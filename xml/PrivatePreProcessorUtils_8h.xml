@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="PrivatePreProcessorUtils_8h" kind="file" language="C++">
     <compoundname>PrivatePreProcessorUtils.h</compoundname>
+    <includedby refid="Core_2PrivatePreProcessorUtils_8h" local="no">iDynTree/Core/PrivatePreProcessorUtils.h</includedby>
       <sectiondef kind="define">
       <memberdef kind="define" id="PrivatePreProcessorUtils_8h_1a24dc8a6fa402bd3a9b9ee3f40017c1fd" prot="public" static="no">
         <name>IDYNTREE_PRETTY_FUNCTION</name>
@@ -12,13 +13,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivatePreProcessorUtils.h" line="10" column="10" bodyfile="iDynTree/Core/PrivatePreProcessorUtils.h" bodystart="10" bodyend="-1"/>
+        <location file="iDynTree/PrivatePreProcessorUtils.h" line="10" column="10" bodyfile="iDynTree/PrivatePreProcessorUtils.h" bodystart="10" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/PrivatePreProcessorUtils.h"/>
+    <location file="iDynTree/PrivatePreProcessorUtils.h"/>
   </compounddef>
 </doxygen>

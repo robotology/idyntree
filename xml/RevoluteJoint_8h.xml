@@ -2,18 +2,19 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="RevoluteJoint_8h" kind="file" language="C++">
     <compoundname>RevoluteJoint.h</compoundname>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
-    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includes>
-    <includes refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="MovableJointImpl_8h" local="no">iDynTree/Model/MovableJointImpl.h</includes>
-    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includes>
+    <includes refid="Axis_8h" local="no">iDynTree/Axis.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="MovableJointImpl_8h" local="no">iDynTree/MovableJointImpl.h</includes>
+    <includedby refid="Model_2RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <innerclass refid="classiDynTree_1_1RevoluteJoint" prot="public">iDynTree::RevoluteJoint</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/RevoluteJoint.h"/>
+    <location file="iDynTree/RevoluteJoint.h"/>
   </compounddef>
 </doxygen>

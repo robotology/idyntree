@@ -2,19 +2,20 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SixAxisForceTorqueSensor_8h" kind="file" language="C++">
     <compoundname>SixAxisForceTorqueSensor.h</compoundname>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="AllSensorsTypes_8h" local="no">iDynTree/Sensors/AllSensorsTypes.h</includedby>
+    <includedby refid="AllSensorsTypes_8h" local="no">iDynTree/AllSensorsTypes.h</includedby>
+    <includedby refid="Sensors_2SixAxisForceTorqueSensor_8h" local="no">iDynTree/Sensors/SixAxisForceTorqueSensor.h</includedby>
     <incdepgraph>
-      <node id="2">
-        <label>vector</label>
-      </node>
       <node id="1">
-        <label>iDynTree/Sensors/SixAxisForceTorqueSensor.h</label>
+        <label>iDynTree/SixAxisForceTorqueSensor.h</label>
         <link refid="SixAxisForceTorqueSensor_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1SixAxisForceTorqueSensor" prot="public">iDynTree::SixAxisForceTorqueSensor</innerclass>
@@ -23,6 +24,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h"/>
+    <location file="iDynTree/SixAxisForceTorqueSensor.h"/>
   </compounddef>
 </doxygen>

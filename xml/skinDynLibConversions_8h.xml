@@ -4,8 +4,8 @@
     <compoundname>skinDynLibConversions.h</compoundname>
     <includes local="no">map</includes>
     <includes local="no">string</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includes>
     <includes local="no">iCub/skinDynLib/dynContactList.h</includes>
     <includes local="no">iCub/skinDynLib/skinContactList.h</includes>
     <includes refid="skinDynLibConversionsImplementation_8h" local="yes">skinDynLibConversionsImplementation.h</includes>

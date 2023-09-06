@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1FixedJoint" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::FixedJoint</compoundname>
     <basecompoundref refid="classiDynTree_1_1IJoint" prot="public" virt="non-virtual">iDynTree::IJoint</basecompoundref>
-    <includes local="no">iDynTree/Model/FixedJoint.h</includes>
+    <includes local="no">iDynTree/FixedJoint.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a12646ce63f11cc02abde41fe13e1487f" prot="private" static="no" mutable="no">
         <type>JointIndex</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="22" column="21" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="22" bodyend="-1"/>
+        <location file="iDynTree/FixedJoint.h" line="22" column="21" bodyfile="iDynTree/FixedJoint.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a3f18fa59745d646643153a82e76ccb24" prot="private" static="no" mutable="no">
         <type>std::size_t</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="23" column="21" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="23" bodyend="-1"/>
+        <location file="iDynTree/FixedJoint.h" line="23" column="21" bodyfile="iDynTree/FixedJoint.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a107a14ac433c9d562a48ccc188701dff" prot="private" static="no" mutable="no">
         <type>std::size_t</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="24" column="21" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="24" bodyend="-1"/>
+        <location file="iDynTree/FixedJoint.h" line="24" column="21" bodyfile="iDynTree/FixedJoint.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a64782f86c39d8ac5ef97fb3225272c51" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="25" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="25" bodyend="-1"/>
+        <location file="iDynTree/FixedJoint.h" line="25" column="19" bodyfile="iDynTree/FixedJoint.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a6e5c06528bbbfc6153337a081b23c38d" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="26" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="26" bodyend="-1"/>
+        <location file="iDynTree/FixedJoint.h" line="26" column="19" bodyfile="iDynTree/FixedJoint.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a850bac913ec25cab817c88cd0f630b99" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="27" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="27" bodyend="-1"/>
+        <location file="iDynTree/FixedJoint.h" line="27" column="19" bodyfile="iDynTree/FixedJoint.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1acdebb8061da99da30f832789149f215a" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="28" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="28" bodyend="-1"/>
+        <location file="iDynTree/FixedJoint.h" line="28" column="19" bodyfile="iDynTree/FixedJoint.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="38" column="18"/>
+        <location file="iDynTree/FixedJoint.h" line="38" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a0cfd93dca7169f99a116c46270432b9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="43" column="9"/>
+        <location file="iDynTree/FixedJoint.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a2d8b3c4a9c19bf932775d5a83d7d2c67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="52" column="9"/>
+        <location file="iDynTree/FixedJoint.h" line="52" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa625db20fbc6f0683efe90b49ee8f9be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="57" column="9"/>
+        <location file="iDynTree/FixedJoint.h" line="57" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a77f5cd096856c52a5694b7431d743d35" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="62" column="17"/>
+        <location file="iDynTree/FixedJoint.h" line="62" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ae7ca38464efead3a54939a67e7e45077" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="65" column="25"/>
+        <location file="iDynTree/FixedJoint.h" line="65" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>unsigned int</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="68" column="30"/>
+        <location file="iDynTree/FixedJoint.h" line="68" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>unsigned int</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="71" column="30"/>
+        <location file="iDynTree/FixedJoint.h" line="71" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a252dce83332fd752932d3c112512a733" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="74" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="74" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d24cec7f90a2b916a9f3ed7d3d49dab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="77" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="77" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a826fcc8006393854c2309de92d3fbef2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="80" column="27"/>
+        <location file="iDynTree/FixedJoint.h" line="80" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac7311235bf7b08357a153c1321bed081" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="83" column="27"/>
+        <location file="iDynTree/FixedJoint.h" line="83" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a11d92b8cc4f0df088f0eb972e9c70b63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -356,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="86" column="27"/>
+        <location file="iDynTree/FixedJoint.h" line="86" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a09dddd2e6d0fc043c6ffa0681b15404c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -383,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="91" column="34"/>
+        <location file="iDynTree/FixedJoint.h" line="91" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aac231749bf30745780aec0d876fd82ed" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -416,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="96" column="29"/>
+        <location file="iDynTree/FixedJoint.h" line="96" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa103b6aee2a08ed32b7688f01e3c10fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -452,7 +452,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="102" column="37"/>
+        <location file="iDynTree/FixedJoint.h" line="102" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a5b6ba1d1c8e77ba3a6b4e2c91078388c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -500,7 +500,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="107" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="107" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1accd64e95d5df5c12cf0d15d71584cfd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -543,7 +543,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="117" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="117" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1afb8391d3ca02525af959e282e9d914ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -578,7 +578,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="125" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="125" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -621,7 +621,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="132" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="132" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a188836bc8b00a32bff5adbd1ac4549e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -660,7 +660,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="141" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="141" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a64f7e46c83d98bb5f533bee54346880a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -737,7 +737,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="149" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="149" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aff64953756add9df5c66cb2dedd08107" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -756,7 +756,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="154" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="154" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a2932d75d7bcb8717a7dc66de9f8f4ea4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointIndex</type>
@@ -771,7 +771,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="157" column="28"/>
+        <location file="iDynTree/FixedJoint.h" line="157" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a9d0e650f359f3bfec60fffe44ae7e879" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -790,7 +790,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="160" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="160" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a6b71751bb05328e175f152276351c137" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -805,7 +805,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="163" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="163" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac94388992a67d161d7b6498219e26da7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -824,7 +824,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="166" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="166" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac88c5b5c3731a56715fea48c2cf87323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -839,7 +839,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="169" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="169" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac14e8020830993efd145171a5c098197" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -857,7 +857,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="172" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="172" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac91261597acef05ed961fd5acc04dfd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -879,7 +879,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="173" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="173" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a768fb933c761bdcc63ee9d60ea1a9214" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -918,7 +918,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="174" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="174" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d2f185b2a43a3efd46e3d40a90ea653" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -937,7 +937,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="175" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="175" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a68f354b50ed5b9c073085f58686236e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -956,7 +956,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="176" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="176" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ab64556dab725cdd0634d3ad4fca9311b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -986,7 +986,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="177" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="177" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a15b1b6b5394b5a8e5891d1f9c6f76eaa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointDynamicsType</type>
@@ -1006,7 +1006,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="180" column="35"/>
+        <location file="iDynTree/FixedJoint.h" line="180" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ab092513e1e87ea380c9a14ac5e2d5152" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1030,7 +1030,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="181" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="181" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d1a2ce4b8bb1e2d8e540ab38de0d889" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1054,7 +1054,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="182" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="182" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1adb45cbcc83ae98382e7f8d01d5f1c864" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1078,7 +1078,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="183" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="183" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a4c3d17770fa1b70fdabccc40cd49628e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1118,7 +1118,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="184" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="184" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a0912b49e9b2d5cd41c52f3218a1c24d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1158,7 +1158,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FixedJoint.h" line="185" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="185" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1191,7 +1191,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/FixedJoint.h" line="19" column="5" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="20" bodyend="186"/>
+    <location file="iDynTree/FixedJoint.h" line="19" column="5" bodyfile="iDynTree/FixedJoint.h" bodystart="20" bodyend="186"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1FixedJoint_1ae7ca38464efead3a54939a67e7e45077" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildAcc</name></member>

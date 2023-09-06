@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="31" column="38" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="31" column="38" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeEstimatorState_1a980cefaadc8f87a0d276cfd83b5b2c5f" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="32" column="31" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="32" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeEstimatorState_1ae6279b61ae1fe0a734ccbc5cc32b6a2b" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="33" column="31" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="33" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -71,7 +71,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Estimation/AttitudeEstimator.h" line="29" column="9" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="30" bodyend="34"/>
+    <location file="iDynTree/AttitudeEstimator.h" line="29" column="9" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="30" bodyend="34"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1AttitudeEstimatorState_1a980cefaadc8f87a0d276cfd83b5b2c5f" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeEstimatorState</scope><name>m_angular_velocity</name></member>
       <member refid="structiDynTree_1_1AttitudeEstimatorState_1ae6279b61ae1fe0a734ccbc5cc32b6a2b" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeEstimatorState</scope><name>m_gyroscope_bias</name></member>

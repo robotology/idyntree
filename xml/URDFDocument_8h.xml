@@ -7,9 +7,9 @@
     <includes refid="MaterialElement_8h" local="yes">MaterialElement.h</includes>
     <includes refid="SensorElement_8h" local="yes">SensorElement.h</includes>
     <includes refid="VisualElement_8h" local="yes">VisualElement.h</includes>
-    <includes refid="ModelLoader_8h" local="yes">iDynTree/ModelIO/ModelLoader.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes refid="ModelLoader_8h" local="yes">iDynTree/ModelLoader.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
     <includes local="no">unordered_map</includes>

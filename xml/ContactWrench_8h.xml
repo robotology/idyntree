@@ -2,22 +2,23 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ContactWrench_8h" kind="file" language="C++">
     <compoundname>ContactWrench.h</compoundname>
-    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
-    <includes refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
+    <includes refid="Wrench_8h" local="no">iDynTree/Wrench.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="Model_2ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includedby>
     <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
     <incdepgraph>
-      <node id="2">
-        <label>vector</label>
-      </node>
       <node id="1">
-        <label>iDynTree/Model/ContactWrench.h</label>
+        <label>iDynTree/ContactWrench.h</label>
         <link refid="ContactWrench_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1ContactWrench" prot="public">iDynTree::ContactWrench</innerclass>
@@ -27,6 +28,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/ContactWrench.h"/>
+    <location file="iDynTree/ContactWrench.h"/>
   </compounddef>
 </doxygen>

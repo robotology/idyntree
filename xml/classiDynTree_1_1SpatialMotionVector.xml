@@ -5,7 +5,7 @@
     <basecompoundref refid="classiDynTree_1_1SpatialVector" prot="public" virt="non-virtual">iDynTree::SpatialVector&lt; SpatialMotionVector &gt;</basecompoundref>
     <derivedcompoundref refid="classiDynTree_1_1SpatialAcc" prot="public" virt="non-virtual">iDynTree::SpatialAcc</derivedcompoundref>
     <derivedcompoundref refid="classiDynTree_1_1Twist" prot="public" virt="non-virtual">iDynTree::Twist</derivedcompoundref>
-    <includes local="no">iDynTree/Core/SpatialMotionVector.h</includes>
+    <includes local="no">iDynTree/SpatialMotionVector.h</includes>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a0fb7aa781b8ab353a0e21bc163e7c1e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="44" column="16" bodyfile="iDynTree/Core/SpatialMotionVector.h" bodystart="44" bodyend="44"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="44" column="16" bodyfile="iDynTree/SpatialMotionVector.h" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a7132bf38ebc1773c0d5d7c0f1f5b630c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="45" column="9"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="45" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a469d555799e3942b020dc94910998dd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="46" column="9"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="46" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a9c27f65454a05a5c770b3e8ae23ab3a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="47" column="9"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="47" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a22816c9ea7c88ea880bbe547366c2dad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="53" column="29"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="53" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a00b69fb5887ebaab90f53bf3f43927ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="70" column="29"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="70" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a1230a70db77b4cf2ebb2c643b62d37e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="85" column="28"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="85" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a0afe65574d10fd441e294b01b9d59328" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="108" column="19"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="108" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1aa12336105b40e215151dc40e02d85533" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="126" column="19"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="126" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a3d13bde6997132732cac8cc942dba7ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMotionVector.h" line="133" column="19"/>
+        <location file="iDynTree/SpatialMotionVector.h" line="133" column="19"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -257,7 +257,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/SpatialMotionVector.h" line="38" column="5" bodyfile="iDynTree/Core/SpatialMotionVector.h" bodystart="39" bodyend="134"/>
+    <location file="iDynTree/SpatialMotionVector.h" line="38" column="5" bodyfile="iDynTree/SpatialMotionVector.h" bodystart="39" bodyend="134"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>angularOffset</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>angularVec3</name></member>

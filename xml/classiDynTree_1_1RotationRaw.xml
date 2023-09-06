@@ -4,7 +4,7 @@
     <compoundname>iDynTree::RotationRaw</compoundname>
     <basecompoundref refid="classiDynTree_1_1MatrixFixSize" prot="public" virt="non-virtual">iDynTree::MatrixFixSize&lt; 3, 3 &gt;</basecompoundref>
     <derivedcompoundref refid="classiDynTree_1_1Rotation" prot="public" virt="non-virtual">iDynTree::Rotation</derivedcompoundref>
-    <includes local="no">iDynTree/Core/RotationRaw.h</includes>
+    <includes local="no">iDynTree/RotationRaw.h</includes>
       <sectiondef kind="user-defined">
       <header>Output helpers.</header>
       <description><para>Output helpers. </para>
@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="133" column="21"/>
+        <location file="iDynTree/RotationRaw.h" line="133" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a0c0d54a248073cdb774f4ef9fe8f1611" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="135" column="21"/>
+        <location file="iDynTree/RotationRaw.h" line="135" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="96" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="96" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a0e74a7a4c05cd27c3253b867d02ee492" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref></type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="103" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="103" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a8a1c042f7058c6fe75f95d4d06f5ac41" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref></type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="110" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="110" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a3dcee2ca1a6e9b6416ea3cf6b815cdad" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref></type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="117" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="117" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a9d043a540104e689499aa688c48da707" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref></type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="124" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="124" column="28"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="43" column="9"/>
+        <location file="iDynTree/RotationRaw.h" line="43" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1aa0a5bea09ea4fb93c09d5acb1e2b076d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="48" column="9"/>
+        <location file="iDynTree/RotationRaw.h" line="48" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1ab9a6ec23b658bd49cde69622d657e22e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="57" column="9"/>
+        <location file="iDynTree/RotationRaw.h" line="57" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a12186033198d4e4b7c3eb48461db1d4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -276,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="61" column="9"/>
+        <location file="iDynTree/RotationRaw.h" line="61" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a308cb7eb1a78ee179c750b79ae84ccda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="66" column="9"/>
+        <location file="iDynTree/RotationRaw.h" line="66" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a37d0a697aaf9d576d7f49493a58d52cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref> &amp;</type>
@@ -312,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="71" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="71" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1ad8862f07c7d01f45194bb9e38b0e60fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref> &amp;</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="72" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="72" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a454c11a15ccb1f1f5cf74148e2a2c94f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref></type>
@@ -346,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="75" column="21"/>
+        <location file="iDynTree/RotationRaw.h" line="75" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a066ec0cd376d0b362944d92ad7f7422a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ClassicalAcc" kindref="compound">ClassicalAcc</ref></type>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="76" column="22"/>
+        <location file="iDynTree/RotationRaw.h" line="76" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1aae1b906465c8dff05dbe2c60637a3071" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
@@ -380,7 +380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="77" column="30"/>
+        <location file="iDynTree/RotationRaw.h" line="77" column="30"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -403,7 +403,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="73" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="73" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationRaw_1a455607358f260425dd91b61d97018678" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref></type>
@@ -420,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/RotationRaw.h" line="74" column="28"/>
+        <location file="iDynTree/RotationRaw.h" line="74" column="28"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -478,7 +478,7 @@
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/RotationRaw.h" line="35" column="5" bodyfile="iDynTree/Core/RotationRaw.h" bodystart="36" bodyend="137"/>
+    <location file="iDynTree/RotationRaw.h" line="35" column="5" bodyfile="iDynTree/RotationRaw.h" bodystart="36" bodyend="137"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1RotationRaw_1a454c11a15ccb1f1f5cf74148e2a2c94f" prot="public" virt="non-virtual"><scope>iDynTree::RotationRaw</scope><name>changeCoordFrameOf</name></member>
       <member refid="classiDynTree_1_1RotationRaw_1a066ec0cd376d0b362944d92ad7f7422a" prot="public" virt="non-virtual"><scope>iDynTree::RotationRaw</scope><name>changeCoordFrameOf</name></member>

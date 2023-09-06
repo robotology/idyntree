@@ -4,9 +4,10 @@
     <compoundname>BipedFootContactClassifier.h</compoundname>
     <includes local="no">memory</includes>
     <includes refid="ContactStateMachine_8h" local="yes">ContactStateMachine.h</includes>
+    <includedby refid="Estimation_2BipedFootContactClassifier_8h" local="no">iDynTree/Estimation/BipedFootContactClassifier.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>iDynTree/Estimation/BipedFootContactClassifier.h</label>
+        <label>iDynTree/BipedFootContactClassifier.h</label>
         <link refid="BipedFootContactClassifier_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -60,13 +61,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="15" column="5" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="16" bodyend="35"/>
+        <location file="iDynTree/BipedFootContactClassifier.h" line="15" column="5" bodyfile="iDynTree/BipedFootContactClassifier.h" bodystart="16" bodyend="35"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/BipedFootContactClassifier.h"/>
+    <location file="iDynTree/BipedFootContactClassifier.h"/>
   </compounddef>
 </doxygen>

@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="dir_c85dc9e218c42523ff9bc550df3028a9" kind="dir">
     <compoundname>iDynTree/yarp</compoundname>
-    <innerfile refid="YARPConfigurationsLoader_8h">YARPConfigurationsLoader.h</innerfile>
-    <innerfile refid="YARPConfigurationsLoaderImplementation_8h">YARPConfigurationsLoaderImplementation.h</innerfile>
-    <innerfile refid="YARPConversions_8h">YARPConversions.h</innerfile>
-    <innerfile refid="YARPConversionsImplementation_8h">YARPConversionsImplementation.h</innerfile>
-    <innerfile refid="YARPEigenConversions_8h">YARPEigenConversions.h</innerfile>
+    <innerfile refid="yarp_2YARPConfigurationsLoader_8h">YARPConfigurationsLoader.h</innerfile>
+    <innerfile refid="yarp_2YARPConfigurationsLoaderImplementation_8h">YARPConfigurationsLoaderImplementation.h</innerfile>
+    <innerfile refid="yarp_2YARPConversions_8h">YARPConversions.h</innerfile>
+    <innerfile refid="yarp_2YARPConversionsImplementation_8h">YARPConversionsImplementation.h</innerfile>
+    <innerfile refid="yarp_2YARPEigenConversions_8h">YARPEigenConversions.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

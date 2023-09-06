@@ -2,8 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="FreeFloatingMatrices_8h" kind="file" language="C++">
     <compoundname>FreeFloatingMatrices.h</compoundname>
-    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="Model_2FreeFloatingMatrices_8h" local="no">iDynTree/Model/FreeFloatingMatrices.h</includedby>
     <innerclass refid="classiDynTree_1_1FrameFreeFloatingJacobian" prot="public">iDynTree::FrameFreeFloatingJacobian</innerclass>
     <innerclass refid="classiDynTree_1_1MomentumFreeFloatingJacobian" prot="public">iDynTree::MomentumFreeFloatingJacobian</innerclass>
     <innerclass refid="classiDynTree_1_1FreeFloatingMassMatrix" prot="public">iDynTree::FreeFloatingMassMatrix</innerclass>
@@ -47,13 +48,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="25" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="26" bodyend="30"/>
+        <location file="iDynTree/FreeFloatingMatrices.h" line="25" column="1" bodyfile="iDynTree/FreeFloatingMatrices.h" bodystart="26" bodyend="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/FreeFloatingMatrices.h"/>
+    <location file="iDynTree/FreeFloatingMatrices.h"/>
   </compounddef>
 </doxygen>

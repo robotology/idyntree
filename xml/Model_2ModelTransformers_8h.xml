@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Model_2ModelTransformers_8h" kind="file" language="C++">
+    <compoundname>ModelTransformers.h</compoundname>
+    <includes refid="ModelTransformers_8h" local="no">iDynTree/ModelTransformers.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>iDynTree/ModelTransformers.h</label>
+        <link refid="ModelTransformers_8h"/>
+      </node>
+      <node id="1">
+        <label>iDynTree/Model/ModelTransformers.h</label>
+        <link refid="Model_2ModelTransformers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/ModelTransformers.h"/>
+  </compounddef>
+</doxygen>

@@ -2,18 +2,19 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ArticulatedBodyInertia_8h" kind="file" language="C++">
     <compoundname>ArticulatedBodyInertia.h</compoundname>
-    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
     <includes local="no">string</includes>
-    <includedby refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includedby>
+    <includedby refid="Core_2ArticulatedBodyInertia_8h" local="no">iDynTree/Core/ArticulatedBodyInertia.h</includedby>
+    <includedby refid="LinkState_8h" local="no">iDynTree/LinkState.h</includedby>
     <incdepgraph>
-      <node id="2">
-        <label>string</label>
-      </node>
       <node id="1">
-        <label>iDynTree/Core/ArticulatedBodyInertia.h</label>
+        <label>iDynTree/ArticulatedBodyInertia.h</label>
         <link refid="ArticulatedBodyInertia_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
       </node>
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1ArticulatedBodyInertia" prot="public">iDynTree::ArticulatedBodyInertia</innerclass>
@@ -22,6 +23,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/ArticulatedBodyInertia.h"/>
+    <location file="iDynTree/ArticulatedBodyInertia.h"/>
   </compounddef>
 </doxygen>

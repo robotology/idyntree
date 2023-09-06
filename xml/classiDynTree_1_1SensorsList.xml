@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1SensorsList" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::SensorsList</compoundname>
-    <includes local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes local="no">iDynTree/Sensors.h</includes>
     <innerclass refid="classiDynTree_1_1SensorsList_1_1ConstIterator" prot="public">iDynTree::SensorsList::ConstIterator</innerclass>
     <innerclass refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator" prot="public">iDynTree::SensorsList::ConstTypedIterator</innerclass>
     <innerclass refid="classiDynTree_1_1SensorsList_1_1Iterator" prot="public">iDynTree::SensorsList::Iterator</innerclass>
@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="261" column="35" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="260" bodyend="-1"/>
+        <location file="iDynTree/Sensors.h" line="261" column="35" bodyfile="iDynTree/Sensors.h" bodystart="260" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1a2eb981ba901b6eb4ff2354d5f04b7701" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator" kindref="compound">ConstTypedIterator</ref></type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="262" column="40" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="262" bodyend="-1"/>
+        <location file="iDynTree/Sensors.h" line="262" column="40" bodyfile="iDynTree/Sensors.h" bodystart="262" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1a4143a28a17a2b0884179d095cd0f8c9a" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1SensorsList_1_1Iterator" kindref="compound">Iterator</ref></type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="265" column="30" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="264" bodyend="-1"/>
+        <location file="iDynTree/Sensors.h" line="265" column="30" bodyfile="iDynTree/Sensors.h" bodystart="264" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1a401ffc51c5a62062d291d42af9809ce4" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1SensorsList_1_1ConstIterator" kindref="compound">ConstIterator</ref></type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="266" column="35" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="266" bodyend="-1"/>
+        <location file="iDynTree/Sensors.h" line="266" column="35" bodyfile="iDynTree/Sensors.h" bodystart="266" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="252" column="31" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="251" bodyend="-1"/>
+        <location file="iDynTree/Sensors.h" line="252" column="31" bodyfile="iDynTree/Sensors.h" bodystart="251" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="254" column="18"/>
+        <location file="iDynTree/Sensors.h" line="254" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a30f89ecec31984236133b22919ccb5af" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="255" column="18"/>
+        <location file="iDynTree/Sensors.h" line="255" column="18"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="271" column="13"/>
+        <location file="iDynTree/Sensors.h" line="271" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a0fdf85096d1148e6bf8b9b9d97f2befe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="276" column="13"/>
+        <location file="iDynTree/Sensors.h" line="276" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1af5b05d310b8adbd0939524343b6b35bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="281" column="25"/>
+        <location file="iDynTree/Sensors.h" line="281" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a74706c274df024a9c45c910a6d65ece3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="286" column="21"/>
+        <location file="iDynTree/Sensors.h" line="286" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1ad80ce6e179db6add932264147609bc66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::ptrdiff_t</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="301" column="28"/>
+        <location file="iDynTree/Sensors.h" line="301" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a6154db8662dabf186ed7014fdd247374" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="306" column="18"/>
+        <location file="iDynTree/Sensors.h" line="306" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a674083e12d9a5e673d75db1998020589" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="311" column="18"/>
+        <location file="iDynTree/Sensors.h" line="311" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a561e2e3a6e1002d3ee4af0e96d17efe9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="317" column="25"/>
+        <location file="iDynTree/Sensors.h" line="317" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a03e95f4b1d11084323e3374bf8ca72b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -297,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="324" column="18"/>
+        <location file="iDynTree/Sensors.h" line="324" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1aa85df07f8e9590e8746011476a12eac7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::ptrdiff_t</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="334" column="28"/>
+        <location file="iDynTree/Sensors.h" line="334" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a31832ea1ddd81e7e4c9fa0983e33d47e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="339" column="20"/>
+        <location file="iDynTree/Sensors.h" line="339" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1abc051d05660ce2a35b36cd26c573dee9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -363,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="347" column="21"/>
+        <location file="iDynTree/Sensors.h" line="347" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1aa6db282503b0aceb2145d981b5ca5478" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -381,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="352" column="18"/>
+        <location file="iDynTree/Sensors.h" line="352" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a17f2ff2224e182ab21916bab483eb5ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -402,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="354" column="18"/>
+        <location file="iDynTree/Sensors.h" line="354" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1afc13a8e991877add1ae0fe891e0433f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -423,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="355" column="18"/>
+        <location file="iDynTree/Sensors.h" line="355" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1af466948f6df5c1cdbfdcfe7e44d410d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -440,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="356" column="18"/>
+        <location file="iDynTree/Sensors.h" line="356" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1ac33a16f90ea2b150f312eb34670711fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SensorsList_1_1Iterator" kindref="compound">iterator</ref></type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="358" column="22"/>
+        <location file="iDynTree/Sensors.h" line="358" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a5a258d522fe2d95ce8a7757fbc178a15" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SensorsList_1_1ConstIterator" kindref="compound">const_iterator</ref></type>
@@ -466,7 +466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="359" column="28"/>
+        <location file="iDynTree/Sensors.h" line="359" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1a1ec968093835c3af65c6cbce72556421" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SensorsList_1_1TypedIterator" kindref="compound">typed_iterator</ref></type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="360" column="28"/>
+        <location file="iDynTree/Sensors.h" line="360" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorsList_1ab1b2c5c0c17738a644825aa6c47ab095" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator" kindref="compound">const_typed_iterator</ref></type>
@@ -500,7 +500,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="361" column="34"/>
+        <location file="iDynTree/Sensors.h" line="361" column="34"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -508,7 +508,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Sensors/Sensors.h" line="250" column="5" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="250" bodyend="363"/>
+    <location file="iDynTree/Sensors.h" line="250" column="5" bodyfile="iDynTree/Sensors.h" bodystart="250" bodyend="363"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SensorsList_1ad80ce6e179db6add932264147609bc66" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList</scope><name>addSensor</name></member>
       <member refid="classiDynTree_1_1SensorsList_1ac33a16f90ea2b150f312eb34670711fa" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList</scope><name>allSensorsIterator</name></member>

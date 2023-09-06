@@ -2,14 +2,15 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="TransformDerivative_8h" kind="file" language="C++">
     <compoundname>TransformDerivative.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
+    <includedby refid="Core_2TransformDerivative_8h" local="no">iDynTree/Core/TransformDerivative.h</includedby>
     <innerclass refid="classiDynTree_1_1TransformDerivative" prot="public">iDynTree::TransformDerivative</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/TransformDerivative.h"/>
+    <location file="iDynTree/TransformDerivative.h"/>
   </compounddef>
 </doxygen>

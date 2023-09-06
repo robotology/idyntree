@@ -3,13 +3,14 @@
   <compounddef id="PrivateUtils_8h" kind="file" language="C++">
     <compoundname>PrivateUtils.h</compoundname>
     <includes local="no">Eigen/Dense</includes>
-    <includes refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includes>
+    <includes refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includes>
+    <includedby refid="Core_2PrivateUtils_8h" local="no">iDynTree/Core/PrivateUtils.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Eigen/Dense</label>
       </node>
       <node id="1">
-        <label>iDynTree/Core/PrivateUtils.h</label>
+        <label>iDynTree/PrivateUtils.h</label>
         <link refid="PrivateUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -33,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivateUtils.h" line="20" column="21" declfile="iDynTree/Core/PrivateUtils.h" declline="20" declcolumn="21"/>
+        <location file="iDynTree/PrivateUtils.h" line="20" column="21" declfile="iDynTree/PrivateUtils.h" declline="20" declcolumn="21"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1a8dac2640419d7eaba00586c252ab99e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Eigen::Matrix3d</type>
@@ -51,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivateUtils.h" line="28" column="21" declfile="iDynTree/Core/PrivateUtils.h" declline="28" declcolumn="21"/>
+        <location file="iDynTree/PrivateUtils.h" line="28" column="21" declfile="iDynTree/PrivateUtils.h" declline="28" declcolumn="21"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1ab4c72168cc4cc9909da74c433345e8d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -78,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivateUtils.h" line="34" column="10" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="34" bodyend="39"/>
+        <location file="iDynTree/PrivateUtils.h" line="34" column="10" bodyfile="iDynTree/PrivateUtils.h" bodystart="34" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1a9f173fe7a9b0aabdbfa0169513dd0afa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -105,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivateUtils.h" line="45" column="14" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="45" bodyend="51"/>
+        <location file="iDynTree/PrivateUtils.h" line="45" column="14" bodyfile="iDynTree/PrivateUtils.h" bodystart="45" bodyend="51"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1ad44d09b939590fde0dca95ebd7f899c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -132,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivateUtils.h" line="57" column="14" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="57" bodyend="63"/>
+        <location file="iDynTree/PrivateUtils.h" line="57" column="14" bodyfile="iDynTree/PrivateUtils.h" bodystart="57" bodyend="63"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1ada26d16396f1cd9f82b2e7c921fe202e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -165,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivateUtils.h" line="70" column="16" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="70" bodyend="81"/>
+        <location file="iDynTree/PrivateUtils.h" line="70" column="16" bodyfile="iDynTree/PrivateUtils.h" bodystart="70" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1a2941457a02de10e9de1dea4106588921" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -198,13 +199,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PrivateUtils.h" line="88" column="16" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="88" bodyend="97"/>
+        <location file="iDynTree/PrivateUtils.h" line="88" column="16" bodyfile="iDynTree/PrivateUtils.h" bodystart="88" bodyend="97"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/PrivateUtils.h"/>
+    <location file="iDynTree/PrivateUtils.h"/>
   </compounddef>
 </doxygen>

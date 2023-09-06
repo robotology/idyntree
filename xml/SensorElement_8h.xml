@@ -3,8 +3,8 @@
   <compounddef id="SensorElement_8h" kind="file" language="C++">
     <compoundname>SensorElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includes local="no">unordered_map</includes>

@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1FreeFloatingPos" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::FreeFloatingPos</compoundname>
-    <includes local="no">iDynTree/Model/FreeFloatingState.h</includes>
+    <includes local="no">iDynTree/FreeFloatingState.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingPos_1aad41c4da3ed443679b518e6df126931b" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="32" column="19" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/FreeFloatingState.h" line="32" column="19" bodyfile="iDynTree/FreeFloatingState.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingPos_1a7acd49e0e7773939ba34a11a5dc2df44" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref></type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="33" column="29" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/FreeFloatingState.h" line="33" column="29" bodyfile="iDynTree/FreeFloatingState.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="37" column="8"/>
+        <location file="iDynTree/FreeFloatingState.h" line="37" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a3e4cc78de27fb152f1d245a0bbb5de2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="38" column="8"/>
+        <location file="iDynTree/FreeFloatingState.h" line="38" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1ab69d30d60d31af3fd103953d83ead22b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="49" column="13"/>
+        <location file="iDynTree/FreeFloatingState.h" line="49" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1aea73fe7075b9a6b60d9f62c65bc2a881" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="54" column="19"/>
+        <location file="iDynTree/FreeFloatingState.h" line="54" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a32b053f578ff6e6e14a16c4ac30be3ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="59" column="29"/>
+        <location file="iDynTree/FreeFloatingState.h" line="59" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a279b784f801f6b74df935e941eb97335" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="64" column="25"/>
+        <location file="iDynTree/FreeFloatingState.h" line="64" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a31608c663581f5b26e85f5819dffea73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="69" column="35"/>
+        <location file="iDynTree/FreeFloatingState.h" line="69" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1ad26b33be62d9855e51cbdcaad31eca8c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="74" column="21"/>
+        <location file="iDynTree/FreeFloatingState.h" line="74" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a3803d18f1287e18ef42aaf890ec00519" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="79" column="17"/>
+        <location file="iDynTree/FreeFloatingState.h" line="79" column="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -183,7 +183,7 @@
     <detaileddescription>
 <para>The position of a free floating robot is represented by the transform of a base frame with respect to an inertial frame, and a vector of joint positions. </para>
     </detaileddescription>
-    <location file="iDynTree/Model/FreeFloatingState.h" line="29" column="5" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="30" bodyend="80"/>
+    <location file="iDynTree/FreeFloatingState.h" line="29" column="5" bodyfile="iDynTree/FreeFloatingState.h" bodystart="30" bodyend="80"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1FreeFloatingPos_1a93e51d593b16b15f5be0f86c92dade51" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>FreeFloatingPos</name></member>
       <member refid="classiDynTree_1_1FreeFloatingPos_1a3e4cc78de27fb152f1d245a0bbb5de2b" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>FreeFloatingPos</name></member>

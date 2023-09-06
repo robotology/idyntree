@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::ThreeAxisForceTorqueContactSensor</compoundname>
     <basecompoundref refid="classiDynTree_1_1LinkSensor" prot="public" virt="non-virtual">iDynTree::LinkSensor</basecompoundref>
-    <includes local="no">iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h</includes>
+    <includes local="no">iDynTree/ThreeAxisForceTorqueContactSensor.h</includes>
       <sectiondef kind="user-defined">
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a40cfcd0ae4f87a355e9a103afae53df9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -23,7 +23,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="143" column="14"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="143" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a6635108e1e4778e84cb8cd3a4261dc18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &gt;</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="148" column="21"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="148" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ab4c6badea80c6d3a48ae1b6d96b76cc8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="155" column="17"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="155" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a0cb7b4dcec179b29fefaa116f8a515a8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="160" column="18"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="160" column="18"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="44" column="61" bodyfile="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="44" column="61" bodyfile="iDynTree/ThreeAxisForceTorqueContactSensor.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="50" column="9"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="50" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ad268a5a84823f122b83fc59884734965" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="55" column="9"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="55" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a1be09ff575e14e196fd14ed8713e87fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" kindref="compound">ThreeAxisForceTorqueContactSensor</ref> &amp;</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="60" column="43"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="60" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a5cdc5c339744808ca229f7dd0fb79ab5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="65" column="17"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="65" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a355c0226fb7c34e765123b965efdac85" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="71" column="14"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="71" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a137df78d69f448d6a1e1876158167eec" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="78" column="14"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="78" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a7e2978a17832c1405d6667db5515aa8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -217,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="83" column="14"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="83" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ae29362a072ca8c3dcace8c39b553c83a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="88" column="14"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="88" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a8297291284faa8217f01bad0fed9ca2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="94" column="21"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="94" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aac80df24ed741903317fb8a725ce0e36" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SensorType</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="99" column="20"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="99" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a6d1bf2bf8184f0a079f0c0bffc2c7b1f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="105" column="21"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="105" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ad956d3ad8f4670cf87047ca3d9971698" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="110" column="19"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="110" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aeb7e44f72ffbb9991b0d9995c1040627" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="113" column="19"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="113" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a659cbf015f650a0874fe4db00020cd10" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="118" column="14"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="118" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a670171513daa59f2494bd08af665e3ea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="123" column="17"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="123" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aff3b2cd0b1a847dc6336c55042131e6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -369,7 +369,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="128" column="14"/>
+        <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="128" column="14"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -418,7 +418,7 @@
         <link refid="classiDynTree_1_1Sensor"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="40" column="5" bodyfile="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" bodystart="41" bodyend="164"/>
+    <location file="iDynTree/ThreeAxisForceTorqueContactSensor.h" line="40" column="5" bodyfile="iDynTree/ThreeAxisForceTorqueContactSensor.h" bodystart="41" bodyend="164"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a670171513daa59f2494bd08af665e3ea" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a0cb7b4dcec179b29fefaa116f8a515a8" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>computeCenterOfPressureFromLoadCellMeasurements</name></member>

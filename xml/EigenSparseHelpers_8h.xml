@@ -3,10 +3,11 @@
   <compounddef id="EigenSparseHelpers_8h" kind="file" language="C++">
     <compoundname>EigenSparseHelpers.h</compoundname>
     <includes local="no">Eigen/SparseCore</includes>
-    <includes refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includes>
+    <includes refid="SparseMatrix_8h" local="no">iDynTree/SparseMatrix.h</includes>
+    <includedby refid="Core_2EigenSparseHelpers_8h" local="no">iDynTree/Core/EigenSparseHelpers.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>iDynTree/Core/EigenSparseHelpers.h</label>
+        <label>iDynTree/EigenSparseHelpers.h</label>
         <link refid="EigenSparseHelpers_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -32,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenSparseHelpers.h" line="14" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="14" bodyend="23"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="14" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="14" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="EigenSparseHelpers_8h_1a3c0db1fc07367309957972bd66454c7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::SparseMatrix&lt; double, Eigen::RowMajor &gt; &gt;</type>
@@ -49,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenSparseHelpers.h" line="25" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="25" bodyend="34"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="25" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="25" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="EigenSparseHelpers_8h_1a90ae57e2a42e7bad1cedda56db4ee3d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; Eigen::SparseMatrix&lt; double, Eigen::ColMajor &gt; &gt;</type>
@@ -66,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenSparseHelpers.h" line="36" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="36" bodyend="45"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="36" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="36" bodyend="45"/>
       </memberdef>
       <memberdef kind="function" id="EigenSparseHelpers_8h_1ae48cfcc0f75e51f21ae1ac34de84efc1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::SparseMatrix&lt; double, Eigen::ColMajor &gt; &gt;</type>
@@ -83,13 +84,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenSparseHelpers.h" line="47" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="47" bodyend="56"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="47" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="47" bodyend="56"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/EigenSparseHelpers.h"/>
+    <location file="iDynTree/EigenSparseHelpers.h"/>
   </compounddef>
 </doxygen>

@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1ModelCalibrationHelper" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::ModelCalibrationHelper</compoundname>
-    <includes local="no">iDynTree/ModelIO/ModelCalibrationHelper.h</includes>
+    <includes local="no">iDynTree/ModelCalibrationHelper.h</includes>
       <sectiondef kind="user-defined">
       <header>Constructor/Destructor</header>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a1ee092e0ff7d45fac63d6d8ccdf56aa7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="43" column="5"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="43" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1af6c2bcc1b30c17feb10fd76bde44317e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="45" column="5"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="45" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a374a9140cd2d14f17ea40f43a5f8f35c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="56" column="10"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="56" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a22e1119ec00b5a9c3c80ff3e74b35366" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="65" column="10"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="65" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a583dcf51ec22f9d6a875103a6c4e8f76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="72" column="10"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="72" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1ad3ab40b088a598f6da9b259222b28bb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="82" column="10"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="82" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a94ce715abf88213cee30f6ccb804210a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="92" column="18"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="92" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1ab73d50123d391c2ddf08bcc1c5f82485" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="99" column="24"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="99" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a884bd9c1a6b009191ccb34d1b374fe00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="107" column="10"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="107" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="30" column="21" bodyfile="iDynTree/ModelIO/ModelCalibrationHelper.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="30" column="21" bodyfile="iDynTree/ModelCalibrationHelper.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -258,7 +258,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="26" column="1" bodyfile="iDynTree/ModelIO/ModelCalibrationHelper.h" bodystart="27" bodyend="109"/>
+    <location file="iDynTree/ModelCalibrationHelper.h" line="26" column="1" bodyfile="iDynTree/ModelCalibrationHelper.h" bodystart="27" bodyend="109"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelCalibrationHelper_1a884bd9c1a6b009191ccb34d1b374fe00" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>isValid</name></member>
       <member refid="classiDynTree_1_1ModelCalibrationHelper_1a22e1119ec00b5a9c3c80ff3e74b35366" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>loadModelFromFile</name></member>

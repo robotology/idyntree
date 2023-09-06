@@ -4,7 +4,7 @@
     <compoundname>iDynTree::IJoint</compoundname>
     <derivedcompoundref refid="classiDynTree_1_1FixedJoint" prot="public" virt="non-virtual">iDynTree::FixedJoint</derivedcompoundref>
     <derivedcompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;</derivedcompoundref>
-    <includes local="no">iDynTree/Model/IJoint.h</includes>
+    <includes local="no">iDynTree/IJoint.h</includes>
       <sectiondef kind="user-defined">
       <header>Methods to set joint</header>
       <description><para>Methods to set joint informations (used when building a model) </para>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="110" column="22"/>
+        <location file="iDynTree/IJoint.h" line="110" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="121" column="22"/>
+        <location file="iDynTree/IJoint.h" line="121" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>LinkIndex</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="128" column="27"/>
+        <location file="iDynTree/IJoint.h" line="128" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>LinkIndex</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="133" column="27"/>
+        <location file="iDynTree/IJoint.h" line="133" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="144" column="27"/>
+        <location file="iDynTree/IJoint.h" line="144" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="153" column="34"/>
+        <location file="iDynTree/IJoint.h" line="153" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="169" column="37"/>
+        <location file="iDynTree/IJoint.h" line="169" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -234,7 +234,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="201" column="37"/>
+        <location file="iDynTree/IJoint.h" line="201" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -284,7 +284,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="214" column="22"/>
+        <location file="iDynTree/IJoint.h" line="214" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -329,7 +329,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="228" column="22"/>
+        <location file="iDynTree/IJoint.h" line="228" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -366,7 +366,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="240" column="22"/>
+        <location file="iDynTree/IJoint.h" line="240" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -411,7 +411,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="250" column="22"/>
+        <location file="iDynTree/IJoint.h" line="250" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -452,7 +452,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="262" column="22"/>
+        <location file="iDynTree/IJoint.h" line="262" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -531,7 +531,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="281" column="22"/>
+        <location file="iDynTree/IJoint.h" line="281" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -551,7 +551,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="291" column="22"/>
+        <location file="iDynTree/IJoint.h" line="291" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a2accdcd6fbf7e222a3c7c6b99130934e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>JointIndex</type>
@@ -567,7 +567,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="296" column="28"/>
+        <location file="iDynTree/IJoint.h" line="296" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -587,7 +587,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="303" column="22"/>
+        <location file="iDynTree/IJoint.h" line="303" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1afc71b67f79c9bbdd8f2925ee08ca0323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>size_t</type>
@@ -603,7 +603,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="309" column="24"/>
+        <location file="iDynTree/IJoint.h" line="309" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -623,7 +623,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="315" column="22"/>
+        <location file="iDynTree/IJoint.h" line="315" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a64aa264a72088da07844f25176a25bee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>size_t</type>
@@ -639,7 +639,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="321" column="24"/>
+        <location file="iDynTree/IJoint.h" line="321" column="24"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -666,7 +666,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="342" column="22"/>
+        <location file="iDynTree/IJoint.h" line="342" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -690,7 +690,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="350" column="22"/>
+        <location file="iDynTree/IJoint.h" line="350" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -731,7 +731,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="357" column="22"/>
+        <location file="iDynTree/IJoint.h" line="357" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -752,7 +752,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="362" column="24"/>
+        <location file="iDynTree/IJoint.h" line="362" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -773,7 +773,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="367" column="24"/>
+        <location file="iDynTree/IJoint.h" line="367" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -805,7 +805,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="375" column="22"/>
+        <location file="iDynTree/IJoint.h" line="375" column="22"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -839,7 +839,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="401" column="35"/>
+        <location file="iDynTree/IJoint.h" line="401" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -865,7 +865,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="409" column="22"/>
+        <location file="iDynTree/IJoint.h" line="409" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -907,7 +907,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="421" column="22"/>
+        <location file="iDynTree/IJoint.h" line="421" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -949,7 +949,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="433" column="22"/>
+        <location file="iDynTree/IJoint.h" line="433" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -975,7 +975,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="442" column="24"/>
+        <location file="iDynTree/IJoint.h" line="442" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -1001,7 +1001,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="451" column="24"/>
+        <location file="iDynTree/IJoint.h" line="451" column="24"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -1017,7 +1017,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="70" column="17"/>
+        <location file="iDynTree/IJoint.h" line="70" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -1034,7 +1034,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="75" column="25"/>
+        <location file="iDynTree/IJoint.h" line="75" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>unsigned int</type>
@@ -1054,7 +1054,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="87" column="30"/>
+        <location file="iDynTree/IJoint.h" line="87" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>unsigned int</type>
@@ -1074,7 +1074,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="96" column="30"/>
+        <location file="iDynTree/IJoint.h" line="96" column="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1118,7 +1118,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Model/IJoint.h" line="63" column="5" bodyfile="iDynTree/Model/IJoint.h" bodystart="64" bodyend="455"/>
+    <location file="iDynTree/IJoint.h" line="63" column="5" bodyfile="iDynTree/IJoint.h" bodystart="64" bodyend="455"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildAcc</name></member>

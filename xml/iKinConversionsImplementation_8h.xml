@@ -3,8 +3,8 @@
   <compounddef id="iKinConversionsImplementation_8h" kind="file" language="C++">
     <compoundname>iKinConversionsImplementation.h</compoundname>
     <includes refid="iKinConversions_8h" local="no">iDynTree/iKinConversions.h</includes>
-    <includes refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includes>
-    <includes refid="YARPConversions_8h" local="no">iDynTree/yarp/YARPConversions.h</includes>
+    <includes refid="DenavitHartenberg_8h" local="no">iDynTree/DenavitHartenberg.h</includes>
+    <includes refid="YARPConversions_8h" local="no">iDynTree/YARPConversions.h</includes>
     <includes local="no">iCub/iKin/iKinFwd.h</includes>
     <includes local="no">cassert</includes>
     <includedby refid="iKinConversions_8h" local="yes">iDynTree/iKinConversions.h</includedby>

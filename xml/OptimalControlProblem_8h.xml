@@ -5,7 +5,7 @@
     <includes local="no">memory</includes>
     <includes local="no">vector</includes>
     <includes local="no">string</includes>
-    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
     <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>

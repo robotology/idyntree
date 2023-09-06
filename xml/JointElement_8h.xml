@@ -3,9 +3,9 @@
   <compounddef id="JointElement_8h" kind="file" language="C++">
     <compoundname>JointElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
-    <includes refid="IJoint_8h" local="no">iDynTree/Model/IJoint.h</includes>
-    <includes refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="IJoint_8h" local="no">iDynTree/IJoint.h</includes>
+    <includes refid="Axis_8h" local="no">iDynTree/Axis.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includes local="no">unordered_map</includes>

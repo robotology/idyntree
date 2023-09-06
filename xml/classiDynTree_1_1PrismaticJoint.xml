@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1PrismaticJoint" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::PrismaticJoint</compoundname>
     <basecompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; 1, 1 &gt;</basecompoundref>
-    <includes local="no">iDynTree/Model/PrismaticJoint.h</includes>
+    <includes local="no">iDynTree/PrismaticJoint.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1af6b5715987ab445df5c773d4133d1c19" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="26" column="19" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="26" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="26" column="19" bodyfile="iDynTree/PrismaticJoint.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1abcff171c5084bdc6a435f8fcd091b778" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="27" column="19" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="27" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="27" column="19" bodyfile="iDynTree/PrismaticJoint.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a0e6552482e90be482b88a75851d58ee9" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="28" column="19" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="28" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="28" column="19" bodyfile="iDynTree/PrismaticJoint.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1ac1008c3d9dd5c7bff5a5a90af722fbf7" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="29" column="14" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="29" column="14" bodyfile="iDynTree/PrismaticJoint.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a375259f12a9804bf9482e27a3cdca74a" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="33" column="14" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="33" column="14" bodyfile="iDynTree/PrismaticJoint.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a668879821383b2858ea3f9079cee842b" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="34" column="16" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="34" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a1f5bdda35aa1d796773d570517693ae5" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="35" column="16" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="35" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1affcbbcde843f22f4a82ecd0abe8d5959" prot="private" static="no" mutable="no">
         <type>JointDynamicsType</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="39" column="27" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="39" column="27" bodyfile="iDynTree/PrismaticJoint.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a2127635356b5f4a94406eb48d3b4b6e2" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="40" column="16" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="40" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a32e577b27db3673f0f46d3e90718ba0b" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="41" column="16" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="41" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1abd0f4f96717e4322fd0a786ba9197754" prot="private" static="no" mutable="yes">
         <type>double</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="44" column="24" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="44" column="24" bodyfile="iDynTree/PrismaticJoint.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a21357cd473ebb1ace3ad1d8be047bbc0" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="45" column="27" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="45" column="27" bodyfile="iDynTree/PrismaticJoint.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a6d884f6b58c3fab743af56a65d2ca9a4" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="46" column="27" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="46" column="27" bodyfile="iDynTree/PrismaticJoint.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a4851266f2394dc6907522ba7d0113030" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="47" column="37" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="47" column="37" bodyfile="iDynTree/PrismaticJoint.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1ae8bc56ca5557142f172e996639533131" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="48" column="37" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/PrismaticJoint.h" line="48" column="37" bodyfile="iDynTree/PrismaticJoint.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="32" column="14"/>
+        <location file="iDynTree/PrismaticJoint.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ad5909faf79ce873324da7c5310f98e61" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="38" column="14"/>
+        <location file="iDynTree/PrismaticJoint.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a5352289b3185771ca66b6163a32717c8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="50" column="14"/>
+        <location file="iDynTree/PrismaticJoint.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a693283039138367a864d05a97f1d48bb" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="51" column="14"/>
+        <location file="iDynTree/PrismaticJoint.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a81d5439e47c00f25b57d4e7f4e351f0b" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="52" column="14"/>
+        <location file="iDynTree/PrismaticJoint.h" line="52" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="58" column="9"/>
+        <location file="iDynTree/PrismaticJoint.h" line="58" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1aa83aec02a88dec71313860dcbb9a90ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="61" column="9"/>
+        <location file="iDynTree/PrismaticJoint.h" line="61" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a3f6bc8eedb120e0fb1c9920fea7319ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="67" column="9"/>
+        <location file="iDynTree/PrismaticJoint.h" line="67" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a65531e877d712df301e2cd6e0ad04b42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="72" column="17"/>
+        <location file="iDynTree/PrismaticJoint.h" line="72" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a1ac21ca360862669e3e90dcd2674ce37" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="75" column="25"/>
+        <location file="iDynTree/PrismaticJoint.h" line="75" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1acc37e809466dbaa48c63d710172466d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -406,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="78" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="78" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ac6cf334be17f178a4b1a8b8877a034d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -426,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="81" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="81" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ab34363eae08df95076be5eb0ae54a08f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -457,7 +457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="92" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="92" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ad0f4e013dee877bd775a8efafddb6f42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -474,7 +474,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="98" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="98" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a213fda83fc530f350e8bde91a04e2b4e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -489,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="101" column="27"/>
+        <location file="iDynTree/PrismaticJoint.h" line="101" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a742bd7aeca927a280704ae37daa6c55d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="104" column="27"/>
+        <location file="iDynTree/PrismaticJoint.h" line="104" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a6a54677981ef06a20d5374e212987c12" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -541,7 +541,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="130" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="130" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a373f69a06f669b0696732484469a0000" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -565,7 +565,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="134" column="27"/>
+        <location file="iDynTree/PrismaticJoint.h" line="134" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1aa496c937ad1ca73bb90e7da79cc646b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -592,7 +592,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="139" column="34"/>
+        <location file="iDynTree/PrismaticJoint.h" line="139" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a0ce9b9cd049657c73cf6b1e2461210b9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -625,7 +625,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="144" column="29"/>
+        <location file="iDynTree/PrismaticJoint.h" line="144" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a6e6fb431a49f7a0215f7d4b5faa3f9f9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -662,7 +662,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="150" column="37"/>
+        <location file="iDynTree/PrismaticJoint.h" line="150" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a254a889ad22326e340e31893aa3b3a17" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -710,7 +710,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="155" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="155" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ab7ee688d192b918dfb9efbe8afda0f09" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -745,7 +745,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="164" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="164" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a3f60b0d78a2065d4a6d4f470496894b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -788,7 +788,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="170" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="170" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a35f4eda7506082ee7a520df7f976da60" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -831,7 +831,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="178" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="178" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a808c5b7e92112d346dce43905ea0a671" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -870,7 +870,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="187" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="187" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ad2033d545ccada271a36eeecf73ccacd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -947,7 +947,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="195" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="195" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a0d0c74fb7e7ad6f9e9ddf9bef7528068" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -965,7 +965,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="200" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="200" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a4028e7e729f7665ed75f852e46475769" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -987,7 +987,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="201" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="201" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a906a19995a2749717bca458338f26cc6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1026,7 +1026,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="202" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="202" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a8c978202c47f891a9060c8a6c8cfbb5c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1045,7 +1045,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="203" column="24"/>
+        <location file="iDynTree/PrismaticJoint.h" line="203" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a8824f586b55d5a1c4c6348ed1264c7b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1064,7 +1064,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="204" column="24"/>
+        <location file="iDynTree/PrismaticJoint.h" line="204" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a52256e40dd9de343d01815f8b5020569" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1094,7 +1094,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="205" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="205" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a5996b37c717055239c6c7004c4569ab1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointDynamicsType</type>
@@ -1114,7 +1114,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="208" column="35"/>
+        <location file="iDynTree/PrismaticJoint.h" line="208" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a2b605313e25fe0275a26e6a2e897159f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1138,7 +1138,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="209" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="209" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ac97640fe2a6e88a8fc6b1f0cab245d4c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1162,7 +1162,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="210" column="24"/>
+        <location file="iDynTree/PrismaticJoint.h" line="210" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a81ef6901743bbc19b62977d36a933949" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1186,7 +1186,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="211" column="24"/>
+        <location file="iDynTree/PrismaticJoint.h" line="211" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a19f03f6f51f848a19579caf86d63de16" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1226,7 +1226,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="212" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="212" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ac69cf18efdbabe8e9da3dbd225cd02fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1266,7 +1266,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/PrismaticJoint.h" line="213" column="22"/>
+        <location file="iDynTree/PrismaticJoint.h" line="213" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1311,7 +1311,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         <link refid="classiDynTree_1_1IJoint"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/PrismaticJoint.h" line="22" column="5" bodyfile="iDynTree/Model/PrismaticJoint.h" bodystart="23" bodyend="214"/>
+    <location file="iDynTree/PrismaticJoint.h" line="22" column="5" bodyfile="iDynTree/PrismaticJoint.h" bodystart="23" bodyend="214"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1PrismaticJoint_1a1ac21ca360862669e3e90dcd2674ce37" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1PrismaticJoint_1a35f4eda7506082ee7a520df7f976da60" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>computeChildAcc</name></member>

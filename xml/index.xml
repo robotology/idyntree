@@ -4517,6 +4517,7 @@
     <member refid="ForwardKinematics_8h_1a16f1071f088ed89178092de7b820558d" kind="function"><name>ForwardBiasAccKinematics</name></member>
     <member refid="ForwardKinematics_8h_1a2249785bd035cf4d2f35851d9eb50d26" kind="function"><name>ForwardBiasAccKinematics</name></member>
     <member refid="group__iDynTreeModel_1gab0b6f0ce3e6e175b1532bdd897fd83c4" kind="function"><name>FreeFloatingJacobianUsingLinkPos</name></member>
+    <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
     <member refid="ModelTestUtils_8h_1aea1ae47d4bec72e35885ee56cf39578b" kind="function"><name>addRandomLinkToModel</name></member>
     <member refid="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" kind="function"><name>addRandomAdditionalFrameToModel</name></member>
@@ -4531,6 +4532,11 @@
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
+    <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
+    <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
+    <member refid="Sensors_8h_1a784ae0ef50c758f0cf07ab414f432963" kind="function"><name>isLinkSensor</name></member>
+    <member refid="Sensors_8h_1a6edabe0d73bb9102d0ad456124c0f195" kind="function"><name>isJointSensor</name></member>
+    <member refid="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" kind="function"><name>getSensorTypeSize</name></member>
     <member refid="SubModel_8h_1a2f7475185a0d9ae6c7dcd2048d4a23fb" kind="function"><name>computeTransformToTraversalBase</name></member>
     <member refid="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" kind="function"><name>computeTransformToSubModelBase</name></member>
     <member refid="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" kind="function"><name>dofsListFromURDF</name></member>
@@ -4554,12 +4560,6 @@
     <member refid="iKinConversionsImplementation_8h_1a907871ccc9e6e56fb19fa0af4c0854c8" kind="function"><name>iKinLink2DHLink</name></member>
     <member refid="iKinConversionsImplementation_8h_1ae6d845189d4491128320b2c78c6082ec" kind="function"><name>DHLink2iKinLink</name></member>
     <member refid="skinDynLibConversionsImplementation_8h_1abd0cb602d0a91817a13e042d47004d79" kind="function"><name>fromSkinDynLibToiDynTreeHelper</name></member>
-    <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
-    <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
-    <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
-    <member refid="Sensors_8h_1a784ae0ef50c758f0cf07ab414f432963" kind="function"><name>isLinkSensor</name></member>
-    <member refid="Sensors_8h_1a6edabe0d73bb9102d0ad456124c0f195" kind="function"><name>isJointSensor</name></member>
-    <member refid="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" kind="function"><name>getSensorTypeSize</name></member>
     <member refid="YARPConfigurationsLoader_8h_1a51e39202a162fa642eed01df66c75878" kind="function"><name>parseRotationMatrix</name></member>
     <member refid="group__iDynTreeYARP_1ga5043dfa20b4ffc99d8dbdae5b15c0dae" kind="function"><name>toiDynTree</name></member>
     <member refid="group__iDynTreeYARP_1gaa28c5100610c33e81bafbdad8cd65f74" kind="function"><name>toYarp</name></member>
@@ -4628,13 +4628,25 @@
   </compound>
   <compound refid="ArticulatedBodyInertia_8h" kind="file"><name>ArticulatedBodyInertia.h</name>
   </compound>
+  <compound refid="Core_2ArticulatedBodyInertia_8h" kind="file"><name>ArticulatedBodyInertia.h</name>
+  </compound>
   <compound refid="Axis_8h" kind="file"><name>Axis.h</name>
+  </compound>
+  <compound refid="Core_2Axis_8h" kind="file"><name>Axis.h</name>
   </compound>
   <compound refid="ClassicalAcc_8h" kind="file"><name>ClassicalAcc.h</name>
   </compound>
+  <compound refid="Core_2ClassicalAcc_8h" kind="file"><name>ClassicalAcc.h</name>
+  </compound>
+  <compound refid="Core_2CubicSpline_8h" kind="file"><name>CubicSpline.h</name>
+  </compound>
   <compound refid="CubicSpline_8h" kind="file"><name>CubicSpline.h</name>
   </compound>
+  <compound refid="Core_2Direction_8h" kind="file"><name>Direction.h</name>
+  </compound>
   <compound refid="Direction_8h" kind="file"><name>Direction.h</name>
+  </compound>
+  <compound refid="Core_2EigenHelpers_8h" kind="file"><name>EigenHelpers.h</name>
   </compound>
   <compound refid="EigenHelpers_8h" kind="file"><name>EigenHelpers.h</name>
     <member refid="EigenHelpers_8h_1acad81b92d9885b5eec826b3066af8960" kind="typedef"><name>iDynTreeEigenVector</name></member>
@@ -4674,16 +4686,22 @@
     <member refid="EigenHelpers_8h_1a6c26a20e65041a0023677f35f84563f4" kind="function"><name>setSubVector</name></member>
     <member refid="EigenHelpers_8h_1a3707e4cd79954877014299710fee2607" kind="function"><name>setSubVector</name></member>
   </compound>
+  <compound refid="Core_2EigenMathHelpers_8h" kind="file"><name>EigenMathHelpers.h</name>
+  </compound>
   <compound refid="EigenMathHelpers_8h" kind="file"><name>EigenMathHelpers.h</name>
     <member refid="EigenMathHelpers_8h_1a903238e532f385a1cd3db7b731fa884c" kind="function"><name>pseudoInverse_helper2</name></member>
     <member refid="EigenMathHelpers_8h_1aacb98344c6221dbf5e5d7678e3e75136" kind="function"><name>pseudoInverse_helper1</name></member>
     <member refid="EigenMathHelpers_8h_1a0b20a0208cab1ac6cdbd661612ca4c1b" kind="function"><name>pseudoInverse</name></member>
+  </compound>
+  <compound refid="Core_2EigenSparseHelpers_8h" kind="file"><name>EigenSparseHelpers.h</name>
   </compound>
   <compound refid="EigenSparseHelpers_8h" kind="file"><name>EigenSparseHelpers.h</name>
     <member refid="EigenSparseHelpers_8h_1ade809da6861adf8889108908fd931ee5" kind="function"><name>toEigen</name></member>
     <member refid="EigenSparseHelpers_8h_1a3c0db1fc07367309957972bd66454c7e" kind="function"><name>toEigen</name></member>
     <member refid="EigenSparseHelpers_8h_1a90ae57e2a42e7bad1cedda56db4ee3d4" kind="function"><name>toEigen</name></member>
     <member refid="EigenSparseHelpers_8h_1ae48cfcc0f75e51f21ae1ac34de84efc1" kind="function"><name>toEigen</name></member>
+  </compound>
+  <compound refid="Core_2GeomVector3_8h" kind="file"><name>GeomVector3.h</name>
   </compound>
   <compound refid="GeomVector3_8h" kind="file"><name>GeomVector3.h</name>
     <member refid="GeomVector3_8h_1ad00786c331484214ec14e850f805602f" kind="typedef"><name>LinearMotionVector3</name></member>
@@ -4700,9 +4718,15 @@
     <member refid="GeomVector3_8h_1a6201e5c8d3cc72533773d11302674f5c" kind="typedef"><name>Torque</name></member>
     <member refid="GeomVector3_8h_1aaaf9fe3261e02ce6de58a3e752e6f891" kind="typedef"><name>MotionVector3</name></member>
   </compound>
+  <compound refid="Core_2InertiaNonLinearParametrization_8h" kind="file"><name>InertiaNonLinearParametrization.h</name>
+  </compound>
   <compound refid="InertiaNonLinearParametrization_8h" kind="file"><name>InertiaNonLinearParametrization.h</name>
   </compound>
+  <compound refid="Core_2MatrixDynSize_8h" kind="file"><name>MatrixDynSize.h</name>
+  </compound>
   <compound refid="MatrixDynSize_8h" kind="file"><name>MatrixDynSize.h</name>
+  </compound>
+  <compound refid="Core_2MatrixFixSize_8h" kind="file"><name>MatrixFixSize.h</name>
   </compound>
   <compound refid="MatrixFixSize_8h" kind="file"><name>MatrixFixSize.h</name>
     <member refid="MatrixFixSize_8h_1a3f95b4a0200fda604f7717bcb0781b89" kind="typedef"><name>Matrix1x6</name></member>
@@ -4714,6 +4738,8 @@
     <member refid="MatrixFixSize_8h_1a6d63b01d7d6de76185f849d32b9fbd29" kind="typedef"><name>Matrix6x10</name></member>
     <member refid="MatrixFixSize_8h_1ad7bb9ef7fdaadb16f95a6e42cf32d622" kind="typedef"><name>Matrix10x16</name></member>
   </compound>
+  <compound refid="Core_2MatrixView_8h" kind="file"><name>MatrixView.h</name>
+  </compound>
   <compound refid="MatrixView_8h" kind="file"><name>MatrixView.h</name>
     <member refid="MatrixView_8h_1a347aa032e680c7848af88b7a3b840829" kind="define"><name>IDYNTREE_CONSTEXPR</name></member>
     <member refid="MatrixView_8h_1ae51124a635564fed29ab419da3ec3dcf" kind="function"><name>make_matrix_view</name></member>
@@ -4722,12 +4748,20 @@
     <member refid="MatrixView_8h_1a60ffec30976d99d36dda278b50600853" kind="function"><name>make_matrix_view</name></member>
     <member refid="MatrixView_8h_1a6c7864c31a89d1f9f3a5196a21d8cf23" kind="function"><name>make_matrix_view</name></member>
   </compound>
+  <compound refid="Core_2Position_8h" kind="file"><name>Position.h</name>
+  </compound>
   <compound refid="Position_8h" kind="file"><name>Position.h</name>
+  </compound>
+  <compound refid="Core_2PositionRaw_8h" kind="file"><name>PositionRaw.h</name>
   </compound>
   <compound refid="PositionRaw_8h" kind="file"><name>PositionRaw.h</name>
   </compound>
+  <compound refid="Core_2PrivatePreProcessorUtils_8h" kind="file"><name>PrivatePreProcessorUtils.h</name>
+  </compound>
   <compound refid="PrivatePreProcessorUtils_8h" kind="file"><name>PrivatePreProcessorUtils.h</name>
     <member refid="PrivatePreProcessorUtils_8h_1a24dc8a6fa402bd3a9b9ee3f40017c1fd" kind="define"><name>IDYNTREE_PRETTY_FUNCTION</name></member>
+  </compound>
+  <compound refid="Core_2PrivateUtils_8h" kind="file"><name>PrivateUtils.h</name>
   </compound>
   <compound refid="PrivateUtils_8h" kind="file"><name>PrivateUtils.h</name>
     <member refid="PrivateUtils_8h_1a5cb90836a26ae5bb773be45bad7dad54" kind="function"><name>squareCrossProductMatrix</name></member>
@@ -4738,17 +4772,27 @@
     <member refid="PrivateUtils_8h_1ada26d16396f1cd9f82b2e7c921fe202e" kind="function"><name>efficientTwistCrossTwist</name></member>
     <member refid="PrivateUtils_8h_1a2941457a02de10e9de1dea4106588921" kind="function"><name>efficientTwistCrossMomentum</name></member>
   </compound>
+  <compound refid="Core_2Rotation_8h" kind="file"><name>Rotation.h</name>
+  </compound>
   <compound refid="Rotation_8h" kind="file"><name>Rotation.h</name>
+  </compound>
+  <compound refid="Core_2RotationalInertiaRaw_8h" kind="file"><name>RotationalInertiaRaw.h</name>
   </compound>
   <compound refid="RotationalInertiaRaw_8h" kind="file"><name>RotationalInertiaRaw.h</name>
   </compound>
+  <compound refid="Core_2RotationRaw_8h" kind="file"><name>RotationRaw.h</name>
+  </compound>
   <compound refid="RotationRaw_8h" kind="file"><name>RotationRaw.h</name>
+  </compound>
+  <compound refid="Core_2SO3Utils_8h" kind="file"><name>SO3Utils.h</name>
   </compound>
   <compound refid="SO3Utils_8h" kind="file"><name>SO3Utils.h</name>
     <member refid="SO3Utils_8h_1a72d7e0a9ca21815a7dadb8ea94f5aef4" kind="function"><name>isValidRotationMatrix</name></member>
     <member refid="SO3Utils_8h_1a7950f68e2a23c633dc53411db5b5b573" kind="function"><name>geodesicL2Distance</name></member>
     <member refid="SO3Utils_8h_1a2c019748c0b171a73279ba732546d87a" kind="function"><name>geodesicL2MeanRotation</name></member>
     <member refid="SO3Utils_8h_1a07cf035073cc1e3f95ef18eda4928db5" kind="function"><name>geodesicL2WeightedMeanRotation</name></member>
+  </compound>
+  <compound refid="Core_2Span_8h" kind="file"><name>Span.h</name>
   </compound>
   <compound refid="Span_8h" kind="file"><name>Span.h</name>
     <member refid="Span_8h_1a243167d9388652a87880135833c55737" kind="define"><name>IDYNTREE_USE_STATIC_CONSTEXPR_WORKAROUND</name></member>
@@ -4772,23 +4816,41 @@
     <member refid="Span_8h_1acaebdb9ef4dfce796979f9392e238616" kind="function"><name>make_span</name></member>
     <member refid="Span_8h_1a30a50da99346e81a568b2d5629347b92" kind="function"><name>make_span</name></member>
   </compound>
+  <compound refid="Core_2SparseMatrix_8h" kind="file"><name>SparseMatrix.h</name>
+  </compound>
   <compound refid="SparseMatrix_8h" kind="file"><name>SparseMatrix.h</name>
+  </compound>
+  <compound refid="Core_2SpatialAcc_8h" kind="file"><name>SpatialAcc.h</name>
   </compound>
   <compound refid="SpatialAcc_8h" kind="file"><name>SpatialAcc.h</name>
   </compound>
+  <compound refid="Core_2SpatialForceVector_8h" kind="file"><name>SpatialForceVector.h</name>
+  </compound>
   <compound refid="SpatialForceVector_8h" kind="file"><name>SpatialForceVector.h</name>
+  </compound>
+  <compound refid="Core_2SpatialInertia_8h" kind="file"><name>SpatialInertia.h</name>
   </compound>
   <compound refid="SpatialInertia_8h" kind="file"><name>SpatialInertia.h</name>
   </compound>
+  <compound refid="Core_2SpatialInertiaRaw_8h" kind="file"><name>SpatialInertiaRaw.h</name>
+  </compound>
   <compound refid="SpatialInertiaRaw_8h" kind="file"><name>SpatialInertiaRaw.h</name>
+  </compound>
+  <compound refid="Core_2SpatialMomentum_8h" kind="file"><name>SpatialMomentum.h</name>
   </compound>
   <compound refid="SpatialMomentum_8h" kind="file"><name>SpatialMomentum.h</name>
   </compound>
+  <compound refid="Core_2SpatialMotionVector_8h" kind="file"><name>SpatialMotionVector.h</name>
+  </compound>
   <compound refid="SpatialMotionVector_8h" kind="file"><name>SpatialMotionVector.h</name>
+  </compound>
+  <compound refid="Core_2SpatialVector_8h" kind="file"><name>SpatialVector.h</name>
   </compound>
   <compound refid="SpatialVector_8h" kind="file"><name>SpatialVector.h</name>
     <member refid="group__iDynTreeCore_1ga92610f375c318c6d08be7c5fb29c7222" kind="define"><name>SPATIALVECTOR_TEMPLATE_HDR</name></member>
     <member refid="SpatialVector_8h_1a13ae9b40bef45da6de6dc13e80735b9d" kind="define"><name>SPATIALVECTOR_INSTANCE_HDR</name></member>
+  </compound>
+  <compound refid="Core_2TestUtils_8h" kind="file"><name>TestUtils.h</name>
   </compound>
   <compound refid="TestUtils_8h" kind="file"><name>TestUtils.h</name>
     <member refid="TestUtils_8h_1a187efc872711557e58cc6e85475ec53f" kind="define"><name>ASSERT_IS_TRUE</name></member>
@@ -4834,13 +4896,23 @@
     <member refid="TestUtils_8h_1a6b4c4d79f076ed9013708a5ab40e9273" kind="function"><name>assertVectorAreEqualWithRelativeTol</name></member>
     <member refid="TestUtils_8h_1ac3a22c22491b65545bdfbab336950530" kind="function"><name>assertMatrixAreEqual</name></member>
   </compound>
+  <compound refid="Core_2Transform_8h" kind="file"><name>Transform.h</name>
+  </compound>
   <compound refid="Transform_8h" kind="file"><name>Transform.h</name>
+  </compound>
+  <compound refid="Core_2TransformDerivative_8h" kind="file"><name>TransformDerivative.h</name>
   </compound>
   <compound refid="TransformDerivative_8h" kind="file"><name>TransformDerivative.h</name>
   </compound>
+  <compound refid="Core_2Triplets_8h" kind="file"><name>Triplets.h</name>
+  </compound>
   <compound refid="Triplets_8h" kind="file"><name>Triplets.h</name>
   </compound>
+  <compound refid="Core_2Twist_8h" kind="file"><name>Twist.h</name>
+  </compound>
   <compound refid="Twist_8h" kind="file"><name>Twist.h</name>
+  </compound>
+  <compound refid="Core_2Utils_8h" kind="file"><name>Utils.h</name>
   </compound>
   <compound refid="Utils_8h" kind="file"><name>Utils.h</name>
     <member refid="Utils_8h_1a92a04f61c0d9680aebd960d653165339" kind="define"><name>IDYNTREE_UNUSED</name></member>
@@ -4862,7 +4934,11 @@
     <member refid="Utils_8h_1a3ffc4d06e77379cc44c32f2ea44df1d5" kind="function"><name>rad2deg</name></member>
     <member refid="Utils_8h_1a3f330bf40f3d09799c2b4923f79173ff" kind="function"><name>checkDoublesAreEqual</name></member>
   </compound>
+  <compound refid="Core_2VectorDynSize_8h" kind="file"><name>VectorDynSize.h</name>
+  </compound>
   <compound refid="VectorDynSize_8h" kind="file"><name>VectorDynSize.h</name>
+  </compound>
+  <compound refid="Core_2VectorFixSize_8h" kind="file"><name>VectorFixSize.h</name>
   </compound>
   <compound refid="VectorFixSize_8h" kind="file"><name>VectorFixSize.h</name>
     <member refid="VectorFixSize_8h_1a60f2b9c49979e66bbc9fd83dba192e07" kind="typedef"><name>Vector2</name></member>
@@ -4872,6 +4948,8 @@
     <member refid="VectorFixSize_8h_1a658ee3743c3ccf3d61c38e4fa1c81ec9" kind="typedef"><name>Vector10</name></member>
     <member refid="VectorFixSize_8h_1a68b87219f8e66c52f9d5de9d84aef7c9" kind="typedef"><name>Vector16</name></member>
   </compound>
+  <compound refid="Core_2Wrench_8h" kind="file"><name>Wrench.h</name>
+  </compound>
   <compound refid="Wrench_8h" kind="file"><name>Wrench.h</name>
   </compound>
   <compound refid="AttitudeEstimator_8h" kind="file"><name>AttitudeEstimator.h</name>
@@ -4880,6 +4958,8 @@
     <member refid="AttitudeEstimator_8h_1ad170eb4fd0bd13bfb0bdbdb6460d28bc" kind="typedef"><name>MagnetometerMeasurements</name></member>
     <member refid="AttitudeEstimator_8h_1a8953e202971beb38867767ab9f002c42" kind="typedef"><name>UnitQuaternion</name></member>
     <member refid="AttitudeEstimator_8h_1a48e2955e462d28103d57a10634d0654d" kind="typedef"><name>RPY</name></member>
+  </compound>
+  <compound refid="Estimation_2AttitudeEstimator_8h" kind="file"><name>AttitudeEstimator.h</name>
   </compound>
   <compound refid="AttitudeEstimatorUtils_8h" kind="file"><name>AttitudeEstimatorUtils.h</name>
     <member refid="AttitudeEstimatorUtils_8h_1a525335710b53cb064ca56b936120431e" kind="define"><name>_USE_MATH_DEFINES</name></member>
@@ -4891,12 +4971,18 @@
     <member refid="AttitudeEstimatorUtils_8h_1a810ee43797b075ff113b46c0b83796d5" kind="function"><name>mapR3Toso3</name></member>
     <member refid="AttitudeEstimatorUtils_8h_1ae22926f6b4098d795734502bfa284aff" kind="function"><name>checkSkewSymmetricity</name></member>
   </compound>
+  <compound refid="Estimation_2AttitudeEstimatorUtils_8h" kind="file"><name>AttitudeEstimatorUtils.h</name>
+  </compound>
   <compound refid="AttitudeMahonyFilter_8h" kind="file"><name>AttitudeMahonyFilter.h</name>
+  </compound>
+  <compound refid="Estimation_2AttitudeMahonyFilter_8h" kind="file"><name>AttitudeMahonyFilter.h</name>
   </compound>
   <compound refid="AttitudeQuaternionEKF_8h" kind="file"><name>AttitudeQuaternionEKF.h</name>
     <member refid="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" kind="variable"><name>output_dimensions_with_magnetometer</name></member>
     <member refid="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" kind="variable"><name>output_dimensions_without_magnetometer</name></member>
     <member refid="AttitudeQuaternionEKF_8h_1ae4a3a4ece8b00835bf57f387795ba015" kind="variable"><name>input_dimensions</name></member>
+  </compound>
+  <compound refid="Estimation_2AttitudeQuaternionEKF_8h" kind="file"><name>AttitudeQuaternionEKF.h</name>
   </compound>
   <compound refid="BerdyHelper_8h" kind="file"><name>BerdyHelper.h</name>
     <member refid="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" kind="enum"><name>BerdyVariants</name></member>
@@ -4926,7 +5012,11 @@
     <member refid="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" kind="function"><name>isJointBerdyDynamicVariable</name></member>
     <member refid="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" kind="function"><name>isDOFBerdyDynamicVariable</name></member>
   </compound>
+  <compound refid="Estimation_2BerdyHelper_8h" kind="file"><name>BerdyHelper.h</name>
+  </compound>
   <compound refid="BerdySparseMAPSolver_8h" kind="file"><name>BerdySparseMAPSolver.h</name>
+  </compound>
+  <compound refid="Estimation_2BerdySparseMAPSolver_8h" kind="file"><name>BerdySparseMAPSolver.h</name>
   </compound>
   <compound refid="BipedFootContactClassifier_8h" kind="file"><name>BipedFootContactClassifier.h</name>
     <member refid="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946" kind="enum"><name>SwitchingPattern</name></member>
@@ -4934,9 +5024,17 @@
     <member refid="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946ad1645067b3ead8a700e7551ff0af01d9" kind="enumvalue"><name>LATEST_ACTIVE_CONTACT</name></member>
     <member refid="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946aa6e9a49639f39ee24e3fbafc4cee78f0" kind="enumvalue"><name>DEFAULT_CONTACT</name></member>
   </compound>
+  <compound refid="Estimation_2BipedFootContactClassifier_8h" kind="file"><name>BipedFootContactClassifier.h</name>
+  </compound>
   <compound refid="ContactStateMachine_8h" kind="file"><name>ContactStateMachine.h</name>
   </compound>
+  <compound refid="Estimation_2ContactStateMachine_8h" kind="file"><name>ContactStateMachine.h</name>
+  </compound>
+  <compound refid="Estimation_2ExtendedKalmanFilter_8h" kind="file"><name>ExtendedKalmanFilter.h</name>
+  </compound>
   <compound refid="ExtendedKalmanFilter_8h" kind="file"><name>ExtendedKalmanFilter.h</name>
+  </compound>
+  <compound refid="Estimation_2ExternalWrenchesEstimation_8h" kind="file"><name>ExternalWrenchesEstimation.h</name>
   </compound>
   <compound refid="ExternalWrenchesEstimation_8h" kind="file"><name>ExternalWrenchesEstimation.h</name>
     <member refid="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26" kind="enum"><name>UnknownWrenchContactType</name></member>
@@ -4951,13 +5049,23 @@
     <member refid="ExternalWrenchesEstimation_8h_1a2cf3011d218d8a98440bdcafdd1d54e6" kind="function"><name>computeLinkNetWrenchesWithoutGravity</name></member>
     <member refid="ExternalWrenchesEstimation_8h_1ab6c0784c22088705cc07732b5b29dd4b" kind="function"><name>estimateLinkContactWrenchesFromLinkNetExternalWrenches</name></member>
   </compound>
+  <compound refid="Estimation_2ExtWrenchesAndJointTorquesEstimator_8h" kind="file"><name>ExtWrenchesAndJointTorquesEstimator.h</name>
+  </compound>
   <compound refid="ExtWrenchesAndJointTorquesEstimator_8h" kind="file"><name>ExtWrenchesAndJointTorquesEstimator.h</name>
+  </compound>
+  <compound refid="Estimation_2GravityCompensationHelpers_8h" kind="file"><name>GravityCompensationHelpers.h</name>
   </compound>
   <compound refid="GravityCompensationHelpers_8h" kind="file"><name>GravityCompensationHelpers.h</name>
   </compound>
+  <compound refid="Estimation_2KalmanFilter_8h" kind="file"><name>KalmanFilter.h</name>
+  </compound>
   <compound refid="KalmanFilter_8h" kind="file"><name>KalmanFilter.h</name>
   </compound>
+  <compound refid="Estimation_2SchmittTrigger_8h" kind="file"><name>SchmittTrigger.h</name>
+  </compound>
   <compound refid="SchmittTrigger_8h" kind="file"><name>SchmittTrigger.h</name>
+  </compound>
+  <compound refid="Estimation_2SimpleLeggedOdometry_8h" kind="file"><name>SimpleLeggedOdometry.h</name>
   </compound>
   <compound refid="SimpleLeggedOdometry_8h" kind="file"><name>SimpleLeggedOdometry.h</name>
   </compound>
@@ -5005,15 +5113,29 @@
   </compound>
   <compound refid="TransformConstraint_8h" kind="file"><name>TransformConstraint.h</name>
   </compound>
+  <compound refid="AccelerometerSensor_8h" kind="file"><name>AccelerometerSensor.h</name>
+  </compound>
+  <compound refid="Sensors_2AccelerometerSensor_8h" kind="file"><name>AccelerometerSensor.h</name>
+  </compound>
+  <compound refid="AllSensorsTypes_8h" kind="file"><name>AllSensorsTypes.h</name>
+  </compound>
+  <compound refid="Sensors_2AllSensorsTypes_8h" kind="file"><name>AllSensorsTypes.h</name>
+  </compound>
   <compound refid="Centroidal_8h" kind="file"><name>Centroidal.h</name>
   </compound>
+  <compound refid="Model_2Centroidal_8h" kind="file"><name>Centroidal.h</name>
+  </compound>
   <compound refid="ContactWrench_8h" kind="file"><name>ContactWrench.h</name>
+  </compound>
+  <compound refid="Model_2ContactWrench_8h" kind="file"><name>ContactWrench.h</name>
   </compound>
   <compound refid="DenavitHartenberg_8h" kind="file"><name>DenavitHartenberg.h</name>
     <member refid="DenavitHartenberg_8h_1a9f5fda0dc8377f9fad3f8b60d73f1c7c" kind="function"><name>TransformFromDHCraig1989</name></member>
     <member refid="DenavitHartenberg_8h_1a259b4c68b0f4b9ae9ce389ed14f4c712" kind="function"><name>TransformFromDH</name></member>
     <member refid="DenavitHartenberg_8h_1ada11245ee6d17f4d64ccf59eeead8f07" kind="function"><name>ExtractDHChainFromModel</name></member>
     <member refid="DenavitHartenberg_8h_1ac94534b93496e2703a218b38774c64a1" kind="function"><name>CreateModelFromDHChain</name></member>
+  </compound>
+  <compound refid="Model_2DenavitHartenberg_8h" kind="file"><name>DenavitHartenberg.h</name>
   </compound>
   <compound refid="Dynamics_8h" kind="file"><name>Dynamics.h</name>
     <member refid="group__iDynTreeModel_1ga1f433a6725585332945762ed4e6b5fe5" kind="function"><name>ComputeLinearAndAngularMomentum</name></member>
@@ -5023,17 +5145,27 @@
     <member refid="group__iDynTreeModel_1ga5879141982887fc0d049cc3645f10dd5" kind="function"><name>ArticulatedBodyAlgorithm</name></member>
     <member refid="group__iDynTreeModel_1ga0c75db73b7682b9c524b0727b516b12b" kind="function"><name>InverseDynamicsInertialParametersRegressor</name></member>
   </compound>
+  <compound refid="Model_2Dynamics_8h" kind="file"><name>Dynamics.h</name>
+  </compound>
   <compound refid="DynamicsLinearization_8h" kind="file"><name>DynamicsLinearization.h</name>
     <member refid="DynamicsLinearization_8h_1a0c9b6d083f99f1b6ffd1a6c3a7ae5e07" kind="function"><name>ForwardDynamicsLinearization</name></member>
+  </compound>
+  <compound refid="Model_2DynamicsLinearization_8h" kind="file"><name>DynamicsLinearization.h</name>
   </compound>
   <compound refid="DynamicsLinearizationHelpers_8h" kind="file"><name>DynamicsLinearizationHelpers.h</name>
     <member refid="DynamicsLinearizationHelpers_8h_1a8f92a6a26be06461e7364405c553bd66" kind="function"><name>operator*</name></member>
     <member refid="DynamicsLinearizationHelpers_8h_1aedfbcb0d62ea5bb9bf6fc476f3cc717a" kind="function"><name>operator*</name></member>
   </compound>
+  <compound refid="Model_2DynamicsLinearizationHelpers_8h" kind="file"><name>DynamicsLinearizationHelpers.h</name>
+  </compound>
   <compound refid="DynamicsUtils_8h" kind="file"><name>DynamicsUtils.h</name>
     <member refid="DynamicsUtils_8h_1aed28749437ab0ff261382d34506ffad4" kind="function"><name>biasWrenchVelocityDerivative</name></member>
   </compound>
+  <compound refid="Model_2DynamicsUtils_8h" kind="file"><name>DynamicsUtils.h</name>
+  </compound>
   <compound refid="FixedJoint_8h" kind="file"><name>FixedJoint.h</name>
+  </compound>
+  <compound refid="Model_2FixedJoint_8h" kind="file"><name>FixedJoint.h</name>
   </compound>
   <compound refid="ForwardKinematics_8h" kind="file"><name>ForwardKinematics.h</name>
     <member refid="group__iDynTreeModel_1ga41ad76666d447a42318ab5778b3ad18e" kind="function"><name>ForwardPositionKinematics</name></member>
@@ -5045,13 +5177,23 @@
     <member refid="ForwardKinematics_8h_1a16f1071f088ed89178092de7b820558d" kind="function"><name>ForwardBiasAccKinematics</name></member>
     <member refid="ForwardKinematics_8h_1a2249785bd035cf4d2f35851d9eb50d26" kind="function"><name>ForwardBiasAccKinematics</name></member>
   </compound>
+  <compound refid="Model_2ForwardKinematics_8h" kind="file"><name>ForwardKinematics.h</name>
+  </compound>
   <compound refid="FreeFloatingMatrices_8h" kind="file"><name>FreeFloatingMatrices.h</name>
     <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375a" kind="enum"><name>FrameVelocityRepresentation</name></member>
     <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" kind="enumvalue"><name>INERTIAL_FIXED_REPRESENTATION</name></member>
     <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" kind="enumvalue"><name>BODY_FIXED_REPRESENTATION</name></member>
     <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" kind="enumvalue"><name>MIXED_REPRESENTATION</name></member>
   </compound>
+  <compound refid="Model_2FreeFloatingMatrices_8h" kind="file"><name>FreeFloatingMatrices.h</name>
+  </compound>
   <compound refid="FreeFloatingState_8h" kind="file"><name>FreeFloatingState.h</name>
+  </compound>
+  <compound refid="Model_2FreeFloatingState_8h" kind="file"><name>FreeFloatingState.h</name>
+  </compound>
+  <compound refid="GyroscopeSensor_8h" kind="file"><name>GyroscopeSensor.h</name>
+  </compound>
+  <compound refid="Sensors_2GyroscopeSensor_8h" kind="file"><name>GyroscopeSensor.h</name>
   </compound>
   <compound refid="IJoint_8h" kind="file"><name>IJoint.h</name>
     <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" kind="enum"><name>JointDynamicsType</name></member>
@@ -5059,6 +5201,8 @@
     <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" kind="enumvalue"><name>URDFJointDynamics</name></member>
     <member refid="IJoint_8h_1ade0c4658492d5288102a323d704a2a1c" kind="typedef"><name>IJointPtr</name></member>
     <member refid="IJoint_8h_1ac8fef24361e5d31b7bb1c5e468ea9513" kind="typedef"><name>IJointConstPtr</name></member>
+  </compound>
+  <compound refid="Model_2IJoint_8h" kind="file"><name>IJoint.h</name>
   </compound>
   <compound refid="Indices_8h" kind="file"><name>Indices.h</name>
     <member refid="Indices_8h_1a7b1bbb834d5bf0d3c64cdf91ab3d6e72" kind="typedef"><name>LinkIndex</name></member>
@@ -5076,14 +5220,22 @@
     <member refid="Indices_8h_1a6d57d4391d58c8fd9470846d4a72118f" kind="variable"><name>FRAME_INVALID_NAME</name></member>
     <member refid="Indices_8h_1a1ceb2215b00eb2c21af358eb9b7d88f4" kind="variable"><name>TRAVERSAL_INVALID_INDEX</name></member>
   </compound>
+  <compound refid="Model_2Indices_8h" kind="file"><name>Indices.h</name>
+  </compound>
   <compound refid="Jacobians_8h" kind="file"><name>Jacobians.h</name>
     <member refid="group__iDynTreeModel_1gab0b6f0ce3e6e175b1532bdd897fd83c4" kind="function"><name>FreeFloatingJacobianUsingLinkPos</name></member>
   </compound>
+  <compound refid="Model_2Jacobians_8h" kind="file"><name>Jacobians.h</name>
+  </compound>
   <compound refid="JointState_8h" kind="file"><name>JointState.h</name>
+  </compound>
+  <compound refid="Model_2JointState_8h" kind="file"><name>JointState.h</name>
   </compound>
   <compound refid="Link_8h" kind="file"><name>Link.h</name>
     <member refid="Link_8h_1a39bc17f697110e44c09c2e6e1aa7fa57" kind="typedef"><name>LinkPtr</name></member>
     <member refid="Link_8h_1a34779dc4741f85944c0e2f736dc7def2" kind="typedef"><name>LinkConstPtr</name></member>
+  </compound>
+  <compound refid="Model_2Link_8h" kind="file"><name>Link.h</name>
   </compound>
   <compound refid="LinkState_8h" kind="file"><name>LinkState.h</name>
     <member refid="LinkState_8h_1ac93f1a5870ffbdb40436a8ab17b4df5a" kind="typedef"><name>LinkNetExternalWrenches</name></member>
@@ -5092,9 +5244,17 @@
     <member refid="LinkState_8h_1a4eebfd4c3b5feb2154a1de101578fb4a" kind="typedef"><name>LinkCompositeRigidBodyInertias</name></member>
     <member refid="LinkState_8h_1a104b2ec0864d4c37b58b808b43630171" kind="typedef"><name>LinkProperAccArray</name></member>
   </compound>
+  <compound refid="Model_2LinkState_8h" kind="file"><name>LinkState.h</name>
+  </compound>
   <compound refid="LinkTraversalsCache_8h" kind="file"><name>LinkTraversalsCache.h</name>
   </compound>
+  <compound refid="Model_2LinkTraversalsCache_8h" kind="file"><name>LinkTraversalsCache.h</name>
+  </compound>
+  <compound refid="Model_2Model_8h" kind="file"><name>Model.h</name>
+  </compound>
   <compound refid="Model_8h" kind="file"><name>Model.h</name>
+  </compound>
+  <compound refid="Model_2ModelTestUtils_8h" kind="file"><name>ModelTestUtils.h</name>
   </compound>
   <compound refid="ModelTestUtils_8h" kind="file"><name>ModelTestUtils.h</name>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
@@ -5108,11 +5268,15 @@
     <member refid="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" kind="function"><name>getRandomJointPositions</name></member>
     <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
   </compound>
+  <compound refid="Model_2ModelTransformers_8h" kind="file"><name>ModelTransformers.h</name>
+  </compound>
   <compound refid="ModelTransformers_8h" kind="file"><name>ModelTransformers.h</name>
     <member refid="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" kind="function"><name>removeFakeLinks</name></member>
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
+  </compound>
+  <compound refid="Model_2MovableJointImpl_8h" kind="file"><name>MovableJointImpl.h</name>
   </compound>
   <compound refid="MovableJointImpl_8h" kind="file"><name>MovableJointImpl.h</name>
     <member refid="MovableJointImpl_8h_1ac4ab72af9658e6e1503c06a97786db7f" kind="typedef"><name>MovableJointImpl1</name></member>
@@ -5122,23 +5286,78 @@
     <member refid="MovableJointImpl_8h_1a5b8dfe13ce097fa3e505f492b7906c63" kind="typedef"><name>MovableJointImpl5</name></member>
     <member refid="MovableJointImpl_8h_1af1c9c077a2177994db5ee45257af1d48" kind="typedef"><name>MovableJointImpl6</name></member>
   </compound>
+  <compound refid="Model_2PrismaticJoint_8h" kind="file"><name>PrismaticJoint.h</name>
+  </compound>
   <compound refid="PrismaticJoint_8h" kind="file"><name>PrismaticJoint.h</name>
+  </compound>
+  <compound refid="Model_2RevoluteJoint_8h" kind="file"><name>RevoluteJoint.h</name>
   </compound>
   <compound refid="RevoluteJoint_8h" kind="file"><name>RevoluteJoint.h</name>
   </compound>
+  <compound refid="Model_2SolidShapes_8h" kind="file"><name>SolidShapes.h</name>
+  </compound>
   <compound refid="SolidShapes_8h" kind="file"><name>SolidShapes.h</name>
+  </compound>
+  <compound refid="Model_2SubModel_8h" kind="file"><name>SubModel.h</name>
   </compound>
   <compound refid="SubModel_8h" kind="file"><name>SubModel.h</name>
     <member refid="SubModel_8h_1a2f7475185a0d9ae6c7dcd2048d4a23fb" kind="function"><name>computeTransformToTraversalBase</name></member>
     <member refid="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" kind="function"><name>computeTransformToSubModelBase</name></member>
   </compound>
+  <compound refid="Model_2Traversal_8h" kind="file"><name>Traversal.h</name>
+  </compound>
   <compound refid="Traversal_8h" kind="file"><name>Traversal.h</name>
+  </compound>
+  <compound refid="ModelSensorsTransformers_8h" kind="file"><name>ModelSensorsTransformers.h</name>
+    <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
+  </compound>
+  <compound refid="Sensors_2ModelSensorsTransformers_8h" kind="file"><name>ModelSensorsTransformers.h</name>
+  </compound>
+  <compound refid="PredictSensorsMeasurements_8h" kind="file"><name>PredictSensorsMeasurements.h</name>
+    <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
+    <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
+  </compound>
+  <compound refid="Sensors_2PredictSensorsMeasurements_8h" kind="file"><name>PredictSensorsMeasurements.h</name>
+  </compound>
+  <compound refid="Sensors_2Sensors_8h" kind="file"><name>Sensors.h</name>
+  </compound>
+  <compound refid="Sensors_8h" kind="file"><name>Sensors.h</name>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" kind="enum"><name>SensorType</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" kind="enumvalue"><name>SIX_AXIS_FORCE_TORQUE</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" kind="enumvalue"><name>ACCELEROMETER</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" kind="enumvalue"><name>GYROSCOPE</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" kind="enumvalue"><name>THREE_AXIS_ANGULAR_ACCELEROMETER</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" kind="enumvalue"><name>THREE_AXIS_FORCE_TORQUE_CONTACT</name></member>
+    <member refid="Sensors_8h_1a27f6da1749325b5fabe94ceb7278f0df" kind="variable"><name>NR_OF_SENSOR_TYPES</name></member>
+    <member refid="Sensors_8h_1a784ae0ef50c758f0cf07ab414f432963" kind="function"><name>isLinkSensor</name></member>
+    <member refid="Sensors_8h_1a6edabe0d73bb9102d0ad456124c0f195" kind="function"><name>isJointSensor</name></member>
+    <member refid="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" kind="function"><name>getSensorTypeSize</name></member>
+  </compound>
+  <compound refid="Sensors_2SixAxisForceTorqueSensor_8h" kind="file"><name>SixAxisForceTorqueSensor.h</name>
+  </compound>
+  <compound refid="SixAxisForceTorqueSensor_8h" kind="file"><name>SixAxisForceTorqueSensor.h</name>
+  </compound>
+  <compound refid="Sensors_2ThreeAxisAngularAccelerometerSensor_8h" kind="file"><name>ThreeAxisAngularAccelerometerSensor.h</name>
+  </compound>
+  <compound refid="ThreeAxisAngularAccelerometerSensor_8h" kind="file"><name>ThreeAxisAngularAccelerometerSensor.h</name>
+  </compound>
+  <compound refid="Sensors_2ThreeAxisForceTorqueContactSensor_8h" kind="file"><name>ThreeAxisForceTorqueContactSensor.h</name>
+  </compound>
+  <compound refid="ThreeAxisForceTorqueContactSensor_8h" kind="file"><name>ThreeAxisForceTorqueContactSensor.h</name>
   </compound>
   <compound refid="ModelCalibrationHelper_8h" kind="file"><name>ModelCalibrationHelper.h</name>
   </compound>
+  <compound refid="ModelIO_2ModelCalibrationHelper_8h" kind="file"><name>ModelCalibrationHelper.h</name>
+  </compound>
   <compound refid="ModelExporter_8h" kind="file"><name>ModelExporter.h</name>
   </compound>
+  <compound refid="ModelIO_2ModelExporter_8h" kind="file"><name>ModelExporter.h</name>
+  </compound>
+  <compound refid="ModelIO_2ModelLoader_8h" kind="file"><name>ModelLoader.h</name>
+  </compound>
   <compound refid="ModelLoader_8h" kind="file"><name>ModelLoader.h</name>
+  </compound>
+  <compound refid="ModelIO_2URDFDofsImport_8h" kind="file"><name>URDFDofsImport.h</name>
   </compound>
   <compound refid="URDFDofsImport_8h" kind="file"><name>URDFDofsImport.h</name>
     <member refid="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" kind="function"><name>dofsListFromURDF</name></member>
@@ -5272,37 +5491,6 @@
     <member refid="TimeVaryingObject_8h_1a434327935f65cbdfc7ed0c1b3999d0b1" kind="typedef"><name>TimeInvariantRotation</name></member>
     <member refid="TimeVaryingObject_8h_1abc9508a4f067c4b7e8412e75ac0b388a" kind="typedef"><name>TimeInvariantPosition</name></member>
   </compound>
-  <compound refid="AccelerometerSensor_8h" kind="file"><name>AccelerometerSensor.h</name>
-  </compound>
-  <compound refid="AllSensorsTypes_8h" kind="file"><name>AllSensorsTypes.h</name>
-  </compound>
-  <compound refid="GyroscopeSensor_8h" kind="file"><name>GyroscopeSensor.h</name>
-  </compound>
-  <compound refid="ModelSensorsTransformers_8h" kind="file"><name>ModelSensorsTransformers.h</name>
-    <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
-  </compound>
-  <compound refid="PredictSensorsMeasurements_8h" kind="file"><name>PredictSensorsMeasurements.h</name>
-    <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
-    <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
-  </compound>
-  <compound refid="Sensors_8h" kind="file"><name>Sensors.h</name>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" kind="enum"><name>SensorType</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" kind="enumvalue"><name>SIX_AXIS_FORCE_TORQUE</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" kind="enumvalue"><name>ACCELEROMETER</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" kind="enumvalue"><name>GYROSCOPE</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" kind="enumvalue"><name>THREE_AXIS_ANGULAR_ACCELEROMETER</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" kind="enumvalue"><name>THREE_AXIS_FORCE_TORQUE_CONTACT</name></member>
-    <member refid="Sensors_8h_1a27f6da1749325b5fabe94ceb7278f0df" kind="variable"><name>NR_OF_SENSOR_TYPES</name></member>
-    <member refid="Sensors_8h_1a784ae0ef50c758f0cf07ab414f432963" kind="function"><name>isLinkSensor</name></member>
-    <member refid="Sensors_8h_1a6edabe0d73bb9102d0ad456124c0f195" kind="function"><name>isJointSensor</name></member>
-    <member refid="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" kind="function"><name>getSensorTypeSize</name></member>
-  </compound>
-  <compound refid="SixAxisForceTorqueSensor_8h" kind="file"><name>SixAxisForceTorqueSensor.h</name>
-  </compound>
-  <compound refid="ThreeAxisAngularAccelerometerSensor_8h" kind="file"><name>ThreeAxisAngularAccelerometerSensor.h</name>
-  </compound>
-  <compound refid="ThreeAxisForceTorqueContactSensor_8h" kind="file"><name>ThreeAxisForceTorqueContactSensor.h</name>
-  </compound>
   <compound refid="InertialParametersSolidShapesHelpers_8h" kind="file"><name>InertialParametersSolidShapesHelpers.h</name>
     <member refid="InertialParametersSolidShapesHelpers_8h_1a4ed7d9dcd80664b1b86236a0f1086cda" kind="function"><name>estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</name></member>
     <member refid="InertialParametersSolidShapesHelpers_8h_1a3fc080109daad044981533bc143d1bee" kind="function"><name>computeBoundingBoxFromShape</name></member>
@@ -5320,10 +5508,16 @@
     <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aa7552ee08212d810760cfcca2c9e26976" kind="enumvalue"><name>POINT_LIGHT</name></member>
     <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aac19ca7f555771da916a01ed3fa781d21" kind="enumvalue"><name>DIRECTIONAL_LIGHT</name></member>
   </compound>
+  <compound refid="yarp_2YARPConfigurationsLoader_8h" kind="file"><name>YARPConfigurationsLoader.h</name>
+  </compound>
   <compound refid="YARPConfigurationsLoader_8h" kind="file"><name>YARPConfigurationsLoader.h</name>
     <member refid="YARPConfigurationsLoader_8h_1a51e39202a162fa642eed01df66c75878" kind="function"><name>parseRotationMatrix</name></member>
   </compound>
+  <compound refid="yarp_2YARPConfigurationsLoaderImplementation_8h" kind="file"><name>YARPConfigurationsLoaderImplementation.h</name>
+  </compound>
   <compound refid="YARPConfigurationsLoaderImplementation_8h" kind="file"><name>YARPConfigurationsLoaderImplementation.h</name>
+  </compound>
+  <compound refid="yarp_2YARPConversions_8h" kind="file"><name>YARPConversions.h</name>
   </compound>
   <compound refid="YARPConversions_8h" kind="file"><name>YARPConversions.h</name>
     <member refid="group__iDynTreeYARP_1ga5043dfa20b4ffc99d8dbdae5b15c0dae" kind="function"><name>toiDynTree</name></member>
@@ -5341,6 +5535,8 @@
     <member refid="group__iDynTreeYARP_1ga056a45c2887a5f314c963c89bb16a270" kind="function"><name>toiDynTree</name></member>
     <member refid="group__iDynTreeYARP_1gae1c1d7e3baf33d9b84f593330a3cf199" kind="function"><name>toiDynTree</name></member>
   </compound>
+  <compound refid="yarp_2YARPConversionsImplementation_8h" kind="file"><name>YARPConversionsImplementation.h</name>
+  </compound>
   <compound refid="YARPConversionsImplementation_8h" kind="file"><name>YARPConversionsImplementation.h</name>
     <member refid="group__iDynTreeYARP_1ga5043dfa20b4ffc99d8dbdae5b15c0dae" kind="function"><name>toiDynTree</name></member>
     <member refid="group__iDynTreeYARP_1gaa28c5100610c33e81bafbdad8cd65f74" kind="function"><name>toYarp</name></member>
@@ -5352,6 +5548,8 @@
     <member refid="group__iDynTreeYARP_1ga8c4d32377000e6629f2855a6d5aebf72" kind="function"><name>toiDynTree</name></member>
     <member refid="group__iDynTreeYARP_1gaa01de51e3acfd87599aa688e4c3d32c0" kind="function"><name>toiDynTree</name></member>
     <member refid="group__iDynTreeYARP_1ga0c1a2189345fb926b98f2d82219d5dd1" kind="function"><name>toYarp</name></member>
+  </compound>
+  <compound refid="yarp_2YARPEigenConversions_8h" kind="file"><name>YARPEigenConversions.h</name>
   </compound>
   <compound refid="YARPEigenConversions_8h" kind="file"><name>YARPEigenConversions.h</name>
     <member refid="YARPEigenConversions_8h_1ae7c28c545c2775b437536fd84dabc97d" kind="function"><name>toEigen</name></member>
@@ -5445,9 +5643,11 @@
   </compound>
   <compound refid="dir_b150590bf3cb0aeeb6e2dfe5b34738cd" kind="dir"><name>iDynTree/Estimation</name>
   </compound>
-  <compound refid="dir_6cbc0da72a45ae4a04ea9a67ef3f69a4" kind="dir"><name>iDynTree</name>
+  <compound refid="dir_8e99af8152dbf29e4d6ec0a354618320" kind="dir"><name>iDynTree</name>
   </compound>
-  <compound refid="dir_ecb6d03c0733fbe44a25bdeb4ac364f3" kind="dir"><name>iDynTree</name>
+  <compound refid="dir_e92bd7cc5c3faa48a1797a843d5dac1f" kind="dir"><name>iDynTree</name>
+  </compound>
+  <compound refid="dir_30e5997e332243feb7f49058feeba2a4" kind="dir"><name>iDynTree</name>
   </compound>
   <compound refid="dir_0e7cec72910a9e4eb0887f9d16201f2d" kind="dir"><name>iDynTree</name>
   </compound>
@@ -5455,11 +5655,9 @@
   </compound>
   <compound refid="dir_04861cd47670ee41d59a3da72b8cd430" kind="dir"><name>iDynTree</name>
   </compound>
-  <compound refid="dir_30e5997e332243feb7f49058feeba2a4" kind="dir"><name>iDynTree</name>
-  </compound>
   <compound refid="dir_bee4db886efdb85971375e4ac361013b" kind="dir"><name>iDynTree</name>
   </compound>
-  <compound refid="dir_e92bd7cc5c3faa48a1797a843d5dac1f" kind="dir"><name>iDynTree</name>
+  <compound refid="dir_6cbc0da72a45ae4a04ea9a67ef3f69a4" kind="dir"><name>iDynTree</name>
   </compound>
   <compound refid="dir_8a9a7493649de9ea8cf66fdadb0b3b4d" kind="dir"><name>iDynTree</name>
   </compound>
@@ -5468,8 +5666,6 @@
   <compound refid="dir_9b4985e264b159935f1acc310967ece5" kind="dir"><name>iDynTree</name>
   </compound>
   <compound refid="dir_353eda84f30183659a170273efa23586" kind="dir"><name>iDynTree</name>
-  </compound>
-  <compound refid="dir_8e99af8152dbf29e4d6ec0a354618320" kind="dir"><name>iDynTree</name>
   </compound>
   <compound refid="dir_95b075728cf7547ec50495102e6a3dc3" kind="dir"><name>iDynTree/Integrators</name>
   </compound>
@@ -5485,7 +5681,7 @@
   </compound>
   <compound refid="dir_dffea4b92cacc2f3de0172caac576a81" kind="dir"><name>private</name>
   </compound>
-  <compound refid="dir_2ea05bf7eecb6175b20c8dd90e13c33d" kind="dir"><name>iDynTree/Sensors</name>
+  <compound refid="dir_1297d6acd49bc46b3e043f2d0e085891" kind="dir"><name>iDynTree/Sensors</name>
   </compound>
   <compound refid="dir_c85dc9e218c42523ff9bc550df3028a9" kind="dir"><name>iDynTree/yarp</name>
   </compound>

@@ -4,7 +4,7 @@
     <compoundname>iDynTree::VectorDynSize</compoundname>
     <derivedcompoundref refid="classiDynTree_1_1JointDOFsDoubleArray" prot="public" virt="non-virtual">iDynTree::JointDOFsDoubleArray</derivedcompoundref>
     <derivedcompoundref refid="classiDynTree_1_1JointPosDoubleArray" prot="public" virt="non-virtual">iDynTree::JointPosDoubleArray</derivedcompoundref>
-    <includes local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes local="no">iDynTree/VectorDynSize.h</includes>
       <sectiondef kind="user-defined">
       <memberdef kind="typedef" id="classiDynTree_1_1VectorDynSize_1a0bfc17c328f9cbb2a63b501edb09cc6a" prot="public" static="no">
         <type>double</type>
@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="247" column="24" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="247" bodyend="-1"/>
+        <location file="iDynTree/VectorDynSize.h" line="247" column="24" bodyfile="iDynTree/VectorDynSize.h" bodystart="247" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1VectorDynSize_1a3ea2fb7a1554fed00d992b005b6c661a" prot="public" static="no">
         <type>std::allocator&lt; double &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="249" column="32" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="249" bodyend="-1"/>
+        <location file="iDynTree/VectorDynSize.h" line="249" column="32" bodyfile="iDynTree/VectorDynSize.h" bodystart="249" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1VectorDynSize_1a4ade79723371cd1b3b3d7bbdf17d9e92" prot="public" static="no">
         <type>std::allocator_traits&lt; std::allocator&lt; double &gt; &gt;::pointer</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="251" column="58" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="251" bodyend="-1"/>
+        <location file="iDynTree/VectorDynSize.h" line="251" column="58" bodyfile="iDynTree/VectorDynSize.h" bodystart="251" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1VectorDynSize_1afa55464b73d97865bb3c070a3fa53b72" prot="public" static="no">
         <type>std::allocator_traits&lt; std::allocator&lt; double &gt; &gt;::const_pointer</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="253" column="64" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="253" bodyend="-1"/>
+        <location file="iDynTree/VectorDynSize.h" line="253" column="64" bodyfile="iDynTree/VectorDynSize.h" bodystart="253" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="123" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="123" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1aa0dccee7d469722a58972d578ec3e004" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double &amp;</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="125" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="125" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a89c0494d10142474cf317a3fba6704d1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="127" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="127" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a0f51ccc812b13faf0059f2e392e39c93" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double &amp;</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="129" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="129" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a5f0d8d1b4087ca7dad2efee621700b88" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="131" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="131" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a4d111694becf32e213e35b89f6a22508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="133" column="14"/>
+        <location file="iDynTree/VectorDynSize.h" line="133" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a5f0343d03d3920a41c1bd94d2e6ffff5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="140" column="22"/>
+        <location file="iDynTree/VectorDynSize.h" line="140" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1aa75089c81fd2e6224182b16dee49dd79" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="147" column="22"/>
+        <location file="iDynTree/VectorDynSize.h" line="147" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a2c6ca00df9c9295292f8aa505c938dbc" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="154" column="22"/>
+        <location file="iDynTree/VectorDynSize.h" line="154" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1ae32ad5772e2398de0f8fa4bf82eb9179" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="161" column="22"/>
+        <location file="iDynTree/VectorDynSize.h" line="161" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a6bd1b71bba47254db0d28d8a77135998" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>double *</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="168" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="168" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1acb315119d3e5018c46a6d410bae6830c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>double *</type>
@@ -270,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="175" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="175" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1ae0939194f829b13a798bc7120efa26c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="177" column="21"/>
+        <location file="iDynTree/VectorDynSize.h" line="177" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="261" column="21"/>
+        <location file="iDynTree/VectorDynSize.h" line="261" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1af1d48bf5aac5f4cf8c87e3ac161d2523" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -314,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="263" column="21"/>
+        <location file="iDynTree/VectorDynSize.h" line="263" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -331,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="29" column="17" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/VectorDynSize.h" line="29" column="17" bodyfile="iDynTree/VectorDynSize.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1VectorDynSize_1a82c970a6d8f227ee9b6613fd2592eea4" prot="protected" static="no" mutable="no">
         <type>std::size_t</type>
@@ -345,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="34" column="21" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/VectorDynSize.h" line="34" column="21" bodyfile="iDynTree/VectorDynSize.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1VectorDynSize_1af654f4b9b859eff6af68a6ece12a60d2" prot="protected" static="no" mutable="no">
         <type>std::size_t</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="39" column="21" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/VectorDynSize.h" line="39" column="21" bodyfile="iDynTree/VectorDynSize.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="44" column="14"/>
+        <location file="iDynTree/VectorDynSize.h" line="44" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="50" column="9"/>
+        <location file="iDynTree/VectorDynSize.h" line="50" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1ab5078978b40c0d797f4ec2679ad9a39c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -425,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="59" column="9"/>
+        <location file="iDynTree/VectorDynSize.h" line="59" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a357bd4663b1aa598357dfeb2a5221dd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -451,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="68" column="9"/>
+        <location file="iDynTree/VectorDynSize.h" line="68" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a6cd442c9388f049e75a141fa9da1a37e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -472,7 +472,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="74" column="9"/>
+        <location file="iDynTree/VectorDynSize.h" line="74" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1ab68a0190fe0a877a55d7a6b8399517a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -502,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="85" column="9"/>
+        <location file="iDynTree/VectorDynSize.h" line="85" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a2b3a46833b8ac3023a285d9d180604c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -519,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="93" column="17"/>
+        <location file="iDynTree/VectorDynSize.h" line="93" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a6bf2663c71216f9ec3b8fb9d6e68e3ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
@@ -541,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="104" column="24"/>
+        <location file="iDynTree/VectorDynSize.h" line="104" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a03b12232917d198052696fec51b891c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
@@ -563,7 +563,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="116" column="24"/>
+        <location file="iDynTree/VectorDynSize.h" line="116" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a6f33a6cbfc6efa20a58d174c96e1605f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const double *</type>
@@ -580,7 +580,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="186" column="23"/>
+        <location file="iDynTree/VectorDynSize.h" line="186" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a463b9b3d0f4581b3ab44f2ce63ba8874" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double *</type>
@@ -597,7 +597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="193" column="17"/>
+        <location file="iDynTree/VectorDynSize.h" line="193" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1ad264c9a85bf7adbd308627b0e719d65f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -611,7 +611,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="198" column="14"/>
+        <location file="iDynTree/VectorDynSize.h" line="198" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a0c18e4e63e37de5efe0481f4c1861774" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -643,7 +643,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="207" column="14"/>
+        <location file="iDynTree/VectorDynSize.h" line="207" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a6c1045505770a93e2a142546d3a8420c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -673,7 +673,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="215" column="14"/>
+        <location file="iDynTree/VectorDynSize.h" line="215" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1adb3205ed58008a5d54c9cd84b155d6e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -690,7 +690,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="222" column="14"/>
+        <location file="iDynTree/VectorDynSize.h" line="222" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1adb08f82f775b84bd0e0f8964b5c42dc5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -704,7 +704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="227" column="16"/>
+        <location file="iDynTree/VectorDynSize.h" line="227" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a1f435e6b594f64f058059df2e63434f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -735,7 +735,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorDynSize.h" line="241" column="14"/>
+        <location file="iDynTree/VectorDynSize.h" line="241" column="14"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -762,7 +762,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Core/VectorDynSize.h" line="21" column="5" bodyfile="iDynTree/Core/VectorDynSize.h" bodystart="22" bodyend="266"/>
+    <location file="iDynTree/VectorDynSize.h" line="21" column="5" bodyfile="iDynTree/VectorDynSize.h" bodystart="22" bodyend="266"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorDynSize_1a3ea2fb7a1554fed00d992b005b6c661a" prot="public" virt="non-virtual"><scope>iDynTree::VectorDynSize</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorDynSize_1a5f0343d03d3920a41c1bd94d2e6ffff5" prot="public" virt="non-virtual"><scope>iDynTree::VectorDynSize</scope><name>begin</name></member>

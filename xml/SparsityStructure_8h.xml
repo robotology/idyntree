@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SparsityStructure_8h" kind="file" language="C++">
     <compoundname>SparsityStructure.h</compoundname>
-    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includes local="no">vector</includes>
     <includes local="no">cstddef</includes>
     <includes local="no">unordered_set</includes>

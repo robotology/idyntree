@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1Box" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::Box</compoundname>
     <basecompoundref refid="classiDynTree_1_1SolidShape" prot="public" virt="non-virtual">iDynTree::SolidShape</basecompoundref>
-    <includes local="no">iDynTree/Model/SolidShapes.h</includes>
+    <includes local="no">iDynTree/SolidShapes.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1Box_1a6c2572489891468177899f65c0115d9b" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="189" column="16" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="189" bodyend="-1"/>
+        <location file="iDynTree/SolidShapes.h" line="189" column="16" bodyfile="iDynTree/SolidShapes.h" bodystart="189" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Box_1a76b5925258003a79d08f51c3b9e4d2bb" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="190" column="16" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="190" bodyend="-1"/>
+        <location file="iDynTree/SolidShapes.h" line="190" column="16" bodyfile="iDynTree/SolidShapes.h" bodystart="190" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Box_1a85f1c8576f6573c00bbd387ef4ab6775" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="191" column="16" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="191" bodyend="-1"/>
+        <location file="iDynTree/SolidShapes.h" line="191" column="16" bodyfile="iDynTree/SolidShapes.h" bodystart="191" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="155" column="17"/>
+        <location file="iDynTree/SolidShapes.h" line="155" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Box_1ab7328592c2163c117835f224e1a5c5b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> *</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="156" column="28"/>
+        <location file="iDynTree/SolidShapes.h" line="156" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Box_1ab7252219ca88a26b18131cf1be693f2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="161" column="16"/>
+        <location file="iDynTree/SolidShapes.h" line="161" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Box_1a92c9f9d78f2921b40b5fc5e80e1c6ed8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="166" column="14"/>
+        <location file="iDynTree/SolidShapes.h" line="166" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Box_1a73aa296674914ac0cbe050a441391c78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="171" column="16"/>
+        <location file="iDynTree/SolidShapes.h" line="171" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Box_1ac1c0f62c91e58392c05bde6564709f7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="176" column="14"/>
+        <location file="iDynTree/SolidShapes.h" line="176" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Box_1aec523b78c87de03bfc380d80720aa89e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="181" column="16"/>
+        <location file="iDynTree/SolidShapes.h" line="181" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Box_1acae948236f9ad072355b20a188d7f86b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SolidShapes.h" line="186" column="14"/>
+        <location file="iDynTree/SolidShapes.h" line="186" column="14"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -201,7 +201,7 @@
         <link refid="classiDynTree_1_1SolidShape"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/SolidShapes.h" line="152" column="5" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="153" bodyend="192"/>
+    <location file="iDynTree/SolidShapes.h" line="152" column="5" bodyfile="iDynTree/SolidShapes.h" bodystart="153" bodyend="192"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SolidShape_1a9d8ee4804ecf2c25181a65f1f44b9a3b" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>asBox</name></member>
       <member refid="classiDynTree_1_1SolidShape_1a1249bfe8e2fefc34b749c7878b83e462" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>asBox</name></member>

@@ -2,19 +2,20 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ModelExporter_8h" kind="file" language="C++">
     <compoundname>ModelExporter.h</compoundname>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
-    <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelIO/ModelCalibrationHelper.h</includedby>
+    <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelCalibrationHelper.h</includedby>
+    <includedby refid="ModelIO_2ModelExporter_8h" local="no">iDynTree/ModelIO/ModelExporter.h</includedby>
     <includedby refid="URDFModelExport_8h" local="no">private/URDFModelExport.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>string</label>
       </node>
       <node id="1">
-        <label>iDynTree/ModelIO/ModelExporter.h</label>
+        <label>iDynTree/ModelExporter.h</label>
         <link refid="ModelExporter_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -37,6 +38,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/ModelIO/ModelExporter.h"/>
+    <location file="iDynTree/ModelExporter.h"/>
   </compounddef>
 </doxygen>

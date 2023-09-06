@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1ContactStateMachine" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::ContactStateMachine</compoundname>
-    <includes local="no">iDynTree/Estimation/ContactStateMachine.h</includes>
+    <includes local="no">iDynTree/ContactStateMachine.h</includes>
       <sectiondef kind="public-type">
       <memberdef kind="enum" id="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49" prot="public" static="no" strong="no">
         <type></type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="46" column="9" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="47" bodyend="72"/>
+        <location file="iDynTree/ContactStateMachine.h" line="46" column="9" bodyfile="iDynTree/ContactStateMachine.h" bodystart="47" bodyend="72"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="113" column="25" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="113" bodyend="-1"/>
+        <location file="iDynTree/ContactStateMachine.h" line="113" column="25" bodyfile="iDynTree/ContactStateMachine.h" bodystart="113" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="116" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="116" bodyend="-1"/>
+        <location file="iDynTree/ContactStateMachine.h" line="116" column="14" bodyfile="iDynTree/ContactStateMachine.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ContactStateMachine_1a1e12e745fc2931da65ab26f65dac2909" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="119" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="119" bodyend="-1"/>
+        <location file="iDynTree/ContactStateMachine.h" line="119" column="14" bodyfile="iDynTree/ContactStateMachine.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ContactStateMachine_1ace6064413372d47ba0fdc30a5e1fd2a4" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="122" column="13" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="122" bodyend="-1"/>
+        <location file="iDynTree/ContactStateMachine.h" line="122" column="13" bodyfile="iDynTree/ContactStateMachine.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="78" column="9"/>
+        <location file="iDynTree/ContactStateMachine.h" line="78" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1a4557b8a49662617f8902e60b54a327fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="85" column="14"/>
+        <location file="iDynTree/ContactStateMachine.h" line="85" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1ad7c8a61bf69587923f0990bb3c88b23b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="90" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="90" bodyend="90"/>
+        <location file="iDynTree/ContactStateMachine.h" line="90" column="14" bodyfile="iDynTree/ContactStateMachine.h" bodystart="90" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1ad7e300074de0e0e1627f4e6c6e50779a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="96" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="96" bodyend="96"/>
+        <location file="iDynTree/ContactStateMachine.h" line="96" column="14" bodyfile="iDynTree/ContactStateMachine.h" bodystart="96" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1a876aff9f52fecfa4d8fc73abe1272b3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49" kindref="member">contactTransition</ref></type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="102" column="27"/>
+        <location file="iDynTree/ContactStateMachine.h" line="102" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1a441c61571ece47719322503b7bad6ca5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -247,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="108" column="16"/>
+        <location file="iDynTree/ContactStateMachine.h" line="108" column="16"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -282,7 +282,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Estimation/ContactStateMachine.h" line="40" column="5" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="41" bodyend="124"/>
+    <location file="iDynTree/ContactStateMachine.h" line="40" column="5" bodyfile="iDynTree/ContactStateMachine.h" bodystart="41" bodyend="124"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49a036db61ab6a2856f3a3186af39b8e454" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>CONTACT_BREAK</name></member>
       <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49ae7d672315b8c5329c68891ec9c6c2f80" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>CONTACT_MAKE</name></member>

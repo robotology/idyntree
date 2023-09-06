@@ -13,7 +13,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/Span.h" line="608" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="608" bodyend="608"/>
+    <location file="iDynTree/Span.h" line="608" column="5" bodyfile="iDynTree/Span.h" bodystart="608" bodyend="608"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

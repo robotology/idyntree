@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1Twist" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::Twist</compoundname>
     <basecompoundref refid="classiDynTree_1_1SpatialMotionVector" prot="public" virt="non-virtual">iDynTree::SpatialMotionVector</basecompoundref>
-    <includes local="no">iDynTree/Core/Twist.h</includes>
+    <includes local="no">iDynTree/Twist.h</includes>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="classiDynTree_1_1Twist_1a3a2fff49fa9cbdcdc96589f26f909811" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="25" column="9"/>
+        <location file="iDynTree/Twist.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1ad6ccf45a38ed5304317540ac2d4f9953" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="26" column="9"/>
+        <location file="iDynTree/Twist.h" line="26" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1a356ac02dceb5807c911d0dc77a37c62b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="27" column="9"/>
+        <location file="iDynTree/Twist.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1a9769af112f3b78419a69678a80da6c53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="28" column="9"/>
+        <location file="iDynTree/Twist.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1aceda68fe1acfbabfe78f7c9462f4f25a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="31" column="15"/>
+        <location file="iDynTree/Twist.h" line="31" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1a40943fa7464aa2f1f205ffad431dbb02" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="32" column="15"/>
+        <location file="iDynTree/Twist.h" line="32" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1a2c0be74f866be2d1607cbfdf28031411" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="33" column="15"/>
+        <location file="iDynTree/Twist.h" line="33" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1aca6ae92346059edd6efe6a3d6faf81da" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="36" column="20"/>
+        <location file="iDynTree/Twist.h" line="36" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Twist_1aeb45cc74d27dbe912f630842136f0e40" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Twist.h" line="37" column="16"/>
+        <location file="iDynTree/Twist.h" line="37" column="16"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -228,7 +228,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/Twist.h" line="22" column="5" bodyfile="iDynTree/Core/Twist.h" bodystart="23" bodyend="39"/>
+    <location file="iDynTree/Twist.h" line="22" column="5" bodyfile="iDynTree/Twist.h" bodystart="23" bodyend="39"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::Twist</scope><name>angularOffset</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::Twist</scope><name>angularVec3</name></member>

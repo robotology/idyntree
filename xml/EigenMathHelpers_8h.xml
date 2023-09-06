@@ -3,12 +3,13 @@
   <compounddef id="EigenMathHelpers_8h" kind="file" language="C++">
     <compoundname>EigenMathHelpers.h</compoundname>
     <includes local="no">Eigen/Dense</includes>
+    <includedby refid="Core_2EigenMathHelpers_8h" local="no">iDynTree/Core/EigenMathHelpers.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>Eigen/Dense</label>
       </node>
       <node id="1">
-        <label>iDynTree/Core/EigenMathHelpers.h</label>
+        <label>iDynTree/EigenMathHelpers.h</label>
         <link refid="EigenMathHelpers_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -53,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenMathHelpers.h" line="16" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="16" bodyend="41"/>
+        <location file="iDynTree/EigenMathHelpers.h" line="16" column="6" bodyfile="iDynTree/EigenMathHelpers.h" bodystart="16" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="EigenMathHelpers_8h_1aacb98344c6221dbf5e5d7678e3e75136" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -92,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenMathHelpers.h" line="45" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="45" bodyend="53"/>
+        <location file="iDynTree/EigenMathHelpers.h" line="45" column="6" bodyfile="iDynTree/EigenMathHelpers.h" bodystart="45" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="EigenMathHelpers_8h_1a0b20a0208cab1ac6cdbd661612ca4c1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -127,13 +128,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenMathHelpers.h" line="56" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="56" bodyend="64"/>
+        <location file="iDynTree/EigenMathHelpers.h" line="56" column="6" bodyfile="iDynTree/EigenMathHelpers.h" bodystart="56" bodyend="64"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/EigenMathHelpers.h"/>
+    <location file="iDynTree/EigenMathHelpers.h"/>
   </compounddef>
 </doxygen>

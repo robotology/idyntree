@@ -2,15 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SpatialMotionVector_8h" kind="file" language="C++">
     <compoundname>SpatialMotionVector.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
-    <includes refid="SpatialVector_8h" local="no">iDynTree/Core/SpatialVector.h</includes>
-    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
-    <includedby refid="SpatialAcc_8h" local="no">iDynTree/Core/SpatialAcc.h</includedby>
-    <includedby refid="Twist_8h" local="no">iDynTree/Core/Twist.h</includedby>
-    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/Model/DynamicsUtils.h</includedby>
-    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/Model/PrismaticJoint.h</includedby>
-    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
+    <includes refid="SpatialVector_8h" local="no">iDynTree/SpatialVector.h</includes>
+    <includedby refid="Core_2SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
+    <includedby refid="SpatialAcc_8h" local="no">iDynTree/SpatialAcc.h</includedby>
+    <includedby refid="Twist_8h" local="no">iDynTree/Twist.h</includedby>
+    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/DynamicsUtils.h</includedby>
+    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/PrismaticJoint.h</includedby>
+    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/RevoluteJoint.h</includedby>
     <innerclass refid="classiDynTree_1_1Dummy" prot="public">iDynTree::Dummy</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialMotionVector" prot="public">iDynTree::SpatialMotionVector</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
@@ -18,6 +19,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/SpatialMotionVector.h"/>
+    <location file="iDynTree/SpatialMotionVector.h"/>
   </compounddef>
 </doxygen>

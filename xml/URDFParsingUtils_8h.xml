@@ -7,8 +7,8 @@
     <includes local="no">sstream</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes local="no">fpconv.h</includes>
     <incdepgraph>
       <node id="2">

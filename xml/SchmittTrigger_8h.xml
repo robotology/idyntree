@@ -3,10 +3,11 @@
   <compounddef id="SchmittTrigger_8h" kind="file" language="C++">
     <compoundname>SchmittTrigger.h</compoundname>
     <includes local="no">iostream</includes>
-    <includedby refid="ContactStateMachine_8h" local="yes">iDynTree/Estimation/ContactStateMachine.h</includedby>
+    <includedby refid="ContactStateMachine_8h" local="yes">iDynTree/ContactStateMachine.h</includedby>
+    <includedby refid="Estimation_2SchmittTrigger_8h" local="no">iDynTree/Estimation/SchmittTrigger.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>iDynTree/Estimation/SchmittTrigger.h</label>
+        <label>iDynTree/SchmittTrigger.h</label>
         <link refid="SchmittTrigger_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -21,6 +22,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/SchmittTrigger.h"/>
+    <location file="iDynTree/SchmittTrigger.h"/>
   </compounddef>
 </doxygen>

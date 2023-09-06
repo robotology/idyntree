@@ -3,6 +3,10 @@
   <compounddef id="dir_bee4db886efdb85971375e4ac361013b" kind="dir">
     <compoundname>iDynTree</compoundname>
     <innerdir refid="dir_52266d84fa8cdfa7d5e17899a30a301e">iDynTree/ModelIO</innerdir>
+    <innerfile refid="ModelCalibrationHelper_8h">ModelCalibrationHelper.h</innerfile>
+    <innerfile refid="ModelExporter_8h">ModelExporter.h</innerfile>
+    <innerfile refid="ModelLoader_8h">ModelLoader.h</innerfile>
+    <innerfile refid="URDFDofsImport_8h">URDFDofsImport.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/TestUtils.h" line="51" column="14" bodyfile="iDynTree/Core/TestUtils.h" bodystart="51" bodyend="-1"/>
+        <location file="iDynTree/TestUtils.h" line="51" column="14" bodyfile="iDynTree/TestUtils.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1TestMatrixMismatch_1ab6ffcf5077580483c50bdd7ff94a6aa8" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/TestUtils.h" line="52" column="16" bodyfile="iDynTree/Core/TestUtils.h" bodystart="52" bodyend="-1"/>
+        <location file="iDynTree/TestUtils.h" line="52" column="16" bodyfile="iDynTree/TestUtils.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1TestMatrixMismatch_1abb621257176b0e5b3e8d7c0b41a9d401" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/TestUtils.h" line="53" column="16" bodyfile="iDynTree/Core/TestUtils.h" bodystart="53" bodyend="-1"/>
+        <location file="iDynTree/TestUtils.h" line="53" column="16" bodyfile="iDynTree/TestUtils.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -67,14 +67,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/TestUtils.h" line="55" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="55" bodyend="56"/>
+        <location file="iDynTree/TestUtils.h" line="55" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="55" bodyend="56"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/TestUtils.h" line="50" column="5" bodyfile="iDynTree/Core/TestUtils.h" bodystart="50" bodyend="57"/>
+    <location file="iDynTree/TestUtils.h" line="50" column="5" bodyfile="iDynTree/TestUtils.h" bodystart="50" bodyend="57"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1TestMatrixMismatch_1ab6ffcf5077580483c50bdd7ff94a6aa8" prot="public" virt="non-virtual"><scope>iDynTree::TestMatrixMismatch</scope><name>expected</name></member>
       <member refid="structiDynTree_1_1TestMatrixMismatch_1a494e7bed6dd1a5177f1b47a8717909fb" prot="public" virt="non-virtual"><scope>iDynTree::TestMatrixMismatch</scope><name>match</name></member>

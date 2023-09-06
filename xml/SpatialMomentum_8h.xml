@@ -2,14 +2,15 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SpatialMomentum_8h" kind="file" language="C++">
     <compoundname>SpatialMomentum.h</compoundname>
-    <includes refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includes>
-    <includedby refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
+    <includes refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includes>
+    <includedby refid="Core_2SpatialMomentum_8h" local="no">iDynTree/Core/SpatialMomentum.h</includedby>
+    <includedby refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includedby>
     <innerclass refid="classiDynTree_1_1SpatialMomentum" prot="public">iDynTree::SpatialMomentum</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/SpatialMomentum.h"/>
+    <location file="iDynTree/SpatialMomentum.h"/>
   </compounddef>
 </doxygen>

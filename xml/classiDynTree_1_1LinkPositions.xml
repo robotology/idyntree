@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="24" column="21" bodyfile="iDynTree/Model/LinkState.h" bodystart="24" bodyend="-1"/>
+        <location file="iDynTree/LinkState.h" line="24" column="21" bodyfile="iDynTree/LinkState.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="27" column="9"/>
+        <location file="iDynTree/LinkState.h" line="27" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1adddcfd14514bf0291ca2da74b32e64bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -51,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="28" column="9"/>
+        <location file="iDynTree/LinkState.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a53f1d3c9e87601c9d0d792065662bb11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="30" column="14"/>
+        <location file="iDynTree/LinkState.h" line="30" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a0de7132a04d7e5ab09cf6550020a5c52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="31" column="14"/>
+        <location file="iDynTree/LinkState.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a947b7f210de62f5b33e30cbae81d217d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="33" column="14"/>
+        <location file="iDynTree/LinkState.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a7e19bd0bea206810ddc587d508447106" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="35" column="16"/>
+        <location file="iDynTree/LinkState.h" line="35" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a22370e5ee142a6200b865580f7933730" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="37" column="30"/>
+        <location file="iDynTree/LinkState.h" line="37" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a4294652847f2f41b462bde498605246a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="38" column="36"/>
+        <location file="iDynTree/LinkState.h" line="38" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a137a28e8ed47b61f6295440fb71ad080" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="40" column="21"/>
+        <location file="iDynTree/LinkState.h" line="40" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkPositions_1a853a7a1289b72f22c279eb6f8733163f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -179,14 +179,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="42" column="9"/>
+        <location file="iDynTree/LinkState.h" line="42" column="9"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/LinkState.h" line="21" column="5" bodyfile="iDynTree/Model/LinkState.h" bodystart="22" bodyend="43"/>
+    <location file="iDynTree/LinkState.h" line="21" column="5" bodyfile="iDynTree/LinkState.h" bodystart="22" bodyend="43"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1LinkPositions_1a7e19bd0bea206810ddc587d508447106" prot="public" virt="non-virtual"><scope>iDynTree::LinkPositions</scope><name>getNrOfLinks</name></member>
       <member refid="classiDynTree_1_1LinkPositions_1a947b7f210de62f5b33e30cbae81d217d" prot="public" virt="non-virtual"><scope>iDynTree::LinkPositions</scope><name>isConsistent</name></member>

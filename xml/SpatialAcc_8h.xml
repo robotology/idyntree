@@ -2,15 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SpatialAcc_8h" kind="file" language="C++">
     <compoundname>SpatialAcc.h</compoundname>
-    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includes>
-    <includedby refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
-    <includedby refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includedby>
+    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includes>
+    <includedby refid="Core_2SpatialAcc_8h" local="no">iDynTree/Core/SpatialAcc.h</includedby>
+    <includedby refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includedby>
+    <includedby refid="LinkState_8h" local="no">iDynTree/LinkState.h</includedby>
     <innerclass refid="classiDynTree_1_1SpatialAcc" prot="public">iDynTree::SpatialAcc</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/SpatialAcc.h"/>
+    <location file="iDynTree/SpatialAcc.h"/>
   </compounddef>
 </doxygen>

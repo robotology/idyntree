@@ -2,9 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="DynamicsUtils_8h" kind="file" language="C++">
     <compoundname>DynamicsUtils.h</compoundname>
-    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includes>
-    <includes refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includes>
-    <includes refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includes>
+    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includes>
+    <includes refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includes>
+    <includes refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includes>
+    <includedby refid="Model_2DynamicsUtils_8h" local="no">iDynTree/Model/DynamicsUtils.h</includedby>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
       <memberdef kind="function" id="DynamicsUtils_8h_1aed28749437ab0ff261382d34506ffad4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -28,13 +29,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsUtils.h" line="21" column="5" declfile="iDynTree/Model/DynamicsUtils.h" declline="21" declcolumn="5"/>
+        <location file="iDynTree/DynamicsUtils.h" line="21" column="5" declfile="iDynTree/DynamicsUtils.h" declline="21" declcolumn="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/DynamicsUtils.h"/>
+    <location file="iDynTree/DynamicsUtils.h"/>
   </compounddef>
 </doxygen>

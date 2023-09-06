@@ -3,7 +3,7 @@
   <compounddef id="MaterialElement_8h" kind="file" language="C++">
     <compoundname>MaterialElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includedby refid="RobotElement_8h" local="yes">private/RobotElement.h</includedby>

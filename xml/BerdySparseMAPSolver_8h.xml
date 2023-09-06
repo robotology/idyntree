@@ -2,15 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="BerdySparseMAPSolver_8h" kind="file" language="C++">
     <compoundname>BerdySparseMAPSolver.h</compoundname>
-    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includedby refid="Estimation_2BerdySparseMAPSolver_8h" local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includedby>
     <innerclass refid="classiDynTree_1_1BerdySparseMAPSolver" prot="public">iDynTree::BerdySparseMAPSolver</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/BerdySparseMAPSolver.h"/>
+    <location file="iDynTree/BerdySparseMAPSolver.h"/>
   </compounddef>
 </doxygen>

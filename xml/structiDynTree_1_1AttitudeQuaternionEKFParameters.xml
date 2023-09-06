@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="41" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="41" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a36632047df81704134f3e68aa4e3041c" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="42" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="42" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="42" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a7240502333c0ddceee465fe196f24564" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="45" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="45" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a7822b825b05c3f0ab6cc0888e62831c8" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="46" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="46" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a62569b4408f25fc383fec5378c56c6b5" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="49" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="49" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="49" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a1713af1c3f17f856ad34127372590abb" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="50" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="50" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="50" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1ab89d382744fb69db1570767a960b0b76" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="52" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="52" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="52" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1adebf29310eb3bbe3aa2e5f02baad3d37" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="53" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="53" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="53" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a746a917e3743a21c74d46d21970c3ce1" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="54" column="12" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="54" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="54" column="12" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeQuaternionEKFParameters_1ad6736d3272d84629e5e78fe9e5b60d96" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="56" column="10" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="56" bodyend="-1"/>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="56" column="10" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -159,7 +159,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="40" column="5" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="40" bodyend="57"/>
+    <location file="iDynTree/AttitudeQuaternionEKF.h" line="40" column="5" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="40" bodyend="57"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a7240502333c0ddceee465fe196f24564" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKFParameters</scope><name>accelerometer_noise_variance</name></member>
       <member refid="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a36632047df81704134f3e68aa4e3041c" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKFParameters</scope><name>bias_correlation_time_factor</name></member>

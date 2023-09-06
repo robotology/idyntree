@@ -2,25 +2,26 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Sensors_8h" kind="file" language="C++">
     <compoundname>Sensors.h</compoundname>
-    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
     <includes local="no">iterator</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
-    <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelIO/ModelCalibrationHelper.h</includedby>
-    <includedby refid="ModelExporter_8h" local="no">iDynTree/ModelIO/ModelExporter.h</includedby>
-    <includedby refid="ModelLoader_8h" local="no">iDynTree/ModelIO/ModelLoader.h</includedby>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="AccelerometerSensor_8h" local="no">iDynTree/AccelerometerSensor.h</includedby>
+    <includedby refid="GyroscopeSensor_8h" local="no">iDynTree/GyroscopeSensor.h</includedby>
+    <includedby refid="Sensors_2Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
+    <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/SixAxisForceTorqueSensor.h</includedby>
+    <includedby refid="ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/ThreeAxisAngularAccelerometerSensor.h</includedby>
+    <includedby refid="ThreeAxisForceTorqueContactSensor_8h" local="no">iDynTree/ThreeAxisForceTorqueContactSensor.h</includedby>
+    <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelCalibrationHelper.h</includedby>
+    <includedby refid="ModelExporter_8h" local="no">iDynTree/ModelExporter.h</includedby>
+    <includedby refid="ModelLoader_8h" local="no">iDynTree/ModelLoader.h</includedby>
     <includedby refid="SensorElement_8h" local="no">private/SensorElement.h</includedby>
     <includedby refid="URDFDocument_8h" local="no">private/URDFDocument.h</includedby>
-    <includedby refid="AccelerometerSensor_8h" local="no">iDynTree/Sensors/AccelerometerSensor.h</includedby>
-    <includedby refid="GyroscopeSensor_8h" local="no">iDynTree/Sensors/GyroscopeSensor.h</includedby>
-    <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/Sensors/SixAxisForceTorqueSensor.h</includedby>
-    <includedby refid="ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h</includedby>
-    <includedby refid="ThreeAxisForceTorqueContactSensor_8h" local="no">iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h</includedby>
     <incdepgraph>
       <node id="4">
         <label>iterator</label>
@@ -32,7 +33,7 @@
         <label>vector</label>
       </node>
       <node id="1">
-        <label>iDynTree/Sensors/Sensors.h</label>
+        <label>iDynTree/Sensors.h</label>
         <link refid="Sensors_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -102,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="27" column="5" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="28" bodyend="34"/>
+        <location file="iDynTree/Sensors.h" line="27" column="5" bodyfile="iDynTree/Sensors.h" bodystart="28" bodyend="34"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="var">
@@ -118,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="38" column="15" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Sensors.h" line="38" column="15" bodyfile="iDynTree/Sensors.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -138,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="43" column="17" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="43" bodyend="56"/>
+        <location file="iDynTree/Sensors.h" line="43" column="17" bodyfile="iDynTree/Sensors.h" bodystart="43" bodyend="56"/>
       </memberdef>
       <memberdef kind="function" id="Sensors_8h_1a6edabe0d73bb9102d0ad456124c0f195" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -156,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="61" column="17" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="61" bodyend="64"/>
+        <location file="iDynTree/Sensors.h" line="61" column="17" bodyfile="iDynTree/Sensors.h" bodystart="61" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::size_t</type>
@@ -173,13 +174,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/Sensors.h" line="66" column="24" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="66" bodyend="80"/>
+        <location file="iDynTree/Sensors.h" line="66" column="24" bodyfile="iDynTree/Sensors.h" bodystart="66" bodyend="80"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Sensors/Sensors.h"/>
+    <location file="iDynTree/Sensors.h"/>
   </compounddef>
 </doxygen>

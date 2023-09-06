@@ -3,12 +3,12 @@
   <compounddef id="skinDynLibConversionsImplementation_8h" kind="file" language="C++">
     <compoundname>skinDynLibConversionsImplementation.h</compoundname>
     <includes refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includes>
-    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
-    <includes refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includes>
-    <includes refid="ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includes>
-    <includes refid="YARPConversions_8h" local="no">iDynTree/yarp/YARPConversions.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
+    <includes refid="Wrench_8h" local="no">iDynTree/Wrench.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
+    <includes refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includes>
+    <includes refid="YARPConversions_8h" local="no">iDynTree/YARPConversions.h</includes>
     <includes local="no">cassert</includes>
     <includedby refid="skinDynLibConversions_8h" local="yes">iDynTree/skinDynLibConversions.h</includedby>
     <incdepgraph>

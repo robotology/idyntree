@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="36" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="37" bodyend="66"/>
+        <location file="iDynTree/BerdyHelper.h" line="36" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="37" bodyend="66"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" prot="public" static="no" strong="no">
         <type></type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="75" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="76" bodyend="100"/>
+        <location file="iDynTree/BerdyHelper.h" line="75" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="76" bodyend="100"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" prot="public" static="no" strong="no">
         <type></type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="118" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="119" bodyend="138"/>
+        <location file="iDynTree/BerdyHelper.h" line="118" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="119" bodyend="138"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

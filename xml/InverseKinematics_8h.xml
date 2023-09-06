@@ -5,7 +5,7 @@
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
     <includes refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includes>
-    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
     <includedby refid="TransformConstraint_8h" local="no">private/TransformConstraint.h</includedby>
     <incdepgraph>

@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="TransformConstraint_8h" kind="file" language="C++">
     <compoundname>TransformConstraint.h</compoundname>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="InverseKinematics_8h" local="no">iDynTree/InverseKinematics.h</includes>
     <innerclass refid="classinternal_1_1kinematics_1_1TransformConstraint" prot="public">internal::kinematics::TransformConstraint</innerclass>
     <innernamespace refid="namespaceinternal">internal</innernamespace>

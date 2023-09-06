@@ -4,8 +4,8 @@
     <compoundname>VisualElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
     <includes refid="MaterialElement_8h" local="yes">MaterialElement.h</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
-    <includes refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="SolidShapes_8h" local="no">iDynTree/SolidShapes.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includes local="no">unordered_map</includes>

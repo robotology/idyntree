@@ -4,7 +4,7 @@
     <compoundname>Constraint.h</compoundname>
     <includes local="no">cstddef</includes>
     <includes local="no">string</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
     <includedby refid="LinearConstraint_8h" local="no">iDynTree/LinearConstraint.h</includedby>
     <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>

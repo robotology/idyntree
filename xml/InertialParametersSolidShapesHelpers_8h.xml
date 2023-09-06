@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="InertialParametersSolidShapesHelpers_8h" kind="file" language="C++">
     <compoundname>InertialParametersSolidShapesHelpers.h</compoundname>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="SolidShapes_8h" local="no">iDynTree/SolidShapes.h</includes>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
       <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a4ed7d9dcd80664b1b86236a0f1086cda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">

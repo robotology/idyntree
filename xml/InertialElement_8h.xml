@@ -3,8 +3,8 @@
   <compounddef id="InertialElement_8h" kind="file" language="C++">
     <compoundname>InertialElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <innerclass refid="classiDynTree_1_1InertialElement" prot="public">iDynTree::InertialElement</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

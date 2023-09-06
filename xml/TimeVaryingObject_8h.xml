@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="TimeVaryingObject_8h" kind="file" language="C++">
     <compoundname>TimeVaryingObject.h</compoundname>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
-    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includedby refid="L2NormCost_8h" local="no">iDynTree/L2NormCost.h</includedby>
     <includedby refid="LinearConstraint_8h" local="no">iDynTree/LinearConstraint.h</includedby>
     <includedby refid="LinearCost_8h" local="no">iDynTree/LinearCost.h</includedby>

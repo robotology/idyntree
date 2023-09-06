@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Core_2EigenHelpers_8h" kind="file" language="C++">
+    <compoundname>EigenHelpers.h</compoundname>
+    <includes refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/EigenHelpers.h"/>
+  </compounddef>
+</doxygen>

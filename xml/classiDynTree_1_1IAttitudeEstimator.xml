@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="61" column="17"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="61" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a9c251ac717cbcfeb75a39fffd5a9b185" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="76" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="76" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a7121acf85b46be0edb9231588c579013" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="88" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="88" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a6cc4ea7bacb721c67890ceb250857e71" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="98" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="98" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a3fd8541c4ede713177058251aae24717" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="107" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="107" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a72f94711e28d7173869f41492d6ac364" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="122" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="122" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1add5b1c7109a232bcb3da976792f72a6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -222,7 +222,7 @@
 <para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="191">$ A $</formula> as inertial frame and <formula id="192">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="193">$ {^A}R_B $</formula> as the rotation matrix where <formula id="195">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
-<para>For more details about the range of the RPY Euler angles, please refer the documentation of <ulink url="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Core/Rotation.h#L167">GetRPY()</ulink></para>
+<para>For more details about the range of the RPY Euler angles, please refer the documentation of <ulink url="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Rotation.h#L167">GetRPY()</ulink></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">rpy</parametername>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="135" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="135" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a7234eb151268d99d90dbe691a6bf3a46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>size_t</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="141" column="24"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="141" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a0360685bed94e086224b1126116dca04" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="153" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="153" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a86554ddcfc70601b05ad7cd997851983" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -321,7 +321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="165" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="165" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a4277465fc6cacfa0fa0ccd1d1c863954" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="176" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="176" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a8ca76def98fa0bd37975788dc7e1c0c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="185" column="22"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="185" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -424,7 +424,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Estimation/AttitudeEstimator.h" line="58" column="5" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="59" bodyend="186"/>
+    <location file="iDynTree/AttitudeEstimator.h" line="58" column="5" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="59" bodyend="186"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1IAttitudeEstimator_1a86554ddcfc70601b05ad7cd997851983" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getDefaultInternalInitialState</name></member>
       <member refid="classiDynTree_1_1IAttitudeEstimator_1a0360685bed94e086224b1126116dca04" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getInternalState</name></member>

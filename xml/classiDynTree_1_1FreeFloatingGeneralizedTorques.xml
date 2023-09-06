@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="86" column="16" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="86" bodyend="-1"/>
+        <location file="iDynTree/FreeFloatingState.h" line="86" column="16" bodyfile="iDynTree/FreeFloatingState.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afc23533156de2aa1a9536a18a1bf2dcf" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="87" column="30" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="87" bodyend="-1"/>
+        <location file="iDynTree/FreeFloatingState.h" line="87" column="30" bodyfile="iDynTree/FreeFloatingState.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="91" column="8"/>
+        <location file="iDynTree/FreeFloatingState.h" line="91" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1af8745d49ca9d8070f571d54af5ca6a6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="92" column="8"/>
+        <location file="iDynTree/FreeFloatingState.h" line="92" column="8"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a3767b5dff094576e64bcbbf888570c8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="103" column="13"/>
+        <location file="iDynTree/FreeFloatingState.h" line="103" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a12d629a4355c695d823d5c8a896e4bca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="108" column="16"/>
+        <location file="iDynTree/FreeFloatingState.h" line="108" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a37692b2dd5b3f3a4484982cad02f39de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="113" column="30"/>
+        <location file="iDynTree/FreeFloatingState.h" line="113" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afab934defd1fb77d4f87bd5ebe2f1902" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="118" column="22"/>
+        <location file="iDynTree/FreeFloatingState.h" line="118" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a9c36bae89798ee2ff869c3c3c4de890c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="123" column="36"/>
+        <location file="iDynTree/FreeFloatingState.h" line="123" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a2b5a306d487019b2b529c4f4756af168" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="125" column="21"/>
+        <location file="iDynTree/FreeFloatingState.h" line="125" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a99cbac618487f817aac94c095fcf8241" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -172,14 +172,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingState.h" line="130" column="17"/>
+        <location file="iDynTree/FreeFloatingState.h" line="130" column="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/FreeFloatingState.h" line="83" column="5" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="84" bodyend="131"/>
+    <location file="iDynTree/FreeFloatingState.h" line="83" column="5" bodyfile="iDynTree/FreeFloatingState.h" bodystart="84" bodyend="131"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a12d629a4355c695d823d5c8a896e4bca" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>baseWrench</name></member>
       <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afab934defd1fb77d4f87bd5ebe2f1902" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>baseWrench</name></member>

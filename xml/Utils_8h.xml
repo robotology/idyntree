@@ -4,22 +4,23 @@
     <compoundname>Utils.h</compoundname>
     <includes local="no">cstddef</includes>
     <includes local="yes">CoreExport.h</includes>
-    <includedby refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
-    <includedby refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includedby>
-    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
-    <includedby refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includedby>
-    <includedby refid="MatrixView_8h" local="no">iDynTree/Core/MatrixView.h</includedby>
-    <includedby refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includedby>
-    <includedby refid="SpatialVector_8h" local="yes">iDynTree/Core/SpatialVector.h</includedby>
-    <includedby refid="TestUtils_8h" local="no">iDynTree/Core/TestUtils.h</includedby>
-    <includedby refid="Triplets_8h" local="no">iDynTree/Core/Triplets.h</includedby>
-    <includedby refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includedby>
+    <includedby refid="Axis_8h" local="no">iDynTree/Axis.h</includedby>
+    <includedby refid="Core_2Utils_8h" local="no">iDynTree/Core/Utils.h</includedby>
+    <includedby refid="Direction_8h" local="no">iDynTree/Direction.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
+    <includedby refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includedby>
+    <includedby refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includedby>
+    <includedby refid="SparseMatrix_8h" local="no">iDynTree/SparseMatrix.h</includedby>
+    <includedby refid="SpatialVector_8h" local="yes">iDynTree/SpatialVector.h</includedby>
+    <includedby refid="TestUtils_8h" local="no">iDynTree/TestUtils.h</includedby>
+    <includedby refid="Triplets_8h" local="no">iDynTree/Triplets.h</includedby>
+    <includedby refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
-    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includedby>
-    <includedby refid="ExtendedKalmanFilter_8h" local="no">iDynTree/Estimation/ExtendedKalmanFilter.h</includedby>
-    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
-    <includedby refid="KalmanFilter_8h" local="no">iDynTree/Estimation/KalmanFilter.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
+    <includedby refid="ExtendedKalmanFilter_8h" local="no">iDynTree/ExtendedKalmanFilter.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/GravityCompensationHelpers.h</includedby>
+    <includedby refid="KalmanFilter_8h" local="no">iDynTree/KalmanFilter.h</includedby>
     <includedby refid="L2NormCost_8h" local="no">iDynTree/L2NormCost.h</includedby>
     <includedby refid="OptimalControlProblem_8h" local="no">iDynTree/OptimalControlProblem.h</includedby>
     <includedby refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includedby>
@@ -28,7 +29,7 @@
         <label>CoreExport.h</label>
       </node>
       <node id="1">
-        <label>iDynTree/Core/Utils.h</label>
+        <label>iDynTree/Utils.h</label>
         <link refid="Utils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -54,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="14" column="9" bodyfile="iDynTree/Core/Utils.h" bodystart="14" bodyend="-1"/>
+        <location file="iDynTree/Utils.h" line="14" column="9" bodyfile="iDynTree/Utils.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Utils_8h_1a069ac05ff9cbb2e8c9a27845f641a184" prot="public" static="no">
         <name>IDYNTREE_DEPRECATED</name>
@@ -67,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="31" column="10" bodyfile="iDynTree/Core/Utils.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/Utils.h" line="31" column="10" bodyfile="iDynTree/Utils.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="Utils_8h_1a604e6a884902ee52a0cbb3e0c5fcfb64" prot="public" static="no">
         <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
@@ -79,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="32" column="9" bodyfile="iDynTree/Core/Utils.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/Utils.h" line="32" column="9" bodyfile="iDynTree/Utils.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="enum">
@@ -109,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="117" column="5" bodyfile="iDynTree/Core/Utils.h" bodystart="117" bodyend="120"/>
+        <location file="iDynTree/Utils.h" line="117" column="5" bodyfile="iDynTree/Utils.h" bodystart="117" bodyend="120"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="var">
@@ -124,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="39" column="37" declfile="iDynTree/Core/Utils.h" declline="39" declcolumn="37"/>
+        <location file="iDynTree/Utils.h" line="39" column="37" declfile="iDynTree/Utils.h" declline="39" declcolumn="37"/>
       </memberdef>
       <memberdef kind="variable" id="Utils_8h_1abe71efaac97b8e18f842ccc49d07026a" prot="public" static="no" mutable="no">
         <type>IDYNTREE_CORE_EXPORT double</type>
@@ -138,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="42" column="40" declfile="iDynTree/Core/Utils.h" declline="42" declcolumn="40"/>
+        <location file="iDynTree/Utils.h" line="42" column="40" declfile="iDynTree/Utils.h" declline="42" declcolumn="40"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -171,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="49" column="10" declfile="iDynTree/Core/Utils.h" declline="49" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="49" column="10" declfile="iDynTree/Utils.h" declline="49" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1af82eb4858f1f94dbcf92a68210e17593" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -194,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="57" column="10" declfile="iDynTree/Core/Utils.h" declline="57" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="57" column="10" declfile="iDynTree/Utils.h" declline="57" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1ab710bc576b963cce44ee3a97a0d37df5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -220,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="63" column="10" declfile="iDynTree/Core/Utils.h" declline="63" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="63" column="10" declfile="iDynTree/Utils.h" declline="63" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1a1b924287a0557e41bb16704961399f68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -246,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="68" column="10" declfile="iDynTree/Core/Utils.h" declline="68" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="68" column="10" declfile="iDynTree/Utils.h" declline="68" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1ad1ad9933bf06265120db1feecb34ac9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -272,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="74" column="10" declfile="iDynTree/Core/Utils.h" declline="74" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="74" column="10" declfile="iDynTree/Utils.h" declline="74" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1a6260625e944d3b34a7db5730dbd11d21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -298,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="80" column="10" declfile="iDynTree/Core/Utils.h" declline="80" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="80" column="10" declfile="iDynTree/Utils.h" declline="80" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1a34f0ca347ac5bfae3a50fe09ccd787d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -324,7 +325,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="86" column="10" declfile="iDynTree/Core/Utils.h" declline="86" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="86" column="10" declfile="iDynTree/Utils.h" declline="86" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1a2099697a85abd10017e2ab2ca9f3336e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -342,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="91" column="12" declfile="iDynTree/Core/Utils.h" declline="91" declcolumn="12"/>
+        <location file="iDynTree/Utils.h" line="91" column="12" declfile="iDynTree/Utils.h" declline="91" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1a3ffc4d06e77379cc44c32f2ea44df1d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -360,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="96" column="12" declfile="iDynTree/Core/Utils.h" declline="96" declcolumn="12"/>
+        <location file="iDynTree/Utils.h" line="96" column="12" declfile="iDynTree/Utils.h" declline="96" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="Utils_8h_1a3f330bf40f3d09799c2b4923f79173ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -387,13 +388,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Utils.h" line="125" column="10" declfile="iDynTree/Core/Utils.h" declline="125" declcolumn="10"/>
+        <location file="iDynTree/Utils.h" line="125" column="10" declfile="iDynTree/Utils.h" declline="125" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/Utils.h"/>
+    <location file="iDynTree/Utils.h"/>
   </compounddef>
 </doxygen>

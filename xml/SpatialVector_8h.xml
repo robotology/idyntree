@@ -5,14 +5,15 @@
     <includes refid="Position_8h" local="yes">Position.h</includes>
     <includes refid="Rotation_8h" local="yes">Rotation.h</includes>
     <includes refid="Utils_8h" local="yes">Utils.h</includes>
-    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
     <includes local="no">iostream</includes>
     <includes local="no">sstream</includes>
-    <includedby refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includedby>
-    <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
+    <includedby refid="Core_2SpatialVector_8h" local="no">iDynTree/Core/SpatialVector.h</includedby>
+    <includedby refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includedby>
+    <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>iDynTree/Core/SpatialVector.h</label>
+        <label>iDynTree/SpatialVector.h</label>
         <link refid="SpatialVector_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -50,7 +51,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="69" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="69" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="69" column="9" bodyfile="iDynTree/SpatialVector.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="SpatialVector_8h_1a13ae9b40bef45da6de6dc13e80735b9d" prot="public" static="no">
         <name>SPATIALVECTOR_INSTANCE_HDR</name>
@@ -61,13 +62,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="72" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="72" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="72" column="9" bodyfile="iDynTree/SpatialVector.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/SpatialVector.h"/>
+    <location file="iDynTree/SpatialVector.h"/>
   </compounddef>
 </doxygen>

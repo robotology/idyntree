@@ -2,15 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="InertiaNonLinearParametrization_8h" kind="file" language="C++">
     <compoundname>InertiaNonLinearParametrization.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includes refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includedby refid="Core_2InertiaNonLinearParametrization_8h" local="no">iDynTree/Core/InertiaNonLinearParametrization.h</includedby>
     <innerclass refid="classiDynTree_1_1RigidBodyInertiaNonLinearParametrization" prot="public">iDynTree::RigidBodyInertiaNonLinearParametrization</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/InertiaNonLinearParametrization.h"/>
+    <location file="iDynTree/InertiaNonLinearParametrization.h"/>
   </compounddef>
 </doxygen>

@@ -2,13 +2,14 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Dynamics_8h" kind="file" language="C++">
     <compoundname>Dynamics.h</compoundname>
-    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
-    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
-    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
-    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
-    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includedby>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/GravityCompensationHelpers.h</includedby>
+    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/DynamicsLinearization.h</includedby>
+    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/DynamicsLinearizationHelpers.h</includedby>
+    <includedby refid="Model_2Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includedby>
     <innerclass refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" prot="public">iDynTree::ArticulatedBodyAlgorithmInternalBuffers</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
@@ -76,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="38" column="10" declfile="iDynTree/Model/Dynamics.h" declline="38" declcolumn="10"/>
+        <location file="iDynTree/Dynamics.h" line="38" column="10" declfile="iDynTree/Dynamics.h" declline="38" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Dynamics_8h_1ae214683bf9d037ee89a0c070ed9ed78d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -113,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="51" column="10" declfile="iDynTree/Model/Dynamics.h" declline="51" declcolumn="10"/>
+        <location file="iDynTree/Dynamics.h" line="51" column="10" declfile="iDynTree/Dynamics.h" declline="51" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeModel_1ga18613d41830aef7430e7a8a09fef98e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -226,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="72" column="10" declfile="iDynTree/Model/Dynamics.h" declline="72" declcolumn="10"/>
+        <location file="iDynTree/Dynamics.h" line="72" column="10" declfile="iDynTree/Dynamics.h" declline="72" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="Dynamics_8h_1afa4f3546edbb4ab3e50a486e316a2470" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -260,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="86" column="10" declfile="iDynTree/Model/Dynamics.h" declline="86" declcolumn="10"/>
+        <location file="iDynTree/Dynamics.h" line="86" column="10" declfile="iDynTree/Dynamics.h" declline="86" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeModel_1ga5879141982887fc0d049cc3645f10dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -307,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="147" column="10" declfile="iDynTree/Model/Dynamics.h" declline="147" declcolumn="10"/>
+        <location file="iDynTree/Dynamics.h" line="147" column="10" declfile="iDynTree/Dynamics.h" declline="147" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeModel_1ga0c75db73b7682b9c524b0727b516b12b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -398,13 +399,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="180" column="10" declfile="iDynTree/Model/Dynamics.h" declline="180" declcolumn="10"/>
+        <location file="iDynTree/Dynamics.h" line="180" column="10" declfile="iDynTree/Dynamics.h" declline="180" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/Dynamics.h"/>
+    <location file="iDynTree/Dynamics.h"/>
   </compounddef>
 </doxygen>

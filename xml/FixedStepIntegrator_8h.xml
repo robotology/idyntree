@@ -3,7 +3,7 @@
   <compounddef id="FixedStepIntegrator_8h" kind="file" language="C++">
     <compoundname>FixedStepIntegrator.h</compoundname>
     <includes refid="Integrator_8h" local="no">iDynTree/Integrator.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includedby refid="ForwardEuler_8h" local="no">iDynTree/Integrators/ForwardEuler.h</includedby>
     <includedby refid="ImplicitTrapezoidal_8h" local="no">iDynTree/Integrators/ImplicitTrapezoidal.h</includedby>
     <includedby refid="RK4_8h" local="no">iDynTree/Integrators/RK4.h</includedby>

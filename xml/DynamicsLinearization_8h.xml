@@ -2,10 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="DynamicsLinearization_8h" kind="file" language="C++">
     <compoundname>DynamicsLinearization.h</compoundname>
-    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
-    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
-    <includes refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includes>
-    <includes refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includes>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includes>
+    <includes refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/DynamicsLinearizationHelpers.h</includes>
+    <includedby refid="Model_2DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
     <innerclass refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers" prot="public">iDynTree::ForwardDynamicsLinearizationInternalBuffers</innerclass>
     <innerclass refid="classiDynTree_1_1FreeFloatingStateLinearization" prot="public">iDynTree::FreeFloatingStateLinearization</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
@@ -57,13 +58,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="89" column="10" declfile="iDynTree/Model/DynamicsLinearization.h" declline="89" declcolumn="10"/>
+        <location file="iDynTree/DynamicsLinearization.h" line="89" column="10" declfile="iDynTree/DynamicsLinearization.h" declline="89" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/DynamicsLinearization.h"/>
+    <location file="iDynTree/DynamicsLinearization.h"/>
   </compounddef>
 </doxygen>

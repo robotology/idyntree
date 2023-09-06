@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1SpatialAcc" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::SpatialAcc</compoundname>
     <basecompoundref refid="classiDynTree_1_1SpatialMotionVector" prot="public" virt="non-virtual">iDynTree::SpatialMotionVector</basecompoundref>
-    <includes local="no">iDynTree/Core/SpatialAcc.h</includes>
+    <includes local="no">iDynTree/SpatialAcc.h</includes>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="classiDynTree_1_1SpatialAcc_1a7f86e1d84d6c0cd10295f267cec74b41" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialAcc.h" line="29" column="16" bodyfile="iDynTree/Core/SpatialAcc.h" bodystart="29" bodyend="29"/>
+        <location file="iDynTree/SpatialAcc.h" line="29" column="16" bodyfile="iDynTree/SpatialAcc.h" bodystart="29" bodyend="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialAcc_1ac6b893cc27cb8cfd88ac0feeea7e18f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialAcc.h" line="30" column="9"/>
+        <location file="iDynTree/SpatialAcc.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialAcc_1a9303c3fc30ff89d9c41abc2c09ea5e34" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialAcc.h" line="31" column="9"/>
+        <location file="iDynTree/SpatialAcc.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialAcc_1a8ea94a2808f1b0c03cf5afbbdc437d55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialAcc.h" line="32" column="9"/>
+        <location file="iDynTree/SpatialAcc.h" line="32" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialAcc_1a003311bc2f503b0741a00f2c73ccd601" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialAcc.h" line="35" column="20"/>
+        <location file="iDynTree/SpatialAcc.h" line="35" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialAcc_1ac8746043ef0439e70ed44dede999d278" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialAcc.h" line="36" column="20"/>
+        <location file="iDynTree/SpatialAcc.h" line="36" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialAcc_1a13042371f792f10cd9d7f8d73fe613d5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialAcc.h" line="37" column="20"/>
+        <location file="iDynTree/SpatialAcc.h" line="37" column="20"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -197,7 +197,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/SpatialAcc.h" line="21" column="5" bodyfile="iDynTree/Core/SpatialAcc.h" bodystart="22" bodyend="39"/>
+    <location file="iDynTree/SpatialAcc.h" line="21" column="5" bodyfile="iDynTree/SpatialAcc.h" bodystart="22" bodyend="39"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialAcc</scope><name>angularOffset</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialAcc</scope><name>angularVec3</name></member>

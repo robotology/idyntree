@@ -3,7 +3,7 @@
   <compounddef id="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor_3_01T_00_01SpanUtils_1_1void__t_3_01decl7e9aca95d34952fed609ee84e1af283d" kind="struct" language="C++" prot="public">
     <compoundname>iDynTree::MatrixViewInternal::has_IsRowMajor&lt; T, SpanUtils::void_t&lt; decltype(T::IsRowMajor)&gt; &gt;</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
-    <includes local="no">iDynTree/Core/MatrixView.h</includes>
+    <includes local="no">iDynTree/MatrixView.h</includes>
     <templateparamlist>
       <param>
         <type>typename T</type>
@@ -37,7 +37,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/MatrixView.h" line="43" column="9" bodyfile="iDynTree/Core/MatrixView.h" bodystart="43" bodyend="43"/>
+    <location file="iDynTree/MatrixView.h" line="43" column="9" bodyfile="iDynTree/MatrixView.h" bodystart="43" bodyend="43"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

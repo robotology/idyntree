@@ -2,18 +2,19 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="JointState_8h" kind="file" language="C++">
     <compoundname>JointState.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
-    <includes refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includes>
     <includes local="no">vector</includes>
     <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
-    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
-    <includedby refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includedby>
-    <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
+    <includedby refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includedby>
+    <includedby refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includedby>
+    <includedby refid="Model_2JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>iDynTree/Model/JointState.h</label>
+        <label>iDynTree/JointState.h</label>
         <link refid="JointState_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -31,6 +32,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/JointState.h"/>
+    <location file="iDynTree/JointState.h"/>
   </compounddef>
 </doxygen>

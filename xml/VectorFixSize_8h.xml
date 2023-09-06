@@ -2,37 +2,44 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="VectorFixSize_8h" kind="file" language="C++">
     <compoundname>VectorFixSize.h</compoundname>
-    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
-    <includes refid="Span_8h" local="no">iDynTree/Core/Span.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="Span_8h" local="no">iDynTree/Span.h</includes>
     <includes local="no">string</includes>
     <includes local="no">sstream</includes>
     <includes local="no">cassert</includes>
     <includes local="no">cstddef</includes>
     <includes local="no">cstring</includes>
-    <includedby refid="ClassicalAcc_8h" local="no">iDynTree/Core/ClassicalAcc.h</includedby>
-    <includedby refid="CubicSpline_8h" local="no">iDynTree/Core/CubicSpline.h</includedby>
-    <includedby refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includedby>
-    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
-    <includedby refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includedby>
-    <includedby refid="InertiaNonLinearParametrization_8h" local="no">iDynTree/Core/InertiaNonLinearParametrization.h</includedby>
-    <includedby refid="PositionRaw_8h" local="no">iDynTree/Core/PositionRaw.h</includedby>
-    <includedby refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includedby>
-    <includedby refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includedby>
-    <includedby refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
-    <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
-    <includedby refid="TransformDerivative_8h" local="no">iDynTree/Core/TransformDerivative.h</includedby>
+    <includedby refid="ClassicalAcc_8h" local="no">iDynTree/ClassicalAcc.h</includedby>
+    <includedby refid="Core_2VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includedby>
+    <includedby refid="CubicSpline_8h" local="no">iDynTree/CubicSpline.h</includedby>
+    <includedby refid="Direction_8h" local="no">iDynTree/Direction.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
+    <includedby refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includedby>
+    <includedby refid="InertiaNonLinearParametrization_8h" local="no">iDynTree/InertiaNonLinearParametrization.h</includedby>
+    <includedby refid="PositionRaw_8h" local="no">iDynTree/PositionRaw.h</includedby>
+    <includedby refid="Rotation_8h" local="no">iDynTree/Rotation.h</includedby>
+    <includedby refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includedby>
+    <includedby refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includedby>
+    <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includedby>
+    <includedby refid="TransformDerivative_8h" local="no">iDynTree/TransformDerivative.h</includedby>
     <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
-    <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/Estimation/AttitudeEstimator.h</includedby>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
-    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includedby>
-    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
-    <includedby refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
+    <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/AttitudeEstimator.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
+    <includedby refid="JointState_8h" local="no">iDynTree/JointState.h</includedby>
     <includedby refid="MaterialElement_8h" local="no">private/MaterialElement.h</includedby>
     <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
     <incdepgraph>
+      <node id="4">
+        <label>cassert</label>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
       <node id="1">
-        <label>iDynTree/Core/VectorFixSize.h</label>
+        <label>iDynTree/VectorFixSize.h</label>
         <link refid="VectorFixSize_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -44,12 +51,6 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-      </node>
-      <node id="4">
-        <label>cassert</label>
-      </node>
-      <node id="2">
-        <label>string</label>
       </node>
       <node id="3">
         <label>sstream</label>
@@ -75,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="391" column="28" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="391" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="391" column="28" bodyfile="iDynTree/VectorFixSize.h" bodystart="391" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="VectorFixSize_8h_1a6ba91315448cf1d275f460097e36d134" prot="public" static="no">
         <type>VectorFixSize&lt; 3 &gt;</type>
@@ -88,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="392" column="28" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="392" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="392" column="28" bodyfile="iDynTree/VectorFixSize.h" bodystart="392" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="VectorFixSize_8h_1a9827b82ba400214bc1c3f0a2714aee0a" prot="public" static="no">
         <type>VectorFixSize&lt; 4 &gt;</type>
@@ -101,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="393" column="28" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="393" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="393" column="28" bodyfile="iDynTree/VectorFixSize.h" bodystart="393" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="VectorFixSize_8h_1aacbdf066949a170899a2e43ad52987d8" prot="public" static="no">
         <type>VectorFixSize&lt; 6 &gt;</type>
@@ -114,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="394" column="28" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="394" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="394" column="28" bodyfile="iDynTree/VectorFixSize.h" bodystart="394" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="VectorFixSize_8h_1a658ee3743c3ccf3d61c38e4fa1c81ec9" prot="public" static="no">
         <type>VectorFixSize&lt; 10 &gt;</type>
@@ -127,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="395" column="27" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="395" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="395" column="27" bodyfile="iDynTree/VectorFixSize.h" bodystart="395" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="VectorFixSize_8h_1a68b87219f8e66c52f9d5de9d84aef7c9" prot="public" static="no">
         <type>VectorFixSize&lt; 16 &gt;</type>
@@ -140,13 +141,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="396" column="27" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="396" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="396" column="27" bodyfile="iDynTree/VectorFixSize.h" bodystart="396" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/VectorFixSize.h"/>
+    <location file="iDynTree/VectorFixSize.h"/>
   </compounddef>
 </doxygen>

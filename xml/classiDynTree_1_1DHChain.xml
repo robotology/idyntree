@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1DHChain" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::DHChain</compoundname>
-    <includes local="no">iDynTree/Model/DenavitHartenberg.h</includes>
+    <includes local="no">iDynTree/DenavitHartenberg.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1DHChain_1a02813a720aff188c0a82d2a04030ed60" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="40" column="15" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="40" column="15" bodyfile="iDynTree/DenavitHartenberg.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DHChain_1a4bfd1fcfa1968c65f7baa2417f82dc84" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref> &gt;</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="41" column="17" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="41" column="17" bodyfile="iDynTree/DenavitHartenberg.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DHChain_1a99dca7a170a832a9300c6e74ba7ec0c2" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="42" column="15" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="42" bodyend="-1"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="42" column="15" bodyfile="iDynTree/DenavitHartenberg.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DHChain_1a304a1733fe9146f0e05ab7af018519c4" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="43" column="17" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="43" column="17" bodyfile="iDynTree/DenavitHartenberg.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="46" column="12"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="46" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1ac8ec2b05145ff21bd09102050f41be52" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="47" column="12"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="47" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1ac1e61774269fcf4ca8ed17a610ff2e1a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="49" column="10"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="49" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a451ed04b6a79015e210df0ff015d3d22" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="50" column="32"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="50" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1aa08991e4469d716726dea2904b7659e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="52" column="10"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="52" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a76186ab04dc0e7f53679570a32705238" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="53" column="22"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="53" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a6c8806befe921857a962d7620e00f3f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref> &amp;</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="58" column="13"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="58" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a5d475054d91c46ebe509784d2b5c4c6e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref> &amp;</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="63" column="19"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="63" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1ae0d3f071d632ec173a33fa5d38e2bcdb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="68" column="17"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="68" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1af1384b7f4385bfb88a1fb5031d5eb467" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="73" column="10"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="73" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a6131ce652566c6f82cee9e51cfb15010" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="79" column="10"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="79" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a2ba930d39c99e692f39a9649f3588099" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="85" column="10"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="85" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -281,7 +281,7 @@
     <detaileddescription>
 <para>Directly inspiered by the iCub::iKin::iKinChain class. </para>
     </detaileddescription>
-    <location file="iDynTree/Model/DenavitHartenberg.h" line="37" column="1" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="38" bodyend="88"/>
+    <location file="iDynTree/DenavitHartenberg.h" line="37" column="1" bodyfile="iDynTree/DenavitHartenberg.h" bodystart="38" bodyend="88"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1DHChain_1a4bfd1fcfa1968c65f7baa2417f82dc84" prot="private" virt="non-virtual"><scope>iDynTree::DHChain</scope><name>dhParams</name></member>
       <member refid="classiDynTree_1_1DHChain_1a304a1733fe9146f0e05ab7af018519c4" prot="private" virt="non-virtual"><scope>iDynTree::DHChain</scope><name>dofNames</name></member>

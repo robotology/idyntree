@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ModelTransformers_8h" kind="file" language="C++">
     <compoundname>ModelTransformers.h</compoundname>
+    <includedby refid="Model_2ModelTransformers_8h" local="no">iDynTree/Model/ModelTransformers.h</includedby>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
       <memberdef kind="function" id="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -35,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="43" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="43" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="43" column="6" declfile="iDynTree/ModelTransformers.h" declline="43" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -62,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="58" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="58" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="58" column="6" declfile="iDynTree/ModelTransformers.h" declline="58" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -94,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="79" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="79" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="79" column="6" declfile="iDynTree/ModelTransformers.h" declline="79" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -124,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="94" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="94" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="94" column="6" declfile="iDynTree/ModelTransformers.h" declline="94" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -133,6 +134,6 @@
     <detaileddescription>
 <para>In this file a series of functions for transforming Model objects are provided </para>
     </detaileddescription>
-    <location file="iDynTree/Model/ModelTransformers.h"/>
+    <location file="iDynTree/ModelTransformers.h"/>
   </compounddef>
 </doxygen>

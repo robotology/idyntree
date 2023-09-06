@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="structiDynTree_1_1ModelParserOptions" kind="struct" language="C++" prot="public">
     <compoundname>iDynTree::ModelParserOptions</compoundname>
-    <includes local="no">iDynTree/ModelIO/ModelLoader.h</includes>
+    <includes local="no">iDynTree/ModelLoader.h</includes>
       <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1acca6da96631f8577cc259f939872d156" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="34" column="10" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/ModelLoader.h" line="34" column="10" bodyfile="iDynTree/ModelLoader.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1a7bbd5bfdb0a83af64bcc10e955714bc4" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="44" column="17" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/ModelLoader.h" line="44" column="17" bodyfile="iDynTree/ModelLoader.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="51" column="5"/>
+        <location file="iDynTree/ModelLoader.h" line="51" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -78,7 +78,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/ModelIO/ModelLoader.h" line="22" column="1" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="23" bodyend="53"/>
+    <location file="iDynTree/ModelLoader.h" line="22" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="23" bodyend="53"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1ModelParserOptions_1acca6da96631f8577cc259f939872d156" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>addSensorFramesAsAdditionalFrames</name></member>
       <member refid="structiDynTree_1_1ModelParserOptions_1aace65fc753b0bc44d5a88f8de61a0276" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>ModelParserOptions</name></member>

@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1SpatialForceWrtMotionDerivative" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::SpatialForceWrtMotionDerivative</compoundname>
     <basecompoundref refid="classiDynTree_1_1MatrixFixSize" prot="public" virt="non-virtual">iDynTree::MatrixFixSize&lt; 6, 6 &gt;</basecompoundref>
-    <includes local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includes>
+    <includes local="no">iDynTree/DynamicsLinearizationHelpers.h</includes>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="classiDynTree_1_1SpatialForceWrtMotionDerivative_1a9d454876935197ca67ebe145684fa53f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" kindref="compound">SpatialForceWrtMotionDerivative</ref></type>
@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="63" column="41"/>
+        <location file="iDynTree/DynamicsLinearizationHelpers.h" line="63" column="41"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -57,7 +57,7 @@
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="51" column="5" bodyfile="iDynTree/Model/DynamicsLinearizationHelpers.h" bodystart="52" bodyend="65"/>
+    <location file="iDynTree/DynamicsLinearizationHelpers.h" line="51" column="5" bodyfile="iDynTree/DynamicsLinearizationHelpers.h" bodystart="52" bodyend="65"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1MatrixFixSize_1ae38fd55ba7321a950d4d99a215508bf2" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceWrtMotionDerivative</scope><name>cols</name></member>
       <member refid="classiDynTree_1_1MatrixFixSize_1afa9fff22a34eb198785d87ffe161488f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceWrtMotionDerivative</scope><name>data</name></member>

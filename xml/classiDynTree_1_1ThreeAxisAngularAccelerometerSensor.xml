@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::ThreeAxisAngularAccelerometerSensor</compoundname>
     <basecompoundref refid="classiDynTree_1_1LinkSensor" prot="public" virt="non-virtual">iDynTree::LinkSensor</basecompoundref>
-    <includes local="no">iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h</includes>
+    <includes local="no">iDynTree/ThreeAxisAngularAccelerometerSensor.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a16e3d94533e18494fc6cfaabcc1b53f3" prot="private" static="no" mutable="no">
         <type>ThreeAxisAngularAccelerometerPrivateAttributes *</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="33" column="57" bodyfile="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="33" column="57" bodyfile="iDynTree/ThreeAxisAngularAccelerometerSensor.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="39" column="9"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="39" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a4c7efd1837494a1a771637cf8effb241" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="44" column="9"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="44" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1afcfe46a5c4d2f131f6d4322641bd4a87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" kindref="compound">ThreeAxisAngularAccelerometerSensor</ref> &amp;</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="49" column="45"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="49" column="45"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a44ea289081e8e872e28ae1839f913a60" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="54" column="17"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="54" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1ae60d56505a10ef186f6af7f5bf5feaa1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="60" column="14"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="60" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0c6420e2d828d4d95c399f847bada325" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="67" column="14"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a52e9392105c1194d30238ff2df75e782" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="72" column="14"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="72" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0d83d703d9273361a697fd33e64286a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="77" column="14"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="77" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1adf34f6a32f73d39b0a9a5eb98e675a05" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="83" column="21"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="83" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a5ef9ac9d8a3d752d2d89e66006bb2a49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SensorType</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="88" column="20"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="88" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9e1daa37dc2f4d2dcae646e01cb06a5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="94" column="21"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="94" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9cb57d1b01e563b914a00182ad15a6ca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="99" column="19"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="99" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a2eda12416407060776056a95c375d554" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="102" column="19"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="102" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a7df52d9d13dd67a1cf29847d436070e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="107" column="14"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="107" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a51c85baae65ce7f750e272fc684b24ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="112" column="17"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="112" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a8213b6c275f41db4b3a60bc2451a03f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="117" column="14"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="117" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1af25f1dada5f0669f6fe876274f66891d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="126" column="17"/>
+        <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="126" column="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -369,7 +369,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="29" column="5" bodyfile="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" bodystart="30" bodyend="127"/>
+    <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h" line="29" column="5" bodyfile="iDynTree/ThreeAxisAngularAccelerometerSensor.h" bodystart="30" bodyend="127"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a51c85baae65ce7f750e272fc684b24ee" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a2eda12416407060776056a95c375d554" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>getLinkSensorTransform</name></member>

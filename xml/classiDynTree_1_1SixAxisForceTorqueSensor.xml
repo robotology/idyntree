@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1SixAxisForceTorqueSensor" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::SixAxisForceTorqueSensor</compoundname>
     <basecompoundref refid="classiDynTree_1_1JointSensor" prot="public" virt="non-virtual">iDynTree::JointSensor</basecompoundref>
-    <includes local="no">iDynTree/Sensors/SixAxisForceTorqueSensor.h</includes>
+    <includes local="no">iDynTree/SixAxisForceTorqueSensor.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a5b8c746a9d2132f6202a00005a5c7cd9" prot="private" static="no" mutable="no">
         <type>SixAxisForceTorqueSensorPrivateAttributes *</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="34" column="52" bodyfile="iDynTree/Sensors/SixAxisForceTorqueSensor.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="34" column="52" bodyfile="iDynTree/SixAxisForceTorqueSensor.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="40" column="9"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="40" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a22e3fcd77b77f1bf9c938d301fd8ae17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="45" column="9"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="45" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a178cb0438054b6113c73d250ae6a051e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SixAxisForceTorqueSensor" kindref="compound">SixAxisForceTorqueSensor</ref> &amp;</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="50" column="34"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="50" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a0bf5b31da64e7c6c5bd1b11ebdf205fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="55" column="17"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="55" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a445a69b12f7ae15e85e189cecb37a984" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="61" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="61" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a78b02580a6c6c543f36af88b5e9a4d2f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="68" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="68" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1aec7e938209e9dddcbbc696fb658e0a5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="75" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="75" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a2add205093853d5a98622f0213c74d55" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="82" column="19"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="82" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1aeee5343108cf96ad80d76e17719aefa7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="89" column="19"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="89" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a4023a4689e7be9c6ca254f5beff2a8d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="94" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="94" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1ab5e8f251429697fc14ce57b4ae9be8d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="99" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="99" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a292081038cae5fc474ceebe27117c1ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="104" column="21"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="104" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1afb8fea77a956d20cfbb991bc88e36940" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="109" column="21"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="109" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1afa9c0da7093f9509d3ca71c6d3079a34" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="112" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="112" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a9587c186d30f878760f43fc932675fe7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="115" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="115" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a17f5b7b97eebf3f15f88ecceaeea5c35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="123" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="123" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a973fc334d1ae6e08d6d189f260a79acf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="129" column="21"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="129" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a0e7919d76cf8126f0e270bad03d7d70b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SensorType</type>
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="134" column="20"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="134" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a1dd7d0316793878dac193ebb161879c0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -352,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="137" column="21"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="137" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a3bd2224408b97f1c55aa004804b1236e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointIndex</type>
@@ -371,7 +371,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="140" column="20"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="140" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a816f6f309557a0f69330dad9879cfc14" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -386,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="145" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="145" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a41bc1ed3c1ae3a46b593dc5638fd6725" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -401,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="150" column="17"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="150" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1ada92c79d908918bf309936c15f6f0f05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -420,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="155" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="155" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a7001ee72b97b7cf9c48abb8ac38aa2a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="163" column="19"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="163" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1ac72818e596a54cd7ae5b2f9f6f8a49ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="169" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="169" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1acd2d4d5e6e9348dbc1e36dd724f38ca3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="177" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="177" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a3ef36dac1e5968fe728e44e565d8a52b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -513,7 +513,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="188" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="188" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a9f926b5fed9b17da38ab5fb158487b33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -546,7 +546,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="212" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="212" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a978eb446cf0f7b11baab9e866a253566" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -579,7 +579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="235" column="14"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="235" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1aa8fc03efd89977d0e4ca7df9131c1dbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref></type>
@@ -604,7 +604,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="244" column="26"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="244" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1af767a41c2680e4bd6af1159f58ab249a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -621,7 +621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="249" column="21"/>
+        <location file="iDynTree/SixAxisForceTorqueSensor.h" line="249" column="21"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -665,7 +665,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="31" column="5" bodyfile="iDynTree/Sensors/SixAxisForceTorqueSensor.h" bodystart="31" bodyend="251"/>
+    <location file="iDynTree/SixAxisForceTorqueSensor.h" line="31" column="5" bodyfile="iDynTree/SixAxisForceTorqueSensor.h" bodystart="31" bodyend="251"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a41bc1ed3c1ae3a46b593dc5638fd6725" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a7001ee72b97b7cf9c48abb8ac38aa2a1" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getAppliedWrenchLink</name></member>

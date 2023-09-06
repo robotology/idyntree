@@ -2,29 +2,30 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="BerdyHelper_8h" kind="file" language="C++">
     <compoundname>BerdyHelper.h</compoundname>
-    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
-    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
-    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
-    <includes refid="Triplets_8h" local="no">iDynTree/Core/Triplets.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
-    <includes refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includes>
-    <includes refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includes>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
-    <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="Triplets_8h" local="no">iDynTree/Triplets.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
+    <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
+    <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
+    <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/LinkTraversalsCache.h</includes>
     <includes local="no">vector</includes>
+    <includedby refid="Estimation_2BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
     <incdepgraph>
+      <node id="2">
+        <label>vector</label>
+      </node>
       <node id="1">
-        <label>iDynTree/Estimation/BerdyHelper.h</label>
+        <label>iDynTree/BerdyHelper.h</label>
         <link refid="BerdyHelper_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
-      </node>
-      <node id="2">
-        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="structiDynTree_1_1BerdyOptions" prot="public">iDynTree::BerdyOptions</innerclass>
@@ -76,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="36" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="37" bodyend="66"/>
+        <location file="iDynTree/BerdyHelper.h" line="36" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="37" bodyend="66"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" prot="public" static="no" strong="no">
         <type></type>
@@ -146,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="75" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="76" bodyend="100"/>
+        <location file="iDynTree/BerdyHelper.h" line="75" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="76" bodyend="100"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" prot="public" static="no" strong="no">
         <type></type>
@@ -244,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="118" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="119" bodyend="138"/>
+        <location file="iDynTree/BerdyHelper.h" line="118" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="119" bodyend="138"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -263,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="140" column="6" declfile="iDynTree/Estimation/BerdyHelper.h" declline="140" declcolumn="6"/>
+        <location file="iDynTree/BerdyHelper.h" line="140" column="6" declfile="iDynTree/BerdyHelper.h" declline="140" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -280,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="141" column="6" declfile="iDynTree/Estimation/BerdyHelper.h" declline="141" declcolumn="6"/>
+        <location file="iDynTree/BerdyHelper.h" line="141" column="6" declfile="iDynTree/BerdyHelper.h" declline="141" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -297,13 +298,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="142" column="6" declfile="iDynTree/Estimation/BerdyHelper.h" declline="142" declcolumn="6"/>
+        <location file="iDynTree/BerdyHelper.h" line="142" column="6" declfile="iDynTree/BerdyHelper.h" declline="142" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/BerdyHelper.h"/>
+    <location file="iDynTree/BerdyHelper.h"/>
   </compounddef>
 </doxygen>

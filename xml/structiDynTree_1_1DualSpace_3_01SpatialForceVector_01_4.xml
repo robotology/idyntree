@@ -16,14 +16,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="52" column="60" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="52" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="52" column="60" bodyfile="iDynTree/SpatialVector.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/SpatialVector.h" line="52" column="15" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="52" bodyend="52"/>
+    <location file="iDynTree/SpatialVector.h" line="52" column="15" bodyfile="iDynTree/SpatialVector.h" bodystart="52" bodyend="52"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1DualSpace_3_01SpatialForceVector_01_4_1a3c9d35b241e2d343f91eac6c3db04123" prot="public" virt="non-virtual"><scope>iDynTree::DualSpace&lt; SpatialForceVector &gt;</scope><name>Type</name></member>
     </listofallmembers>

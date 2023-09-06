@@ -2,20 +2,21 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="KalmanFilter_8h" kind="file" language="C++">
     <compoundname>KalmanFilter.h</compoundname>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
-    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
-    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
-    <includes refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includes>
     <includes local="no">vector</includes>
+    <includedby refid="Estimation_2KalmanFilter_8h" local="no">iDynTree/Estimation/KalmanFilter.h</includedby>
     <incdepgraph>
-      <node id="2">
-        <label>vector</label>
-      </node>
       <node id="1">
-        <label>iDynTree/Estimation/KalmanFilter.h</label>
+        <label>iDynTree/KalmanFilter.h</label>
         <link refid="KalmanFilter_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1DiscreteKalmanFilterHelper" prot="public">iDynTree::DiscreteKalmanFilterHelper</innerclass>
@@ -24,6 +25,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/KalmanFilter.h"/>
+    <location file="iDynTree/KalmanFilter.h"/>
   </compounddef>
 </doxygen>

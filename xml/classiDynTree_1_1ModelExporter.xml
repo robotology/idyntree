@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1ModelExporter" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::ModelExporter</compoundname>
-    <includes local="no">iDynTree/ModelIO/ModelExporter.h</includes>
+    <includes local="no">iDynTree/ModelExporter.h</includes>
       <sectiondef kind="user-defined">
       <header>Constructor/Destructor</header>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1afb8051cba34b2e3e60d0b375c0e790bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="129" column="5"/>
+        <location file="iDynTree/ModelExporter.h" line="129" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a0797985ef2e2cebb8bf25c0c0e4ed18b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="131" column="5"/>
+        <location file="iDynTree/ModelExporter.h" line="131" column="5"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="140" column="32"/>
+        <location file="iDynTree/ModelExporter.h" line="140" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1aa7babe5fc2794ed01d3ba46c4a0ae041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="142" column="10"/>
+        <location file="iDynTree/ModelExporter.h" line="142" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a9fb6599971ddb3e6b081321952818042" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="152" column="10"/>
+        <location file="iDynTree/ModelExporter.h" line="152" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a2a8eff680e7a14c66dafe5a9360d89a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="160" column="18"/>
+        <location file="iDynTree/ModelExporter.h" line="160" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a8c208f8c87d5f6fae8faef6460a561ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="165" column="24"/>
+        <location file="iDynTree/ModelExporter.h" line="165" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1abcbf9a179e9f6a2da5c2fc59ea2c83e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="172" column="10"/>
+        <location file="iDynTree/ModelExporter.h" line="172" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ab5523d12f0411456625313c8e51f8d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="181" column="10"/>
+        <location file="iDynTree/ModelExporter.h" line="181" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="192" column="10"/>
+        <location file="iDynTree/ModelExporter.h" line="192" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="117" column="21" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="116" bodyend="-1"/>
+        <location file="iDynTree/ModelExporter.h" line="117" column="21" bodyfile="iDynTree/ModelExporter.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -302,7 +302,7 @@
 </sect2>
 </sect1>
     </detaileddescription>
-    <location file="iDynTree/ModelIO/ModelExporter.h" line="112" column="1" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="113" bodyend="194"/>
+    <location file="iDynTree/ModelExporter.h" line="112" column="1" bodyfile="iDynTree/ModelExporter.h" bodystart="113" bodyend="194"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelExporter_1ac7eee90d88819d3697225c412d6717d0" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>exportingOptions</name></member>
       <member refid="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>exportModelToFile</name></member>

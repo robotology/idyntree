@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="153" column="21"/>
+        <location file="iDynTree/SpatialVector.h" line="153" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a73b398dd07e9f3dd5c252692380a6b02" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="155" column="21"/>
+        <location file="iDynTree/SpatialVector.h" line="155" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-type">
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="79" column="79" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="79" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="79" column="79" bodyfile="iDynTree/SpatialVector.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SpatialVector_1a13a172b06a7af17f6220a90a4163b3f8" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1SpatialMotionForceVectorT__traits" kindref="compound">SpatialMotionForceVectorT_traits</ref>&lt; DerivedSpatialVecT &gt;::AngularVector3Type</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="80" column="80" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="80" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="80" column="80" bodyfile="iDynTree/SpatialVector.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SpatialVector_1a7910d803e3b8c3ef52db0bdc0b2bec42" prot="public" static="no">
         <type><ref refid="structiDynTree_1_1DualSpace" kindref="compound">DualSpace</ref>&lt; DerivedSpatialVecT &gt;::Type</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="81" column="43" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="81" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="81" column="43" bodyfile="iDynTree/SpatialVector.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="84" column="24" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="84" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="84" column="24" bodyfile="iDynTree/SpatialVector.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" static="no" mutable="no">
         <type>AngularVector3T</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="85" column="25" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="85" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="85" column="25" bodyfile="iDynTree/SpatialVector.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-static-attrib">
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="86" column="35" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="86" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="86" column="35" bodyfile="iDynTree/SpatialVector.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" static="yes" mutable="no">
         <type>const unsigned int</type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="87" column="35" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="87" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="87" column="35" bodyfile="iDynTree/SpatialVector.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1adfea1ab56aa331af032a7f7d31ac0afc" prot="protected" static="yes" mutable="no">
         <type>const unsigned int</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="88" column="35" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="88" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="88" column="35" bodyfile="iDynTree/SpatialVector.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="94" column="9"/>
+        <location file="iDynTree/SpatialVector.h" line="94" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a3d7d78e133ab83dfadb346539f70df96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="95" column="9"/>
+        <location file="iDynTree/SpatialVector.h" line="95" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aff082c865731b86ad00f3901b1f487cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="96" column="9"/>
+        <location file="iDynTree/SpatialVector.h" line="96" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a1000a5a67bd77de13aabe6e41b320587" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="97" column="9"/>
+        <location file="iDynTree/SpatialVector.h" line="97" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a705aa7e917215639cf8088da8a279031" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>LinearVector3T &amp;</type>
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="102" column="25"/>
+        <location file="iDynTree/SpatialVector.h" line="102" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a8b9ae18e77c2af17ec1d369d196e0c10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>AngularVector3T &amp;</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="103" column="26"/>
+        <location file="iDynTree/SpatialVector.h" line="103" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aef471e533b923fca899adfcac5703173" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const LinearVector3T &amp;</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="104" column="31"/>
+        <location file="iDynTree/SpatialVector.h" line="104" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a67479f75f4632e397d7c38394f499ca5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const AngularVector3T &amp;</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="105" column="32"/>
+        <location file="iDynTree/SpatialVector.h" line="105" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a171e7cf6e215e67eb32ac791526a044f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -284,7 +284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="106" column="14"/>
+        <location file="iDynTree/SpatialVector.h" line="106" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a719a64c179d736390f48b6ddd0ccf6fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="107" column="14"/>
+        <location file="iDynTree/SpatialVector.h" line="107" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a176d715e9026aee5a3cad9ff9dde198c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="112" column="16"/>
+        <location file="iDynTree/SpatialVector.h" line="112" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a583e1a9062c0d7f72da539e521e597b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double &amp;</type>
@@ -336,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="113" column="16"/>
+        <location file="iDynTree/SpatialVector.h" line="113" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a74a991f1f695825378e5b1765e743e42" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="114" column="16"/>
+        <location file="iDynTree/SpatialVector.h" line="114" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a0fe3633e4ccf66267b01b7302a1658ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -374,7 +374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="115" column="14"/>
+        <location file="iDynTree/SpatialVector.h" line="115" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1af1f3a2d0e7522b63b2dc0d729a33f5a5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -387,7 +387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="116" column="22"/>
+        <location file="iDynTree/SpatialVector.h" line="116" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a8414377bb976157317aeb070b4ed235d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -400,7 +400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="117" column="14"/>
+        <location file="iDynTree/SpatialVector.h" line="117" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aaf50d0723aa1bf73962f05224a56bd8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const DerivedSpatialVecT</type>
@@ -418,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="122" column="34"/>
+        <location file="iDynTree/SpatialVector.h" line="122" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1af55844354af98084b8fd52a9240b2d5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const DerivedSpatialVecT</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="123" column="34"/>
+        <location file="iDynTree/SpatialVector.h" line="123" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a676b41872e9165b9795a9706149a8e17" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="130" column="16"/>
+        <location file="iDynTree/SpatialVector.h" line="130" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aee117ebb24cae309a169f678019f1181" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>DerivedSpatialVecT</type>
@@ -471,7 +471,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="135" column="28"/>
+        <location file="iDynTree/SpatialVector.h" line="135" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1afcf112b3ddd4e01fc0389dd2319eb383" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>DerivedSpatialVecT</type>
@@ -488,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="136" column="28"/>
+        <location file="iDynTree/SpatialVector.h" line="136" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a3ac59b03e3786339836b9b7d190f39e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>DerivedSpatialVecT</type>
@@ -501,7 +501,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="137" column="28"/>
+        <location file="iDynTree/SpatialVector.h" line="137" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a28178bda574859bc9cda8e51f23ffc07" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector6</ref></type>
@@ -515,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="147" column="17"/>
+        <location file="iDynTree/SpatialVector.h" line="147" column="17"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -538,7 +538,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="124" column="35"/>
+        <location file="iDynTree/SpatialVector.h" line="124" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aa1ad54ef1ef1c37676cf7c231242f9fb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>DerivedSpatialVecT</type>
@@ -555,7 +555,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="125" column="35"/>
+        <location file="iDynTree/SpatialVector.h" line="125" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1ae2ae611372d0a0f53dd983e3598bcc58" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>DerivedSpatialVecT</type>
@@ -569,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="142" column="35"/>
+        <location file="iDynTree/SpatialVector.h" line="142" column="35"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -653,7 +653,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/SpatialVector.h" line="76" column="5" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="77" bodyend="159"/>
+    <location file="iDynTree/SpatialVector.h" line="76" column="5" bodyfile="iDynTree/SpatialVector.h" bodystart="77" bodyend="159"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>angularOffset</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>angularVec3</name></member>

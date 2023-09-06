@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1SubModelDecomposition" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::SubModelDecomposition</compoundname>
-    <includes local="no">iDynTree/Model/SubModel.h</includes>
+    <includes local="no">iDynTree/SubModel.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1SubModelDecomposition_1a6d5fdc37d78e7a5948d71d997182be70" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> * &gt;</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="38" column="21" bodyfile="iDynTree/Model/SubModel.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/SubModel.h" line="38" column="21" bodyfile="iDynTree/SubModel.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SubModelDecomposition_1a4700199605f495eb12af9d70db8402ee" prot="private" static="no" mutable="no">
         <type>std::vector&lt; size_t &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="43" column="21" bodyfile="iDynTree/Model/SubModel.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/SubModel.h" line="43" column="21" bodyfile="iDynTree/SubModel.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="48" column="9"/>
+        <location file="iDynTree/SubModel.h" line="48" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a5fe54e692ed2865a3d57fc8a761a301a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref> &amp;</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="53" column="31"/>
+        <location file="iDynTree/SubModel.h" line="53" column="31"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="59" column="9"/>
+        <location file="iDynTree/SubModel.h" line="59" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a145cde29018b5b6c27a462925fd484f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="64" column="9"/>
+        <location file="iDynTree/SubModel.h" line="64" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a03d8e08985fa2b90c2f9a8cd5c4d97ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="77" column="14"/>
+        <location file="iDynTree/SubModel.h" line="77" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a53534266e618b82ab612058081e813e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="84" column="14"/>
+        <location file="iDynTree/SubModel.h" line="84" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a2e7f4ca8c79fb8401a5f3cd70db7147b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="89" column="16"/>
+        <location file="iDynTree/SubModel.h" line="89" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a4ad7b85b26b61b08adb0256570556265" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="94" column="16"/>
+        <location file="iDynTree/SubModel.h" line="94" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a9a138de132efc3956281047491d79d1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="99" column="20"/>
+        <location file="iDynTree/SubModel.h" line="99" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1aa3d7187ddb025bea922c77e2744fcb49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="104" column="26"/>
+        <location file="iDynTree/SubModel.h" line="104" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1a716875f41b4d883d5ef8a2baa8930b4e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="109" column="16"/>
+        <location file="iDynTree/SubModel.h" line="109" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SubModelDecomposition_1ac68e94640125f0909f1ef2023143dad4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="114" column="16"/>
+        <location file="iDynTree/SubModel.h" line="114" column="16"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -284,7 +284,7 @@
 <para>This class is used in algorithms, such as estimation of external wrenches, where a complete model is decomposed in several submodels.</para>
 <para>For each submodel a <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> is provided, so that algorithms that are explicitly designed to run on both FullModel <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> and SubModel traversal can be executed on the SubModel. </para>
     </detaileddescription>
-    <location file="iDynTree/Model/SubModel.h" line="32" column="5" bodyfile="iDynTree/Model/SubModel.h" bodystart="33" bodyend="116"/>
+    <location file="iDynTree/SubModel.h" line="32" column="5" bodyfile="iDynTree/SubModel.h" bodystart="33" bodyend="116"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SubModelDecomposition_1a4ad7b85b26b61b08adb0256570556265" prot="public" virt="non-virtual"><scope>iDynTree::SubModelDecomposition</scope><name>getNrOfLinks</name></member>
       <member refid="classiDynTree_1_1SubModelDecomposition_1a2e7f4ca8c79fb8401a5f3cd70db7147b" prot="public" virt="non-virtual"><scope>iDynTree::SubModelDecomposition</scope><name>getNrOfSubModels</name></member>

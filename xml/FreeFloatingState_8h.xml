@@ -2,20 +2,21 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="FreeFloatingState_8h" kind="file" language="C++">
     <compoundname>FreeFloatingState.h</compoundname>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
-    <includes refid="Twist_8h" local="no">iDynTree/Core/Twist.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
-    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
-    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
-    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/GravityCompensationHelpers.h</includedby>
+    <includedby refid="Model_2FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>iDynTree/Model/FreeFloatingState.h</label>
+        <label>iDynTree/FreeFloatingState.h</label>
         <link refid="FreeFloatingState_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -33,6 +34,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/FreeFloatingState.h"/>
+    <location file="iDynTree/FreeFloatingState.h"/>
   </compounddef>
 </doxygen>

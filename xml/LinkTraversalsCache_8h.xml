@@ -3,15 +3,16 @@
   <compounddef id="LinkTraversalsCache_8h" kind="file" language="C++">
     <compoundname>LinkTraversalsCache.h</compoundname>
     <includes local="no">vector</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="Model_2LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>vector</label>
       </node>
       <node id="1">
-        <label>iDynTree/Model/LinkTraversalsCache.h</label>
+        <label>iDynTree/LinkTraversalsCache.h</label>
         <link refid="LinkTraversalsCache_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -23,6 +24,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/LinkTraversalsCache.h"/>
+    <location file="iDynTree/LinkTraversalsCache.h"/>
   </compounddef>
 </doxygen>

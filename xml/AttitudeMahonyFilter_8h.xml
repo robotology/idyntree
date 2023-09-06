@@ -2,8 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="AttitudeMahonyFilter_8h" kind="file" language="C++">
     <compoundname>AttitudeMahonyFilter.h</compoundname>
-    <includes refid="AttitudeEstimator_8h" local="no">iDynTree/Estimation/AttitudeEstimator.h</includes>
-    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <includes refid="AttitudeEstimator_8h" local="no">iDynTree/AttitudeEstimator.h</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
+    <includedby refid="Estimation_2AttitudeMahonyFilter_8h" local="no">iDynTree/Estimation/AttitudeMahonyFilter.h</includedby>
     <innerclass refid="structiDynTree_1_1AttitudeMahonyFilterParameters" prot="public">iDynTree::AttitudeMahonyFilterParameters</innerclass>
     <innerclass refid="classiDynTree_1_1AttitudeMahonyFilter" prot="public">iDynTree::AttitudeMahonyFilter</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
@@ -11,6 +12,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/AttitudeMahonyFilter.h"/>
+    <location file="iDynTree/AttitudeMahonyFilter.h"/>
   </compounddef>
 </doxygen>

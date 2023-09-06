@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="structiDynTree_1_1BerdyOptions" kind="struct" language="C++" prot="public">
     <compoundname>iDynTree::BerdyOptions</compoundname>
-    <includes local="no">iDynTree/Estimation/BerdyHelper.h</includes>
+    <includes local="no">iDynTree/BerdyHelper.h</includes>
       <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1a19628b15cf3bbcf28b976c39b437d006" prot="public" static="no" mutable="no">
         <type><ref refid="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" kindref="member">BerdyVariants</ref></type>
@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="174" column="19" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="174" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="174" column="19" bodyfile="iDynTree/BerdyHelper.h" bodystart="174" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1af051c7f89d8e3dc8d7b455c587344a69" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="187" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="187" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="187" column="10" bodyfile="iDynTree/BerdyHelper.h" bodystart="187" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1aea6e6fac0efefbe5add4a140b1dcaccd" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="194" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="194" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="194" column="10" bodyfile="iDynTree/BerdyHelper.h" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1af70033b6bbcded8f40b50946ecb66107" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="201" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="201" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="201" column="10" bodyfile="iDynTree/BerdyHelper.h" bodystart="201" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1ae3072e1e8330ff15fb6fbc4f838aeb89" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="209" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="209" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="209" column="10" bodyfile="iDynTree/BerdyHelper.h" bodystart="209" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1ad8132d863ced1232d12fc0ef0053c6d4" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="219" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="219" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="219" column="10" bodyfile="iDynTree/BerdyHelper.h" bodystart="219" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1a963fa2e88833e09594b13a22f788c5cb" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="228" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="228" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="228" column="17" bodyfile="iDynTree/BerdyHelper.h" bodystart="228" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1a0fa96e6bdabbcf1165d7027de1977698" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="235" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="235" bodyend="-1"/>
+        <location file="iDynTree/BerdyHelper.h" line="235" column="17" bodyfile="iDynTree/BerdyHelper.h" bodystart="235" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="156" column="5" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="156" bodyend="164"/>
+        <location file="iDynTree/BerdyHelper.h" line="156" column="5" bodyfile="iDynTree/BerdyHelper.h" bodystart="156" bodyend="164"/>
       </memberdef>
       <memberdef kind="function" id="structiDynTree_1_1BerdyOptions_1a1b9fc6eff357d120844ee98f48cc28a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="240" column="10"/>
+        <location file="iDynTree/BerdyHelper.h" line="240" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -212,7 +212,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Estimation/BerdyHelper.h" line="153" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="154" bodyend="241"/>
+    <location file="iDynTree/BerdyHelper.h" line="153" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="154" bodyend="241"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1BerdyOptions_1a0fa96e6bdabbcf1165d7027de1977698" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>baseLink</name></member>
       <member refid="structiDynTree_1_1BerdyOptions_1ac9aab7a6f83181df7b667c049665dc03" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>BerdyOptions</name></member>

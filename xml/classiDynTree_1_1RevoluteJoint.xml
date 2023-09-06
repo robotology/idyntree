@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1RevoluteJoint" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::RevoluteJoint</compoundname>
     <basecompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; 1, 1 &gt;</basecompoundref>
-    <includes local="no">iDynTree/Model/RevoluteJoint.h</includes>
+    <includes local="no">iDynTree/RevoluteJoint.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a64e64e4c7b80737e16af12d405479737" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="26" column="19" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="26" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="26" column="19" bodyfile="iDynTree/RevoluteJoint.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a0019a807eb17312f89d3e95251220455" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="27" column="19" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="27" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="27" column="19" bodyfile="iDynTree/RevoluteJoint.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a34fff2ede1ed0c72992270f8d70d89bb" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="28" column="19" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="28" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="28" column="19" bodyfile="iDynTree/RevoluteJoint.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a00529279702ce43517fe1daad9767a35" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="29" column="14" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="29" column="14" bodyfile="iDynTree/RevoluteJoint.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a27aa47da74de0c6909449a815307d434" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="33" column="14" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="33" column="14" bodyfile="iDynTree/RevoluteJoint.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a5c24ef0034d0c449baba2d5fec33871c" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="34" column="16" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="34" column="16" bodyfile="iDynTree/RevoluteJoint.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a4acd59cca211ac385237519cc2b2c149" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="35" column="16" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="35" column="16" bodyfile="iDynTree/RevoluteJoint.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1abf00dc550831135b1eeca356b2885613" prot="private" static="no" mutable="no">
         <type>JointDynamicsType</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="39" column="27" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="39" column="27" bodyfile="iDynTree/RevoluteJoint.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1adf6822fcbf649a76703378142f1cefe1" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="40" column="16" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="40" column="16" bodyfile="iDynTree/RevoluteJoint.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1afaed8b14a45055427ba10ca53b50a991" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="41" column="16" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="41" column="16" bodyfile="iDynTree/RevoluteJoint.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1af3e89e865b6f934a00e2bfb32fee15fd" prot="private" static="no" mutable="yes">
         <type>double</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="44" column="24" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="44" column="24" bodyfile="iDynTree/RevoluteJoint.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a088374402862b6993c0fc690baa0c547" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="45" column="27" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="45" column="27" bodyfile="iDynTree/RevoluteJoint.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a98aa396b2c5880913e1a8f93c0fad716" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="46" column="27" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="46" column="27" bodyfile="iDynTree/RevoluteJoint.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a2cd60e1fa399d50697d31977c3181fa8" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="47" column="37" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="47" column="37" bodyfile="iDynTree/RevoluteJoint.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a63b5b07e4efcd2d3223e2b6c654a26f5" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="48" column="37" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/RevoluteJoint.h" line="48" column="37" bodyfile="iDynTree/RevoluteJoint.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="32" column="14"/>
+        <location file="iDynTree/RevoluteJoint.h" line="32" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ae120b274f9c563582f9694f1a46d9de6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="38" column="14"/>
+        <location file="iDynTree/RevoluteJoint.h" line="38" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ac9353cea48ca3448d9c3954b4fb77e56" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="50" column="14"/>
+        <location file="iDynTree/RevoluteJoint.h" line="50" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1abea64170132558068a88804574ca7c87" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="51" column="14"/>
+        <location file="iDynTree/RevoluteJoint.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1af697ff856633860ace4df9e45ad13204" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="52" column="14"/>
+        <location file="iDynTree/RevoluteJoint.h" line="52" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="58" column="9"/>
+        <location file="iDynTree/RevoluteJoint.h" line="58" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a2340a2651002e2513df12ccd1b2b4040" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="61" column="9"/>
+        <location file="iDynTree/RevoluteJoint.h" line="61" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ad0ba82884c9219ac78f9137f16f432e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="70" column="9"/>
+        <location file="iDynTree/RevoluteJoint.h" line="70" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a23308fb8f761871832d44fe98b077bfd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="75" column="9"/>
+        <location file="iDynTree/RevoluteJoint.h" line="75" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a2988b3e47487b611a6db58149c76ade4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -373,7 +373,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="80" column="17"/>
+        <location file="iDynTree/RevoluteJoint.h" line="80" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a3dfbe0ccbbf399581aab181f86727ded" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -388,7 +388,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="83" column="25"/>
+        <location file="iDynTree/RevoluteJoint.h" line="83" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ab0054852e1d734677a145eba7d855259" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -429,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="86" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="86" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a01e2fa3bcf4c67533d2869d73124aa45" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="89" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="89" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a8eb38f7d6b81de02f396a7464cb67b1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -480,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="100" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="100" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1adae6f30b84188990fdd86ae68aa65527" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -497,7 +497,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="106" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="106" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a5b22e4e2870280815c24f1e1fb0084ce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -512,7 +512,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="109" column="27"/>
+        <location file="iDynTree/RevoluteJoint.h" line="109" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ab51ac6ab6659dfdba43232dfedd24ea4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -527,7 +527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="112" column="27"/>
+        <location file="iDynTree/RevoluteJoint.h" line="112" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a7f3bc5c79ffa42a6eebd670e84c63358" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -564,7 +564,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="138" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="138" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1addfd7a524a8b455fed2e119e5337a5ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -588,7 +588,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="142" column="27"/>
+        <location file="iDynTree/RevoluteJoint.h" line="142" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4dd07d55b77a7b6063c4f677b9900499" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -615,7 +615,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="147" column="34"/>
+        <location file="iDynTree/RevoluteJoint.h" line="147" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1afb136bbf0c99f9bcf571dfe1d3937e18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -648,7 +648,7 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="152" column="29"/>
+        <location file="iDynTree/RevoluteJoint.h" line="152" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ab21df5f6c5075952811c700a9c5cd51a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -685,7 +685,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="158" column="37"/>
+        <location file="iDynTree/RevoluteJoint.h" line="158" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4e54ab1a66775c23d867d96bc4981d89" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -733,7 +733,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="163" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="163" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1adaae229eae185031300bf171a513d181" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -768,7 +768,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="172" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="172" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1aefd91d85490aac0b9231c4624ac61175" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -811,7 +811,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="178" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="178" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a8cc08db7802d2b4f0978efc6ca6c947d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -854,7 +854,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="186" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="186" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a60ddcf0fd610a2d3ec72c05341621f09" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -893,7 +893,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="195" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="195" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4d73857202239a3e54de8defafaf62a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -970,7 +970,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="203" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="203" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a14b6333b82f42a82d644d341ed627c73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -988,7 +988,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="208" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="208" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a1adadb8bf7bdc3335dfb8b90556edc94" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1010,7 +1010,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="209" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="209" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4d3db4e8079ec53967f00b2451e9651a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1049,7 +1049,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="210" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="210" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ad67f412133c3e07b6c49fd7b67b6c4aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1068,7 +1068,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="211" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="211" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a3580e3bc0eeb67b1497cbfec5945641d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1087,7 +1087,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="212" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="212" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1abbea73315ff8ea7f81b9c3d27d32f05c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1117,7 +1117,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="213" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="213" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a02116cee53bf5ff75e12dc74e9226f9d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointDynamicsType</type>
@@ -1137,7 +1137,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="216" column="35"/>
+        <location file="iDynTree/RevoluteJoint.h" line="216" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a825b9d81e7de95679fafcb473b5d05cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1161,7 +1161,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="217" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="217" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a9c11645dcc7a2a5a303d7c1de5d7fb89" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1185,7 +1185,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="218" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="218" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a6e6f4824555ea71cc71834f60bc47130" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1209,7 +1209,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="219" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="219" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a17a88c97ad95a5f4bc71aedfd41fb7cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1249,7 +1249,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="220" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="220" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a33a03be41e423704f17f94c0c58193db" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1289,7 +1289,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/RevoluteJoint.h" line="221" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="221" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1334,7 +1334,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         <link refid="classiDynTree_1_1IJoint"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/RevoluteJoint.h" line="22" column="5" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="23" bodyend="222"/>
+    <location file="iDynTree/RevoluteJoint.h" line="22" column="5" bodyfile="iDynTree/RevoluteJoint.h" bodystart="23" bodyend="222"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1RevoluteJoint_1a3dfbe0ccbbf399581aab181f86727ded" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1a8cc08db7802d2b4f0978efc6ca6c947d" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeChildAcc</name></member>

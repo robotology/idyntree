@@ -2,9 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="DynamicsLinearizationHelpers_8h" kind="file" language="C++">
     <compoundname>DynamicsLinearizationHelpers.h</compoundname>
-    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
-    <includes refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includes>
-    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
+    <includes refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includes>
+    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/DynamicsLinearization.h</includedby>
+    <includedby refid="Model_2DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includedby>
     <innerclass refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative" prot="public">iDynTree::SpatialMotionWrtMotionDerivative</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" prot="public">iDynTree::SpatialForceWrtMotionDerivative</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
@@ -33,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="43" column="38" declfile="iDynTree/Model/DynamicsLinearizationHelpers.h" declline="43" declcolumn="38"/>
+        <location file="iDynTree/DynamicsLinearizationHelpers.h" line="43" column="38" declfile="iDynTree/DynamicsLinearizationHelpers.h" declline="43" declcolumn="38"/>
       </memberdef>
       <memberdef kind="function" id="DynamicsLinearizationHelpers_8h_1aedfbcb0d62ea5bb9bf6fc476f3cc717a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SpatialForceWrtMotionDerivative</type>
@@ -59,13 +60,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="77" column="38" declfile="iDynTree/Model/DynamicsLinearizationHelpers.h" declline="77" declcolumn="38"/>
+        <location file="iDynTree/DynamicsLinearizationHelpers.h" line="77" column="38" declfile="iDynTree/DynamicsLinearizationHelpers.h" declline="77" declcolumn="38"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/DynamicsLinearizationHelpers.h"/>
+    <location file="iDynTree/DynamicsLinearizationHelpers.h"/>
   </compounddef>
 </doxygen>

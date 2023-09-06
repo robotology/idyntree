@@ -2,15 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="PositionRaw_8h" kind="file" language="C++">
     <compoundname>PositionRaw.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes local="no">string</includes>
-    <includedby refid="Position_8h" local="no">iDynTree/Core/Position.h</includedby>
+    <includedby refid="Core_2PositionRaw_8h" local="no">iDynTree/Core/PositionRaw.h</includedby>
+    <includedby refid="Position_8h" local="no">iDynTree/Position.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>string</label>
       </node>
       <node id="1">
-        <label>iDynTree/Core/PositionRaw.h</label>
+        <label>iDynTree/PositionRaw.h</label>
         <link refid="PositionRaw_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -22,6 +23,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/PositionRaw.h"/>
+    <location file="iDynTree/PositionRaw.h"/>
   </compounddef>
 </doxygen>

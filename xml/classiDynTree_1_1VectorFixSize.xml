@@ -3,7 +3,7 @@
   <compounddef id="classiDynTree_1_1VectorFixSize" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::VectorFixSize</compoundname>
     <derivedcompoundref refid="classiDynTree_1_1ClassicalAcc" prot="public" virt="non-virtual">iDynTree::ClassicalAcc</derivedcompoundref>
-    <includes local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes local="no">iDynTree/VectorFixSize.h</includes>
     <templateparamlist>
       <param>
         <type>unsigned int</type>
@@ -24,7 +24,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="180" column="24" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="180" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="180" column="24" bodyfile="iDynTree/VectorFixSize.h" bodystart="180" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" static="no">
         <type>std::allocator&lt; double &gt;</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="182" column="32" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="182" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="182" column="32" bodyfile="iDynTree/VectorFixSize.h" bodystart="182" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1VectorFixSize_1aa11c3eee00e88dabb7880f6cac2a9b82" prot="public" static="no">
         <type>std::allocator_traits&lt; std::allocator&lt; double &gt; &gt;::pointer</type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="184" column="58" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="184" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="184" column="58" bodyfile="iDynTree/VectorFixSize.h" bodystart="184" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1VectorFixSize_1a69b51f8119155d31a254676ae867ae8f" prot="public" static="no">
         <type>std::allocator_traits&lt; std::allocator&lt; double &gt; &gt;::const_pointer</type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="186" column="64" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="186" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="186" column="64" bodyfile="iDynTree/VectorFixSize.h" bodystart="186" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="65" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="298" bodyend="302"/>
+        <location file="iDynTree/VectorFixSize.h" line="65" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="298" bodyend="302"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1aaeeab0c1251340903c447dbc3cd33b01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double &amp;</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="67" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="305" bodyend="309"/>
+        <location file="iDynTree/VectorFixSize.h" line="67" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="305" bodyend="309"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a8345a3e5ee2998a02dd79019ce293421" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="69" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="312" bodyend="316"/>
+        <location file="iDynTree/VectorFixSize.h" line="69" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="312" bodyend="316"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a21683853dd0b95beea5b091a584fe486" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double &amp;</type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="71" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="319" bodyend="323"/>
+        <location file="iDynTree/VectorFixSize.h" line="71" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="319" bodyend="323"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1af8b3a33ff82732e94480023aa18cfe98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="73" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="326" bodyend="335"/>
+        <location file="iDynTree/VectorFixSize.h" line="73" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="326" bodyend="335"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1ab63541744f87c564754359e4923da4a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="75" column="14" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="338" bodyend="349"/>
+        <location file="iDynTree/VectorFixSize.h" line="75" column="14" bodyfile="iDynTree/VectorFixSize.h" bodystart="338" bodyend="349"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="82" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="247" bodyend="250"/>
+        <location file="iDynTree/VectorFixSize.h" line="82" column="22" bodyfile="iDynTree/VectorFixSize.h" bodystart="247" bodyend="250"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a9409f3724df4aa4de2c8281ba7e67db2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="89" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="253" bodyend="256"/>
+        <location file="iDynTree/VectorFixSize.h" line="89" column="22" bodyfile="iDynTree/VectorFixSize.h" bodystart="253" bodyend="256"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a1420c32072d5c1e21140da111955a6d1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="96" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="259" bodyend="262"/>
+        <location file="iDynTree/VectorFixSize.h" line="96" column="22" bodyfile="iDynTree/VectorFixSize.h" bodystart="259" bodyend="262"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a0b5d60b77fbd7ba982e855453800f776" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const double *</type>
@@ -242,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="103" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="265" bodyend="268"/>
+        <location file="iDynTree/VectorFixSize.h" line="103" column="22" bodyfile="iDynTree/VectorFixSize.h" bodystart="265" bodyend="268"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a8e64a7875375a8b1b894614ba882ad05" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>double *</type>
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="110" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="271" bodyend="274"/>
+        <location file="iDynTree/VectorFixSize.h" line="110" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="271" bodyend="274"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a8b6f1796eba4d7c3db40e3d14e33b246" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>double *</type>
@@ -276,7 +276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="117" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="277" bodyend="280"/>
+        <location file="iDynTree/VectorFixSize.h" line="117" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="277" bodyend="280"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a92e903cfdf924fee24e71eee1b0dff76" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="119" column="21" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="283" bodyend="286"/>
+        <location file="iDynTree/VectorFixSize.h" line="119" column="21" bodyfile="iDynTree/VectorFixSize.h" bodystart="283" bodyend="286"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="171" column="21" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="361" bodyend="371"/>
+        <location file="iDynTree/VectorFixSize.h" line="171" column="21" bodyfile="iDynTree/VectorFixSize.h" bodystart="361" bodyend="371"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1acae25eb63bcbe6b524849d77134c168d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="173" column="21" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="374" bodyend="384"/>
+        <location file="iDynTree/VectorFixSize.h" line="173" column="21" bodyfile="iDynTree/VectorFixSize.h" bodystart="374" bodyend="384"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="34" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/VectorFixSize.h" line="34" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -354,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="42" column="9" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="194" bodyend="197"/>
+        <location file="iDynTree/VectorFixSize.h" line="42" column="9" bodyfile="iDynTree/VectorFixSize.h" bodystart="194" bodyend="197"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a6e92dc360040bccf652bebb0b0318cd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="49" column="9" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="201" bodyend="213"/>
+        <location file="iDynTree/VectorFixSize.h" line="49" column="9" bodyfile="iDynTree/VectorFixSize.h" bodystart="201" bodyend="213"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a9fd2c86208c88b1b904564d0a6f5a3b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -396,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="57" column="9" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="218" bodyend="220"/>
+        <location file="iDynTree/VectorFixSize.h" line="57" column="9" bodyfile="iDynTree/VectorFixSize.h" bodystart="218" bodyend="220"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">VectorFixSize</ref> &amp;</type>
@@ -415,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="130" column="24" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="290" bodyend="294"/>
+        <location file="iDynTree/VectorFixSize.h" line="130" column="24" bodyfile="iDynTree/VectorFixSize.h" bodystart="290" bodyend="294"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a3bd1389dbdf51e06f4c64451c242397e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const double *</type>
@@ -432,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="138" column="23" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="241" bodyend="244"/>
+        <location file="iDynTree/VectorFixSize.h" line="138" column="23" bodyfile="iDynTree/VectorFixSize.h" bodystart="241" bodyend="244"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double *</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="145" column="17" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="235" bodyend="238"/>
+        <location file="iDynTree/VectorFixSize.h" line="145" column="17" bodyfile="iDynTree/VectorFixSize.h" bodystart="235" bodyend="238"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a57b77a6c96f3276ed8e12b5e35b7f442" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -463,7 +463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="150" column="14" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="225" bodyend="231"/>
+        <location file="iDynTree/VectorFixSize.h" line="150" column="14" bodyfile="iDynTree/VectorFixSize.h" bodystart="225" bodyend="231"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1aee106d61ebb0925fecfa55cbaa515981" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -494,7 +494,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/VectorFixSize.h" line="164" column="14" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="352" bodyend="358"/>
+        <location file="iDynTree/VectorFixSize.h" line="164" column="14" bodyfile="iDynTree/VectorFixSize.h" bodystart="352" bodyend="358"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -553,7 +553,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Core/VectorFixSize.h" line="26" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="27" bodyend="190"/>
+    <location file="iDynTree/VectorFixSize.h" line="26" column="16" bodyfile="iDynTree/VectorFixSize.h" bodystart="27" bodyend="190"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>begin</name></member>

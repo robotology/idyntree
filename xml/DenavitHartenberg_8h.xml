@@ -2,20 +2,21 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="DenavitHartenberg_8h" kind="file" language="C++">
     <compoundname>DenavitHartenberg.h</compoundname>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes local="no">vector</includes>
+    <includedby refid="Model_2DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
     <includedby refid="iKinConversionsImplementation_8h" local="no">iDynTree/iKinConversionsImplementation.h</includedby>
     <incdepgraph>
-      <node id="2">
-        <label>vector</label>
-      </node>
       <node id="1">
-        <label>iDynTree/Model/DenavitHartenberg.h</label>
+        <label>iDynTree/DenavitHartenberg.h</label>
         <link refid="DenavitHartenberg_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="structiDynTree_1_1DHLink" prot="public">iDynTree::DHLink</innerclass>
@@ -49,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="138" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="138" declcolumn="11"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="138" column="11" declfile="iDynTree/DenavitHartenberg.h" declline="138" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1a259b4c68b0f4b9ae9ce389ed14f4c712" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Transform</type>
@@ -81,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="149" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="149" declcolumn="11"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="149" column="11" declfile="iDynTree/DenavitHartenberg.h" declline="149" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1ada11245ee6d17f4d64ccf59eeead8f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -120,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="162" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="162" declcolumn="6"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="162" column="6" declfile="iDynTree/DenavitHartenberg.h" declline="162" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1ac94534b93496e2703a218b38774c64a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -149,13 +150,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="178" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="178" declcolumn="6"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="178" column="6" declfile="iDynTree/DenavitHartenberg.h" declline="178" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/DenavitHartenberg.h"/>
+    <location file="iDynTree/DenavitHartenberg.h"/>
   </compounddef>
 </doxygen>

@@ -4,10 +4,10 @@
     <compoundname>Visualizer.h</compoundname>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
-    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
-    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
-    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <incdepgraph>
       <node id="2">
         <label>string</label>

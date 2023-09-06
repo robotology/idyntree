@@ -2,21 +2,22 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ExtWrenchesAndJointTorquesEstimator_8h" kind="file" language="C++">
     <compoundname>ExtWrenchesAndJointTorquesEstimator.h</compoundname>
-    <includes refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="SubModel_8h" local="no">iDynTree/Model/SubModel.h</includes>
-    <includes refid="ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includes>
-    <includes refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includes>
-    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
-    <includes refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includes>
-    <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includes>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="SubModel_8h" local="no">iDynTree/SubModel.h</includes>
+    <includes refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includes>
+    <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
+    <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
+    <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/LinkTraversalsCache.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
+    <includedby refid="Estimation_2ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <innerclass refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator" prot="public">iDynTree::ExtWrenchesAndJointTorquesEstimator</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"/>
+    <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h"/>
   </compounddef>
 </doxygen>

@@ -2,14 +2,21 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SubModel_8h" kind="file" language="C++">
     <compoundname>SubModel.h</compoundname>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes local="no">vector</includes>
     <includes local="no">string</includes>
     <includes local="no">cstddef</includes>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="Model_2SubModel_8h" local="no">iDynTree/Model/SubModel.h</includedby>
     <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
       <node id="1">
-        <label>iDynTree/Model/SubModel.h</label>
+        <label>iDynTree/SubModel.h</label>
         <link refid="SubModel_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -17,12 +24,6 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-      </node>
-      <node id="3">
-        <label>string</label>
-      </node>
-      <node id="2">
-        <label>vector</label>
       </node>
       <node id="4">
         <label>cstddef</label>
@@ -93,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="127" column="10" declfile="iDynTree/Model/SubModel.h" declline="127" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="127" column="10" declfile="iDynTree/SubModel.h" declline="127" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -157,13 +158,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/SubModel.h" line="142" column="10" declfile="iDynTree/Model/SubModel.h" declline="142" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="142" column="10" declfile="iDynTree/SubModel.h" declline="142" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/SubModel.h"/>
+    <location file="iDynTree/SubModel.h"/>
   </compounddef>
 </doxygen>

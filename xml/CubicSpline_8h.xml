@@ -3,11 +3,12 @@
   <compounddef id="CubicSpline_8h" kind="file" language="C++">
     <compoundname>CubicSpline.h</compoundname>
     <includes local="no">vector</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includedby refid="Core_2CubicSpline_8h" local="no">iDynTree/Core/CubicSpline.h</includedby>
     <incdepgraph>
       <node id="1">
-        <label>iDynTree/Core/CubicSpline.h</label>
+        <label>iDynTree/CubicSpline.h</label>
         <link refid="CubicSpline_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -22,6 +23,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/CubicSpline.h"/>
+    <location file="iDynTree/CubicSpline.h"/>
   </compounddef>
 </doxygen>

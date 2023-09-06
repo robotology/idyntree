@@ -2,12 +2,13 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ModelCalibrationHelper_8h" kind="file" language="C++">
     <compoundname>ModelCalibrationHelper.h</compoundname>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
-    <includes refid="ModelExporter_8h" local="no">iDynTree/ModelIO/ModelExporter.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
+    <includes refid="ModelExporter_8h" local="no">iDynTree/ModelExporter.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
+    <includedby refid="ModelIO_2ModelCalibrationHelper_8h" local="no">iDynTree/ModelIO/ModelCalibrationHelper.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>string</label>
@@ -16,7 +17,7 @@
         <label>vector</label>
       </node>
       <node id="1">
-        <label>iDynTree/ModelIO/ModelCalibrationHelper.h</label>
+        <label>iDynTree/ModelCalibrationHelper.h</label>
         <link refid="ModelCalibrationHelper_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
@@ -35,6 +36,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/ModelIO/ModelCalibrationHelper.h"/>
+    <location file="iDynTree/ModelCalibrationHelper.h"/>
   </compounddef>
 </doxygen>

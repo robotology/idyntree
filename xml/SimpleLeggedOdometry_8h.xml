@@ -2,18 +2,19 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SimpleLeggedOdometry_8h" kind="file" language="C++">
     <compoundname>SimpleLeggedOdometry.h</compoundname>
-    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
-    <includes refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includes>
-    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
+    <includedby refid="Estimation_2SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
     <innerclass refid="classiDynTree_1_1SimpleLeggedOdometry" prot="public">iDynTree::SimpleLeggedOdometry</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/SimpleLeggedOdometry.h"/>
+    <location file="iDynTree/SimpleLeggedOdometry.h"/>
   </compounddef>
 </doxygen>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Estimation_2SchmittTrigger_8h" kind="file" language="C++">
+    <compoundname>SchmittTrigger.h</compoundname>
+    <includes refid="SchmittTrigger_8h" local="no">iDynTree/SchmittTrigger.h</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/SchmittTrigger.h"/>
+  </compounddef>
+</doxygen>

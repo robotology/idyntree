@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1Model" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::Model</compoundname>
-    <includes local="no">iDynTree/Model/Model.h</includes>
+    <includes local="no">iDynTree/Model.h</includes>
       <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a50093f9efe3d556d3c02ca287e7e4450" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> &gt;</type>
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="72" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="72" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="72" column="21" bodyfile="iDynTree/Model.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a29cae490ae0b99ab9eb301bbafbae005" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointPtr</ref> &gt;</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="75" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="75" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="75" column="21" bodyfile="iDynTree/Model.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1abc6612a340646ead0a7eae8df5bf5bbc" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="81" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="81" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="81" column="21" bodyfile="iDynTree/Model.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1ac96b6c1f63733c8187b6f6d0995d09d8" prot="private" static="no" mutable="no">
         <type>std::vector&lt; LinkIndex &gt;</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="88" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="88" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="88" column="21" bodyfile="iDynTree/Model.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a3e5f1bc51f4bd89f9c5450c61165dac8" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="91" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="91" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="91" column="21" bodyfile="iDynTree/Model.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a6fd86eb6b7a813c89ef71ffda31e0210" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="94" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="94" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="94" column="21" bodyfile="iDynTree/Model.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a7918eb0613b28e50c92f5af609875bda" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="101" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="101" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="101" column="21" bodyfile="iDynTree/Model.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1ac70249ac612e3cf157cd89d1e90b7538" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::vector&lt; <ref refid="structiDynTree_1_1Neighbor" kindref="compound">Neighbor</ref> &gt; &gt;</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="105" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="105" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="105" column="21" bodyfile="iDynTree/Model.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a774db17a0420685ac979959453f80ad4" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::string &gt;</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="108" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="108" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="108" column="21" bodyfile="iDynTree/Model.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1aba9b3e5e28b33093537fbb4d6d454560" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="114" column="19" bodyfile="iDynTree/Model/Model.h" bodystart="114" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="114" column="19" bodyfile="iDynTree/Model.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a7258bf4d518366514fc8caa4666f2485" prot="private" static="no" mutable="no">
         <type>unsigned int</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="120" column="22" bodyfile="iDynTree/Model/Model.h" bodystart="120" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="120" column="22" bodyfile="iDynTree/Model.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a6731df1e65f92cc0052bfe043ec60ee4" prot="private" static="no" mutable="no">
         <type>unsigned int</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="126" column="22" bodyfile="iDynTree/Model/Model.h" bodystart="126" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="126" column="22" bodyfile="iDynTree/Model.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1abd5ba08c0e5cd02c99afb3c12d10b75c" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref></type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="131" column="26" bodyfile="iDynTree/Model/Model.h" bodystart="131" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="131" column="26" bodyfile="iDynTree/Model.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Model_1a12f992f6ba249137e188ac9a2ada7775" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref></type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="136" column="26" bodyfile="iDynTree/Model/Model.h" bodystart="136" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="136" column="26" bodyfile="iDynTree/Model.h" bodystart="136" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="141" column="14"/>
+        <location file="iDynTree/Model.h" line="141" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a6a08210de977eab57082a75b363d5ade" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="146" column="14"/>
+        <location file="iDynTree/Model.h" line="146" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="153" column="9"/>
+        <location file="iDynTree/Model.h" line="153" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a96e83863f4c01d3ef034dd9ebd85bf5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="158" column="9"/>
+        <location file="iDynTree/Model.h" line="158" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a87ed3b079e81106a66290f55bd518759" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -291,7 +291,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="163" column="15"/>
+        <location file="iDynTree/Model.h" line="163" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ae5291043dfff013ca1a1d4270285a974" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
@@ -306,7 +306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="170" column="15"/>
+        <location file="iDynTree/Model.h" line="170" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a74d155b1e7ede1524c5781d7862fd573" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -320,7 +320,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="176" column="17"/>
+        <location file="iDynTree/Model.h" line="176" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="181" column="16"/>
+        <location file="iDynTree/Model.h" line="181" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1af084aa0a158b53693f1c63572ed8ef18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::vector&lt; std::string &gt; &amp;</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="186" column="27"/>
+        <location file="iDynTree/Model.h" line="186" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a9c7c704722ddc9601e35cdba9c0da62a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -367,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="188" column="14"/>
+        <location file="iDynTree/Model.h" line="188" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1aac86147dd37cd977de054e55635cd718" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="194" column="22"/>
+        <location file="iDynTree/Model.h" line="194" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ae9557eba54c8845eb69c79259299fddb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -402,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="196" column="19"/>
+        <location file="iDynTree/Model.h" line="196" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1aa5d6b472a34f852a7e3671e41f7e90e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -424,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="206" column="14"/>
+        <location file="iDynTree/Model.h" line="206" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ae87129dc71ea30e448842b6bb5d96bd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Link" kindref="compound">LinkPtr</ref></type>
@@ -441,7 +441,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="208" column="17"/>
+        <location file="iDynTree/Model.h" line="208" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a7dacd5618b5f212df82da101dd4d6415" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Link" kindref="compound">LinkConstPtr</ref></type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="209" column="22"/>
+        <location file="iDynTree/Model.h" line="209" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a217617e53c6a0d0efb237ba3556fe8b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -479,7 +479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="211" column="19"/>
+        <location file="iDynTree/Model.h" line="211" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ab69c340d5fde147645854c880fbded18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -493,7 +493,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="216" column="16"/>
+        <location file="iDynTree/Model.h" line="216" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a276aca07d27ee16dd9f53afb9e46f730" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -511,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="222" column="21"/>
+        <location file="iDynTree/Model.h" line="222" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a36a23bd3f7e2740f721b87c6b2d89464" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -525,7 +525,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="227" column="16"/>
+        <location file="iDynTree/Model.h" line="227" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a9e586e10ab288a30401b767c160181e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>JointIndex</type>
@@ -544,7 +544,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="235" column="20"/>
+        <location file="iDynTree/Model.h" line="235" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a4c236d6f7cc088912d469f6ff1127450" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointPtr</ref></type>
@@ -561,7 +561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="237" column="19"/>
+        <location file="iDynTree/Model.h" line="237" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ad1166f43e7a70e4ee2a04a5d45bb7028" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointConstPtr</ref></type>
@@ -578,7 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="239" column="24"/>
+        <location file="iDynTree/Model.h" line="239" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a9a149aed5e8a9b933a8e6c4c4a715f78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -600,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="249" column="14"/>
+        <location file="iDynTree/Model.h" line="249" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a21bdfccdb54557700c4babc278d52323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -621,7 +621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="256" column="14"/>
+        <location file="iDynTree/Model.h" line="256" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a3a7a786baeeae8a5f3c08aca06d5ab35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -642,7 +642,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="263" column="14"/>
+        <location file="iDynTree/Model.h" line="263" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a6da12797ce7fd9bc747a6192e1a8632d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -665,7 +665,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="271" column="14"/>
+        <location file="iDynTree/Model.h" line="271" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1aaead8cb8c5367589131a877ea121c573" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>JointIndex</type>
@@ -690,7 +690,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="280" column="20"/>
+        <location file="iDynTree/Model.h" line="280" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a6b550b42785b54510ea704dbaa4f47c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>JointIndex</type>
@@ -723,7 +723,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="289" column="20"/>
+        <location file="iDynTree/Model.h" line="289" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a764763adb198032da5bdfcfc5f6a0748" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>JointIndex</type>
@@ -760,7 +760,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="301" column="20"/>
+        <location file="iDynTree/Model.h" line="301" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a4d1a4e182102ae3c29c97fd2245f4497" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>JointIndex</type>
@@ -862,7 +862,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="321" column="20"/>
+        <location file="iDynTree/Model.h" line="321" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -880,7 +880,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="333" column="16"/>
+        <location file="iDynTree/Model.h" line="333" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -898,7 +898,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="341" column="16"/>
+        <location file="iDynTree/Model.h" line="341" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -917,7 +917,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="352" column="16"/>
+        <location file="iDynTree/Model.h" line="352" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ab67ec3bb2074412c1002befff50e2f57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -973,7 +973,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="373" column="14"/>
+        <location file="iDynTree/Model.h" line="373" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a9aaf343086bebc57ec349061d3b24956" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -1003,7 +1003,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="384" column="22"/>
+        <location file="iDynTree/Model.h" line="384" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1af64e0e775f931371f0bfb5544adb7375" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>FrameIndex</type>
@@ -1033,7 +1033,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="393" column="20"/>
+        <location file="iDynTree/Model.h" line="393" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ada72d786e1453f211a7d79f4dc0de8df" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1055,7 +1055,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="403" column="14"/>
+        <location file="iDynTree/Model.h" line="403" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ad3e8276d1ec7e275aadeb75c1add80b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -1085,7 +1085,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="415" column="19"/>
+        <location file="iDynTree/Model.h" line="415" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a64e8453f19a7c6f4e9dd0d9063062854" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -1103,7 +1103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="422" column="19"/>
+        <location file="iDynTree/Model.h" line="422" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1aa10729a2d397c325b1c5b130ec2e36e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1149,7 +1149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="434" column="14"/>
+        <location file="iDynTree/Model.h" line="434" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a7f1740784d873282ad0f0a5da9a56ddf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -1167,7 +1167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="439" column="22"/>
+        <location file="iDynTree/Model.h" line="439" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ab5ab577f364a9592ee074a71bbafeb9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structiDynTree_1_1Neighbor" kindref="compound">Neighbor</ref></type>
@@ -1190,7 +1190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="445" column="18"/>
+        <location file="iDynTree/Model.h" line="445" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a9e9f250f80cd292f5d9009aad2689ffa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1208,7 +1208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="450" column="14"/>
+        <location file="iDynTree/Model.h" line="450" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a1a8dc1c97b99ffc51dbf93ecff20e8c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -1226,7 +1226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="461" column="19"/>
+        <location file="iDynTree/Model.h" line="461" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a72469e19312e70ae804a90953989a009" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1260,7 +1260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="476" column="14"/>
+        <location file="iDynTree/Model.h" line="476" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a72909f545efbc21f9b2097cd20716e5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1306,7 +1306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="492" column="14"/>
+        <location file="iDynTree/Model.h" line="492" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1339,7 +1339,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="512" column="14"/>
+        <location file="iDynTree/Model.h" line="512" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a629860714a6975c091a90c9586bad57e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1374,7 +1374,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="535" column="14"/>
+        <location file="iDynTree/Model.h" line="535" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a62d3d30e55a1b02170e70bd773a3212d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
@@ -1391,7 +1391,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="542" column="26"/>
+        <location file="iDynTree/Model.h" line="542" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1af68aaae6690c95229ade6eeba1627f6b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
@@ -1408,7 +1408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="549" column="32"/>
+        <location file="iDynTree/Model.h" line="549" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1ad2a504bd113005539effec1c49094d36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
@@ -1425,7 +1425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="556" column="26"/>
+        <location file="iDynTree/Model.h" line="556" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1acbb988f29beafe0e9a8540f486271c08" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
@@ -1442,7 +1442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="564" column="32"/>
+        <location file="iDynTree/Model.h" line="564" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Model_1a0691a75a1750e3973431c41929ea7da4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -1457,7 +1457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Model.h" line="571" column="21"/>
+        <location file="iDynTree/Model.h" line="571" column="21"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1477,7 +1477,7 @@
 <para>The DOF indices are also assigned when the joint is added to the model with the addJoint method. For example if a model is composed only of 0 or 1 DOF joints and the 1 DOFs joints are added before the 0 DOFs then the joint index and dof index for 1 DOF joints will be coincident (this is how the URDF parser is actually implemented). For this reason the current implementation does not have a concept of DOF explicit identifier, i.e. a getDOFName(DOFIndex dofIndex) method does not exist.</para>
 <para>The frame indices between 0 and <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref>-1 are always assigned to the &quot;main&quot; link frame of the link with the same index. The frame indices between <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref> and <ref refid="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" kindref="member">getNrOfFrames()</ref>-1 are assigned when the additional frame is added to the model with the addAdditionalFrameToLink call. All the additional frame indices are incremented by 1 whenever a new link is added, to ensure that its &quot;link frame&quot; has a frame index in the 0...<ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref>-1 range. </para>
     </detaileddescription>
-    <location file="iDynTree/Model/Model.h" line="68" column="5" bodyfile="iDynTree/Model/Model.h" bodystart="69" bodyend="573"/>
+    <location file="iDynTree/Model.h" line="68" column="5" bodyfile="iDynTree/Model.h" bodystart="69" bodyend="573"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Model_1ab67ec3bb2074412c1002befff50e2f57" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>addAdditionalFrameToLink</name></member>
       <member refid="classiDynTree_1_1Model_1abc6612a340646ead0a7eae8df5bf5bbc" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>additionalFrames</name></member>

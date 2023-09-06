@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1Transform" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::Transform</compoundname>
-    <includes local="no">iDynTree/Core/Transform.h</includes>
+    <includes local="no">iDynTree/Transform.h</includes>
       <sectiondef kind="user-defined">
       <header>Overloaded operators.</header>
       <description><para>This operators are used to change the frame in which a quantity is expressed from the <formula id="81">$\texttt{frame}$</formula> to the <formula id="82">$\texttt{refFrame}$</formula> of the transform. </para>
@@ -26,7 +26,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="201" column="19"/>
+        <location file="iDynTree/Transform.h" line="201" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a8a58af1e6c5d582c5765d91e5cdc1675" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="216" column="19"/>
+        <location file="iDynTree/Transform.h" line="216" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a47a4606065be27e235712f9805b3bdc9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="237" column="18"/>
+        <location file="iDynTree/Transform.h" line="237" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1af120c9b238d9efdf947109b47c4e4fdf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="277" column="18"/>
+        <location file="iDynTree/Transform.h" line="277" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a5ecf98714169de1a297c543305005a92" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="317" column="18"/>
+        <location file="iDynTree/Transform.h" line="317" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a9698f396afb2d422caae294fd6a8894c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="325" column="25"/>
+        <location file="iDynTree/Transform.h" line="325" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1adb61420ce0cf15da881551147ced2000" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="333" column="22"/>
+        <location file="iDynTree/Transform.h" line="333" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ac77626420790ccdf7bc8672f0f8238d4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="341" column="31"/>
+        <location file="iDynTree/Transform.h" line="341" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ad0351792d47583c938b5dab0d678bafc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="349" column="30"/>
+        <location file="iDynTree/Transform.h" line="349" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a1434f959c24d6047900578768e29909c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="355" column="24"/>
+        <location file="iDynTree/Transform.h" line="355" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a909ab9d195c19ede41da8b503be868c0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="361" column="32"/>
+        <location file="iDynTree/Transform.h" line="361" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a4b630c9130ea310c7dc05034a145557f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="383" column="24"/>
+        <location file="iDynTree/Transform.h" line="383" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1aa342f1751789eba01433f662d2b0c512" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="404" column="24"/>
+        <location file="iDynTree/Transform.h" line="404" column="24"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="449" column="19"/>
+        <location file="iDynTree/Transform.h" line="449" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1afadd977e513cdb2813b8763abe627121" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="482" column="19"/>
+        <location file="iDynTree/Transform.h" line="482" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a860616069f3511b9a78b82b4a3de1f2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="515" column="19"/>
+        <location file="iDynTree/Transform.h" line="515" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a0020412b9f32230742d028960fcdc811" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="521" column="29"/>
+        <location file="iDynTree/Transform.h" line="521" column="29"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="530" column="21"/>
+        <location file="iDynTree/Transform.h" line="530" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a3cfe8175a9139f543034665f40743535" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="532" column="21"/>
+        <location file="iDynTree/Transform.h" line="532" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -383,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="71" column="18" bodyfile="iDynTree/Core/Transform.h" bodystart="71" bodyend="-1"/>
+        <location file="iDynTree/Transform.h" line="71" column="18" bodyfile="iDynTree/Transform.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Transform_1a473cab87d96deea511e558fa67b21e57" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="81" column="18" bodyfile="iDynTree/Core/Transform.h" bodystart="81" bodyend="-1"/>
+        <location file="iDynTree/Transform.h" line="81" column="18" bodyfile="iDynTree/Transform.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -415,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="89" column="9"/>
+        <location file="iDynTree/Transform.h" line="89" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a46a45cf7fbe614298b85c4784f3518de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="94" column="9"/>
+        <location file="iDynTree/Transform.h" line="94" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a51b7b01d69d3e0cf26851745a742a8a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -465,7 +465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="100" column="9"/>
+        <location file="iDynTree/Transform.h" line="100" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a813733bebe23163c27cecab9e289aeef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="105" column="9"/>
+        <location file="iDynTree/Transform.h" line="105" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1adf94fe4e7e534b90a8515d9fe2b03d9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -511,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="111" column="14"/>
+        <location file="iDynTree/Transform.h" line="111" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a5c0d49ae7be0a639762f99c31af25369" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -541,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="120" column="19"/>
+        <location file="iDynTree/Transform.h" line="120" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ad2a5547291451dbae5c9b5ca5fe32cd1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
@@ -556,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="130" column="25"/>
+        <location file="iDynTree/Transform.h" line="130" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a63f8b8f234ecea5da3c0210ca1214f27" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -571,7 +571,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="140" column="25"/>
+        <location file="iDynTree/Transform.h" line="140" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a2b95e05edabf49b5584efb38d105f9be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -590,7 +590,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="150" column="14"/>
+        <location file="iDynTree/Transform.h" line="150" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ac27f7fdc364760a5e0e24b3c0abab7a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -609,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="160" column="14"/>
+        <location file="iDynTree/Transform.h" line="160" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -632,7 +632,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="163" column="26"/>
+        <location file="iDynTree/Transform.h" line="163" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ae07533c65a0654bc797006083fddbd65" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -649,7 +649,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="164" column="26"/>
+        <location file="iDynTree/Transform.h" line="164" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a706809fe4f1904e07634ed3d0c493fcd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -667,7 +667,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Transform.h" line="417" column="26"/>
+        <location file="iDynTree/Transform.h" line="417" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -741,7 +741,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/Transform.h" line="60" column="5" bodyfile="iDynTree/Core/Transform.h" bodystart="61" bodyend="535"/>
+    <location file="iDynTree/Transform.h" line="60" column="5" bodyfile="iDynTree/Transform.h" bodystart="61" bodyend="535"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Transform_1afadd977e513cdb2813b8763abe627121" prot="public" virt="non-virtual"><scope>iDynTree::Transform</scope><name>asAdjointTransform</name></member>
       <member refid="classiDynTree_1_1Transform_1a860616069f3511b9a78b82b4a3de1f2d" prot="public" virt="non-virtual"><scope>iDynTree::Transform</scope><name>asAdjointTransformWrench</name></member>

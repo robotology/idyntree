@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1SpatialMotionForceVectorT__traits" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::SpatialMotionForceVectorT_traits</compoundname>
-    <includes local="no">iDynTree/Core/SpatialVector.h</includes>
+    <includes local="no">iDynTree/SpatialVector.h</includes>
     <templateparamlist>
       <param>
         <type>class SpatialMotionForceVectorT</type>
@@ -26,7 +26,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Core/SpatialVector.h" line="27" column="5" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="27" bodyend="27"/>
+    <location file="iDynTree/SpatialVector.h" line="27" column="5" bodyfile="iDynTree/SpatialVector.h" bodystart="27" bodyend="27"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

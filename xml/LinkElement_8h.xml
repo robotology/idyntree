@@ -4,7 +4,7 @@
     <compoundname>LinkElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
     <includes refid="VisualElement_8h" local="yes">VisualElement.h</includes>
-    <includes refid="Link_8h" local="no">iDynTree/Model/Link.h</includes>
+    <includes refid="Link_8h" local="no">iDynTree/Link.h</includes>
     <innerclass refid="classiDynTree_1_1LinkElement" prot="public">iDynTree::LinkElement</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

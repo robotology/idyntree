@@ -2,7 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Jacobians_8h" kind="file" language="C++">
     <compoundname>Jacobians.h</compoundname>
-    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includedby refid="Model_2Jacobians_8h" local="no">iDynTree/Model/Jacobians.h</includedby>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
       <memberdef kind="function" id="group__iDynTreeModel_1gab0b6f0ce3e6e175b1532bdd897fd83c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -117,13 +118,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Jacobians.h" line="41" column="10" declfile="iDynTree/Model/Jacobians.h" declline="41" declcolumn="10"/>
+        <location file="iDynTree/Jacobians.h" line="41" column="10" declfile="iDynTree/Jacobians.h" declline="41" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/Jacobians.h"/>
+    <location file="iDynTree/Jacobians.h"/>
   </compounddef>
 </doxygen>

@@ -3,7 +3,7 @@
   <compounddef id="LinearConstraint_8h" kind="file" language="C++">
     <compoundname>LinearConstraint.h</compoundname>
     <includes refid="Constraint_8h" local="no">iDynTree/Constraint.h</includes>
-    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
     <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
     <includes local="no">string</includes>

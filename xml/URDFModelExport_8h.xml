@@ -3,7 +3,7 @@
   <compounddef id="URDFModelExport_8h" kind="file" language="C++">
     <compoundname>URDFModelExport.h</compoundname>
     <includes local="no">string</includes>
-    <includes refid="ModelExporter_8h" local="no">iDynTree/ModelIO/ModelExporter.h</includes>
+    <includes refid="ModelExporter_8h" local="no">iDynTree/ModelExporter.h</includes>
     <incdepgraph>
       <node id="2">
         <label>string</label>

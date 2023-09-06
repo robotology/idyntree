@@ -2,21 +2,21 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="dir_b150590bf3cb0aeeb6e2dfe5b34738cd" kind="dir">
     <compoundname>iDynTree/Estimation</compoundname>
-    <innerfile refid="AttitudeEstimator_8h">AttitudeEstimator.h</innerfile>
-    <innerfile refid="AttitudeEstimatorUtils_8h">AttitudeEstimatorUtils.h</innerfile>
-    <innerfile refid="AttitudeMahonyFilter_8h">AttitudeMahonyFilter.h</innerfile>
-    <innerfile refid="AttitudeQuaternionEKF_8h">AttitudeQuaternionEKF.h</innerfile>
-    <innerfile refid="BerdyHelper_8h">BerdyHelper.h</innerfile>
-    <innerfile refid="BerdySparseMAPSolver_8h">BerdySparseMAPSolver.h</innerfile>
-    <innerfile refid="BipedFootContactClassifier_8h">BipedFootContactClassifier.h</innerfile>
-    <innerfile refid="ContactStateMachine_8h">ContactStateMachine.h</innerfile>
-    <innerfile refid="ExtendedKalmanFilter_8h">ExtendedKalmanFilter.h</innerfile>
-    <innerfile refid="ExternalWrenchesEstimation_8h">ExternalWrenchesEstimation.h</innerfile>
-    <innerfile refid="ExtWrenchesAndJointTorquesEstimator_8h">ExtWrenchesAndJointTorquesEstimator.h</innerfile>
-    <innerfile refid="GravityCompensationHelpers_8h">GravityCompensationHelpers.h</innerfile>
-    <innerfile refid="KalmanFilter_8h">KalmanFilter.h</innerfile>
-    <innerfile refid="SchmittTrigger_8h">SchmittTrigger.h</innerfile>
-    <innerfile refid="SimpleLeggedOdometry_8h">SimpleLeggedOdometry.h</innerfile>
+    <innerfile refid="Estimation_2AttitudeEstimator_8h">AttitudeEstimator.h</innerfile>
+    <innerfile refid="Estimation_2AttitudeEstimatorUtils_8h">AttitudeEstimatorUtils.h</innerfile>
+    <innerfile refid="Estimation_2AttitudeMahonyFilter_8h">AttitudeMahonyFilter.h</innerfile>
+    <innerfile refid="Estimation_2AttitudeQuaternionEKF_8h">AttitudeQuaternionEKF.h</innerfile>
+    <innerfile refid="Estimation_2BerdyHelper_8h">BerdyHelper.h</innerfile>
+    <innerfile refid="Estimation_2BerdySparseMAPSolver_8h">BerdySparseMAPSolver.h</innerfile>
+    <innerfile refid="Estimation_2BipedFootContactClassifier_8h">BipedFootContactClassifier.h</innerfile>
+    <innerfile refid="Estimation_2ContactStateMachine_8h">ContactStateMachine.h</innerfile>
+    <innerfile refid="Estimation_2ExtendedKalmanFilter_8h">ExtendedKalmanFilter.h</innerfile>
+    <innerfile refid="Estimation_2ExternalWrenchesEstimation_8h">ExternalWrenchesEstimation.h</innerfile>
+    <innerfile refid="Estimation_2ExtWrenchesAndJointTorquesEstimator_8h">ExtWrenchesAndJointTorquesEstimator.h</innerfile>
+    <innerfile refid="Estimation_2GravityCompensationHelpers_8h">GravityCompensationHelpers.h</innerfile>
+    <innerfile refid="Estimation_2KalmanFilter_8h">KalmanFilter.h</innerfile>
+    <innerfile refid="Estimation_2SchmittTrigger_8h">SchmittTrigger.h</innerfile>
+    <innerfile refid="Estimation_2SimpleLeggedOdometry_8h">SimpleLeggedOdometry.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

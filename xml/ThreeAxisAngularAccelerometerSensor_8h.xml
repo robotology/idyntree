@@ -2,15 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ThreeAxisAngularAccelerometerSensor_8h" kind="file" language="C++">
     <compoundname>ThreeAxisAngularAccelerometerSensor.h</compoundname>
-    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
-    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
-    <includedby refid="AllSensorsTypes_8h" local="no">iDynTree/Sensors/AllSensorsTypes.h</includedby>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
+    <includedby refid="AllSensorsTypes_8h" local="no">iDynTree/AllSensorsTypes.h</includedby>
+    <includedby refid="Sensors_2ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h</includedby>
     <innerclass refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" prot="public">iDynTree::ThreeAxisAngularAccelerometerSensor</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"/>
+    <location file="iDynTree/ThreeAxisAngularAccelerometerSensor.h"/>
   </compounddef>
 </doxygen>

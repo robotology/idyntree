@@ -3,6 +3,43 @@
   <compounddef id="dir_6cbc0da72a45ae4a04ea9a67ef3f69a4" kind="dir">
     <compoundname>iDynTree</compoundname>
     <innerdir refid="dir_77cdb3a72d5a00eea7dab51220307fb7">iDynTree/Model</innerdir>
+    <innerdir refid="dir_1297d6acd49bc46b3e043f2d0e085891">iDynTree/Sensors</innerdir>
+    <innerfile refid="AccelerometerSensor_8h">AccelerometerSensor.h</innerfile>
+    <innerfile refid="AllSensorsTypes_8h">AllSensorsTypes.h</innerfile>
+    <innerfile refid="Centroidal_8h">Centroidal.h</innerfile>
+    <innerfile refid="ContactWrench_8h">ContactWrench.h</innerfile>
+    <innerfile refid="DenavitHartenberg_8h">DenavitHartenberg.h</innerfile>
+    <innerfile refid="Dynamics_8h">Dynamics.h</innerfile>
+    <innerfile refid="DynamicsLinearization_8h">DynamicsLinearization.h</innerfile>
+    <innerfile refid="DynamicsLinearizationHelpers_8h">DynamicsLinearizationHelpers.h</innerfile>
+    <innerfile refid="DynamicsUtils_8h">DynamicsUtils.h</innerfile>
+    <innerfile refid="FixedJoint_8h">FixedJoint.h</innerfile>
+    <innerfile refid="ForwardKinematics_8h">ForwardKinematics.h</innerfile>
+    <innerfile refid="FreeFloatingMatrices_8h">FreeFloatingMatrices.h</innerfile>
+    <innerfile refid="FreeFloatingState_8h">FreeFloatingState.h</innerfile>
+    <innerfile refid="GyroscopeSensor_8h">GyroscopeSensor.h</innerfile>
+    <innerfile refid="IJoint_8h">IJoint.h</innerfile>
+    <innerfile refid="Indices_8h">Indices.h</innerfile>
+    <innerfile refid="Jacobians_8h">Jacobians.h</innerfile>
+    <innerfile refid="JointState_8h">JointState.h</innerfile>
+    <innerfile refid="Link_8h">Link.h</innerfile>
+    <innerfile refid="LinkState_8h">LinkState.h</innerfile>
+    <innerfile refid="LinkTraversalsCache_8h">LinkTraversalsCache.h</innerfile>
+    <innerfile refid="Model_8h">Model.h</innerfile>
+    <innerfile refid="ModelSensorsTransformers_8h">ModelSensorsTransformers.h</innerfile>
+    <innerfile refid="ModelTestUtils_8h">ModelTestUtils.h</innerfile>
+    <innerfile refid="ModelTransformers_8h">ModelTransformers.h</innerfile>
+    <innerfile refid="MovableJointImpl_8h">MovableJointImpl.h</innerfile>
+    <innerfile refid="PredictSensorsMeasurements_8h">PredictSensorsMeasurements.h</innerfile>
+    <innerfile refid="PrismaticJoint_8h">PrismaticJoint.h</innerfile>
+    <innerfile refid="RevoluteJoint_8h">RevoluteJoint.h</innerfile>
+    <innerfile refid="Sensors_8h">Sensors.h</innerfile>
+    <innerfile refid="SixAxisForceTorqueSensor_8h">SixAxisForceTorqueSensor.h</innerfile>
+    <innerfile refid="SolidShapes_8h">SolidShapes.h</innerfile>
+    <innerfile refid="SubModel_8h">SubModel.h</innerfile>
+    <innerfile refid="ThreeAxisAngularAccelerometerSensor_8h">ThreeAxisAngularAccelerometerSensor.h</innerfile>
+    <innerfile refid="ThreeAxisForceTorqueContactSensor_8h">ThreeAxisForceTorqueContactSensor.h</innerfile>
+    <innerfile refid="Traversal_8h">Traversal.h</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

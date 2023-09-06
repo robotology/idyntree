@@ -2,9 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="MovableJointImpl_8h" kind="file" language="C++">
     <compoundname>MovableJointImpl.h</compoundname>
-    <includes refid="IJoint_8h" local="no">iDynTree/Model/IJoint.h</includes>
-    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/Model/PrismaticJoint.h</includedby>
-    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
+    <includes refid="IJoint_8h" local="no">iDynTree/IJoint.h</includes>
+    <includedby refid="Model_2MovableJointImpl_8h" local="no">iDynTree/Model/MovableJointImpl.h</includedby>
+    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/PrismaticJoint.h</includedby>
+    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/RevoluteJoint.h</includedby>
     <innerclass refid="classiDynTree_1_1MovableJointImpl" prot="public">iDynTree::MovableJointImpl</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="typedef">
@@ -19,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/MovableJointImpl.h" line="157" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="157" bodyend="-1"/>
+        <location file="iDynTree/MovableJointImpl.h" line="157" column="30" bodyfile="iDynTree/MovableJointImpl.h" bodystart="157" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MovableJointImpl_8h_1a24b411fa2a181857fd60881b7a1fa644" prot="public" static="no">
         <type>MovableJointImpl&lt; 2, 2 &gt;</type>
@@ -32,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/MovableJointImpl.h" line="158" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="158" bodyend="-1"/>
+        <location file="iDynTree/MovableJointImpl.h" line="158" column="30" bodyfile="iDynTree/MovableJointImpl.h" bodystart="158" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MovableJointImpl_8h_1ae4671e7929209092bc1d6a72f460872a" prot="public" static="no">
         <type>MovableJointImpl&lt; 3, 3 &gt;</type>
@@ -45,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/MovableJointImpl.h" line="159" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="159" bodyend="-1"/>
+        <location file="iDynTree/MovableJointImpl.h" line="159" column="30" bodyfile="iDynTree/MovableJointImpl.h" bodystart="159" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MovableJointImpl_8h_1a66158274373829ef7c8694995a9d6929" prot="public" static="no">
         <type>MovableJointImpl&lt; 4, 4 &gt;</type>
@@ -58,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/MovableJointImpl.h" line="160" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="160" bodyend="-1"/>
+        <location file="iDynTree/MovableJointImpl.h" line="160" column="30" bodyfile="iDynTree/MovableJointImpl.h" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MovableJointImpl_8h_1a5b8dfe13ce097fa3e505f492b7906c63" prot="public" static="no">
         <type>MovableJointImpl&lt; 5, 5 &gt;</type>
@@ -71,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/MovableJointImpl.h" line="161" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="161" bodyend="-1"/>
+        <location file="iDynTree/MovableJointImpl.h" line="161" column="30" bodyfile="iDynTree/MovableJointImpl.h" bodystart="161" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="MovableJointImpl_8h_1af1c9c077a2177994db5ee45257af1d48" prot="public" static="no">
         <type>MovableJointImpl&lt; 6, 6 &gt;</type>
@@ -84,13 +85,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/MovableJointImpl.h" line="162" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="162" bodyend="-1"/>
+        <location file="iDynTree/MovableJointImpl.h" line="162" column="30" bodyfile="iDynTree/MovableJointImpl.h" bodystart="162" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/MovableJointImpl.h"/>
+    <location file="iDynTree/MovableJointImpl.h"/>
   </compounddef>
 </doxygen>

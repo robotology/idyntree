@@ -2,24 +2,25 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="VectorDynSize_8h" kind="file" language="C++">
     <compoundname>VectorDynSize.h</compoundname>
-    <includes refid="Span_8h" local="no">iDynTree/Core/Span.h</includes>
+    <includes refid="Span_8h" local="no">iDynTree/Span.h</includes>
     <includes local="no">string</includes>
-    <includedby refid="CubicSpline_8h" local="no">iDynTree/Core/CubicSpline.h</includedby>
-    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
-    <includedby refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includedby>
+    <includedby refid="Core_2VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includedby>
+    <includedby refid="CubicSpline_8h" local="no">iDynTree/CubicSpline.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
+    <includedby refid="SparseMatrix_8h" local="no">iDynTree/SparseMatrix.h</includedby>
     <includedby refid="BoundingBoxHelpers_8h" local="no">iDynTree/BoundingBoxHelpers.h</includedby>
     <includedby refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includedby>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
     <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
     <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
-    <includedby refid="ExtendedKalmanFilter_8h" local="no">iDynTree/Estimation/ExtendedKalmanFilter.h</includedby>
-    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
-    <includedby refid="KalmanFilter_8h" local="no">iDynTree/Estimation/KalmanFilter.h</includedby>
-    <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
-    <includedby refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
-    <includedby refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
-    <includedby refid="YARPConversionsImplementation_8h" local="no">iDynTree/yarp/YARPConversionsImplementation.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="ExtendedKalmanFilter_8h" local="no">iDynTree/ExtendedKalmanFilter.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
+    <includedby refid="KalmanFilter_8h" local="no">iDynTree/KalmanFilter.h</includedby>
+    <includedby refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includedby>
+    <includedby refid="JointState_8h" local="no">iDynTree/JointState.h</includedby>
+    <includedby refid="Sensors_8h" local="no">iDynTree/Sensors.h</includedby>
+    <includedby refid="YARPConversionsImplementation_8h" local="no">iDynTree/YARPConversionsImplementation.h</includedby>
     <includedby refid="Constraint_8h" local="no">iDynTree/Constraint.h</includedby>
     <includedby refid="DynamicalSystem_8h" local="no">iDynTree/DynamicalSystem.h</includedby>
     <includedby refid="Integrator_8h" local="no">iDynTree/Integrator.h</includedby>
@@ -28,14 +29,14 @@
     <includedby refid="QuadraticCost_8h" local="no">iDynTree/QuadraticCost.h</includedby>
     <includedby refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includedby>
     <incdepgraph>
-      <node id="2">
-        <label>string</label>
-      </node>
       <node id="1">
-        <label>iDynTree/Core/VectorDynSize.h</label>
+        <label>iDynTree/VectorDynSize.h</label>
         <link refid="VectorDynSize_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
       </node>
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1VectorDynSize" prot="public">iDynTree::VectorDynSize</innerclass>
@@ -44,6 +45,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/VectorDynSize.h"/>
+    <location file="iDynTree/VectorDynSize.h"/>
   </compounddef>
 </doxygen>
