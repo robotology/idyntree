@@ -6,10 +6,10 @@
 
 #include <iDynTree/XMLElement.h>
 
-#include <iDynTree/Model/IJoint.h>
+#include <iDynTree/IJoint.h>
 
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/Transform.h>
 
 #include <memory>
 #include <string>

@@ -2,24 +2,24 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Dynamics.h>
-#include <iDynTree/Model/DynamicsLinearization.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Dynamics.h>
+#include <iDynTree/DynamicsLinearization.h>
 
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/FreeFloatingMatrices.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/FreeFloatingMatrices.h>
 
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include "testModels.h"
 

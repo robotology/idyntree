@@ -2,23 +2,23 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include "testModels.h"
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Core/SpatialMomentum.h>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/VectorDynSize.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/FreeFloatingState.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 
 namespace Eigen

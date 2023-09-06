@@ -7,7 +7,7 @@
 
 #include "IrrlichtUtils.h"
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 #include <cassert>
 

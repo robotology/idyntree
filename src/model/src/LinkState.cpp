@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/Model.h>
 
-#include <iDynTree/Core/ArticulatedBodyInertia.h>
+#include <iDynTree/ArticulatedBodyInertia.h>
 
 namespace iDynTree
 {

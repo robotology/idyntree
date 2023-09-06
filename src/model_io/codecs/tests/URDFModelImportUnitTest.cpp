@@ -3,11 +3,11 @@
 
 #include "testModels.h"
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/URDFDofsImport.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/URDFDofsImport.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <cassert>
 #include <cstdio>

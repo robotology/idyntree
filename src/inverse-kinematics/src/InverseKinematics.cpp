@@ -6,12 +6,12 @@
 #include "InverseKinematicsData.h"
 #include "TransformConstraint.h"
 
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/Direction.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/Direction.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/ModelLoader.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <cassert>
 #include <iostream>

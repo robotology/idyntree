@@ -11,8 +11,8 @@
 #include <iDynTree/LinearConstraint.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/TimeRange.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/TestUtils.h>
 #include <memory>
 
 using namespace iDynTree;

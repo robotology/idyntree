@@ -3,8 +3,8 @@
 
 #include <iDynTree/ConvexHullHelpers.h>
 
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/TestUtils.h>
 
 void testConvexHullProjectionConstraint()
 {

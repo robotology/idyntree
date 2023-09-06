@@ -38,94 +38,94 @@
 #include <cmath>
 
 //Utils
-#include "iDynTree/Core/Utils.h"
+#include "iDynTree/Utils.h"
 
 // Basic math classes
-#include "iDynTree/Core/MatrixDynSize.h"
-#include "iDynTree/Core/MatrixFixSize.h"
-#include "iDynTree/Core/SparseMatrix.h"
+#include "iDynTree/MatrixDynSize.h"
+#include "iDynTree/MatrixFixSize.h"
+#include "iDynTree/SparseMatrix.h"
 
-#include "iDynTree/Core/VectorDynSize.h"
-#include "iDynTree/Core/VectorFixSize.h"
+#include "iDynTree/VectorDynSize.h"
+#include "iDynTree/VectorFixSize.h"
 
 // Basic Vectors: Point Vectors and Spatial Vectors
-#include "iDynTree/Core/PositionRaw.h"
-#include "iDynTree/Core/Position.h"
-#include "iDynTree/Core/SpatialForceVector.h"
-#include "iDynTree/Core/SpatialMotionVector.h"
-#include "iDynTree/Core/Twist.h"
-#include "iDynTree/Core/Wrench.h"
-#include "iDynTree/Core/SpatialMomentum.h"
-#include "iDynTree/Core/SpatialAcc.h"
-#include "iDynTree/Core/ClassicalAcc.h"
-#include "iDynTree/Core/Direction.h"
-#include "iDynTree/Core/Axis.h"
+#include "iDynTree/PositionRaw.h"
+#include "iDynTree/Position.h"
+#include "iDynTree/SpatialForceVector.h"
+#include "iDynTree/SpatialMotionVector.h"
+#include "iDynTree/Twist.h"
+#include "iDynTree/Wrench.h"
+#include "iDynTree/SpatialMomentum.h"
+#include "iDynTree/SpatialAcc.h"
+#include "iDynTree/ClassicalAcc.h"
+#include "iDynTree/Direction.h"
+#include "iDynTree/Axis.h"
 
 // Inertias
-#include "iDynTree/Core/RotationalInertiaRaw.h"
-#include "iDynTree/Core/SpatialInertiaRaw.h"
-#include "iDynTree/Core/SpatialInertia.h"
-#include "iDynTree/Core/ArticulatedBodyInertia.h"
-#include "iDynTree/Core/InertiaNonLinearParametrization.h"
+#include "iDynTree/RotationalInertiaRaw.h"
+#include "iDynTree/SpatialInertiaRaw.h"
+#include "iDynTree/SpatialInertia.h"
+#include "iDynTree/ArticulatedBodyInertia.h"
+#include "iDynTree/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
-#include "iDynTree/Core/RotationRaw.h"
-#include "iDynTree/Core/Rotation.h"
-#include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/TransformDerivative.h"
-#include "iDynTree/Core/Span.h"
+#include "iDynTree/RotationRaw.h"
+#include "iDynTree/Rotation.h"
+#include "iDynTree/Transform.h"
+#include "iDynTree/TransformDerivative.h"
+#include "iDynTree/Span.h"
 
 // Model related data structures
-#include "iDynTree/Model/Indices.h"
-#include "iDynTree/Model/LinkState.h"
-#include "iDynTree/Model/Link.h"
-#include "iDynTree/Model/IJoint.h"
-#include "iDynTree/Model/FixedJoint.h"
-#include "iDynTree/Model/MovableJointImpl.h"
-#include "iDynTree/Model/RevoluteJoint.h"
-#include "iDynTree/Model/PrismaticJoint.h"
-#include "iDynTree/Model/Traversal.h"
-#include "iDynTree/Model/SolidShapes.h"
-#include "iDynTree/Model/Model.h"
-#include "iDynTree/Model/JointState.h"
-#include "iDynTree/Model/FreeFloatingMatrices.h"
-#include "iDynTree/Model/FreeFloatingState.h"
-#include "iDynTree/Model/ContactWrench.h"
-#include "iDynTree/Model/ModelTestUtils.h"
-#include "iDynTree/Model/ModelTransformers.h"
-#include "iDynTree/Model/SubModel.h"
+#include "iDynTree/Indices.h"
+#include "iDynTree/LinkState.h"
+#include "iDynTree/Link.h"
+#include "iDynTree/IJoint.h"
+#include "iDynTree/FixedJoint.h"
+#include "iDynTree/MovableJointImpl.h"
+#include "iDynTree/RevoluteJoint.h"
+#include "iDynTree/PrismaticJoint.h"
+#include "iDynTree/Traversal.h"
+#include "iDynTree/SolidShapes.h"
+#include "iDynTree/Model.h"
+#include "iDynTree/JointState.h"
+#include "iDynTree/FreeFloatingMatrices.h"
+#include "iDynTree/FreeFloatingState.h"
+#include "iDynTree/ContactWrench.h"
+#include "iDynTree/ModelTestUtils.h"
+#include "iDynTree/ModelTransformers.h"
+#include "iDynTree/SubModel.h"
 
 // Kinematics & Dynamics related functions
-#include "iDynTree/Model/ForwardKinematics.h"
-#include "iDynTree/Model/Dynamics.h"
-#include "iDynTree/Model/DenavitHartenberg.h"
+#include "iDynTree/ForwardKinematics.h"
+#include "iDynTree/Dynamics.h"
+#include "iDynTree/DenavitHartenberg.h"
 
 // Sensors related data structures
-#include "iDynTree/Sensors/Sensors.h"
-#include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
-#include "iDynTree/Sensors/AccelerometerSensor.h"
-#include "iDynTree/Sensors/GyroscopeSensor.h"
-#include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
-#include "iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"
-#include "iDynTree/Sensors/PredictSensorsMeasurements.h"
+#include "iDynTree/Sensors.h"
+#include "iDynTree/SixAxisForceTorqueSensor.h"
+#include "iDynTree/AccelerometerSensor.h"
+#include "iDynTree/GyroscopeSensor.h"
+#include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
+#include "iDynTree/ThreeAxisForceTorqueContactSensor.h"
+#include "iDynTree/PredictSensorsMeasurements.h"
 
 // Model loading from external formats
-#include "iDynTree/ModelIO/URDFDofsImport.h"
-#include "iDynTree/ModelIO/ModelLoader.h"
-#include "iDynTree/ModelIO/ModelExporter.h"
-#include "iDynTree/ModelIO/ModelCalibrationHelper.h"
+#include "iDynTree/URDFDofsImport.h"
+#include "iDynTree/ModelLoader.h"
+#include "iDynTree/ModelExporter.h"
+#include "iDynTree/ModelCalibrationHelper.h"
 
 
 // Estimation related classes
-#include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
-#include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
-#include "iDynTree/Estimation/SimpleLeggedOdometry.h"
-#include "iDynTree/Estimation/BerdyHelper.h"
-#include "iDynTree/Estimation/BerdySparseMAPSolver.h"
-#include "iDynTree/Estimation/AttitudeEstimator.h"
-#include "iDynTree/Estimation/AttitudeMahonyFilter.h"
-#include "iDynTree/Estimation/ExtendedKalmanFilter.h"
-#include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+#include "iDynTree/ExternalWrenchesEstimation.h"
+#include "iDynTree/ExtWrenchesAndJointTorquesEstimator.h"
+#include "iDynTree/SimpleLeggedOdometry.h"
+#include "iDynTree/BerdyHelper.h"
+#include "iDynTree/BerdySparseMAPSolver.h"
+#include "iDynTree/AttitudeEstimator.h"
+#include "iDynTree/AttitudeMahonyFilter.h"
+#include "iDynTree/ExtendedKalmanFilter.h"
+#include "iDynTree/AttitudeQuaternionEKF.h"
 
 // SolidShapes related classes
 #include "iDynTree/InertialParametersSolidShapesHelpers.h"
@@ -149,19 +149,19 @@ namespace std {
 }
 
 //Utils
-%include "iDynTree/Core/Utils.h"
+%include "iDynTree/Utils.h"
 
 /* Note : always include headers following the inheritance order */
 // Basic math classes
-%include "iDynTree/Core/MatrixDynSize.h"
-%include "iDynTree/Core/MatrixFixSize.h"
-%include "iDynTree/Core/SparseMatrix.h"
+%include "iDynTree/MatrixDynSize.h"
+%include "iDynTree/MatrixFixSize.h"
+%include "iDynTree/SparseMatrix.h"
 %template(SparseMatrixRowMajor) iDynTree::SparseMatrix<iDynTree::RowMajor>;
 %template(SparseMatrixColMajor) iDynTree::SparseMatrix<iDynTree::ColumnMajor>;
 
 
-%include "iDynTree/Core/VectorDynSize.h"
-%include "iDynTree/Core/VectorFixSize.h"
+%include "iDynTree/VectorDynSize.h"
+%include "iDynTree/VectorFixSize.h"
 
 #ifdef SWIGMATLAB
 %include "./matlab/matlab_matvec.i"
@@ -186,12 +186,12 @@ namespace std {
 %template(Vector16) iDynTree::VectorFixSize<16>;
 
 // Basic Vectors: Point Vectors and Spatial Vectors
-%include "iDynTree/Core/PositionRaw.h"
-%include "iDynTree/Core/Position.h"
+%include "iDynTree/PositionRaw.h"
+%include "iDynTree/Position.h"
 
-%include "iDynTree/Core/GeomVector3.h"
+%include "iDynTree/GeomVector3.h"
 
-%include "iDynTree/Core/SpatialVector.h"
+%include "iDynTree/SpatialVector.h"
 
 %template() iDynTree::DualSpace<iDynTree::SpatialMotionVector>;
 %template() iDynTree::DualSpace<iDynTree::SpatialForceVector>;
@@ -207,41 +207,41 @@ namespace std {
 %template(SpatialMotionVectorBase) iDynTree::SpatialVector<iDynTree::SpatialMotionVector>;
 %template(SpatialForceVectorBase) iDynTree::SpatialVector<iDynTree::SpatialForceVector>;
 
-%include "iDynTree/Core/SpatialMotionVector.h"
-%include "iDynTree/Core/SpatialForceVector.h"
-%include "iDynTree/Core/Twist.h"
-%include "iDynTree/Core/Wrench.h"
-%include "iDynTree/Core/SpatialMomentum.h"
-%include "iDynTree/Core/SpatialAcc.h"
-%include "iDynTree/Core/ClassicalAcc.h"
-%include "iDynTree/Core/Direction.h"
-%include "iDynTree/Core/Axis.h"
+%include "iDynTree/SpatialMotionVector.h"
+%include "iDynTree/SpatialForceVector.h"
+%include "iDynTree/Twist.h"
+%include "iDynTree/Wrench.h"
+%include "iDynTree/SpatialMomentum.h"
+%include "iDynTree/SpatialAcc.h"
+%include "iDynTree/ClassicalAcc.h"
+%include "iDynTree/Direction.h"
+%include "iDynTree/Axis.h"
 
 // Inertias
-%include "iDynTree/Core/RotationalInertiaRaw.h"
-%include "iDynTree/Core/SpatialInertiaRaw.h"
-%include "iDynTree/Core/SpatialInertia.h"
-%include "iDynTree/Core/ArticulatedBodyInertia.h"
-%include "iDynTree/Core/InertiaNonLinearParametrization.h"
+%include "iDynTree/RotationalInertiaRaw.h"
+%include "iDynTree/SpatialInertiaRaw.h"
+%include "iDynTree/SpatialInertia.h"
+%include "iDynTree/ArticulatedBodyInertia.h"
+%include "iDynTree/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
-%include "iDynTree/Core/RotationRaw.h"
-%include "iDynTree/Core/Rotation.h"
-%include "iDynTree/Core/Transform.h"
-%include "iDynTree/Core/TransformDerivative.h"
-%include "iDynTree/Core/Span.h"
-%include "iDynTree/Core/MatrixView.h"
+%include "iDynTree/RotationRaw.h"
+%include "iDynTree/Rotation.h"
+%include "iDynTree/Transform.h"
+%include "iDynTree/TransformDerivative.h"
+%include "iDynTree/Span.h"
+%include "iDynTree/MatrixView.h"
 
 %template(DynamicSpan) iDynTree::Span<double, iDynTree::dynamic_extent>;
 %template(DynamicMatrixView) iDynTree::MatrixView<double>;
 
 // Model related data structures
-%include "iDynTree/Model/Indices.h"
-%include "iDynTree/Model/LinkState.h"
-%include "iDynTree/Model/Link.h"
-%include "iDynTree/Model/IJoint.h"
-%include "iDynTree/Model/FixedJoint.h"
-%include "iDynTree/Model/MovableJointImpl.h"
+%include "iDynTree/Indices.h"
+%include "iDynTree/LinkState.h"
+%include "iDynTree/Link.h"
+%include "iDynTree/IJoint.h"
+%include "iDynTree/FixedJoint.h"
+%include "iDynTree/MovableJointImpl.h"
 
 %template(MovableJointImpl1) iDynTree::MovableJointImpl<1,1>;
 %template(MovableJointImpl2) iDynTree::MovableJointImpl<2,2>;
@@ -250,18 +250,18 @@ namespace std {
 %template(MovableJointImpl5) iDynTree::MovableJointImpl<5,5>;
 %template(MovableJointImpl6) iDynTree::MovableJointImpl<6,6>;
 
-%include "iDynTree/Model/RevoluteJoint.h"
-%include "iDynTree/Model/PrismaticJoint.h"
-%include "iDynTree/Model/Traversal.h"
-%include "iDynTree/Model/SolidShapes.h"
-%include "iDynTree/Model/Model.h"
-%include "iDynTree/Model/JointState.h"
-%include "iDynTree/Model/FreeFloatingMatrices.h"
-%include "iDynTree/Model/FreeFloatingState.h"
-%include "iDynTree/Model/ContactWrench.h"
-%include "iDynTree/Model/ModelTestUtils.h"
-%include "iDynTree/Model/ModelTransformers.h"
-%include "iDynTree/Model/SubModel.h"
+%include "iDynTree/RevoluteJoint.h"
+%include "iDynTree/PrismaticJoint.h"
+%include "iDynTree/Traversal.h"
+%include "iDynTree/SolidShapes.h"
+%include "iDynTree/Model.h"
+%include "iDynTree/JointState.h"
+%include "iDynTree/FreeFloatingMatrices.h"
+%include "iDynTree/FreeFloatingState.h"
+%include "iDynTree/ContactWrench.h"
+%include "iDynTree/ModelTestUtils.h"
+%include "iDynTree/ModelTransformers.h"
+%include "iDynTree/SubModel.h"
 
 %include "joints.i"
 
@@ -270,37 +270,37 @@ namespace std {
 
 
 // Kinematics & Dynamics related functions
-%include "iDynTree/Model/ForwardKinematics.h"
-%include "iDynTree/Model/Dynamics.h"
-%include "iDynTree/Model/DenavitHartenberg.h"
+%include "iDynTree/ForwardKinematics.h"
+%include "iDynTree/Dynamics.h"
+%include "iDynTree/DenavitHartenberg.h"
 
 // Sensors related data structures
-%include "iDynTree/Sensors/Sensors.h"
-%include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
-%include "iDynTree/Sensors/AccelerometerSensor.h"
-%include "iDynTree/Sensors/GyroscopeSensor.h"
-%include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
-%include "iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"
-%include "iDynTree/Sensors/PredictSensorsMeasurements.h"
+%include "iDynTree/Sensors.h"
+%include "iDynTree/SixAxisForceTorqueSensor.h"
+%include "iDynTree/AccelerometerSensor.h"
+%include "iDynTree/GyroscopeSensor.h"
+%include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
+%include "iDynTree/ThreeAxisForceTorqueContactSensor.h"
+%include "iDynTree/PredictSensorsMeasurements.h"
 
 %include "sensors.i"
 
 // Model loading from external formats
-%include "iDynTree/ModelIO/URDFDofsImport.h"
-%include "iDynTree/ModelIO/ModelLoader.h"
-%include "iDynTree/ModelIO/ModelExporter.h"
-%include "iDynTree/ModelIO/ModelCalibrationHelper.h"
+%include "iDynTree/URDFDofsImport.h"
+%include "iDynTree/ModelLoader.h"
+%include "iDynTree/ModelExporter.h"
+%include "iDynTree/ModelCalibrationHelper.h"
 
 // Estimation related classes
-%include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
-%include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
-%include "iDynTree/Estimation/SimpleLeggedOdometry.h"
-%include "iDynTree/Estimation/BerdyHelper.h"
-%include "iDynTree/Estimation/BerdySparseMAPSolver.h"
-%include "iDynTree/Estimation/AttitudeEstimator.h"
-%include "iDynTree/Estimation/AttitudeMahonyFilter.h"
-%include "iDynTree/Estimation/ExtendedKalmanFilter.h"
-%include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+%include "iDynTree/ExternalWrenchesEstimation.h"
+%include "iDynTree/ExtWrenchesAndJointTorquesEstimator.h"
+%include "iDynTree/SimpleLeggedOdometry.h"
+%include "iDynTree/BerdyHelper.h"
+%include "iDynTree/BerdySparseMAPSolver.h"
+%include "iDynTree/AttitudeEstimator.h"
+%include "iDynTree/AttitudeMahonyFilter.h"
+%include "iDynTree/ExtendedKalmanFilter.h"
+%include "iDynTree/AttitudeQuaternionEKF.h"
 
 // SolidShapes related classes
 %include "iDynTree/InertialParametersSolidShapesHelpers.h"

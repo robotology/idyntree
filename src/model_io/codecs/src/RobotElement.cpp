@@ -8,8 +8,8 @@
 #include "SensorElement.h"
 #include "MaterialElement.h"
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Sensors.h>
 
 #include <unordered_set>
 

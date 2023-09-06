@@ -1,11 +1,11 @@
 # SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 # SPDX-License-Identifier: BSD-3-Clause
 
-SET(iDynTree_YARP_header include/iDynTree/yarp/YARPConversions.h
-                         include/iDynTree/yarp/YARPEigenConversions.h
-                         include/iDynTree/yarp/YARPConfigurationsLoader.h
-                         include/iDynTree/yarp/YARPConversionsImplementation.h
-                         include/iDynTree/yarp/YARPConfigurationsLoaderImplementation.h)
+SET(iDynTree_YARP_header include/iDynTree/YARPConversions.h
+                         include/iDynTree/YARPEigenConversions.h
+                         include/iDynTree/YARPConfigurationsLoader.h
+                         include/iDynTree/YARPConversionsImplementation.h
+                         include/iDynTree/YARPConfigurationsLoaderImplementation.h)
 
 SOURCE_GROUP("Header Files" FILES ${iDynTree_YARP_header})
 
@@ -24,6 +24,10 @@ install(TARGETS idyntree-yarp
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/yarp" COMPONENT dev)
+        PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-yarp)
+
+# Install deprecated headers
+install(DIRECTORY include/iDynTree/yarp
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)

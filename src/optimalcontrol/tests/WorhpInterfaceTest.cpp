@@ -10,10 +10,10 @@
 
 #include <iDynTree/OptimizationProblem.h>
 #include <iDynTree/Optimizers/WorhpInterface.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
 #include <vector>
 #include <memory>
 

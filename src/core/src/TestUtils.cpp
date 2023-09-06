@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/SpatialForceVector.h>
-#include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/SpatialForceVector.h>
-#include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Core/SpatialInertia.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/SpatialForceVector.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/SpatialForceVector.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/SpatialInertia.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/Transform.h>
 
 #include <iostream>
 

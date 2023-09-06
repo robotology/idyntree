@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/JointState.h>
+#include <iDynTree/JointState.h>
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
-#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/SpatialMotionVector.h>
 
 namespace iDynTree
 {

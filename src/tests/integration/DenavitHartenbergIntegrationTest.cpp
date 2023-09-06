@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/DenavitHartenberg.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/DenavitHartenberg.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/KinDynComputations.h>
 

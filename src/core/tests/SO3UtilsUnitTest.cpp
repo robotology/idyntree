@@ -2,10 +2,10 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/SO3Utils.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/SO3Utils.h>
+#include <iDynTree/EigenHelpers.h>
 #include <Eigen/Dense>
 
 #include <cmath>

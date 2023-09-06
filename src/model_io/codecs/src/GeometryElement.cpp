@@ -6,8 +6,8 @@
 #include "URDFParsingUtils.h"
 
 #include <iDynTree/XMLAttribute.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/SolidShapes.h>
 
 namespace iDynTree{
 

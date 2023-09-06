@@ -12,7 +12,7 @@
 #include "TransformConstraint.h"
 
 #include <Eigen/Core>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 #include <cassert>
 #include <cmath>
 

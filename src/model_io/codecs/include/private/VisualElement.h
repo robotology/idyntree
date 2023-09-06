@@ -8,8 +8,8 @@
 
 #include "MaterialElement.h"
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/SolidShapes.h>
 
 #include <memory>
 #include <string>

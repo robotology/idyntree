@@ -5,17 +5,17 @@
 #include <MeshcatCpp/Meshcat.h>
 #include <MeshcatCpp/Shape.h>
 
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/MatrixFixSize.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/MatrixFixSize.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/SolidShapes.h>
 #include <iDynTree/MeshcatVisualizer.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/Traversal.h>
 
 #include <memory>
 #include <string_view>

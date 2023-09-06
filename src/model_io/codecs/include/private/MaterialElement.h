@@ -6,7 +6,7 @@
 
 #include <iDynTree/XMLElement.h>
 
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/VectorFixSize.h>
 
 #include <memory>
 #include <string>

@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_INERTIAL_PARAMETERS_HELPERS_H
 #define IDYNTREE_INERTIAL_PARAMETERS_HELPERS_H
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/SolidShapes.h>
 
 namespace iDynTree
 {

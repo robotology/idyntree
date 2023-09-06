@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>
 
 #include "testModels.h"
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
 
 
 using namespace iDynTree;

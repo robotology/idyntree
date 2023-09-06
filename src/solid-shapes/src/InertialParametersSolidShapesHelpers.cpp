@@ -3,13 +3,13 @@
 
 #include <iDynTree/InertialParametersSolidShapesHelpers.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/SpatialInertia.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/SpatialInertia.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/VectorFixSize.h>
 
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/SolidShapes.h>
 
 #ifdef IDYNTREE_USES_ASSIMP
 #include <assimp/Importer.hpp>

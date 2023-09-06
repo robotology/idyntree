@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/TestUtils.h>
 
 
 using namespace iDynTree;

@@ -7,7 +7,7 @@
 
 #include <iDynTree/XMLAttribute.h>
 
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 
 namespace iDynTree {
     OriginElement::OriginElement(

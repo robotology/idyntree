@@ -1,4 +1,4 @@
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <iDynTree/XMLParser.h>
 #include <iDynTree/XMLElement.h>

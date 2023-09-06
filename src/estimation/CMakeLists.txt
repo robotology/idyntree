@@ -2,22 +2,22 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 
-set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
-                                include/iDynTree/Estimation/ExternalWrenchesEstimation.h
-                                include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h
-                                include/iDynTree/Estimation/SimpleLeggedOdometry.h
-                                include/iDynTree/Estimation/BerdySparseMAPSolver.h
-                                include/iDynTree/Estimation/SchmittTrigger.h
-                                include/iDynTree/Estimation/ContactStateMachine.h
-                                include/iDynTree/Estimation/BipedFootContactClassifier.h
-                                include/iDynTree/Estimation/GravityCompensationHelpers.h
-                                include/iDynTree/Estimation/ExtendedKalmanFilter.h
-                                include/iDynTree/Estimation/AttitudeEstimator.h
-                                include/iDynTree/Estimation/AttitudeMahonyFilter.h
-                                include/iDynTree/Estimation/AttitudeQuaternionEKF.h
-                                include/iDynTree/Estimation/KalmanFilter.h                                )
+set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/BerdyHelper.h
+                                include/iDynTree/ExternalWrenchesEstimation.h
+                                include/iDynTree/ExtWrenchesAndJointTorquesEstimator.h
+                                include/iDynTree/SimpleLeggedOdometry.h
+                                include/iDynTree/BerdySparseMAPSolver.h
+                                include/iDynTree/SchmittTrigger.h
+                                include/iDynTree/ContactStateMachine.h
+                                include/iDynTree/BipedFootContactClassifier.h
+                                include/iDynTree/GravityCompensationHelpers.h
+                                include/iDynTree/ExtendedKalmanFilter.h
+                                include/iDynTree/AttitudeEstimator.h
+                                include/iDynTree/AttitudeMahonyFilter.h
+                                include/iDynTree/AttitudeQuaternionEKF.h
+                                include/iDynTree/KalmanFilter.h                                )
 
-set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES include/iDynTree/Estimation/AttitudeEstimatorUtils.h)
+set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES include/iDynTree/AttitudeEstimatorUtils.h)
 
 set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
                                 src/ExternalWrenchesEstimation.cpp
@@ -46,7 +46,7 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-modelio
                                      PRIVATE Eigen3::Eigen)
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
@@ -59,8 +59,8 @@ install(TARGETS ${libraryname}
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Estimation
-        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Estimation/impl)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree
+        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
@@ -74,6 +74,10 @@ if(CMAKE_VERSION VERSION_GREATER 3.17)
   set_target_properties(idyntree-modelio-urdf
                         PROPERTIES DEPRECATION "Do not use deprecated target iDynTree::idyntree-modelio-urdf, use iDynTree::idyntree-modelio instead.")
 endif()
+
+# Install deprecated headers
+install(DIRECTORY include/iDynTree/Estimation
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/RotationalInertiaRaw.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/RotationalInertiaRaw.h>
+#include <iDynTree/Utils.h>
 
 #include <iostream>
 #include <sstream>

@@ -5,9 +5,9 @@
 #define IDYNTREE_IKIN_CONVERSIONS_IMPLEMENTATION_H
 
 #include <iDynTree/iKinConversions.h>
-#include <iDynTree/Model/DenavitHartenberg.h>
+#include <iDynTree/DenavitHartenberg.h>
 
-#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/YARPConversions.h>
 
 #include <iCub/iKin/iKinFwd.h>
 

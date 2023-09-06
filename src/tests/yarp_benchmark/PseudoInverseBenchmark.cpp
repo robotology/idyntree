@@ -3,12 +3,12 @@
 
 #include "testModels.h"
 
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/EigenMathHelpers.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/EigenMathHelpers.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Transform.h>
 
 #include <yarp/sig/Matrix.h>
 #include <yarp/math/SVD.h>

@@ -9,7 +9,7 @@
  */
 
 #include <iDynTree/ControlledDynamicalSystem.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #include <cassert>
 
 namespace iDynTree {

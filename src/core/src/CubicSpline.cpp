@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/CubicSpline.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/CubicSpline.h>
+#include <iDynTree/EigenHelpers.h>
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 #include <Eigen/SparseLU>

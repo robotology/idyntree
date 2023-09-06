@@ -7,10 +7,10 @@
 #include "ForceTorqueSensorElement.h"
 
 #include <iDynTree/XMLAttribute.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/AccelerometerSensor.h>
-#include <iDynTree/Sensors/GyroscopeSensor.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/AccelerometerSensor.h>
+#include <iDynTree/GyroscopeSensor.h>
 
 
 namespace iDynTree {

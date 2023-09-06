@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/ArticulatedBodyInertia.h>
-#include <iDynTree/Core/TransformDerivative.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/ArticulatedBodyInertia.h>
+#include <iDynTree/TransformDerivative.h>
+#include <iDynTree/Transform.h>
 
 #include <Eigen/Dense>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
 

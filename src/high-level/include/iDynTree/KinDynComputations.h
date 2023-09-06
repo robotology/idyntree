@@ -7,15 +7,15 @@
 #include <string>
 #include <vector>
 
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/MatrixView.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/Span.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/MatrixView.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/Span.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/FreeFloatingMatrices.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/FreeFloatingMatrices.h>
+#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {

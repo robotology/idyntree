@@ -3,20 +3,20 @@
 
 
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
 
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/FreeFloatingMatrices.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/JointState.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/FreeFloatingMatrices.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/JointState.h>
 
-#include <iDynTree/Core/ArticulatedBodyInertia.h>
-#include <iDynTree/Core/SpatialInertia.h>
-#include <iDynTree/Core/SpatialMomentum.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/ArticulatedBodyInertia.h>
+#include <iDynTree/SpatialInertia.h>
+#include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/EigenHelpers.h>
 
-#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Dynamics.h>
 
 #include <Eigen/Core>
 

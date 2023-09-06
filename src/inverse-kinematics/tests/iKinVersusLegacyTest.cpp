@@ -6,7 +6,7 @@
 #include <yarp/os/Network.h>
 #include <yarp/os/LogStream.h>
 #include <string>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 #include <iCub/iKin/iKinIpOpt.h>
 #include <iCub/iKin/iKinFwd.h>
 
@@ -17,7 +17,7 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 #include <Eigen/Core>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 int main(int argc, char **argv) {
 

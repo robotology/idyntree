@@ -7,11 +7,11 @@
 #include <string>
 #include <vector>
 
-#include <iDynTree/Core/Direction.h>
-#include <iDynTree/Core/Position.h>
+#include <iDynTree/Direction.h>
+#include <iDynTree/Position.h>
 
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {

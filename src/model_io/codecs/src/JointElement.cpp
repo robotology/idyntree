@@ -9,9 +9,9 @@
 #include <iDynTree/XMLAttribute.h>
 #include <iDynTree/XMLParser.h>
 
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/PrismaticJoint.h>
-#include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/RevoluteJoint.h>
 
 #include <array>
 

@@ -13,7 +13,7 @@
 
 #include <cstddef>
 #include <string>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {

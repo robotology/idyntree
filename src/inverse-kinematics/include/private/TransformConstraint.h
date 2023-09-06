@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_INTERNAL_TRANSFORM_CONSTRAINT_H
 #define IDYNTREE_INTERNAL_TRANSFORM_CONSTRAINT_H
 
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 #include <iDynTree/InverseKinematics.h>
 
 namespace internal {

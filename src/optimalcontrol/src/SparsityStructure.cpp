@@ -9,7 +9,7 @@
  */
 
 #include <iDynTree/SparsityStructure.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #include <cassert>
 
 void iDynTree::optimalcontrol::SparsityStructure::addNonZero(size_t row, size_t col)

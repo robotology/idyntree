@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 # SPDX-License-Identifier: BSD-3-Clause
 
-set(IDYNTREE_MODELIO_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
-                                  include/iDynTree/ModelIO/ModelLoader.h
-                                  include/iDynTree/ModelIO/ModelExporter.h
-                                  include/iDynTree/ModelIO/ModelCalibrationHelper.h)
+set(IDYNTREE_MODELIO_HEADERS include/iDynTree/URDFDofsImport.h
+                                  include/iDynTree/ModelLoader.h
+                                  include/iDynTree/ModelExporter.h
+                                  include/iDynTree/ModelCalibrationHelper.h)
 
 set(IDYNTREE_MODELIO_PRIVATE_HEADERS include/private/URDFDocument.h
                                           include/private/InertialElement.h
@@ -51,7 +51,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/private>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio-xml
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-modelio-xml
                                      PRIVATE Eigen3::Eigen LibXml2::LibXml2)
 # See https://stackoverflow.com/questions/38832528/transitive-target-include-directories-on-object-libraries
 # Can be removed with CMake 3.12
@@ -67,10 +67,15 @@ install(TARGETS ${libraryname}
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/ModelIO)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
 endif(IDYNTREE_COMPILE_TESTS)
+
+
+# Install deprecated headers
+install(DIRECTORY include/iDynTree/ModelIO
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)

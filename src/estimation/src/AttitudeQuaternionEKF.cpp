@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/AttitudeQuaternionEKF.h>
-#include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
+#include <iDynTree/AttitudeQuaternionEKF.h>
+#include <iDynTree/AttitudeEstimatorUtils.h>
 
 void iDynTree::AttitudeQuaternionEKF::serializeStateVector()
 {

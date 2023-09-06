@@ -1,23 +1,23 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/ExternalWrenchesEstimation.h>
 
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
-#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
+#include <iDynTree/PredictSensorsMeasurements.h>
 
-#include <iDynTree/Model/ContactWrench.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/SubModel.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/ModelTestUtils.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/ContactWrench.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/SubModel.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Dynamics.h>
 
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/TestUtils.h>
 
 #include <cstdio>
 #include <cstdlib>

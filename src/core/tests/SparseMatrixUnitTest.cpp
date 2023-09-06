@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/SparseMatrix.h>
-#include <iDynTree/Core/Triplets.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/SparseMatrix.h>
+#include <iDynTree/Triplets.h>
+#include <iDynTree/TestUtils.h>
 #include <iostream>
 
 

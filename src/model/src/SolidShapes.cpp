@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/SolidShapes.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/SolidShapes.h>
+#include <iDynTree/Model.h>
 
 #include <string>
 #include <cstdlib>

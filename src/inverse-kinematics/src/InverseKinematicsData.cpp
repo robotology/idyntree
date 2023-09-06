@@ -4,12 +4,12 @@
 #include "InverseKinematicsData.h"
 #include "InverseKinematicsNLP.h"
 #include "TransformConstraint.h"
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/ClassicalAcc.h>
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/ClassicalAcc.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/ModelLoader.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <cassert>
 #include <private/InverseKinematicsData.h>

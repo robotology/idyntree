@@ -6,20 +6,20 @@
 #include <cmath>
 #include <ctime>
 
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/EigenSparseHelpers.h>
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/EigenSparseHelpers.h>
+#include <iDynTree/ModelTestUtils.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/ModelLoader.h>
 
-#include <iDynTree/Sensors/AccelerometerSensor.h>
-#include <iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h>
+#include <iDynTree/AccelerometerSensor.h>
+#include <iDynTree/ThreeAxisAngularAccelerometerSensor.h>
 
-#include <iDynTree/Estimation/BerdyHelper.h>
-#include <iDynTree/Estimation/BerdySparseMAPSolver.h>
-#include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
+#include <iDynTree/BerdyHelper.h>
+#include <iDynTree/BerdySparseMAPSolver.h>
+#include <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>
 
 using namespace iDynTree;
 

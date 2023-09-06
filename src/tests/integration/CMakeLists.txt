@@ -8,7 +8,7 @@ macro(add_integration_test testname)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
     target_link_libraries(${testbinary} PRIVATE idyntree-core idyntree-model idyntree-modelio
-                                                idyntree-high-level idyntree-sensors idyntree-estimation
+                                                idyntree-high-level idyntree-estimation
                                                 idyntree-solid-shapes idyntree-testmodels Eigen3::Eigen)
     # Setting explicitly the WORKING_DIRECTORY is necessary to make sure that meshes are correctly loaded,
     # as a workaround for https://github.com/robotology/idyntree/issues/291
@@ -25,7 +25,7 @@ macro(add_integration_test_no_valgrind testname)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
     target_link_libraries(${testbinary} PRIVATE idyntree-core idyntree-model idyntree-modelio
-                                                idyntree-high-level idyntree-sensors idyntree-estimation
+                                                idyntree-high-level idyntree-estimation
                                                 idyntree-solid-shapes idyntree-testmodels Eigen3::Eigen)
     add_test(NAME ${testtarget} COMMAND ${testbinary})
 endmacro()
@@ -41,6 +41,8 @@ endmacro()
 
 add_integration_test(Dynamics)
 add_integration_test(DenavitHartenberg)
+add_integration_test(ReducedModelWithFT)
+
 
 # See issue https://github.com/robotology/idyntree/issues/367
 add_integration_test_no_valgrind(iCubTorqueEstimation)

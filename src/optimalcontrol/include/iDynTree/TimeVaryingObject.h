@@ -12,9 +12,9 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_TIMEVARYINGOBJECT_H
 #define IDYNTREE_OPTIMALCONTROL_TIMEVARYINGOBJECT_H
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Transform.h>
 
 namespace iDynTree {
 

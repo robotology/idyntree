@@ -6,8 +6,8 @@
 
 #include <iDynTree/XMLElement.h>
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Model.h>
 
 namespace iDynTree {
     class InertialElement;

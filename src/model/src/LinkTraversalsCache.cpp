@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include "iDynTree/Model/LinkTraversalsCache.h"
+#include "iDynTree/LinkTraversalsCache.h"
 
-#include "iDynTree/Model/Traversal.h"
-#include "iDynTree/Model/Model.h"
+#include "iDynTree/Traversal.h"
+#include "iDynTree/Model.h"
 
 #include <cassert>
 

@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include <iDynTree/ModelIO/ModelExporter.h>
+#include <iDynTree/ModelExporter.h>
 
 namespace iDynTree
 

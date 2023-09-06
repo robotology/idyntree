@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
-# include <iDynTree/Sensors/Sensors.h>
+# include <iDynTree/Sensors.h>
 #include "testModels.h"
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/ModelIO/URDFDofsImport.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/ModelLoader.h>
+#include <iDynTree/URDFDofsImport.h>
 
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Sensors/AccelerometerSensor.h>
-#include <iDynTree/Sensors/GyroscopeSensor.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/AccelerometerSensor.h>
+#include <iDynTree/GyroscopeSensor.h>
 
 #include <cassert>
 #include <cstdio>

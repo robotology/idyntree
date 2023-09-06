@@ -11,7 +11,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_SPARSITYSTRUCTURE_H
 #define IDYNTREE_OPTIMALCONTROL_SPARSITYSTRUCTURE_H
 
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #include <vector>
 #include <cstddef>
 #include <unordered_set>

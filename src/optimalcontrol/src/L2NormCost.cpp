@@ -9,13 +9,13 @@
  */
 
 #include <iDynTree/L2NormCost.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/Span.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/Span.h>
 #include <cassert>
 #include <Eigen/Dense>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

@@ -3,17 +3,17 @@
 
 #include <iostream>
 
-# include <iDynTree/Sensors/Sensors.h>
+# include <iDynTree/Sensors.h>
 #include "testModels.h"
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/ModelIO/URDFDofsImport.h>
-#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/ModelLoader.h>
+#include <iDynTree/URDFDofsImport.h>
+#include <iDynTree/PredictSensorsMeasurements.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/FreeFloatingState.h>
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 const double acclTestVal = 1.5;
 const double gyroTestVal = 1.5;
 #include <cassert>

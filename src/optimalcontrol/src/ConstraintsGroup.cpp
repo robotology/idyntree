@@ -8,14 +8,14 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Utils.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/Constraint.h>
 #include <iDynTree/LinearConstraint.h>
 #include <iDynTree/TimeRange.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 #include <Eigen/Dense>
 #include <vector>
 #include <unordered_map>

@@ -9,7 +9,7 @@
  */
 
 #include <iDynTree/Cost.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #include <sstream>
 
 namespace iDynTree {

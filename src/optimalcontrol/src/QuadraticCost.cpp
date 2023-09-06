@@ -9,9 +9,9 @@
  */
 
 #include <iDynTree/QuadraticCost.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 #include <cmath>
 
 namespace iDynTree {

@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/Wrench.h>
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Core/SpatialMomentum.h>
-#include <iDynTree/Core/PrivateUtils.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/Wrench.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/PrivateUtils.h>
 
 namespace iDynTree
 {

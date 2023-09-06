@@ -1,45 +1,45 @@
 # SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 # SPDX-License-Identifier: BSD-3-Clause
 
-set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
-                              include/iDynTree/Core/ArticulatedBodyInertia.h
-                              include/iDynTree/Core/ClassicalAcc.h
-                              include/iDynTree/Core/Direction.h
-                              include/iDynTree/Core/EigenSparseHelpers.h
-                              include/iDynTree/Core/EigenMathHelpers.h
-                              include/iDynTree/Core/EigenHelpers.h
-                              include/iDynTree/Core/InertiaNonLinearParametrization.h
-                              include/iDynTree/Core/MatrixDynSize.h
-                              include/iDynTree/Core/MatrixFixSize.h
-                              include/iDynTree/Core/Position.h
-                              include/iDynTree/Core/PositionRaw.h
-                              include/iDynTree/Core/Rotation.h
-                              include/iDynTree/Core/RotationRaw.h
-                              include/iDynTree/Core/RotationalInertiaRaw.h
-                              include/iDynTree/Core/SpatialAcc.h
-                              include/iDynTree/Core/SpatialForceVector.h
-                              include/iDynTree/Core/SpatialInertiaRaw.h
-                              include/iDynTree/Core/SpatialInertia.h
-                              include/iDynTree/Core/SpatialMomentum.h
-                              include/iDynTree/Core/SpatialMotionVector.h
-                              include/iDynTree/Core/TestUtils.h
-                              include/iDynTree/Core/Transform.h
-                              include/iDynTree/Core/TransformDerivative.h
-                              include/iDynTree/Core/Twist.h
-                              include/iDynTree/Core/Utils.h
-                              include/iDynTree/Core/VectorFixSize.h
-                              include/iDynTree/Core/VectorDynSize.h
-                              include/iDynTree/Core/Wrench.h
-                              include/iDynTree/Core/PrivateUtils.h
-                              include/iDynTree/Core/PrivatePreProcessorUtils.h
-                              include/iDynTree/Core/GeomVector3.h
-                              include/iDynTree/Core/SpatialVector.h
-                              include/iDynTree/Core/SparseMatrix.h
-                              include/iDynTree/Core/Triplets.h
-                              include/iDynTree/Core/CubicSpline.h
-                              include/iDynTree/Core/Span.h
-                              include/iDynTree/Core/SO3Utils.h
-                              include/iDynTree/Core/MatrixView.h)
+set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Axis.h
+                              include/iDynTree/ArticulatedBodyInertia.h
+                              include/iDynTree/ClassicalAcc.h
+                              include/iDynTree/Direction.h
+                              include/iDynTree/EigenSparseHelpers.h
+                              include/iDynTree/EigenMathHelpers.h
+                              include/iDynTree/EigenHelpers.h
+                              include/iDynTree/InertiaNonLinearParametrization.h
+                              include/iDynTree/MatrixDynSize.h
+                              include/iDynTree/MatrixFixSize.h
+                              include/iDynTree/Position.h
+                              include/iDynTree/PositionRaw.h
+                              include/iDynTree/Rotation.h
+                              include/iDynTree/RotationRaw.h
+                              include/iDynTree/RotationalInertiaRaw.h
+                              include/iDynTree/SpatialAcc.h
+                              include/iDynTree/SpatialForceVector.h
+                              include/iDynTree/SpatialInertiaRaw.h
+                              include/iDynTree/SpatialInertia.h
+                              include/iDynTree/SpatialMomentum.h
+                              include/iDynTree/SpatialMotionVector.h
+                              include/iDynTree/TestUtils.h
+                              include/iDynTree/Transform.h
+                              include/iDynTree/TransformDerivative.h
+                              include/iDynTree/Twist.h
+                              include/iDynTree/Utils.h
+                              include/iDynTree/VectorFixSize.h
+                              include/iDynTree/VectorDynSize.h
+                              include/iDynTree/Wrench.h
+                              include/iDynTree/PrivateUtils.h
+                              include/iDynTree/PrivatePreProcessorUtils.h
+                              include/iDynTree/GeomVector3.h
+                              include/iDynTree/SpatialVector.h
+                              include/iDynTree/SparseMatrix.h
+                              include/iDynTree/Triplets.h
+                              include/iDynTree/CubicSpline.h
+                              include/iDynTree/Span.h
+                              include/iDynTree/SO3Utils.h
+                              include/iDynTree/MatrixView.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
@@ -77,9 +77,9 @@ SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})
 
 # Check if this does not break existing build
-# reason: avoid including with <iDynTree/Core/**> inside .cpp but using directly
+# reason: avoid including with <iDynTree/**> inside .cpp but using directly
 # "**" which clearly states the difference between in-library files and external files
-include_directories(include/iDynTree/Core)
+include_directories(include/iDynTree)
 
 set(libraryname idyntree-core)
 
@@ -130,10 +130,14 @@ install(TARGETS ${libraryname}
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core
-        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core/impl)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree
+        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
+# Install deprecated headers
+install(DIRECTORY include/iDynTree
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)

@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/PrivateUtils.h>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/MatrixFixSize.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/PrivateUtils.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/MatrixFixSize.h>
+#include <iDynTree/TestUtils.h>
 #include <Eigen/Dense>
 
 #include <cstdio>

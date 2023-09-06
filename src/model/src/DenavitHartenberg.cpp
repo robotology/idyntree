@@ -1,15 +1,15 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/DenavitHartenberg.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/RevoluteJoint.h>
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/DenavitHartenberg.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/FreeFloatingState.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 
 namespace iDynTree

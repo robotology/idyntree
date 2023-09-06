@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/ExtendedKalmanFilter.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/ExtendedKalmanFilter.h>
+#include <iDynTree/EigenHelpers.h>
 
 iDynTree::DiscreteExtendedKalmanFilterHelper::DiscreteExtendedKalmanFilterHelper()
 {

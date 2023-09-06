@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include "iDynTree/ModelIO/URDFDofsImport.h"
+#include "iDynTree/URDFDofsImport.h"
 
-#include "iDynTree/ModelIO/ModelLoader.h"
+#include "iDynTree/ModelLoader.h"
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 #include <cstdlib>
 #include <cmath>

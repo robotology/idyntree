@@ -6,14 +6,14 @@
 
 #include <iDynTree/skinDynLibConversions.h>
 
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/Wrench.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/ContactWrench.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/ContactWrench.h>
 
-#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/YARPConversions.h>
 
 #include <cassert>
 

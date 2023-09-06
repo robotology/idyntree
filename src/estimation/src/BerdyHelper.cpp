@@ -1,20 +1,20 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/BerdyHelper.h>
+#include <iDynTree/BerdyHelper.h>
 
-#include <iDynTree/Core/ClassicalAcc.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/SparseMatrix.h>
+#include <iDynTree/ClassicalAcc.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/SparseMatrix.h>
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Dynamics.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/AllSensorsTypes.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Dynamics.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/AllSensorsTypes.h>
 
-#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/ExternalWrenchesEstimation.h>
 
 #include <sstream>
 #include <algorithm>

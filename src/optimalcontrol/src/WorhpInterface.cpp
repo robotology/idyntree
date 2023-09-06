@@ -9,9 +9,9 @@
  */
 
 #include <iDynTree/Optimizers/WorhpInterface.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/Triplets.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/Triplets.h>
 #include <worhp/worhp.h>
 #include <algorithm>
 #include <unordered_map>

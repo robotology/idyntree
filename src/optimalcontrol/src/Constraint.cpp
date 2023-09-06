@@ -9,8 +9,8 @@
  */
 
 #include <iDynTree/Constraint.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/MatrixDynSize.h>
 
 #include <cassert>
 

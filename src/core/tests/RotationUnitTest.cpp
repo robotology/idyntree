@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Rotation.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
 
 #include <cstdio>
 #include <cstdlib>

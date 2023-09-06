@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/ModelIO/ModelCalibrationHelper.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/ModelIO/ModelExporter.h>
+#include <iDynTree/ModelCalibrationHelper.h>
+#include <iDynTree/ModelLoader.h>
+#include <iDynTree/ModelExporter.h>
 
 #include <string>
 #include <vector>

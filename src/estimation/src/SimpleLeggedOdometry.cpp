@@ -2,15 +2,15 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
-#include <iDynTree/Estimation/SimpleLeggedOdometry.h>
+#include <iDynTree/SimpleLeggedOdometry.h>
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/ModelTransformers.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/ModelTransformers.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <sstream>
 

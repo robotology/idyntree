@@ -7,7 +7,7 @@
 #include "XMLAttribute.h"
 #include "XMLDocument.h"
 
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
 #include <libxml/SAX2.h>
 #include <libxml/xmlschemas.h>

@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/InertiaNonLinearParametrization.h>
-#include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/InertiaNonLinearParametrization.h>
+#include <iDynTree/SpatialInertia.h>
 
 #include <Eigen/Dense>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 namespace iDynTree
 {

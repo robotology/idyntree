@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/AttitudeMahonyFilter.h>
-#include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
+#include <iDynTree/AttitudeMahonyFilter.h>
+#include <iDynTree/AttitudeEstimatorUtils.h>
 #include <ctime>
 
 iDynTree::Matrix3x3 getMatrixFromVectorVectorMultiplication(iDynTree::Vector3 a, iDynTree::Vector3 b)

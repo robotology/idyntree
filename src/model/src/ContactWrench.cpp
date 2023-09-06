@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/ContactWrench.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/ContactWrench.h>
 
 namespace iDynTree
 {

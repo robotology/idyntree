@@ -9,7 +9,7 @@ avoid having to type the `iDynTree` namespace.
 #include <iostream>
 
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 using namespace iDynTree;
 ~~~

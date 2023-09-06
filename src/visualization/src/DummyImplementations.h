@@ -5,7 +5,7 @@
 #define IDYNTREE_DUMMYIMPLEMENTATIONS_H
 
 #include <iDynTree/Visualizer.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 namespace iDynTree
 {

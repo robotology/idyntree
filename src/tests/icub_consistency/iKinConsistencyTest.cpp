@@ -1,20 +1,20 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <iDynTree/iKinConversions.h>
 
 #include <iDynTree/KinDynComputations.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/JointState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/JointState.h>
 
-#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/YARPConversions.h>
 
 #include <iCub/iKin/iKinFwd.h>
 
-#include <iDynTree/Model/DenavitHartenberg.h>
+#include <iDynTree/DenavitHartenberg.h>
 
 #include <cassert>
 #include <cstdio>

@@ -1,4 +1,4 @@
-"""Tests for idyntree-sensors Python bindings."""
+"""Tests for sensors-related Python bindings."""
 import itertools
 import unittest
 

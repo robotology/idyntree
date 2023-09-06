@@ -10,9 +10,9 @@
 
 #include <iDynTree/Integrators/ImplicitTrapezoidal.h>
 #include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #include <Eigen/Dense>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 #include <cstddef>
 #include <sstream>
 #include <string>

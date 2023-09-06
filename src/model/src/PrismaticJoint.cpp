@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/PrismaticJoint.h>
+#include <iDynTree/PrismaticJoint.h>
 
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/TransformDerivative.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Core/Wrench.h>
-#include <iDynTree/Core/Twist.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/TransformDerivative.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/Wrench.h>
+#include <iDynTree/Twist.h>
 
 #include <cassert>
 

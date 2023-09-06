@@ -1,26 +1,14 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#ifndef IDYNTREE_CENTROIDAL_H
-#define IDYNTREE_CENTROIDAL_H
+#ifndef IDYNTREE_MODEL_CENTROIDAL_H
+#define IDYNTREE_MODEL_CENTROIDAL_H
 
-#include <iDynTree/Model/Indices.h>
+#ifdef __DEPRECATED
+  #warning <iDynTree/Model/Centroidal.h> is deprecated. Please use <iDynTree/Centroidal.h>. To disable this warning use -Wno-deprecated.
+#endif
 
-namespace iDynTree
-{
-    class Model;
-    class Traversal;
-    class Transform;
-    class FreeFloatingPos;
-    class FreeFloatingVel;
-    class FreeFloatingAcc;
-    class LinkPositions;
-    class LinkVelArray;
-    class LinkAccArray;
-    class JointPosDoubleArray;
-    class MatrixDynSize;
+#include <iDynTree/Centroidal.h>
 
-
-}
 
 #endif

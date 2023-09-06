@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/BerdySparseMAPSolver.h>
+#include <iDynTree/BerdySparseMAPSolver.h>
 
-#include <iDynTree/Estimation/BerdyHelper.h>
+#include <iDynTree/BerdyHelper.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/EigenSparseHelpers.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/EigenSparseHelpers.h>
+#include <iDynTree/TestUtils.h>
 
 #include <cstdio>
 #include <cstdlib>

@@ -12,7 +12,7 @@
 #define IDYNTREE_OPTIMALCONTROL_LINEARCONSTRAINT_H
 
 #include <iDynTree/Constraint.h>
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
 #include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/SparsityStructure.h>
 #include <string>

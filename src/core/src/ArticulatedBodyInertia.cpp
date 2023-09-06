@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/ArticulatedBodyInertia.h>
-#include <iDynTree/Core/SpatialInertia.h>
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/ArticulatedBodyInertia.h>
+#include <iDynTree/SpatialInertia.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/Wrench.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <Eigen/Dense>
 

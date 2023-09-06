@@ -2,31 +2,40 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 
-set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
-                           include/iDynTree/Model/DenavitHartenberg.h
-                           include/iDynTree/Model/FixedJoint.h
-                           include/iDynTree/Model/ForwardKinematics.h
-                           include/iDynTree/Model/FreeFloatingState.h
-                           include/iDynTree/Model/FreeFloatingMatrices.h
-                           include/iDynTree/Model/IJoint.h
-                           include/iDynTree/Model/Dynamics.h
-                           include/iDynTree/Model/DynamicsLinearization.h
-                           include/iDynTree/Model/DynamicsLinearizationHelpers.h
-                           include/iDynTree/Model/Indices.h
-                           include/iDynTree/Model/Jacobians.h
-                           include/iDynTree/Model/JointState.h
-                           include/iDynTree/Model/LinkTraversalsCache.h
-                           include/iDynTree/Model/Link.h
-                           include/iDynTree/Model/LinkState.h
-                           include/iDynTree/Model/Model.h
-                           include/iDynTree/Model/ModelTransformers.h
-                           include/iDynTree/Model/MovableJointImpl.h
-                           include/iDynTree/Model/RevoluteJoint.h
-                           include/iDynTree/Model/PrismaticJoint.h
-                           include/iDynTree/Model/SolidShapes.h
-                           include/iDynTree/Model/SubModel.h
-                           include/iDynTree/Model/Traversal.h
-                           include/iDynTree/Model/ModelTestUtils.h)
+set(IDYNTREE_MODEL_HEADERS include/iDynTree/ContactWrench.h
+                           include/iDynTree/DenavitHartenberg.h
+                           include/iDynTree/FixedJoint.h
+                           include/iDynTree/ForwardKinematics.h
+                           include/iDynTree/FreeFloatingState.h
+                           include/iDynTree/FreeFloatingMatrices.h
+                           include/iDynTree/IJoint.h
+                           include/iDynTree/Dynamics.h
+                           include/iDynTree/DynamicsLinearization.h
+                           include/iDynTree/DynamicsLinearizationHelpers.h
+                           include/iDynTree/Indices.h
+                           include/iDynTree/Jacobians.h
+                           include/iDynTree/JointState.h
+                           include/iDynTree/LinkTraversalsCache.h
+                           include/iDynTree/Link.h
+                           include/iDynTree/LinkState.h
+                           include/iDynTree/Model.h
+                           include/iDynTree/ModelTransformers.h
+                           include/iDynTree/MovableJointImpl.h
+                           include/iDynTree/RevoluteJoint.h
+                           include/iDynTree/PrismaticJoint.h
+                           include/iDynTree/SolidShapes.h
+                           include/iDynTree/SubModel.h
+                           include/iDynTree/Traversal.h
+                           include/iDynTree/ModelTestUtils.h
+                           include/iDynTree/AllSensorsTypes.h
+                           include/iDynTree/Sensors.h
+                           include/iDynTree/SixAxisForceTorqueSensor.h
+                           include/iDynTree/GyroscopeSensor.h
+                           include/iDynTree/AccelerometerSensor.h
+                           include/iDynTree/ThreeAxisAngularAccelerometerSensor.h
+                           include/iDynTree/ThreeAxisForceTorqueContactSensor.h
+                           include/iDynTree/PredictSensorsMeasurements.h
+                           include/iDynTree/ModelSensorsTransformers.h)
 
 set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/DenavitHartenberg.cpp
@@ -50,7 +59,15 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/PrismaticJoint.cpp
                            src/SolidShapes.cpp
                            src/SubModel.cpp
-                           src/Traversal.cpp)
+                           src/Traversal.cpp
+                           src/Sensors.cpp
+                           src/SixAxisForceTorqueSensor.cpp
+                           src/AccelerometerSensor.cpp
+                           src/GyroscopeSensor.cpp
+                           src/ThreeAxisAngularAccelerometerSensor.cpp
+                           src/ThreeAxisForceTorqueContactSensor.cpp
+                           src/PredictSensorsMeasurements.cpp
+                           src/ModelSensorsTransformers.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODEL_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODEL_HEADERS})
@@ -58,6 +75,7 @@ SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODEL_HEADERS})
 set(libraryname idyntree-model)
 
 add_library(${libraryname} ${IDYNTREE_MODEL_SOURCES} ${IDYNTREE_MODEL_HEADERS})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
@@ -92,12 +110,32 @@ install(TARGETS ${libraryname}
         RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
         LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
         ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Model
-        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Model/impl)
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree
+        PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
 endif(IDYNTREE_COMPILE_TESTS)
+
+# Add deprecated target iDynTree::idyntree-sensors
+add_library(idyntree-sensors INTERFACE)
+add_library(iDynTree::idyntree-sensors ALIAS idyntree-sensors)
+set_target_properties(idyntree-sensors PROPERTIES INTERFACE_LINK_LIBRARIES iDynTree::idyntree-model)
+if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.17)
+    set_target_properties(idyntree-sensors PROPERTIES DEPRECATION "Linking the iDynTree::idyntree-sensors target is deprecated, please link iDynTree::idyntree-model that provides the symbols formerly containd in iDynTree::idyntree-sensors")
+endif()
+set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-sensors)
+install(TARGETS idyntree-sensors
+        EXPORT iDynTree
+        COMPONENT runtime
+        RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}" COMPONENT bin
+        LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT shlib
+        ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}" COMPONENT lib)
+
+# Install deprecated headers
+install(DIRECTORY include/iDynTree/Model
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
+install(DIRECTORY include/iDynTree/Sensors
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
