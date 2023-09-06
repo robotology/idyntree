@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/BerdyHelper.h>
-#include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
+#include <iDynTree/BerdyHelper.h>
+#include <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>
 
 #include <iDynTree/PredictSensorsMeasurements.h>
 

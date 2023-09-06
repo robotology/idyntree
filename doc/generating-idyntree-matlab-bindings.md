@@ -13,7 +13,7 @@ This can be found in the repository [https://github.com/robotology-dependencies/
 This executable will be used to generate the iDynTree Matlab/Octave bindings for custom classes.
 
 ## Including the custom classes for bindings generations
-In this section, as a toy example, let us consider a custom class `DiscreteKalmanFilterHelper` for which the bindings need to be generated. Let's assume the class `DiscreteKalmanFilterHelper` exists in the header file `iDynTree/Estimation/KalmanFilter.h`.
+In this section, as a toy example, let us consider a custom class `DiscreteKalmanFilterHelper` for which the bindings need to be generated. Let's assume the class `DiscreteKalmanFilterHelper` exists in the header file `iDynTree/KalmanFilter.h`.
 
 - Take a glance at `bindings/iDynTree.i`. It follows a particular structure, adding the necessary header files twice for the desired classes, one using the prefix `#` and another using the prefix `%`.
     - It is also important to notice the order in which these headers are added, which ensures that the dependent header file is compiled after the dependee header file.
@@ -22,11 +22,11 @@ In this section, as a toy example, let us consider a custom class `DiscreteKalma
 
 - Coming back to our toy example, we will add the header file in the section related to the `Estimation related classes`, in two different places
 ```
-#include "iDynTree/Estimation/KalmanFilter.h"
+#include "iDynTree/KalmanFilter.h"
 ```
 and
 ```
-%include "iDynTree/Estimation/KalmanFilter.h"
+%include "iDynTree/KalmanFilter.h"
 ```
 
 Now, all is left is to compile and generate the bindings.

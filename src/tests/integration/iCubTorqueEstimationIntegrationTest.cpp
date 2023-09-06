@@ -17,9 +17,9 @@
 #include <iDynTree/AccelerometerSensor.h>
 #include <iDynTree/ThreeAxisAngularAccelerometerSensor.h>
 
-#include <iDynTree/Estimation/BerdyHelper.h>
-#include <iDynTree/Estimation/BerdySparseMAPSolver.h>
-#include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
+#include <iDynTree/BerdyHelper.h>
+#include <iDynTree/BerdySparseMAPSolver.h>
+#include <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>
 
 using namespace iDynTree;
 

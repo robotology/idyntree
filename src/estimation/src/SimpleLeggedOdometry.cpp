@@ -4,7 +4,7 @@
 
 #include <iDynTree/EigenHelpers.h>
 
-#include <iDynTree/Estimation/SimpleLeggedOdometry.h>
+#include <iDynTree/SimpleLeggedOdometry.h>
 
 #include <iDynTree/ForwardKinematics.h>
 #include <iDynTree/Indices.h>

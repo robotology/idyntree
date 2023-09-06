@@ -4,8 +4,8 @@
 #ifndef ATTITUDE_QUATERNION_EKF_H
 #define ATTITUDE_QUATERNION_EKF_H
 
-#include <iDynTree/Estimation/AttitudeEstimator.h>
-#include <iDynTree/Estimation/ExtendedKalmanFilter.h>
+#include <iDynTree/AttitudeEstimator.h>
+#include <iDynTree/ExtendedKalmanFilter.h>
 #include <iDynTree/Direction.h>
 
 namespace iDynTree

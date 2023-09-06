@@ -13,7 +13,7 @@
 #include <iDynTree/Utils.h>
 #include <iDynTree/ClassicalAcc.h>
 
-#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/ExternalWrenchesEstimation.h>
 
 namespace iDynTree
 {

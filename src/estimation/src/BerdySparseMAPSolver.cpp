@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
-#include "iDynTree/Estimation/BerdySparseMAPSolver.h"
-#include "iDynTree/Estimation/BerdyHelper.h"
+#include "iDynTree/BerdySparseMAPSolver.h"
+#include "iDynTree/BerdyHelper.h"
 
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/VectorFixSize.h>

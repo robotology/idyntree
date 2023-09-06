@@ -5,7 +5,7 @@
 #define IDYNTREE_DEPRECATED_ESTIMATION_EXTERNALWRENCHESTIMATION_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/ExternalWrenchesEstimation.h> is deprecated. Please use <iDynTree/ExternalWrenchesEstimation.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/ExternalWrenchesEstimation.h> is deprecated. Please use <iDynTree/ExternalWrenchesEstimation.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ExternalWrenchesEstimation.h>

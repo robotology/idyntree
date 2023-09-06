@@ -5,7 +5,7 @@
 #define IDYNTREE_DEPRECATED_ESTIMATION_EXTWRENCHESANDJOINTTORQUEESTIMATOR_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h> is deprecated. Please use <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/ExtWrenchesAndJointTorquesEstimator.h> is deprecated. Please use <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>

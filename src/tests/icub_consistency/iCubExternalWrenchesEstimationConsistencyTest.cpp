@@ -42,7 +42,7 @@
 #include <iDynTree/PredictSensorsMeasurements.h>
 
 #include <iDynTree/ModelLoader.h>
-#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/ExternalWrenchesEstimation.h>
 #include <iDynTree/yarp/YARPConversions.h>
 #include <iDynTree/skinDynLibConversions.h>
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/ForwardKinematics.h>
-#include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
+#include <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>
 
 #include "testModels.h"
 

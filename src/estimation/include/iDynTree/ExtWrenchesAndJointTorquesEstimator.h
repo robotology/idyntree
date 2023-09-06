@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_ESTIMATION_EXTWRENCHESANDJOINTTORQUEESTIMATOR_H
 #define IDYNTREE_ESTIMATION_EXTWRENCHESANDJOINTTORQUEESTIMATOR_H
 
-#include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
+#include <iDynTree/ExternalWrenchesEstimation.h>
 
 #include <iDynTree/Model.h>
 #include <iDynTree/SubModel.h>

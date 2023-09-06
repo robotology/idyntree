@@ -117,15 +117,15 @@
 
 
 // Estimation related classes
-#include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
-#include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
-#include "iDynTree/Estimation/SimpleLeggedOdometry.h"
-#include "iDynTree/Estimation/BerdyHelper.h"
-#include "iDynTree/Estimation/BerdySparseMAPSolver.h"
-#include "iDynTree/Estimation/AttitudeEstimator.h"
-#include "iDynTree/Estimation/AttitudeMahonyFilter.h"
-#include "iDynTree/Estimation/ExtendedKalmanFilter.h"
-#include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+#include "iDynTree/ExternalWrenchesEstimation.h"
+#include "iDynTree/ExtWrenchesAndJointTorquesEstimator.h"
+#include "iDynTree/SimpleLeggedOdometry.h"
+#include "iDynTree/BerdyHelper.h"
+#include "iDynTree/BerdySparseMAPSolver.h"
+#include "iDynTree/AttitudeEstimator.h"
+#include "iDynTree/AttitudeMahonyFilter.h"
+#include "iDynTree/ExtendedKalmanFilter.h"
+#include "iDynTree/AttitudeQuaternionEKF.h"
 
 // SolidShapes related classes
 #include "iDynTree/InertialParametersSolidShapesHelpers.h"
@@ -292,15 +292,15 @@ namespace std {
 %include "iDynTree/ModelCalibrationHelper.h"
 
 // Estimation related classes
-%include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
-%include "iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h"
-%include "iDynTree/Estimation/SimpleLeggedOdometry.h"
-%include "iDynTree/Estimation/BerdyHelper.h"
-%include "iDynTree/Estimation/BerdySparseMAPSolver.h"
-%include "iDynTree/Estimation/AttitudeEstimator.h"
-%include "iDynTree/Estimation/AttitudeMahonyFilter.h"
-%include "iDynTree/Estimation/ExtendedKalmanFilter.h"
-%include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+%include "iDynTree/ExternalWrenchesEstimation.h"
+%include "iDynTree/ExtWrenchesAndJointTorquesEstimator.h"
+%include "iDynTree/SimpleLeggedOdometry.h"
+%include "iDynTree/BerdyHelper.h"
+%include "iDynTree/BerdySparseMAPSolver.h"
+%include "iDynTree/AttitudeEstimator.h"
+%include "iDynTree/AttitudeMahonyFilter.h"
+%include "iDynTree/ExtendedKalmanFilter.h"
+%include "iDynTree/AttitudeQuaternionEKF.h"
 
 // SolidShapes related classes
 %include "iDynTree/InertialParametersSolidShapesHelpers.h"

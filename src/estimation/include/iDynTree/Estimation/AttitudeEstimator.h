@@ -5,7 +5,7 @@
 #define IDYNTREE_ESTIMATION_ATTITUDEESTIMATOR_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/AttitudeEstimator.h> is deprecated. Please use <iDynTree/AttitudeEstimator.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/AttitudeEstimator.h> is deprecated. Please use <iDynTree/AttitudeEstimator.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/AttitudeEstimator.h>

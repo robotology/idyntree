@@ -4,7 +4,7 @@
 #ifndef ATTITUDE_MAHONY_FILTER_H
 #define ATTITUDE_MAHONY_FILTER_H
 
-#include <iDynTree/Estimation/AttitudeEstimator.h>
+#include <iDynTree/AttitudeEstimator.h>
 #include <iDynTree/Direction.h>
 
 namespace iDynTree

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Estimation/AttitudeQuaternionEKF.h>
-#include <iDynTree/Estimation/AttitudeMahonyFilter.h>
+#include <iDynTree/AttitudeQuaternionEKF.h>
+#include <iDynTree/AttitudeMahonyFilter.h>
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/SpatialMotionVector.h>
 #include <iDynTree/SpatialForceVector.h>
