@@ -4,10 +4,10 @@
 #ifndef KALMAN_FILTER_H
 #define KALMAN_FILTER_H
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/EigenHelpers.h>
 #include <vector>
 
 namespace iDynTree

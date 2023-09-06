@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include "TransformConstraint.h"
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 
 namespace internal {
 namespace kinematics {

@@ -6,9 +6,9 @@
 #include <cmath>
 #include <ctime>
 
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/EigenSparseHelpers.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/EigenSparseHelpers.h>
 #include <iDynTree/Model/ModelTestUtils.h>
 
 #include <iDynTree/Model/Model.h>

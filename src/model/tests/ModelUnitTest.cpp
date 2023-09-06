@@ -8,7 +8,7 @@
 #include <iDynTree/Model/ModelTestUtils.h>
 #include <iDynTree/Model/Traversal.h>
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <algorithm>
 #include <cassert>

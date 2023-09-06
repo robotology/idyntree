@@ -5,7 +5,7 @@
 #define IDYNTREE_TWIST_H
 
 
-#include  <iDynTree/Core/SpatialMotionVector.h>
+#include  <iDynTree/SpatialMotionVector.h>
 
 namespace iDynTree
 {

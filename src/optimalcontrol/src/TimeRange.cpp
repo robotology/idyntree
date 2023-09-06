@@ -9,7 +9,7 @@
  */
 
 #include <iDynTree/TimeRange.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

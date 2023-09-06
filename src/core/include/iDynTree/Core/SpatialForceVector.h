@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_SPATIAL_FORCE_RAW_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/SpatialForceVector.h> is deprecated. Please use <iDynTree/SpatialForceVector.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/SpatialForceVector.h> is deprecated. Please use <iDynTree/SpatialForceVector.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SpatialForceVector.h>

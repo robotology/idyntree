@@ -5,7 +5,7 @@
 #ifndef ACCELEROMETER_HPP
 #define ACCELEROMETER_HPP
 
-#include <iDynTree/Core/GeomVector3.h>
+#include <iDynTree/GeomVector3.h>
 
 namespace iDynTree
 {

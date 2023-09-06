@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/SpatialMomentum.h>
-#include <iDynTree/Core/PrivateUtils.h>
+#include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/PrivateUtils.h>
 
 namespace iDynTree
 {

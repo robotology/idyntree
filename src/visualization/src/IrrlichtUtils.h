@@ -13,7 +13,7 @@
 #include <Eigen/Core>
 #include <Eigen/LU>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include "FloorGridSceneNode.h"
 

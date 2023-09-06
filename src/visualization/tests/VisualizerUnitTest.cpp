@@ -4,7 +4,7 @@
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/Visualizer.h>
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include "testModels.h"
 

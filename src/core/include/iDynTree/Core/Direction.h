@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_DIRECTION_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/Direction.h> is deprecated. Please use <iDynTree/Direction.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Direction.h> is deprecated. Please use <iDynTree/Direction.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Direction.h>

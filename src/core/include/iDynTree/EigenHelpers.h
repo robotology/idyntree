@@ -7,17 +7,17 @@
 #include <cstddef>
 
 #include <Eigen/Dense>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/MatrixFixSize.h>
-#include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Core/SpatialForceVector.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/MatrixFixSize.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/SpatialForceVector.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Utils.h>
 
 #if __cplusplus > 199711L
-#include <iDynTree/Core/SparseMatrix.h>
+#include <iDynTree/SparseMatrix.h>
 #endif
 
 

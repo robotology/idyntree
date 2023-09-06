@@ -6,7 +6,7 @@
 #define IDYNTREE_CORE_CUBIC_SPLINE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/CubicSpline.h> is deprecated. Please use <iDynTree/CubicSpline.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/CubicSpline.h> is deprecated. Please use <iDynTree/CubicSpline.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/CubicSpline.h>

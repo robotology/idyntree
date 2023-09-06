@@ -3,8 +3,8 @@
 
 #include <iDynTree/BoundingBoxHelpers.h>
 
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <Eigen/Core>
 

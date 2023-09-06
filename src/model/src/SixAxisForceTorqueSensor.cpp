@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
-#include "iDynTree/Core/Wrench.h"
+#include "iDynTree/Wrench.h"
 #include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
 
-#include "iDynTree/Core/Transform.h"
+#include "iDynTree/Transform.h"
 
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/Link.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 
 #include <cassert>

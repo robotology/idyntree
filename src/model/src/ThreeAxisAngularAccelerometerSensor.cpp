@@ -4,12 +4,12 @@
 
 #include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
 
-#include "iDynTree/Core/Transform.h"
+#include "iDynTree/Transform.h"
 
-#include "iDynTree/Core/SpatialAcc.h"
-#include "iDynTree/Core/Twist.h"
+#include "iDynTree/SpatialAcc.h"
+#include "iDynTree/Twist.h"
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 namespace iDynTree {
 

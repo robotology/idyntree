@@ -5,7 +5,7 @@
 #define IDYNTREE_POSITION_RAW_H
 
 
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/VectorFixSize.h>
 #include <string>
 
 namespace iDynTree

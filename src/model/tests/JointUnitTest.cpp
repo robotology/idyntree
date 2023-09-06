@@ -3,12 +3,12 @@
 
 #include <iDynTree/Model/Link.h>
 
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/TransformDerivative.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/TransformDerivative.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/Model/PrismaticJoint.h>

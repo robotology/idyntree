@@ -8,9 +8,9 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Optimizer.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
 namespace iDynTree {
     namespace optimization {

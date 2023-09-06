@@ -10,8 +10,8 @@
 #include <string>
 #include <vector>
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/VectorFixSize.h>
 
 #include <fpconv.h>
 

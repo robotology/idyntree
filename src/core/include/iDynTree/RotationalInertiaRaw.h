@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_ROTATIONAL_INERTIA_RAW_H
 #define IDYNTREE_ROTATIONAL_INERTIA_RAW_H
 
-#include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/MatrixFixSize.h>
 
 namespace iDynTree
 {

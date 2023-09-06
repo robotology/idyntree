@@ -4,10 +4,10 @@
 #include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/EigenMathHelpers.h>
-#include <iDynTree/Core/SpatialMomentum.h>
-#include <iDynTree/Core/ClassicalAcc.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/EigenMathHelpers.h>
+#include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/ClassicalAcc.h>
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
@@ -25,7 +25,7 @@
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <sstream>
 

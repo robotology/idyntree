@@ -4,7 +4,7 @@
 #include <iDynTree/Sensors/Sensors.h>
 #include "testModels.h"
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <cassert>
 #include <cstdio>

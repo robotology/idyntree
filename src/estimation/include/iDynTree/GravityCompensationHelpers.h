@@ -9,9 +9,9 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/Dynamics.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/ClassicalAcc.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/ClassicalAcc.h>
 
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 

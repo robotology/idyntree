@@ -14,7 +14,7 @@
 #include <iDynTree/Integrators/FixedStepIntegrator.h>
 #include <Eigen/Sparse>
 #include <Eigen/Dense>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

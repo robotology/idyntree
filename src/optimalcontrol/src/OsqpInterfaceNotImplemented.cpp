@@ -9,7 +9,7 @@
  */
 
 #include <iDynTree/Optimizers/OsqpInterface.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
 
 using namespace iDynTree::optimization;

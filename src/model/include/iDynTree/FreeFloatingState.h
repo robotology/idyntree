@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_FREE_FLOATING_STATE_H
 #define IDYNTREE_FREE_FLOATING_STATE_H
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>

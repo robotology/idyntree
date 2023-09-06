@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/Axis.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/TransformDerivative.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/TransformDerivative.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/SpatialAcc.h>
 
 #include <Eigen/Dense>
 

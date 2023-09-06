@@ -5,7 +5,7 @@
 #ifndef THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR_H
 #define THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR_H
 
-#include <iDynTree/Core/GeomVector3.h>
+#include <iDynTree/GeomVector3.h>
 
 namespace iDynTree
 {

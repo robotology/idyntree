@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: BSD-3-Clause
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/EigenMathHelpers.h>
-#include <iDynTree/Core/SpatialMomentum.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/EigenMathHelpers.h>
+#include <iDynTree/SpatialMomentum.h>
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>

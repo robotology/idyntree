@@ -5,7 +5,7 @@
 #define IDYNTREE_SPATIALMOMENTUM_H
 
 
-#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/SpatialForceVector.h>
 
 namespace iDynTree
 {

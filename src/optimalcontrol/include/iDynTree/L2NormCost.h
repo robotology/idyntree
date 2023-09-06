@@ -14,7 +14,7 @@
 
 #include <iDynTree/Cost.h>
 #include <iDynTree/TimeVaryingObject.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #include <memory>
 #include <string>
 

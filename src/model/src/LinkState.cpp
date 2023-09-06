@@ -4,7 +4,7 @@
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/Model.h>
 
-#include <iDynTree/Core/ArticulatedBodyInertia.h>
+#include <iDynTree/ArticulatedBodyInertia.h>
 
 namespace iDynTree
 {

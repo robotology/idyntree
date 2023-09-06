@@ -11,10 +11,10 @@
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/JointState.h>
 
-#include <iDynTree/Core/ArticulatedBodyInertia.h>
-#include <iDynTree/Core/SpatialInertia.h>
-#include <iDynTree/Core/SpatialMomentum.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/ArticulatedBodyInertia.h>
+#include <iDynTree/SpatialInertia.h>
+#include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <iDynTree/Model/Dynamics.h>
 

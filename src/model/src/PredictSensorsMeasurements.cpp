@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Sensors/PredictSensorsMeasurements.h>
-#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/SpatialMotionVector.h>
 #include <iDynTree/Sensors/AccelerometerSensor.h>
 #include <iDynTree/Sensors/GyroscopeSensor.h>
 #include <iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h>
@@ -15,8 +15,8 @@
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/Dynamics.h>
 
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/EigenHelpers.h>
 
 namespace iDynTree {
 

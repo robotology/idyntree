@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_TRIPLETS_H
 #define IDYNTREE_TRIPLETS_H
 
-#include <iDynTree/Core/MatrixFixSize.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/MatrixFixSize.h>
+#include <iDynTree/Utils.h>
 
 #include <iterator>
 #include <string>

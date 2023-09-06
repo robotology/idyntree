@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_ATTITUDEESTIMATOR_H
 #define IDYNTREE_ATTITUDEESTIMATOR_H
 
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/Rotation.h>
 
 #include <iostream>
 
@@ -127,7 +127,7 @@ namespace iDynTree
          *        then this method gives us the RPY 3d vector of Euler Angles when composed together gives us \f$ {^A}R_B \f$ as the rotation matrix
          *        where \f$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)\f$.
          *        For more details about the range of the RPY Euler angles, please refer the documentation of
-         *   <a href="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Core/Rotation.h#L167">GetRPY()</a>
+         *   <a href="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Rotation.h#L167">GetRPY()</a>
          *
          * @param[out] rpy 3D vector containing roll pitch yaw angles
          * @return true/false if successful/not

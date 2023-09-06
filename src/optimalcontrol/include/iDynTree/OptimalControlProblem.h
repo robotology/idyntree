@@ -15,7 +15,7 @@
 #include <vector>
 #include <string>
 
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #include <iDynTree/SparsityStructure.h>
 #include <iDynTree/TimeVaryingObject.h>
 

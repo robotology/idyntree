@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_TRANSFORM_H
 #define IDYNTREE_TRANSFORM_H
 
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/Rotation.h>
-#include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/Rotation.h>
+#include <iDynTree/MatrixFixSize.h>
 
 #include <string>
 

@@ -7,7 +7,7 @@
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/Model.h>
 
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 
 #include <vector>
 

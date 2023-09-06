@@ -8,8 +8,8 @@
 
 #include <type_traits>
 
-#include <iDynTree/Core/Span.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Span.h>
+#include <iDynTree/Utils.h>
 
 // constexpr workaround for SWIG
 #ifdef SWIG

@@ -5,7 +5,7 @@
 #define IDYNTREE_DYNAMIC_SIZE_VECTOR_H
 
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
-#include <iDynTree/Core/Span.h>
+#include <iDynTree/Span.h>
 #endif
 
 #include <string>

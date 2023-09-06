@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/Direction.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Direction.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <cstdlib>
 

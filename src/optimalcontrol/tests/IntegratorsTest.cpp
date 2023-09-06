@@ -9,8 +9,8 @@
  */
 
 #include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Integrator.h>
 #include <iDynTree/Integrators/RK4.h>
 #include <iDynTree/Integrators/ForwardEuler.h>

@@ -4,9 +4,9 @@
 #include <iDynTree/InverseKinematics.h>
 #include <iDynTree/KinDynComputations.h>
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/ModelTestUtils.h>
 #include <iDynTree/ModelIO/ModelLoader.h>

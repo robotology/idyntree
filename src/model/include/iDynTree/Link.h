@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_LINK_H
 #define IDYNTREE_LINK_H
 
-#include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/SpatialInertia.h>
 
 #include <iDynTree/Model/Indices.h>
 

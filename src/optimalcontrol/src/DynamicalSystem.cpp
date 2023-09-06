@@ -10,7 +10,7 @@
 
 #include <iDynTree/DynamicalSystem.h>
 #include <iDynTree/Controller.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
 #include <cstddef>
 

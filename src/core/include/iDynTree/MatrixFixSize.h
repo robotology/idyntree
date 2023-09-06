@@ -5,8 +5,8 @@
 #define IDYNTREE_MATRIX_FIX_SIZE_H
 
 
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/MatrixView.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/MatrixView.h>
 
 #include <cassert>
 #include <cstring>

@@ -7,7 +7,7 @@
 #include "Position.h"
 #include "Rotation.h"
 #include "Utils.h"
-#include <iDynTree/Core/GeomVector3.h>
+#include <iDynTree/GeomVector3.h>
 
 
 #include <iostream>

@@ -4,8 +4,8 @@
 
 #include <iDynTree/L2NormCost.h>
 #include <iDynTree/TimeVaryingObject.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
 #include <memory>
 
 int main() {

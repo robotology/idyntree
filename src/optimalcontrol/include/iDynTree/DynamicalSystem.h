@@ -11,7 +11,7 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_DYNAMICALSYSTEM_H
 #define IDYNTREE_OPTIMALCONTROL_DYNAMICALSYSTEM_H
 
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {

@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include "iDynTree/Core/CubicSpline.h"
-#include "iDynTree/Core/TestUtils.h"
-#include "iDynTree/Core/VectorFixSize.h"
+#include "iDynTree/CubicSpline.h"
+#include "iDynTree/TestUtils.h"
+#include "iDynTree/VectorFixSize.h"
 #include <cmath>
 
 using namespace iDynTree;

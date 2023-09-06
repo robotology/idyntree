@@ -9,7 +9,7 @@
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 
 namespace iDynTree

@@ -13,7 +13,7 @@
 #include <iDynTree/Model/LinkState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 const double acclTestVal = 1.5;
 const double gyroTestVal = 1.5;
 #include <cassert>

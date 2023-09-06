@@ -5,7 +5,7 @@
 #define IDYNTREE_EIGEN_SPARSE_HELPERS_H
 
 #include <Eigen/SparseCore>
-#include <iDynTree/Core/SparseMatrix.h>
+#include <iDynTree/SparseMatrix.h>
 
 namespace iDynTree
 {

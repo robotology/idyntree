@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_DYNAMICS_LINEARIZATION_HELPERS_H
 #define IDYNTREE_DYNAMICS_LINEARIZATION_HELPERS_H
 
-#include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/MatrixFixSize.h>
 
 #include <iDynTree/Model/Dynamics.h>
 

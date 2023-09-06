@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_VECTOR_FIX_SIZE_H
 #define IDYNTREE_VECTOR_FIX_SIZE_H
 
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
-#include <iDynTree/Core/Span.h>
+#include <iDynTree/Span.h>
 #endif
 #include <string>
 #include <sstream>

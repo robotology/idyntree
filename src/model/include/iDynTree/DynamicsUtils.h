@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_DYNAMICS_UTILS_H
 #define IDYNTREE_DYNAMICS_UTILS_H
 
-#include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Core/SpatialForceVector.h>
-#include <iDynTree/Core/SpatialInertia.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/SpatialForceVector.h>
+#include <iDynTree/SpatialInertia.h>
 
 namespace iDynTree
 {

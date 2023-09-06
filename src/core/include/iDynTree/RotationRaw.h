@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_ROTATION_RAW_H
 #define IDYNTREE_ROTATION_RAW_H
 
-#include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/MatrixFixSize.h>
 #include <string>
 
 namespace iDynTree

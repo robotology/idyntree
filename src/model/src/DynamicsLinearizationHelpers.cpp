@@ -4,7 +4,7 @@
 
 #include <iDynTree/Model/DynamicsLinearizationHelpers.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 namespace iDynTree
 {

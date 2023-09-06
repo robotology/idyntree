@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_INVERSE_DYNAMICS_H
 #define IDYNTREE_INVERSE_DYNAMICS_H
 
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>

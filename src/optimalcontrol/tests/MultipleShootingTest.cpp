@@ -16,14 +16,14 @@
 #include <iDynTree/Optimizer.h>
 #include <iDynTree/OCSolvers/MultipleShootingSolver.h>
 #include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/Utils.h>
 #include <iDynTree/Integrators/ForwardEuler.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
 #include <iDynTree/TimeRange.h>
 #include <Eigen/Dense>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 #include <string>
 
 class TestSystem : public iDynTree::optimalcontrol::DynamicalSystem {

@@ -6,14 +6,14 @@
 #include <vector>
 #include <map>
 
-#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Wrench.h>
 #include <iDynTree/Sensors/Sensors.h>
 
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 #include <iDynTree/Sensors/AccelerometerSensor.h>
 #include <iDynTree/Sensors/GyroscopeSensor.h>
 
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <cassert>
 #include <iostream>

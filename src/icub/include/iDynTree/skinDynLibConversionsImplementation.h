@@ -6,8 +6,8 @@
 
 #include <iDynTree/skinDynLibConversions.h>
 
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/Wrench.h>
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>

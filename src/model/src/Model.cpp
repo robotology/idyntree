@@ -5,8 +5,8 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/SolidShapes.h>
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <cassert>
 #include <deque>

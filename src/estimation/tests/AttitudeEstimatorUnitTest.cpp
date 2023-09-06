@@ -3,9 +3,9 @@
 
 #include <iDynTree/Estimation/AttitudeQuaternionEKF.h>
 #include <iDynTree/Estimation/AttitudeMahonyFilter.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/SpatialForceVector.h>
 #include <iostream>
 #include <memory>
 

@@ -3,9 +3,9 @@
 
 #include <iDynTree/Estimation/BerdyHelper.h>
 
-#include <iDynTree/Core/ClassicalAcc.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/SparseMatrix.h>
+#include <iDynTree/ClassicalAcc.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/SparseMatrix.h>
 
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>

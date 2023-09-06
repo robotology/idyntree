@@ -4,10 +4,10 @@
 
 #include "URDFModelExport.h"
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/SpatialInertia.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/SpatialInertia.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/VectorFixSize.h>
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/Model.h>

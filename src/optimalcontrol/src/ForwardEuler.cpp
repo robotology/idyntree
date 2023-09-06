@@ -10,11 +10,11 @@
 
 #include <iDynTree/Integrators/ForwardEuler.h>
 #include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 #include <Eigen/Dense>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

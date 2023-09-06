@@ -38,42 +38,42 @@
 #include <cmath>
 
 //Utils
-#include "iDynTree/Core/Utils.h"
+#include "iDynTree/Utils.h"
 
 // Basic math classes
-#include "iDynTree/Core/MatrixDynSize.h"
-#include "iDynTree/Core/MatrixFixSize.h"
-#include "iDynTree/Core/SparseMatrix.h"
+#include "iDynTree/MatrixDynSize.h"
+#include "iDynTree/MatrixFixSize.h"
+#include "iDynTree/SparseMatrix.h"
 
-#include "iDynTree/Core/VectorDynSize.h"
-#include "iDynTree/Core/VectorFixSize.h"
+#include "iDynTree/VectorDynSize.h"
+#include "iDynTree/VectorFixSize.h"
 
 // Basic Vectors: Point Vectors and Spatial Vectors
-#include "iDynTree/Core/PositionRaw.h"
-#include "iDynTree/Core/Position.h"
-#include "iDynTree/Core/SpatialForceVector.h"
-#include "iDynTree/Core/SpatialMotionVector.h"
-#include "iDynTree/Core/Twist.h"
-#include "iDynTree/Core/Wrench.h"
-#include "iDynTree/Core/SpatialMomentum.h"
-#include "iDynTree/Core/SpatialAcc.h"
-#include "iDynTree/Core/ClassicalAcc.h"
-#include "iDynTree/Core/Direction.h"
-#include "iDynTree/Core/Axis.h"
+#include "iDynTree/PositionRaw.h"
+#include "iDynTree/Position.h"
+#include "iDynTree/SpatialForceVector.h"
+#include "iDynTree/SpatialMotionVector.h"
+#include "iDynTree/Twist.h"
+#include "iDynTree/Wrench.h"
+#include "iDynTree/SpatialMomentum.h"
+#include "iDynTree/SpatialAcc.h"
+#include "iDynTree/ClassicalAcc.h"
+#include "iDynTree/Direction.h"
+#include "iDynTree/Axis.h"
 
 // Inertias
-#include "iDynTree/Core/RotationalInertiaRaw.h"
-#include "iDynTree/Core/SpatialInertiaRaw.h"
-#include "iDynTree/Core/SpatialInertia.h"
-#include "iDynTree/Core/ArticulatedBodyInertia.h"
-#include "iDynTree/Core/InertiaNonLinearParametrization.h"
+#include "iDynTree/RotationalInertiaRaw.h"
+#include "iDynTree/SpatialInertiaRaw.h"
+#include "iDynTree/SpatialInertia.h"
+#include "iDynTree/ArticulatedBodyInertia.h"
+#include "iDynTree/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
-#include "iDynTree/Core/RotationRaw.h"
-#include "iDynTree/Core/Rotation.h"
-#include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/TransformDerivative.h"
-#include "iDynTree/Core/Span.h"
+#include "iDynTree/RotationRaw.h"
+#include "iDynTree/Rotation.h"
+#include "iDynTree/Transform.h"
+#include "iDynTree/TransformDerivative.h"
+#include "iDynTree/Span.h"
 
 // Model related data structures
 #include "iDynTree/Model/Indices.h"
@@ -149,19 +149,19 @@ namespace std {
 }
 
 //Utils
-%include "iDynTree/Core/Utils.h"
+%include "iDynTree/Utils.h"
 
 /* Note : always include headers following the inheritance order */
 // Basic math classes
-%include "iDynTree/Core/MatrixDynSize.h"
-%include "iDynTree/Core/MatrixFixSize.h"
-%include "iDynTree/Core/SparseMatrix.h"
+%include "iDynTree/MatrixDynSize.h"
+%include "iDynTree/MatrixFixSize.h"
+%include "iDynTree/SparseMatrix.h"
 %template(SparseMatrixRowMajor) iDynTree::SparseMatrix<iDynTree::RowMajor>;
 %template(SparseMatrixColMajor) iDynTree::SparseMatrix<iDynTree::ColumnMajor>;
 
 
-%include "iDynTree/Core/VectorDynSize.h"
-%include "iDynTree/Core/VectorFixSize.h"
+%include "iDynTree/VectorDynSize.h"
+%include "iDynTree/VectorFixSize.h"
 
 #ifdef SWIGMATLAB
 %include "./matlab/matlab_matvec.i"
@@ -186,12 +186,12 @@ namespace std {
 %template(Vector16) iDynTree::VectorFixSize<16>;
 
 // Basic Vectors: Point Vectors and Spatial Vectors
-%include "iDynTree/Core/PositionRaw.h"
-%include "iDynTree/Core/Position.h"
+%include "iDynTree/PositionRaw.h"
+%include "iDynTree/Position.h"
 
-%include "iDynTree/Core/GeomVector3.h"
+%include "iDynTree/GeomVector3.h"
 
-%include "iDynTree/Core/SpatialVector.h"
+%include "iDynTree/SpatialVector.h"
 
 %template() iDynTree::DualSpace<iDynTree::SpatialMotionVector>;
 %template() iDynTree::DualSpace<iDynTree::SpatialForceVector>;
@@ -207,30 +207,30 @@ namespace std {
 %template(SpatialMotionVectorBase) iDynTree::SpatialVector<iDynTree::SpatialMotionVector>;
 %template(SpatialForceVectorBase) iDynTree::SpatialVector<iDynTree::SpatialForceVector>;
 
-%include "iDynTree/Core/SpatialMotionVector.h"
-%include "iDynTree/Core/SpatialForceVector.h"
-%include "iDynTree/Core/Twist.h"
-%include "iDynTree/Core/Wrench.h"
-%include "iDynTree/Core/SpatialMomentum.h"
-%include "iDynTree/Core/SpatialAcc.h"
-%include "iDynTree/Core/ClassicalAcc.h"
-%include "iDynTree/Core/Direction.h"
-%include "iDynTree/Core/Axis.h"
+%include "iDynTree/SpatialMotionVector.h"
+%include "iDynTree/SpatialForceVector.h"
+%include "iDynTree/Twist.h"
+%include "iDynTree/Wrench.h"
+%include "iDynTree/SpatialMomentum.h"
+%include "iDynTree/SpatialAcc.h"
+%include "iDynTree/ClassicalAcc.h"
+%include "iDynTree/Direction.h"
+%include "iDynTree/Axis.h"
 
 // Inertias
-%include "iDynTree/Core/RotationalInertiaRaw.h"
-%include "iDynTree/Core/SpatialInertiaRaw.h"
-%include "iDynTree/Core/SpatialInertia.h"
-%include "iDynTree/Core/ArticulatedBodyInertia.h"
-%include "iDynTree/Core/InertiaNonLinearParametrization.h"
+%include "iDynTree/RotationalInertiaRaw.h"
+%include "iDynTree/SpatialInertiaRaw.h"
+%include "iDynTree/SpatialInertia.h"
+%include "iDynTree/ArticulatedBodyInertia.h"
+%include "iDynTree/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
-%include "iDynTree/Core/RotationRaw.h"
-%include "iDynTree/Core/Rotation.h"
-%include "iDynTree/Core/Transform.h"
-%include "iDynTree/Core/TransformDerivative.h"
-%include "iDynTree/Core/Span.h"
-%include "iDynTree/Core/MatrixView.h"
+%include "iDynTree/RotationRaw.h"
+%include "iDynTree/Rotation.h"
+%include "iDynTree/Transform.h"
+%include "iDynTree/TransformDerivative.h"
+%include "iDynTree/Span.h"
+%include "iDynTree/MatrixView.h"
 
 %template(DynamicSpan) iDynTree::Span<double, iDynTree::dynamic_extent>;
 %template(DynamicMatrixView) iDynTree::MatrixView<double>;

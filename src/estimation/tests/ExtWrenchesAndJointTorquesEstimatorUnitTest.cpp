@@ -6,8 +6,8 @@
 
 #include "testModels.h"
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
 
 
 using namespace iDynTree;

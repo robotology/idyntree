@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include "iDynTree/Sensors/GyroscopeSensor.h"
-#include "iDynTree/Core/Transform.h"
-#include "iDynTree/Core/Wrench.h"
-#include "iDynTree/Core/Twist.h"
+#include "iDynTree/Transform.h"
+#include "iDynTree/Wrench.h"
+#include "iDynTree/Twist.h"
 
 
 namespace iDynTree {

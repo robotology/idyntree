@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 
 #include <iDynTree/ModelTransformersSolidShapes.h>
 
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Model/Model.h>
 
 

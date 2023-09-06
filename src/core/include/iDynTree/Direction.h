@@ -6,8 +6,8 @@
 
 #include <string>
 
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/Utils.h>
 
 
 namespace iDynTree

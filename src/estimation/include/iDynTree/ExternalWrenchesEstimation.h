@@ -4,11 +4,11 @@
 #ifndef IDYNTREE_ESTIMATION_EXTERNALWRENCHESTIMATION_H
 #define IDYNTREE_ESTIMATION_EXTERNALWRENCHESTIMATION_H
 
-#include <iDynTree/Core/Direction.h>
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Direction.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/VectorFixSize.h>
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/LinkState.h>

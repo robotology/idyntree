@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/GeomVector3.h>
+#include <iDynTree/GeomVector3.h>
 
-#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Rotation.h>
 
 #include <Eigen/Dense>
 

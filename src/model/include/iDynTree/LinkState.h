@@ -4,11 +4,11 @@
 #ifndef IDYNTREE_LINK_STATE_H
 #define IDYNTREE_LINK_STATE_H
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Core/Wrench.h>
-#include <iDynTree/Core/ArticulatedBodyInertia.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/Wrench.h>
+#include <iDynTree/ArticulatedBodyInertia.h>
 
 #include <iDynTree/Model/Indices.h>
 

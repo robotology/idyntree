@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_SPARSE_MATRIX_H
 #define IDYNTREE_SPARSE_MATRIX_H
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/Triplets.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/Triplets.h>
+#include <iDynTree/Utils.h>
 
 #include <vector>
 

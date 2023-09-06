@@ -3,11 +3,11 @@
 #include "iDynTree/Estimation/BerdySparseMAPSolver.h"
 #include "iDynTree/Estimation/BerdyHelper.h"
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/SparseMatrix.h>
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/EigenSparseHelpers.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/SparseMatrix.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/EigenSparseHelpers.h>
 
 #include <Eigen/SparseCore>
 #include <Eigen/SparseCholesky>

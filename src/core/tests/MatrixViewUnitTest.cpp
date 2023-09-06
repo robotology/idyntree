@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/MatrixView.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/MatrixView.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
 
 using namespace iDynTree;
 

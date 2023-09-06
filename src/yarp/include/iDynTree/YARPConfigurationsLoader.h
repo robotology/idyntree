@@ -5,7 +5,7 @@
 #define IDYNTREE_YARP_CONFIGURATIONS_LOADER_H
 
 #include <yarp/os/Searchable.h>
-#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Rotation.h>
 #include <string>
 
 namespace iDynTree

@@ -10,8 +10,8 @@
 
 #include <iDynTree/Integrator.h>
 #include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <cassert>
 #include <cstddef>

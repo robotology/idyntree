@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_INERTIA_NON_LINEAR_PARAMETRIZATION_H
 #define IDYNTREE_INERTIA_NON_LINEAR_PARAMETRIZATION_H
 
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/Rotation.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/Rotation.h>
+#include <iDynTree/Transform.h>
 
 namespace iDynTree
 {

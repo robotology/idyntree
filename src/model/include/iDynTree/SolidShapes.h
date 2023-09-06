@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <string>
 #include <vector>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 #include <iDynTree/Model/Indices.h>
 
 namespace iDynTree

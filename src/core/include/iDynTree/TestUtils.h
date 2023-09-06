@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_TEST_UTILS_H
 #define IDYNTREE_TEST_UTILS_H
 
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
 
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
 #include <algorithm>
 #include <iomanip>

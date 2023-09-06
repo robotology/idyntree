@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include <iDynTree/Core/MatrixView.h>
+#include <iDynTree/MatrixView.h>
 
 namespace iDynTree
 {

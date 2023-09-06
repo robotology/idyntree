@@ -6,9 +6,9 @@
 
 #include <string>
 
-#include <iDynTree/Core/Direction.h>
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Direction.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/Utils.h>
 
 namespace iDynTree
 {

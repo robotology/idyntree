@@ -5,11 +5,11 @@
 #define IDYNTREE_INTERNAL_INVERSEKINEMATICSNLP_H
 
 #include <IpTNLP.hpp>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/Transform.h>
 
 #include <map>
 

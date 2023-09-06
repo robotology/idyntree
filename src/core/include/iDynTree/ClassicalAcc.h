@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_CLASSICAL_ACC_H
 #define IDYNTREE_CLASSICAL_ACC_H
 
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/VectorFixSize.h>
 
 namespace iDynTree
 {

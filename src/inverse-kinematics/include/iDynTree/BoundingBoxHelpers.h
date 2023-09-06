@@ -7,10 +7,10 @@
 #include <string>
 #include <vector>
 
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/ConvexHullHelpers.h>
 
 namespace iDynTree

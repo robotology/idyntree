@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_TRANSFORM_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/Transform.h> is deprecated. Please use <iDynTree/Transform.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Transform.h> is deprecated. Please use <iDynTree/Transform.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Transform.h>

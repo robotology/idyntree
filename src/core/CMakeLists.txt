@@ -77,9 +77,9 @@ SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})
 
 # Check if this does not break existing build
-# reason: avoid including with <iDynTree/Core/**> inside .cpp but using directly
+# reason: avoid including with <iDynTree/**> inside .cpp but using directly
 # "**" which clearly states the difference between in-library files and external files
-include_directories(include/iDynTree/Core)
+include_directories(include/iDynTree)
 
 set(libraryname idyntree-core)
 
@@ -136,7 +136,7 @@ install(TARGETS ${libraryname}
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 # Install deprecated headers
-install(DIRECTORY include/iDynTree/Core
+install(DIRECTORY include/iDynTree
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 if(IDYNTREE_COMPILE_TESTS)

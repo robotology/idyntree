@@ -1,5 +1,5 @@
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/Transform.h>
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 #include <iDynTree/Sensors/ModelSensorsTransformers.h>

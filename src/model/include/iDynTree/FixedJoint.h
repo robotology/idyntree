@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_FIXED_JOINT_H
 #define IDYNTREE_FIXED_JOINT_H
 
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/IJoint.h>

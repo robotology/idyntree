@@ -4,7 +4,7 @@
 // TODO: change this to correct include
 #include <iDynTree/OptimalControl.h>
 
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
 
 int main()
 {

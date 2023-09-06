@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_CLASSICAL_ACC_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/ClassicalAcc.h> is deprecated. Please use <iDynTree/ClassicalAcc.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/ClassicalAcc.h> is deprecated. Please use <iDynTree/ClassicalAcc.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ClassicalAcc.h>

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Estimation/KalmanFilter.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 #include <iostream>
 #include <memory>
 

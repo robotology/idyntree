@@ -5,8 +5,8 @@
 #ifndef IDYNTREE_SO3UTILS_H
 #define IDYNTREE_SO3UTILS_H
 
-#include <iDynTree/Core/Rotation.h>
-#include <iDynTree/Core/GeomVector3.h>
+#include <iDynTree/Rotation.h>
+#include <iDynTree/GeomVector3.h>
 #include <vector>
 
 namespace iDynTree

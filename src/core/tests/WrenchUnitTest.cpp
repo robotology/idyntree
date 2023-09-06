@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/Wrench.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/Wrench.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/TestUtils.h>
 
 #include <Eigen/Dense>
 

@@ -9,7 +9,7 @@
 #include <vector>
 
 #include <iDynTree/ConvexHullHelpers.h>
-#include <iDynTree/Core/Direction.h>
+#include <iDynTree/Direction.h>
 
 namespace iDynTree {
     class VectorDynSize;

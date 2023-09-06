@@ -34,9 +34,9 @@
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/TestUtils.h>
-#include <iDynTree/Core/ClassicalAcc.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/ClassicalAcc.h>
 
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/PredictSensorsMeasurements.h>

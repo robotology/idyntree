@@ -27,9 +27,9 @@
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 using namespace iDynTree;
 

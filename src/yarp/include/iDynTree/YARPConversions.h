@@ -7,7 +7,7 @@
 #include <yarp/sig/Matrix.h>
 #include <yarp/sig/Vector.h>
 
-#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/Wrench.h>
 
 namespace iDynTree
 {

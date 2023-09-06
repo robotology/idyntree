@@ -5,7 +5,7 @@
 
 #include <iDynTree/Model/Model.h>
 
-#include <iDynTree/Core/SpatialMotionVector.h>
+#include <iDynTree/SpatialMotionVector.h>
 
 namespace iDynTree
 {

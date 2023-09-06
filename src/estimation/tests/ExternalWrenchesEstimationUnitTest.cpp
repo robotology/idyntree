@@ -16,8 +16,8 @@
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>
 
-#include <iDynTree/Core/Position.h>
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/TestUtils.h>
 
 #include <cstdio>
 #include <cstdlib>

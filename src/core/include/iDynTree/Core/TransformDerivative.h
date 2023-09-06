@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_TRANSFORM_DERIVATIVE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/TransformDerivative.h> is deprecated. Please use <iDynTree/TransformDerivative.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/TransformDerivative.h> is deprecated. Please use <iDynTree/TransformDerivative.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/TransformDerivative.h>

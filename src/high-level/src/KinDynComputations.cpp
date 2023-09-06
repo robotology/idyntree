@@ -3,18 +3,18 @@
 
 #include <iDynTree/KinDynComputations.h>
 
-#include <iDynTree/Core/ClassicalAcc.h>
-#include <iDynTree/Core/MatrixDynSize.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/Rotation.h>
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Core/SpatialInertia.h>
-#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/ClassicalAcc.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Rotation.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/SpatialInertia.h>
+#include <iDynTree/Wrench.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>

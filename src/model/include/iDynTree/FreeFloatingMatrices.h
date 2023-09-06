@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_FREE_FLOATING_MATRICES_H
 #define IDYNTREE_FREE_FLOATING_MATRICES_H
 
-#include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/MatrixDynSize.h>
 
 namespace iDynTree
 {

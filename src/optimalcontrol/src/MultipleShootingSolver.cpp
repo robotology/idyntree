@@ -17,11 +17,11 @@
 #include <iDynTree/TimeRange.h>
 #include <iDynTree/OptimizationProblem.h>
 
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/Utils.h>
 
 #include <Eigen/Dense>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <cassert>
 #include <algorithm>

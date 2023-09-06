@@ -6,7 +6,7 @@
 
 #include <iDynTree/XMLElement.h>
 
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 #include <iDynTree/Model/Model.h>
 
 namespace iDynTree {

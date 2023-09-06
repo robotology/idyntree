@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_CORE_SENSORS_HPP
 #define IDYNTREE_CORE_SENSORS_HPP
 
-#include <iDynTree/Core/GeomVector3.h>
+#include <iDynTree/GeomVector3.h>
 
 
 namespace iDynTree {
@@ -17,7 +17,7 @@ namespace iDynTree {
 #include <vector>
 #include <iterator>
 
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Indices.h>

@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_YARP_CONVERSIONS_IMPLEMENTATION_H
 #define IDYNTREE_YARP_CONVERSIONS_IMPLEMENTATION_H
 
-#include <iDynTree/Core/Direction.h>
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Direction.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <yarp/math/Math.h>
 #include <cstring>

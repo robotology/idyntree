@@ -6,8 +6,8 @@
 #define IDYNTREE_CUBIC_SPLINE_H
 
 #include <vector>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/VectorDynSize.h>
 
 namespace iDynTree
 {

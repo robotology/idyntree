@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_PRIVATE_UTILS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/PrivateUtils.h> is deprecated. Please use <iDynTree/PrivateUtils.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/PrivateUtils.h> is deprecated. Please use <iDynTree/PrivateUtils.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/PrivateUtils.h>

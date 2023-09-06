@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_SPATIAL_FORCE_RAW_H
 #define IDYNTREE_SPATIAL_FORCE_RAW_H
 
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/GeomVector3.h>
-#include <iDynTree/Core/SpatialVector.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/GeomVector3.h>
+#include <iDynTree/SpatialVector.h>
 
 namespace iDynTree
 {

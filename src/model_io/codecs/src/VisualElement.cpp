@@ -8,7 +8,7 @@
 #include "OriginElement.h"
 
 #include <iDynTree/XMLAttribute.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Utils.h>
 
 namespace iDynTree {
 

@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_JOINT_STATE_H
 #define IDYNTREE_JOINT_STATE_H
 
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/VectorDynSize.h>
-#include <iDynTree/Core/SpatialForceVector.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/VectorDynSize.h>
+#include <iDynTree/SpatialForceVector.h>
 
 #include <vector>
 

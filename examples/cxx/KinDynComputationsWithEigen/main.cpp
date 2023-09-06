@@ -23,7 +23,7 @@
 
 // Helpers function to convert between
 // iDynTree datastructures
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 
 /**

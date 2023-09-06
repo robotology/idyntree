@@ -12,7 +12,7 @@
 
 #include <iDynTree/OptimalControlProblem.h>
 
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <cassert>
 

@@ -7,10 +7,10 @@
 #include <memory>
 #include <string>
 
-#include <iDynTree/Core/Transform.h>
-#include <iDynTree/Core/Span.h>
-#include <iDynTree/Core/MatrixView.h>
-#include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Span.h>
+#include <iDynTree/MatrixView.h>
+#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Model/Model.h>
 
 namespace iDynTree

@@ -10,8 +10,8 @@
 
 #include <iDynTree/Model/FreeFloatingState.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
-#include <iDynTree/Core/TransformDerivative.h>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/TransformDerivative.h>
 
 #include <Eigen/Core>
 

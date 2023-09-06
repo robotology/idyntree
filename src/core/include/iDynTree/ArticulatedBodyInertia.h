@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_ARTICULATED_BODY_INERTIA_H
 #define IDYNTREE_ARTICULATED_BODY_INERTIA_H
 
-#include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/MatrixFixSize.h>
 #include <string>
 
 namespace iDynTree

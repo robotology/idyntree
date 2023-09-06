@@ -5,9 +5,9 @@
 #define IDYNTREE_ROTATION_H
 
 #include <string>
-#include <iDynTree/Core/GeomVector3.h>
-#include <iDynTree/Core/RotationRaw.h>
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/GeomVector3.h>
+#include <iDynTree/RotationRaw.h>
+#include <iDynTree/VectorFixSize.h>
 
 namespace iDynTree
 {

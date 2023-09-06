@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Core/PositionRaw.h>
-#include <iDynTree/Core/RotationRaw.h>
-#include <iDynTree/Core/SpatialMotionVector.h>
-#include <iDynTree/Core/SpatialForceVector.h>
-#include <iDynTree/Core/Utils.h>
+#include <iDynTree/PositionRaw.h>
+#include <iDynTree/RotationRaw.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/SpatialForceVector.h>
+#include <iDynTree/Utils.h>
 #include <cstdio>
 #include <sstream>
 

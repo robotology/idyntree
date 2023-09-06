@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_BERDY_SPARSEMAPSOLVER_H
 #define IDYNTREE_BERDY_SPARSEMAPSOLVER_H
 
-#include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/Utils.h>
+#include <iDynTree/VectorFixSize.h>
 #include <iDynTree/Model/Indices.h>
 
 namespace iDynTree {

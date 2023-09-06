@@ -10,7 +10,7 @@
 
 #include <iDynTree/Integrators/RK4.h>
 #include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 namespace iDynTree {
     namespace optimalcontrol {

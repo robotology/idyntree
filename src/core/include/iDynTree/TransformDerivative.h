@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_TRANSFORM_DERIVATIVE_H
 #define IDYNTREE_TRANSFORM_DERIVATIVE_H
 
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/MatrixFixSize.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/MatrixFixSize.h>
 
 namespace iDynTree
 {

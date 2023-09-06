@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_POSITION_H
 #define IDYNTREE_POSITION_H
 
-#include <iDynTree/Core/PositionRaw.h>
-#include <iDynTree/Core/Rotation.h>
+#include <iDynTree/PositionRaw.h>
+#include <iDynTree/Rotation.h>
 
 #include <string>
 

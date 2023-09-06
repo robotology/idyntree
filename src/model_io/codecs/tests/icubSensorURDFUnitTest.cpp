@@ -6,7 +6,7 @@
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/ModelIO/URDFDofsImport.h>
 
-#include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/TestUtils.h>
 #include <iDynTree/Sensors/AccelerometerSensor.h>
 #include <iDynTree/Sensors/GyroscopeSensor.h>
 

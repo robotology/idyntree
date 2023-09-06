@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_SIMPLE_LEGGED_ODOMETRY2_
 #define IDYNTREE_SIMPLE_LEGGED_ODOMETRY2_
 
-#include <iDynTree/Core/Transform.h>
+#include <iDynTree/Transform.h>
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>

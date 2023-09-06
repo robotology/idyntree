@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_GEOM_VECTOR_3_H
 #define IDYNTREE_GEOM_VECTOR_3_H
 
-#include <iDynTree/Core/VectorFixSize.h>
+#include <iDynTree/VectorFixSize.h>
 
 namespace iDynTree
 {

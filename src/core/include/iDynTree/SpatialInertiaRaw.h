@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_SPATIAL_INERTIA_RAW_H
 #define IDYNTREE_SPATIAL_INERTIA_RAW_H
 
-#include <iDynTree/Core/RotationalInertiaRaw.h>
+#include <iDynTree/RotationalInertiaRaw.h>
 
 namespace iDynTree
 {

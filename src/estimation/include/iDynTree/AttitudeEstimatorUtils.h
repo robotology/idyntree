@@ -5,7 +5,7 @@
 #define IDYNTREE_ATTITUDE_ESTIMATOR_UTILS_H
 
 #include <iDynTree/Estimation/AttitudeEstimator.h>
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <vector>

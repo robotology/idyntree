@@ -4,12 +4,12 @@
 #ifndef IDYNTREE_SPATIAL_INERTIA_H
 #define IDYNTREE_SPATIAL_INERTIA_H
 
-#include <iDynTree/Core/SpatialInertiaRaw.h>
-#include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/Twist.h>
-#include <iDynTree/Core/SpatialMomentum.h>
-#include <iDynTree/Core/SpatialAcc.h>
-#include <iDynTree/Core/Wrench.h>
+#include <iDynTree/SpatialInertiaRaw.h>
+#include <iDynTree/VectorFixSize.h>
+#include <iDynTree/Twist.h>
+#include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/SpatialAcc.h>
+#include <iDynTree/Wrench.h>
 
 namespace iDynTree
 {

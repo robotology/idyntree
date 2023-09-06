@@ -10,7 +10,7 @@
 
 #include <iDynTree/LinearConstraint.h>
 
-#include <iDynTree/Core/EigenHelpers.h>
+#include <iDynTree/EigenHelpers.h>
 
 #include <cassert>
 
