@@ -331,7 +331,7 @@ bool ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements(c
     /**
      * Simulate FT sensor measurements
      */
-    predictSensorsMeasurementsFromRawBuffers(m_model,m_model.sensors(),m_dynamicTraversal,
+    predictSensorsMeasurementsFromRawBuffers(m_model,m_dynamicTraversal,
                                              m_linkVels,m_linkProperAccs,m_linkIntWrenches,predictedMeasures);
 
 

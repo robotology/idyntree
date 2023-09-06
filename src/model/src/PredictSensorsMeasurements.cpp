@@ -51,7 +51,7 @@ bool predictSensorsMeasurements(const Model & model,
     RNEADynamicPhase(model,traversal,robotPos.jointPos(),buf_linkVel,buf_linkProperAcc,
                      externalWrenches,buf_internalWrenches,buf_outputTorques);
 
-    return predictSensorsMeasurementsFromRawBuffers(model,model.sensors(),traversal,
+    return predictSensorsMeasurementsFromRawBuffers(model,traversal,
                                                     buf_linkVel,buf_linkProperAcc,
                                                     buf_internalWrenches,predictedMeasurement);
 }
@@ -144,7 +144,7 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
     Model modelCopy = model;
     modelCopy.sensors() = sensorsList;
 
-    return predictSensorsMeasurementsFromRawBuffers(model, sensorsList, traversal, buf_linkVel, 
+    return predictSensorsMeasurementsFromRawBuffers(model, traversal, buf_linkVel, 
                                                     buf_linkProperAcc, buf_internalWrenches, predictedMeasurement);
 }
 

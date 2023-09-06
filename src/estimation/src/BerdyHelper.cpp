@@ -238,7 +238,7 @@ bool BerdyHelper::init(const Model& model,
 {
     Model modelCopy = model;
     modelCopy.sensors() = sensors;
-    return init(model, options);
+    return init(modelCopy, options);
 }
 
 BerdyOptions BerdyHelper::getOptions() const

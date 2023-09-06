@@ -161,7 +161,7 @@ public:
      */
     IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use the variant in which the sensors are passed as part of the iDynTree::Model.")
     bool init(const Model& model,
-              const SensorsList& sensors=SensorsList(),
+              const SensorsList& sensors,
               const ModelExporterOptions options=ModelExporterOptions());
 
     /**

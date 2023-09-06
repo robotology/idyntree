@@ -869,9 +869,10 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
         }
     }
 
-    // At this point the traversal should contain all the links
-    // of the model
-    assert(traversal.getNrOfVisitedLinks() == this->getNrOfLinks());
+    // At this point the traversal should contain part of the links of the model
+    // (not all, as it is a subset if the links of the model are not all connected by joints )
+    // See https://github.com/robotology/idyntree/pull/914
+    assert(traversal.getNrOfVisitedLinks() <= this->getNrOfLinks());
 
     return true;
 }
