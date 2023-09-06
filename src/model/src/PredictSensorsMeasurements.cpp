@@ -128,7 +128,7 @@ bool predictSensorsMeasurements(const Model & model,
     Model modelCopy = model;
     modelCopy.sensors() = sensorsList;
 
-    return predictSensorsMeasurements(model, traversal, robotPos, robotVel, robotAcc, gravity, 
+    return predictSensorsMeasurements(modelCopy, traversal, robotPos, robotVel, robotAcc, gravity, 
                                       externalWrenches, buf_properRobotAcc, buf_linkPos, buf_linkVel, 
                                       buf_linkProperAcc, buf_internalWrenches, buf_outputTorques, predictedMeasurement);
 }
@@ -144,7 +144,7 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
     Model modelCopy = model;
     modelCopy.sensors() = sensorsList;
 
-    return predictSensorsMeasurementsFromRawBuffers(model, traversal, buf_linkVel, 
+    return predictSensorsMeasurementsFromRawBuffers(modelCopy, traversal, buf_linkVel, 
                                                     buf_linkProperAcc, buf_internalWrenches, predictedMeasurement);
 }
 
