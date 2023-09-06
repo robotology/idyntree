@@ -6,7 +6,7 @@
 #define IDYNTREE_CORE_SO3UTILS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/SO3Utils.h> is deprecated. Please use <iDynTree/SO3Utils.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/SO3Utils.h> is deprecated. Please use <iDynTree/SO3Utils.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SO3Utils.h>

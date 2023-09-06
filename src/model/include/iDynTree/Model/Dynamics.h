@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_DYNAMICS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Dynamics.h> is deprecated. Please use <iDynTree/Dynamics.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Model/Dynamics.h> is deprecated. Please use <iDynTree/Dynamics.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Dynamics.h>

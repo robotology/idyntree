@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_EIGEN_MATH_HELPERS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/EigenMathHelpers.h> is deprecated. Please use <iDynTree/EigenMathHelpers.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/EigenMathHelpers.h> is deprecated. Please use <iDynTree/EigenMathHelpers.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/EigenMathHelpers.h>

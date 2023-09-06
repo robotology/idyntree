@@ -5,7 +5,7 @@
 #define IDYNTREE_ESTIMATION_SIMPLE_LEGGED_ODOMETRY2_
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/SimpleLeggedOdometry.h> is deprecated. Please use <iDynTree/SimpleLeggedOdometry.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Estimation/SimpleLeggedOdometry.h> is deprecated. Please use <iDynTree/SimpleLeggedOdometry.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SimpleLeggedOdometry.h>

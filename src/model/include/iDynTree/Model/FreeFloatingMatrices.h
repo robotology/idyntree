@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_FREE_FLOATING_MATRICES_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/FreeFloatingMatrices.h> is deprecated. Please use <iDynTree/FreeFloatingMatrices.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Model/FreeFloatingMatrices.h> is deprecated. Please use <iDynTree/FreeFloatingMatrices.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/FreeFloatingMatrices.h>

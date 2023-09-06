@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_MATRIX_DYN_SIZE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/MatrixDynSize.h> is deprecated. Please use <iDynTree/MatrixDynSize.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/MatrixDynSize.h> is deprecated. Please use <iDynTree/MatrixDynSize.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/MatrixDynSize.h>

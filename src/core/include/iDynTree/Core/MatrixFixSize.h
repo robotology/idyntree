@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_MATRIX_FIX_SIZE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/MatrixFixSize.h> is deprecated. Please use <iDynTree/MatrixFixSize.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/MatrixFixSize.h> is deprecated. Please use <iDynTree/MatrixFixSize.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/MatrixFixSize.h>

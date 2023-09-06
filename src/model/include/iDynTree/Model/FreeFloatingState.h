@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_FREE_FLOATING_STATE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/FreeFloatingState.h> is deprecated. Please use <iDynTree/FreeFloatingState.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Model/FreeFloatingState.h> is deprecated. Please use <iDynTree/FreeFloatingState.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/FreeFloatingState.h>

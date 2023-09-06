@@ -5,7 +5,7 @@
 #define IDYNTREE_SENSORS_PREDICT_SENSORS_MEASUREMENTS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/PredictSensorsMeasurements.h> is deprecated. Please use <iDynTree/PredictSensorsMeasurements.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Sensors/PredictSensorsMeasurements.h> is deprecated. Please use <iDynTree/PredictSensorsMeasurements.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/PredictSensorsMeasurements.h>

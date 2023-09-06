@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_DYN_LINEARIZATION_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/DynamicsLinearization.h> is deprecated. Please use <iDynTree/DynamicsLinearization.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Model/DynamicsLinearization.h> is deprecated. Please use <iDynTree/DynamicsLinearization.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/DynamicsLinearization.h>

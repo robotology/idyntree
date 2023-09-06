@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_SPARSE_MATRIX_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/SparseMatrix.h> is deprecated. Please use <iDynTree/SparseMatrix.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/SparseMatrix.h> is deprecated. Please use <iDynTree/SparseMatrix.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SparseMatrix.h>

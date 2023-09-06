@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_UTILS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Utils.h> is deprecated. Please use <iDynTree/Utils.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/Utils.h> is deprecated. Please use <iDynTree/Utils.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Utils.h>

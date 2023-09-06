@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_MATRIX_VIEW_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/MatrixView.h> is deprecated. Please use <iDynTree/MatrixView.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/MatrixView.h> is deprecated. Please use <iDynTree/MatrixView.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/MatrixView.h>

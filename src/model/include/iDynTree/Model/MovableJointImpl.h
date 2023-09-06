@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_MOVABLE_JOINT_IMPL_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/MovableJointImpl.h> is deprecated. Please use <iDynTree/MovableJointImpl.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Model/MovableJointImpl.h> is deprecated. Please use <iDynTree/MovableJointImpl.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/MovableJointImpl.h>

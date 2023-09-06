@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_INERTIA_NON_LINEAR_PARAMETRIZATION_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/InertiaNonLinearParametrization.h> is deprecated. Please use <iDynTree/InertiaNonLinearParametrization.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Core/InertiaNonLinearParametrization.h> is deprecated. Please use <iDynTree/InertiaNonLinearParametrization.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/InertiaNonLinearParametrization.h>

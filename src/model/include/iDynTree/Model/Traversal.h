@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_TRAVERSAL_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Traversal.h> is deprecated. Please use <iDynTree/Traversal.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Model/Traversal.h> is deprecated. Please use <iDynTree/Traversal.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Traversal.h>
