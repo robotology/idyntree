@@ -9,8 +9,8 @@
     <includedby refid="Core_2MatrixView_8h" local="no">iDynTree/Core/MatrixView.h</includedby>
     <includedby refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includedby>
     <includedby refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includedby>
-    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>cassert</label>

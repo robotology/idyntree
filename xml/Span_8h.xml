@@ -15,8 +15,8 @@
     <includedby refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includedby>
     <includedby refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includedby>
     <includedby refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includedby>
-    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <incdepgraph>
       <node id="7">
         <label>limits</label>
