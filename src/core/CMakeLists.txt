@@ -136,7 +136,7 @@ install(TARGETS ${libraryname}
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 # Install deprecated headers
-install(DIRECTORY include/iDynTree
+install(DIRECTORY include/iDynTree/Core
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 if(IDYNTREE_COMPILE_TESTS)
