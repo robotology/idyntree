@@ -5,6 +5,7 @@
 #include "iDynTree/Transform.h"
 #include "iDynTree/Wrench.h"
 #include "iDynTree/Twist.h"
+#include <iDynTree/Model.h>
 
 
 namespace iDynTree {

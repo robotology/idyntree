@@ -20,9 +20,7 @@
 
 namespace iDynTree {
 
-
 bool predictSensorsMeasurements(const Model & model,
-                                const SensorsList &sensorsList,
                                 const Traversal & traversal,
                                 const FreeFloatingPos& robotPos,
                                 const FreeFloatingVel& robotVel,
@@ -53,13 +51,12 @@ bool predictSensorsMeasurements(const Model & model,
     RNEADynamicPhase(model,traversal,robotPos.jointPos(),buf_linkVel,buf_linkProperAcc,
                      externalWrenches,buf_internalWrenches,buf_outputTorques);
 
-    return predictSensorsMeasurementsFromRawBuffers(model,sensorsList,traversal,
+    return predictSensorsMeasurementsFromRawBuffers(model,traversal,
                                                     buf_linkVel,buf_linkProperAcc,
                                                     buf_internalWrenches,predictedMeasurement);
 }
 
-bool predictSensorsMeasurementsFromRawBuffers(const Model& /*model*/,
-                                              const SensorsList& sensorsList,
+bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
                                               const Traversal& traversal,
                                               const LinkVelArray& buf_linkVel,
                                               const LinkAccArray& buf_linkProperAcc,
@@ -68,10 +65,10 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& /*model*/,
 {
     bool retVal = true;
 
-    size_t numOfFTs = sensorsList.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+    size_t numOfFTs = model.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
     for(size_t idx = 0; idx<numOfFTs; idx++)
     {
-        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)sensorsList.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
+        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)model.sensors().getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
 
         Wrench predictedWrench = ftSens->predictMeasurement(traversal,buf_internalWrenches);
         retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,idx,predictedWrench);
@@ -80,36 +77,75 @@ bool predictSensorsMeasurementsFromRawBuffers(const Model& /*model*/,
 
     //Iterate through each accelrometer and find its parent. Compute local (classical accelration)
     // It is automatically proper acceleration since gravity is incorporated into the base acceleration
-    unsigned int numAccl = sensorsList.getNrOfSensors(iDynTree::ACCELEROMETER);
+    unsigned int numAccl = model.sensors().getNrOfSensors(iDynTree::ACCELEROMETER);
     for(size_t idx = 0; idx<numAccl; idx++)
     {
-        AccelerometerSensor * accelerometer = (AccelerometerSensor *)sensorsList.getSensor(iDynTree::ACCELEROMETER, idx);
+        AccelerometerSensor * accelerometer = (AccelerometerSensor *)model.sensors().getSensor(iDynTree::ACCELEROMETER, idx);
         LinkIndex parentLinkId = accelerometer->getParentLinkIndex();
         LinAcceleration predictedAcc = accelerometer->predictMeasurement(buf_linkProperAcc(parentLinkId),
                                                                          buf_linkVel(parentLinkId));
         retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::ACCELEROMETER,idx,predictedAcc);
     }
 
-    unsigned int numGyro = sensorsList.getNrOfSensors(iDynTree::GYROSCOPE);
+    unsigned int numGyro = model.sensors().getNrOfSensors(iDynTree::GYROSCOPE);
     for(size_t idx = 0; idx<numGyro; idx++)
     {
-        GyroscopeSensor * gyroscope = (GyroscopeSensor*)sensorsList.getSensor(iDynTree::GYROSCOPE, idx);
+        GyroscopeSensor * gyroscope = (GyroscopeSensor*)model.sensors().getSensor(iDynTree::GYROSCOPE, idx);
         LinkIndex parentLinkId = gyroscope->getParentLinkIndex();
         AngVelocity predictedAngVel = gyroscope->predictMeasurement(buf_linkVel(parentLinkId));
         retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::GYROSCOPE,idx,predictedAngVel);
     }
 
-    unsigned int numAngAccl = sensorsList.getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER);
+    unsigned int numAngAccl = model.sensors().getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER);
     for(size_t idx = 0; idx<numAngAccl; idx++)
     {
         ThreeAxisAngularAccelerometerSensor * angAccelerometer =
-        (ThreeAxisAngularAccelerometerSensor*)sensorsList.getSensor(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, idx);
+        (ThreeAxisAngularAccelerometerSensor*)model.sensors().getSensor(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, idx);
         LinkIndex parentLinkId = angAccelerometer->getParentLinkIndex();
         Vector3 predictedAngAcc = angAccelerometer->predictMeasurement(buf_linkProperAcc(parentLinkId));
         retVal = retVal && predictedMeasurement.setMeasurement(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER,idx,predictedAngAcc);
     }
 
     return retVal;
+}
+
+bool predictSensorsMeasurements(const Model & model,
+                                const SensorsList &sensorsList,
+                                const Traversal & traversal,
+                                const FreeFloatingPos& robotPos,
+                                const FreeFloatingVel& robotVel,
+                                const FreeFloatingAcc& robotAcc,
+                                const LinAcceleration & gravity,
+                                const LinkNetExternalWrenches & externalWrenches,
+                                      FreeFloatingAcc& buf_properRobotAcc,
+                                      LinkPositions& buf_linkPos,
+                                      LinkVelArray& buf_linkVel,
+                                      LinkAccArray& buf_linkProperAcc,
+                                      LinkInternalWrenches& buf_internalWrenches,
+                                      FreeFloatingGeneralizedTorques& buf_outputTorques,
+                                      SensorsMeasurements &predictedMeasurement)
+{
+    Model modelCopy = model;
+    modelCopy.sensors() = sensorsList;
+
+    return predictSensorsMeasurements(modelCopy, traversal, robotPos, robotVel, robotAcc, gravity, 
+                                      externalWrenches, buf_properRobotAcc, buf_linkPos, buf_linkVel, 
+                                      buf_linkProperAcc, buf_internalWrenches, buf_outputTorques, predictedMeasurement);
+}
+
+bool predictSensorsMeasurementsFromRawBuffers(const Model& model,
+                                              const SensorsList& sensorsList,
+                                              const Traversal& traversal,
+                                              const LinkVelArray& buf_linkVel,
+                                              const LinkAccArray& buf_linkProperAcc,
+                                              const LinkInternalWrenches& buf_internalWrenches,
+                                              SensorsMeasurements& predictedMeasurement)
+{
+    Model modelCopy = model;
+    modelCopy.sensors() = sensorsList;
+
+    return predictSensorsMeasurementsFromRawBuffers(modelCopy, traversal, buf_linkVel, 
+                                                    buf_linkProperAcc, buf_internalWrenches, predictedMeasurement);
 }
 
 

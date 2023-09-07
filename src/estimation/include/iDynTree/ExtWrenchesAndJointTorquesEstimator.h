@@ -51,7 +51,6 @@ class ExtWrenchesAndJointTorquesEstimator
      */
     Model m_model;
     SubModelDecomposition m_submodels;
-    SensorsList m_sensors;
     bool m_isModelValid;
     bool m_isKinematicsUpdated;
 
@@ -99,9 +98,18 @@ public:
      * \brief Set model and sensors used for the estimation.
      *
      * @param[in] _model the kinematic and dynamic model used for the estimation.
+     * @return true if all went well (model and sensors are well formed), false otherwise.
+     */
+    bool setModel(const Model & _model);
+
+    /**
+     * \brief Set model and sensors used for the estimation.
+     *
+     * @param[in] _model the kinematic and dynamic model used for the estimation.
      * @param[in] _sensors the sensor model used for the estimation.
      * @return true if all went well (model and sensors are well formed), false otherwise.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use variant of this method (i.e. setModel) where SensorsList is passed via the iDynTree::Model.")
     bool setModelAndSensors(const Model & _model, const SensorsList & _sensors);
 
     /**
@@ -146,6 +154,7 @@ public:
      *
      * @return the sensor model used for estimation.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use model::sensors.")
     const SensorsList & sensors() const;
 
     /**

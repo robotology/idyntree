@@ -14,6 +14,7 @@
 
 #include <iDynTree/Indices.h>
 #include <iDynTree/LinkState.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
 #include <iDynTree/FreeFloatingState.h>
 
@@ -342,11 +343,6 @@ class BerdyHelper
     Model m_model;
 
     /**
-     * Sensors used in this class
-     */
-    SensorsList m_sensors;
-
-    /**
      * Traversal used for the dynamics computations
      */
     Traversal m_dynamicsTraversal;
@@ -519,6 +515,7 @@ public:
     /**
      * Access the sensors.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use BerdyHelper::model::sensors method.")
     SensorsList& sensors();
 
     /**
@@ -534,6 +531,7 @@ public:
     /**
      * Access the model (const version).
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use BerdyHelper::model::sensors method.")
     const SensorsList& sensors() const;
 
     /**
@@ -547,10 +545,21 @@ public:
      * Init the class
      *
      * @param[in] model The used model.
+     * @param[in] options The used options, check BerdyOptions docs.
+     * @return true if all went well, false otherwise.
+     */
+    bool init(const Model& model,
+              const BerdyOptions options=BerdyOptions());
+
+    /**
+     * Init the class
+     *
+     * @param[in] model The used model.
      * @param[in] sensors The used sensors.
      * @param[in] options The used options, check BerdyOptions docs.
      * @return true if all went well, false otherwise.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use the version in which sensors are passed via the iDynTree::Model")
     bool init(const Model& model,
               const SensorsList& sensors,
               const BerdyOptions options=BerdyOptions());

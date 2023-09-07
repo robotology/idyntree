@@ -3,6 +3,7 @@
 
 #include "ForceTorqueSensorElement.h"
 
+#include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
 #include <iDynTree/SixAxisForceTorqueSensor.h>
 

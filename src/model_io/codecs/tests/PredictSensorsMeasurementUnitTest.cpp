@@ -22,7 +22,7 @@ const double gyroTestVal = 1.5;
 using namespace iDynTree;
 
 void init(std::string fileName, Model &model, Traversal &traversal,
-          SensorsList &sensorsList, SensorsMeasurements &predictedMeasurement)
+         SensorsMeasurements &predictedMeasurement)
 {
     // load URDF model
     ModelLoader loader;
@@ -42,16 +42,15 @@ void init(std::string fileName, Model &model, Traversal &traversal,
     ASSERT_EQUAL_DOUBLE(ok,true);
 
     // Load sensorList
-    sensorsList = loader.sensors();
 
-    ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(ACCELEROMETER),2);
-    ASSERT_EQUAL_DOUBLE(sensorsList.getNrOfSensors(GYROSCOPE),1);
+    ASSERT_EQUAL_DOUBLE(loader.sensors().getNrOfSensors(ACCELEROMETER),2);
+    ASSERT_EQUAL_DOUBLE(loader.sensors().getNrOfSensors(GYROSCOPE),1);
 
-    predictedMeasurement.resize(sensorsList);
+    predictedMeasurement.resize(loader.sensors());
 }
 
 void runTest(const int& expID,const Model& model,const Traversal& traversal,
-             const SensorsList& sensorsList, SensorsMeasurements& predictedMeasurement)
+             SensorsMeasurements& predictedMeasurement)
 {
     // quantities to be set according to experiment
     FreeFloatingPos robotPos(model);
@@ -93,7 +92,7 @@ void runTest(const int& expID,const Model& model,const Traversal& traversal,
                 break;
     }
 
-    predictSensorsMeasurements(model,sensorsList,
+    predictSensorsMeasurements(model,
                                traversal,robotPos,robotVel,robotAcc,gravity,externalWrenches,
                                buf_properRobotAcc,buf_linkPos,buf_linkVel,buf_linkAcc,buf_internalWrenches,
                                buf_generalizedTorques,predictedMeasurement);
@@ -140,15 +139,14 @@ int main()
     Model model;
     Traversal traversal;
 
-    SensorsList sensorsList;
     SensorsMeasurements predictedMeasurement;
-    init(fileName, model,traversal,sensorsList,predictedMeasurement);
+    init(fileName, model,traversal,predictedMeasurement);
 
     //experiments 1-accelerometer gravity test, 2-angularVelocity test, 3-angularAccelerationTest
 
     for(int expID=1;expID<4;expID++)
     {
-        runTest(expID,model,traversal,sensorsList,predictedMeasurement);
+        runTest(expID,model,traversal,predictedMeasurement);
     }
 
 

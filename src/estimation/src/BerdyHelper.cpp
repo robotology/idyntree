@@ -158,15 +158,13 @@ BerdyHelper::BerdyHelper(): m_areModelAndSensorsValid(false),
 }
 
 bool BerdyHelper::init(const Model& model,
-                        const SensorsList& sensors,
-                        const BerdyOptions options)
+                       const BerdyOptions options)
 {
     // Reset the class
     m_kinematicsUpdated = false;
     m_areModelAndSensorsValid = false;
 
     m_model = model;
-    m_sensors = sensors;
     m_options = options;
 
     LinkIndex baseLinkIndex;
@@ -234,6 +232,15 @@ bool BerdyHelper::init(const Model& model,
     return res;
 }
 
+bool BerdyHelper::init(const Model& model,
+                       const SensorsList& sensors,
+                       const BerdyOptions options)
+{
+    Model modelCopy = model;
+    modelCopy.sensors() = sensors;
+    return init(modelCopy, options);
+}
+
 BerdyOptions BerdyHelper::getOptions() const
 {
     return m_options;
@@ -250,7 +257,7 @@ bool BerdyHelper::initSensorsMeasurements()
     // Berdy variant is BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
     if(m_options.berdyVariant != BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
-        m_nrOfSensorsMeasurements = m_sensors.getSizeOfAllSensorsMeasurements();
+        m_nrOfSensorsMeasurements = m_model.sensors().getSizeOfAllSensorsMeasurements();
     }
     else
     {
@@ -347,9 +354,9 @@ bool BerdyHelper::initOriginalBerdyFixedBase()
         //        so we need a better way to iterate over them
         if( isLinkSensor(type) )
         {
-            for(size_t sensIdx = 0; sensIdx < m_sensors.getNrOfSensors(type); sensIdx++)
+            for(size_t sensIdx = 0; sensIdx < m_model.sensors().getNrOfSensors(type); sensIdx++)
             {
-                LinkSensor * linkSensor = dynamic_cast<LinkSensor*>(m_sensors.getSensor(type,sensIdx));
+                LinkSensor * linkSensor = dynamic_cast<LinkSensor*>(m_model.sensors().getSensor(type,sensIdx));
 
                 LinkIndex   linkToWhichTheSensorIsAttached = linkSensor->getParentLinkIndex();
 
@@ -575,27 +582,27 @@ IndexRange BerdyHelper::getRangeSensorVariable(const SensorType type, const unsi
 
     if( type > SIX_AXIS_FORCE_TORQUE )
     {
-        sensorOffset += 6*m_sensors.getNrOfSensors(SIX_AXIS_FORCE_TORQUE);
+        sensorOffset += 6*m_model.sensors().getNrOfSensors(SIX_AXIS_FORCE_TORQUE);
     }
 
     if( type > ACCELEROMETER )
     {
-        sensorOffset += 3*m_sensors.getNrOfSensors(ACCELEROMETER);
+        sensorOffset += 3*m_model.sensors().getNrOfSensors(ACCELEROMETER);
     }
 
     if( type > GYROSCOPE )
     {
-        sensorOffset += 3*m_sensors.getNrOfSensors(GYROSCOPE);
+        sensorOffset += 3*m_model.sensors().getNrOfSensors(GYROSCOPE);
     }
 
     if( type > THREE_AXIS_ANGULAR_ACCELEROMETER )
     {
-        sensorOffset += 3*m_sensors.getNrOfSensors(THREE_AXIS_ANGULAR_ACCELEROMETER);
+        sensorOffset += 3*m_model.sensors().getNrOfSensors(THREE_AXIS_ANGULAR_ACCELEROMETER);
     }
 
     if( type > THREE_AXIS_FORCE_TORQUE_CONTACT )
     {
-        sensorOffset += 3*m_sensors.getNrOfSensors(THREE_AXIS_FORCE_TORQUE_CONTACT);
+        sensorOffset += 3*m_model.sensors().getNrOfSensors(THREE_AXIS_FORCE_TORQUE_CONTACT);
     }
 
     sensorOffset += sensorIdx*getSensorTypeSize(type);
@@ -1145,10 +1152,10 @@ bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::Co
     ////////////////////////////////////////////////////////////////////////
     ///// SIX AXIS F/T SENSORS
     ////////////////////////////////////////////////////////////////////////
-    size_t numOfFTs = m_sensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+    size_t numOfFTs = m_model.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
     for(size_t idx = 0; idx<numOfFTs; idx++)
     {
-        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)m_sensors.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
+        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)m_model.sensors().getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
         LinkIndex childLink;
         childLink = m_dynamicsTraversal.getChildLinkIndexFromJointIndex(m_model,ftSens->getParentJointIndex());
         Matrix6x6 sensor_M_link;
@@ -1165,10 +1172,10 @@ bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::Co
     ////////////////////////////////////////////////////////////////////////
     ///// ACCELEROMETERS
     ////////////////////////////////////////////////////////////////////////
-    unsigned int numAccl = m_sensors.getNrOfSensors(iDynTree::ACCELEROMETER);
+    unsigned int numAccl = m_model.sensors().getNrOfSensors(iDynTree::ACCELEROMETER);
     for(size_t idx = 0; idx<numAccl; idx++)
     {
-        AccelerometerSensor * accelerometer = (AccelerometerSensor *)m_sensors.getSensor(iDynTree::ACCELEROMETER, idx);
+        AccelerometerSensor * accelerometer = (AccelerometerSensor *)m_model.sensors().getSensor(iDynTree::ACCELEROMETER, idx);
         LinkIndex parentLinkId = accelerometer->getParentLinkIndex();
         Transform sensor_X_link = accelerometer->getLinkSensorTransform().inverse();
         IndexRange sensorRange = this->getRangeSensorVariable(ACCELEROMETER,idx);
@@ -1215,10 +1222,10 @@ bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::Co
     ////////////////////////////////////////////////////////////////////////
     ///// GYROSCOPES
     ////////////////////////////////////////////////////////////////////////
-    unsigned int numGyro = m_sensors.getNrOfSensors(iDynTree::GYROSCOPE);
+    unsigned int numGyro = m_model.sensors().getNrOfSensors(iDynTree::GYROSCOPE);
     for(size_t idx = 0; idx<numGyro; idx++)
     {
-        GyroscopeSensor * gyroscope = (GyroscopeSensor*)m_sensors.getSensor(iDynTree::GYROSCOPE, idx);
+        GyroscopeSensor * gyroscope = (GyroscopeSensor*)m_model.sensors().getSensor(iDynTree::GYROSCOPE, idx);
         LinkIndex parentLinkId = gyroscope->getParentLinkIndex();
         Transform sensor_X_link = gyroscope->getLinkSensorTransform().inverse();
         IndexRange sensorRange = this->getRangeSensorVariable(GYROSCOPE,idx);
@@ -1232,10 +1239,10 @@ bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::Co
     ////////////////////////////////////////////////////////////////////////
     ///// THREE AXIS ANGULAR ACCELEROMETERS
     ////////////////////////////////////////////////////////////////////////
-    unsigned int numThreeAxisAngularAccelerometer = m_sensors.getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER);
+    unsigned int numThreeAxisAngularAccelerometer = m_model.sensors().getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER);
     for(size_t idx = 0; idx<numThreeAxisAngularAccelerometer; idx++)
     {
-        ThreeAxisAngularAccelerometerSensor * angAccelerometer = (ThreeAxisAngularAccelerometerSensor*)m_sensors.getSensor(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, idx);
+        ThreeAxisAngularAccelerometerSensor * angAccelerometer = (ThreeAxisAngularAccelerometerSensor*)m_model.sensors().getSensor(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, idx);
         LinkIndex parentLinkId = angAccelerometer->getParentLinkIndex();
         Transform sensor_X_link = angAccelerometer->getLinkSensorTransform().inverse();
         IndexRange sensorRange = this->getRangeSensorVariable(THREE_AXIS_ANGULAR_ACCELEROMETER, idx);
@@ -1264,10 +1271,10 @@ bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::Co
     ////////////////////////////////////////////////////////////////////////
     ///// THREE AXIS FORCE TORQUE CONTACT
     ////////////////////////////////////////////////////////////////////////
-    unsigned int numThreeAxisForceTorqueContact = m_sensors.getNrOfSensors(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT);
+    unsigned int numThreeAxisForceTorqueContact = m_model.sensors().getNrOfSensors(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT);
     for(size_t idx = 0; idx<numThreeAxisForceTorqueContact; idx++)
     {
-        ThreeAxisForceTorqueContactSensor * threeAxisFTContactSensor = (ThreeAxisForceTorqueContactSensor*)m_sensors.getSensor(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT, idx);
+        ThreeAxisForceTorqueContactSensor * threeAxisFTContactSensor = (ThreeAxisForceTorqueContactSensor*)m_model.sensors().getSensor(iDynTree::THREE_AXIS_FORCE_TORQUE_CONTACT, idx);
         LinkIndex parentLinkId = threeAxisFTContactSensor->getParentLinkIndex();
         Transform sensor_X_link = threeAxisFTContactSensor->getLinkSensorTransform().inverse();
         IndexRange sensorRange = this->getRangeSensorVariable(THREE_AXIS_FORCE_TORQUE_CONTACT, idx);
@@ -1520,12 +1527,12 @@ const Model& BerdyHelper::model() const
 
 SensorsList& BerdyHelper::sensors()
 {
-    return this->m_sensors;
+    return this->m_model.sensors();
 }
 
 const SensorsList& BerdyHelper::sensors() const
 {
-    return this->m_sensors;
+    return this->m_model.sensors();
 }
 
 const Traversal& BerdyHelper::dynamicTraversal() const
@@ -1728,10 +1735,10 @@ void BerdyHelper::cacheSensorsOrdering()
     //To be a bit more flexible, rely on getRangeSensorVariable to have the order of
     //the URDF sensors
     //???: Isn't this a loop in some way??
-    for (SensorsList::Iterator it = m_sensors.allSensorsIterator();
+    for (SensorsList::Iterator it = m_model.sensors().allSensorsIterator();
          it.isValid(); ++it)
     {
-        IndexRange sensorRange = this->getRangeSensorVariable((*it)->getSensorType(), m_sensors.getSensorIndex((*it)->getSensorType(), (*it)->getName()));
+        IndexRange sensorRange = this->getRangeSensorVariable((*it)->getSensorType(), m_model.sensors().getSensorIndex((*it)->getSensorType(), (*it)->getName()));
 
         BerdySensor sensor;
         sensor.type = static_cast<BerdySensorTypes>((*it)->getSensorType());

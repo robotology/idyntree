@@ -10,6 +10,8 @@
 
 #include <iDynTree/EigenHelpers.h>
 
+#include <iDynTree/Model.h>
+
 namespace iDynTree {
 
 struct ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensorPrivateAttributes

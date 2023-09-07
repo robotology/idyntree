@@ -11,6 +11,9 @@
 
 #include <iDynTree/EigenHelpers.h>
 
+#include <iDynTree/Model.h>
+
+
 namespace iDynTree {
 
 struct ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerPrivateAttributes

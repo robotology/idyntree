@@ -6,7 +6,7 @@
 #include "URDFDocument.h"
 
 #include <iDynTree/XMLParser.h>
-#include <iDynTree/ModelSensorsTransformers.h>
+#include <iDynTree/ModelTransformers.h>
 
 
 #include <string>
@@ -23,28 +23,23 @@ namespace iDynTree
     class ModelLoader::ModelLoaderPimpl {
     public:
         Model m_model;
-        SensorsList m_sensors;
         bool m_isModelValid;
         ModelParserOptions m_options;
 
-        bool setModelAndSensors(const Model& _model, const SensorsList& _sensors);
+        bool setModel(const Model& _model);
     };
 
-    bool ModelLoader::ModelLoaderPimpl::setModelAndSensors(const Model& _model,
-                                                           const SensorsList& _sensors)
+    bool ModelLoader::ModelLoaderPimpl::setModel(const Model& _model)
     {
-
         m_model = _model;
-        m_sensors = _sensors;
 
         // TODO \todo add a self consistency check of model/sensors
         m_isModelValid = true;
 
         if (!m_isModelValid)
         {
-            reportError("ModelLoader","setModelAndSensors","Loading failed, resetting ModelLoader to be invalid");
+            reportError("ModelLoader","setModel","Loading failed, resetting ModelLoader to be invalid");
             m_model = Model();
-            m_sensors = SensorsList();
         }
 
         return m_isModelValid;
@@ -65,7 +60,7 @@ namespace iDynTree
 
     const SensorsList& ModelLoader::sensors()
     {
-        return m_pimpl->m_sensors;
+        return m_pimpl->m_model.sensors();
     }
 
     bool ModelLoader::isValid()
@@ -103,7 +98,7 @@ namespace iDynTree
             return false;
         }
 
-        return m_pimpl->setModelAndSensors(urdfDocument->model(),urdfDocument->sensors());
+        return m_pimpl->setModel(urdfDocument->model());
     }
 
     bool ModelLoader::loadModelFromString(const std::string& modelString,
@@ -128,24 +123,23 @@ namespace iDynTree
             return false;
         }
 
-        return m_pimpl->setModelAndSensors(urdfDocument->model(),urdfDocument->sensors());
+        return m_pimpl->setModel(urdfDocument->model());
     }
 
     bool ModelLoader::loadReducedModelFromFullModel(const Model& fullModel,
                                                     const std::vector< std::string >& consideredJoints,
                                                     const std::string /*filetype*/)
     {
-        SensorsList _sensorsFull, _sensorsReduced;
         Model _modelReduced;
         _modelReduced.setPackageDirs(fullModel.getPackageDirs());
-        bool ok = createReducedModelAndSensors(fullModel,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+        bool ok = createReducedModel(fullModel,consideredJoints,_modelReduced);
 
         if( !ok )
         {
             return false;
         }
 
-        return m_pimpl->setModelAndSensors(_modelReduced,_sensorsReduced);
+        return m_pimpl->setModel(_modelReduced);
     }
 
     bool ModelLoader::loadReducedModelFromString(const std::string modelString,
@@ -155,20 +149,18 @@ namespace iDynTree
     {
         bool parsingCorrect = loadModelFromString(modelString, filetype, packageDirs);
         if (!parsingCorrect) return false;
-        SensorsList _sensorsFull = m_pimpl->m_sensors, _sensorsReduced;
         Model _modelFull = m_pimpl->m_model, _modelReduced;
         _modelReduced.setPackageDirs(packageDirs);
 
-        parsingCorrect = createReducedModelAndSensors(_modelFull, _sensorsFull,
-                                                      consideredJoints,
-                                                      _modelReduced, _sensorsReduced);
+        parsingCorrect = createReducedModel(_modelFull, consideredJoints,
+                                            _modelReduced);
 
         if (!parsingCorrect)
         {
             return false;
         }
 
-        return m_pimpl->setModelAndSensors(_modelReduced, _sensorsReduced);
+        return m_pimpl->setModel(_modelReduced);
     }
 
     bool ModelLoader::loadReducedModelFromFile(const std::string filename,
@@ -178,17 +170,16 @@ namespace iDynTree
     {
         bool parsingCorrect = loadModelFromFile(filename, filetype, packageDirs);
         if (!parsingCorrect) return false;
-        SensorsList _sensorsFull = m_pimpl->m_sensors, _sensorsReduced;
         Model _modelFull = m_pimpl->m_model, _modelReduced;
         _modelReduced.setPackageDirs(packageDirs);
 
-        parsingCorrect = createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
+        parsingCorrect = createReducedModel(_modelFull,consideredJoints,_modelReduced);
 
         if (!parsingCorrect)
         {
             return false;
         }
 
-        return m_pimpl->setModelAndSensors(_modelReduced,_sensorsReduced);
+        return m_pimpl->setModel(_modelReduced);
     }
 }

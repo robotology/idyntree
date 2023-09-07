@@ -96,6 +96,7 @@ public:
      * 
      * @note This always return the model loaded via loadModel method, and is not affected by the updateModel methods.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use ModelCalibrationHelper::model::sensors method.")
     const SensorsList & sensors();
 
     /**

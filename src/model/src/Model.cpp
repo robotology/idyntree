@@ -63,6 +63,9 @@ void Model::copy(const Model& other)
     // Copy the solid shapes
     this->m_collisionSolidShapes = other.m_collisionSolidShapes;
     this->m_visualSolidShapes    = other.m_visualSolidShapes;
+
+    // Copy the sensors
+    this->m_sensors = other.m_sensors;
 }
 
 
@@ -866,9 +869,10 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
         }
     }
 
-    // At this point the traversal should contain all the links
-    // of the model
-    assert(traversal.getNrOfVisitedLinks() == this->getNrOfLinks());
+    // At this point the traversal should contain part of the links of the model
+    // (not all, as it is a subset if the links of the model are not all connected by joints )
+    // See https://github.com/robotology/idyntree/pull/914
+    assert(traversal.getNrOfVisitedLinks() <= this->getNrOfLinks());
 
     return true;
 }
@@ -931,6 +935,16 @@ const ModelSolidShapes& Model::collisionSolidShapes() const
     return m_collisionSolidShapes;
 }
 
+SensorsList& Model::sensors()
+{
+    return m_sensors;
+}
+
+const SensorsList& Model::sensors() const
+{
+    return m_sensors;
+}
+
 std::string Model::toString() const
 {
     std::stringstream ss;
@@ -960,4 +974,10 @@ std::string Model::toString() const
 
     return ss.str();
 }
+
+bool Model::isValid() const
+{
+    return m_sensors.isConsistent(*this);
+}
+
 }

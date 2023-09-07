@@ -36,6 +36,8 @@ class SensorsList;
  * to the output model, but a frame with the same name of the "fake link"
  * and with the same transform is added to the model.
  *
+ * @warning This function does not handle SensorsList contained inside the input model.
+ * 
  * \note The definition of "fake link" used in this function excludes
  *       the case in which two fake links are attached to one another.
  *
@@ -73,6 +75,8 @@ bool createReducedModel(const Model& fullModel,
  *       this numbering is not required by any algorithm in iDynTree, but it may be useful for
  *       example to ensure that for a chain model the joint numbering is the one induced by the
  *       kinematic structure.
+ * 
+ * @warning This function does not handle SensorsList contained inside the input model.
  *
  * @return true if all went well, false if there was an error in conversion.
  */
@@ -88,6 +92,9 @@ bool createModelWithNormalizedJointNumbering(const Model& model,
  * The function takes in input a iDynTree::Model and a iDynTree::Traversal. The new model will contain joints
  * and links composing the subModelTraversal, with the same order.
  * The FT sensor frames are added as additional frames.
+ *
+ * @warning This function does not handle SensorsList contained inside the input model.
+ *
  *
  * @return true if all went well, false if there was an error in creating the sub model.
  */
