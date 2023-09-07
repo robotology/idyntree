@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="199" column="17"/>
+        <location file="iDynTree/Sensors.h" line="200" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>std::string</type>
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="204" column="29"/>
+        <location file="iDynTree/Sensors.h" line="205" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>LinkIndex</type>
@@ -60,11 +60,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="211" column="27"/>
+        <location file="iDynTree/Sensors.h" line="212" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
-        <definition>virtual Transform iDynTree::LinkSensor::getLinkSensorTransform</definition>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a052f8aa7ae390e28764e372ce6cae62a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>virtual iDynTree::Transform iDynTree::LinkSensor::getLinkSensorTransform</definition>
         <argsstring>() const =0</argsstring>
         <name>getLinkSensorTransform</name>
         <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1ab009666f7115b8591e516087d89e5dca">getLinkSensorTransform</reimplementedby>
@@ -75,14 +75,14 @@
 <para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="321">\[ {}^l H_s \]</formula>).</para>
+<para><formula id="21">\[ {}^l H_s \]</formula>).</para>
 <para><simplesect kind="return"><para>the link_H_sensor transform </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="220" column="27"/>
+        <location file="iDynTree/Sensors.h" line="221" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a9420746600b52d524f2c6fde5023147d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="225" column="22"/>
+        <location file="iDynTree/Sensors.h" line="226" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1aec8002495ae7ca62e3e8b516c55e5a0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="230" column="22"/>
+        <location file="iDynTree/Sensors.h" line="231" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a716a29b8598842583ac5c92903a978f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="237" column="22"/>
+        <location file="iDynTree/Sensors.h" line="238" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="242" column="22"/>
+        <location file="iDynTree/Sensors.h" line="243" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -225,10 +225,10 @@
         <link refid="classiDynTree_1_1Sensor"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Sensors.h" line="193" column="5" bodyfile="iDynTree/Sensors.h" bodystart="194" bodyend="243"/>
+    <location file="iDynTree/Sensors.h" line="194" column="5" bodyfile="iDynTree/Sensors.h" bodystart="195" bodyend="244"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>clone</name></member>
-      <member refid="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a052f8aa7ae390e28764e372ce6cae62a" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getLinkSensorTransform</name></member>
       <member refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getName</name></member>
       <member refid="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getParentLink</name></member>
       <member refid="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getParentLinkIndex</name></member>

@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model.h" line="24" column="19" bodyfile="iDynTree/Model.h" bodystart="24" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="25" column="19" bodyfile="iDynTree/Model.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1Neighbor_1a89630624e755423ef2d82cab0912303d" prot="public" static="no" mutable="no">
         <type>JointIndex</type>
@@ -27,14 +27,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model.h" line="25" column="20" bodyfile="iDynTree/Model.h" bodystart="25" bodyend="-1"/>
+        <location file="iDynTree/Model.h" line="26" column="20" bodyfile="iDynTree/Model.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model.h" line="22" column="5" bodyfile="iDynTree/Model.h" bodystart="23" bodyend="26"/>
+    <location file="iDynTree/Model.h" line="23" column="5" bodyfile="iDynTree/Model.h" bodystart="24" bodyend="27"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1Neighbor_1a89630624e755423ef2d82cab0912303d" prot="public" virt="non-virtual"><scope>iDynTree::Neighbor</scope><name>neighborJoint</name></member>
       <member refid="structiDynTree_1_1Neighbor_1af598faae51121c98f4731c705f7d9359" prot="public" virt="non-virtual"><scope>iDynTree::Neighbor</scope><name>neighborLink</name></member>

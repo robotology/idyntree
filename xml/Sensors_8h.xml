@@ -6,17 +6,18 @@
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
     <includes local="no">iterator</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="AccelerometerSensor_8h" local="no">iDynTree/AccelerometerSensor.h</includedby>
     <includedby refid="GyroscopeSensor_8h" local="no">iDynTree/GyroscopeSensor.h</includedby>
+    <includedby refid="Model_8h" local="no">iDynTree/Model.h</includedby>
     <includedby refid="Sensors_2Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
     <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/SixAxisForceTorqueSensor.h</includedby>
     <includedby refid="ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/ThreeAxisAngularAccelerometerSensor.h</includedby>
     <includedby refid="ThreeAxisForceTorqueContactSensor_8h" local="no">iDynTree/ThreeAxisForceTorqueContactSensor.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelCalibrationHelper.h</includedby>
     <includedby refid="ModelExporter_8h" local="no">iDynTree/ModelExporter.h</includedby>
     <includedby refid="ModelLoader_8h" local="no">iDynTree/ModelLoader.h</includedby>
@@ -103,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="27" column="5" bodyfile="iDynTree/Sensors.h" bodystart="28" bodyend="34"/>
+        <location file="iDynTree/Sensors.h" line="28" column="5" bodyfile="iDynTree/Sensors.h" bodystart="29" bodyend="35"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="var">
@@ -119,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="38" column="15" bodyfile="iDynTree/Sensors.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Sensors.h" line="39" column="15" bodyfile="iDynTree/Sensors.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -139,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="43" column="17" bodyfile="iDynTree/Sensors.h" bodystart="43" bodyend="56"/>
+        <location file="iDynTree/Sensors.h" line="44" column="17" bodyfile="iDynTree/Sensors.h" bodystart="44" bodyend="57"/>
       </memberdef>
       <memberdef kind="function" id="Sensors_8h_1a6edabe0d73bb9102d0ad456124c0f195" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -157,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="61" column="17" bodyfile="iDynTree/Sensors.h" bodystart="61" bodyend="64"/>
+        <location file="iDynTree/Sensors.h" line="62" column="17" bodyfile="iDynTree/Sensors.h" bodystart="62" bodyend="65"/>
       </memberdef>
       <memberdef kind="function" id="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::size_t</type>
@@ -174,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="66" column="24" bodyfile="iDynTree/Sensors.h" bodystart="66" bodyend="80"/>
+        <location file="iDynTree/Sensors.h" line="67" column="24" bodyfile="iDynTree/Sensors.h" bodystart="67" bodyend="81"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

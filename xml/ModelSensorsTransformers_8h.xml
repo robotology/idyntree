@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ModelSensorsTransformers_8h" kind="file" language="C++">
     <compoundname>ModelSensorsTransformers.h</compoundname>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includedby refid="Sensors_2ModelSensorsTransformers_8h" local="no">iDynTree/Sensors/ModelSensorsTransformers.h</includedby>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
@@ -34,11 +35,19 @@
 <para>Variant of createReducedModel function that also process the sensorList . </para>
         </briefdescription>
         <detaileddescription>
-<para>Note </para>
+<para>Note: since iDynTree 10, this has been superseded by the regular createReducedModel that also operated on the <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> associated with the model.</para>
+<para>To migrate to this version, just change from:</para>
+<para><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> fullModel, reducedModel; std::vector&lt;std::string&gt; jointsInReducedModel; <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> fullSensors, reducedSensors;</para>
+<para>bool ok = createReducedModelAndSensors(fullModel, fullSensors, jointsInReducedModel, reducedModel, reducedSensors);</para>
+<para>// handle ok // access reducedModel and reducedSensors</para>
+<para>to</para>
+<para><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> fullModel, reducedModel; std::vector&lt;std::string&gt; jointsInReducedModel; <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> fullSensors; fullModel.sensors() = fullSensors;</para>
+<para>bool ok = createReducedModel(fullModel, jointsInReducedModel, reducedModel);</para>
+<para>// Handle ok // access reducedModel and reducedModel.sensors() </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelSensorsTransformers.h" line="25" column="6" declfile="iDynTree/ModelSensorsTransformers.h" declline="25" declcolumn="6"/>
+        <location file="iDynTree/ModelSensorsTransformers.h" line="58" column="6" declfile="iDynTree/ModelSensorsTransformers.h" declline="58" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

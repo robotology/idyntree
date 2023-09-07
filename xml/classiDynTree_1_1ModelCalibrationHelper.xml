@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelCalibrationHelper.h" line="99" column="24"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="100" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a884bd9c1a6b009191ccb34d1b374fe00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelCalibrationHelper.h" line="107" column="10"/>
+        <location file="iDynTree/ModelCalibrationHelper.h" line="108" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -258,7 +258,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/ModelCalibrationHelper.h" line="26" column="1" bodyfile="iDynTree/ModelCalibrationHelper.h" bodystart="27" bodyend="109"/>
+    <location file="iDynTree/ModelCalibrationHelper.h" line="26" column="1" bodyfile="iDynTree/ModelCalibrationHelper.h" bodystart="27" bodyend="110"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelCalibrationHelper_1a884bd9c1a6b009191ccb34d1b374fe00" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>isValid</name></member>
       <member refid="classiDynTree_1_1ModelCalibrationHelper_1a22e1119ec00b5a9c3c80ff3e74b35366" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>loadModelFromFile</name></member>

@@ -4,8 +4,8 @@
     <compoundname>ArticulatedBodyInertia.h</compoundname>
     <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
     <includes local="no">string</includes>
-    <includedby refid="Core_2ArticulatedBodyInertia_8h" local="no">iDynTree/Core/ArticulatedBodyInertia.h</includedby>
     <includedby refid="LinkState_8h" local="no">iDynTree/LinkState.h</includedby>
+    <includedby refid="Core_2ArticulatedBodyInertia_8h" local="no">iDynTree/Core/ArticulatedBodyInertia.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/ArticulatedBodyInertia.h</label>

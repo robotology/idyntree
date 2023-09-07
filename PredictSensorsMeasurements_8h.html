@@ -84,6 +84,32 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeSensors.html#ga26f5afdf5245848ed0cf946cab8510d6" class="m-doc">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const FreeFloatingPos&amp; robotPos,
+              const FreeFloatingVel&amp; robotVel,
+              const FreeFloatingAcc&amp; robotAcc,
+              const LinAcceleration&amp; gravity,
+              const LinkNetExternalWrenches&amp; externalWrenches,
+              FreeFloatingAcc&amp; buf_properRobotAcc,
+              LinkPositions&amp; buf_linkPos,
+              LinkVelArray&amp; buf_linkVel,
+              LinkAccArray&amp; buf_linkProperAcc,
+              LinkInternalWrenches&amp; buf_internalWrenches,
+              FreeFloatingGeneralizedTorques&amp; buf_outputTorques,
+              SensorsMeasurements&amp; predictedMeasurement) -&gt; bool</span>
+            </dt>
+            <dd>Predict the measurement of a set of sensors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeSensors.html#ga85a09204a0c57c96bb77548d2a633677" class="m-doc">predictSensorsMeasurementsFromRawBuffers</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const LinkVelArray&amp; buf_linkVel,
+              const LinkAccArray&amp; buf_linkProperAcc,
+              const LinkInternalWrenches&amp; buf_internalWrenches,
+              SensorsMeasurements&amp; predictedMeasurement) -&gt; bool</span>
+            </dt>
+            <dd>Predict the measurement of a set of sensors.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeSensors.html#gacf87de6a0acc7c79369e4ea587ef19bc" class="m-doc">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const Model&amp; model,
               const SensorsList&amp; sensorList,
               const Traversal&amp; traversal,

@@ -121,6 +121,32 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga26f5afdf5245848ed0cf946cab8510d6" class="m-doc">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const FreeFloatingPos&amp; robotPos,
+              const FreeFloatingVel&amp; robotVel,
+              const FreeFloatingAcc&amp; robotAcc,
+              const LinAcceleration&amp; gravity,
+              const LinkNetExternalWrenches&amp; externalWrenches,
+              FreeFloatingAcc&amp; buf_properRobotAcc,
+              LinkPositions&amp; buf_linkPos,
+              LinkVelArray&amp; buf_linkVel,
+              LinkAccArray&amp; buf_linkProperAcc,
+              LinkInternalWrenches&amp; buf_internalWrenches,
+              FreeFloatingGeneralizedTorques&amp; buf_outputTorques,
+              SensorsMeasurements&amp; predictedMeasurement) -&gt; bool</span>
+            </dt>
+            <dd>Predict the measurement of a set of sensors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ga85a09204a0c57c96bb77548d2a633677" class="m-doc">predictSensorsMeasurementsFromRawBuffers</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const LinkVelArray&amp; buf_linkVel,
+              const LinkAccArray&amp; buf_linkProperAcc,
+              const LinkInternalWrenches&amp; buf_internalWrenches,
+              SensorsMeasurements&amp; predictedMeasurement) -&gt; bool</span>
+            </dt>
+            <dd>Predict the measurement of a set of sensors.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#gacf87de6a0acc7c79369e4ea587ef19bc" class="m-doc">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const Model&amp; model,
               const SensorsList&amp; sensorList,
               const Traversal&amp; traversal,
@@ -152,6 +178,146 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ga26f5afdf5245848ed0cf946cab8510d6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga26f5afdf5245848ed0cf946cab8510d6" class="m-doc-self">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const FreeFloatingPos&amp; robotPos,
+              const FreeFloatingVel&amp; robotVel,
+              const FreeFloatingAcc&amp; robotAcc,
+              const LinAcceleration&amp; gravity,
+              const LinkNetExternalWrenches&amp; externalWrenches,
+              FreeFloatingAcc&amp; buf_properRobotAcc,
+              LinkPositions&amp; buf_linkPos,
+              LinkVelArray&amp; buf_linkVel,
+              LinkAccArray&amp; buf_linkProperAcc,
+              LinkInternalWrenches&amp; buf_internalWrenches,
+              FreeFloatingGeneralizedTorques&amp; buf_outputTorques,
+              SensorsMeasurements&amp; predictedMeasurement)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="PredictSensorsMeasurements_8h.html">&lt;iDynTree/PredictSensorsMeasurements.h&gt;</a></div>
+            </h3>
+            <p>Predict the measurement of a set of sensors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">model&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the model used to predict the sensor measurements.</td>
+                </tr>
+                <tr>
+                  <td>traversal&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a> used for predict the sensor measurements.</td>
+                </tr>
+                <tr>
+                  <td>robotPos&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the position of the model used for prediction.</td>
+                </tr>
+                <tr>
+                  <td>robotVel&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the velocity of the model used for prediction.</td>
+                </tr>
+                <tr>
+                  <td>robotAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the acceleration of the model used for prediction.</td>
+                </tr>
+                <tr>
+                  <td>gravity&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the gravity acceleration (in world frame) used for prediction.</td>
+                </tr>
+                <tr>
+                  <td>externalWrenches&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the net external wrench acting on each link.</td>
+                </tr>
+                <tr>
+                  <td>buf_properRobotAcc&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>internal buffer, storing the proper acceleration of the model.</td>
+                </tr>
+                <tr>
+                  <td>buf_linkPos&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>internal buffer, storing the position of every link in the model.</td>
+                </tr>
+                <tr>
+                  <td>buf_linkVel&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>internal buffer, storing the velocity of every link in the model.</td>
+                </tr>
+                <tr>
+                  <td>buf_linkProperAcc&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>internal buffer, storing the proper acceleration of every link in the model.</td>
+                </tr>
+                <tr>
+                  <td>buf_internalWrenches&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>internal buffer, storing the internal wrenches.</td>
+                </tr>
+                <tr>
+                  <td>buf_outputTorques&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>internal buffer, storing the generalized joint torques.</td>
+                </tr>
+                <tr>
+                  <td>predictedMeasurement&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>the predicted measurements for the sensors.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the sensors in the list are all valid</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Given a SensorList object describing a list of sensor of a model fill the output argument predictedMeasurement with the predicted measurement of the sensors consistent with the state and the acceleration/torques and forces of the <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>.</p><p>This function takes in input the internal buffers used for the computation to avoid dynamic memory allocation.</p>
+          </div></section>
+          <section class="m-doc-details" id="ga85a09204a0c57c96bb77548d2a633677"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ga85a09204a0c57c96bb77548d2a633677" class="m-doc-self">predictSensorsMeasurementsFromRawBuffers</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const LinkVelArray&amp; buf_linkVel,
+              const LinkAccArray&amp; buf_linkProperAcc,
+              const LinkInternalWrenches&amp; buf_internalWrenches,
+              SensorsMeasurements&amp; predictedMeasurement)</span></span>
+              <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="PredictSensorsMeasurements_8h.html">&lt;iDynTree/PredictSensorsMeasurements.h&gt;</a></div>
+            </h3>
+            <p>Predict the measurement of a set of sensors.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">model&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the model used to predict the sensor measurements.</td>
+                </tr>
+                <tr>
+                  <td>traversal&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a> used for predict the sensor measurements.</td>
+                </tr>
+                <tr>
+                  <td>buf_linkVel&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>internal buffer, storing the velocity of every link in the model.</td>
+                </tr>
+                <tr>
+                  <td>buf_linkProperAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>internal buffer, storing the proper acceleration of every link in the model.</td>
+                </tr>
+                <tr>
+                  <td>buf_internalWrenches&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>internal buffer, storing the internal wrenches.</td>
+                </tr>
+                <tr>
+                  <td>predictedMeasurement&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>the predicted measurements for the sensors.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the sensors in the list are all valid</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Helper function that works on buffers already compute with Dynamics functions</p>
+          </div></section>
           <section class="m-doc-details" id="gacf87de6a0acc7c79369e4ea587ef19bc"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#gacf87de6a0acc7c79369e4ea587ef19bc" class="m-doc-self">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const Model&amp; model,

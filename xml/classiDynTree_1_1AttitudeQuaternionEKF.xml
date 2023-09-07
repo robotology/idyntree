@@ -53,7 +53,7 @@
         <argsstring></argsstring>
         <name>m_orientationInSO3</name>
         <briefdescription>
-<para>orientation estimate as rotation matrix <formula id="193">$ {^A}R_B $</formula> where <formula id="191">$ A $</formula> is inertial frame and <formula id="192">$ B $</formula> is the frame attached to the body </para>
+<para>orientation estimate as rotation matrix <formula id="30">$ {^A}R_B $</formula> where <formula id="28">$ A $</formula> is inertial frame and <formula id="29">$ B $</formula> is the frame attached to the body </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -67,7 +67,7 @@
         <argsstring></argsstring>
         <name>m_orientationInRPY</name>
         <briefdescription>
-<para>orientation estimate as a 3D vector in RPY representation, where <formula id="215">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) $</formula> </para>
+<para>orientation estimate as a 3D vector in RPY representation, where <formula id="53">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -222,7 +222,7 @@
         <argsstring></argsstring>
         <name>m_Id4</name>
         <briefdescription>
-<para><formula id="248">$ 4 \times 4 $</formula> identity matrix </para>
+<para><formula id="86">$ 4 \times 4 $</formula> identity matrix </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -250,7 +250,7 @@
         <argsstring></argsstring>
         <name>m_gravity_direction</name>
         <briefdescription>
-<para>direction of the gravity vector expressed in the inertial frame denoted by <formula id="191">$ A $</formula>, default set to <formula id="218">$ e_3 = \begin{bmatrix} 0 &amp; 0 &amp; 1.0 \end{bmatrix}^T $</formula> </para>
+<para>direction of the gravity vector expressed in the inertial frame denoted by <formula id="28">$ A $</formula>, default set to <formula id="56">$ e_3 = \begin{bmatrix} 0 &amp; 0 &amp; 1.0 \end{bmatrix}^T $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -740,7 +740,7 @@
           <declname>rot</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="191">$ A $</formula> as inertial frame and <formula id="192">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="193">$ {^A}R_B $</formula> as the rotation matrix. </para>
+<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="28">$ A $</formula> as inertial frame and <formula id="29">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="30">$ {^A}R_B $</formula> as the rotation matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -771,7 +771,7 @@
           <declname>q</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="191">$ A $</formula> as inertial frame and <formula id="192">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="194">$ {^A}q_B as the quaternion $</formula>. </para>
+<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="28">$ A $</formula> as inertial frame and <formula id="29">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="31">$ {^A}q_B as the quaternion $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="note"><para>quaternion has the form (real, imaginary) and is normalized </para>
@@ -806,7 +806,7 @@
           <declname>rpy</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="191">$ A $</formula> as inertial frame and <formula id="192">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="193">$ {^A}R_B $</formula> as the rotation matrix where <formula id="195">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
+<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="28">$ A $</formula> as inertial frame and <formula id="29">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="30">$ {^A}R_B $</formula> as the rotation matrix where <formula id="32">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para>For more details about the range of the RPY Euler angles, please refer the documentation of <ulink url="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Rotation.h#L167">GetRPY()</ulink></para>
@@ -856,10 +856,10 @@
           <declname>stateBuffer</declname>
         </param>
         <briefdescription>
-<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="187">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="188">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="189">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="190">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="24">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="25">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="26">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="27">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The default internal state of the estimator would be <formula id="196">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<para>The default internal state of the estimator would be <formula id="33">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">stateBuffer</parametername>
 </parameternamelist>
@@ -887,10 +887,10 @@
           <declname>stateBuffer</declname>
         </param>
         <briefdescription>
-<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="187">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="188">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="189">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="190">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="24">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="25">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="26">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="27">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The default internal state of the estimator would be <formula id="196">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<para>The default internal state of the estimator would be <formula id="33">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">stateBuffer</parametername>
 </parameternamelist>
@@ -921,7 +921,7 @@
 <para>set internal state of the estimator. </para>
         </briefdescription>
         <detaileddescription>
-<para>The internal state of the estimator is described as <formula id="187">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="188">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="189">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="190">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
+<para>The internal state of the estimator is described as <formula id="24">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="25">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="26">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="27">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">stateBuffer</parametername>
 </parameternamelist>
@@ -952,7 +952,7 @@
 <para>set the initial orientation for the internal state of the estimator. </para>
         </briefdescription>
         <detaileddescription>
-<para>The initial orientation for the internal state of the estimator is described as <formula id="197">$ {^A}q_B $</formula> <formula id="188">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
+<para>The initial orientation for the internal state of the estimator is described as <formula id="34">$ {^A}q_B $</formula> <formula id="25">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">stateBuffer</parametername>
 </parameternamelist>
@@ -990,7 +990,7 @@
           <declname>xhat_k_plus_one</declname>
         </param>
         <briefdescription>
-<para>discrete system propagation <formula id="236">$ f(X, u) = f(X, y_gyro) $</formula> where <formula id="237">$ X = \begin{bmatrix} q_0 &amp; q_1 &amp; q_2 &amp; q_3 &amp; \omega_x &amp; \omega_y &amp; \omega_z &amp; b_x &amp; b_y &amp; b_z \end{bmatrix}^T $</formula> <formula id="238">$ u = \begin{bmatrix} {y_{gyro}}_x &amp; {y_{gyro}}_y &amp; {y_{gyro}}_z \end{bmatrix}^T $</formula> <formula id="239">$ f(X, u) = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro} - b \\ (1 - \lambda_{b} \Delta t)b \end{bmatrix}$</formula> </para>
+<para>discrete system propagation <formula id="74">$ f(X, u) = f(X, y_gyro) $</formula> where <formula id="75">$ X = \begin{bmatrix} q_0 &amp; q_1 &amp; q_2 &amp; q_3 &amp; \omega_x &amp; \omega_y &amp; \omega_z &amp; b_x &amp; b_y &amp; b_z \end{bmatrix}^T $</formula> <formula id="76">$ u = \begin{bmatrix} {y_{gyro}}_x &amp; {y_{gyro}}_y &amp; {y_{gyro}}_z \end{bmatrix}^T $</formula> <formula id="77">$ f(X, u) = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro} - b \\ (1 - \lambda_{b} \Delta t)b \end{bmatrix}$</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -1013,7 +1013,7 @@
           <declname>zhat_k_plus_one</declname>
         </param>
         <briefdescription>
-<para>discrete measurement prediction where <formula id="240">$ h(X) = \begin{bmatrix} h_{acc}(X) &amp; h_{mag}(X) \end{bmatrix}^T $</formula> <formula id="241">$ h_{acc}(X) = R^T \begin{bmatrix} 0 \\ 0 \\ -1 \end{bmatrix} $</formula> <formula id="242">$ h_{mag}(X) = atan2(tan(yaw))$</formula> </para>
+<para>discrete measurement prediction where <formula id="78">$ h(X) = \begin{bmatrix} h_{acc}(X) &amp; h_{mag}(X) \end{bmatrix}^T $</formula> <formula id="79">$ h_{acc}(X) = R^T \begin{bmatrix} 0 \\ 0 \\ -1 \end{bmatrix} $</formula> <formula id="80">$ h_{mag}(X) = atan2(tan(yaw))$</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -1174,7 +1174,7 @@
           <declname>Q</declname>
         </param>
         <briefdescription>
-<para>prepares the system noise covariance matrix using internal struct params system model is as good as gyroscope measurement and bias estimate system noise covariance can be descibed as <formula id="243">$ Q = F_u U {F_u}^T $</formula> where <formula id="244">$ F = \begin{bmatrix} \frac{\partial f}{\partial y_gyro} &amp; \frac{\partial f}{ \partial x_gyrobias} \end{bmatrix} $</formula> <formula id="245">$ = \begin{bmatrix} 0_{4 \times 3} &amp; 0_{4 \times 3} \\ I_{3 \times 3} &amp; 0_{3 \times 3} \\ 0_{3 \times 3} &amp; I_{3 \times 3} \end{bmatrix}$</formula> <formula id="246">$ U = diag(\begin{bmatrix} \sigma_{gyro}^{2} I_{3 \times 3} &amp; \sigma_{gyrobias}^{2} I_{3 \times 3} \end{bmatrix}) $</formula> </para>
+<para>prepares the system noise covariance matrix using internal struct params system model is as good as gyroscope measurement and bias estimate system noise covariance can be descibed as <formula id="81">$ Q = F_u U {F_u}^T $</formula> where <formula id="82">$ F = \begin{bmatrix} \frac{\partial f}{\partial y_gyro} &amp; \frac{\partial f}{ \partial x_gyrobias} \end{bmatrix} $</formula> <formula id="83">$ = \begin{bmatrix} 0_{4 \times 3} &amp; 0_{4 \times 3} \\ I_{3 \times 3} &amp; 0_{3 \times 3} \\ 0_{3 \times 3} &amp; I_{3 \times 3} \end{bmatrix}$</formula> <formula id="84">$ U = diag(\begin{bmatrix} \sigma_{gyro}^{2} I_{3 \times 3} &amp; \sigma_{gyrobias}^{2} I_{3 \times 3} \end{bmatrix}) $</formula> </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -1202,7 +1202,7 @@
           <declname>R</declname>
         </param>
         <briefdescription>
-<para>prepares the measurement noise covariance matrix using internal struct parameters measurement noise depends only on accelerometer measurement along x-,y- and z- directions along with magnetometer z-direction if included measurement noise covariance can be descibed as, <formula id="247">$ R = \begin{bmatrix} \sigma_{acc}^{2} I_{3 \times 3} &amp; 0_{3 \times 1} \\ 0_{1 \times 3} &amp; \sigma_{mag}^{2}$</formula> if magnetometer measurements is also considered. </para>
+<para>prepares the measurement noise covariance matrix using internal struct parameters measurement noise depends only on accelerometer measurement along x-,y- and z- directions along with magnetometer z-direction if included measurement noise covariance can be descibed as, <formula id="85">$ R = \begin{bmatrix} \sigma_{acc}^{2} I_{3 \times 3} &amp; 0_{3 \times 1} \\ 0_{1 \times 3} &amp; \sigma_{mag}^{2}$</formula> if magnetometer measurements is also considered. </para>
         </briefdescription>
         <detaileddescription>
 <para>In case of magnetometer measurements not being considered, it is reduced to the <formula id="35">$ 3 \times 3 $</formula> matrix <parameterlist kind="param"><parameteritem>
@@ -1284,11 +1284,11 @@
 <para>Quaternion based Discrete Extended Kalman Filter fusing IMU measurements, to give estimates of orientation, angular velocity and gyroscope bias. </para>
     </briefdescription>
     <detaileddescription>
-<para>It follows the implementation detailed in <ulink url="https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/1109745/mod_resource/content/1/QEKF_Floatsat_WS16.pdf">Quaternion Based Extended Kalman Filter, slides by Michael Stohmeier</ulink> The filter is used to estimate the states <formula id="187">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> where <formula id="188">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="189">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="190">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <simplesect kind="note"><para>: we will drop the subscripts and superscripts in the rest of the documentation for convenience</para>
+<para>It follows the implementation detailed in <ulink url="https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/1109745/mod_resource/content/1/QEKF_Floatsat_WS16.pdf">Quaternion Based Extended Kalman Filter, slides by Michael Stohmeier</ulink> The filter is used to estimate the states <formula id="24">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> where <formula id="25">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="26">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="27">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <simplesect kind="note"><para>: we will drop the subscripts and superscripts in the rest of the documentation for convenience</para>
 </simplesect>
-Discretized dynamics during the prediction step, <formula id="232">\[ \hat{{x}}_{k+1} = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro_{k}} - b_{k} \\ (1 - \lambda_{b} \Delta t)b_k \end{bmatrix} \]</formula></para>
-<para>Measurement model for accelerometer is given as, <formula id="233">\[ h_{acc}(\hat{x}_{k+1}) = \begin{bmatrix} 2(q_1q_3 - q_0q_2) \\ 2(q_2q_3 - q_0q_1) \\ q_0^2 - q_1^2 - q_2^2 + q_3^2 \end{bmatrix} \]</formula> obtained from <formula id="234">$ {^w}R_b^T e_3 $</formula> of the assumed gravity direction.</para>
-<para>Measurement model for magnetometer measurement is given as, <formula id="235">\[ h_{mag}(\hat{x}_{k+1}) = atan2( 2(q_0q_3 + q_1q_2),1 - 2(q_2^2 + q_3^2) ) \]</formula></para>
+Discretized dynamics during the prediction step, <formula id="70">\[ \hat{{x}}_{k+1} = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro_{k}} - b_{k} \\ (1 - \lambda_{b} \Delta t)b_k \end{bmatrix} \]</formula></para>
+<para>Measurement model for accelerometer is given as, <formula id="71">\[ h_{acc}(\hat{x}_{k+1}) = \begin{bmatrix} 2(q_1q_3 - q_0q_2) \\ 2(q_2q_3 - q_0q_1) \\ q_0^2 - q_1^2 - q_2^2 + q_3^2 \end{bmatrix} \]</formula> obtained from <formula id="72">$ {^w}R_b^T e_3 $</formula> of the assumed gravity direction.</para>
+<para>Measurement model for magnetometer measurement is given as, <formula id="73">\[ h_{mag}(\hat{x}_{k+1}) = atan2( 2(q_0q_3 + q_1q_2),1 - 2(q_2^2 + q_3^2) ) \]</formula></para>
 <para>The linearized system propogation and measurement model is obtained by computing Jacobins F and H with respect to the state.</para>
 <para>The zero mean, additive Gaussian noise can be set using the covariance matrices which will be used during predict and update steps.</para>
 <para>The <ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1a6d06f0744427bd918a7175919176fa05" kindref="member">propagateStates()</ref> method is called to set the input vector for the EKF, then <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a06e0c6ab212f148079af396e0eb69244" kindref="member">ekfPredict()</ref> is called to propagate the state through the propagation function f() and propate the state covariance using the Jacobian F.</para>

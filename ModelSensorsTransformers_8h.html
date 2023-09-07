@@ -104,7 +104,7 @@
               SensorsList&amp; reducedSensors)</span></span>
             </h3>
             <p>Variant of createReducedModel function that also process the sensorList .</p>
-<p>Note</p>
+<p>Note: since iDynTree 10, this has been superseded by the regular createReducedModel that also operated on the <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> associated with the model.</p><p>To migrate to this version, just change from:</p><p><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a> fullModel, reducedModel; std::vector&lt;std::string&gt; jointsInReducedModel; <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> fullSensors, reducedSensors;</p><p>bool ok = createReducedModelAndSensors(fullModel, fullSensors, jointsInReducedModel, reducedModel, reducedSensors);</p><p>// handle ok // access reducedModel and reducedSensors</p><p>to</p><p><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a> fullModel, reducedModel; std::vector&lt;std::string&gt; jointsInReducedModel; <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> fullSensors; fullModel.sensors() = fullSensors;</p><p>bool ok = createReducedModel(fullModel, jointsInReducedModel, reducedModel);</p><p>// Handle ok // access reducedModel and reducedModel.sensors()</p>
           </div></section>
         </section>
       </div>

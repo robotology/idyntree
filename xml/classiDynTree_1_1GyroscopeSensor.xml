@@ -228,12 +228,12 @@
         <definition>Transform iDynTree::GyroscopeSensor::getLinkSensorTransform</definition>
         <argsstring>() const</argsstring>
         <name>getLinkSensorTransform</name>
-        <reimplements refid="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858">getLinkSensorTransform</reimplements>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a052f8aa7ae390e28764e372ce6cae62a">getLinkSensorTransform</reimplements>
         <briefdescription>
 <para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="321">\[ {}^l H_s \]</formula>).</para>
+<para><formula id="21">\[ {}^l H_s \]</formula>).</para>
 <para><simplesect kind="return"><para>the link_H_sensor transform </para>
 </simplesect>
 </para>

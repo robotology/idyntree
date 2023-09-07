@@ -4,9 +4,9 @@
     <compoundname>LinkTraversalsCache.h</compoundname>
     <includes local="no">vector</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includedby refid="Model_2LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
-    <includedby refid="Model_2LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>vector</label>

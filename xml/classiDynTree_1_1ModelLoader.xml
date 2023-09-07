@@ -415,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="213" column="24"/>
+        <location file="iDynTree/ModelLoader.h" line="214" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -432,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="220" column="10"/>
+        <location file="iDynTree/ModelLoader.h" line="221" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -456,7 +456,7 @@
     <detaileddescription>
 <para>Unless the methods for loading a model with an explicit serialization are used, the default joint serialization of the model loaded will be a &quot;normalized&quot; joint serialization based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function for more details. </para>
     </detaileddescription>
-    <location file="iDynTree/ModelLoader.h" line="66" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="67" bodyend="222"/>
+    <location file="iDynTree/ModelLoader.h" line="66" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="67" bodyend="223"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>isValid</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromFile</name></member>

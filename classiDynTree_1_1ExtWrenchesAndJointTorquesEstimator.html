@@ -92,6 +92,10 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a559e22f6ae100c24fabe83d708bfdf32" class="m-doc">setModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model) -&gt; bool</span>
+            </dt>
+            <dd>Set model and sensors used for the estimation.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab62c38a61392178a65af5a90a6a7a076" class="m-doc">setModelAndSensors</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model,
               const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; _sensors) -&gt; bool</span>
             </dt>
@@ -173,6 +177,29 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a559e22f6ae100c24fabe83d708bfdf32"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a559e22f6ae100c24fabe83d708bfdf32" class="m-doc-self">setModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model)</span></span>
+            </h3>
+            <p>Set model and sensors used for the estimation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_model&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the kinematic and dynamic model used for the estimation.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well (model and sensors are well formed), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="ab62c38a61392178a65af5a90a6a7a076"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab62c38a61392178a65af5a90a6a7a076" class="m-doc-self">setModelAndSensors</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model,
