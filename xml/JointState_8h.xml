@@ -6,12 +6,12 @@
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
-    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
     <includedby refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includedby>
     <includedby refid="Model_2JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
+    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/JointState.h</label>

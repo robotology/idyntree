@@ -9,6 +9,8 @@
     <includes local="no">string</includes>
     <includes local="no">iostream</includes>
     <includes local="no">sstream</includes>
+    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/DynamicsLinearization.h</includedby>
+    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/DynamicsLinearizationHelpers.h</includedby>
     <includedby refid="ArticulatedBodyInertia_8h" local="no">iDynTree/ArticulatedBodyInertia.h</includedby>
     <includedby refid="Core_2MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includedby>
     <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
@@ -17,8 +19,6 @@
     <includedby refid="Transform_8h" local="no">iDynTree/Transform.h</includedby>
     <includedby refid="TransformDerivative_8h" local="no">iDynTree/TransformDerivative.h</includedby>
     <includedby refid="Triplets_8h" local="no">iDynTree/Triplets.h</includedby>
-    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/DynamicsLinearization.h</includedby>
-    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/DynamicsLinearizationHelpers.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/MatrixFixSize.h</label>
