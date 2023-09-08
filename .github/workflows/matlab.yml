@@ -43,7 +43,7 @@ jobs:
         # Compilation related dependencies
         mamba install cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install eigen libxml2 assimp ipopt irrlicht osqp-eigen glfw
+        mamba install eigen libxml2 assimp ipopt irrlicht osqp-eigen glfw libopenblas==0.3.23
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
@@ -73,6 +73,11 @@ jobs:
       run: |
         mamba list
         env
+
+    - name: Print used MATLAB version 
+      uses: matlab-actions/run-command@v1
+      with:
+        command: ver
 
     - name: Configure [Conda - Linux or  macOS]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
