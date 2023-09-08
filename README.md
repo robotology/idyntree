@@ -44,7 +44,7 @@ If you are not familiar with conda or conda-forge, you can read an introduction 
 
 ### robotology-superbuild (advanced)
 
-If you are installing iDynTree for use as part of [iCub humanoid robot software installation](https://icub-tech-iit.github.io/documentation/sw_installation/), you may want to install iDynTree through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild. If you want to install also iDynTree Python or MATLAB bindings, remember to enable the `ROBOTOLOGY_USES_PYTHON` or `ROBOTOLOGY_USES_MATLAB` options. 
+If you are installing iDynTree for use as part of [iCub humanoid robot software installation](https://icub-tech-iit.github.io/documentation/sw_installation/), you may want to install iDynTree through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](https://www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild. If you want to install also iDynTree Python or MATLAB bindings, remember to enable the `ROBOTOLOGY_USES_PYTHON` or `ROBOTOLOGY_USES_MATLAB` options. 
 
 ### Build from source (advanced)
 
@@ -73,16 +73,15 @@ If this is not working, make sure that you are launching `matlab` after having a
 
 These tutorials describe how to use specific parts of iDynTree. Are you interested in a tutorial on a specific feature or algorithm that you can't find in this list? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
-
 | Topic  | Location | Language  |
 |:------:|:--------:|:---------:|
-| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) together with the [[Eigen](http://eigen.tuxfamily.org) C++ Matrix library to compute kinematics and dynamics quantities such as forward kinematics, inverse dynamics, mass matrix. | [examples/cxx/KinDynComputationsWithEigen/main.cpp](examples/cxx/KinDynComputationsWithEigen/main.cpp) | C++ |
-| How to use the [InverseKinematics class](https://robotology.github.io/docs/idyntree/master/classiDynTree_1_1InverseKinematics.html) for the IK of an industrial fixed-base manipulator. | [examples/cxx/InverseKinematics/README.md](examples/cxx/InverseKinematics/README.md) | C++ |
-| Use of the [ExtWrenchesAndJointTorquesEstimator class](https://robotology.github.io/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors |  [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | MATLAB |
-| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) | [examples/matlab/SensorsListParsing/SensorsListParsing.m](examples/matlab/SensorsListParsing/SensorsListParsing.m) | MATLAB |
+| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/classiDynTree_1_1KinDynComputations.html) together with the [[Eigen](http://eigen.tuxfamily.org) C++ Matrix library to compute kinematics and dynamics quantities such as forward kinematics, inverse dynamics, mass matrix. | [examples/cxx/KinDynComputationsWithEigen/main.cpp](examples/cxx/KinDynComputationsWithEigen/main.cpp) | C++ |
+| How to use the [InverseKinematics class](https://robotology.github.io/idyntree/classiDynTree_1_1InverseKinematics.html) for the IK of an industrial fixed-base manipulator. | [examples/cxx/InverseKinematics/README.md](examples/cxx/InverseKinematics/README.md) | C++ |
+| Use of the [ExtWrenchesAndJointTorquesEstimator class](https://robotology.github.io/idyntree/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors |  [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | MATLAB |
+| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](https://robotology.github.io/idyntree/classiDynTree_1_1KinDynComputations.html) | [examples/matlab/SensorsListParsing/SensorsListParsing.m](examples/matlab/SensorsListParsing/SensorsListParsing.m) | MATLAB |
 | How to read the Six Axis Force Torque sensors information contained in a URDF model. | [examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | MATLAB |
 | Usage of the MATLAB-native visualizer using the [MATLAB high-level wrappers](bindings/matlab/+iDynTreeWrappers/README.md). | [examples/matlab/iDynTreeWrappers/visualizeRobot.m](examples/matlab/iDynTreeWrappers/visualizeRobot.m) | MATLAB |
-| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html). | [examples/python/KinDynComputationsTutorial.py](examples/python/KinDynComputationsTutorial.py) | Python |
+| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/classiDynTree_1_1KinDynComputations.html). | [examples/python/KinDynComputationsTutorial.py](examples/python/KinDynComputationsTutorial.py) | Python |
 | Basic usage of the [MeshcatVisualizer class](bindings/python/visualize/meshcat_visualizer.py). | [examples/python/MeshcatVisualizerExample.ipynb](examples/python/MeshcatVisualizerExample.ipynb) | Python |
 
 ## Tools Usage 
@@ -152,7 +151,7 @@ The bibtex code for including this citation is provided:
 ~~~
 
 ## Acknowledgments
-The initial development of iDynTree was supported by the FP7 EU projects [CoDyCo (No. 600716 ICT 2011.2.1 Cognitive Systems and Robotics)](http://www.codyco.eu/)  and [Koroibot (No. 611909 ICT- 2013.2.1 Cognitive Systems and Robotics)](http://koroibot.eu/).
+The initial development of iDynTree was supported by the FP7 EU projects [CoDyCo (No. 600716 ICT 2011.2.1 Cognitive Systems and Robotics)](http://www.codyco.eu/)  and [Koroibot (No. 611909 ICT- 2013.2.1 Cognitive Systems and Robotics)](https://cordis.europa.eu/project/id/611909/).
 
 The development is now supported by the [Artificial Mechanical Intelligence research line](https://ami.iit.it/) at the [Italian Institute of Technology](https://www.iit.it/).
 
