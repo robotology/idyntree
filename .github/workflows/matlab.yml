@@ -61,6 +61,12 @@ jobs:
         # See https://github.com/robotology/robotology-superbuild/issues/477
         mamba install vs2019_win-64
 
+    # Workaround for https://github.com/robotology/idyntree/issues/1109
+    - name: Dependencies [Conda/macOS]
+      if: contains(matrix.os, 'macos')
+      run: |
+        mamba install libblas=*=*netlib
+
     # workaround for https://github.com/robotology/robotology-superbuild/issues/64
     # and https://github.com/robotology/idyntree/issues/995
     - name: Do not use MATLAB's stdc++ to avoid incompatibilities with other libraries
