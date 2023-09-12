@@ -214,7 +214,7 @@ int main()
     // Then, we compute the A and b matrices
     std::vector<iDynTree::MatrixDynSize> A;
     std::vector<iDynTree::VectorDynSize> b;
-    std::vector<size_t> subModelIDs;
+    std::vector<std::ptrdiff_t> subModelIDs;
     std::vector<iDynTree::LinkIndex> baseLinkIndeces;
     ok = estimatorIMU.computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics(fullBodyUnknowns,A,b,subModelIDs,baseLinkIndeces);
     ASSERT_IS_TRUE(ok);

@@ -64,6 +64,8 @@ class ExtWrenchesAndJointTorquesEstimator
     LinkTraversalsCache m_kinematicTraversals;
 
     JointPosDoubleArray m_jointPos;
+    JointDOFsDoubleArray m_jointVel;
+    JointDOFsDoubleArray m_jointAcc;
     LinkVelArray m_linkVels;
     LinkAccArray m_linkProperAccs;
     LinkNetExternalWrenches m_linkNetExternalWrenches;
@@ -190,9 +192,9 @@ public:
      *                       expressed in the specified frame orientation.
      * @return true if all went ok, false otherwise.
      */
-    bool updateKinematicsFromFloatingBase(const JointPosDoubleArray  & jointPos,
-                                          const JointDOFsDoubleArray & jointVel,
-                                          const JointDOFsDoubleArray & jointAcc,
+    bool updateKinematicsFromFloatingBase(const VectorDynSize  & jointPos,
+                                          const VectorDynSize & jointVel,
+                                          const VectorDynSize & jointAcc,
                                           const FrameIndex & floatingFrame,
                                           const Vector3 & properClassicalLinearAcceleration,
                                           const Vector3 & angularVel,
@@ -209,9 +211,9 @@ public:
      * @param[in] gravity the gravity acceleration vector, expressed in the specified fixed frame.
      * @return true if all went ok, false otherwise.
      */
-    bool updateKinematicsFromFixedBase(const JointPosDoubleArray  & jointPos,
-                                       const JointDOFsDoubleArray & jointVel,
-                                       const JointDOFsDoubleArray & jointAcc,
+    bool updateKinematicsFromFixedBase(const VectorDynSize  & jointPos,
+                                       const VectorDynSize & jointVel,
+                                       const VectorDynSize & jointAcc,
                                        const FrameIndex & fixedFrame,
                                        const Vector3 & gravity);
 
@@ -305,7 +307,7 @@ public:
     bool computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics(const LinkUnknownWrenchContacts & unknowns,
                                                                      std::vector<iDynTree::MatrixDynSize>& A,
                                                                      std::vector<iDynTree::VectorDynSize>& b,
-                                                                     std::vector<size_t>& subModelID,
+                                                                     std::vector<std::ptrdiff_t>& subModelID,
                                                                      std::vector<iDynTree::LinkIndex>& baseLinkIndeces);
 
     /**

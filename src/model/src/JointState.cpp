@@ -36,6 +36,13 @@ bool JointPosDoubleArray::isConsistent(const Model& model) const
     return (this->size() == model.getNrOfPosCoords());
 }
 
+JointPosDoubleArray& JointPosDoubleArray::operator=(const iDynTree::VectorDynSize& input)
+{
+    iDynTree::VectorDynSize* thisUpCast = static_cast<iDynTree::VectorDynSize*>(this);
+    *thisUpCast = input;
+    return *this;
+}
+
 JointPosDoubleArray::~JointPosDoubleArray()
 {
 
@@ -66,6 +73,13 @@ void JointDOFsDoubleArray::resize(std::size_t nrOfDOFs)
 bool JointDOFsDoubleArray::isConsistent(const Model& model) const
 {
     return (this->size() == model.getNrOfDOFs());
+}
+
+JointDOFsDoubleArray& JointDOFsDoubleArray::operator=(const iDynTree::VectorDynSize& input)
+{
+    iDynTree::VectorDynSize* thisUpCast = static_cast<iDynTree::VectorDynSize*>(this);
+    *thisUpCast = input;
+    return *this;
 }
 
 JointDOFsDoubleArray::~JointDOFsDoubleArray()

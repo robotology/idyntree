@@ -29,6 +29,7 @@ namespace iDynTree
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const iDynTree::Model & model) const;
+        JointPosDoubleArray& operator=(const iDynTree::VectorDynSize& input);
 
         ~JointPosDoubleArray();
     };
@@ -47,6 +48,7 @@ namespace iDynTree
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const iDynTree::Model & model) const;
+        JointDOFsDoubleArray& operator=(const iDynTree::VectorDynSize& input);
 
         ~JointDOFsDoubleArray();
     };
