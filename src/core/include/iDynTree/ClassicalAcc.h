@@ -8,7 +8,7 @@
 
 namespace iDynTree
 {
-    class RotationRaw;
+    class Rotation;
     class SpatialAcc;
     class Twist;
 
@@ -44,7 +44,7 @@ namespace iDynTree
         ClassicalAcc(const ClassicalAcc& other);
 
         /* Geometric operations */
-        const ClassicalAcc & changeCoordFrame(const RotationRaw & newCoordFrame);
+        const ClassicalAcc & changeCoordFrame(const Rotation & newCoordFrame);
 
         /** constructor helpers */
         static ClassicalAcc Zero();

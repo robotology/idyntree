@@ -10,7 +10,7 @@
 
 namespace iDynTree
 {
-    class RotationRaw;
+    class Rotation;
     class SpatialMotionVector;
     class SpatialForceVector;
 

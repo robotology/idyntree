@@ -52,7 +52,6 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/Position.cpp
                               src/PositionRaw.cpp
                               src/Rotation.cpp
-                              src/RotationRaw.cpp
                               src/RotationalInertiaRaw.cpp
                               src/SpatialAcc.cpp
                               src/SpatialForceVector.cpp
