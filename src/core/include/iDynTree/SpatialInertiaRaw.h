@@ -8,7 +8,7 @@
 
 namespace iDynTree
 {
-    class PositionRaw;
+    class Position;
     class SpatialForceVector;
     class SpatialMotionVector;
 
@@ -45,7 +45,7 @@ namespace iDynTree
          * \warning the KDL::RigidBodyInertia class has a similar constructor, but in that one
          *          the rotational inerta in input is expressed in the center of mass of the body.
          */
-        SpatialInertiaRaw(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
+        SpatialInertiaRaw(const double mass, const Position & com, const RotationalInertiaRaw & rotInertia);
         SpatialInertiaRaw(const SpatialInertiaRaw & other);
 
         /**
@@ -53,7 +53,7 @@ namespace iDynTree
          * and the rotational inertia expressed in the center of mass.
          *
          */
-        void fromRotationalInertiaWrtCenterOfMass(const double mass, const PositionRaw & com, const RotationalInertiaRaw & rotInertia);
+        void fromRotationalInertiaWrtCenterOfMass(const double mass, const Position& com, const RotationalInertiaRaw & rotInertia);
 
 
         /** multiplication operator
@@ -73,7 +73,7 @@ namespace iDynTree
          *       efficient.
          */
         double getMass() const;
-        PositionRaw getCenterOfMass() const;
+        Position getCenterOfMass() const;
         const RotationalInertiaRaw& getRotationalInertiaWrtFrameOrigin() const;
         RotationalInertiaRaw getRotationalInertiaWrtCenterOfMass() const;
 

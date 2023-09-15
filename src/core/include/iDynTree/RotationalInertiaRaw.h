@@ -8,7 +8,7 @@
 
 namespace iDynTree
 {
-    class PositionRaw;
+    class Position;
 
     /**
      * Class providing the raw coordinates for a 3d inertia matrix.

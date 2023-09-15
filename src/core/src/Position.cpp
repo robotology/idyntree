@@ -15,6 +15,7 @@
 #include <iostream>
 #include <sstream>
 
+
 namespace iDynTree
 {
     /**
@@ -41,41 +42,116 @@ namespace iDynTree
                                          newAngularVec);
     }
 
-    /**
-     * class Method definitions
-     */
-
-    Position::Position(): PositionRaw()
+    Position::Position()
     {
     }
 
-    Position::Position(double x, double y, double z): PositionRaw(x,y,z)
+
+    Position::Position(double x, double y, double z)
     {
+        this->m_data[0] = x;
+        this->m_data[1] = y;
+        this->m_data[2] = z;
     }
 
-    Position::Position(const Position & other): PositionRaw(other)
-    {
-    }
-
-    Position::Position(const PositionRaw& other): PositionRaw(other)
+    Position::Position(const double* in_data, const unsigned int in_size):
+                 VectorFixSize< 3 >(in_data,in_size)
     {
 
     }
 
-    Position::Position(Span<const double> other): PositionRaw(other)
+    Position::Position(const Position& other):VectorFixSize< int(3) >(other)
     {
+        this->m_data[0] = other.m_data[0];
+        this->m_data[1] = other.m_data[1];
+        this->m_data[2] = other.m_data[2];
+
+    }
+
+    Position::Position(Span<const double> other):
+                 VectorFixSize< 3 >(other)
+    {
+
     }
 
     const Position& Position::changePoint(const Position& newPoint)
     {
-        this->PositionRaw::changePoint(newPoint);
+        this->m_data[0] += newPoint(0);
+        this->m_data[1] += newPoint(1);
+        this->m_data[2] += newPoint(2);
+
         return *this;
     }
 
     const Position& Position::changeRefPoint(const Position& newRefPoint)
     {
-        this->PositionRaw::changeRefPoint(newRefPoint);
+        this->m_data[0] += newRefPoint(0);
+        this->m_data[1] += newRefPoint(1);
+        this->m_data[2] += newRefPoint(2);
+
         return *this;
+    }
+
+    Position Position::compose(const Position& op1, const Position& op2)
+    {
+        Position result;
+        result(0) = op1(0) + op2(0);
+        result(1) = op1(1) + op2(1);
+        result(2) = op1(2) + op2(2);
+        return result;
+    }
+
+    Position Position::inverse(const Position& op)
+    {
+        Position result;
+        result(0) = -op.m_data[0];
+        result(1) = -op.m_data[1];
+        result(2) = -op.m_data[2];
+        return result;
+    }
+
+    SpatialMotionVector Position::changePointOf(const SpatialMotionVector & other) const
+    {
+        SpatialMotionVector result;
+
+        Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
+        Eigen::Map<const Eigen::Vector3d> otherLinear(other.getLinearVec3().data());
+        Eigen::Map<const Eigen::Vector3d> otherAngular(other.getAngularVec3().data());
+        Eigen::Map<Eigen::Vector3d> resLinear(result.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> resAngular(result.getAngularVec3().data());
+
+        resLinear  = otherLinear + thisPos.cross(otherAngular);
+        resAngular = otherAngular;
+
+        return result;
+    }
+
+    SpatialForceVector Position::changePointOf(const SpatialForceVector & other) const
+    {
+        SpatialForceVector result;
+
+        Eigen::Map<const Eigen::Vector3d> thisPos(this->data());
+        Eigen::Map<const Eigen::Vector3d> otherLinear(other.getLinearVec3().data());
+        Eigen::Map<const Eigen::Vector3d> otherAngular(other.getAngularVec3().data());
+        Eigen::Map<Eigen::Vector3d> resLinear(result.getLinearVec3().data());
+        Eigen::Map<Eigen::Vector3d> resAngular(result.getAngularVec3().data());
+
+        resLinear  = otherLinear;
+        resAngular = thisPos.cross(otherLinear) + otherAngular;
+
+        return result;
+    }
+
+    std::string Position::toString() const
+    {
+        std::stringstream ss;
+        ss << this->m_data[0] << " " << this->m_data[1] << " " << this->m_data[2];
+        return ss.str();
+    }
+
+    std::string Position::reservedToString() const
+    {
+        return this->toString();
     }
 
     const Position& Position::changeCoordinateFrame(const Rotation & newCoordinateFrame)
@@ -84,26 +160,6 @@ namespace iDynTree
         return *this;
     }
 
-    Position Position::compose(const Position& op1, const Position& op2)
-    {
-        return Position(PositionRaw::compose(op1,op2));
-    }
-
-
-    Position Position::inverse(const Position& op)
-    {
-        return Position(PositionRaw::inverse(op));
-    }
-
-    SpatialMotionVector Position::changePointOf(const SpatialMotionVector & other) const
-    {
-        return changePointOfMotionT<SpatialMotionVector>(*this, other);
-    }
-
-    SpatialForceVector Position::changePointOf(const SpatialForceVector & other) const
-    {
-        return changePointOfForceT<SpatialForceVector>(*this, other);
-    }
 
     Twist Position::changePointOf(const Twist & other) const
     {
@@ -164,19 +220,6 @@ namespace iDynTree
     Wrench Position::operator*(const Wrench& other) const
     {
         return changePointOfForceT<Wrench>(*this, other);
-    }
-
-    std::string Position::toString() const
-    {
-        std::stringstream ss;
-
-        ss << PositionRaw::toString();
-        return ss.str();
-    }
-
-    std::string Position::reservedToString() const
-    {
-        return this->toString();
     }
 
     Position Position::Zero()
