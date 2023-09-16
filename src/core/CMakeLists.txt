@@ -57,7 +57,6 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/SpatialForceVector.cpp
                               src/SpatialMomentum.cpp
                               src/SpatialMotionVector.cpp
-                              src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
                               src/TestUtils.cpp
                               src/Transform.cpp
