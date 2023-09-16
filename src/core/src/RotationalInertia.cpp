@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/RotationalInertiaRaw.h>
+#include <iDynTree/RotationalInertia.h>
 #include <iDynTree/Utils.h>
 
 #include <iostream>
@@ -14,25 +14,25 @@
 namespace iDynTree
 {
 
-RotationalInertiaRaw::RotationalInertiaRaw()
+RotationalInertia::RotationalInertia()
 {
 }
 
 
-RotationalInertiaRaw::RotationalInertiaRaw(const double* in_data,
+RotationalInertia::RotationalInertia(const double* in_data,
                                            const unsigned int in_rows,
                                            const unsigned int in_cols):
                                            Matrix3x3(in_data,in_rows,in_cols)
 {
 }
 
-RotationalInertiaRaw::RotationalInertiaRaw(const RotationalInertiaRaw& other): Matrix3x3(other)
+RotationalInertia::RotationalInertia(const RotationalInertia& other): Matrix3x3(other)
 {
 }
 
-RotationalInertiaRaw RotationalInertiaRaw::Zero()
+RotationalInertia RotationalInertia::Zero()
 {
-    RotationalInertiaRaw ret;
+    RotationalInertia ret;
     ret.zero();
     return ret;
 }

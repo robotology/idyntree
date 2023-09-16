@@ -8,7 +8,7 @@
 #include <iDynTree/Direction.h>
 #include <iDynTree/Position.h>
 #include <iDynTree/Wrench.h>
-#include <iDynTree/RotationalInertiaRaw.h>
+#include <iDynTree/RotationalInertia.h>
 #include <iDynTree/Twist.h>
 #include <iDynTree/SpatialAcc.h>
 #include <iDynTree/SpatialMomentum.h>
@@ -160,9 +160,9 @@ namespace iDynTree
         return result;
     }
 
-    RotationalInertiaRaw Rotation::changeCoordFrameOf(const RotationalInertiaRaw& other) const
+    RotationalInertia Rotation::changeCoordFrameOf(const RotationalInertia& other) const
     {
-        RotationalInertiaRaw result;
+        RotationalInertia result;
 
         Eigen::Map<const Matrix3dRowMajor> op1Rot(this->data());
         Eigen::Map<const Matrix3dRowMajor> op2Inertia3d(other.data());
@@ -344,7 +344,7 @@ namespace iDynTree
         return changeCoordFrameOf(other);
     }
 
-    RotationalInertiaRaw Rotation::operator*(const RotationalInertiaRaw& other) const
+    RotationalInertia Rotation::operator*(const RotationalInertia& other) const
     {
         return changeCoordFrameOf(other);
     }

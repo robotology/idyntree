@@ -21,7 +21,7 @@ namespace iDynTree
     class SpatialAcc;
     class SpatialMomentum;
     class ClassicalAcc;
-    class RotationalInertiaRaw;
+    class RotationalInertia;
     class SpatialMotionVector;
     class SpatialForceVector;
     class ArticulatedBodyInertia;
@@ -104,7 +104,7 @@ namespace iDynTree
         Direction changeCoordFrameOf(const Direction & other) const;
         Axis      changeCoordFrameOf(const Axis & other) const;
         ClassicalAcc changeCoordFrameOf(const ClassicalAcc & other) const;
-        RotationalInertiaRaw changeCoordFrameOf(const RotationalInertiaRaw & other) const;
+        RotationalInertia changeCoordFrameOf(const RotationalInertia & other) const;
 
 
         /**
@@ -121,7 +121,7 @@ namespace iDynTree
         SpatialAcc      operator*(const SpatialAcc    & other) const;
         SpatialMomentum operator*(const SpatialMomentum   & other) const;
         ClassicalAcc    operator*(const ClassicalAcc    & other) const;
-        RotationalInertiaRaw    operator*(const RotationalInertiaRaw    & other) const;
+        RotationalInertia    operator*(const RotationalInertia    & other) const;
 
         /**
          * Log mapping between a  generic element of SO(3) (iDynTree::Rotation)
