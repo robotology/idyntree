@@ -33,7 +33,7 @@ inline Link getRandomLink()
 
     SpatialInertia inertiaLink(getRandomDouble(0,4),
                                Position(getRandomDouble(-2,2),getRandomDouble(-2,2),getRandomDouble(-2,2)),
-                               rot*RotationalInertiaRaw(rotInertiaData,3,3));
+                               rot*RotationalInertia(rotInertiaData,3,3));
 
     Link link;
 

@@ -329,9 +329,9 @@ std::string Transform::reservedToString() const
 
         // the rotational inertial is rotated and then
         // the parallel axis theorem applies
-        RotationalInertiaRaw newRotInertia;
+        RotationalInertia newRotInertia;
         Eigen::Map<Eigen::Matrix3d> newI(newRotInertia.data());
-        RotationalInertiaRaw oldRotInertiaWrtCom = op2.getRotationalInertiaWrtCenterOfMass();
+        RotationalInertia oldRotInertiaWrtCom = op2.getRotationalInertiaWrtCenterOfMass();
         Eigen::Map<const Eigen::Matrix3d> oldIWrtCom(oldRotInertiaWrtCom.data());
 
         Eigen::Map<const Matrix3dRowMajor> R(op1.getRotation().data());

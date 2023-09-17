@@ -37,7 +37,7 @@ inline Link getSimplestLink()
 
     SpatialInertia inertiaLink(7.0,
                                Position(5.0,0.0,0.0),
-                               rot*RotationalInertiaRaw(rotInertiaData,3,3));
+                               rot*RotationalInertia(rotInertiaData,3,3));
 
     Link link;
 
@@ -194,7 +194,7 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
                                   0.0,1.0,0.0,
                                   0.0,0.0,1.0};
 
-    SpatialInertia inertia(1.0,iDynTree::Position::Zero(),RotationalInertiaRaw(rotInertiaData,3,3));
+    SpatialInertia inertia(1.0,iDynTree::Position::Zero(),RotationalInertia(rotInertiaData,3,3));
     Link link0, link1, link2, link3;
     link0.setInertia(inertia);
     link1.setInertia(inertia);

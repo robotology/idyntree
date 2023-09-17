@@ -324,13 +324,13 @@ import_array();
         if (i != 3 || j != 3)
             throw std::runtime_error("Wrong size of input matrix");
 
-        return iDynTree::RotationRaw(in, static_cast<unsigned>(i), static_cast<unsigned>(j));
+        return iDynTree::Rotation(in, static_cast<unsigned>(i), static_cast<unsigned>(j));
     }
 
     Rotation(const double* in_data, const std::ptrdiff_t in_rows, const std::ptrdiff_t in_cols) {
-        iDynTree::Rotation* rot = new iDynTree::Rotation(iDynTree::RotationRaw(in_data,
-                                                                               static_cast<unsigned>(in_rows),
-                                                                               static_cast<unsigned>(in_cols)));
+        iDynTree::Rotation* rot = new iDynTree::Rotation(in_data,
+                                                         static_cast<unsigned>(in_rows),
+                                                         static_cast<unsigned>(in_cols));
         return rot;
     }
 };
@@ -340,11 +340,11 @@ import_array();
         if (size != 3)
             throw std::runtime_error("Wrong size of input array");
 
-        return iDynTree::PositionRaw(in, static_cast<unsigned>(size));
+        return iDynTree::Position(in, static_cast<unsigned>(size));
     }
 
     Position(const double* in_data, const unsigned in_size) {
-        iDynTree::Position* pos = new iDynTree::Position(iDynTree::PositionRaw(in_data, in_size));
+        iDynTree::Position* pos = new iDynTree::Position(in_data, in_size);
         return pos;
     }
 };
@@ -352,15 +352,15 @@ import_array();
 %extend iDynTree::Transform {
 
     void setPosition(const double* in_data, const unsigned in_size) {
-        $self->setPosition(iDynTree::PositionRaw(in_data, static_cast<unsigned>(in_size)));
+        $self->setPosition(iDynTree::Position(in_data, static_cast<unsigned>(in_size)));
     }
 
     void setRotation(const double* in_data,
                      const std::ptrdiff_t in_rows,
                      const std::ptrdiff_t in_cols) {
-        $self->setRotation(iDynTree::RotationRaw(in_data,
-                                                 static_cast<unsigned>(in_rows),
-                                                 static_cast<unsigned>(in_cols)));
+        $self->setRotation(iDynTree::Rotation(in_data,
+                                              static_cast<unsigned>(in_rows),
+                                              static_cast<unsigned>(in_cols)));
     }
 };
 

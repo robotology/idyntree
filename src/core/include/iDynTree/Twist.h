@@ -28,6 +28,7 @@ namespace iDynTree
         Twist(const Twist& other);
 
         /** overloaded operators **/
+        Twist& operator=(const Twist & other);
         Twist operator+(const Twist &other) const;
         Twist operator-(const Twist &other) const;
         Twist operator-() const;

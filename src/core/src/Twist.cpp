@@ -35,6 +35,14 @@ Twist::Twist(const Twist& other):
 
 }
 
+Twist& Twist::operator=(const Twist &other)
+{
+    this->getLinearVec3() = other.getLinearVec3();
+    this->getAngularVec3() = other.getAngularVec3();
+    return *this;
+}
+
+
 Twist Twist::operator+(const Twist& other) const
 {
     return efficient6dSum(*this,other);

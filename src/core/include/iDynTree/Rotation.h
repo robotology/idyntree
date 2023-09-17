@@ -110,6 +110,7 @@ namespace iDynTree
         /**
           * overloaded operators
           */
+        Rotation& operator=(const Rotation & other);
         Rotation operator*(const Rotation & other) const;
         Rotation inverse() const;
         Position operator*(const Position & other) const;

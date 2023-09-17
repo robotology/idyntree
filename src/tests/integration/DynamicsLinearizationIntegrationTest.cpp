@@ -472,7 +472,7 @@ int main()
     // First test some models used for debug
     Model doubleBodyModel;
 
-    RotationalInertiaRaw rotInertia = RotationalInertiaRaw::Zero();
+    RotationalInertia rotInertia = RotationalInertia::Zero();
     rotInertia(0,0) = rotInertia(1,1) = rotInertia(2,2) = 1.0;
 
     Position com = Position::Zero();

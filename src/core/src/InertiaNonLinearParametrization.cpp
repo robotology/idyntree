@@ -126,7 +126,7 @@ void RigidBodyInertiaNonLinearParametrization::fromRigidBodyInertia(const Spatia
     this->com = inertia.getCenterOfMass();
 
     // We get the inertia at the COM
-    RotationalInertiaRaw inertiaAtCOM = inertia.getRotationalInertiaWrtCenterOfMass();
+    RotationalInertia inertiaAtCOM = inertia.getRotationalInertiaWrtCenterOfMass();
 
     // We get the inertia at the principal axis using eigen
     JacobiSVD<Matrix<double,3,3,RowMajor> > eigenValuesSolver;
@@ -163,7 +163,7 @@ void RigidBodyInertiaNonLinearParametrization::fromRigidBodyInertia(const Spatia
 SpatialInertia RigidBodyInertiaNonLinearParametrization::toRigidBodyInertia() const
 {
     // Compute the inertia wrt to the center of mass
-    RotationalInertiaRaw rotInertia;
+    RotationalInertia rotInertia;
 
     Eigen::Vector3d principalMomentOfInertiaAtCOM;
 

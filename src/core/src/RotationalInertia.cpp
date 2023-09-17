@@ -30,6 +30,18 @@ RotationalInertia::RotationalInertia(const RotationalInertia& other): Matrix3x3(
 {
 }
 
+RotationalInertia& RotationalInertia::operator=(const RotationalInertia& other)
+{
+    for(std::size_t row=0; row < 3; row++ )
+    {
+        for(std::size_t col=0; col < 3; col++ )
+        {
+            this->m_data[row*3+col] = other.m_data[row*3+col];
+        }
+    }
+    return *this;
+}
+
 RotationalInertia RotationalInertia::Zero()
 {
     RotationalInertia ret;

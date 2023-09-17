@@ -33,7 +33,7 @@ int main()
     // http://scienceworld.wolfram.com/physics/MomentofInertiaRectangularParallelepiped.html
     double totalMass = 24;
     double expectedInertia = 16;
-    RotationalInertiaRaw rotInertia;
+    RotationalInertia rotInertia;
     rotInertia.zero();
     rotInertia(0, 0) = rotInertia(1, 1) = rotInertia(2, 2) = expectedInertia;
 

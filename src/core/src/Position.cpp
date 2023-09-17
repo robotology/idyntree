@@ -68,6 +68,14 @@ namespace iDynTree
 
     }
 
+    Position& Position::operator=(const Position& other)
+    {
+        this->m_data[0] = other.m_data[0];
+        this->m_data[1] = other.m_data[1];
+        this->m_data[2] = other.m_data[2];
+        return *this;
+    }
+
     Position::Position(Span<const double> other):
                  VectorFixSize< 3 >(other)
     {

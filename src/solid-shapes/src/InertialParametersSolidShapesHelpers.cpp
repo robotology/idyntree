@@ -27,10 +27,10 @@ SpatialInertia boxGet6DInertiaInLinkFrameFromDensity(const Box& box,
     double boxVolume = box.getX() * box.getY() * box.getZ();
     double boxMass   = density*boxVolume;
     // Assuming uniform density, the center of mass is coincident with the box center
-    PositionRaw comInGeomFrame;
+    Position comInGeomFrame;
     comInGeomFrame.zero();
     // From http://scienceworld.wolfram.com/physics/MomentofInertiaRectangularParallelepiped.html
-    RotationalInertiaRaw rotInertiaInGeomFrame;
+    RotationalInertia rotInertiaInGeomFrame;
     rotInertiaInGeomFrame.zero();
     double x2 = box.getX() * box.getX();
     double y2 = box.getY() * box.getY();

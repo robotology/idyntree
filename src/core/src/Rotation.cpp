@@ -294,6 +294,15 @@ namespace iDynTree
         return inverse2(*this);
     }
 
+    Rotation& Rotation::operator=(const Rotation & other)
+    {
+        Eigen::Map<Matrix3dRowMajor> thisData(m_data);
+        Eigen::Map<const Matrix3dRowMajor> otherData(other.data());
+        thisData = otherData;
+        return *this;
+    }
+
+
     Rotation Rotation::operator*(const Rotation& other) const
     {
         return compose(*this,other);

@@ -5,10 +5,8 @@
 #include <iDynTree/MatrixDynSize.h>
 #include <iDynTree/MatrixFixSize.h>
 #include <iDynTree/Position.h>
-#include <iDynTree/PositionRaw.h>
 #include <iDynTree/Rotation.h>
-#include <iDynTree/RotationRaw.h>
-#include <iDynTree/RotationalInertiaRaw.h>
+#include <iDynTree/RotationalInertia.h>
 #include <iDynTree/SpatialInertia.h>
 #include <iDynTree/Transform.h>
 #include <iDynTree/Twist.h>
@@ -197,23 +195,17 @@ void iDynTreeCoreBindings(pybind11::module& module) {
   createFixSizeMatrix<6, 6>(module, "Matrix6x6");
 
   // Positions, Rotations and Transforms.
-  py::class_<PositionRaw, VectorFixSize<3>>(module, "_PositionRaw")
-      // Do not expose constructor as we do not want users to use this class.
-      .def("__repr__", &PositionRaw::toString);
-
-  py::class_<Position, PositionRaw>(module, "Position")
+  py::class_<Position, VectorFixSize<3>>(module, "Position")
       .def(py::init())
       .def(py::init<double, double, double>())
       .def(py::self + py::self)
       .def(py::self - py::self)
       .def(-py::self)
+      .def("__repr__", &Position::toString)
       .def_static("Zero", &Position::Zero);
 
-  py::class_<RotationRaw, MatrixFixSize<3, 3>>(module, "_RotationRaw")
-      // Do not expose constructor as we do not want users to use this class.
-      .def("__repr__", &RotationRaw::toString);
 
-  py::class_<Rotation, RotationRaw>(module, "Rotation")
+  py::class_<Rotation, MatrixFixSize<3, 3>>(module, "Rotation")
       .def(py::init())
       .def(py::init<double, double, double,  //
                     double, double, double,  //
@@ -228,6 +220,7 @@ void iDynTreeCoreBindings(pybind11::module& module) {
           py::is_operator())
       .def("as_rpy", &Rotation::asRPY)
       .def("as_quaternion", &Rotation::asQuaternion)
+      .def("__repr__", &Rotation::toString)
       .def_static("Identity", &Rotation::Identity)
       .def_static("RotX", &Rotation::RotX)
       .def_static("RotY", &Rotation::RotY)
@@ -248,23 +241,21 @@ void iDynTreeCoreBindings(pybind11::module& module) {
       .def_property("origin", &Axis::getOrigin, &Axis::setOrigin)
       .def("__repr__", &Axis::toString);
 
-  py::class_<RotationalInertiaRaw, MatrixFixSize<3, 3>>(module,
-                                                        "RotationalInertia")
+  py::class_<RotationalInertia, MatrixFixSize<3, 3>>(module,
+                                                     "RotationalInertia")
       .def(py::init());
 
-  py::class_<SpatialInertiaRaw>(module, "_SpatialInertiaRaw")
-      .def("from_rotational_inertia_wrt_center_of_mass",
-           &SpatialInertiaRaw::fromRotationalInertiaWrtCenterOfMass)
-      .def("get_mass", &SpatialInertiaRaw::getMass)
-      .def("get_center_of_mass", &SpatialInertiaRaw::getCenterOfMass)
-      .def("get_rotational_inertia_wrt_frame_origin",
-           &SpatialInertiaRaw::getRotationalInertiaWrtFrameOrigin)
-      .def("get_rotational_inertia_wrt_center_of_mass",
-           &SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass);
-
-  py::class_<SpatialInertia, SpatialInertiaRaw>(module, "SpatialInertia")
+  py::class_<SpatialInertia>(module, "SpatialInertia")
       .def(py::init())
-      .def(py::init<double, const PositionRaw&, const RotationalInertiaRaw&>())
+      .def(py::init<double, const Position&, const RotationalInertia&>())
+      .def("from_rotational_inertia_wrt_center_of_mass",
+           &SpatialInertia::fromRotationalInertiaWrtCenterOfMass)
+      .def("get_mass", &SpatialInertia::getMass)
+      .def("get_center_of_mass", &SpatialInertia::getCenterOfMass)
+      .def("get_rotational_inertia_wrt_frame_origin",
+           &SpatialInertia::getRotationalInertiaWrtFrameOrigin)
+      .def("get_rotational_inertia_wrt_center_of_mass",
+           &SpatialInertia::getRotationalInertiaWrtCenterOfMass)
       .def_static("Zero", &SpatialInertia::Zero)
       .def("as_matrix", &SpatialInertia::asMatrix)
       .def(py::self + py::self)

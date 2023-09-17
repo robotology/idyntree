@@ -444,7 +444,7 @@ int main()
     double rotInertiaData[3*3] = {10.0,0.04,0.04,
                                   0.04,20.0,0.04,
                                   0.04,0.04,24.0};
-    SpatialInertia inertia(1.0,Position(100,-5,10),RotationalInertiaRaw(rotInertiaData,3,3));
+    SpatialInertia inertia(1.0,Position(100,-5,10),RotationalInertia(rotInertiaData,3,3));
 
     checkInertiaTwistProduct(inertia,twist);
     checkInertiaTransformation(trans,inertia);

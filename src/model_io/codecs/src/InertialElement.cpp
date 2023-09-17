@@ -79,7 +79,7 @@ namespace iDynTree {
                     xy, yy, yz,
                     xz, yz, zz
                 };
-                m_rotationalInertiaWRTCoM = RotationalInertiaRaw(buffer, 3, 3);
+                m_rotationalInertiaWRTCoM = RotationalInertia(buffer, 3, 3);
                 
                 return true;
             });

@@ -51,6 +51,11 @@ namespace iDynTree
         Position(const Position & other);
 
         /**
+         * Assignment operator: assign a Position from another Position
+         */
+        Position& operator=(const Position& other);
+
+        /**
          * Constructor from a raw buffer of 3 doubles.
          */
         Position(const double* in_data, const unsigned int in_size);

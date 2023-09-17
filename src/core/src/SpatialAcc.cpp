@@ -26,6 +26,13 @@ SpatialAcc::SpatialAcc(const SpatialAcc& other):
 
 }
 
+SpatialAcc& SpatialAcc::operator=(const SpatialAcc &other)
+{
+    this->getLinearVec3() = other.getLinearVec3();
+    this->getAngularVec3() = other.getAngularVec3();
+    return *this;
+}
+
 SpatialAcc SpatialAcc::operator+(const SpatialAcc& other) const
 {
     return efficient6dSum(*this,other);

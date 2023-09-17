@@ -11,7 +11,7 @@ namespace iDynTree
     class Position;
 
     /**
-     * Class providing the raw coordinates for a 3d inertia matrix.
+     * Class providing the coordinates for a 3d inertia matrix.
      *
      * \ingroup iDynTreeCore
      *
@@ -35,6 +35,7 @@ namespace iDynTree
         RotationalInertia();
         RotationalInertia(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
         RotationalInertia(const RotationalInertia & other);
+        RotationalInertia& operator=(const RotationalInertia& other);
 
         /**
          * Initializer helper: return a zero matrix.
