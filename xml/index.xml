@@ -943,6 +943,8 @@
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae0ce4359181d853be92b88cdeafa69ff" kind="variable"><name>m_dynamicTraversal</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a1882f61b3453b6a5c6112e35a4815ace" kind="variable"><name>m_kinematicTraversals</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ad66bd96fb4e15eebe79840a535301f51" kind="variable"><name>m_jointPos</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a0cdf56def127a01a7a629455c1f55b8b" kind="variable"><name>m_jointVel</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a687bcc088e718035e1448d5248d4e59b" kind="variable"><name>m_jointAcc</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a940080c96e8902612b6ba498aab8bd2d" kind="variable"><name>m_linkVels</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a4ce21922d525f32ac0b4dad58a2dac4c" kind="variable"><name>m_linkProperAccs</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1add15a23c42a1eed9bbdf5528a79aedfc" kind="variable"><name>m_linkNetExternalWrenches</name></member>
@@ -961,10 +963,10 @@
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae1fcc20d0e3eb0eace44e334d931c0f4" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5da76e1decfef128f4580a108d865166" kind="function"><name>sensors</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a0ad964451590f8bbe0a9bb9e01de1374" kind="function"><name>submodels</name></member>
-    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5d44956cd4c5a64c2c3397fce2c9edd8" kind="function"><name>updateKinematicsFromFloatingBase</name></member>
-    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a988f7114c5e0661ddd931d98c04645c9" kind="function"><name>updateKinematicsFromFixedBase</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5ac25475eaa0e7b750c4cd9e266fa758" kind="function"><name>updateKinematicsFromFloatingBase</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a7719cb1bcf6b3ba9f3d7f66e60738a68" kind="function"><name>updateKinematicsFromFixedBase</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a903f0fca32abdb551ffe7eda013ce462" kind="function"><name>computeExpectedFTSensorsMeasurements</name></member>
-    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ace39d234b8ab82cbdcce3bb49673a794" kind="function"><name>computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a2ce880f4ac64809b17c49f7a4bf60569" kind="function"><name>computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a9abd2346013d2a811c5336255323962b" kind="function"><name>estimateExtWrenchesAndJointTorques</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a584e5d2ca3426529f407dbb5248f290e" kind="function"><name>checkThatTheModelIsStill</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ad52d10a9a145eba8d52c67ea65128554" kind="function"><name>estimateLinkNetWrenchesWithoutGravity</name></member>
@@ -1869,6 +1871,7 @@
     <member refid="classiDynTree_1_1JointDOFsDoubleArray_1a9b301ad1063e206b9004e01350f55a3b" kind="function"><name>resize</name></member>
     <member refid="classiDynTree_1_1JointDOFsDoubleArray_1a788595cebd4af5791674c4f4b506f82e" kind="function"><name>resize</name></member>
     <member refid="classiDynTree_1_1JointDOFsDoubleArray_1a634466c96b990921ee045b50d269acb0" kind="function"><name>isConsistent</name></member>
+    <member refid="classiDynTree_1_1JointDOFsDoubleArray_1afd385c540e540d2dcd5ca4bd320e37de" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1JointDOFsDoubleArray_1af32950db5c4fedbd963cdc7e7a2fb982" kind="function"><name>~JointDOFsDoubleArray</name></member>
   </compound>
   <compound refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams" kind="struct"><name>iDynTree::JointElement::JointDynamicsParams</name>
@@ -1904,6 +1907,7 @@
     <member refid="classiDynTree_1_1JointPosDoubleArray_1a0283c1bf421404a0c560e4a4a57c4490" kind="function"><name>resize</name></member>
     <member refid="classiDynTree_1_1JointPosDoubleArray_1a61439b6f58feac5dca9b2062c2cc1457" kind="function"><name>resize</name></member>
     <member refid="classiDynTree_1_1JointPosDoubleArray_1a78911c1ffd581937c6017ef74b6bbe0f" kind="function"><name>isConsistent</name></member>
+    <member refid="classiDynTree_1_1JointPosDoubleArray_1a2dac89673656993f25dad60391171eb6" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1JointPosDoubleArray_1a6927f9ed20083812efd426e917e1643f" kind="function"><name>~JointPosDoubleArray</name></member>
   </compound>
   <compound refid="classiDynTree_1_1JointSensor" kind="class"><name>iDynTree::JointSensor</name>

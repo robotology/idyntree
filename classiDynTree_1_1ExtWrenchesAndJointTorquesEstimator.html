@@ -74,7 +74,7 @@
             </li>
           </ul>
         </nav>
-<p>This is a class for estimating external wrenches and joint torques using as an input the robot velocities and the accelerations and the measurement of internal six axis F/T sensors.</p><p>The kinematic information (position,velocity and acceleration) necessary for the estimation can be provided in two ways:</p><ul><li>using the updateKinematicsFromFloatingBase</li><li>using the updateKinematicsFromFixedBase</li></ul><p>Note that in both ways there is no need (for the estimation) to provide the absolute position and linear velocity of the robot with respect to the inertial frame. The effect of gravity is considered by directly using the proper acceleration in the case of the floating frame (proper acceleration can be directly measured by an accelerometer) or by directly providing the gravity vector in the fixed frame case.</p><p>Beside its main goal of estimation of external wrenches and joint torques, the class also provide methods that can be useful to calibrate the six-axis FT sensors of the robot. These methods are:</p><ul><li><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a903f0fca32abdb551ffe7eda013ce462" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeExpectedFTSensorsMeasurements</a></li><li><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#ace39d234b8ab82cbdcce3bb49673a794" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a> Details of each method can be found in the method documentation</li></ul>
+<p>This is a class for estimating external wrenches and joint torques using as an input the robot velocities and the accelerations and the measurement of internal six axis F/T sensors.</p><p>The kinematic information (position,velocity and acceleration) necessary for the estimation can be provided in two ways:</p><ul><li>using the updateKinematicsFromFloatingBase</li><li>using the updateKinematicsFromFixedBase</li></ul><p>Note that in both ways there is no need (for the estimation) to provide the absolute position and linear velocity of the robot with respect to the inertial frame. The effect of gravity is considered by directly using the proper acceleration in the case of the floating frame (proper acceleration can be directly measured by an accelerometer) or by directly providing the gravity vector in the fixed frame case.</p><p>Beside its main goal of estimation of external wrenches and joint torques, the class also provide methods that can be useful to calibrate the six-axis FT sensors of the robot. These methods are:</p><ul><li><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a903f0fca32abdb551ffe7eda013ce462" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeExpectedFTSensorsMeasurements</a></li><li><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a2ce880f4ac64809b17c49f7a4bf60569" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a> Details of each method can be found in the method documentation</li></ul>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -124,9 +124,9 @@
             </dt>
             <dd>Get the used submodel decomposition.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a5d44956cd4c5a64c2c3397fce2c9edd8" class="m-doc">updateKinematicsFromFloatingBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a5ac25475eaa0e7b750c4cd9e266fa758" class="m-doc">updateKinematicsFromFloatingBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointVel,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointAcc,
               const FrameIndex&amp; floatingFrame,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; properClassicalLinearAcceleration,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; angularVel,
@@ -134,9 +134,9 @@
             </dt>
             <dd>Set the kinematic information necessary for the force estimation using the acceleration and angular velocity information of a floating frame.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a988f7114c5e0661ddd931d98c04645c9" class="m-doc">updateKinematicsFromFixedBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a7719cb1bcf6b3ba9f3d7f66e60738a68" class="m-doc">updateKinematicsFromFixedBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointVel,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointAcc,
               const FrameIndex&amp; fixedFrame,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; gravity) -&gt; bool</span>
             </dt>
@@ -149,10 +149,10 @@
             </dt>
             <dd>Predict FT sensors using the knoledge of external wrenches location.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ace39d234b8ab82cbdcce3bb49673a794" class="m-doc">computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknowns,
+              <span class="m-doc-wrap-bumper">auto <a href="#a2ce880f4ac64809b17c49f7a4bf60569" class="m-doc">computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknowns,
               std::vector&lt;<a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&gt;&amp; A,
               std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&gt;&amp; b,
-              std::vector&lt;size_t&gt;&amp; subModelID,
+              std::vector&lt;std::ptrdiff_t&gt;&amp; subModelID,
               std::vector&lt;iDynTree::LinkIndex&gt;&amp; baseLinkIndeces) -&gt; bool</span>
             </dt>
             <dd>For each submodel without any external wrench, computes the equation that relates the FT sensor measures with the kinematics-related known terms.</dd>
@@ -333,11 +333,11 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a5d44956cd4c5a64c2c3397fce2c9edd8"><div>
+          <section class="m-doc-details" id="a5ac25475eaa0e7b750c4cd9e266fa758"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5d44956cd4c5a64c2c3397fce2c9edd8" class="m-doc-self">updateKinematicsFromFloatingBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5ac25475eaa0e7b750c4cd9e266fa758" class="m-doc-self">updateKinematicsFromFloatingBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointVel,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointAcc,
               const FrameIndex&amp; floatingFrame,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; properClassicalLinearAcceleration,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; angularVel,
@@ -387,11 +387,11 @@
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>Tipically the floating frame information comes from an sensor containing a gyroscope (providing the angular velocity) and an accelerometer (providing the classical proper acceleration). As inertial sensors that return angular acceleration exist but are not common, the angular acceleration is usually obtained by numerical derivation on the angular velocity measure. In some cases it could make sense to just neglet the contribution of the floating frame angular acceleration (setting it to a zero vector), if its impact to the dynamics is marginal.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a988f7114c5e0661ddd931d98c04645c9"><div>
+          <section class="m-doc-details" id="a7719cb1bcf6b3ba9f3d7f66e60738a68"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a988f7114c5e0661ddd931d98c04645c9" class="m-doc-self">updateKinematicsFromFixedBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7719cb1bcf6b3ba9f3d7f66e60738a68" class="m-doc-self">updateKinematicsFromFixedBase</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointVel,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jointAcc,
               const FrameIndex&amp; fixedFrame,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; gravity)</span></span>
             </h3>
@@ -469,12 +469,12 @@
             </table>
 <p>This function is used to estimate the expected measurement of the FT sensors. The typical use of this function is to specify only one external unknown wrench in the unknowns parameter and then compute the expected measurements of the FT sensors using the kinematic information specified with an updateKinematics*** method. The location of the single external unknown wrench is the one of the only link that is supporting the weight of the robot.</p><p>This function can also be used to estimate the FT sensor measurements in case two unknown external wrenches are applied on the robot, if some additional assumption about the simmetry of the robot configuration, the joint torques and the external wrenches can be done.</p><aside class="m-note m-danger"><h4>Warning</h4><p>Before calling this method, either updateKinematicsFromFloatingBase or updateKinematicsFromFixedBase must be called.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="ace39d234b8ab82cbdcce3bb49673a794"><div>
+          <section class="m-doc-details" id="a2ce880f4ac64809b17c49f7a4bf60569"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ace39d234b8ab82cbdcce3bb49673a794" class="m-doc-self">computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknowns,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2ce880f4ac64809b17c49f7a4bf60569" class="m-doc-self">computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknowns,
               std::vector&lt;<a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&gt;&amp; A,
               std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&gt;&amp; b,
-              std::vector&lt;size_t&gt;&amp; subModelID,
+              std::vector&lt;std::ptrdiff_t&gt;&amp; subModelID,
               std::vector&lt;iDynTree::LinkIndex&gt;&amp; baseLinkIndeces)</span></span>
             </h3>
             <p>For each submodel without any external wrench, computes the equation that relates the FT sensor measures with the kinematics-related known terms.</p>

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="90" column="21" bodyfile="iDynTree/JointState.h" bodystart="90" bodyend="-1"/>
+        <location file="iDynTree/JointState.h" line="92" column="21" bodyfile="iDynTree/JointState.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="93" column="9"/>
+        <location file="iDynTree/JointState.h" line="95" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a48e1e7e2f8d578b983220ab091274482" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="94" column="9"/>
+        <location file="iDynTree/JointState.h" line="96" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a1d54c21999e0d2934da0c3e1edc562d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="96" column="14"/>
+        <location file="iDynTree/JointState.h" line="98" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a2c03aa02d558e139337d061e4b471785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="97" column="14"/>
+        <location file="iDynTree/JointState.h" line="99" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a84105fd3e858f5a55645a4436e125ec5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="99" column="14"/>
+        <location file="iDynTree/JointState.h" line="101" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a90e18ed78dd1010e7b158abe6e47ee9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">iDynTree::SpatialMotionVector</ref> &amp;</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="101" column="40"/>
+        <location file="iDynTree/JointState.h" line="103" column="40"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1aa8225eb16e3c8b009c2ae46aef1ac0f7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">iDynTree::SpatialMotionVector</ref> &amp;</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="102" column="46"/>
+        <location file="iDynTree/JointState.h" line="104" column="46"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1ab5331dbe1432a3442f2ed81a6d3eb621" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="104" column="9"/>
+        <location file="iDynTree/JointState.h" line="106" column="9"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -158,7 +158,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/JointState.h" line="87" column="5" bodyfile="iDynTree/JointState.h" bodystart="88" bodyend="105"/>
+    <location file="iDynTree/JointState.h" line="89" column="5" bodyfile="iDynTree/JointState.h" bodystart="90" bodyend="107"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a374aefc02190f47c0280738cfbe18749" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>DOFSpatialMotionArray</name></member>
       <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a48e1e7e2f8d578b983220ab091274482" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>DOFSpatialMotionArray</name></member>
