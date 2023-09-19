@@ -36,6 +36,7 @@
 %{
 /* Note : always include headers following the inheritance order */
 #include <cmath>
+#include <cstddef>
 
 //Utils
 #include "iDynTree/Utils.h"
@@ -139,6 +140,25 @@
 #include "iDynTree/InverseKinematics.h"
 
 %}
+
+// Wrap the std::vector<iDynTree::MatrixDynSize> params
+%template(MatrixDynSizeVector) std::vector<iDynTree::MatrixDynSize>;
+
+// Wrap the std::vector<iDynTree::VectorDynSize> params
+%template(VectorDynSizeVector) std::vector<iDynTree::VectorDynSize>;
+
+// Wrap the:
+// * std::vector<std::ptrdiff_t>,
+// * std::vector<iDynTree::LinkIndex>,
+// * std::vector<iDynTree::JointIndex>,
+// * std::vector<iDynTree::DOFIndex>,
+// * std::vector<iDynTree::FrameIndex>,
+// * std::vector<iDynTree::TraversalIndex>,
+// params
+namespace std {
+    typedef ::ptrdiff_t ptrdiff_t;
+}
+%template(IndexVector) std::vector<std::ptrdiff_t>;
 
 //Wrap std::vector<BerdySensors>
 namespace std {

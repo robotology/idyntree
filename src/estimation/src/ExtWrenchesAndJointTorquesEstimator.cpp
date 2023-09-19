@@ -40,6 +40,8 @@ ExtWrenchesAndJointTorquesEstimator::ExtWrenchesAndJointTorquesEstimator():
     m_dynamicTraversal(),
     m_kinematicTraversals(),
     m_jointPos(),
+    m_jointVel(),
+    m_jointAcc(),
     m_linkVels(),
     m_linkProperAccs(),
     m_linkNetExternalWrenches(),
@@ -88,7 +90,9 @@ bool ExtWrenchesAndJointTorquesEstimator::setModel(const Model& _model)
     m_model.computeFullTreeTraversal(m_dynamicTraversal);
     m_kinematicTraversals.resize(m_model);
 
-
+    m_jointPos.resize(m_model);
+    m_jointVel.resize(m_model);
+    m_jointAcc.resize(m_model);
     m_linkVels.resize(m_model);
     m_linkProperAccs.resize(m_model);
     m_linkIntWrenches.resize(m_model);
@@ -187,9 +191,9 @@ const SubModelDecomposition& ExtWrenchesAndJointTorquesEstimator::submodels() co
 }
 
 
-bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFixedBase(const JointPosDoubleArray& jointPos,
-                                                                        const JointDOFsDoubleArray& jointVel,
-                                                                        const JointDOFsDoubleArray& jointAcc,
+bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFixedBase(const VectorDynSize& jointPos,
+                                                                        const VectorDynSize& jointVel,
+                                                                        const VectorDynSize& jointAcc,
                                                                         const FrameIndex& fixedFrame,
                                                                         const Vector3& gravity)
 {
@@ -211,9 +215,10 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFixedBase(const Jo
     return updateKinematicsFromFloatingBase(jointPos,jointVel,jointAcc,fixedFrame,properClassicalAcceleration,zero,zero);
 }
 
-bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jointPos,
-                                                                           const JointDOFsDoubleArray& jointVel,
-                                                                           const JointDOFsDoubleArray& jointAcc,
+
+bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const VectorDynSize& jointPos,
+                                                                           const VectorDynSize& jointVel,
+                                                                           const VectorDynSize& jointAcc,
                                                                            const FrameIndex& floatingFrame,
                                                                            const Vector3& properClassicalLinearAcceleration,
                                                                            const Vector3& angularVel,
@@ -231,6 +236,26 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
         reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromFloatingBase","Unknown frame index specified.");
         return false;
     }
+
+    if (m_jointPos.size() != jointPos.size())
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromFloatingBase","Wrong size of input joint positions.");
+        return false;
+    }
+
+    if (m_jointVel.size() != jointVel.size())
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromFloatingBase","Wrong size of input joint velocities.");
+    }
+
+    if (m_jointAcc.size() != jointAcc.size())
+    {
+        reportError("ExtWrenchesAndJointTorquesEstimator","updateKinematicsFromFloatingBase","Wrong size of input joint accelerations.");
+    }
+
+    m_jointPos = jointPos;
+    m_jointVel = jointVel;
+    m_jointAcc = jointAcc;
 
     // Get link of the specified frame
     LinkIndex floatingLinkIndex = m_model.getFrameLink(floatingFrame);
@@ -255,16 +280,15 @@ bool ExtWrenchesAndJointTorquesEstimator::updateKinematicsFromFloatingBase(const
     base_acc_link = link_H_frame*base_acc_frame;
     base_classical_acc_link.fromSpatial(base_acc_link,base_vel_link);
 
+
     // Propagate the kinematics information
     bool ok = dynamicsEstimationForwardVelAccKinematics(m_model,m_kinematicTraversals.getTraversalWithLinkAsBase(m_model,floatingLinkIndex),
                                                         base_classical_acc_link.getLinearVec3(),
                                                         base_vel_link.getAngularVec3(),
                                                         base_classical_acc_link.getAngularVec3(),
-                                                        jointPos,jointVel,jointAcc,
+                                                        m_jointPos,m_jointVel,m_jointAcc,
                                                         m_linkVels,m_linkProperAccs);
 
-    // Store joint positions
-    m_jointPos = jointPos;
 
     m_isKinematicsUpdated = ok;
     return ok;
@@ -427,7 +451,7 @@ iDynTree::LinkConstPtr getLinkOfSubModelThatIsConnectedToFTSensors(const Travers
 bool ExtWrenchesAndJointTorquesEstimator::computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics(const LinkUnknownWrenchContacts & unknownWrenches,
                                                                                                       std::vector<iDynTree::MatrixDynSize>& A,
                                                                                                       std::vector<iDynTree::VectorDynSize>& b,
-                                                                                                      std::vector<size_t>& subModelIDs,
+                                                                                                      std::vector<std::ptrdiff_t>& subModelIDs,
                                                                                                       std::vector<iDynTree::LinkIndex>& baseLinkIndeces)
 {
     if( !m_isModelValid )
