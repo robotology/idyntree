@@ -58,16 +58,21 @@ public:
                        const iDynTree::Span<const double> &jointPositions,
                        const std::string &modelName);
 
+    bool set_sphere(const std::string &name,
+                    const iDynTree::Position &position,
+                    const double radius,
+                    const iDynTree::VectorDynSize &color);
+
     /**
      * Utility function to make the meshcat interface run forever (until the user stops the
      * application)
      */
     void join();
 
-private:
+  private:
     class Impl;
     std::unique_ptr<Impl> m_pimpl;
-};
+  };
 
 } // namespace iDynTree
 
