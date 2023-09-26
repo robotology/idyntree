@@ -260,15 +260,17 @@ bool MeshcatVisualizer::setModelState(const iDynTree::MatrixView<const double> &
                                modelName);
 }
 
-bool MeshcatVisualizer::set_sphere(const std::string &name,
-                                   const iDynTree::Position &position,
-                                   const double radius,
-                                   const iDynTree::VectorDynSize &color)
+bool MeshcatVisualizer::setSphere(const std::string &name,
+                                  const iDynTree::Position &position,
+                                  const double radius,
+                                  const iDynTree::VectorFixSize<3> &color)
 {
     MeshcatCpp::Material m;
     m.set_color(color[0] * 255, color[1] * 255, color[2] * 255);
-    m_pimpl->set_object(name, MeshcatCpp::Sphere(radius), m);
-    return m_pimpl->set_transform(name, iDynTree::Transform(iDynTree::Rotation::Identity(), position));
+    MeshcatCpp::Meshcat meshcat;
+    meshcat.set_object(name, MeshcatCpp::Sphere(radius), m);
+    // meshcat.set_transform(name, iDynTree::Transform(iDynTree::Rotation::Identity(), position));
+    return true;
 }
 
 void MeshcatVisualizer::join()
