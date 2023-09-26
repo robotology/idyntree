@@ -63,7 +63,6 @@ struct MeshcatVisualizer::Impl
         return format == "dae" || format == "stl" || format == "obj";
     }
 
-
     // extact the path of the mesh from the meshcat tree
     std::string getMeshPathInMeshcatTree(const std::string &modelName,
                                          const std::string &linkName,
@@ -155,10 +154,9 @@ struct MeshcatVisualizer::Impl
         {
             const std::string msg = "Wrong size of the jointPositions vector for the model " + modelName +
                                     ". Expected: " + std::to_string(model.getNrOfDOFs()) +
-                                    "Provided: " +  std::to_string(jointPositions.size());
+                                    "Provided: " + std::to_string(jointPositions.size());
             reportError("MeshcatVisualizer::Impl", "updateModelGeometry", msg.c_str());
             return false;
-
         }
 
         if (!iDynTree::ForwardPositionKinematics(
@@ -167,7 +165,6 @@ struct MeshcatVisualizer::Impl
             const std::string msg = "Unable to solve the inverse kinematics for the model named " + modelName;
             reportError("MeshcatVisualizer::Impl", "updateModelGeometry", msg.c_str());
             return false;
-
         }
 
         // update the visual shape
@@ -253,9 +250,7 @@ bool MeshcatVisualizer::setModelState(const iDynTree::MatrixView<const double> &
 {
     if (world_T_base.rows() != world_T_base.cols() || world_T_base.rows() != 4)
     {
-        const std::string msg = "world_T_base needs to be a 4x4 matrix. Provided a "
-                              + std::to_string(world_T_base.rows()) + "x"
-                              + std::to_string(world_T_base.cols()) + " matrix.";
+        const std::string msg = "world_T_base needs to be a 4x4 matrix. Provided a " + std::to_string(world_T_base.rows()) + "x" + std::to_string(world_T_base.cols()) + " matrix.";
         reportError("MeshcatVisualizer", "setModelState", msg.c_str());
         return false;
     }

@@ -16,13 +16,13 @@
 namespace iDynTree
 {
 
-/**
- *  MeshcatVisualizer is an iDynTree-based wrapper to the [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) visualizer.
- * \note Only meshes are supported and the color is taken from the iDynTree::Model
- */
-class MeshcatVisualizer
-{
-public:
+  /**
+   *  MeshcatVisualizer is an iDynTree-based wrapper to the [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) visualizer.
+   * \note Only meshes are supported and the color is taken from the iDynTree::Model
+   */
+  class MeshcatVisualizer
+  {
+  public:
     MeshcatVisualizer();
     ~MeshcatVisualizer();
 
@@ -33,21 +33,21 @@ public:
      * @return True in case of success false otherwise/
      * @warning Only meshes are supported. The support to the primary shapes needs to be added.
      */
-    bool loadModel(const iDynTree::Model& model,
-                   const std::string& modelName);
+    bool loadModel(const iDynTree::Model &model,
+                   const std::string &modelName);
 
-   /**
+    /**
      * Set the state of an already existing model in the visualizer.
      * @param world_T_base pose of the base of the model.
      * @param jointPositions position of the joints.
      * @param modelName the name of the model specified in MeshcatVisualizer::loadModel(),
      * @return True in case of success false otherwise.
      */
-    bool setModelState(const iDynTree::Transform& world_T_base,
-                       const iDynTree::VectorDynSize& jointPositions,
-                       const std::string& modelName);
+    bool setModelState(const iDynTree::Transform &world_T_base,
+                       const iDynTree::VectorDynSize &jointPositions,
+                       const std::string &modelName);
 
-   /**
+    /**
      * Set the state of an already existing model in the visualizer.
      * @param world_T_base 4x4 matrix representing the homogeneous transformation,
      * @param jointPositions position of the joints,
