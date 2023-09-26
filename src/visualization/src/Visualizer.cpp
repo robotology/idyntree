@@ -39,7 +39,10 @@
 #include <windows.h>
 #endif
 
-#if defined(_WIN32) ||  defined(__APPLE__)
+#if defined(_IRR_COMPILE_WITH_SDL_DEVICE_) || defined(_WIN32) ||  defined(__APPLE__)
+#if (defined(_WIN32) ||  defined(__APPLE__)) && !defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+#error "On Windows and MacOS it is necessary to use Irrlicht with SDL"
+#endif
 #define IDYNTREE_USE_GLFW_WINDOW
 #endif
 
@@ -142,6 +145,8 @@ struct Visualizer::VisualizerPimpl
     HWND m_windowId;
 #elif defined(__APPLE__)
     id m_windowId;
+#elif defined(__linux__)
+    Window m_windowId;
 #endif
 #endif
 
@@ -476,11 +481,11 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 #elif defined(__APPLE__)
     pimpl->m_windowId = glfwGetCocoaWindow(pimpl->m_window);
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
+#elif defined(__linux__)
+    pimpl->m_windowId = glfwGetX11Window(pimpl->m_window);
+    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #endif
 
-#ifndef _IRR_COMPILE_WITH_SDL_DEVICE_
-#error "On Windows and MacOS it is necessary to use Irrlicht with SDL"
-#endif
     irrDevParams.DeviceType = irr::EIDT_SDL;
 #endif
 
