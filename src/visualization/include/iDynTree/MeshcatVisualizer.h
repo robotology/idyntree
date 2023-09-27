@@ -59,16 +59,61 @@ namespace iDynTree
                        const std::string &modelName);
 
     /**
-     * Load a mesh in the visualizer.
-     * @param name the name of the sphere. Each geometry you add needs to have an unique name.
+     * Load a sphere mesh in the visualizer.
      * @param radius radius of the sphere.
      * @param color the color of the mesh.
+     * @param name the name of the sphere. Each geometry you add needs to have an unique name.
      * @return True in case of success false otherwise.
      */
     bool loadSphere(const double radius,
                     const iDynTree::Span<const double> &color,
                     const std::string &name);
 
+    /**
+     * Load a cylinder mesh in the visualizer.
+     * @param radius radius of the cylinder.
+     * @param height height of the cylinder.
+     * @param color the color of the mesh.
+     * @param name the name of the cylinder. Each geometry you add needs to have an unique name.
+     * @return True in case of success false otherwise.
+     */
+    bool loadCylinder(const double radius, const double height,
+                      const iDynTree::Span<const double> &color,
+                      const std::string &name);
+
+    /**
+     * Load a box mesh in the visualizer.
+     * @param width width of the box.
+     * @param depth depth of the box.
+     * @param height height of the box.
+     * @param color the color of the mesh.
+     * @param name the name of the box. Each geometry you add needs to have an unique name.
+     * @return True in case of success false otherwise.
+     */
+    bool loadBox(const double width, const double depth, const double height,
+                 const iDynTree::Span<const double> &color,
+                 const std::string &name);
+
+    /**
+     * Load an ellipsoid mesh in the visualizer.
+     * @param a a-axis of the ellipsoid.
+     * @param b b-axis of the ellipsoid.
+     * @param c c-axis of the ellipsoid.
+     * @param color the color of the mesh.
+     * @param name the name of the ellipsoid. Each geometry you add needs to have an unique name.
+     * @return True in case of success false otherwise.
+     */
+    bool loadEllipsoid(const double a, const double b, const double c,
+                       const iDynTree::Span<const double> &color,
+                       const std::string &name);
+
+    /**
+     * set the pose of a primitive geometry mesh in the visualizer.
+     * @param world_T_geometry pose of the geometry.
+     * @param geometryName the name of the geometry specified in MeshcatVisualizer::loadSphere() || MeshcatVisualizer::loadCylinder() || MeshcatVisualizer::loadBox() || MeshcatVisualizer::loadEllipsoid().
+     * @return True in case of success false otherwise.
+     * Two implementations are provided: one for iDynTree::Transform and one for iDynTree::MatrixView.
+     */
     bool setPrimitiveGeometryTransform(const iDynTree::Transform &world_T_geometry,
                                        const std::string &geometryName);
 

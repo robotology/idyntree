@@ -310,6 +310,144 @@ bool MeshcatVisualizer::loadSphere(const double radius,
     return true;
 }
 
+bool MeshcatVisualizer::loadCylinder(const double radius, const double height,
+                                     const iDynTree::Span<const double> &color,
+                                     const std::string &name)
+{
+    // check if the model already exists
+    if (m_pimpl->modelExists(name))
+    {
+        const std::string msg = "The model named " + name + "already exists.";
+        reportError("MeshcatVisualizer", "loadCylinder", msg.c_str());
+        return false;
+    }
+
+    // check if the size of the vector is equal to 4
+    if (color.size() != 4)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color.size());
+        reportError("MeshcatVisualizer", "loadCylinder", msg.c_str());
+        return false;
+    }
+
+    // check if all the elements in color are between 0 and 1
+    if (color(0) < 0 || color(0) > 1 ||
+        color(1) < 0 || color(1) > 1 ||
+        color(2) < 0 || color(2) > 1 ||
+        color(3) < 0 || color(3) > 1)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color[0]) + ", " + std::to_string(color[1]) + ", " + std::to_string(color[2]) + ", " + std::to_string(color[3]);
+        reportError("MeshcatVisualizer", "loadCylinder", msg.c_str());
+        return false;
+    }
+
+    MeshcatCpp::Material m = MeshcatCpp::Material::get_default_material();
+    m.set_color(uint8_t(color[0] * 255), uint8_t(color[1] * 255), uint8_t(color[2] * 255));
+    if (color[3] < 1)
+    {
+        m.opacity = color[3];
+        m.transparent = true;
+    }
+
+    m_pimpl->meshcat.set_object(name, MeshcatCpp::Cylinder(radius, height), m);
+
+    m_pimpl->storedGeometries.insert(name);
+
+    return true;
+}
+
+bool MeshcatVisualizer::loadBox(const double width, const double depth, const double height,
+                                const iDynTree::Span<const double> &color,
+                                const std::string &name)
+{
+    // check if the model already exists
+    if (m_pimpl->modelExists(name))
+    {
+        const std::string msg = "The model named " + name + "already exists.";
+        reportError("MeshcatVisualizer", "loadBox", msg.c_str());
+        return false;
+    }
+
+    // check if the size of the vector is equal to 4
+    if (color.size() != 4)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color.size());
+        reportError("MeshcatVisualizer", "loadBox", msg.c_str());
+        return false;
+    }
+
+    // check if all the elements in color are between 0 and 1
+    if (color(0) < 0 || color(0) > 1 ||
+        color(1) < 0 || color(1) > 1 ||
+        color(2) < 0 || color(2) > 1 ||
+        color(3) < 0 || color(3) > 1)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color[0]) + ", " + std::to_string(color[1]) + ", " + std::to_string(color[2]) + ", " + std::to_string(color[3]);
+        reportError("MeshcatVisualizer", "loadBox", msg.c_str());
+        return false;
+    }
+
+    MeshcatCpp::Material m = MeshcatCpp::Material::get_default_material();
+    m.set_color(uint8_t(color[0] * 255), uint8_t(color[1] * 255), uint8_t(color[2] * 255));
+    if (color[3] < 1)
+    {
+        m.opacity = color[3];
+        m.transparent = true;
+    }
+
+    m_pimpl->meshcat.set_object(name, MeshcatCpp::Box(width, depth, height), m);
+
+    m_pimpl->storedGeometries.insert(name);
+
+    return true;
+}
+
+bool MeshcatVisualizer::loadEllipsoid(const double a, const double b, const double c,
+                                      const iDynTree::Span<const double> &color,
+                                      const std::string &name)
+{
+    // check if the model already exists
+    if (m_pimpl->modelExists(name))
+    {
+        const std::string msg = "The model named " + name + "already exists.";
+        reportError("MeshcatVisualizer", "loadEllipsoid", msg.c_str());
+        return false;
+    }
+
+    // check if the size of the vector is equal to 4
+    if (color.size() != 4)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color.size());
+        reportError("MeshcatVisualizer", "loadEllipsoid", msg.c_str());
+        return false;
+    }
+
+    // check if all the elements in color are between 0 and 1
+    if (color(0) < 0 || color(0) > 1 ||
+        color(1) < 0 || color(1) > 1 ||
+        color(2) < 0 || color(2) > 1 ||
+        color(3) < 0 || color(3) > 1)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color[0]) + ", " + std::to_string(color[1]) + ", " + std::to_string(color[2]) + ", " + std::to_string(color[3]);
+        reportError("MeshcatVisualizer", "loadEllipsoid", msg.c_str());
+        return false;
+    }
+
+    MeshcatCpp::Material m = MeshcatCpp::Material::get_default_material();
+    m.set_color(uint8_t(color[0] * 255), uint8_t(color[1] * 255), uint8_t(color[2] * 255));
+    if (color[3] < 1)
+    {
+        m.opacity = color[3];
+        m.transparent = true;
+    }
+
+    m_pimpl->meshcat.set_object(name, MeshcatCpp::Ellipsoid(a, b, c), m);
+
+    m_pimpl->storedGeometries.insert(name);
+
+    return true;
+}
+
 bool MeshcatVisualizer::setPrimitiveGeometryTransform(const iDynTree::Transform &world_T_geometry,
                                                       const std::string &geometryName)
 {
