@@ -58,11 +58,22 @@ namespace iDynTree
                        const iDynTree::Span<const double> &jointPositions,
                        const std::string &modelName);
 
-    bool setSphere(const std::string &name,
-                   const iDynTree::Position &position,
-                   const double radius,
-                   const iDynTree::VectorFixSize<3> &color);
+    /**
+     * Load a mesh in the visualizer.
+     * @param name the name of the sphere. Each geometry you add needs to have an unique name.
+     * @param radius radius of the sphere.
+     * @param color the color of the mesh.
+     * @return True in case of success false otherwise.
+     */
+    bool loadSphere(const double radius,
+                    const iDynTree::Span<const double> &color,
+                    const std::string &name);
 
+    bool setPrimitiveGeometryTransform(const iDynTree::Transform &world_T_geometry,
+                                       const std::string &geometryName);
+
+    bool setPrimitiveGeometryTransform(const iDynTree::MatrixView<const double> &world_T_geometry,
+                                       const std::string &geometryName);
     /**
      * Utility function to make the meshcat interface run forever (until the user stops the
      * application)

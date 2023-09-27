@@ -20,6 +20,8 @@
 #include <memory>
 #include <string_view>
 #include <utility>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace iDynTree;
 
@@ -27,17 +29,19 @@ struct MeshcatVisualizer::Impl
 {
     ::MeshcatCpp::Meshcat meshcat;
 
-    struct ModelData
+    struct MultiBodyModelData
     {
         iDynTree::Model model;
         iDynTree::Traversal traversal;
         iDynTree::LinkPositions linkPositions;
     };
+    std::unordered_map<std::string, MultiBodyModelData> storedMultiBodyModels;
+    std::unordered_set<std::string> storedGeometries;
 
-    std::unordered_map<std::string, ModelData> storedModels;
     [[nodiscard]] inline bool modelExists(const std::string &modelName)
     {
-        return this->storedModels.find(modelName) != this->storedModels.end();
+        return this->storedMultiBodyModels.find(modelName) != this->storedMultiBodyModels.end() ||
+               this->storedGeometries.find(modelName) != this->storedGeometries.end();
     }
 
     [[nodiscard]] inline bool isMesh(const iDynTree::SolidShape &geometry)
@@ -79,7 +83,7 @@ struct MeshcatVisualizer::Impl
         return modelName + "/" + linkName + "/" + fileName.substr(pos_slash + 1, pos_dot - pos_slash - 1);
     }
 
-    bool addModelGeometryToView(ModelData &data,
+    bool addModelGeometryToView(MultiBodyModelData &data,
                                 const std::string &modelName)
     {
         iDynTree::Model &model = data.model;
@@ -140,7 +144,7 @@ struct MeshcatVisualizer::Impl
         return true;
     }
 
-    bool updateModelGeometry(ModelData &data,
+    bool updateModelGeometry(MultiBodyModelData &data,
                              const iDynTree::Transform &basePose,
                              const iDynTree::VectorDynSize &jointPositions,
                              const std::string &modelName)
@@ -219,9 +223,9 @@ bool MeshcatVisualizer::loadModel(const iDynTree::Model &model,
     }
 
     // add the model
-    Impl::ModelData data;
-    m_pimpl->storedModels[modelName].model = model;
-    auto &storedModel = m_pimpl->storedModels[modelName];
+    Impl::MultiBodyModelData data;
+    m_pimpl->storedMultiBodyModels[modelName].model = model;
+    auto &storedModel = m_pimpl->storedMultiBodyModels[modelName];
     storedModel.model.computeFullTreeTraversal(storedModel.traversal);
     storedModel.linkPositions.resize(storedModel.model);
 
@@ -240,7 +244,7 @@ bool MeshcatVisualizer::setModelState(const iDynTree::Transform &world_T_base,
         return false;
     }
 
-    Impl::ModelData &storedModel = m_pimpl->storedModels[modelName];
+    Impl::MultiBodyModelData &storedModel = m_pimpl->storedMultiBodyModels[modelName];
     return m_pimpl->updateModelGeometry(storedModel, world_T_base, jointPositions, modelName);
 }
 
@@ -260,16 +264,77 @@ bool MeshcatVisualizer::setModelState(const iDynTree::MatrixView<const double> &
                                modelName);
 }
 
-bool MeshcatVisualizer::setSphere(const std::string &name,
-                                  const iDynTree::Position &position,
-                                  const double radius,
-                                  const iDynTree::VectorFixSize<3> &color)
+bool MeshcatVisualizer::loadSphere(const double radius,
+                                   const iDynTree::Span<const double> &color,
+                                   const std::string &name)
 {
-    MeshcatCpp::Material m;
-    m.set_color(color[0] * 255, color[1] * 255, color[2] * 255);
-    MeshcatCpp::Meshcat meshcat;
-    meshcat.set_object(name, MeshcatCpp::Sphere(radius), m);
-    // meshcat.set_transform(name, iDynTree::Transform(iDynTree::Rotation::Identity(), position));
+    // check if the model already exists
+    if (m_pimpl->modelExists(name))
+    {
+        const std::string msg = "The model named " + name + "already exists.";
+        reportError("MeshcatVisualizer", "loadSphere", msg.c_str());
+        return false;
+    }
+
+    // check if the size of the vector is equal to 4
+    if (color.size() != 4)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color.size());
+        reportError("MeshcatVisualizer", "loadSphere", msg.c_str());
+        return false;
+    }
+
+    // check if all the elements in color are between 0 and 1
+    if (color(0) < 0 || color(0) > 1 ||
+        color(1) < 0 || color(1) > 1 ||
+        color(2) < 0 || color(2) > 1 ||
+        color(3) < 0 || color(3) > 1)
+    {
+        const std::string msg = "The color needs to be a vector of 4 elements between 0 and 1. Provided: " + std::to_string(color[0]) + ", " + std::to_string(color[1]) + ", " + std::to_string(color[2]) + ", " + std::to_string(color[3]);
+        reportError("MeshcatVisualizer", "loadSphere", msg.c_str());
+        return false;
+    }
+
+    MeshcatCpp::Material m = MeshcatCpp::Material::get_default_material();
+    m.set_color(uint8_t(color[0] * 255), uint8_t(color[1] * 255), uint8_t(color[2] * 255));
+    if (color[3] < 1)
+    {
+        m.opacity = color[3];
+        m.transparent = true;
+    }
+
+    m_pimpl->meshcat.set_object(name, MeshcatCpp::Sphere(radius), m);
+
+    m_pimpl->storedGeometries.insert(name);
+
+    return true;
+}
+
+bool MeshcatVisualizer::setPrimitiveGeometryTransform(const iDynTree::Transform &world_T_geometry,
+                                                      const std::string &geometryName)
+{
+    return this->setPrimitiveGeometryTransform(iDynTree::make_matrix_view(world_T_geometry.asHomogeneousTransform()), geometryName);
+}
+
+bool MeshcatVisualizer::setPrimitiveGeometryTransform(const iDynTree::MatrixView<const double> &world_T_geometry,
+                                                      const std::string &geometryName)
+{
+    if (world_T_geometry.rows() != world_T_geometry.cols() || world_T_geometry.rows() != 4)
+    {
+        const std::string msg = "world_T_geometry needs to be a 4x4 matrix. Provided a " + std::to_string(world_T_geometry.rows()) + "x" + std::to_string(world_T_geometry.cols()) + " matrix.";
+        reportError("MeshcatVisualizer", "setPrimitiveGeometryTransform", msg.c_str());
+        return false;
+    }
+
+    if (!m_pimpl->storedGeometries.count(geometryName))
+    {
+        const std::string msg = "Unable to find the geometry named " + geometryName;
+        reportError("MeshcatVisualizer", "setPrimitiveGeometryTransform", msg.c_str());
+        return false;
+    }
+
+    m_pimpl->meshcat.set_transform(geometryName, world_T_geometry);
+
     return true;
 }
 
