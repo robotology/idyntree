@@ -62,6 +62,7 @@ namespace iDynTree
      * Load a sphere mesh in the visualizer.
      * @param radius radius of the sphere.
      * @param color the color of the mesh.
+     * @param color needs to be a vector of 4 double between 0 and 1 representing RGBA.
      * @param name the name of the sphere. Each geometry you add needs to have an unique name.
      * @return True in case of success false otherwise.
      */
@@ -74,6 +75,7 @@ namespace iDynTree
      * @param radius radius of the cylinder.
      * @param height height of the cylinder.
      * @param color the color of the mesh.
+     * @param color needs to be a vector of 4 double between 0 and 1 representing RGBA.
      * @param name the name of the cylinder. Each geometry you add needs to have an unique name.
      * @return True in case of success false otherwise.
      */
@@ -87,6 +89,7 @@ namespace iDynTree
      * @param depth depth of the box.
      * @param height height of the box.
      * @param color the color of the mesh.
+     * @param color needs to be a vector of 4 double between 0 and 1 representing RGBA.
      * @param name the name of the box. Each geometry you add needs to have an unique name.
      * @return True in case of success false otherwise.
      */
@@ -100,6 +103,7 @@ namespace iDynTree
      * @param b b-axis of the ellipsoid.
      * @param c c-axis of the ellipsoid.
      * @param color the color of the mesh.
+     * @param color needs to be a vector of 4 double between 0 and 1 representing RGBA.
      * @param name the name of the ellipsoid. Each geometry you add needs to have an unique name.
      * @return True in case of success false otherwise.
      */
