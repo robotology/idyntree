@@ -116,11 +116,18 @@ namespace iDynTree
      * @param world_T_geometry pose of the geometry.
      * @param geometryName the name of the geometry specified in MeshcatVisualizer::loadSphere() || MeshcatVisualizer::loadCylinder() || MeshcatVisualizer::loadBox() || MeshcatVisualizer::loadEllipsoid().
      * @return True in case of success false otherwise.
-     * Two implementations are provided: one for iDynTree::Transform and one for iDynTree::MatrixView.
+     * Implementations available: for iDynTree::Transform, for iDynTree::MatrixView.
      */
     bool setPrimitiveGeometryTransform(const iDynTree::Transform &world_T_geometry,
                                        const std::string &geometryName);
 
+    /**
+     * set the pose of a primitive geometry mesh in the visualizer.
+     * @param world_T_geometry pose of the geometry.
+     * @param geometryName the name of the geometry specified in MeshcatVisualizer::loadSphere() || MeshcatVisualizer::loadCylinder() || MeshcatVisualizer::loadBox() || MeshcatVisualizer::loadEllipsoid().
+     * @return True in case of success false otherwise.
+     * Implementations available: for iDynTree::Transform, for iDynTree::MatrixView.
+     */
     bool setPrimitiveGeometryTransform(const iDynTree::MatrixView<const double> &world_T_geometry,
                                        const std::string &geometryName);
     /**
