@@ -39,6 +39,13 @@
 #include <windows.h>
 #endif
 
+#if defined(_IRR_COMPILE_WITH_SDL_DEVICE_) || defined(_WIN32) ||  defined(__APPLE__)
+#if (defined(_WIN32) ||  defined(__APPLE__)) && !defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+#error "On Windows and MacOS it is necessary to use Irrlicht with SDL"
+#endif
+#define IDYNTREE_USE_GLFW_WINDOW
+#endif
+
 #endif
 
 #include "DummyImplementations.h"
@@ -126,6 +133,7 @@ struct Visualizer::VisualizerPimpl
 
 #ifdef IDYNTREE_USES_IRRLICHT
 
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     /**
      * Custom window object
      */
@@ -139,6 +147,7 @@ struct Visualizer::VisualizerPimpl
     id m_windowId;
 #elif defined(__linux__)
     Window m_windowId;
+#endif
 #endif
 
     /**
@@ -238,6 +247,7 @@ struct Visualizer::VisualizerPimpl
         m_palette["meshcat"].vector = irr::video::SColor(255,253,98,2);
     }
 
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
     {
         if (window != m_window)
@@ -375,6 +385,7 @@ struct Visualizer::VisualizerPimpl
     {
         static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->scrollCallback(window, xoffset, yoffset);
     }
+#endif
 
 #else
     DummyCamera m_camera;
@@ -399,7 +410,7 @@ struct Visualizer::VisualizerPimpl
     }
 };
 
-#ifdef IDYNTREE_USES_IRRLICHT
+#ifdef IDYNTREE_USE_GLFW_WINDOW
 
 unsigned int Visualizer::VisualizerPimpl::m_glfwInstances = 0;
 
@@ -441,6 +452,9 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     // initialize the color palette
     pimpl->initializePalette();
 
+    irr::SIrrlichtCreationParameters irrDevParams;
+
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     if (pimpl->m_glfwInstances == 0)
     {
         if (!glfwInit()) {
@@ -461,21 +475,6 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     glfwMakeContextCurrent(pimpl->m_window);
     glfwSwapInterval(1);
 
-    irr::SIrrlichtCreationParameters irrDevParams;
-
-// If we are on Windows, only SDL works with the external window
-#if defined(_WIN32) ||  defined(__APPLE__)
-#ifndef _IRR_COMPILE_WITH_SDL_DEVICE_
-#error "On Windows and MacOS it is necessary to use Irrlicht with SDL"
-#endif
-    irrDevParams.DeviceType = irr::EIDT_SDL;
-#endif
-
-    irrDevParams.DriverType = irr::video::EDT_OPENGL;
-    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
-    irrDevParams.WithAlphaChannel = true;
-    irrDevParams.AntiAlias = 4;
-
 #if defined(_WIN32)
     pimpl->m_windowId = glfwGetWin32Window(pimpl->m_window);
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
@@ -487,6 +486,13 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #endif
 
+    irrDevParams.DeviceType = irr::EIDT_SDL;
+#endif
+
+    irrDevParams.DriverType = irr::video::EDT_OPENGL;
+    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
+    irrDevParams.WithAlphaChannel = true;
+    irrDevParams.AntiAlias = 4;
 
     if( visualizerOptions.verbose )
     {
@@ -555,10 +561,12 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     pimpl->m_textures.init(pimpl->m_irrDriver, pimpl->m_irrSmgr);
 
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     glfwSetWindowUserPointer(pimpl->m_window, pimpl);
     glfwSetCursorPosCallback(pimpl->m_window, VisualizerPimpl::cursor_position_callback);
     glfwSetMouseButtonCallback(pimpl->m_window, VisualizerPimpl::mouse_button_callback);
     glfwSetScrollCallback(pimpl->m_window, VisualizerPimpl::scroll_callback);
+#endif
 
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
@@ -667,7 +675,9 @@ void Visualizer::draw()
             return;
         }
 
+#ifdef IDYNTREE_USE_GLFW_WINDOW
         glfwMakeContextCurrent(pimpl->m_window);
+#endif
 
         pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
 
@@ -685,9 +695,11 @@ void Visualizer::draw()
     pimpl->m_irrDriver->endScene();
     pimpl->m_subDrawStarted = false;
 
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     glfwSwapBuffers(pimpl->m_window);
 
     glfwPollEvents();
+#endif
 
     int fps = pimpl->m_irrDriver->getFPS();
 
@@ -701,7 +713,9 @@ void Visualizer::draw()
         irr::core::stringc strc(str);
 
         pimpl->m_irrDevice->setWindowCaption(str.c_str());
+#ifdef IDYNTREE_USE_GLFW_WINDOW
         glfwSetWindowTitle(pimpl->m_window, strc.c_str());
+#endif
         pimpl->lastFPS = fps;
     }
 
@@ -739,7 +753,9 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
     bool clearTextureBuffers = false;
     if (!pimpl->m_subDrawStarted)
     {
+#ifdef IDYNTREE_USE_GLFW_WINDOW
         glfwMakeContextCurrent(pimpl->m_window);
+#endif
         pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
         pimpl->m_subDrawStarted = true;
         clearTextureBuffers = true;
@@ -907,11 +923,15 @@ int Visualizer::width() const
         reportError("Visualizer","width","Visualizer not initialized.");
         return 0;
     }
-
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     GLint ww, wh;
     glfwGetWindowSize(pimpl->m_window, &ww, &wh);
 
     return ww;
+#else
+    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
+    return winDimensions.Width;
+#endif
 #else
     return 0;
 #endif
@@ -926,9 +946,15 @@ int Visualizer::height() const
         return 0;
     }
 
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     GLint ww, wh;
     glfwGetWindowSize(pimpl->m_window, &ww, &wh);
+
     return wh;
+#else
+    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
+    return winDimensions.Height;
+#endif
 #else
     return 0;
 #endif
@@ -942,8 +968,13 @@ bool Visualizer::run()
         reportError("Visualizer","run","Impossible to run not initialized visualizer");
         return false;
     }
+    bool shouldClose = false;
 
-    return pimpl->m_irrDevice->run() && !glfwWindowShouldClose(pimpl->m_window);
+#ifdef IDYNTREE_USE_GLFW_WINDOW
+    shouldClose = glfwWindowShouldClose(pimpl->m_window);
+#endif
+
+    return pimpl->m_irrDevice->run() && !shouldClose;
 #else
     reportError("Visualizer","run","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
@@ -957,7 +988,9 @@ void Visualizer::close()
     {
         return;
     }
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     glfwMakeContextCurrent(pimpl->m_window);
+#endif
 
     pimpl->m_vectors.close();
     pimpl->m_frames.close();
@@ -979,6 +1012,7 @@ void Visualizer::close()
 
     pimpl->m_modelViz.resize(0);
 
+#ifdef IDYNTREE_USE_GLFW_WINDOW
     if (pimpl->m_window)
     {
         glfwMakeContextCurrent(pimpl->m_window);
@@ -992,6 +1026,7 @@ void Visualizer::close()
 
         pimpl->m_window = nullptr;
     }
+#endif
 
     return;
 #endif
