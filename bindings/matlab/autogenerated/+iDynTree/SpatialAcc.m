@@ -7,23 +7,23 @@ classdef SpatialAcc < iDynTree.SpatialMotionVector
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(517, varargin{:});
+        tmp = iDynTreeMEX(583, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(518, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(584, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(519, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(585, self, varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(520, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(586, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(521, self);
+        iDynTreeMEX(587, self);
         self.SwigClear();
       end
     end

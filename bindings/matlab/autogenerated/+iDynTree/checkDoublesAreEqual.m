@@ -1,3 +1,3 @@
 function varargout = checkDoublesAreEqual(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(131, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(206, varargin{:});
 end

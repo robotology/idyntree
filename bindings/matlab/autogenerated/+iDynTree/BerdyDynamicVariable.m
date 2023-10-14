@@ -7,37 +7,37 @@ classdef BerdyDynamicVariable < iDynTreeSwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1589, self);
+        varargout{1} = iDynTreeMEX(1672, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1590, self, varargin{1});
+        iDynTreeMEX(1673, self, varargin{1});
       end
     end
     function varargout = id(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1591, self);
+        varargout{1} = iDynTreeMEX(1674, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1592, self, varargin{1});
+        iDynTreeMEX(1675, self, varargin{1});
       end
     end
     function varargout = range(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1593, self);
+        varargout{1} = iDynTreeMEX(1676, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1594, self, varargin{1});
+        iDynTreeMEX(1677, self, varargin{1});
       end
     end
     function varargout = eq(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1595, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1678, self, varargin{:});
     end
     function varargout = lt(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1596, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1679, self, varargin{:});
     end
     function self = BerdyDynamicVariable(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
@@ -45,14 +45,14 @@ classdef BerdyDynamicVariable < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1597, varargin{:});
+        tmp = iDynTreeMEX(1680, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1598, self);
+        iDynTreeMEX(1681, self);
         self.SwigClear();
       end
     end
