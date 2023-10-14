@@ -406,12 +406,6 @@
         <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="18" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="2">
         <label>iDynTree::MatrixDynSize</label>
         <link refid="classiDynTree_1_1MatrixDynSize"/>
@@ -425,7 +419,7 @@
           <edgelabel>&lt; iDynTree::Transform &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="19">
+      <node id="17">
         <label>iDynTree::VectorDynSize</label>
         <link refid="classiDynTree_1_1VectorDynSize"/>
       </node>
@@ -442,23 +436,17 @@
           <edgelabel>&lt; 2, 3 &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="15">
+      <node id="14">
         <label>Matrix3x3</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
         <childnode refid="7" relation="template-instance">
           <edgelabel>&lt; 3, 3 &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="14">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="16">
+      <node id="15">
         <label>iDynTree::Position</label>
         <link refid="classiDynTree_1_1Position"/>
-        <childnode refid="17" relation="public-inheritance">
+        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
@@ -485,10 +473,10 @@
         <childnode refid="11" relation="usage">
           <edgelabel>absoluteFrame_X_supportFrame</edgelabel>
         </childnode>
-        <childnode refid="16" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>o</edgelabel>
         </childnode>
-        <childnode refid="19" relation="usage">
+        <childnode refid="17" relation="usage">
           <edgelabel>b</edgelabel>
         </childnode>
       </node>
@@ -514,7 +502,7 @@
           <edgelabel>&lt; int &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="18">
+      <node id="16">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
         <childnode refid="10" relation="template-instance">
@@ -527,7 +515,7 @@
         <childnode refid="13" relation="usage">
           <edgelabel>rot</edgelabel>
         </childnode>
-        <childnode refid="16" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>pos</edgelabel>
         </childnode>
       </node>

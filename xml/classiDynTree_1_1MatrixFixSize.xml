@@ -456,16 +456,10 @@
     <detaileddescription>
     </detaileddescription>
     <inheritancegraph>
-      <node id="11">
-        <label>iDynTree::RotationalInertiaRaw</label>
-        <link refid="classiDynTree_1_1RotationalInertiaRaw"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="10">
+      <node id="9">
         <label>iDynTree::Rotation</label>
         <link refid="classiDynTree_1_1Rotation"/>
-        <childnode refid="9" relation="public-inheritance">
+        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
@@ -481,6 +475,12 @@
           <edgelabel>&lt; 2, 3 &gt;</edgelabel>
         </childnode>
       </node>
+      <node id="10">
+        <label>iDynTree::RotationalInertia</label>
+        <link refid="classiDynTree_1_1RotationalInertia"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="5">
         <label>iDynTree::MatrixFixSize&lt; 4, 4 &gt;</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
@@ -492,12 +492,6 @@
         <label>iDynTree::SpatialMotionWrtMotionDerivative&lt; 6, 6 &gt;</label>
         <link refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative"/>
         <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">

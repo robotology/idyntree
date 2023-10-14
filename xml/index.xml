@@ -424,7 +424,7 @@
     <member refid="classiDynTree_1_1ClassicalAcc_1af2840c213b585301e38240715afbb360" kind="function"><name>ClassicalAcc</name></member>
     <member refid="classiDynTree_1_1ClassicalAcc_1acb7b4a36b251b50c79af8b06037977cf" kind="function"><name>ClassicalAcc</name></member>
     <member refid="classiDynTree_1_1ClassicalAcc_1a9ce69cc1e892338d4e2d0b5c13ebbedf" kind="function"><name>ClassicalAcc</name></member>
-    <member refid="classiDynTree_1_1ClassicalAcc_1aca1ce7ef6cd00e20ae9cf786eb0c8d00" kind="function"><name>changeCoordFrame</name></member>
+    <member refid="classiDynTree_1_1ClassicalAcc_1abfe45c4f44f4ef12ef64f98d8edd504d" kind="function"><name>changeCoordFrame</name></member>
     <member refid="classiDynTree_1_1ClassicalAcc_1ab0e6e43ee966f2533517c85785b0caf1" kind="function"><name>getLinearVec3</name></member>
     <member refid="classiDynTree_1_1ClassicalAcc_1a3379201467dbcfad92ee7c3db9568513" kind="function"><name>getAngularVec3</name></member>
     <member refid="classiDynTree_1_1ClassicalAcc_1aa79bec4d759003f661270ac600dd5712" kind="function"><name>fromSpatial</name></member>
@@ -735,6 +735,7 @@
     <member refid="classiDynTree_1_1Direction_1a672c6529f15e722aae114037129079d1" kind="function"><name>Direction</name></member>
     <member refid="classiDynTree_1_1Direction_1a27bad1805642f34c355f1acdf4a342fb" kind="function"><name>Direction</name></member>
     <member refid="classiDynTree_1_1Direction_1a1609526471348ae9e754b980dbb031fd" kind="function"><name>Direction</name></member>
+    <member refid="classiDynTree_1_1Direction_1afa20fb0433a6d471eb0af4ef1a266a27" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1Direction_1a5d5834ef11b8373e4349dbe4f6020d08" kind="function"><name>Normalize</name></member>
     <member refid="classiDynTree_1_1Direction_1af9342642d4167ba6916f81a483b061f4" kind="function"><name>isParallel</name></member>
     <member refid="classiDynTree_1_1Direction_1a71848027a8d49d11d937e55fc926bd29" kind="function"><name>isPerpendicular</name></member>
@@ -1459,7 +1460,7 @@
   <compound refid="classiDynTree_1_1InertialElement" kind="class"><name>iDynTree::InertialElement</name>
     <member refid="classiDynTree_1_1InertialElement_1ad653f593941c6d19e334506439428769" kind="variable"><name>m_centerOfMass</name></member>
     <member refid="classiDynTree_1_1InertialElement_1a7683b4416677feab71ec30df7bdd83bb" kind="variable"><name>m_mass</name></member>
-    <member refid="classiDynTree_1_1InertialElement_1a9b14d54dac0825d1efccf405b6a26468" kind="variable"><name>m_rotationalInertiaWRTCoM</name></member>
+    <member refid="classiDynTree_1_1InertialElement_1aadf2f731b1aa0f6df1189e6ce8ad3e61" kind="variable"><name>m_rotationalInertiaWRTCoM</name></member>
     <member refid="classiDynTree_1_1InertialElement_1ac18d60d227d3868dc73bbcb2034ec904" kind="variable"><name>m_link</name></member>
     <member refid="classiDynTree_1_1InertialElement_1a50533db788c3c43e6c7910ad97e0bf5d" kind="function"><name>InertialElement</name></member>
     <member refid="classiDynTree_1_1InertialElement_1aec2e94c9ffa5a1d2aa6c2e7406cce1a0" kind="function"><name>childElementForName</name></member>
@@ -2831,7 +2832,8 @@
     <member refid="classiDynTree_1_1Position_1a7586102420b5ad9c679db233b556dc05" kind="function"><name>Position</name></member>
     <member refid="classiDynTree_1_1Position_1ab9a911b341e94dce3c12a0b00909bca7" kind="function"><name>Position</name></member>
     <member refid="classiDynTree_1_1Position_1a43bb1d57623d1a8723ed4d91b11c84f0" kind="function"><name>Position</name></member>
-    <member refid="classiDynTree_1_1Position_1a2ec67c9730e953b9b322eed3ab93a327" kind="function"><name>Position</name></member>
+    <member refid="classiDynTree_1_1Position_1a90c4199fc682ff1d02c3792750cf6830" kind="function"><name>operator=</name></member>
+    <member refid="classiDynTree_1_1Position_1ac69c714e0be98a0313da0b4361643f0f" kind="function"><name>Position</name></member>
     <member refid="classiDynTree_1_1Position_1a016c1499d097271e726f56b49caba0bf" kind="function"><name>Position</name></member>
     <member refid="classiDynTree_1_1Position_1ae15e7759f6fa62cfc1dcee22d030571d" kind="function"><name>changePoint</name></member>
     <member refid="classiDynTree_1_1Position_1ab88fdc6dccec1ee9e1f54c29037305a4" kind="function"><name>changeRefPoint</name></member>
@@ -2854,21 +2856,6 @@
     <member refid="classiDynTree_1_1Position_1ae43c016fee4cfd0f8bbb5c2da2cd9d80" kind="function"><name>inverse</name></member>
     <member refid="classiDynTree_1_1Position_1a0e6aa3aa05225fb775224d8bcfc56168" kind="function"><name>Zero</name></member>
     <member refid="classiDynTree_1_1Position_1a529088a017261b8a2aad8312e6e23ee7" kind="friend"><name>Rotation::changeCoordFrameOf</name></member>
-  </compound>
-  <compound refid="classiDynTree_1_1PositionRaw" kind="class"><name>iDynTree::PositionRaw</name>
-    <member refid="classiDynTree_1_1PositionRaw_1a673f8b97cb2251f58b9cd8269abe1c35" kind="function"><name>toString</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1ad9bc7d10dfcc39db22d173c18e2d28a2" kind="function"><name>reservedToString</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1a262288c2b48b229af89bebb53d92d9f9" kind="function"><name>PositionRaw</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1a7e7bc8ca7dd0f280f948bd5b68a74be9" kind="function"><name>PositionRaw</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1a80d840331aaff631f3a20de6c1ad058c" kind="function"><name>PositionRaw</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1a393b55cd191f8e7d55e1b0f01d34c593" kind="function"><name>PositionRaw</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1ade679b0251443c8dceb3057b296cd548" kind="function"><name>PositionRaw</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1a890b62a7da3fffa39225b8bffe42b082" kind="function"><name>changePoint</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1ac9ae12237eab2576cbd7d72d69a248e5" kind="function"><name>changeRefPoint</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1aeb3d01e442c7e59b1c090119f4ee629c" kind="function"><name>changePointOf</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1a33ed3752652d9616246560299cd283c8" kind="function"><name>changePointOf</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1a95bbcdb325604964ac5f7badad015792" kind="function"><name>compose</name></member>
-    <member refid="classiDynTree_1_1PositionRaw_1ad03fd4c796ef99a463767b4f36fe4661" kind="function"><name>inverse</name></member>
   </compound>
   <compound refid="classiDynTree_1_1PrismaticJoint" kind="class"><name>iDynTree::PrismaticJoint</name>
     <member refid="classiDynTree_1_1PrismaticJoint_1af6b5715987ab445df5c773d4133d1c19" kind="variable"><name>link1</name></member>
@@ -3085,9 +3072,9 @@
     <member refid="classiDynTree_1_1Rotation_1ab1d4bce1f02c6d61782afdd85d5cf7d7" kind="function"><name>leftJacobianInverse</name></member>
     <member refid="classiDynTree_1_1Rotation_1a3b5c6a82b93158b7dce0a5a87cd42d51" kind="function"><name>Rotation</name></member>
     <member refid="classiDynTree_1_1Rotation_1aea80e6bbd7eba2511c16de3a8070d393" kind="function"><name>Rotation</name></member>
-    <member refid="classiDynTree_1_1Rotation_1af2c807c8151fdb61f4bff2de2752c145" kind="function"><name>Rotation</name></member>
     <member refid="classiDynTree_1_1Rotation_1a836995b0cd4569da0199d1de96f09000" kind="function"><name>Rotation</name></member>
     <member refid="classiDynTree_1_1Rotation_1a0499eaac98ff4a77ae1e1febad65f933" kind="function"><name>Rotation</name></member>
+    <member refid="classiDynTree_1_1Rotation_1a0824b91af566a1e4da3bfcd736a25085" kind="function"><name>Rotation</name></member>
     <member refid="classiDynTree_1_1Rotation_1ae4baa49ac08287f5dfc2f4af43c39c15" kind="function"><name>changeOrientFrame</name></member>
     <member refid="classiDynTree_1_1Rotation_1a54ad49f3579466f0c69d6d6633d18b71" kind="function"><name>changeRefOrientFrame</name></member>
     <member refid="classiDynTree_1_1Rotation_1ae2a7020bd4159e6c1f4bac06dc227757" kind="function"><name>changeCoordinateFrame</name></member>
@@ -3101,7 +3088,8 @@
     <member refid="classiDynTree_1_1Rotation_1a2bf5899ea17119adec9150554b11ff80" kind="function"><name>changeCoordFrameOf</name></member>
     <member refid="classiDynTree_1_1Rotation_1a90083c8fd426035fdfd81f0f019222c9" kind="function"><name>changeCoordFrameOf</name></member>
     <member refid="classiDynTree_1_1Rotation_1adc231798a74209f9560d61361cb3516c" kind="function"><name>changeCoordFrameOf</name></member>
-    <member refid="classiDynTree_1_1Rotation_1a16c64400ab9bd2461c1dfe9dc79088ef" kind="function"><name>changeCoordFrameOf</name></member>
+    <member refid="classiDynTree_1_1Rotation_1a4750f61c48280f21a89fc1bbda30fbf3" kind="function"><name>changeCoordFrameOf</name></member>
+    <member refid="classiDynTree_1_1Rotation_1aba2560ef0fa424c6f9d6ccfdbf21c443" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1Rotation_1a7b907d0eea05fea309a607bbc5a2aebc" kind="function"><name>operator*</name></member>
     <member refid="classiDynTree_1_1Rotation_1a91ef997749232efa10da11c7c4139205" kind="function"><name>inverse</name></member>
     <member refid="classiDynTree_1_1Rotation_1a5ea65af729f09227d495d488581aea80" kind="function"><name>operator*</name></member>
@@ -3113,38 +3101,18 @@
     <member refid="classiDynTree_1_1Rotation_1aa5301287f3a23308cc8c6634425b113f" kind="function"><name>operator*</name></member>
     <member refid="classiDynTree_1_1Rotation_1a4982c8b2ee7d822389cb80f93e8171c9" kind="function"><name>operator*</name></member>
     <member refid="classiDynTree_1_1Rotation_1aef148d5c3b3b5294b879b2f57d3f6b0e" kind="function"><name>operator*</name></member>
-    <member refid="classiDynTree_1_1Rotation_1a187d8cde5f7cd24560a7785cb89ad585" kind="function"><name>operator*</name></member>
+    <member refid="classiDynTree_1_1Rotation_1acb92e594ed0d83965aedbf0ea7139d5c" kind="function"><name>operator*</name></member>
     <member refid="classiDynTree_1_1Rotation_1a31ca5467d6991d28c1c95c1091693452" kind="function"><name>log</name></member>
     <member refid="classiDynTree_1_1Rotation_1a40da839b3ed7cf1be092ce4c8056467a" kind="function"><name>fromQuaternion</name></member>
     <member refid="classiDynTree_1_1Rotation_1aa9fd6b878b6ea25bf935251a39b0d988" kind="function"><name>compose</name></member>
     <member refid="classiDynTree_1_1Rotation_1a41e1012a6b218b75008b9c9e7fd556d0" kind="function"><name>inverse2</name></member>
   </compound>
-  <compound refid="classiDynTree_1_1RotationalInertiaRaw" kind="class"><name>iDynTree::RotationalInertiaRaw</name>
-    <member refid="classiDynTree_1_1RotationalInertiaRaw_1ab9d59eeb6e800984a084de1b92f9c848" kind="function"><name>RotationalInertiaRaw</name></member>
-    <member refid="classiDynTree_1_1RotationalInertiaRaw_1a4fd1fb49b1ec5a14d36d77e579c8b4ce" kind="function"><name>RotationalInertiaRaw</name></member>
-    <member refid="classiDynTree_1_1RotationalInertiaRaw_1ab2abca01c8b3bf4875193d7c00fcfe5c" kind="function"><name>RotationalInertiaRaw</name></member>
-    <member refid="classiDynTree_1_1RotationalInertiaRaw_1a2e39cb0f0483d8035aa0b78de8d6d943" kind="function"><name>Zero</name></member>
-  </compound>
-  <compound refid="classiDynTree_1_1RotationRaw" kind="class"><name>iDynTree::RotationRaw</name>
-    <member refid="classiDynTree_1_1RotationRaw_1a664fe5dfd3048f06edd3e832432ab6bc" kind="function"><name>toString</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a0c0d54a248073cdb774f4ef9fe8f1611" kind="function"><name>reservedToString</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a1157c8d34789de9bc2871a78b1e111e2" kind="function"><name>RotX</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a0e74a7a4c05cd27c3253b867d02ee492" kind="function"><name>RotY</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a8a1c042f7058c6fe75f95d4d06f5ac41" kind="function"><name>RotZ</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a3dcee2ca1a6e9b6416ea3cf6b815cdad" kind="function"><name>RPY</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a9d043a540104e689499aa688c48da707" kind="function"><name>Identity</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1aaa44b90d4fa704b11750cfc426fc24e6" kind="function"><name>RotationRaw</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1aa0a5bea09ea4fb93c09d5acb1e2b076d" kind="function"><name>RotationRaw</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1ab9a6ec23b658bd49cde69622d657e22e" kind="function"><name>RotationRaw</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a12186033198d4e4b7c3eb48461db1d4f" kind="function"><name>RotationRaw</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a308cb7eb1a78ee179c750b79ae84ccda" kind="function"><name>RotationRaw</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a37d0a697aaf9d576d7f49493a58d52cf" kind="function"><name>changeOrientFrame</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1ad8862f07c7d01f45194bb9e38b0e60fa" kind="function"><name>changeRefOrientFrame</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a454c11a15ccb1f1f5cf74148e2a2c94f" kind="function"><name>changeCoordFrameOf</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a066ec0cd376d0b362944d92ad7f7422a" kind="function"><name>changeCoordFrameOf</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1aae1b906465c8dff05dbe2c60637a3071" kind="function"><name>changeCoordFrameOf</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a5fbe3e13fcf00607c4cd99f474856ab2" kind="function"><name>compose</name></member>
-    <member refid="classiDynTree_1_1RotationRaw_1a455607358f260425dd91b61d97018678" kind="function"><name>inverse2</name></member>
+  <compound refid="classiDynTree_1_1RotationalInertia" kind="class"><name>iDynTree::RotationalInertia</name>
+    <member refid="classiDynTree_1_1RotationalInertia_1af68624a6d40e1a5464e5979a59203259" kind="function"><name>RotationalInertia</name></member>
+    <member refid="classiDynTree_1_1RotationalInertia_1a340a4908597f68423747d76991bdb88f" kind="function"><name>RotationalInertia</name></member>
+    <member refid="classiDynTree_1_1RotationalInertia_1af7c7f4f07ac6230c19eee4c6af9ec069" kind="function"><name>RotationalInertia</name></member>
+    <member refid="classiDynTree_1_1RotationalInertia_1a73592c4c8febd334850b82da60714fe4" kind="function"><name>operator=</name></member>
+    <member refid="classiDynTree_1_1RotationalInertia_1a9a12018498ac55c2b907ebea775f77db" kind="function"><name>Zero</name></member>
   </compound>
   <compound refid="structiDynTree_1_1SchmittParams" kind="struct"><name>iDynTree::SchmittParams</name>
     <member refid="structiDynTree_1_1SchmittParams_1a2696f35d748c8d690457cf7b438216d4" kind="variable"><name>stableTimeContactMake</name></member>
@@ -3546,6 +3514,7 @@
     <member refid="classiDynTree_1_1SpatialAcc_1ac6b893cc27cb8cfd88ac0feeea7e18f3" kind="function"><name>SpatialAcc</name></member>
     <member refid="classiDynTree_1_1SpatialAcc_1a9303c3fc30ff89d9c41abc2c09ea5e34" kind="function"><name>SpatialAcc</name></member>
     <member refid="classiDynTree_1_1SpatialAcc_1a8ea94a2808f1b0c03cf5afbbdc437d55" kind="function"><name>SpatialAcc</name></member>
+    <member refid="classiDynTree_1_1SpatialAcc_1affa9a382b974594c6f3671745eefb297" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1SpatialAcc_1a003311bc2f503b0741a00f2c73ccd601" kind="function"><name>operator+</name></member>
     <member refid="classiDynTree_1_1SpatialAcc_1ac8746043ef0439e70ed44dede999d278" kind="function"><name>operator-</name></member>
     <member refid="classiDynTree_1_1SpatialAcc_1a13042371f792f10cd9d7f8d73fe613d5" kind="function"><name>operator-</name></member>
@@ -3564,10 +3533,19 @@
     <member refid="classiDynTree_1_1SpatialForceWrtMotionDerivative_1a9d454876935197ca67ebe145684fa53f" kind="function"><name>operator*</name></member>
   </compound>
   <compound refid="classiDynTree_1_1SpatialInertia" kind="class"><name>iDynTree::SpatialInertia</name>
+    <member refid="classiDynTree_1_1SpatialInertia_1a391e52e261b0cd42e34e1868eeda92f4" kind="variable"><name>m_mass</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1acbf8e9831ad5f2b1454418109990d6e4" kind="variable"><name>m_mcom</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1aa2c5b1a589d41a1a5d2975b7c4414350" kind="variable"><name>m_rotInertia</name></member>
     <member refid="classiDynTree_1_1SpatialInertia_1ab599c235ffbb9936d16a56c53f390d06" kind="function"><name>SpatialInertia</name></member>
-    <member refid="classiDynTree_1_1SpatialInertia_1a894a85c0a1319ae8894c73b5298669d7" kind="function"><name>SpatialInertia</name></member>
-    <member refid="classiDynTree_1_1SpatialInertia_1a105dc0fc74f9c5fe6475ac3d29dc275f" kind="function"><name>SpatialInertia</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1a907cad4be71448b45dac2a76aa55e3b0" kind="function"><name>SpatialInertia</name></member>
     <member refid="classiDynTree_1_1SpatialInertia_1a64175e97f51f1595870b8aff78f64839" kind="function"><name>SpatialInertia</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1a25c6ee7a1f07eabfa32fc26b7cca46e0" kind="function"><name>fromRotationalInertiaWrtCenterOfMass</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1ab52a9bf87a0a91234995cc5b5f6e4b37" kind="function"><name>getMass</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1a76eeb9d55d89cd0f249dbfe2638f1207" kind="function"><name>getCenterOfMass</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1a7e3c5484c7f7038f955aac544576000f" kind="function"><name>getRotationalInertiaWrtFrameOrigin</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1a3c6f18da61651876659fcfa173639428" kind="function"><name>getRotationalInertiaWrtCenterOfMass</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1a7dc8fd64e0a069923ee589a77689e2a7" kind="function"><name>multiply</name></member>
+    <member refid="classiDynTree_1_1SpatialInertia_1a2ad61dd654c4a4916e05c7a9dbc81632" kind="function"><name>zero</name></member>
     <member refid="classiDynTree_1_1SpatialInertia_1a7ac807ec779d50c39b04d37578f57e21" kind="function"><name>asMatrix</name></member>
     <member refid="classiDynTree_1_1SpatialInertia_1ac8f2cb43371716b2aeb3a893e4e14462" kind="function"><name>applyInverse</name></member>
     <member refid="classiDynTree_1_1SpatialInertia_1a7a7aee5d660fcc79d46351cc250a58cf" kind="function"><name>getInverse</name></member>
@@ -3586,27 +3564,12 @@
     <member refid="classiDynTree_1_1SpatialInertia_1a5b8bf854a9e99daa3d7abdacaa73c0fd" kind="function"><name>momentumDerivativeRegressor</name></member>
     <member refid="classiDynTree_1_1SpatialInertia_1a33efaebc74adccc53058177922a50370" kind="function"><name>momentumDerivativeSlotineLiRegressor</name></member>
   </compound>
-  <compound refid="classiDynTree_1_1SpatialInertiaRaw" kind="class"><name>iDynTree::SpatialInertiaRaw</name>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1a94039efc9f52c01fc0111fb5c17cbd87" kind="variable"><name>m_mass</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1adffed809529bfbc044e8c330374c611a" kind="variable"><name>m_mcom</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1aae4c95f1309e827a915431c58dad3666" kind="variable"><name>m_rotInertia</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1a9075739a88cf8d456be6c9346955c267" kind="function"><name>SpatialInertiaRaw</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1aae32215a7b93c1f160bdf449dc76c60f" kind="function"><name>SpatialInertiaRaw</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1a5e43484f889736ad717282bb72bdac92" kind="function"><name>SpatialInertiaRaw</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1a910d0f719839f786b22a9bcc1b945371" kind="function"><name>fromRotationalInertiaWrtCenterOfMass</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1a38d60687fb01182e2d6cc9970e697b98" kind="function"><name>getMass</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1a37cb05817ed6e158eb96a8d5d7519941" kind="function"><name>getCenterOfMass</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1ae13758f1b92ba30c1c02e5076ccb8940" kind="function"><name>getRotationalInertiaWrtFrameOrigin</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1a890bf2876d229c14b3ae24277bccebba" kind="function"><name>getRotationalInertiaWrtCenterOfMass</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1adda5a778ebf6d876fa24d8d8b48a49ef" kind="function"><name>multiply</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1ab545a454ffbd8144ce1b13fbb280d787" kind="function"><name>zero</name></member>
-    <member refid="classiDynTree_1_1SpatialInertiaRaw_1aec240d29470a4bb7d7aebaa434ffef3c" kind="function"><name>combine</name></member>
-  </compound>
   <compound refid="classiDynTree_1_1SpatialMomentum" kind="class"><name>iDynTree::SpatialMomentum</name>
     <member refid="classiDynTree_1_1SpatialMomentum_1a33dbae19e7b71c3e5a109f01320c9dc5" kind="function"><name>SpatialMomentum</name></member>
     <member refid="classiDynTree_1_1SpatialMomentum_1a3a35ab39d70c4172dda479965294f152" kind="function"><name>SpatialMomentum</name></member>
     <member refid="classiDynTree_1_1SpatialMomentum_1a75866ebbf82a596f16159d0ef8f76b0b" kind="function"><name>SpatialMomentum</name></member>
     <member refid="classiDynTree_1_1SpatialMomentum_1ab3e289ea80df9790190ef366d4ce7623" kind="function"><name>SpatialMomentum</name></member>
+    <member refid="classiDynTree_1_1SpatialMomentum_1ad9d19a6227631ddc07b4a02cf6d2cbb2" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1SpatialMomentum_1ab764ff72fed03fa8fae21deb6747b181" kind="function"><name>operator+</name></member>
     <member refid="classiDynTree_1_1SpatialMomentum_1a500636f1ab58625e4ed7deac76293b39" kind="function"><name>operator-</name></member>
     <member refid="classiDynTree_1_1SpatialMomentum_1aa1adc21c7c04b11507360c0fd4b669ef" kind="function"><name>operator-</name></member>
@@ -3666,6 +3629,7 @@
     <member refid="classiDynTree_1_1SpatialVector_1aaf50d0723aa1bf73962f05224a56bd8b" kind="function"><name>changePoint</name></member>
     <member refid="classiDynTree_1_1SpatialVector_1af55844354af98084b8fd52a9240b2d5f" kind="function"><name>changeCoordFrame</name></member>
     <member refid="classiDynTree_1_1SpatialVector_1a676b41872e9165b9795a9706149a8e17" kind="function"><name>dot</name></member>
+    <member refid="classiDynTree_1_1SpatialVector_1a739d85b3a1b3af607344f9fc8e930b0c" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1SpatialVector_1aee117ebb24cae309a169f678019f1181" kind="function"><name>operator+</name></member>
     <member refid="classiDynTree_1_1SpatialVector_1afcf112b3ddd4e01fc0389dd2319eb383" kind="function"><name>operator-</name></member>
     <member refid="classiDynTree_1_1SpatialVector_1a3ac59b03e3786339836b9b7d190f39e3" kind="function"><name>operator-</name></member>
@@ -3960,6 +3924,7 @@
     <member refid="classiDynTree_1_1Twist_1ad6ccf45a38ed5304317540ac2d4f9953" kind="function"><name>Twist</name></member>
     <member refid="classiDynTree_1_1Twist_1a356ac02dceb5807c911d0dc77a37c62b" kind="function"><name>Twist</name></member>
     <member refid="classiDynTree_1_1Twist_1a9769af112f3b78419a69678a80da6c53" kind="function"><name>Twist</name></member>
+    <member refid="classiDynTree_1_1Twist_1aad28c77fa88e513b639ac507148102ad" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1Twist_1aceda68fe1acfbabfe78f7c9462f4f25a" kind="function"><name>operator+</name></member>
     <member refid="classiDynTree_1_1Twist_1a40943fa7464aa2f1f205ffad431dbb02" kind="function"><name>operator-</name></member>
     <member refid="classiDynTree_1_1Twist_1a2c0be74f866be2d1607cbfdf28031411" kind="function"><name>operator-</name></member>
@@ -4165,6 +4130,7 @@
     <member refid="classiDynTree_1_1Wrench_1a7d3b8ee3ef7f6024acb26428a393415c" kind="function"><name>Wrench</name></member>
     <member refid="classiDynTree_1_1Wrench_1a99c5191f4b6abfe0b72d1dab0a02bb0c" kind="function"><name>Wrench</name></member>
     <member refid="classiDynTree_1_1Wrench_1af66e21abd0dd2721b0ca8db613355648" kind="function"><name>Wrench</name></member>
+    <member refid="classiDynTree_1_1Wrench_1aaf9ea30a4a1beb5ac91d797e5a2e9996" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1Wrench_1a2fcff32a02a287e62f3bd666b0a4328d" kind="function"><name>operator+</name></member>
     <member refid="classiDynTree_1_1Wrench_1a061d3e56d593d54bae7c1d717d70e8b6" kind="function"><name>operator-</name></member>
     <member refid="classiDynTree_1_1Wrench_1ae43f980d914019c767a6bc1e2f7d65d2" kind="function"><name>operator-</name></member>
@@ -4487,6 +4453,7 @@
     <member refid="MatrixView_8h_1ace02c0a5e7df4f19a28615bbea0b2d49" kind="function"><name>make_matrix_view</name></member>
     <member refid="MatrixView_8h_1a60ffec30976d99d36dda278b50600853" kind="function"><name>make_matrix_view</name></member>
     <member refid="MatrixView_8h_1a6c7864c31a89d1f9f3a5196a21d8cf23" kind="function"><name>make_matrix_view</name></member>
+    <member refid="Position_8h_1aacc071e8e145a637bd7305dc9f120353" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="PrivateUtils_8h_1a5cb90836a26ae5bb773be45bad7dad54" kind="function"><name>squareCrossProductMatrix</name></member>
     <member refid="PrivateUtils_8h_1a8dac2640419d7eaba00586c252ab99e5" kind="function"><name>skew</name></member>
     <member refid="PrivateUtils_8h_1ab4c72168cc4cc9909da74c433345e8d0" kind="function"><name>efficient6dCopy</name></member>
@@ -4494,6 +4461,8 @@
     <member refid="PrivateUtils_8h_1ad44d09b939590fde0dca95ebd7f899c5" kind="function"><name>efficient6ddifference</name></member>
     <member refid="PrivateUtils_8h_1ada26d16396f1cd9f82b2e7c921fe202e" kind="function"><name>efficientTwistCrossTwist</name></member>
     <member refid="PrivateUtils_8h_1a2941457a02de10e9de1dea4106588921" kind="function"><name>efficientTwistCrossMomentum</name></member>
+    <member refid="Rotation_8h_1afc22a429e9fa472ce408d199475fa100" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="RotationalInertia_8h_1affa3ef6d96e03cfad96623d8d7dbcacf" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="SO3Utils_8h_1a72d7e0a9ca21815a7dadb8ea94f5aef4" kind="function"><name>isValidRotationMatrix</name></member>
     <member refid="SO3Utils_8h_1a7950f68e2a23c633dc53411db5b5b573" kind="function"><name>geodesicL2Distance</name></member>
     <member refid="SO3Utils_8h_1a2c019748c0b171a73279ba732546d87a" kind="function"><name>geodesicL2MeanRotation</name></member>
@@ -4759,6 +4728,7 @@
   <compound refid="Core_2Position_8h" kind="file"><name>Position.h</name>
   </compound>
   <compound refid="Position_8h" kind="file"><name>Position.h</name>
+    <member refid="Position_8h_1aacc071e8e145a637bd7305dc9f120353" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
   </compound>
   <compound refid="Core_2PositionRaw_8h" kind="file"><name>PositionRaw.h</name>
   </compound>
@@ -4783,6 +4753,7 @@
   <compound refid="Core_2Rotation_8h" kind="file"><name>Rotation.h</name>
   </compound>
   <compound refid="Rotation_8h" kind="file"><name>Rotation.h</name>
+    <member refid="Rotation_8h_1afc22a429e9fa472ce408d199475fa100" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
   </compound>
   <compound refid="Core_2RotationalInertiaRaw_8h" kind="file"><name>RotationalInertiaRaw.h</name>
   </compound>
@@ -4959,6 +4930,9 @@
   <compound refid="Core_2Wrench_8h" kind="file"><name>Wrench.h</name>
   </compound>
   <compound refid="Wrench_8h" kind="file"><name>Wrench.h</name>
+  </compound>
+  <compound refid="RotationalInertia_8h" kind="file"><name>RotationalInertia.h</name>
+    <member refid="RotationalInertia_8h_1affa3ef6d96e03cfad96623d8d7dbcacf" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
   </compound>
   <compound refid="AttitudeEstimator_8h" kind="file"><name>AttitudeEstimator.h</name>
     <member refid="AttitudeEstimator_8h_1adcfa60b3d3580f517fd47c8864534b36" kind="typedef"><name>LinearAccelerometerMeasurements</name></member>

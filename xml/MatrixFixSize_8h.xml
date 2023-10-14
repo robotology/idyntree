@@ -14,8 +14,8 @@
     <includedby refid="ArticulatedBodyInertia_8h" local="no">iDynTree/ArticulatedBodyInertia.h</includedby>
     <includedby refid="Core_2MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includedby>
     <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
-    <includedby refid="RotationalInertiaRaw_8h" local="no">iDynTree/RotationalInertiaRaw.h</includedby>
-    <includedby refid="RotationRaw_8h" local="no">iDynTree/RotationRaw.h</includedby>
+    <includedby refid="Rotation_8h" local="no">iDynTree/Rotation.h</includedby>
+    <includedby refid="RotationalInertia_8h" local="no">iDynTree/RotationalInertia.h</includedby>
     <includedby refid="Transform_8h" local="no">iDynTree/Transform.h</includedby>
     <includedby refid="TransformDerivative_8h" local="no">iDynTree/TransformDerivative.h</includedby>
     <includedby refid="Triplets_8h" local="no">iDynTree/Triplets.h</includedby>

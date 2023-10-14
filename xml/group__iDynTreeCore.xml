@@ -10,14 +10,11 @@
     <innerclass refid="classiDynTree_1_1MatrixDynSize" prot="public">iDynTree::MatrixDynSize</innerclass>
     <innerclass refid="classiDynTree_1_1MatrixFixSize" prot="public">iDynTree::MatrixFixSize</innerclass>
     <innerclass refid="classiDynTree_1_1Position" prot="public">iDynTree::Position</innerclass>
-    <innerclass refid="classiDynTree_1_1PositionRaw" prot="public">iDynTree::PositionRaw</innerclass>
     <innerclass refid="classiDynTree_1_1Rotation" prot="public">iDynTree::Rotation</innerclass>
-    <innerclass refid="classiDynTree_1_1RotationalInertiaRaw" prot="public">iDynTree::RotationalInertiaRaw</innerclass>
-    <innerclass refid="classiDynTree_1_1RotationRaw" prot="public">iDynTree::RotationRaw</innerclass>
+    <innerclass refid="classiDynTree_1_1RotationalInertia" prot="public">iDynTree::RotationalInertia</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialAcc" prot="public">iDynTree::SpatialAcc</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialForceVector" prot="public">iDynTree::SpatialForceVector</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialInertia" prot="public">iDynTree::SpatialInertia</innerclass>
-    <innerclass refid="classiDynTree_1_1SpatialInertiaRaw" prot="public">iDynTree::SpatialInertiaRaw</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialMomentum" prot="public">iDynTree::SpatialMomentum</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialMotionVector" prot="public">iDynTree::SpatialMotionVector</innerclass>
     <innerclass refid="classiDynTree_1_1Transform" prot="public">iDynTree::Transform</innerclass>

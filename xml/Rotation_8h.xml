@@ -4,12 +4,15 @@
     <compoundname>Rotation.h</compoundname>
     <includes local="no">string</includes>
     <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
-    <includes refid="RotationRaw_8h" local="no">iDynTree/RotationRaw.h</includes>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/AttitudeEstimator.h</includedby>
     <includedby refid="Core_2Rotation_8h" local="no">iDynTree/Core/Rotation.h</includedby>
+    <includedby refid="Core_2RotationRaw_8h" local="no">iDynTree/Core/RotationRaw.h</includedby>
     <includedby refid="InertiaNonLinearParametrization_8h" local="no">iDynTree/InertiaNonLinearParametrization.h</includedby>
     <includedby refid="Position_8h" local="no">iDynTree/Position.h</includedby>
+    <includedby refid="RotationRaw_8h" local="no">iDynTree/RotationRaw.h</includedby>
     <includedby refid="SO3Utils_8h" local="no">iDynTree/SO3Utils.h</includedby>
     <includedby refid="SpatialVector_8h" local="yes">iDynTree/SpatialVector.h</includedby>
     <includedby refid="Transform_8h" local="no">iDynTree/Transform.h</includedby>
@@ -27,6 +30,28 @@
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1Rotation" prot="public">iDynTree::Rotation</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="Rotation_8h_1afc22a429e9fa472ce408d199475fa100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;iDynTree::RotationRaw is deprecated, use iDynTree::Rotation&quot;) typedef Rotation RotationRaw</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
+        <param>
+          <type>&quot;iDynTree::RotationRaw is</type>
+          <declname>deprecated</declname>
+        </param>
+        <param>
+          <type>use <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref>&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Rotation.h" line="479" column="5" declfile="iDynTree/Rotation.h" declline="479" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

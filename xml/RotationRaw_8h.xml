@@ -2,23 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="RotationRaw_8h" kind="file" language="C++">
     <compoundname>RotationRaw.h</compoundname>
-    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
-    <includes local="no">string</includes>
-    <includedby refid="Core_2RotationRaw_8h" local="no">iDynTree/Core/RotationRaw.h</includedby>
-    <includedby refid="Rotation_8h" local="no">iDynTree/Rotation.h</includedby>
-    <incdepgraph>
-      <node id="2">
-        <label>string</label>
-      </node>
-      <node id="1">
-        <label>iDynTree/RotationRaw.h</label>
-        <link refid="RotationRaw_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-    </incdepgraph>
-    <innerclass refid="classiDynTree_1_1RotationRaw" prot="public">iDynTree::RotationRaw</innerclass>
-    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="RotationalInertia_8h" kind="file" language="C++">
+    <compoundname>RotationalInertia.h</compoundname>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
+    <includedby refid="Core_2RotationalInertiaRaw_8h" local="no">iDynTree/Core/RotationalInertiaRaw.h</includedby>
+    <includedby refid="RotationalInertiaRaw_8h" local="no">iDynTree/RotationalInertiaRaw.h</includedby>
+    <includedby refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includedby>
+    <innerclass refid="classiDynTree_1_1RotationalInertia" prot="public">iDynTree::RotationalInertia</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="RotationalInertia_8h_1affa3ef6d96e03cfad96623d8d7dbcacf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;iDynTree::RotationalInertiaRaw is deprecated, use iDynTree::RotationalInertia&quot;) typedef RotationalInertia RotationalInertiaRaw</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
+        <param>
+          <type>&quot;iDynTree::RotationalInertiaRaw is</type>
+          <declname>deprecated</declname>
+        </param>
+        <param>
+          <type>use <ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">iDynTree::RotationalInertia</ref>&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RotationalInertia.h" line="47" column="5" declfile="iDynTree/RotationalInertia.h" declline="47" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/RotationalInertia.h"/>
+  </compounddef>
+</doxygen>

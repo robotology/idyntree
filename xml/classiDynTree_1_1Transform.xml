@@ -684,7 +684,7 @@
 <para>This transform object can be obtained as the <formula id="219">${}^{\texttt{refFrame}} H_{\texttt{frame}}$</formula> 4x4 homogeneous matrix using the asHomogeneousTransform method, or as the <formula id="220">${}^{\texttt{refFrame}} X_{\texttt{frame}}$</formula> 6x6 adjoint matrix using the asAdjointTransform . </para>
     </detaileddescription>
     <collaborationgraph>
-      <node id="9">
+      <node id="7">
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
       </node>
@@ -694,39 +694,27 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
+      <node id="3">
         <label>Matrix3x3</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
-        <childnode refid="5" relation="template-instance">
+        <childnode refid="4" relation="template-instance">
           <edgelabel>&lt; 3, 3 &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="3">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="4" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="6">
+      <node id="5">
         <label>iDynTree::Position</label>
         <link refid="classiDynTree_1_1Position"/>
-        <childnode refid="7" relation="public-inheritance">
+        <childnode refid="6" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="5">
+      <node id="4">
         <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
-      <node id="8">
+      <node id="6">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-        <childnode refid="9" relation="template-instance">
+        <childnode refid="7" relation="template-instance">
           <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>
@@ -736,7 +724,7 @@
         <childnode refid="2" relation="usage">
           <edgelabel>rot</edgelabel>
         </childnode>
-        <childnode refid="6" relation="usage">
+        <childnode refid="5" relation="usage">
           <edgelabel>pos</edgelabel>
         </childnode>
       </node>

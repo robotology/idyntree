@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="classiDynTree_1_1Rotation" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::Rotation</compoundname>
-    <basecompoundref refid="classiDynTree_1_1RotationRaw" prot="public" virt="non-virtual">iDynTree::RotationRaw</basecompoundref>
+    <basecompoundref refid="classiDynTree_1_1MatrixFixSize" prot="public" virt="non-virtual">iDynTree::MatrixFixSize&lt; 3, 3 &gt;</basecompoundref>
     <includes local="no">iDynTree/Rotation.h</includes>
       <sectiondef kind="user-defined">
       <header>Conversion to others represention of matrices.</header>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="154" column="14"/>
+        <location file="iDynTree/Rotation.h" line="161" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1affb93ecd043eb4870e46ad3e7ad9f3d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="163" column="27"/>
+        <location file="iDynTree/Rotation.h" line="170" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a226999eca0d7e8c382a427f7f056da03" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="183" column="14"/>
+        <location file="iDynTree/Rotation.h" line="190" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ae92f3d9a7bd41ba6b6d71d4a6c839998" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="206" column="14"/>
+        <location file="iDynTree/Rotation.h" line="213" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1adcac444f00ca751417f3095b401de86c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref></type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="226" column="27"/>
+        <location file="iDynTree/Rotation.h" line="233" column="27"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="466" column="21"/>
+        <location file="iDynTree/Rotation.h" line="473" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a57bcd6b8bcf5bf76c1a65498264cae35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="468" column="21"/>
+        <location file="iDynTree/Rotation.h" line="475" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="252" column="25"/>
+        <location file="iDynTree/Rotation.h" line="259" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a8212d8f1166090934b71cffa2710e8f6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="271" column="25"/>
+        <location file="iDynTree/Rotation.h" line="278" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1af38eea7de061b870e662cbc6ce7c8988" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="290" column="25"/>
+        <location file="iDynTree/Rotation.h" line="297" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a6b5085898713f9476d0f02d9a0db4be1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -358,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="306" column="25"/>
+        <location file="iDynTree/Rotation.h" line="313" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1acfda4b9d2663bc11e480a57ab86301e5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -400,7 +400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="324" column="26"/>
+        <location file="iDynTree/Rotation.h" line="331" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="332" column="25"/>
+        <location file="iDynTree/Rotation.h" line="339" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1af54e77e5ed5c416f2f2a9b7a9a0e18f1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -458,7 +458,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="345" column="26"/>
+        <location file="iDynTree/Rotation.h" line="352" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ad5c981ad3ab9b38fc41cc409f44165a1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -497,7 +497,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="358" column="26"/>
+        <location file="iDynTree/Rotation.h" line="365" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1adbdabfb1ff646bbf85a6026c40e5ee1f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -524,7 +524,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="366" column="26"/>
+        <location file="iDynTree/Rotation.h" line="373" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ac575ec3145f07095c44faff3fdc23e45" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -563,7 +563,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="374" column="26"/>
+        <location file="iDynTree/Rotation.h" line="381" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a5c47fc1e3411ea7795836068dae756e1" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">MatrixFixSize</ref>&lt; 4, 3 &gt;</type>
@@ -582,7 +582,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="387" column="30"/>
+        <location file="iDynTree/Rotation.h" line="394" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a6a898a875a0e1cfead1d7c9c78e0550b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">MatrixFixSize</ref>&lt; 3, 4 &gt;</type>
@@ -603,7 +603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="395" column="30"/>
+        <location file="iDynTree/Rotation.h" line="402" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1aab6423749ab0a59069e8e1770287e4a3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -617,7 +617,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="403" column="25"/>
+        <location file="iDynTree/Rotation.h" line="410" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ae67bd6a8021cd2d43dde159e7e294822" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -655,7 +655,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="426" column="25"/>
+        <location file="iDynTree/Rotation.h" line="433" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ab32550927c7532dc91c16c4489538732" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -688,7 +688,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="444" column="26"/>
+        <location file="iDynTree/Rotation.h" line="451" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ab1d4bce1f02c6d61782afdd85d5cf7d7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -720,7 +720,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="459" column="26"/>
+        <location file="iDynTree/Rotation.h" line="466" column="26"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -737,7 +737,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="56" column="9"/>
+        <location file="iDynTree/Rotation.h" line="59" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1aea80e6bbd7eba2511c16de3a8070d393" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -787,25 +787,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="61" column="9"/>
-      </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1Rotation_1af2c807c8151fdb61f4bff2de2752c145" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>iDynTree::Rotation::Rotation</definition>
-        <argsstring>(const RotationRaw &amp;other)</argsstring>
-        <name>Rotation</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref> &amp;</type>
-          <declname>other</declname>
-        </param>
-        <briefdescription>
-<para>Copy constructor: create a <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> from another <ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="68" column="9"/>
+        <location file="iDynTree/Rotation.h" line="64" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a836995b0cd4569da0199d1de96f09000" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -823,7 +805,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="73" column="9"/>
+        <location file="iDynTree/Rotation.h" line="71" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a0499eaac98ff4a77ae1e1febad65f933" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -841,7 +823,34 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="78" column="9"/>
+        <location file="iDynTree/Rotation.h" line="76" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Rotation_1a0824b91af566a1e4da3bfcd736a25085" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Rotation::Rotation</definition>
+        <argsstring>(const double *in_data, const unsigned int in_rows, const unsigned int in_cols)</argsstring>
+        <name>Rotation</name>
+        <param>
+          <type>const double *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_rows</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_cols</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from a buffer of 9 doubles, stored as a C-style array (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>row major). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Rotation.h" line="83" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ae4baa49ac08287f5dfc2f4af43c39c15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
@@ -860,7 +869,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="86" column="25"/>
+        <location file="iDynTree/Rotation.h" line="92" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a54ad49f3579466f0c69d6d6633d18b71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
@@ -877,7 +886,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="87" column="25"/>
+        <location file="iDynTree/Rotation.h" line="93" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ae2a7020bd4159e6c1f4bac06dc227757" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
@@ -894,7 +903,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="88" column="25"/>
+        <location file="iDynTree/Rotation.h" line="94" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a207bde922fc36aac515a6137a2dc2747" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -911,7 +920,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="91" column="18"/>
+        <location file="iDynTree/Rotation.h" line="97" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a6db0ecf650360abbc0ae8b80a8b56bef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -928,7 +937,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="92" column="29"/>
+        <location file="iDynTree/Rotation.h" line="98" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1ace899c4b5f9e7da07774713081abff87" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -945,7 +954,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="93" column="29"/>
+        <location file="iDynTree/Rotation.h" line="99" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a8ab289fa8ea505fa304422a611e21dc3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -962,7 +971,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="94" column="15"/>
+        <location file="iDynTree/Rotation.h" line="100" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a6a3e9290ea98e34cb1893ed53c748ee7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -979,7 +988,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="95" column="20"/>
+        <location file="iDynTree/Rotation.h" line="101" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a0a9852ab9cadc27708d251315680fe38" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -996,7 +1005,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="96" column="25"/>
+        <location file="iDynTree/Rotation.h" line="102" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a4719a12b1f3bf67ff09aa0c8a7663b56" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -1013,7 +1022,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="97" column="16"/>
+        <location file="iDynTree/Rotation.h" line="103" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a2bf5899ea17119adec9150554b11ff80" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
@@ -1030,7 +1039,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="98" column="19"/>
+        <location file="iDynTree/Rotation.h" line="104" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a90083c8fd426035fdfd81f0f019222c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -1047,7 +1056,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="99" column="19"/>
+        <location file="iDynTree/Rotation.h" line="105" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1adc231798a74209f9560d61361cb3516c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ClassicalAcc" kindref="compound">ClassicalAcc</ref></type>
@@ -1064,15 +1073,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="100" column="22"/>
+        <location file="iDynTree/Rotation.h" line="106" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1Rotation_1a16c64400ab9bd2461c1dfe9dc79088ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
-        <definition>RotationalInertiaRaw iDynTree::Rotation::changeCoordFrameOf</definition>
-        <argsstring>(const RotationalInertiaRaw &amp;other) const</argsstring>
+      <memberdef kind="function" id="classiDynTree_1_1Rotation_1a4750f61c48280f21a89fc1bbda30fbf3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">RotationalInertia</ref></type>
+        <definition>RotationalInertia iDynTree::Rotation::changeCoordFrameOf</definition>
+        <argsstring>(const RotationalInertia &amp;other) const</argsstring>
         <name>changeCoordFrameOf</name>
         <param>
-          <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
+          <type>const <ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">RotationalInertia</ref> &amp;</type>
           <declname>other</declname>
         </param>
         <briefdescription>
@@ -1081,13 +1090,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="101" column="30"/>
+        <location file="iDynTree/Rotation.h" line="107" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1Rotation_1a7b907d0eea05fea309a607bbc5a2aebc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
-        <definition>Rotation iDynTree::Rotation::operator*</definition>
-        <argsstring>(const Rotation &amp;other) const</argsstring>
-        <name>operator*</name>
+      <memberdef kind="function" id="classiDynTree_1_1Rotation_1aba2560ef0fa424c6f9d6ccfdbf21c443" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
+        <definition>Rotation&amp; iDynTree::Rotation::operator=</definition>
+        <argsstring>(const Rotation &amp;other)</argsstring>
+        <name>operator=</name>
         <param>
           <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
           <declname>other</declname>
@@ -1099,7 +1108,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="107" column="18"/>
+        <location file="iDynTree/Rotation.h" line="113" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Rotation_1a7b907d0eea05fea309a607bbc5a2aebc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
+        <definition>Rotation iDynTree::Rotation::operator*</definition>
+        <argsstring>(const Rotation &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Rotation.h" line="114" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a91ef997749232efa10da11c7c4139205" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -1112,7 +1138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="108" column="18"/>
+        <location file="iDynTree/Rotation.h" line="115" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a5ea65af729f09227d495d488581aea80" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -1129,7 +1155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="109" column="18"/>
+        <location file="iDynTree/Rotation.h" line="116" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1adae81c3a4967c7bf1111972203760260" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -1146,7 +1172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="110" column="28"/>
+        <location file="iDynTree/Rotation.h" line="117" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a4188054f8742115393feaf52807466c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -1163,7 +1189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="111" column="18"/>
+        <location file="iDynTree/Rotation.h" line="118" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1acfeb680d3a2c7f934cdd13c131989f76" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -1180,7 +1206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="112" column="18"/>
+        <location file="iDynTree/Rotation.h" line="119" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a5988709db56f784653d352ad89d7cdf5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
@@ -1197,7 +1223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="113" column="19"/>
+        <location file="iDynTree/Rotation.h" line="120" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1af1f80ef74003cfb4c646c761c19b15ea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -1214,7 +1240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="114" column="19"/>
+        <location file="iDynTree/Rotation.h" line="121" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1aa5301287f3a23308cc8c6634425b113f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -1231,7 +1257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="115" column="25"/>
+        <location file="iDynTree/Rotation.h" line="122" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a4982c8b2ee7d822389cb80f93e8171c9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -1248,7 +1274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="116" column="25"/>
+        <location file="iDynTree/Rotation.h" line="123" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1aef148d5c3b3b5294b879b2f57d3f6b0e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ClassicalAcc" kindref="compound">ClassicalAcc</ref></type>
@@ -1265,15 +1291,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="117" column="25"/>
+        <location file="iDynTree/Rotation.h" line="124" column="25"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1Rotation_1a187d8cde5f7cd24560a7785cb89ad585" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
-        <definition>RotationalInertiaRaw iDynTree::Rotation::operator*</definition>
-        <argsstring>(const RotationalInertiaRaw &amp;other) const</argsstring>
+      <memberdef kind="function" id="classiDynTree_1_1Rotation_1acb92e594ed0d83965aedbf0ea7139d5c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">RotationalInertia</ref></type>
+        <definition>RotationalInertia iDynTree::Rotation::operator*</definition>
+        <argsstring>(const RotationalInertia &amp;other) const</argsstring>
         <name>operator*</name>
         <param>
-          <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
+          <type>const <ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">RotationalInertia</ref> &amp;</type>
           <declname>other</declname>
         </param>
         <briefdescription>
@@ -1282,7 +1308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="118" column="33"/>
+        <location file="iDynTree/Rotation.h" line="125" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a31ca5467d6991d28c1c95c1091693452" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">AngularMotionVector3</ref></type>
@@ -1296,7 +1322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="124" column="30"/>
+        <location file="iDynTree/Rotation.h" line="131" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a40da839b3ed7cf1be092ce4c8056467a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1328,7 +1354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="134" column="14"/>
+        <location file="iDynTree/Rotation.h" line="141" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -1351,7 +1377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="89" column="25"/>
+        <location file="iDynTree/Rotation.h" line="95" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Rotation_1a41e1012a6b218b75008b9c9e7fd556d0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -1368,7 +1394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="90" column="25"/>
+        <location file="iDynTree/Rotation.h" line="96" column="25"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1377,10 +1403,10 @@
     <detaileddescription>
 <para>The semantics for this class is based on the OrientationCoord in:</para>
 <para>De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization, IEEE Robotics &amp; Automation Magazine, Vol. 20, No. 1, pp. 84-93. URL : <ulink url="http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf">http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf</ulink></para>
-<para>Given that this class uses the rotation matrix to represent orientation, some operation are disable because there is a semantic constraint induced by choice of representation, i.e. that the coordinate frame is always the reference orientation frame. Thus, some semantic operation are not enabled, namely:<itemizedlist>
-<listitem><para>the generic inverse, that does not change the coordinate frame.</para>
-</listitem><listitem><para>changeCoordFrame, because CoordFrame is always the same of RefOrientFrame. </para>
-</listitem></itemizedlist>
+<para>Storage for the Orientation:</para>
+<para>The rotation matrix representation of the orientation, stored in row major order, inside a Matrix3x3 parent object.</para>
+<para><simplesect kind="warning"><para>This class uses for convenience the Matrix3x3 as a public parent. Notice that using this methods you can damage the underlyng rotation matrix. In doubt, don&apos;t use them and rely on more high level functions. </para>
+</simplesect>
 </para>
     </detaileddescription>
     <inheritancegraph>
@@ -1390,20 +1416,14 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
+      <node id="2">
         <label>Matrix3x3</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
-        <childnode refid="4" relation="template-instance">
+        <childnode refid="3" relation="template-instance">
           <edgelabel>&lt; 3, 3 &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="2">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
+      <node id="3">
         <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
@@ -1415,25 +1435,19 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="3">
+      <node id="2">
         <label>Matrix3x3</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
-        <childnode refid="4" relation="template-instance">
+        <childnode refid="3" relation="template-instance">
           <edgelabel>&lt; 3, 3 &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="2">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
+      <node id="3">
         <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Rotation.h" line="48" column="5" bodyfile="iDynTree/Rotation.h" bodystart="49" bodyend="470"/>
+    <location file="iDynTree/Rotation.h" line="51" column="5" bodyfile="iDynTree/Rotation.h" bodystart="52" bodyend="477"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Rotation_1adcac444f00ca751417f3095b401de86c" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>asQuaternion</name></member>
       <member refid="classiDynTree_1_1Rotation_1affb93ecd043eb4870e46ad3e7ad9f3d2" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>asRPY</name></member>
@@ -1447,16 +1461,12 @@
       <member refid="classiDynTree_1_1Rotation_1a2bf5899ea17119adec9150554b11ff80" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeCoordFrameOf</name></member>
       <member refid="classiDynTree_1_1Rotation_1a90083c8fd426035fdfd81f0f019222c9" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeCoordFrameOf</name></member>
       <member refid="classiDynTree_1_1Rotation_1adc231798a74209f9560d61361cb3516c" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeCoordFrameOf</name></member>
-      <member refid="classiDynTree_1_1Rotation_1a16c64400ab9bd2461c1dfe9dc79088ef" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeCoordFrameOf</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1a454c11a15ccb1f1f5cf74148e2a2c94f" prot="public" virt="non-virtual" ambiguityscope="iDynTree::RotationRaw::"><scope>iDynTree::Rotation</scope><name>changeCoordFrameOf</name></member>
+      <member refid="classiDynTree_1_1Rotation_1a4750f61c48280f21a89fc1bbda30fbf3" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeCoordFrameOf</name></member>
       <member refid="classiDynTree_1_1Rotation_1ae2a7020bd4159e6c1f4bac06dc227757" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeCoordinateFrame</name></member>
       <member refid="classiDynTree_1_1Rotation_1ae4baa49ac08287f5dfc2f4af43c39c15" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeOrientFrame</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1a37d0a697aaf9d576d7f49493a58d52cf" prot="public" virt="non-virtual" ambiguityscope="iDynTree::RotationRaw::"><scope>iDynTree::Rotation</scope><name>changeOrientFrame</name></member>
       <member refid="classiDynTree_1_1Rotation_1a54ad49f3579466f0c69d6d6633d18b71" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>changeRefOrientFrame</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1ad8862f07c7d01f45194bb9e38b0e60fa" prot="public" virt="non-virtual" ambiguityscope="iDynTree::RotationRaw::"><scope>iDynTree::Rotation</scope><name>changeRefOrientFrame</name></member>
       <member refid="classiDynTree_1_1MatrixFixSize_1ae38fd55ba7321a950d4d99a215508bf2" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>cols</name></member>
       <member refid="classiDynTree_1_1Rotation_1aa9fd6b878b6ea25bf935251a39b0d988" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>compose</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1a5fbe3e13fcf00607c4cd99f474856ab2" prot="public" virt="non-virtual" ambiguityscope="iDynTree::RotationRaw::"><scope>iDynTree::Rotation</scope><name>compose</name></member>
       <member refid="classiDynTree_1_1MatrixFixSize_1afa9fff22a34eb198785d87ffe161488f" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>data</name></member>
       <member refid="classiDynTree_1_1MatrixFixSize_1aa4afb9030800a8424afd9a8bb36d8972" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>data</name></member>
       <member refid="classiDynTree_1_1MatrixFixSize_1a58750c21e5e8c31c54c3eed7dd2309b6" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>fillColMajorBuffer</name></member>
@@ -1469,7 +1479,6 @@
       <member refid="classiDynTree_1_1Rotation_1aab6423749ab0a59069e8e1770287e4a3" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>Identity</name></member>
       <member refid="classiDynTree_1_1Rotation_1a91ef997749232efa10da11c7c4139205" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>inverse</name></member>
       <member refid="classiDynTree_1_1Rotation_1a41e1012a6b218b75008b9c9e7fd556d0" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>inverse2</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1a455607358f260425dd91b61d97018678" prot="public" virt="non-virtual" ambiguityscope="iDynTree::RotationRaw::"><scope>iDynTree::Rotation</scope><name>inverse2</name></member>
       <member refid="classiDynTree_1_1Rotation_1ab32550927c7532dc91c16c4489538732" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>leftJacobian</name></member>
       <member refid="classiDynTree_1_1Rotation_1ab1d4bce1f02c6d61782afdd85d5cf7d7" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>leftJacobianInverse</name></member>
       <member refid="classiDynTree_1_1Rotation_1a31ca5467d6991d28c1c95c1091693452" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>log</name></member>
@@ -1489,22 +1498,18 @@
       <member refid="classiDynTree_1_1Rotation_1aa5301287f3a23308cc8c6634425b113f" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>operator*</name></member>
       <member refid="classiDynTree_1_1Rotation_1a4982c8b2ee7d822389cb80f93e8171c9" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>operator*</name></member>
       <member refid="classiDynTree_1_1Rotation_1aef148d5c3b3b5294b879b2f57d3f6b0e" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>operator*</name></member>
-      <member refid="classiDynTree_1_1Rotation_1a187d8cde5f7cd24560a7785cb89ad585" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>operator*</name></member>
-      <member refid="classiDynTree_1_1MatrixFixSize_1a94ef6fa6794ee354df4687078731e383" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1Rotation_1acb92e594ed0d83965aedbf0ea7139d5c" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1Rotation_1aba2560ef0fa424c6f9d6ccfdbf21c443" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a94ef6fa6794ee354df4687078731e383" prot="public" virt="non-virtual" ambiguityscope="MatrixFixSize&lt; 3, 3 &gt;::"><scope>iDynTree::Rotation</scope><name>operator=</name></member>
       <member refid="classiDynTree_1_1Rotation_1a5c47fc1e3411ea7795836068dae756e1" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>QuaternionRightTrivializedDerivative</name></member>
       <member refid="classiDynTree_1_1Rotation_1a6a898a875a0e1cfead1d7c9c78e0550b" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>QuaternionRightTrivializedDerivativeInverse</name></member>
       <member refid="classiDynTree_1_1Rotation_1a57bcd6b8bcf5bf76c1a65498264cae35" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>reservedToString</name></member>
       <member refid="classiDynTree_1_1Rotation_1a3b5c6a82b93158b7dce0a5a87cd42d51" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>Rotation</name></member>
       <member refid="classiDynTree_1_1Rotation_1aea80e6bbd7eba2511c16de3a8070d393" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>Rotation</name></member>
-      <member refid="classiDynTree_1_1Rotation_1af2c807c8151fdb61f4bff2de2752c145" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>Rotation</name></member>
       <member refid="classiDynTree_1_1Rotation_1a836995b0cd4569da0199d1de96f09000" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>Rotation</name></member>
       <member refid="classiDynTree_1_1Rotation_1a0499eaac98ff4a77ae1e1febad65f933" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>Rotation</name></member>
+      <member refid="classiDynTree_1_1Rotation_1a0824b91af566a1e4da3bfcd736a25085" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>Rotation</name></member>
       <member refid="classiDynTree_1_1Rotation_1ae67bd6a8021cd2d43dde159e7e294822" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotationFromQuaternion</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1aaa44b90d4fa704b11750cfc426fc24e6" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotationRaw</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1aa0a5bea09ea4fb93c09d5acb1e2b076d" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotationRaw</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1ab9a6ec23b658bd49cde69622d657e22e" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotationRaw</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1a12186033198d4e4b7c3eb48461db1d4f" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotationRaw</name></member>
-      <member refid="classiDynTree_1_1RotationRaw_1a308cb7eb1a78ee179c750b79ae84ccda" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotationRaw</name></member>
       <member refid="classiDynTree_1_1Rotation_1a6b5085898713f9476d0f02d9a0db4be1" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotAxis</name></member>
       <member refid="classiDynTree_1_1Rotation_1acfda4b9d2663bc11e480a57ab86301e5" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotAxisDerivative</name></member>
       <member refid="classiDynTree_1_1Rotation_1a52013f04085cbc9edeb38078180a4460" prot="public" virt="non-virtual"><scope>iDynTree::Rotation</scope><name>RotX</name></member>

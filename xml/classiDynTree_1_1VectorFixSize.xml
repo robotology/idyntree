@@ -508,22 +508,16 @@
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
       </node>
-      <node id="6">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="4">
         <label>iDynTree::Direction</label>
         <link refid="classiDynTree_1_1Direction"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="6">
         <label>iDynTree::Position</label>
         <link refid="classiDynTree_1_1Position"/>
-        <childnode refid="6" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
@@ -532,7 +526,7 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="8">
+      <node id="7">
         <label>iDynTree::VectorFixSize&lt; 4 &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
         <childnode refid="1" relation="template-instance">

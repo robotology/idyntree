@@ -16,6 +16,7 @@
     <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
     <includedby refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includedby>
     <includedby refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includedby>
+    <includedby refid="Rotation_8h" local="no">iDynTree/Rotation.h</includedby>
     <includedby refid="SparseMatrix_8h" local="no">iDynTree/SparseMatrix.h</includedby>
     <includedby refid="SpatialVector_8h" local="yes">iDynTree/SpatialVector.h</includedby>
     <includedby refid="TestUtils_8h" local="no">iDynTree/TestUtils.h</includedby>

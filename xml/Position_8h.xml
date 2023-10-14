@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Position_8h" kind="file" language="C++">
     <compoundname>Position.h</compoundname>
-    <includes refid="PositionRaw_8h" local="no">iDynTree/PositionRaw.h</includes>
     <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
     <includes local="no">string</includes>
     <includedby refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includedby>
@@ -10,6 +9,8 @@
     <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
     <includedby refid="Axis_8h" local="no">iDynTree/Axis.h</includedby>
     <includedby refid="Core_2Position_8h" local="no">iDynTree/Core/Position.h</includedby>
+    <includedby refid="Core_2PositionRaw_8h" local="no">iDynTree/Core/PositionRaw.h</includedby>
+    <includedby refid="PositionRaw_8h" local="no">iDynTree/PositionRaw.h</includedby>
     <includedby refid="SpatialVector_8h" local="yes">iDynTree/SpatialVector.h</includedby>
     <includedby refid="Transform_8h" local="no">iDynTree/Transform.h</includedby>
     <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
@@ -29,6 +30,28 @@
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1Position" prot="public">iDynTree::Position</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="Position_8h_1aacc071e8e145a637bd7305dc9f120353" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;iDynTree::PositionRaw is deprecated, use iDynTree::Position&quot;) typedef Position PositionRaw</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
+        <param>
+          <type>&quot;iDynTree::PositionRaw is</type>
+          <declname>deprecated</declname>
+        </param>
+        <param>
+          <type>use <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref>&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Position.h" line="109" column="5" declfile="iDynTree/Position.h" declline="109" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

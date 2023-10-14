@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SubModel.h" line="127" column="10" declfile="iDynTree/SubModel.h" declline="127" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="126" column="10" declfile="iDynTree/SubModel.h" declline="126" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SubModel.h" line="142" column="10" declfile="iDynTree/SubModel.h" declline="142" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="141" column="10" declfile="iDynTree/SubModel.h" declline="141" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -21,6 +21,7 @@
     <innerfile refid="PrivatePreProcessorUtils_8h">PrivatePreProcessorUtils.h</innerfile>
     <innerfile refid="PrivateUtils_8h">PrivateUtils.h</innerfile>
     <innerfile refid="Rotation_8h">Rotation.h</innerfile>
+    <innerfile refid="RotationalInertia_8h">RotationalInertia.h</innerfile>
     <innerfile refid="RotationalInertiaRaw_8h">RotationalInertiaRaw.h</innerfile>
     <innerfile refid="RotationRaw_8h">RotationRaw.h</innerfile>
     <innerfile refid="SO3Utils_8h">SO3Utils.h</innerfile>

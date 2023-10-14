@@ -261,27 +261,27 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="27">
+      <node id="25">
         <label>std::unordered_map&lt; std::string, iDynTree::MaterialElement::MaterialInfo &gt;</label>
-        <childnode refid="28" relation="usage">
+        <childnode refid="26" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>keys</edgelabel>
         </childnode>
-        <childnode refid="25" relation="template-instance">
+        <childnode refid="23" relation="template-instance">
           <edgelabel>&lt; std::string, iDynTree::MaterialElement::MaterialInfo &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="21">
+      <node id="19">
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
       </node>
-      <node id="33">
+      <node id="31">
         <label>iDynTree::Axis</label>
         <link refid="classiDynTree_1_1Axis"/>
       </node>
-      <node id="26">
+      <node id="24">
         <label>K</label>
       </node>
       <node id="6">
@@ -297,12 +297,6 @@
         <label>iDynTree::Rotation</label>
         <link refid="classiDynTree_1_1Rotation"/>
         <childnode refid="15" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="20" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
@@ -323,16 +317,16 @@
         <childnode refid="13" relation="usage">
           <edgelabel>m_origin</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>m_name</edgelabel>
         </childnode>
-        <childnode refid="24" relation="usage">
+        <childnode refid="22" relation="usage">
           <edgelabel>m_packageDirs</edgelabel>
         </childnode>
       </node>
-      <node id="25">
+      <node id="23">
         <label>std::unordered_map&lt; K, T &gt;</label>
-        <childnode refid="26" relation="usage">
+        <childnode refid="24" relation="usage">
           <edgelabel>keys</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
@@ -351,32 +345,26 @@
           <edgelabel>&lt; iDynTree::SensorHelper &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="30">
+      <node id="28">
         <label>std::unordered_map&lt; std::string, iDynTree::JointElement::JointInfo &gt;</label>
-        <childnode refid="31" relation="usage">
+        <childnode refid="29" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>keys</edgelabel>
         </childnode>
-        <childnode refid="25" relation="template-instance">
+        <childnode refid="23" relation="template-instance">
           <edgelabel>&lt; std::string, iDynTree::JointElement::JointInfo &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="23">
+      <node id="21">
         <label>std::basic_string&lt; Char &gt;</label>
       </node>
-      <node id="16">
+      <node id="15">
         <label>Matrix3x3</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
-        <childnode refid="17" relation="template-instance">
+        <childnode refid="16" relation="template-instance">
           <edgelabel>&lt; 3, 3 &gt;</edgelabel>
-        </childnode>
-      </node>
-      <node id="15">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="16" relation="public-inheritance">
         </childnode>
       </node>
       <node id="12">
@@ -385,26 +373,26 @@
           <edgelabel>&lt; iDynTree::SolidShape &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="18">
+      <node id="17">
         <label>iDynTree::Position</label>
         <link refid="classiDynTree_1_1Position"/>
-        <childnode refid="19" relation="public-inheritance">
+        <childnode refid="18" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="17">
+      <node id="16">
         <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
-      <node id="24">
+      <node id="22">
         <label>std::vector&lt; std::string &gt;</label>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
         <childnode refid="7" relation="template-instance">
           <edgelabel>&lt; std::string &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="32">
+      <node id="30">
         <label>std::shared_ptr&lt; iDynTree::IJoint &gt;</label>
         <childnode refid="5" relation="template-instance">
           <edgelabel>&lt; iDynTree::IJoint &gt;</edgelabel>
@@ -437,35 +425,35 @@
         <childnode refid="9" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>keys</edgelabel>
         </childnode>
-        <childnode refid="25" relation="template-instance">
+        <childnode refid="23" relation="template-instance">
           <edgelabel>&lt; std::string, std::vector&lt; iDynTree::VisualElement::VisualInfo &gt; &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="28">
+      <node id="26">
         <label>iDynTree::MaterialElement::MaterialInfo</label>
         <link refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo"/>
-        <childnode refid="29" relation="usage">
+        <childnode refid="27" relation="usage">
           <edgelabel>m_rgba</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>m_name</edgelabel>
           <edgelabel>m_textureFilename</edgelabel>
         </childnode>
       </node>
-      <node id="31">
+      <node id="29">
         <label>iDynTree::JointElement::JointInfo</label>
         <link refid="structiDynTree_1_1JointElement_1_1JointInfo"/>
-        <childnode refid="32" relation="usage">
+        <childnode refid="30" relation="usage">
           <edgelabel>joint</edgelabel>
         </childnode>
-        <childnode refid="22" relation="usage">
+        <childnode refid="20" relation="usage">
           <edgelabel>childLinkName</edgelabel>
           <edgelabel>parentLinkName</edgelabel>
         </childnode>
-        <childnode refid="33" relation="usage">
+        <childnode refid="31" relation="usage">
           <edgelabel>axis</edgelabel>
         </childnode>
       </node>
@@ -481,24 +469,24 @@
           <edgelabel>collisions</edgelabel>
           <edgelabel>visuals</edgelabel>
         </childnode>
-        <childnode refid="27" relation="usage">
+        <childnode refid="25" relation="usage">
           <edgelabel>materials</edgelabel>
         </childnode>
-        <childnode refid="30" relation="usage">
+        <childnode refid="28" relation="usage">
           <edgelabel>fixedJoints</edgelabel>
           <edgelabel>joints</edgelabel>
         </childnode>
       </node>
-      <node id="29">
+      <node id="27">
         <label>std::shared_ptr&lt; iDynTree::VectorFixSize &gt;</label>
         <childnode refid="5" relation="template-instance">
           <edgelabel>&lt; iDynTree::VectorFixSize &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="20">
+      <node id="18">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-        <childnode refid="21" relation="template-instance">
+        <childnode refid="19" relation="template-instance">
           <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>
@@ -508,13 +496,13 @@
         <childnode refid="14" relation="usage">
           <edgelabel>rot</edgelabel>
         </childnode>
-        <childnode refid="18" relation="usage">
+        <childnode refid="17" relation="usage">
           <edgelabel>pos</edgelabel>
         </childnode>
       </node>
-      <node id="22">
+      <node id="20">
         <label>std::string</label>
-        <childnode refid="23" relation="public-inheritance">
+        <childnode refid="21" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

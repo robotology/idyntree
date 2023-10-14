@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>iDynTree::RotationalInertiaRaw class | iDynTree master</title>
+  <title>iDynTree/RotationalInertia.h file | iDynTree master</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -58,71 +58,47 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>RotationalInertiaRaw <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="RotationalInertiaRaw_8h.html">&lt;iDynTree/RotationalInertiaRaw.h&gt;</a></div>
+          <span class="m-breadcrumb"><a href="dir_8e99af8152dbf29e4d6ec0a354618320.html">iDynTree</a>/</span>RotationalInertia.h <span class="m-thin">file</span>
         </h1>
-        <p>Class providing the raw coordinates for a 3d inertia matrix.</p>
+        <p><span></span></p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
-                <li><a href="#pub-static-methods">Public static functions</a></li>
-                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#namespaces">Namespaces</a></li>
+                <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#func-members">Functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<aside class="m-note m-info"><h4>Note</h4><p>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part.</p></aside><p>We use a parent Matrix3x3 for storage of the rotational inertia matrix: given that the inertia matrix is a 3x3 symmetric matrix, the ordering (row order or column order) is not influencing the storage of the matrix.</p>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
+        <section id="namespaces">
+          <h2><a href="#namespaces">Namespaces</a></h2>
           <dl class="m-doc">
-            <dt>
-              <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols&gt;</div>
-              class <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">MatrixFixSize&lt;3, 3&gt;</a>
-            </dt>
-            <dd>Class providing a simple form of matrix with dynamic size.</dd>
-          </dl>
-        </section>
-        <section id="pub-static-methods">
-          <h2><a href="#pub-static-methods">Public static functions</a></h2>
-          <dl class="m-doc">
-            <dt id="a2e39cb0f0483d8035aa0b78de8d6d943">
-              <span class="m-doc-wrap-bumper">static auto <a href="#a2e39cb0f0483d8035aa0b78de8d6d943" class="m-doc-self">Zero</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a></span>
-            </dt>
-            <dd>Initializer helper: return a zero matrix.</dd>
-          </dl>
-        </section>
-        <section id="typeless-methods">
-          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper"><a href="#ab9d59eeb6e800984a084de1b92f9c848" class="m-doc">RotationalInertiaRaw</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Default constructor.</dd>
-            <dt id="a4fd1fb49b1ec5a14d36d77e579c8b4ce">
-              <span class="m-doc-wrap-bumper"><a href="#a4fd1fb49b1ec5a14d36d77e579c8b4ce" class="m-doc-self">RotationalInertiaRaw</a>(</span><span class="m-doc-wrap">const double* in_data,
-              const unsigned int in_rows,
-              const unsigned int in_cols)</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="ab2abca01c8b3bf4875193d7c00fcfe5c">
-              <span class="m-doc-wrap-bumper"><a href="#ab2abca01c8b3bf4875193d7c00fcfe5c" class="m-doc-self">RotationalInertiaRaw</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a>&amp; other)</span>
-            </dt>
+            <dt>namespace <a href="namespaceiDynTree.html" class="m-doc">iDynTree</a></dt>
             <dd><span></span></dd>
           </dl>
         </section>
-        <section>
-          <h2>Function documentation</h2>
-          <section class="m-doc-details" id="ab9d59eeb6e800984a084de1b92f9c848"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />RotationalInertiaRaw::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab9d59eeb6e800984a084de1b92f9c848" class="m-doc-self">RotationalInertiaRaw</a>(</span><span class="m-doc-wrap">)</span></span>
-            </h3>
-            <p>Default constructor.</p>
-<p>The data is not reset to zero for perfomance reason. Please initialize the data in the vector before any use.</p>
-          </div></section>
+        <section id="nested-classes">
+          <h2><a href="#nested-classes">Classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">iDynTree::RotationalInertia</a>
+            </dt>
+            <dd>Class providing the coordinates for a 3d inertia matrix.</dd>
+          </dl>
+        </section>
+        <section id="func-members">
+          <h2><a href="#func-members">Functions</a></h2>
+          <dl class="m-doc">
+            <dt id="affa3ef6d96e03cfad96623d8d7dbcacf">
+              <span class="m-doc-wrap-bumper"><a href="#affa3ef6d96e03cfad96623d8d7dbcacf" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;iDynTree::RotationalInertiaRaw is deprecated,
+              use <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">iDynTree::<wbr />RotationalInertia</a>&quot;) typedef RotationalInertia RotationalInertiaRaw</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
         </section>
       </div>
     </div>

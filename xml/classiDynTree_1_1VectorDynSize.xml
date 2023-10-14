@@ -62,7 +62,7 @@
       </sectiondef>
       <sectiondef kind="user-defined">
       <header>Vector interface methods.</header>
-      <description><para>Methods exposing a vector-like interface to <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref>. </para>
+      <description><para>Methods exposing a vector-like interface to PositionRaw. </para>
 </description>
       <memberdef kind="function" id="classiDynTree_1_1VectorDynSize_1a420b4d9434108eb19ec6a8adc2190856" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>

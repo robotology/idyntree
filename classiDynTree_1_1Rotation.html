@@ -79,14 +79,15 @@
             </li>
           </ul>
         </nav>
-<p>The semantics for this class is based on the OrientationCoord in:</p><p>De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization, IEEE Robotics &amp; Automation Magazine, Vol. 20, No. 1, pp. 84-93. URL : <a href="http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf">http://people.mech.kuleuven.be/~tdelaet/geometric_<wbr />relations_<wbr />semantics/geometric_<wbr />relations_<wbr />semantics_<wbr />theory.pdf</a></p><p>Given that this class uses the rotation matrix to represent orientation, some operation are disable because there is a semantic constraint induced by choice of representation, i.e. that the coordinate frame is always the reference orientation frame. Thus, some semantic operation are not enabled, namely:</p><ul><li>the generic inverse, that does not change the coordinate frame.</li><li>changeCoordFrame, because CoordFrame is always the same of RefOrientFrame.</li></ul>
+<p>The semantics for this class is based on the OrientationCoord in:</p><p>De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization, IEEE Robotics &amp; Automation Magazine, Vol. 20, No. 1, pp. 84-93. URL : <a href="http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf">http://people.mech.kuleuven.be/~tdelaet/geometric_<wbr />relations_<wbr />semantics/geometric_<wbr />relations_<wbr />semantics_<wbr />theory.pdf</a></p><p>Storage for the Orientation:</p><p>The rotation matrix representation of the orientation, stored in row major order, inside a Matrix3x3 parent object.</p><aside class="m-note m-danger"><h4>Warning</h4><p>This class uses for convenience the Matrix3x3 as a public parent. Notice that using this methods you can damage the underlyng rotation matrix. In doubt, don&#x27;t use them and rely on more high level functions.</p></aside>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classiDynTree_1_1RotationRaw.html" class="m-doc">RotationRaw</a>
+              <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols&gt;</div>
+              class <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">MatrixFixSize&lt;3, 3&gt;</a>
             </dt>
-            <dd>Class providing the raw coordinates for <a href="classiDynTree_1_1Rotation.html" class="m-doc">iDynTree::<wbr />Rotation</a> class.</dd>
+            <dd>Class providing a simple form of matrix with dynamic size.</dd>
           </dl>
         </section>
         <section id="pub-static-methods">
@@ -122,10 +123,6 @@
               double zz)</span>
             </dt>
             <dd>Constructor from 9 doubles: initialize elements of the rotation matrix.</dd>
-            <dt id="af2c807c8151fdb61f4bff2de2752c145">
-              <span class="m-doc-wrap-bumper"><a href="#af2c807c8151fdb61f4bff2de2752c145" class="m-doc-self">Rotation</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationRaw.html" class="m-doc">RotationRaw</a>&amp; other)</span>
-            </dt>
-            <dd>Copy constructor: create a <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a> from another <a href="classiDynTree_1_1RotationRaw.html" class="m-doc">RotationRaw</a>.</dd>
             <dt id="a836995b0cd4569da0199d1de96f09000">
               <span class="m-doc-wrap-bumper"><a href="#a836995b0cd4569da0199d1de96f09000" class="m-doc-self">Rotation</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a>&amp; other)</span>
             </dt>
@@ -134,6 +131,12 @@
               <span class="m-doc-wrap-bumper"><a href="#a0499eaac98ff4a77ae1e1febad65f933" class="m-doc-self">Rotation</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; other)</span>
             </dt>
             <dd>Create a <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a> from a <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a0824b91af566a1e4da3bfcd736a25085" class="m-doc">Rotation</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const unsigned int in_rows,
+              const unsigned int in_cols)</span>
+            </dt>
+            <dd>Constructor from a buffer of 9 doubles, stored as a C-style array (i.e.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -191,14 +194,18 @@
               <span class="m-doc-wrap-bumper">auto <a href="#adc231798a74209f9560d61361cb3516c" class="m-doc-self">changeCoordFrameOf</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1ClassicalAcc.html" class="m-doc">ClassicalAcc</a>&amp; other) const -&gt; <a href="classiDynTree_1_1ClassicalAcc.html" class="m-doc">ClassicalAcc</a></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a16c64400ab9bd2461c1dfe9dc79088ef">
-              <span class="m-doc-wrap-bumper">auto <a href="#a16c64400ab9bd2461c1dfe9dc79088ef" class="m-doc-self">changeCoordFrameOf</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a>&amp; other) const -&gt; <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a></span>
+            <dt id="a4750f61c48280f21a89fc1bbda30fbf3">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4750f61c48280f21a89fc1bbda30fbf3" class="m-doc-self">changeCoordFrameOf</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp; other) const -&gt; <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a></span>
             </dt>
             <dd><span></span></dd>
+            <dt id="aba2560ef0fa424c6f9d6ccfdbf21c443">
+              <span class="m-doc-wrap-bumper">auto <a href="#aba2560ef0fa424c6f9d6ccfdbf21c443" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a>&amp; other) -&gt; <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a>&amp;</span>
+            </dt>
+            <dd>overloaded operators</dd>
             <dt id="a7b907d0eea05fea309a607bbc5a2aebc">
               <span class="m-doc-wrap-bumper">auto <a href="#a7b907d0eea05fea309a607bbc5a2aebc" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a>&amp; other) const -&gt; <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a></span>
             </dt>
-            <dd>overloaded operators</dd>
+            <dd><span></span></dd>
             <dt id="a91ef997749232efa10da11c7c4139205">
               <span class="m-doc-wrap-bumper">auto <a href="#a91ef997749232efa10da11c7c4139205" class="m-doc-self">inverse</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a></span>
             </dt>
@@ -239,8 +246,8 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aef148d5c3b3b5294b879b2f57d3f6b0e" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1ClassicalAcc.html" class="m-doc">ClassicalAcc</a>&amp; other) const -&gt; <a href="classiDynTree_1_1ClassicalAcc.html" class="m-doc">ClassicalAcc</a></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a187d8cde5f7cd24560a7785cb89ad585">
-              <span class="m-doc-wrap-bumper">auto <a href="#a187d8cde5f7cd24560a7785cb89ad585" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a>&amp; other) const -&gt; <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a></span>
+            <dt id="acb92e594ed0d83965aedbf0ea7139d5c">
+              <span class="m-doc-wrap-bumper">auto <a href="#acb92e594ed0d83965aedbf0ea7139d5c" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp; other) const -&gt; <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a></span>
             </dt>
             <dd><span></span></dd>
             <dt id="a31ca5467d6991d28c1c95c1091693452">
@@ -392,6 +399,15 @@
             </h3>
             <p>Default constructor.</p>
 <p>The data is not reset to the identity matrix for perfomance reason. Please initialize the data in the vector before any use.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0824b91af566a1e4da3bfcd736a25085"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />Rotation::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0824b91af566a1e4da3bfcd736a25085" class="m-doc-self">Rotation</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const unsigned int in_rows,
+              const unsigned int in_cols)</span></span>
+            </h3>
+            <p>Constructor from a buffer of 9 doubles, stored as a C-style array (i.e.</p>
+<p>row major).</p>
           </div></section>
           <section class="m-doc-details" id="ae4baa49ac08287f5dfc2f4af43c39c15"><div>
             <h3>

@@ -93,16 +93,13 @@
     <innerclass refid="classiDynTree_1_1MatrixDynSize" prot="public">iDynTree::MatrixDynSize</innerclass>
     <innerclass refid="classiDynTree_1_1MatrixFixSize" prot="public">iDynTree::MatrixFixSize</innerclass>
     <innerclass refid="classiDynTree_1_1Position" prot="public">iDynTree::Position</innerclass>
-    <innerclass refid="classiDynTree_1_1PositionRaw" prot="public">iDynTree::PositionRaw</innerclass>
     <innerclass refid="classiDynTree_1_1Rotation" prot="public">iDynTree::Rotation</innerclass>
-    <innerclass refid="classiDynTree_1_1RotationalInertiaRaw" prot="public">iDynTree::RotationalInertiaRaw</innerclass>
-    <innerclass refid="classiDynTree_1_1RotationRaw" prot="public">iDynTree::RotationRaw</innerclass>
+    <innerclass refid="classiDynTree_1_1RotationalInertia" prot="public">iDynTree::RotationalInertia</innerclass>
     <innerclass refid="structiDynTree_1_1GeodesicL2MeanOptions" prot="public">iDynTree::GeodesicL2MeanOptions</innerclass>
     <innerclass refid="classiDynTree_1_1Span" prot="public">iDynTree::Span</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialAcc" prot="public">iDynTree::SpatialAcc</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialForceVector" prot="public">iDynTree::SpatialForceVector</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialInertia" prot="public">iDynTree::SpatialInertia</innerclass>
-    <innerclass refid="classiDynTree_1_1SpatialInertiaRaw" prot="public">iDynTree::SpatialInertiaRaw</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialMomentum" prot="public">iDynTree::SpatialMomentum</innerclass>
     <innerclass refid="classiDynTree_1_1Dummy" prot="public">iDynTree::Dummy</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialMotionVector" prot="public">iDynTree::SpatialMotionVector</innerclass>
@@ -4021,7 +4018,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SubModel.h" line="127" column="10" declfile="iDynTree/SubModel.h" declline="127" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="126" column="10" declfile="iDynTree/SubModel.h" declline="126" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -4085,7 +4082,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SubModel.h" line="142" column="10" declfile="iDynTree/SubModel.h" declline="142" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="141" column="10" declfile="iDynTree/SubModel.h" declline="141" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="BerdyHelper_8h_1a39f8730ab92b19678c82e418b8c0f2a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -5694,6 +5691,26 @@
         </inbodydescription>
         <location file="iDynTree/MatrixView.h" line="284" column="5" bodyfile="iDynTree/MatrixView.h" bodystart="284" bodyend="288"/>
       </memberdef>
+      <memberdef kind="function" id="Position_8h_1aacc071e8e145a637bd7305dc9f120353" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;iDynTree::PositionRaw is deprecated, use iDynTree::Position&quot;) typedef Position PositionRaw</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
+        <param>
+          <type>&quot;iDynTree::PositionRaw is</type>
+          <declname>deprecated</declname>
+        </param>
+        <param>
+          <type>use <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref>&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Position.h" line="109" column="5" declfile="iDynTree/Position.h" declline="109" declcolumn="5"/>
+      </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1a5cb90836a26ae5bb773be45bad7dad54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Eigen::Matrix3d</type>
         <definition>Eigen::Matrix3d iDynTree::squareCrossProductMatrix</definition>
@@ -5876,6 +5893,46 @@
         <inbodydescription>
         </inbodydescription>
         <location file="iDynTree/PrivateUtils.h" line="88" column="16" bodyfile="iDynTree/PrivateUtils.h" bodystart="88" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="Rotation_8h_1afc22a429e9fa472ce408d199475fa100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;iDynTree::RotationRaw is deprecated, use iDynTree::Rotation&quot;) typedef Rotation RotationRaw</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
+        <param>
+          <type>&quot;iDynTree::RotationRaw is</type>
+          <declname>deprecated</declname>
+        </param>
+        <param>
+          <type>use <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref>&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Rotation.h" line="479" column="5" declfile="iDynTree/Rotation.h" declline="479" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="RotationalInertia_8h_1affa3ef6d96e03cfad96623d8d7dbcacf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;iDynTree::RotationalInertiaRaw is deprecated, use iDynTree::RotationalInertia&quot;) typedef RotationalInertia RotationalInertiaRaw</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
+        <param>
+          <type>&quot;iDynTree::RotationalInertiaRaw is</type>
+          <declname>deprecated</declname>
+        </param>
+        <param>
+          <type>use <ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">iDynTree::RotationalInertia</ref>&quot;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RotationalInertia.h" line="47" column="5" declfile="iDynTree/RotationalInertia.h" declline="47" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="SO3Utils_8h_1a72d7e0a9ca21815a7dadb8ea94f5aef4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>

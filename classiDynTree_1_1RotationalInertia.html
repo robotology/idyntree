@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>iDynTree/Position.h file | iDynTree master</title>
+  <title>iDynTree::RotationalInertia class | iDynTree master</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -58,47 +58,81 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="dir_8e99af8152dbf29e4d6ec0a354618320.html">iDynTree</a>/</span>Position.h <span class="m-thin">file</span>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>RotationalInertia <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="RotationalInertia_8h.html">&lt;iDynTree/RotationalInertia.h&gt;</a></div>
         </h1>
-        <p><span></span></p>
+        <p>Class providing the coordinates for a 3d inertia matrix.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#namespaces">Namespaces</a></li>
-                <li><a href="#nested-classes">Classes</a></li>
-                <li><a href="#func-members">Functions</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="namespaces">
-          <h2><a href="#namespaces">Namespaces</a></h2>
-          <dl class="m-doc">
-            <dt>namespace <a href="namespaceiDynTree.html" class="m-doc">iDynTree</a></dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
-        <section id="nested-classes">
-          <h2><a href="#nested-classes">Classes</a></h2>
+<aside class="m-note m-info"><h4>Note</h4><p>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part.</p></aside><p>We use a parent Matrix3x3 for storage of the rotational inertia matrix: given that the inertia matrix is a 3x3 symmetric matrix, the ordering (row order or column order) is not influencing the storage of the matrix.</p>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::Position</a>
+              <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols&gt;</div>
+              class <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">MatrixFixSize&lt;3, 3&gt;</a>
             </dt>
-            <dd>Class representation the coordinates of the <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a> of a point with respect to another point.</dd>
+            <dd>Class providing a simple form of matrix with dynamic size.</dd>
           </dl>
         </section>
-        <section id="func-members">
-          <h2><a href="#func-members">Functions</a></h2>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
-            <dt id="aacc071e8e145a637bd7305dc9f120353">
-              <span class="m-doc-wrap-bumper"><a href="#aacc071e8e145a637bd7305dc9f120353" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;iDynTree::PositionRaw is deprecated,
-              use <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&quot;) typedef Position PositionRaw</span>
+            <dt id="a9a12018498ac55c2b907ebea775f77db">
+              <span class="m-doc-wrap-bumper">static auto <a href="#a9a12018498ac55c2b907ebea775f77db" class="m-doc-self">Zero</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a></span>
+            </dt>
+            <dd>Initializer helper: return a zero matrix.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#af68624a6d40e1a5464e5979a59203259" class="m-doc">RotationalInertia</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Default constructor.</dd>
+            <dt id="a340a4908597f68423747d76991bdb88f">
+              <span class="m-doc-wrap-bumper"><a href="#a340a4908597f68423747d76991bdb88f" class="m-doc-self">RotationalInertia</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const unsigned int in_rows,
+              const unsigned int in_cols)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af7c7f4f07ac6230c19eee4c6af9ec069">
+              <span class="m-doc-wrap-bumper"><a href="#af7c7f4f07ac6230c19eee4c6af9ec069" class="m-doc-self">RotationalInertia</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp; other)</span>
             </dt>
             <dd><span></span></dd>
           </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a73592c4c8febd334850b82da60714fe4">
+              <span class="m-doc-wrap-bumper">auto <a href="#a73592c4c8febd334850b82da60714fe4" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp; other) -&gt; <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="af68624a6d40e1a5464e5979a59203259"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />RotationalInertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af68624a6d40e1a5464e5979a59203259" class="m-doc-self">RotationalInertia</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Default constructor.</p>
+<p>The data is not reset to zero for perfomance reason. Please initialize the data in the vector before any use.</p>
+          </div></section>
         </section>
       </div>
     </div>

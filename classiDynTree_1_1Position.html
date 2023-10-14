@@ -83,9 +83,10 @@
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
-              class <a href="classiDynTree_1_1PositionRaw.html" class="m-doc">PositionRaw</a>
+              <div class="m-doc-template">template&lt;unsigned int VecSize&gt;</div>
+              class <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">VectorFixSize&lt;3&gt;</a>
             </dt>
-            <dd>Class providing the raw coordinates for <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> class.</dd>
+            <dd>Class providing a simple vector of N elements.</dd>
           </dl>
         </section>
         <section id="pub-static-methods">
@@ -123,10 +124,11 @@
               <span class="m-doc-wrap-bumper"><a href="#a43bb1d57623d1a8723ed4d91b11c84f0" class="m-doc-self">Position</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp; other)</span>
             </dt>
             <dd>Copy constructor: create a <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a> from another <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>.</dd>
-            <dt id="a2ec67c9730e953b9b322eed3ab93a327">
-              <span class="m-doc-wrap-bumper"><a href="#a2ec67c9730e953b9b322eed3ab93a327" class="m-doc-self">Position</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1PositionRaw.html" class="m-doc">PositionRaw</a>&amp; other)</span>
+            <dt id="ac69c714e0be98a0313da0b4361643f0f">
+              <span class="m-doc-wrap-bumper"><a href="#ac69c714e0be98a0313da0b4361643f0f" class="m-doc-self">Position</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const unsigned int in_size)</span>
             </dt>
-            <dd>Copy constructor: create a <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a> from a <a href="classiDynTree_1_1PositionRaw.html" class="m-doc">PositionRaw</a>.</dd>
+            <dd>Constructor from a raw buffer of 3 doubles.</dd>
             <dt id="a016c1499d097271e726f56b49caba0bf">
               <span class="m-doc-wrap-bumper"><a href="#a016c1499d097271e726f56b49caba0bf" class="m-doc-self">Position</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; other)</span>
             </dt>
@@ -136,6 +138,10 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
+            <dt id="a90c4199fc682ff1d02c3792750cf6830">
+              <span class="m-doc-wrap-bumper">auto <a href="#a90c4199fc682ff1d02c3792750cf6830" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp; other) -&gt; <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp;</span>
+            </dt>
+            <dd>Assignment operator: assign a <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a> from another <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>.</dd>
             <dt id="ae15e7759f6fa62cfc1dcee22d030571d">
               <span class="m-doc-wrap-bumper">auto <a href="#ae15e7759f6fa62cfc1dcee22d030571d" class="m-doc-self">changePoint</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp; newPoint) -&gt; const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp;</span>
             </dt>

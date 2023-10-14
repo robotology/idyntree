@@ -52,7 +52,7 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="12">
+      <node id="10">
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
       </node>
@@ -62,33 +62,21 @@
         <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="11" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="2">
         <label>iDynTree::MatrixDynSize</label>
         <link refid="classiDynTree_1_1MatrixDynSize"/>
       </node>
-      <node id="8">
+      <node id="7">
         <label>Matrix3x3</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
         <childnode refid="4" relation="template-instance">
           <edgelabel>&lt; 3, 3 &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="7">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="8" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
+      <node id="8">
         <label>iDynTree::Position</label>
         <link refid="classiDynTree_1_1Position"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
@@ -114,10 +102,10 @@
           <edgelabel>transform</edgelabel>
         </childnode>
       </node>
-      <node id="11">
+      <node id="9">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-        <childnode refid="12" relation="template-instance">
+        <childnode refid="10" relation="template-instance">
           <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>
@@ -127,7 +115,7 @@
         <childnode refid="6" relation="usage">
           <edgelabel>rot</edgelabel>
         </childnode>
-        <childnode refid="9" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>pos</edgelabel>
         </childnode>
       </node>

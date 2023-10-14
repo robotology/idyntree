@@ -181,22 +181,16 @@
 <para>A poligon is a geomtric object consisting of a number of points (called vertices) and an equal number of line segments (called sides), namely a cyclically ordered set of points in a plane, with no three successive points collinear, together with the line segments joining consecutive pairs of the points. In other words, a polygon is closed broken line lying in a plane. </para>
     </detaileddescription>
     <collaborationgraph>
-      <node id="6">
+      <node id="5">
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
       </node>
-      <node id="8">
+      <node id="7">
         <label>T</label>
       </node>
-      <node id="4">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="7">
+      <node id="6">
         <label>std::vector&lt; T &gt;</label>
-        <childnode refid="8" relation="usage">
+        <childnode refid="7" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
       </node>
@@ -218,14 +212,14 @@
         <childnode refid="3" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
-        <childnode refid="7" relation="template-instance">
+        <childnode refid="6" relation="template-instance">
           <edgelabel>&lt; iDynTree::Position &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="5">
+      <node id="4">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-        <childnode refid="6" relation="template-instance">
+        <childnode refid="5" relation="template-instance">
           <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>

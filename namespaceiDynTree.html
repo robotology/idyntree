@@ -466,21 +466,13 @@
             </dt>
             <dd>Class representation the coordinates of the <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a> of a point with respect to another point.</dd>
             <dt>
-              class <a href="classiDynTree_1_1PositionRaw.html" class="m-doc">PositionRaw</a>
-            </dt>
-            <dd>Class providing the raw coordinates for <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> class.</dd>
-            <dt>
               class <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a>
             </dt>
             <dd>Class representation the rotation of an orientation frame with respect to a reference orientation frame, expressed as a <a href="classiDynTree_1_1Rotation.html" class="m-doc">Rotation</a> matrix.</dd>
             <dt>
-              class <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a>
+              class <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>
             </dt>
-            <dd>Class providing the raw coordinates for a 3d inertia matrix.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1RotationRaw.html" class="m-doc">RotationRaw</a>
-            </dt>
-            <dd>Class providing the raw coordinates for <a href="classiDynTree_1_1Rotation.html" class="m-doc">iDynTree::<wbr />Rotation</a> class.</dd>
+            <dd>Class providing the coordinates for a 3d inertia matrix.</dd>
             <dt>
               struct <a href="structiDynTree_1_1GeodesicL2MeanOptions.html" class="m-doc">GeodesicL2MeanOptions</a>
             </dt>
@@ -503,10 +495,6 @@
             </dt>
             <dd>Class representing a six dimensional inertia.</dd>
             <dt>
-              class <a href="classiDynTree_1_1SpatialInertiaRaw.html" class="m-doc">SpatialInertiaRaw</a>
-            </dt>
-            <dd>Class providing the raw coordinates for a spatial inertia, i.e.</dd>
-            <dt>
               class <a href="classiDynTree_1_1SpatialMomentum.html" class="m-doc">SpatialMomentum</a>
             </dt>
             <dd>Class representing a spatial momentum, i.e.</dd>
@@ -517,7 +505,7 @@
             <dt>
               class <a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a>
             </dt>
-            <dd>Class providing the raw coordinates for any motion spatial vector (i.e.</dd>
+            <dd>Class providing the coordinates for any motion spatial vector (i.e.</dd>
             <dt>
               <div class="m-doc-template">template&lt;class SpatialMotionForceVectorT&gt;</div>
               class <a href="classiDynTree_1_1SpatialMotionForceVectorT__traits.html" class="m-doc">SpatialMotionForceVectorT_traits</a>
@@ -1827,6 +1815,11 @@ $B$
             </dt>
             <dd><span></span></dd>
             <dt>
+              <span class="m-doc-wrap-bumper"><a href="Position_8h.html#aacc071e8e145a637bd7305dc9f120353" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;iDynTree::PositionRaw is deprecated,
+              use <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&quot;) typedef Position PositionRaw</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="PrivateUtils_8h.html#a5cb90836a26ae5bb773be45bad7dad54" class="m-doc">squareCrossProductMatrix</a>(</span><span class="m-doc-wrap">const Eigen::Vector3d&amp; v) -&gt; Eigen::Matrix3d</span>
             </dt>
             <dd>Maps a 3d vector to the square of the cross product matrix: v --&gt; (v\times)^2 or, if you prefer another notation: v --&gt; S^2(v)</dd>
@@ -1864,6 +1857,16 @@ $B$
               const momentumVectorType&amp; op2) -&gt; resultType</span>
             </dt>
             <dd>Efficient version of the cross product between a twist and a spatial force vector (momentum, wrench, ..)</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="Rotation_8h.html#afc22a429e9fa472ce408d199475fa100" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;iDynTree::RotationRaw is deprecated,
+              use <a href="classiDynTree_1_1Rotation.html" class="m-doc">iDynTree::<wbr />Rotation</a>&quot;) typedef Rotation RotationRaw</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="RotationalInertia_8h.html#affa3ef6d96e03cfad96623d8d7dbcacf" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;iDynTree::RotationalInertiaRaw is deprecated,
+              use <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">iDynTree::<wbr />RotationalInertia</a>&quot;) typedef RotationalInertia RotationalInertiaRaw</span>
+            </dt>
+            <dd><span></span></dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="SO3Utils_8h.html#a72d7e0a9ca21815a7dadb8ea94f5aef4" class="m-doc">isValidRotationMatrix</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Rotation.html" class="m-doc">iDynTree::<wbr />Rotation</a>&amp; r) -&gt; bool</span>
             </dt>

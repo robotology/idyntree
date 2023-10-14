@@ -68,23 +68,14 @@
             <li>
               Reference
               <ul>
-                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#pub-static-methods">Public static functions</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-        <section id="base-classes">
-          <h2><a href="#base-classes">Base classes</a></h2>
-          <dl class="m-doc">
-            <dt>
-              class <a href="classiDynTree_1_1SpatialInertiaRaw.html" class="m-doc">SpatialInertiaRaw</a>
-            </dt>
-            <dd>Class providing the raw coordinates for a spatial inertia, i.e.</dd>
-          </dl>
-        </section>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
           <dl class="m-doc">
@@ -121,14 +112,10 @@
               <span class="m-doc-wrap-bumper"><a href="#ab599c235ffbb9936d16a56c53f390d06" class="m-doc">SpatialInertia</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Default constructor.</dd>
-            <dt id="a894a85c0a1319ae8894c73b5298669d7">
-              <span class="m-doc-wrap-bumper"><a href="#a894a85c0a1319ae8894c73b5298669d7" class="m-doc-self">SpatialInertia</a>(</span><span class="m-doc-wrap">const double mass,
-              const <a href="classiDynTree_1_1PositionRaw.html" class="m-doc">PositionRaw</a>&amp; com,
-              const <a href="classiDynTree_1_1RotationalInertiaRaw.html" class="m-doc">RotationalInertiaRaw</a>&amp; rotInertia)</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt id="a105dc0fc74f9c5fe6475ac3d29dc275f">
-              <span class="m-doc-wrap-bumper"><a href="#a105dc0fc74f9c5fe6475ac3d29dc275f" class="m-doc-self">SpatialInertia</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialInertiaRaw.html" class="m-doc">SpatialInertiaRaw</a>&amp; other)</span>
+            <dt id="a907cad4be71448b45dac2a76aa55e3b0">
+              <span class="m-doc-wrap-bumper"><a href="#a907cad4be71448b45dac2a76aa55e3b0" class="m-doc-self">SpatialInertia</a>(</span><span class="m-doc-wrap">const double mass,
+              const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp; com,
+              const <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp; rotInertia)</span>
             </dt>
             <dd><span></span></dd>
             <dt id="a64175e97f51f1595870b8aff78f64839">
@@ -140,6 +127,36 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
+            <dt id="a25c6ee7a1f07eabfa32fc26b7cca46e0">
+              <span class="m-doc-wrap-bumper">void <a href="#a25c6ee7a1f07eabfa32fc26b7cca46e0" class="m-doc-self">fromRotationalInertiaWrtCenterOfMass</a>(</span><span class="m-doc-wrap">const double mass,
+              const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp; com,
+              const <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp; rotInertia)</span>
+            </dt>
+            <dd>Helper constructor-like function that takes mass, center of mass and the rotational inertia expressed in the center of mass.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab52a9bf87a0a91234995cc5b5f6e4b37" class="m-doc">getMass</a>(</span><span class="m-doc-wrap">) const -&gt; double</span>
+            </dt>
+            <dd>multiplication operator</dd>
+            <dt id="a76eeb9d55d89cd0f249dbfe2638f1207">
+              <span class="m-doc-wrap-bumper">auto <a href="#a76eeb9d55d89cd0f249dbfe2638f1207" class="m-doc-self">getCenterOfMass</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7e3c5484c7f7038f955aac544576000f">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7e3c5484c7f7038f955aac544576000f" class="m-doc-self">getRotationalInertiaWrtFrameOrigin</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3c6f18da61651876659fcfa173639428">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3c6f18da61651876659fcfa173639428" class="m-doc-self">getRotationalInertiaWrtCenterOfMass</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7dc8fd64e0a069923ee589a77689e2a7">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7dc8fd64e0a069923ee589a77689e2a7" class="m-doc-self">multiply</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a>&amp; op) const -&gt; <a href="classiDynTree_1_1SpatialForceVector.html" class="m-doc">SpatialForceVector</a></span>
+            </dt>
+            <dd>Multiplication function.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a2ad61dd654c4a4916e05c7a9dbc81632" class="m-doc">zero</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>reset to zero (i.e.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a7ac807ec779d50c39b04d37578f57e21" class="m-doc">asMatrix</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix6x6</a></span>
             </dt>
@@ -188,6 +205,23 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a6b493d81ed9bcedb37f81d0125d1ab04" class="m-doc">isPhysicallyConsistent</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
             </dt>
             <dd>Check if the Rigid Body Inertia is physically consistent.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a391e52e261b0cd42e34e1868eeda92f4">
+              double <a href="#a391e52e261b0cd42e34e1868eeda92f4" class="m-doc-self">m_mass</a>
+            </dt>
+            <dd>Mass.</dd>
+            <dt id="acbf8e9831ad5f2b1454418109990d6e4">
+              double <a href="#acbf8e9831ad5f2b1454418109990d6e4" class="m-doc-self">m_mcom</a>
+            </dt>
+            <dd>First moment of mass (i.e. mass * center of mass).</dd>
+            <dt id="aa2c5b1a589d41a1a5d2975b7c4414350">
+              <a href="classiDynTree_1_1RotationalInertia.html" class="m-doc">RotationalInertia</a> <a href="#aa2c5b1a589d41a1a5d2975b7c4414350" class="m-doc-self">m_rotInertia</a>
+            </dt>
+            <dd>Three dimensional rotational inertia.</dd>
           </dl>
         </section>
         <section>
@@ -539,6 +573,20 @@ $ \mathbb{M} $
             </h3>
             <p>Default constructor.</p>
 <p>The data is not reset to zero for perfomance reason. Please initialize the data in the vector before any use.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab52a9bf87a0a91234995cc5b5f6e4b37"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">double iDynTree::<wbr />SpatialInertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab52a9bf87a0a91234995cc5b5f6e4b37" class="m-doc-self">getMass</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>multiplication operator</p>
+<p>overloading happens on proper classes Getter functions</p><aside class="m-note m-info"><h4>Note</h4><p>for preserving consistency, no setters are implemented.. if you want to modify a spatial inertia create a new one, and assign it to the spatial inertia that you want modify. Given that no memory allocation happens it should be still efficient.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a2ad61dd654c4a4916e05c7a9dbc81632"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SpatialInertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2ad61dd654c4a4916e05c7a9dbc81632" class="m-doc-self">zero</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>reset to zero (i.e.</p>
+<p>the inertia of body with zero mass) the <a href="classiDynTree_1_1SpatialInertia.html" class="m-doc">SpatialInertia</a></p>
           </div></section>
           <section class="m-doc-details" id="a7ac807ec779d50c39b04d37578f57e21"><div>
             <h3>

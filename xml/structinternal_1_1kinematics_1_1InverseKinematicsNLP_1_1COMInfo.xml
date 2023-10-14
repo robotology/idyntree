@@ -79,7 +79,7 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="6">
+      <node id="5">
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
       </node>
@@ -94,12 +94,6 @@
           <edgelabel>com</edgelabel>
         </childnode>
       </node>
-      <node id="4">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="5" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="2">
         <label>iDynTree::MatrixDynSize</label>
         <link refid="classiDynTree_1_1MatrixDynSize"/>
@@ -110,10 +104,10 @@
         <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="5">
+      <node id="4">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-        <childnode refid="6" relation="template-instance">
+        <childnode refid="5" relation="template-instance">
           <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>

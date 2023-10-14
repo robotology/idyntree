@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Core_2PositionRaw_8h" kind="file" language="C++">
     <compoundname>PositionRaw.h</compoundname>
-    <includes refid="PositionRaw_8h" local="no">iDynTree/PositionRaw.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

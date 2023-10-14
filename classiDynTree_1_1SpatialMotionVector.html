@@ -61,7 +61,7 @@
           <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>SpatialMotionVector <span class="m-thin">class</span>
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="SpatialMotionVector_8h.html">&lt;iDynTree/SpatialMotionVector.h&gt;</a></div>
         </h1>
-        <p>Class providing the raw coordinates for any motion spatial vector (i.e.</p>
+        <p>Class providing the coordinates for any motion spatial vector (i.e.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
@@ -76,7 +76,7 @@
             </li>
           </ul>
         </nav>
-<p>vector form of an element of se(3)).</p><p>A motion spatial vector can be used to to describe a twist, twist acceleration or their derivatives.</p><p>A generic motion spatial vector can also be used to store the logarithm of an <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a> (i.e. an element of SE(3)).</p><p>This is just a basic vector, used to implement the adjoint transformations in a general way. The relative adjoint transformation is contained in TransformRaw::apply(SpatialMotionRaw), for consistency with the <a href="classiDynTree_1_1PositionRaw.html" class="m-doc">iDynTree::<wbr />PositionRaw</a> class.</p><aside class="m-note m-info"><h4>Note</h4><p>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part.</p></aside>
+<p>vector form of an element of se(3)).</p><p>A motion spatial vector can be used to to describe a twist, twist acceleration or their derivatives.</p><p>A generic motion spatial vector can also be used to store the logarithm of an <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a> (i.e. an element of SE(3)).</p><p>This is just a basic vector, used to implement the adjoint transformations in a general way. The relative adjoint transformation is contained in Transform::apply(SpatialMotion), for consistency with the <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> class.</p><aside class="m-note m-info"><h4>Note</h4><p>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part.</p></aside>
         <section id="base-classes">
           <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">

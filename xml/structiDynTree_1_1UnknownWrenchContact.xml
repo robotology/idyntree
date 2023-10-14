@@ -136,15 +136,9 @@
 <para>Class representing a contact for which the approximate center of the contact surface is known, but the wrench is unknown. </para>
     </detaileddescription>
     <collaborationgraph>
-      <node id="11">
+      <node id="10">
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-      </node>
-      <node id="9">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="10" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="4">
         <label>iDynTree::SpatialVector&lt; SpatialForceVector &gt;</label>
@@ -153,10 +147,10 @@
           <edgelabel>&lt; SpatialForceVector &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="12">
+      <node id="11">
         <label>iDynTree::Direction</label>
         <link refid="classiDynTree_1_1Direction"/>
-        <childnode refid="10" relation="public-inheritance">
+        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -182,7 +176,7 @@
         <childnode refid="8" relation="usage">
           <edgelabel>contactPoint</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="11" relation="usage">
           <edgelabel>forceDirection</edgelabel>
         </childnode>
       </node>
@@ -209,10 +203,10 @@
         <label>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionForceVectorT &gt;</label>
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
-      <node id="10">
+      <node id="9">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-        <childnode refid="11" relation="template-instance">
+        <childnode refid="10" relation="template-instance">
           <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>

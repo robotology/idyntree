@@ -107,7 +107,7 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="14">
+      <node id="12">
         <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
       </node>
@@ -126,13 +126,7 @@
         <childnode refid="8" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="12">
-        <label>iDynTree::PositionRaw</label>
-        <link refid="classiDynTree_1_1PositionRaw"/>
-        <childnode refid="13" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="18">
+      <node id="16">
         <label>std::vector&lt; T &gt;</label>
         <childnode refid="4" relation="usage">
           <edgelabel>elements</edgelabel>
@@ -150,10 +144,10 @@
         <childnode refid="6" relation="usage">
           <edgelabel>m_origin</edgelabel>
         </childnode>
-        <childnode refid="15" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>m_name</edgelabel>
         </childnode>
-        <childnode refid="17" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>m_packageDirs</edgelabel>
         </childnode>
       </node>
@@ -163,20 +157,14 @@
           <edgelabel>&lt; iDynTree::MaterialElement::MaterialInfo &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="16">
+      <node id="14">
         <label>std::basic_string&lt; Char &gt;</label>
       </node>
-      <node id="9">
+      <node id="8">
         <label>Matrix3x3</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
-        <childnode refid="10" relation="template-instance">
+        <childnode refid="9" relation="template-instance">
           <edgelabel>&lt; 3, 3 &gt;</edgelabel>
-        </childnode>
-      </node>
-      <node id="8">
-        <label>iDynTree::RotationRaw</label>
-        <link refid="classiDynTree_1_1RotationRaw"/>
-        <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
@@ -185,29 +173,29 @@
           <edgelabel>&lt; iDynTree::SolidShape &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="11">
+      <node id="10">
         <label>iDynTree::Position</label>
         <link refid="classiDynTree_1_1Position"/>
-        <childnode refid="12" relation="public-inheritance">
+        <childnode refid="11" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="10">
+      <node id="9">
         <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
-      <node id="17">
+      <node id="15">
         <label>std::vector&lt; std::string &gt;</label>
-        <childnode refid="15" relation="usage">
+        <childnode refid="13" relation="usage">
           <edgelabel>elements</edgelabel>
         </childnode>
-        <childnode refid="18" relation="template-instance">
+        <childnode refid="16" relation="template-instance">
           <edgelabel>&lt; std::string &gt;</edgelabel>
         </childnode>
       </node>
-      <node id="13">
+      <node id="11">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
-        <childnode refid="14" relation="template-instance">
+        <childnode refid="12" relation="template-instance">
           <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>
@@ -217,13 +205,13 @@
         <childnode refid="7" relation="usage">
           <edgelabel>rot</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
+        <childnode refid="10" relation="usage">
           <edgelabel>pos</edgelabel>
         </childnode>
       </node>
-      <node id="15">
+      <node id="13">
         <label>std::string</label>
-        <childnode refid="16" relation="public-inheritance">
+        <childnode refid="14" relation="public-inheritance">
         </childnode>
       </node>
     </collaborationgraph>

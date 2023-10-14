@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Core_2SpatialInertiaRaw_8h" kind="file" language="C++">
     <compoundname>SpatialInertiaRaw.h</compoundname>
-    <includes refid="SpatialInertiaRaw_8h" local="no">iDynTree/SpatialInertiaRaw.h</includes>
+    <includes refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includes>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

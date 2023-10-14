@@ -143,7 +143,7 @@
     <detaileddescription>
 <para>vector form of an element of se*(3)).</para>
 <para>A force spatial vector can be used to to described spatial momentum, wrench, or their derivatives.</para>
-<para>This is just a basic vector, used to implement the adjoint transformations in a general way. The relative adjoint transformation is contained in TransformRaw::apply(SpatialForceRaw), for consistency with the <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">iDynTree::PositionRaw</ref> class.</para>
+<para>This is just a basic vector, used to implement the adjoint transformations in a general way. The relative adjoint transformation is contained in Transform::apply(SpatialForce), for consistency with the <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> class.</para>
 <para><simplesect kind="note"><para>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part. </para>
 </simplesect>
 </para>
@@ -239,6 +239,7 @@
       <member refid="classiDynTree_1_1SpatialVector_1aee117ebb24cae309a169f678019f1181" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceVector</scope><name>operator+</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1afcf112b3ddd4e01fc0389dd2319eb383" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceVector</scope><name>operator-</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a3ac59b03e3786339836b9b7d190f39e3" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceVector</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a739d85b3a1b3af607344f9fc8e930b0c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceVector</scope><name>operator=</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a73b398dd07e9f3dd5c252692380a6b02" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceVector</scope><name>reservedToString</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a719a64c179d736390f48b6ddd0ccf6fa" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceVector</scope><name>setAngularVec3</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a171e7cf6e215e67eb32ac791526a044f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialForceVector</scope><name>setLinearVec3</name></member>

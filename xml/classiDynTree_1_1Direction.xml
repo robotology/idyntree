@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Direction.h" line="90" column="21"/>
+        <location file="iDynTree/Direction.h" line="95" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Direction_1ab007f4cdb99df36cc3f1faca4aa26f7a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Direction.h" line="92" column="21"/>
+        <location file="iDynTree/Direction.h" line="97" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -134,6 +134,24 @@
         </inbodydescription>
         <location file="iDynTree/Direction.h" line="51" column="9"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Direction_1afa20fb0433a6d471eb0af4ef1a266a27" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+        <definition>Direction&amp; iDynTree::Direction::operator=</definition>
+        <argsstring>(const Direction &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Assignment operator: assign a <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> from another <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Direction.h" line="56" column="19"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Direction_1a5d5834ef11b8373e4349dbe4f6020d08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void iDynTree::Direction::Normalize</definition>
@@ -161,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Direction.h" line="61" column="14"/>
+        <location file="iDynTree/Direction.h" line="66" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Direction_1af9342642d4167ba6916f81a483b061f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -201,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Direction.h" line="69" column="14"/>
+        <location file="iDynTree/Direction.h" line="74" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Direction_1a71848027a8d49d11d937e55fc926bd29" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -241,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Direction.h" line="77" column="14"/>
+        <location file="iDynTree/Direction.h" line="82" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Direction_1af8fe72342e63486a2f6cdbcbc35f1bac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
@@ -256,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Direction.h" line="83" column="19"/>
+        <location file="iDynTree/Direction.h" line="88" column="19"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -271,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Direction.h" line="95" column="26"/>
+        <location file="iDynTree/Direction.h" line="100" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -317,7 +335,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Direction.h" line="21" column="5" bodyfile="iDynTree/Direction.h" bodystart="22" bodyend="96"/>
+    <location file="iDynTree/Direction.h" line="21" column="5" bodyfile="iDynTree/Direction.h" bodystart="22" bodyend="101"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>begin</name></member>
@@ -342,7 +360,8 @@
       <member refid="classiDynTree_1_1Direction_1a5d5834ef11b8373e4349dbe4f6020d08" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>Normalize</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1afbdebfe9410180223c2d33f6f5a243a5" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>operator()</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1aaeeab0c1251340903c447dbc3cd33b01" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>operator()</name></member>
-      <member refid="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1Direction_1afa20fb0433a6d471eb0af4ef1a266a27" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" virt="non-virtual" ambiguityscope="VectorFixSize&lt; 3 &gt;::"><scope>iDynTree::Direction</scope><name>operator=</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1a8345a3e5ee2998a02dd79019ce293421" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>operator[]</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1a21683853dd0b95beea5b091a584fe486" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>operator[]</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1aa11c3eee00e88dabb7880f6cac2a9b82" prot="public" virt="non-virtual"><scope>iDynTree::Direction</scope><name>pointer</name></member>

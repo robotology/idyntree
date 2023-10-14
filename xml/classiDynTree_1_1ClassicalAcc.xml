@@ -58,13 +58,13 @@
         </inbodydescription>
         <location file="iDynTree/ClassicalAcc.h" line="44" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1aca1ce7ef6cd00e20ae9cf786eb0c8d00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1abfe45c4f44f4ef12ef64f98d8edd504d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1ClassicalAcc" kindref="compound">ClassicalAcc</ref> &amp;</type>
         <definition>const ClassicalAcc&amp; iDynTree::ClassicalAcc::changeCoordFrame</definition>
-        <argsstring>(const RotationRaw &amp;newCoordFrame)</argsstring>
+        <argsstring>(const Rotation &amp;newCoordFrame)</argsstring>
         <name>changeCoordFrame</name>
         <param>
-          <type>const <ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref> &amp;</type>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
           <declname>newCoordFrame</declname>
         </param>
         <briefdescription>
@@ -202,7 +202,7 @@
       <member refid="classiDynTree_1_1VectorFixSize_1a8e64a7875375a8b1b894614ba882ad05" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>begin</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1a1420c32072d5c1e21140da111955a6d1" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>cbegin</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1a0b5d60b77fbd7ba982e855453800f776" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>cend</name></member>
-      <member refid="classiDynTree_1_1ClassicalAcc_1aca1ce7ef6cd00e20ae9cf786eb0c8d00" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>changeCoordFrame</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1abfe45c4f44f4ef12ef64f98d8edd504d" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>changeCoordFrame</name></member>
       <member refid="classiDynTree_1_1ClassicalAcc_1af2840c213b585301e38240715afbb360" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>ClassicalAcc</name></member>
       <member refid="classiDynTree_1_1ClassicalAcc_1acb7b4a36b251b50c79af8b06037977cf" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>ClassicalAcc</name></member>
       <member refid="classiDynTree_1_1ClassicalAcc_1a9ce69cc1e892338d4e2d0b5c13ebbedf" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>ClassicalAcc</name></member>
