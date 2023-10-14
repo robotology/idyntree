@@ -7,41 +7,41 @@ classdef GeomVector3 < iDynTree.Vector3
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(428, varargin{:});
+        tmp = iDynTreeMEX(494, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = changeCoordFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(429, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(495, self, varargin{:});
     end
     function varargout = compose(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(430, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(496, self, varargin{:});
     end
     function varargout = inverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(431, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(497, self, varargin{:});
     end
     function varargout = dot(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(432, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(498, self, varargin{:});
     end
     function varargout = plus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(433, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(499, self, varargin{:});
     end
     function varargout = minus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(434, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(500, self, varargin{:});
     end
     function varargout = uminus(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(435, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(501, self, varargin{:});
     end
     function varargout = exp(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(436, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(502, self, varargin{:});
     end
     function varargout = cross(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(437, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(503, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(438, self);
+        iDynTreeMEX(504, self);
         self.SwigClear();
       end
     end

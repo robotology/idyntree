@@ -9,187 +9,187 @@ classdef InverseKinematics < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(2053, varargin{:});
+        tmp = iDynTreeMEX(2136, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(2054, self);
+        iDynTreeMEX(2137, self);
         self.SwigClear();
       end
     end
     function varargout = loadModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2055, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2138, self, varargin{:});
     end
     function varargout = setModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2056, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2139, self, varargin{:});
     end
     function varargout = setJointLimits(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2057, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2140, self, varargin{:});
     end
     function varargout = getJointLimits(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2058, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2141, self, varargin{:});
     end
     function varargout = clearProblem(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2059, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2142, self, varargin{:});
     end
     function varargout = setFloatingBaseOnFrameNamed(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2060, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2143, self, varargin{:});
     end
     function varargout = setCurrentRobotConfiguration(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2061, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2144, self, varargin{:});
     end
     function varargout = setJointConfiguration(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2062, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2145, self, varargin{:});
     end
     function varargout = setRotationParametrization(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2063, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2146, self, varargin{:});
     end
     function varargout = rotationParametrization(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2064, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2147, self, varargin{:});
     end
     function varargout = setMaxIterations(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2065, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2148, self, varargin{:});
     end
     function varargout = maxIterations(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2066, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2149, self, varargin{:});
     end
     function varargout = setMaxCPUTime(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2067, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2150, self, varargin{:});
     end
     function varargout = maxCPUTime(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2068, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2151, self, varargin{:});
     end
     function varargout = setCostTolerance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2069, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2152, self, varargin{:});
     end
     function varargout = costTolerance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2070, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2153, self, varargin{:});
     end
     function varargout = setConstraintsTolerance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2071, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2154, self, varargin{:});
     end
     function varargout = constraintsTolerance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2072, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2155, self, varargin{:});
     end
     function varargout = setVerbosity(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2073, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2156, self, varargin{:});
     end
     function varargout = linearSolverName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2074, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2157, self, varargin{:});
     end
     function varargout = setLinearSolverName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2075, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2158, self, varargin{:});
     end
     function varargout = addFrameConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2076, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2159, self, varargin{:});
     end
     function varargout = addFramePositionConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2077, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2160, self, varargin{:});
     end
     function varargout = addFrameRotationConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2078, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2161, self, varargin{:});
     end
     function varargout = activateFrameConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2079, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2162, self, varargin{:});
     end
     function varargout = deactivateFrameConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2080, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2163, self, varargin{:});
     end
     function varargout = isFrameConstraintActive(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2081, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2164, self, varargin{:});
     end
     function varargout = addCenterOfMassProjectionConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2082, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2165, self, varargin{:});
     end
     function varargout = getCenterOfMassProjectionMargin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2083, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2166, self, varargin{:});
     end
     function varargout = getCenterOfMassProjectConstraintConvexHull(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2084, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2167, self, varargin{:});
     end
     function varargout = addTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2085, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2168, self, varargin{:});
     end
     function varargout = addPositionTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2086, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2169, self, varargin{:});
     end
     function varargout = addRotationTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2087, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2170, self, varargin{:});
     end
     function varargout = updateTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2088, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2171, self, varargin{:});
     end
     function varargout = updatePositionTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2089, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2172, self, varargin{:});
     end
     function varargout = updateRotationTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2090, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2173, self, varargin{:});
     end
     function varargout = setDefaultTargetResolutionMode(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2091, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2174, self, varargin{:});
     end
     function varargout = defaultTargetResolutionMode(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2092, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2175, self, varargin{:});
     end
     function varargout = setTargetResolutionMode(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2093, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2176, self, varargin{:});
     end
     function varargout = targetResolutionMode(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2094, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2177, self, varargin{:});
     end
     function varargout = setDesiredFullJointsConfiguration(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2095, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2178, self, varargin{:});
     end
     function varargout = setDesiredReducedJointConfiguration(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2096, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2179, self, varargin{:});
     end
     function varargout = setFullJointsInitialCondition(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2097, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2180, self, varargin{:});
     end
     function varargout = setReducedInitialCondition(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2098, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2181, self, varargin{:});
     end
     function varargout = solve(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2099, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2182, self, varargin{:});
     end
     function varargout = getFullJointsSolution(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2100, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2183, self, varargin{:});
     end
     function varargout = getReducedSolution(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2101, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2184, self, varargin{:});
     end
     function varargout = getPoseForFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2102, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2185, self, varargin{:});
     end
     function varargout = fullModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2103, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2186, self, varargin{:});
     end
     function varargout = reducedModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2104, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2187, self, varargin{:});
     end
     function varargout = setCOMTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2105, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2188, self, varargin{:});
     end
     function varargout = setCOMAsConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2106, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2189, self, varargin{:});
     end
     function varargout = setCOMAsConstraintTolerance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2107, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2190, self, varargin{:});
     end
     function varargout = isCOMAConstraint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2108, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2191, self, varargin{:});
     end
     function varargout = isCOMTargetActive(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2109, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2192, self, varargin{:});
     end
     function varargout = deactivateCOMTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2110, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2193, self, varargin{:});
     end
     function varargout = setCOMConstraintProjectionDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2111, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2194, self, varargin{:});
     end
   end
   methods(Static)

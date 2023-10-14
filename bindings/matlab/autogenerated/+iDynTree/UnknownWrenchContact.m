@@ -9,7 +9,7 @@ classdef UnknownWrenchContact < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1488, varargin{:});
+        tmp = iDynTreeMEX(1569, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
@@ -18,55 +18,55 @@ classdef UnknownWrenchContact < iDynTreeSwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1489, self);
+        varargout{1} = iDynTreeMEX(1570, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1490, self, varargin{1});
+        iDynTreeMEX(1571, self, varargin{1});
       end
     end
     function varargout = contactPoint(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1491, self);
+        varargout{1} = iDynTreeMEX(1572, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1492, self, varargin{1});
+        iDynTreeMEX(1573, self, varargin{1});
       end
     end
     function varargout = forceDirection(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1493, self);
+        varargout{1} = iDynTreeMEX(1574, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1494, self, varargin{1});
+        iDynTreeMEX(1575, self, varargin{1});
       end
     end
     function varargout = knownWrench(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1495, self);
+        varargout{1} = iDynTreeMEX(1576, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1496, self, varargin{1});
+        iDynTreeMEX(1577, self, varargin{1});
       end
     end
     function varargout = contactId(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1497, self);
+        varargout{1} = iDynTreeMEX(1578, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1498, self, varargin{1});
+        iDynTreeMEX(1579, self, varargin{1});
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1499, self);
+        iDynTreeMEX(1580, self);
         self.SwigClear();
       end
     end
