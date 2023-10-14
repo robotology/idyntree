@@ -17,7 +17,7 @@ function test_momentum_invariance
     twistInFrame1.setVal(4,twistInFrame1_m(5));
     twistInFrame1.setVal(5,twistInFrame1_m(6));
 
-    angularInertia = iDynTree.RotationalInertiaRaw();
+    angularInertia = iDynTree.RotationalInertia();
     angularInertia.setVal(0,0,1.0);
     angularInertia.setVal(1,1,2.0);
     angularInertia.setVal(2,2,3.0);

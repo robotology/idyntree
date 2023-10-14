@@ -26,6 +26,13 @@ SpatialMomentum::SpatialMomentum(const SpatialMomentum& other):
 
 }
 
+SpatialMomentum& SpatialMomentum::operator=(const SpatialMomentum &other)
+{
+    this->getLinearVec3() = other.getLinearVec3();
+    this->getAngularVec3() = other.getAngularVec3();
+    return *this;
+}
+
 SpatialMomentum SpatialMomentum::operator+(const SpatialMomentum& other) const
 {
     return efficient6dSum(*this,other);

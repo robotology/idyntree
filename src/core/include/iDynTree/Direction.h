@@ -51,6 +51,11 @@ namespace iDynTree
         Direction(const double* in_data, const unsigned int in_size);
 
         /**
+         * Assignment operator: assign a Direction from another Direction
+         */
+        Direction& operator=(const Direction& other);
+
+        /**
          * Normalize the representation of the direction, useful if
          * the coordinates of the direction has been manually setted
          * and you want to be sure that this direction is actually

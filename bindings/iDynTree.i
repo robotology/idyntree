@@ -50,7 +50,6 @@
 #include "iDynTree/VectorFixSize.h"
 
 // Basic Vectors: Point Vectors and Spatial Vectors
-#include "iDynTree/PositionRaw.h"
 #include "iDynTree/Position.h"
 #include "iDynTree/SpatialForceVector.h"
 #include "iDynTree/SpatialMotionVector.h"
@@ -63,14 +62,13 @@
 #include "iDynTree/Axis.h"
 
 // Inertias
-#include "iDynTree/RotationalInertiaRaw.h"
-#include "iDynTree/SpatialInertiaRaw.h"
+#include "iDynTree/RotationalInertia.h"
+#include "iDynTree/SpatialInertia.h"
 #include "iDynTree/SpatialInertia.h"
 #include "iDynTree/ArticulatedBodyInertia.h"
 #include "iDynTree/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
-#include "iDynTree/RotationRaw.h"
 #include "iDynTree/Rotation.h"
 #include "iDynTree/Transform.h"
 #include "iDynTree/TransformDerivative.h"
@@ -204,7 +202,6 @@ namespace std {
 %template(Vector16) iDynTree::VectorFixSize<16>;
 
 // Basic Vectors: Point Vectors and Spatial Vectors
-%include "iDynTree/PositionRaw.h"
 %include "iDynTree/Position.h"
 
 %include "iDynTree/GeomVector3.h"
@@ -236,14 +233,12 @@ namespace std {
 %include "iDynTree/Axis.h"
 
 // Inertias
-%include "iDynTree/RotationalInertiaRaw.h"
-%include "iDynTree/SpatialInertiaRaw.h"
+%include "iDynTree/RotationalInertia.h"
 %include "iDynTree/SpatialInertia.h"
 %include "iDynTree/ArticulatedBodyInertia.h"
 %include "iDynTree/InertiaNonLinearParametrization.h"
 
 // Transformations: Rotation and Transform
-%include "iDynTree/RotationRaw.h"
 %include "iDynTree/Rotation.h"
 %include "iDynTree/Transform.h"
 %include "iDynTree/TransformDerivative.h"

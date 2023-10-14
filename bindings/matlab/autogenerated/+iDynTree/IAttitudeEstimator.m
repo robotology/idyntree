@@ -5,39 +5,39 @@ classdef IAttitudeEstimator < iDynTreeSwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1656, self);
+        iDynTreeMEX(1739, self);
         self.SwigClear();
       end
     end
     function varargout = updateFilterWithMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1657, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1740, self, varargin{:});
     end
     function varargout = propagateStates(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1658, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1741, self, varargin{:});
     end
     function varargout = getOrientationEstimateAsRotationMatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1659, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1742, self, varargin{:});
     end
     function varargout = getOrientationEstimateAsQuaternion(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1660, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1743, self, varargin{:});
     end
     function varargout = getOrientationEstimateAsRPY(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1661, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1744, self, varargin{:});
     end
     function varargout = getInternalStateSize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1662, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1745, self, varargin{:});
     end
     function varargout = getInternalState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1663, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1746, self, varargin{:});
     end
     function varargout = getDefaultInternalInitialState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1664, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1747, self, varargin{:});
     end
     function varargout = setInternalState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1665, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1748, self, varargin{:});
     end
     function varargout = setInternalStateInitialOrientation(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1666, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1749, self, varargin{:});
     end
     function self = IAttitudeEstimator(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#ifndef IDYNTREE_SPATIAL_MOTION_RAW_H
-#define IDYNTREE_SPATIAL_MOTION_RAW_H
+#ifndef IDYNTREE_SPATIAL_MOTION_VECTOR_H
+#define IDYNTREE_SPATIAL_MOTION_VECTOR_H
 
 #include <iDynTree/VectorFixSize.h>
 #include <iDynTree/GeomVector3.h>
@@ -15,7 +15,7 @@ namespace iDynTree
     class Dummy {};
 
     /**
-     * Class providing the raw coordinates for any motion spatial vector
+     * Class providing the coordinates for any motion spatial vector
      * (i.e. vector form of an element of se(3)).
      *
      * \ingroup iDynTreeCore
@@ -28,8 +28,8 @@ namespace iDynTree
      *
      * This is just a basic vector, used to implement the adjoint transformations in
      * a general way. The relative adjoint transformation is contained in
-     * TransformRaw::apply(SpatialMotionRaw),
-     * for consistency with the iDynTree::PositionRaw class.
+     * Transform::apply(SpatialMotion),
+     * for consistency with the iDynTree::Position class.
      *
      * \note in iDynTree, the spatial vector follows this serialization: the first three elements are
      *       the linear part and the second three elements are the angular part.

@@ -132,6 +132,7 @@ SpatialVector<DerivedSpatialVecT>
         /**
          * overloaded operators
          */
+        DerivedSpatialVecT& operator=(const DerivedSpatialVecT &other);
         DerivedSpatialVecT operator+(const DerivedSpatialVecT &other) const;
         DerivedSpatialVecT operator-(const DerivedSpatialVecT &other) const;
         DerivedSpatialVecT operator-() const;
@@ -334,6 +335,14 @@ SpatialVector<DerivedSpatialVecT>
     }
 
     // overloaded operators
+    SPATIALVECTOR_TEMPLATE_HDR
+    DerivedSpatialVecT& SPATIALVECTOR_INSTANCE_HDR::operator=(const DerivedSpatialVecT &other)
+    {
+        this->getLinearVec3() = other.getLinearVec3();
+        this->getAngularVec3() = other.getAngularVec3();
+        return &this;
+    }
+
     SPATIALVECTOR_TEMPLATE_HDR
     DerivedSpatialVecT SPATIALVECTOR_INSTANCE_HDR::operator+(const DerivedSpatialVecT &other) const
     {

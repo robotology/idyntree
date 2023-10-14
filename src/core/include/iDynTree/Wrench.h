@@ -23,6 +23,7 @@ namespace iDynTree
         Wrench(const Wrench & other);
 
         // overloaded operators
+        Wrench& operator=(const Wrench & other);
         Wrench operator+(const Wrench &other) const;
         Wrench operator-(const Wrench &other) const;
         Wrench operator-() const;

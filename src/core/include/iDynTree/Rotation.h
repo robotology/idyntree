@@ -6,8 +6,9 @@
 
 #include <string>
 #include <iDynTree/GeomVector3.h>
-#include <iDynTree/RotationRaw.h>
+#include <iDynTree/MatrixFixSize.h>
 #include <iDynTree/VectorFixSize.h>
+#include <iDynTree/Utils.h>
 
 namespace iDynTree
 {
@@ -20,7 +21,7 @@ namespace iDynTree
     class SpatialAcc;
     class SpatialMomentum;
     class ClassicalAcc;
-    class RotationalInertiaRaw;
+    class RotationalInertia;
     class SpatialMotionVector;
     class SpatialForceVector;
     class ArticulatedBodyInertia;
@@ -38,14 +39,16 @@ namespace iDynTree
      * IEEE Robotics & Automation Magazine, Vol. 20, No. 1, pp. 84-93.
      * URL : http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf
      *
-     * Given that this class uses the rotation matrix to represent orientation, some operation
-     * are disable because there is a semantic constraint induced by choice of representation, i.e.
-     * that the coordinate frame is always the reference orientation frame. Thus, some semantic operation
-     * are not enabled, namely:
-     *  * the generic inverse, that does not change the coordinate frame.
-     *  * changeCoordFrame, because CoordFrame is always the same of RefOrientFrame.
+     * Storage for the Orientation:
+     *
+     * The rotation matrix representation of the orientation, stored in row major order,
+     * inside a Matrix3x3 parent object.
+     *
+     * \warning This class uses for convenience the Matrix3x3 as a public parent.
+     *          Notice that using this methods you can damage the underlyng rotation matrix.
+     *          In doubt, don't use them and rely on more high level functions.
      */
-    class Rotation: public RotationRaw
+    class Rotation : public Matrix3x3
     {
     public:
         /**
@@ -63,11 +66,6 @@ namespace iDynTree
                  double zx, double zy, double zz);
 
         /**
-         * Copy constructor: create a Rotation from another RotationRaw.
-         */
-        Rotation(const RotationRaw & other);
-
-        /**
          * Copy constructor: create a Rotation from another Rotation.
          */
         Rotation(const Rotation & other);
@@ -77,6 +75,14 @@ namespace iDynTree
          */
         Rotation(iDynTree::MatrixView<const double> other);
 
+        /**
+         * Constructor from a buffer of 9 doubles,
+         * stored as a C-style array (i.e. row major).
+         *
+         */
+        Rotation(const double* in_data,
+                 const unsigned int in_rows,
+                 const unsigned int in_cols);
         /**
          * Geometric operations.
          * For the inverse2() operation, both the forward and the inverse geometric relations have to
@@ -98,12 +104,13 @@ namespace iDynTree
         Direction changeCoordFrameOf(const Direction & other) const;
         Axis      changeCoordFrameOf(const Axis & other) const;
         ClassicalAcc changeCoordFrameOf(const ClassicalAcc & other) const;
-        RotationalInertiaRaw changeCoordFrameOf(const RotationalInertiaRaw & other) const;
+        RotationalInertia changeCoordFrameOf(const RotationalInertia & other) const;
 
 
         /**
           * overloaded operators
           */
+        Rotation& operator=(const Rotation & other);
         Rotation operator*(const Rotation & other) const;
         Rotation inverse() const;
         Position operator*(const Position & other) const;
@@ -115,7 +122,7 @@ namespace iDynTree
         SpatialAcc      operator*(const SpatialAcc    & other) const;
         SpatialMomentum operator*(const SpatialMomentum   & other) const;
         ClassicalAcc    operator*(const ClassicalAcc    & other) const;
-        RotationalInertiaRaw    operator*(const RotationalInertiaRaw    & other) const;
+        RotationalInertia    operator*(const RotationalInertia    & other) const;
 
         /**
          * Log mapping between a  generic element of SO(3) (iDynTree::Rotation)
@@ -468,6 +475,8 @@ namespace iDynTree
         std::string reservedToString() const;
         ///@}
     };
+
+    IDYNTREE_DEPRECATED_WITH_MSG("iDynTree::RotationRaw is deprecated, use iDynTree::Rotation") typedef Rotation RotationRaw;
 }
 
 #endif

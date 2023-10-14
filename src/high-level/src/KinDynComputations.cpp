@@ -2205,7 +2205,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
     assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
 
     // Get the center of mass in the base frame
-    Position vectorFromComToBaseWithRotationOfBase = PositionRaw::inverse(this->getRobotLockedInertia().getCenterOfMass());
+    Position vectorFromComToBaseWithRotationOfBase = Position::inverse(this->getRobotLockedInertia().getCenterOfMass());
 
     Transform newOutputFrame_X_oldOutputFrame;
     if (leftSideRepresentation == BODY_FIXED_REPRESENTATION)
@@ -2239,7 +2239,7 @@ Twist KinDynComputations::getCentroidalAverageVelocity()
     Twist           base_averageVelocity = base_lockedInertia.applyInverse(base_momentum);
 
     // Get the center of mass in the base frame
-    Position vectorFromComToBaseWithRotationOfBase = PositionRaw::inverse(pimpl->getRobotLockedInertia().getCenterOfMass());
+    Position vectorFromComToBaseWithRotationOfBase = Position::inverse(pimpl->getRobotLockedInertia().getCenterOfMass());
 
     Transform newOutputFrame_X_oldOutputFrame;
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
@@ -2387,7 +2387,7 @@ SpatialMomentum KinDynComputations::getCentroidalTotalMomentum()
     SpatialMomentum base_momentum = pimpl->m_pos.worldBasePos().inverse()*pimpl->m_totalMomentum;
 
     // Get the center of mass in the base frame
-    Position vectorFromComToBaseWithRotationOfBase = PositionRaw::inverse(pimpl->getRobotLockedInertia().getCenterOfMass());
+    Position vectorFromComToBaseWithRotationOfBase = Position::inverse(pimpl->getRobotLockedInertia().getCenterOfMass());
 
     Transform newOutputFrame_X_oldOutputFrame;
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)

@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_SPATIAL_INERTIA_H
 #define IDYNTREE_SPATIAL_INERTIA_H
 
-#include <iDynTree/SpatialInertiaRaw.h>
 #include <iDynTree/VectorFixSize.h>
+#include <iDynTree/RotationalInertia.h>
 #include <iDynTree/Twist.h>
 #include <iDynTree/SpatialMomentum.h>
 #include <iDynTree/SpatialAcc.h>
@@ -19,8 +19,12 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class SpatialInertia: public SpatialInertiaRaw
+    class SpatialInertia
     {
+    protected:
+        double m_mass; ///< Mass.
+        double m_mcom[3]; ///< First moment of mass (i.e. mass * center of mass).
+        RotationalInertia m_rotInertia; ///< Three dimensional rotational inertia.
     public:
         /**
          * Default constructor.
@@ -29,14 +33,51 @@ namespace iDynTree
          */
         inline SpatialInertia() {}
         SpatialInertia(const double mass,
-                       const PositionRaw & com,
-                       const RotationalInertiaRaw & rotInertia);
-        SpatialInertia(const SpatialInertiaRaw& other);
+                       const Position& com,
+                       const RotationalInertia & rotInertia);
         SpatialInertia(const SpatialInertia& other);
 
         // Operations on SpatialInertia
         static SpatialInertia combine(const SpatialInertia & op1,
                                       const SpatialInertia & op2);
+
+        /**
+         * Helper constructor-like function that takes mass, center of mass
+         * and the rotational inertia expressed in the center of mass.
+         *
+         */
+        void fromRotationalInertiaWrtCenterOfMass(const double mass, const Position& com, const RotationalInertia & rotInertia);
+
+
+        /** multiplication operator
+         *
+         * overloading happens on proper classes
+         *
+         */
+
+
+        /**
+         * Getter functions
+         *
+         * \note for preserving consistency, no setters are implemented..
+         *       if you want to modify a spatial inertia create a new one,
+         *       and assign it to the spatial inertia that you want modify.
+         *       Given that no memory allocation happens it should be still
+         *       efficient.
+         */
+        double getMass() const;
+        Position getCenterOfMass() const;
+        const RotationalInertia& getRotationalInertiaWrtFrameOrigin() const;
+        RotationalInertia getRotationalInertiaWrtCenterOfMass() const;
+
+        /**
+         * Multiplication function
+         *
+         */
+        SpatialForceVector multiply(const SpatialMotionVector & op) const;
+
+        /** reset to zero (i.e. the inertia of body with zero mass) the SpatialInertia */
+        void zero();
 
         /**
          * @brief Get the SpatialInertia as a 6x6 matrix

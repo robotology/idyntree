@@ -125,7 +125,7 @@ int main()
     double rotInertiaData[3*3] = {10.0,0.5,0.8,
                                   0.5,20.0,0.6,
                                   0.8,0.6,25.0};
-    SpatialInertia inertia(1.0,Position(0.3,0.6,0.2),RotationalInertiaRaw(rotInertiaData,3,3));
+    SpatialInertia inertia(1.0,Position(0.3,0.6,0.2),RotationalInertia(rotInertiaData,3,3));
     ArticulatedBodyInertia abi = ArticulatedBodyInertia(inertia);
 
     checkInertiaAccProduct(abi,twist);

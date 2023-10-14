@@ -16,7 +16,7 @@ int main()
     double rotInertiaData[3*3] = {10.0,0.0,0.0,
                                   0.0,20.0,0.0,
                                   0.0,0.0,30.0};
-    SpatialInertia settedInertia(1.0,Position(100,0,0),RotationalInertiaRaw(rotInertiaData,3,3));
+    SpatialInertia settedInertia(1.0,Position(100,0,0),RotationalInertia(rotInertiaData,3,3));
 
     Link link;
 

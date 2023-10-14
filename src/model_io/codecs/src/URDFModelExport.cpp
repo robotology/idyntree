@@ -89,7 +89,7 @@ bool exportInertial(const SpatialInertia &inertia, xmlNodePtr parent_element)
     ok = ok && exportTransform(Transform(Rotation::Identity(), inertia.getCenterOfMass()), inertial);
 
     xmlNodePtr inertia_xml = xmlNewChild(inertial, NULL, BAD_CAST "inertia", NULL);
-    RotationalInertiaRaw rotInertia = inertia.getRotationalInertiaWrtCenterOfMass();
+    RotationalInertia rotInertia = inertia.getRotationalInertiaWrtCenterOfMass();
     ok = ok && doubleToStringWithClassicLocale(rotInertia(0, 0), bufStr);
     xmlNewProp(inertia_xml, BAD_CAST "ixx", BAD_CAST bufStr.c_str());
     ok = ok && doubleToStringWithClassicLocale(rotInertia(0, 1), bufStr);

@@ -26,6 +26,13 @@ Wrench::Wrench(const Wrench& other):
 {
 }
 
+Wrench& Wrench::operator=(const Wrench &other)
+{
+    this->getLinearVec3() = other.getLinearVec3();
+    this->getAngularVec3() = other.getAngularVec3();
+    return *this;
+}
+
 Wrench Wrench::operator+(const Wrench& other) const
 {
     return efficient6dSum(*this,other);

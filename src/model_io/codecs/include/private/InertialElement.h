@@ -17,7 +17,7 @@ namespace iDynTree {
 class iDynTree::InertialElement: public iDynTree::XMLElement {
     Transform m_centerOfMass;
     double m_mass;
-    RotationalInertiaRaw m_rotationalInertiaWRTCoM;
+    RotationalInertia m_rotationalInertiaWRTCoM;
     iDynTree::Link &m_link;
     
 public:

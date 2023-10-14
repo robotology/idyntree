@@ -738,7 +738,7 @@ bool CreateModelFromDHChain(const DHChain& inputChain,
     outputModel = Model();
 
     // All the inertial will be of one kg in the origin
-    iDynTree::SpatialInertia inertiaDefault(1.0,Position::Zero(),RotationalInertiaRaw::Zero());
+    iDynTree::SpatialInertia inertiaDefault(1.0,Position::Zero(),RotationalInertia::Zero());
     iDynTree::Link linkDefault;
     linkDefault.setInertia(inertiaDefault);
 

@@ -4,7 +4,6 @@
 #ifndef IDYNTREE_POSITION_H
 #define IDYNTREE_POSITION_H
 
-#include <iDynTree/PositionRaw.h>
 #include <iDynTree/Rotation.h>
 
 #include <string>
@@ -32,7 +31,7 @@ namespace iDynTree
      * respect to an orientation given by *orientFrame* .
      *
      */
-    class Position: public PositionRaw
+    class Position: public Vector3
     {
     public:
         /**
@@ -52,9 +51,14 @@ namespace iDynTree
         Position(const Position & other);
 
         /**
-         * Copy constructor: create a Position from a PositionRaw
+         * Assignment operator: assign a Position from another Position
          */
-        Position(const PositionRaw & other);
+        Position& operator=(const Position& other);
+
+        /**
+         * Constructor from a raw buffer of 3 doubles.
+         */
+        Position(const double* in_data, const unsigned int in_size);
 
         /**
          * Create a Position from a span
@@ -101,6 +105,9 @@ namespace iDynTree
 
         static Position Zero();
     };
+
+    IDYNTREE_DEPRECATED_WITH_MSG("iDynTree::PositionRaw is deprecated, use iDynTree::Position") typedef Position PositionRaw;
+
 }
 
 #endif

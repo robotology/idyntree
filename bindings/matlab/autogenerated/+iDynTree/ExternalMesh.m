@@ -2,27 +2,33 @@ classdef ExternalMesh < iDynTree.SolidShape
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1027, self);
+        iDynTreeMEX(1100, self);
         self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1028, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1101, self, varargin{:});
     end
     function varargout = getFilename(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1029, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1102, self, varargin{:});
+    end
+    function varargout = getPackageDirs(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1103, self, varargin{:});
     end
     function varargout = getFileLocationOnLocalFileSystem(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1030, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1104, self, varargin{:});
     end
     function varargout = setFilename(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1031, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1105, self, varargin{:});
+    end
+    function varargout = setPackageDirs(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1106, self, varargin{:});
     end
     function varargout = getScale(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1032, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1107, self, varargin{:});
     end
     function varargout = setScale(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1033, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1108, self, varargin{:});
     end
     function self = ExternalMesh(varargin)
       self@iDynTree.SolidShape(iDynTreeSwigRef.Null);
@@ -31,7 +37,7 @@ classdef ExternalMesh < iDynTree.SolidShape
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1034, varargin{:});
+        tmp = iDynTreeMEX(1109, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end

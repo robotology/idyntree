@@ -32,6 +32,7 @@ namespace iDynTree
         SpatialAcc(const SpatialAcc& other);
 
         // overloaded operator
+        SpatialAcc& operator=(const SpatialAcc &other);
         SpatialAcc operator+(const SpatialAcc &other) const;
         SpatialAcc operator-(const SpatialAcc &other) const;
         SpatialAcc operator-() const;

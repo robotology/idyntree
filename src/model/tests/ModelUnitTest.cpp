@@ -305,7 +305,7 @@ void checkSimpleModel()
                                   0.0,12.0,0.0,
                                   0.0,0.0,10.0};
 
-    SpatialInertia inertiaLink0(1.0,Position(100,0,0),RotationalInertiaRaw(rotInertiaData,3,3));
+    SpatialInertia inertiaLink0(1.0,Position(100,0,0),RotationalInertia(rotInertiaData,3,3));
 
     Link link0;
     link0.setInertia(inertiaLink0);
@@ -354,7 +354,7 @@ void checkInsertJointAndLink()
                                   0.0,12.0,0.0,
                                   0.0,0.0,10.0};
 
-    SpatialInertia inertiaLink0(1.0,Position(100,0,0),RotationalInertiaRaw(rotInertiaData,3,3));
+    SpatialInertia inertiaLink0(1.0,Position(100,0,0),RotationalInertia(rotInertiaData,3,3));
 
     Link link0;
     link0.setInertia(inertiaLink0);

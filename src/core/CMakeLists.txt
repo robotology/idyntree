@@ -15,6 +15,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Axis.h
                               include/iDynTree/PositionRaw.h
                               include/iDynTree/Rotation.h
                               include/iDynTree/RotationRaw.h
+                              include/iDynTree/RotationalInertia.h
                               include/iDynTree/RotationalInertiaRaw.h
                               include/iDynTree/SpatialAcc.h
                               include/iDynTree/SpatialForceVector.h
@@ -50,15 +51,12 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/MatrixDynSize.cpp
                               src/GeomVector3.cpp
                               src/Position.cpp
-                              src/PositionRaw.cpp
                               src/Rotation.cpp
-                              src/RotationRaw.cpp
-                              src/RotationalInertiaRaw.cpp
+                              src/RotationalInertia.cpp
                               src/SpatialAcc.cpp
                               src/SpatialForceVector.cpp
                               src/SpatialMomentum.cpp
                               src/SpatialMotionVector.cpp
-                              src/SpatialInertiaRaw.cpp
                               src/SpatialInertia.cpp
                               src/TestUtils.cpp
                               src/Transform.cpp

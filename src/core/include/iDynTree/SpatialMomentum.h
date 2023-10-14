@@ -30,6 +30,7 @@ namespace iDynTree
         SpatialMomentum(const SpatialMomentum & other);
 
         // overloaded operators
+        SpatialMomentum& operator=(const SpatialMomentum &other);
         SpatialMomentum operator+(const SpatialMomentum &other) const;
         SpatialMomentum operator-(const SpatialMomentum &other) const;
         SpatialMomentum operator-() const;

@@ -9,62 +9,62 @@ classdef Axis < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(537, varargin{:});
+        tmp = iDynTreeMEX(603, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = getDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(538, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(604, self, varargin{:});
     end
     function varargout = getOrigin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(539, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(605, self, varargin{:});
     end
     function varargout = setDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(540, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(606, self, varargin{:});
     end
     function varargout = setOrigin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(541, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(607, self, varargin{:});
     end
     function varargout = getRotationTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(542, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(608, self, varargin{:});
     end
     function varargout = getRotationTransformDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(543, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(609, self, varargin{:});
     end
     function varargout = getRotationTwist(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(544, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(610, self, varargin{:});
     end
     function varargout = getRotationSpatialAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(545, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(611, self, varargin{:});
     end
     function varargout = getTranslationTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(546, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(612, self, varargin{:});
     end
     function varargout = getTranslationTransformDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(547, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(613, self, varargin{:});
     end
     function varargout = getTranslationTwist(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(548, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(614, self, varargin{:});
     end
     function varargout = getTranslationSpatialAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(549, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(615, self, varargin{:});
     end
     function varargout = isParallel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(550, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(616, self, varargin{:});
     end
     function varargout = reverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(551, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(617, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(552, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(618, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(553, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(619, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(554, self);
+        iDynTreeMEX(620, self);
         self.SwigClear();
       end
     end

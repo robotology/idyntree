@@ -16,7 +16,6 @@ namespace iDynTree
     class Traversal;
     class JointPosDoubleArray;
     class LinkPositions;
-    class IRawVector;
 
     /**
      * Class representing the decomposition in one model in several submodels.

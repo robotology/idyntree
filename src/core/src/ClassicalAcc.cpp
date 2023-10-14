@@ -4,7 +4,7 @@
 #include <iDynTree/ClassicalAcc.h>
 #include <iDynTree/SpatialAcc.h>
 #include <iDynTree/Twist.h>
-#include <iDynTree/RotationRaw.h>
+#include <iDynTree/Rotation.h>
 
 #include <Eigen/Dense>
 
@@ -29,7 +29,7 @@ ClassicalAcc::ClassicalAcc(const ClassicalAcc& other):
 }
 
 
-const ClassicalAcc& ClassicalAcc::changeCoordFrame(const RotationRaw& newCoordFrame)
+const ClassicalAcc& ClassicalAcc::changeCoordFrame(const Rotation& newCoordFrame)
 {
     Eigen::Map<Vector6d> thisData(this->data());
     Eigen::Map<const Matrix3dRowMajor> rotData(newCoordFrame.data());

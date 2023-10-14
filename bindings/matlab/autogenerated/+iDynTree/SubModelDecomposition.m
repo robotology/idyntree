@@ -9,37 +9,37 @@ classdef SubModelDecomposition < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1169, varargin{:});
+        tmp = iDynTreeMEX(1300, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1170, self);
+        iDynTreeMEX(1301, self);
         self.SwigClear();
       end
     end
     function varargout = splitModelAlongJoints(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1171, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1302, self, varargin{:});
     end
     function varargout = setNrOfSubModels(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1172, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1303, self, varargin{:});
     end
     function varargout = getNrOfSubModels(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1173, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1304, self, varargin{:});
     end
     function varargout = getNrOfLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1174, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1305, self, varargin{:});
     end
     function varargout = getTraversal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1175, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1306, self, varargin{:});
     end
     function varargout = getSubModelOfLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1176, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1307, self, varargin{:});
     end
     function varargout = getSubModelOfFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1177, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1308, self, varargin{:});
     end
   end
   methods(Static)

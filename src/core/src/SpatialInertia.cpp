@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Position.h>
+#include <iDynTree/PrivateUtils.h>
 #include <iDynTree/SpatialInertia.h>
 #include <iDynTree/SpatialMomentum.h>
 #include <iDynTree/Twist.h>
@@ -19,28 +20,163 @@ namespace iDynTree
 {
 
 SpatialInertia::SpatialInertia(const double mass,
-                               const PositionRaw& com,
-                               const RotationalInertiaRaw& rotInertia): SpatialInertiaRaw(mass, com, rotInertia)
+                                     const Position& com,
+                                     const RotationalInertia& rotInertia): m_mass(mass),
+                                                                              m_rotInertia(rotInertia)
 {
-
+    for(int i = 0; i < 3; i++ )
+    {
+        this->m_mcom[i] = this->m_mass*com(i);
+    }
 }
 
-SpatialInertia::SpatialInertia(const SpatialInertiaRaw& other): SpatialInertiaRaw(other)
+SpatialInertia::SpatialInertia(const SpatialInertia& other): m_mass(other.m_mass),
+                                                                      m_rotInertia(other.m_rotInertia)
 {
+    for(int i = 0; i < 3; i++ )
+    {
+        m_mcom[i] = other.m_mcom[i];
+    }
+}
 
+void SpatialInertia::fromRotationalInertiaWrtCenterOfMass(const double mass,
+                                                        const Position& com,
+                                                        const RotationalInertia& rotInertiaWrtCom)
+{
+    this->m_mass = mass;
+
+    for(int i = 0; i < 3; i++ )
+    {
+        this->m_mcom[i] = this->m_mass*com(i);
+    }
+
+    // Here we need to compute the rotational inertia at the com
+    // given the one expressed at the frame origin
+    // we apply formula 2.63 in Featherstone 2008
+    Eigen::Map<Eigen::Matrix3d> linkInertia(this->m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> comInertia(rotInertiaWrtCom.data());
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+
+    if( fabs(this->m_mass) > 0)
+    {
+        linkInertia = comInertia - squareCrossProductMatrix(mcom)/this->m_mass;
+    }
+    else
+    {
+        linkInertia = comInertia;
+    }
 }
 
 
-SpatialInertia::SpatialInertia(const SpatialInertia& other): SpatialInertiaRaw(other)
+double SpatialInertia::getMass() const
 {
+    return this->m_mass;
+}
 
+Position SpatialInertia::getCenterOfMass() const
+{
+    Position ret;
+
+    if( fabs(this->m_mass) > 0 )
+    {
+        ret(0) = this->m_mcom[0]/this->m_mass;
+        ret(1) = this->m_mcom[1]/this->m_mass;
+        ret(2) = this->m_mcom[2]/this->m_mass;
+    }
+    else
+    {
+        ret.zero();
+    }
+
+    return ret;
+}
+
+const RotationalInertia& SpatialInertia::getRotationalInertiaWrtFrameOrigin() const
+{
+    return this->m_rotInertia;
+}
+
+RotationalInertia SpatialInertia::getRotationalInertiaWrtCenterOfMass() const
+{
+    RotationalInertia retComInertia;
+    // Here we need to compute the rotational inertia at the com
+    // given the one expressed at the frame origin
+    // we apply formula 2.63 in Featherstone 2008
+    Eigen::Map<const Eigen::Matrix3d> linkInertia(this->m_rotInertia.data());
+    Eigen::Map<Eigen::Matrix3d> comInertia(retComInertia.data());
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+
+    if( fabs(this->m_mass) > 0 )
+    {
+        comInertia = linkInertia + squareCrossProductMatrix(mcom)/this->m_mass;
+    }
+    else
+    {
+        comInertia = linkInertia;
+    }
+
+    return retComInertia;
+}
+
+SpatialInertia SpatialInertia::combine(const SpatialInertia& op1,
+                                                                const SpatialInertia& op2)
+{
+    SpatialInertia ret;
+    // If the two inertia are expressed with the same orientation
+    // and with respect to the same point (and this will be checked by
+    // the semantic check) we just need to sum
+    // the mass, the first moment of mass and the rotational inertia
+    ret.m_mass = op1.m_mass + op2.m_mass;
+
+    Eigen::Map<Eigen::Vector3d> retMcom(ret.m_mcom);
+    Eigen::Map<const Eigen::Vector3d> op1Mcom(op1.m_mcom);
+    Eigen::Map<const Eigen::Vector3d> op2Mcom(op2.m_mcom);
+
+    retMcom = op1Mcom + op2Mcom;
+
+    Eigen::Map<Eigen::Matrix3d> retRotInertia(ret.m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> op1RotInertia(op1.m_rotInertia.data());
+    Eigen::Map<const Eigen::Matrix3d> op2RotInertia(op2.m_rotInertia.data());
+
+    retRotInertia = op1RotInertia + op2RotInertia;
+
+    return ret;
 }
 
 
-SpatialInertia SpatialInertia::combine(const SpatialInertia& op1, const SpatialInertia& op2)
+SpatialForceVector SpatialInertia::multiply(const SpatialMotionVector& op) const
 {
-    return SpatialInertiaRaw::combine(op1,op2);
+    SpatialForceVector ret;
+
+    // we call this linearForce and angularForce
+    // but please remember that they can also be
+    // linear and angular momentum
+    Eigen::Map<Eigen::Vector3d> linearForce(ret.getLinearVec3().data());
+    Eigen::Map<Eigen::Vector3d> angularForce(ret.getAngularVec3().data());
+    Eigen::Map<const Eigen::Vector3d> linearMotion(op.getLinearVec3().data());
+    Eigen::Map<const Eigen::Vector3d> angularMotion(op.getAngularVec3().data());
+
+    Eigen::Map<const Eigen::Vector3d> mcom(this->m_mcom);
+    Eigen::Map<const Eigen::Matrix3d> inertia3d(this->m_rotInertia.data());
+
+    // Implementing the 2.63 formula in Featherstone 2008
+    linearForce  = this->m_mass*linearMotion - mcom.cross(angularMotion);
+    angularForce = mcom.cross(linearMotion) + inertia3d*(angularMotion);
+
+    return ret;
 }
+
+
+void SpatialInertia::zero()
+{
+    m_mass = 0.0;
+    for(int i = 0; i < 3; i++ )
+    {
+        this->m_mcom[i] = 0.0;
+    }
+    this->m_rotInertia.zero();
+}
+
 
 // \todo TODO have a unique mySkew
 template<class Derived>
@@ -103,18 +239,17 @@ SpatialInertia SpatialInertia::operator+(const SpatialInertia& other) const
 
 SpatialForceVector SpatialInertia::operator*(const SpatialMotionVector& other) const
 {
-    return SpatialInertiaRaw::multiply(other);
+    return SpatialInertia::multiply(other);
 }
-
 
 Wrench SpatialInertia::operator*(const SpatialAcc& other) const
 {
-    return SpatialInertiaRaw::multiply(other);
+    return SpatialInertia::multiply(other);
 }
 
 SpatialMomentum SpatialInertia::operator*(const Twist& other) const
 {
-    return SpatialInertiaRaw::multiply(other);
+    return SpatialInertia::multiply(other);
 }
 
 Wrench SpatialInertia::biasWrench(const Twist& V) const
@@ -223,7 +358,7 @@ bool SpatialInertia::isPhysicallyConsistent() const
     }
 
     // We get the inertia at the COM
-    RotationalInertiaRaw inertiaAtCOM = this->getRotationalInertiaWrtCenterOfMass();
+    RotationalInertia inertiaAtCOM = this->getRotationalInertiaWrtCenterOfMass();
 
     // We get the inertia at the principal axis using eigen
     SelfAdjointEigenSolver<Matrix<double,3,3,RowMajor> > eigenValuesSolver;
