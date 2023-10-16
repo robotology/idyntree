@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.0.0] - 2023-10-16
+
 ### Added
 
 - Added the possibility of exporting additional XML elements that are added as child of the `<robot>` element in URDF ModelExporter (https://github.com/robotology/idyntree/pull/1088).
