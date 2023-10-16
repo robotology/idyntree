@@ -92,6 +92,8 @@ namespace iDynTree
         MatrixView(const MatrixView& other)
             : MatrixView(other.m_storage, other.m_rows, other.m_cols, other.m_storageOrder)
         {
+            this->m_innerStride = other.m_innerStride;
+            this->m_outerStride = other.m_outerStride;
         }
         MatrixView& operator=(const MatrixView& other)
         {
@@ -99,6 +101,8 @@ namespace iDynTree
             this->m_rows = other.m_rows;
             this->m_cols = other.m_cols;
             this->m_storageOrder = other.m_storageOrder;
+            this->m_innerStride = other.m_innerStride;
+            this->m_outerStride = other.m_outerStride;
             return *this;
         }
 
