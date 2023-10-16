@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/MeshcatVisualizer.h" line="69" column="21" bodyfile="iDynTree/MeshcatVisualizer.h" bodystart="68" bodyend="-1"/>
+        <location file="iDynTree/MeshcatVisualizer.h" line="141" column="21" bodyfile="iDynTree/MeshcatVisualizer.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -197,6 +197,398 @@
         </inbodydescription>
         <location file="iDynTree/MeshcatVisualizer.h" line="57" column="10"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1ae87bc0c98458ca24fda9c898ebdc5c99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::loadSphere</definition>
+        <argsstring>(const double radius, const iDynTree::Span&lt; const double &gt; &amp;color, const std::string &amp;name)</argsstring>
+        <name>loadSphere</name>
+        <param>
+          <type>const double</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt; &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Load a sphere mesh in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>radius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>radius of the sphere. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the color of the mesh. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>needs to be a vector of 4 double between 0 and 1 representing RGBA. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the sphere. Each geometry you add needs to have an unique name. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="69" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a0fc760701ca4f0c47014f7eb6975530e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::loadCylinder</definition>
+        <argsstring>(const double radius, const double height, const iDynTree::Span&lt; const double &gt; &amp;color, const std::string &amp;name)</argsstring>
+        <name>loadCylinder</name>
+        <param>
+          <type>const double</type>
+          <declname>radius</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt; &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Load a cylinder mesh in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>radius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>radius of the cylinder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the cylinder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the color of the mesh. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>needs to be a vector of 4 double between 0 and 1 representing RGBA. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the cylinder. Each geometry you add needs to have an unique name. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="82" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a3ce54d29db07fc65833154299cf74c17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::loadBox</definition>
+        <argsstring>(const double width, const double depth, const double height, const iDynTree::Span&lt; const double &gt; &amp;color, const std::string &amp;name)</argsstring>
+        <name>loadBox</name>
+        <param>
+          <type>const double</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>depth</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>height</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt; &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Load a box mesh in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>width of the box. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>depth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>depth of the box. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>height of the box. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the color of the mesh. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>needs to be a vector of 4 double between 0 and 1 representing RGBA. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the box. Each geometry you add needs to have an unique name. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1aa0c430263726e7e3b2c854ec13498712" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::loadEllipsoid</definition>
+        <argsstring>(const double a, const double b, const double c, const iDynTree::Span&lt; const double &gt; &amp;color, const std::string &amp;name)</argsstring>
+        <name>loadEllipsoid</name>
+        <param>
+          <type>const double</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt; &amp;</type>
+          <declname>color</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Load an ellipsoid mesh in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a-axis of the ellipsoid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>b-axis of the ellipsoid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>c-axis of the ellipsoid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the color of the mesh. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>needs to be a vector of 4 double between 0 and 1 representing RGBA. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the ellipsoid. Each geometry you add needs to have an unique name. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="110" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a5622aa228c274d579faab7b638abb0f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::setPrimitiveGeometryTransform</definition>
+        <argsstring>(const iDynTree::Transform &amp;world_T_geometry, const std::string &amp;geometryName)</argsstring>
+        <name>setPrimitiveGeometryTransform</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>world_T_geometry</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>geometryName</declname>
+        </param>
+        <briefdescription>
+<para>set the pose of a primitive geometry mesh in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>world_T_geometry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pose of the geometry. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>geometryName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the geometry specified in <ref refid="classiDynTree_1_1MeshcatVisualizer_1ae87bc0c98458ca24fda9c898ebdc5c99" kindref="member">MeshcatVisualizer::loadSphere()</ref> || <ref refid="classiDynTree_1_1MeshcatVisualizer_1a0fc760701ca4f0c47014f7eb6975530e" kindref="member">MeshcatVisualizer::loadCylinder()</ref> || <ref refid="classiDynTree_1_1MeshcatVisualizer_1a3ce54d29db07fc65833154299cf74c17" kindref="member">MeshcatVisualizer::loadBox()</ref> || <ref refid="classiDynTree_1_1MeshcatVisualizer_1aa0c430263726e7e3b2c854ec13498712" kindref="member">MeshcatVisualizer::loadEllipsoid()</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. Implementations available: for <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref>, for <ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="121" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a2d536b2d96d0898139b0b55c9e7f2e15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::setPrimitiveGeometryTransform</definition>
+        <argsstring>(const iDynTree::MatrixView&lt; const double &gt; &amp;world_T_geometry, const std::string &amp;geometryName)</argsstring>
+        <name>setPrimitiveGeometryTransform</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt; &amp;</type>
+          <declname>world_T_geometry</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>geometryName</declname>
+        </param>
+        <briefdescription>
+<para>set the pose of a primitive geometry mesh in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>world_T_geometry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pose of the geometry. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>geometryName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the geometry specified in <ref refid="classiDynTree_1_1MeshcatVisualizer_1ae87bc0c98458ca24fda9c898ebdc5c99" kindref="member">MeshcatVisualizer::loadSphere()</ref> || <ref refid="classiDynTree_1_1MeshcatVisualizer_1a0fc760701ca4f0c47014f7eb6975530e" kindref="member">MeshcatVisualizer::loadCylinder()</ref> || <ref refid="classiDynTree_1_1MeshcatVisualizer_1a3ce54d29db07fc65833154299cf74c17" kindref="member">MeshcatVisualizer::loadBox()</ref> || <ref refid="classiDynTree_1_1MeshcatVisualizer_1aa0c430263726e7e3b2c854ec13498712" kindref="member">MeshcatVisualizer::loadEllipsoid()</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. Implementations available: for <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref>, for <ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="131" column="10"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1ab28b37d1585d8379895900981dc62ab9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void iDynTree::MeshcatVisualizer::join</definition>
@@ -209,7 +601,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/MeshcatVisualizer.h" line="65" column="10"/>
+        <location file="iDynTree/MeshcatVisualizer.h" line="137" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -220,14 +612,20 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/MeshcatVisualizer.h" line="23" column="1" bodyfile="iDynTree/MeshcatVisualizer.h" bodystart="24" bodyend="70"/>
+    <location file="iDynTree/MeshcatVisualizer.h" line="23" column="3" bodyfile="iDynTree/MeshcatVisualizer.h" bodystart="24" bodyend="142"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1MeshcatVisualizer_1ab28b37d1585d8379895900981dc62ab9" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>join</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a3ce54d29db07fc65833154299cf74c17" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>loadBox</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a0fc760701ca4f0c47014f7eb6975530e" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>loadCylinder</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1aa0c430263726e7e3b2c854ec13498712" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>loadEllipsoid</name></member>
       <member refid="classiDynTree_1_1MeshcatVisualizer_1a677342cec357d16a5612108375a8eabf" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>loadModel</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1ae87bc0c98458ca24fda9c898ebdc5c99" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>loadSphere</name></member>
       <member refid="classiDynTree_1_1MeshcatVisualizer_1a3ff0ac700a72f9642bb4179d0ffa8f4e" prot="private" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>m_pimpl</name></member>
       <member refid="classiDynTree_1_1MeshcatVisualizer_1a1a9cf617bbdba399b2cba950980b5133" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>MeshcatVisualizer</name></member>
       <member refid="classiDynTree_1_1MeshcatVisualizer_1a2ce0912f6f5526cb7189565922b39f3d" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>setModelState</name></member>
       <member refid="classiDynTree_1_1MeshcatVisualizer_1a254be39b40e8904b0970f7f91841c552" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>setModelState</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a5622aa228c274d579faab7b638abb0f7" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>setPrimitiveGeometryTransform</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a2d536b2d96d0898139b0b55c9e7f2e15" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>setPrimitiveGeometryTransform</name></member>
       <member refid="classiDynTree_1_1MeshcatVisualizer_1a220d9b2aa9d24c20e293e7e0748cf05a" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>~MeshcatVisualizer</name></member>
     </listofallmembers>
   </compounddef>

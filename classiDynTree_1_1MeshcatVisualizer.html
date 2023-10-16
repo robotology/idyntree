@@ -108,6 +108,45 @@
               const std::string&amp; modelName) -&gt; bool</span>
             </dt>
             <dd>Set the state of an already existing model in the visualizer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae87bc0c98458ca24fda9c898ebdc5c99" class="m-doc">loadSphere</a>(</span><span class="m-doc-wrap">const double radius,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Load a sphere mesh in the visualizer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0fc760701ca4f0c47014f7eb6975530e" class="m-doc">loadCylinder</a>(</span><span class="m-doc-wrap">const double radius,
+              const double height,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Load a cylinder mesh in the visualizer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3ce54d29db07fc65833154299cf74c17" class="m-doc">loadBox</a>(</span><span class="m-doc-wrap">const double width,
+              const double depth,
+              const double height,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Load a box mesh in the visualizer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa0c430263726e7e3b2c854ec13498712" class="m-doc">loadEllipsoid</a>(</span><span class="m-doc-wrap">const double a,
+              const double b,
+              const double c,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd>Load an ellipsoid mesh in the visualizer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5622aa228c274d579faab7b638abb0f7" class="m-doc">setPrimitiveGeometryTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_geometry,
+              const std::string&amp; geometryName) -&gt; bool</span>
+            </dt>
+            <dd>set the pose of a primitive geometry mesh in the visualizer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2d536b2d96d0898139b0b55c9e7f2e15" class="m-doc">setPrimitiveGeometryTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_geometry,
+              const std::string&amp; geometryName) -&gt; bool</span>
+            </dt>
+            <dd>set the pose of a primitive geometry mesh in the visualizer.</dd>
             <dt id="ab28b37d1585d8379895900981dc62ab9">
               <span class="m-doc-wrap-bumper">void <a href="#ab28b37d1585d8379895900981dc62ab9" class="m-doc-self">join</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -207,6 +246,219 @@
                 <tr>
                   <th>Returns</th>
                   <td>True in case of success false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae87bc0c98458ca24fda9c898ebdc5c99"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />MeshcatVisualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae87bc0c98458ca24fda9c898ebdc5c99" class="m-doc-self">loadSphere</a>(</span><span class="m-doc-wrap">const double radius,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name)</span></span>
+            </h3>
+            <p>Load a sphere mesh in the visualizer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">radius</td>
+                  <td>radius of the sphere.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>needs to be a vector of 4 double between 0 and 1 representing RGBA.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>the name of the sphere. Each geometry you add needs to have an unique name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True in case of success false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0fc760701ca4f0c47014f7eb6975530e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />MeshcatVisualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0fc760701ca4f0c47014f7eb6975530e" class="m-doc-self">loadCylinder</a>(</span><span class="m-doc-wrap">const double radius,
+              const double height,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name)</span></span>
+            </h3>
+            <p>Load a cylinder mesh in the visualizer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">radius</td>
+                  <td>radius of the cylinder.</td>
+                </tr>
+                <tr>
+                  <td>height</td>
+                  <td>height of the cylinder.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>needs to be a vector of 4 double between 0 and 1 representing RGBA.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>the name of the cylinder. Each geometry you add needs to have an unique name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True in case of success false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a3ce54d29db07fc65833154299cf74c17"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />MeshcatVisualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3ce54d29db07fc65833154299cf74c17" class="m-doc-self">loadBox</a>(</span><span class="m-doc-wrap">const double width,
+              const double depth,
+              const double height,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name)</span></span>
+            </h3>
+            <p>Load a box mesh in the visualizer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">width</td>
+                  <td>width of the box.</td>
+                </tr>
+                <tr>
+                  <td>depth</td>
+                  <td>depth of the box.</td>
+                </tr>
+                <tr>
+                  <td>height</td>
+                  <td>height of the box.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>needs to be a vector of 4 double between 0 and 1 representing RGBA.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>the name of the box. Each geometry you add needs to have an unique name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True in case of success false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa0c430263726e7e3b2c854ec13498712"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />MeshcatVisualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa0c430263726e7e3b2c854ec13498712" class="m-doc-self">loadEllipsoid</a>(</span><span class="m-doc-wrap">const double a,
+              const double b,
+              const double c,
+              const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt;&amp; color,
+              const std::string&amp; name)</span></span>
+            </h3>
+            <p>Load an ellipsoid mesh in the visualizer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">a</td>
+                  <td>a-axis of the ellipsoid.</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>b-axis of the ellipsoid.</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>c-axis of the ellipsoid.</td>
+                </tr>
+                <tr>
+                  <td>color</td>
+                  <td>needs to be a vector of 4 double between 0 and 1 representing RGBA.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td>the name of the ellipsoid. Each geometry you add needs to have an unique name.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True in case of success false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a5622aa228c274d579faab7b638abb0f7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />MeshcatVisualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5622aa228c274d579faab7b638abb0f7" class="m-doc-self">setPrimitiveGeometryTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_geometry,
+              const std::string&amp; geometryName)</span></span>
+            </h3>
+            <p>set the pose of a primitive geometry mesh in the visualizer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world_T_geometry</td>
+                  <td>pose of the geometry.</td>
+                </tr>
+                <tr>
+                  <td>geometryName</td>
+                  <td>the name of the geometry specified in <a href="classiDynTree_1_1MeshcatVisualizer.html#ae87bc0c98458ca24fda9c898ebdc5c99" class="m-doc">MeshcatVisualizer::<wbr />loadSphere()</a> || <a href="classiDynTree_1_1MeshcatVisualizer.html#a0fc760701ca4f0c47014f7eb6975530e" class="m-doc">MeshcatVisualizer::<wbr />loadCylinder()</a> || <a href="classiDynTree_1_1MeshcatVisualizer.html#a3ce54d29db07fc65833154299cf74c17" class="m-doc">MeshcatVisualizer::<wbr />loadBox()</a> || <a href="classiDynTree_1_1MeshcatVisualizer.html#aa0c430263726e7e3b2c854ec13498712" class="m-doc">MeshcatVisualizer::<wbr />loadEllipsoid()</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True in case of success false otherwise. Implementations available: for <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>, for <a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a2d536b2d96d0898139b0b55c9e7f2e15"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />MeshcatVisualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2d536b2d96d0898139b0b55c9e7f2e15" class="m-doc-self">setPrimitiveGeometryTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_geometry,
+              const std::string&amp; geometryName)</span></span>
+            </h3>
+            <p>set the pose of a primitive geometry mesh in the visualizer.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world_T_geometry</td>
+                  <td>pose of the geometry.</td>
+                </tr>
+                <tr>
+                  <td>geometryName</td>
+                  <td>the name of the geometry specified in <a href="classiDynTree_1_1MeshcatVisualizer.html#ae87bc0c98458ca24fda9c898ebdc5c99" class="m-doc">MeshcatVisualizer::<wbr />loadSphere()</a> || <a href="classiDynTree_1_1MeshcatVisualizer.html#a0fc760701ca4f0c47014f7eb6975530e" class="m-doc">MeshcatVisualizer::<wbr />loadCylinder()</a> || <a href="classiDynTree_1_1MeshcatVisualizer.html#a3ce54d29db07fc65833154299cf74c17" class="m-doc">MeshcatVisualizer::<wbr />loadBox()</a> || <a href="classiDynTree_1_1MeshcatVisualizer.html#aa0c430263726e7e3b2c854ec13498712" class="m-doc">MeshcatVisualizer::<wbr />loadEllipsoid()</a>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True in case of success false otherwise. Implementations available: for <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>, for <a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>.</td>
                 </tr>
               </tfoot>
             </table>

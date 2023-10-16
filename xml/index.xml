@@ -2401,6 +2401,12 @@
     <member refid="classiDynTree_1_1MeshcatVisualizer_1a677342cec357d16a5612108375a8eabf" kind="function"><name>loadModel</name></member>
     <member refid="classiDynTree_1_1MeshcatVisualizer_1a2ce0912f6f5526cb7189565922b39f3d" kind="function"><name>setModelState</name></member>
     <member refid="classiDynTree_1_1MeshcatVisualizer_1a254be39b40e8904b0970f7f91841c552" kind="function"><name>setModelState</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1ae87bc0c98458ca24fda9c898ebdc5c99" kind="function"><name>loadSphere</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a0fc760701ca4f0c47014f7eb6975530e" kind="function"><name>loadCylinder</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a3ce54d29db07fc65833154299cf74c17" kind="function"><name>loadBox</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1aa0c430263726e7e3b2c854ec13498712" kind="function"><name>loadEllipsoid</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a5622aa228c274d579faab7b638abb0f7" kind="function"><name>setPrimitiveGeometryTransform</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a2d536b2d96d0898139b0b55c9e7f2e15" kind="function"><name>setPrimitiveGeometryTransform</name></member>
     <member refid="classiDynTree_1_1MeshcatVisualizer_1ab28b37d1585d8379895900981dc62ab9" kind="function"><name>join</name></member>
   </compound>
   <compound refid="classiDynTree_1_1Model" kind="class"><name>iDynTree::Model</name>
