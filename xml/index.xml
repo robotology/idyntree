@@ -205,6 +205,7 @@
     <member refid="classiDynTree_1_1Axis_1aa1aff15197c9bdb23d6a8a397cfa5d79" kind="function"><name>Axis</name></member>
     <member refid="classiDynTree_1_1Axis_1a56cbca5b0f569174b2f8ce96b2b645e0" kind="function"><name>Axis</name></member>
     <member refid="classiDynTree_1_1Axis_1add0c40dde7f3dc9e4c05f633a74354b2" kind="function"><name>Axis</name></member>
+    <member refid="classiDynTree_1_1Axis_1a16fd918f81fe2496fe167f8396365449" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1Axis_1a1bdc98a69afe6ba3ddc9f0c5c52f836e" kind="function"><name>getDirection</name></member>
     <member refid="classiDynTree_1_1Axis_1a601caad683259796af973dc9a5767f2d" kind="function"><name>getOrigin</name></member>
     <member refid="classiDynTree_1_1Axis_1aea61e891277aabb22e1067404d6d50d5" kind="function"><name>setDirection</name></member>
@@ -2384,6 +2385,7 @@
     <member refid="classiDynTree_1_1MatrixView_1aea394996c9fbbd3afcea2ddf9eee5f2c" kind="function"><name>rawIndex</name></member>
     <member refid="classiDynTree_1_1MatrixView_1a4207d5ae70188d7fe429ddb4c5914e0e" kind="function"><name>MatrixView</name></member>
     <member refid="classiDynTree_1_1MatrixView_1aed1875e3fef525592b94d6ba22e0a298" kind="function"><name>MatrixView</name></member>
+    <member refid="classiDynTree_1_1MatrixView_1a6bb4d3e896edacfbec46d821fd30674e" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1MatrixView_1abb709adaca2698acb0120730d5ca68a6" kind="function"><name>MatrixView</name></member>
     <member refid="classiDynTree_1_1MatrixView_1a2f8730641cf5cac6a6cba7d203c556d1" kind="function"><name>MatrixView</name></member>
     <member refid="classiDynTree_1_1MatrixView_1a355e26185fa9e11b84da8691c07ce7ac" kind="function"><name>MatrixView</name></member>
