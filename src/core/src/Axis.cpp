@@ -27,6 +27,12 @@ namespace iDynTree
 
     }
 
+    Axis& Axis::operator=(const Axis& other)
+    {
+        this->direction = other.getDirection();
+        this->origin = other.getOrigin();
+        return *this;
+    }
 
     const Direction& Axis::getDirection() const
     {

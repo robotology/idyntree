@@ -93,6 +93,14 @@ namespace iDynTree
             : MatrixView(other.m_storage, other.m_rows, other.m_cols, other.m_storageOrder)
         {
         }
+        MatrixView& operator=(const MatrixView& other)
+        {
+            this->m_storage = other.m_storage;
+            this->m_rows = other.m_rows;
+            this->m_cols = other.m_cols;
+            this->m_storageOrder = other.m_storageOrder;
+            return *this;
+        }
 
 #ifndef SWIG
         template <

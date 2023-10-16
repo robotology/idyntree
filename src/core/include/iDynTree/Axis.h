@@ -54,6 +54,11 @@ namespace iDynTree
          */
         Axis(const Axis & other);
 
+        /**
+         * Assignment operator: assign a Axis from another Axis
+         */
+        Axis& operator=(const Axis& other);
+
          /**
          * Get the direction of the axis
          */
