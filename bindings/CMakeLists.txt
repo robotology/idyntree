@@ -43,15 +43,19 @@ if(IDYNTREE_USES_PYTHON OR IDYNTREE_USES_PYTHON_PYBIND11)
     endif()
     find_package(Python3 COMPONENTS Interpreter ${IDYNTREE_SEARCHED_Python_Development_Component} NumPy REQUIRED)
 
-    if (IDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES)
-       set(PYTHON_INSTDIR ${Python3_SITELIB}/idyntree)
-    elseif(IDYNTREE_PACKAGE_FOR_PYPI)
-       set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
+    if(NOT DEFINED IDYNTREE_PYTHON_INSTALL_DIR)
+       if(IDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES)
+           set(IDYNTREE_PYTHON_INSTALL_DIR ${Python3_SITELIB})
+       else()
+           execute_process(COMMAND ${Python3_EXECUTABLE}
+                           -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
+                           OUTPUT_VARIABLE _PYTHON_INSTDIR)
+           string(STRIP ${_PYTHON_INSTDIR} IDYNTREE_PYTHON_INSTALL_DIR)
+       endif()
+    endif()
+    if(IDYNTREE_PACKAGE_FOR_PYPI)
+        set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
     else()
-        execute_process(COMMAND ${Python3_EXECUTABLE}
-                        -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
-                        OUTPUT_VARIABLE _PYTHON_INSTDIR)
-        string(STRIP ${_PYTHON_INSTDIR} IDYNTREE_PYTHON_INSTALL_DIR)
         set(PYTHON_INSTDIR ${IDYNTREE_PYTHON_INSTALL_DIR}/idyntree)
     endif()
     file(TO_CMAKE_PATH "${PYTHON_INSTDIR}" PYTHON_INSTDIR)
