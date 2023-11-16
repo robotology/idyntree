@@ -24,7 +24,7 @@ function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelNa
     % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
-    disp(['[loadReducedModel]: loading the following model: ',[modelPath,modelName]]);
+    disp(['[loadReducedModel]: loading the following model: ',fullfile(modelPath,modelName)]);
         
     % if DEBUG option is set to TRUE, all the wrappers will be run in debug
     % mode. Wrappers concerning iDyntree simulator have their own debugger
@@ -45,7 +45,7 @@ function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelNa
     modelLoader            = iDynTree.ModelLoader();
     reducedModel           = modelLoader.model();
 
-    modelLoader.loadReducedModelFromFile([modelPath,modelName], jointList_idyntree);
+    modelLoader.loadReducedModelFromFile(fullfile(modelPath,modelName), jointList_idyntree);
 
     % get the number of degrees of freedom of the reduced model
     KinDynModel.NDOF       = reducedModel.getNrOfDOFs();
@@ -59,5 +59,5 @@ function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelNa
     % set the floating base link
     KinDynModel.kinDynComp.setFloatingBase(KinDynModel.BASE_LINK);
     
-    disp(['[loadReducedModel]: loaded model: ',[modelPath,modelName],', number of joints: ',num2str(KinDynModel.NDOF)]);
+    disp(['[loadReducedModel]: loaded model: ',fullfile(modelPath,modelName),', number of joints: ',num2str(KinDynModel.NDOF)]);
 end
