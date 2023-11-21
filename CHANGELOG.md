@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - No warning is printed if a sensor not supported by iDynTree is found in an URDF file (https://github.com/robotology/idyntree/pull/997).
 
+### Fixed
+- Fix `iDynTreeWrappers.loadReducedModel` when `model_path` argument does not end in `\` (https://github.com/robotology/idyntree/pull/1126).
+
 ## [5.2.1] - 2022-05-19
 
 ### Fixed 
