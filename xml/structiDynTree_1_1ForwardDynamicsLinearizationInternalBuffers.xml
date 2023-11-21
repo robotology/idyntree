@@ -107,7 +107,7 @@
 <para>Buffer to store the derivative of the product. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="7">\[ V_l \bar\times^* M_l V_l \]</formula></para>
+<para><formula id="10">\[ V_l \bar\times^* M_l V_l \]</formula></para>
 <para>with respect to V_l </para>
         </detaileddescription>
         <inbodydescription>
