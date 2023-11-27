@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - CMake: Permit to explicitly specify Python installation directory by setting the `IDYNTREE_PYTHON_INSTALL_DIR` CMake variable (https://github.com/robotology/idyntree/pull/1124).
 
+### Fixed
+
+- Fixed compilation of pybind11 bindings (https://github.com/robotology/idyntree/pull/1128).
+
 ## [10.0.0] - 2023-10-16
 
 ### Added
