@@ -66,7 +66,7 @@ if(NOT TARGET LibXml2::LibXml2)
   find_package(LibXml2 REQUIRED)
 endif()
 
-idyntree_handle_dependency(YARP COMPONENTS os dev math rosmsg idl_tools MAIN_TARGET YARP::YARP_os)
+idyntree_handle_dependency(YARP COMPONENTS os dev math MAIN_TARGET YARP::YARP_os)
 set(YARP_REQUIRED_VERSION 3.3)
 if(IDYNTREE_USES_YARP AND YARP_FOUND)
   if(${YARP_VERSION} VERSION_LESS ${YARP_REQUIRED_VERSION})
