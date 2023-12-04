@@ -13,6 +13,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
+#include <random>
 
 using namespace iDynTree;
 
@@ -198,8 +199,7 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
         }
     }
 
-    std::random_device rd;
-    std::mt19937 random_gen(rd());
+    std::mt19937 random_gen(0);
     std::shuffle(dofsName.begin(), dofsName.end(), random_gen);
 
     //now load the new model and check they are the same
