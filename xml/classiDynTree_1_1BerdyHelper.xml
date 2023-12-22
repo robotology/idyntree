@@ -472,9 +472,9 @@
         </inbodydescription>
         <location file="iDynTree/BerdyHelper.h" line="400" column="17" bodyfile="iDynTree/BerdyHelper.h" bodystart="400" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a0cf55af18ea120483ffe24977af429ba" prot="private" static="no" mutable="no">
-        <type>struct iDynTree::BerdyHelper::@4</type>
-        <definition>struct iDynTree::BerdyHelper::@4 iDynTree::BerdyHelper::berdySensorTypeOffsets</definition>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a23a64d9b4b538a1f5110be748c7bf250" prot="private" static="no" mutable="no">
+        <type>struct iDynTree::BerdyHelper::@0</type>
+        <definition>struct iDynTree::BerdyHelper::@0 iDynTree::BerdyHelper::berdySensorTypeOffsets</definition>
         <argsstring></argsstring>
         <name>berdySensorTypeOffsets</name>
         <briefdescription>
@@ -486,9 +486,9 @@
         </inbodydescription>
         <location file="iDynTree/BerdyHelper.h" line="467" column="28"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a1aa1f1d7bdedf9968246e890c761ba8c" prot="private" static="no" mutable="no">
-        <type>struct iDynTree::BerdyHelper::@5</type>
-        <definition>struct iDynTree::BerdyHelper::@5 iDynTree::BerdyHelper::berdySensorsInfo</definition>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a8467ab3d0e229a0b8fb6a3098afc523b" prot="private" static="no" mutable="no">
+        <type>struct iDynTree::BerdyHelper::@1</type>
+        <definition>struct iDynTree::BerdyHelper::@1 iDynTree::BerdyHelper::berdySensorsInfo</definition>
         <argsstring></argsstring>
         <name>berdySensorsInfo</name>
         <briefdescription>
@@ -1885,8 +1885,8 @@
     <listofallmembers>
       <member refid="classiDynTree_1_1BerdyHelper_1a09ecc1252e06ed4a98e8f2346bbda095" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>base_H_links</name></member>
       <member refid="classiDynTree_1_1BerdyHelper_1a87d946099a5c1491b7b5143eea33cbea" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>BerdyHelper</name></member>
-      <member refid="classiDynTree_1_1BerdyHelper_1a1aa1f1d7bdedf9968246e890c761ba8c" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>berdySensorsInfo</name></member>
-      <member refid="classiDynTree_1_1BerdyHelper_1a0cf55af18ea120483ffe24977af429ba" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>berdySensorTypeOffsets</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a8467ab3d0e229a0b8fb6a3098afc523b" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>berdySensorsInfo</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a23a64d9b4b538a1f5110be748c7bf250" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>berdySensorTypeOffsets</name></member>
       <member refid="classiDynTree_1_1BerdyHelper_1ad2aec3a74eb905d5a733c59391b9abce" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>cacheDynamicVariablesOrderingFixedBase</name></member>
       <member refid="classiDynTree_1_1BerdyHelper_1ab4eb30b66c27eb28854bef166d6f6768" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>cacheDynamicVariablesOrderingFloatingBase</name></member>
       <member refid="classiDynTree_1_1BerdyHelper_1a7ca82a37bb80c55ffd40a86e2332b6d0" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>cacheSensorsOrdering</name></member>
