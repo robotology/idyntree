@@ -511,3 +511,19 @@ class MeshcatVisualizer:
         self.load_primitive_geometry(
             solid_shape=box, shape_name=shape_name, color=color
         )
+
+    def delete(self, shape_name="iDynTree"):
+        if self.__primitive_geometry_exists(shape_name):
+            self.viewer[shape_name].delete()
+            self.primitive_geometries_names.remove(shape_name)
+        elif self.__arrow_exists(shape_name):
+            self.viewer[shape_name].delete()
+            self.arrow_names.remove(shape_name)
+        elif self.__model_exists(shape_name):
+            self.viewer[shape_name].delete()
+            del self.model[shape_name]
+            del self.traversal[shape_name]
+            del self.link_pos[shape_name]
+        else:
+            msg = "The object named: " + name + " does not exist."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
