@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Fixed compilation of pybind11 bindings (https://github.com/robotology/idyntree/pull/1128).
+- Fixed support for handling correctly STL files that end with `.STL` in iDynTree Irrlicht-based visualizer (https://github.com/robotology/idyntree/pull/1136).
 
 ## [10.0.0] - 2023-10-16
 
