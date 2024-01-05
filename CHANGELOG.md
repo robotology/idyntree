@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - CMake: Permit to explicitly specify Python installation directory by setting the `IDYNTREE_PYTHON_INSTALL_DIR` CMake variable (https://github.com/robotology/idyntree/pull/1124).
 
+- MeshcatVisualizer: Add the possibility to remove a mesh from the visualizer (https://github.com/robotology/idyntree/pull/1138)
+
 ### Fixed
 
 - Fixed compilation of pybind11 bindings (https://github.com/robotology/idyntree/pull/1128).
