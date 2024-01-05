@@ -19,6 +19,8 @@
 
 #include <cmath>
 
+
+
 namespace iDynTree
 {
 
@@ -131,19 +133,22 @@ inline iDynTree::Rotation RotationWithPrescribedZColumn(const iDynTree::Directio
     return R;
 }
 
-inline std::string getFileExt(const std::string filename)
+inline std::string getFileExt(const std::string& filename)
 {
-    std::string::size_type idx;
+    auto idx = filename.rfind('.');
 
-    idx = filename.rfind('.');
-
-    if (idx != std::string::npos)
+    if (idx != std::string::npos && idx + 1 < filename.size())
     {
-       return filename.substr(idx+1);
+        std::string ext = filename.substr(idx + 1);
+        std::transform(ext.begin(), ext.end(), ext.begin(), [](unsigned char c) {
+            return std::tolower(c);
+        });
+
+        return ext;
     }
     else
     {
-        return "";
+        return ""; // No extension found
     }
 }
 
