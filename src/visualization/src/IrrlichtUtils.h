@@ -236,23 +236,32 @@ namespace iDynTree
             if (vCount > 65535)
             {
                 std::cerr << "Loaded mesh has " << vCount << " vertices, creating CDynamicMeshBuffer" << std::endl;
-                irr::scene::CDynamicMeshBuffer *meshBuffer = new irr::scene::CDynamicMeshBuffer(irr::video::EVT_STANDARD, irr::video::EIT_32BIT);
+                // TODO: while this code fixes the itype issue. Still Irrlich will not call drawVertexPrimitiveList and drawIndexedTriangleList
+                // on meshes with larger than 65535 vertices. This means that the error will not be triggered but mesh will not be rendered correctly
+                // anyways, check https://github.com/zaki/irrlicht/blob/97472da9c22ae4a49dfcefb9da5156601fa6a82a/include/IVideoDriver.h#L671
+
+                irr::scene::CDynamicMeshBuffer *meshBuffer = new irr::scene::CDynamicMeshBuffer(irr::video::EVT_TANGENTS, irr::video::EIT_32BIT);
                 meshBuffer->getVertexBuffer().reallocate(vCount);
                 meshBuffer->getIndexBuffer().reallocate(loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getIndexCount());
-                for (irr::u32 i = 0; i < vCount; i++)
+                for (irr::u64 i = 0; i < vCount; i++)
                 {
-                    meshBuffer->getVertexBuffer().push_back(static_cast<irr::video::S3DVertex*>(loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getVertices())[i]);
+                    irr::video::S3DVertex vtx = static_cast<irr::video::S3DVertex*>(loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getVertices())[i];
+                    vtx.Normal.normalize();
+                    meshBuffer->getVertexBuffer().push_back(vtx);
                 }
-                for (irr::u32 i = 0; i < loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getIndexCount(); i++)
+                for (irr::u64 i = 0; i < loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getIndexCount(); i++)
                 {
                     meshBuffer->getIndexBuffer().push_back(loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getIndices()[i]);
                 }
-
+                meshBuffer->setBoundingBox(loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getBoundingBox());
                 irr::scene::SMesh *mesh = new irr::scene::SMesh();
                 mesh->addMeshBuffer(meshBuffer);
+                mesh->setHardwareMappingHint(irr::scene::EHM_STATIC);
+                mesh->recalculateBoundingBox();
                 auto animatedMesh = smgr->getMeshManipulator()->createAnimatedMesh(mesh);
                 geomNode = smgr->addMeshSceneNode(animatedMesh, linkNode);
                 geomNode->setScale(idyntree2irr_pos(scale));
+
                 animatedMesh->drop();
                 meshBuffer->drop();
 
