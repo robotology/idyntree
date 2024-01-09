@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fixed compilation of pybind11 bindings (https://github.com/robotology/idyntree/pull/1128).
 - Fixed support for handling correctly STL files that end with `.STL` in iDynTree Irrlicht-based visualizer (https://github.com/robotology/idyntree/pull/1136).
-
+- Fixed handling meshes with vertix count larger than a limit set in Irrlicht used by idyntree-yarp-visualizer (https://github.com/robotology/idyntree/pull/1139)
 ## [10.0.0] - 2023-10-16
 
 ### Added
@@ -52,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed the `iDynTree::Visualizer` class to work on macOS, after it was broken in 9.0.0 . To do so, now the compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` on macOS requires irrlicht to be compiled with SDL support (https://github.com/robotology/idyntree/issues/1076, https://github.com/robotology/idyntree/pull/1077). 
+- Fixed the `iDynTree::Visualizer` class to work on macOS, after it was broken in 9.0.0 . To do so, now the compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` on macOS requires irrlicht to be compiled with SDL support (https://github.com/robotology/idyntree/issues/1076, https://github.com/robotology/idyntree/pull/1077).
 
 ## [9.0.0] - 2023-05-11
 
@@ -62,10 +62,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Binary wheels available on PyPI now target `manylinux_2_28`, and the options `IDYNTREE_USES_ASSIMP`, `IDYNTREE_USES_IPOPT` and `IDYNTREE_USES_IRRLICHT` are disable in binary wheels on PyPI. If you need these options enabled, please use conda-forge binaries or build iDynTree from source (https://github.com/robotology/idyntree/pull/1068).
-- Compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` now requires `glfw` library. Furthermore, now `IDYNTREE_USES_IRRLICHT`  on Windows requires irrlicht to be compiled with SDL support. This changes have been done to support resizable visualizer windows on Windows (https://github.com/robotology/idyntree/issues/1070, https://github.com/robotology/idyntree/pull/1071). 
+- Compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` now requires `glfw` library. Furthermore, now `IDYNTREE_USES_IRRLICHT`  on Windows requires irrlicht to be compiled with SDL support. This changes have been done to support resizable visualizer windows on Windows (https://github.com/robotology/idyntree/issues/1070, https://github.com/robotology/idyntree/pull/1071).
 - Use iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw as default parametrization in iDynTree::InverseKinematics (https://github.com/robotology/idyntree/pull/1058).
 
-#### URDF XML parser change 
+#### URDF XML parser change
 
 The XML parser API has changed. Now an additional `XMLParserState` context object is propagated while parsing.
 To catch logic errors (which are not pure XML errors that are currently caught by the parser itself) the `XMLParserState` contains a `bool` variable. Further logic can be added to the context state.
@@ -136,7 +136,7 @@ The following errors are currently check:
 
 ## [5.2.1] - 2022-05-19
 
-### Fixed 
+### Fixed
 - Fixed compatibility with YARP 3.7  (https://github.com/robotology/idyntree/pull/992).
 
 ## [5.2.0] - 2022-05-09
