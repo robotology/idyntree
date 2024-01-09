@@ -102,6 +102,11 @@ if(IDYNTREE_USES_MESHCATCPP)
     target_link_libraries(${libraryname} PRIVATE MeshcatCpp::MeshcatCpp)
 endif()
 
+if(IDYNTREE_USES_ASSIMP)
+    target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_ASSIMP)
+    target_link_libraries(${libraryname} PRIVATE assimp::assimp)
+endif()
+
 
 
 install(TARGETS ${libraryname}
