@@ -10,9 +10,11 @@
 
 #include <irrlicht.h>
 
+#ifdef IDYNTREE_USES_ASSIMP
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#endif
 
 #include <Eigen/Core>
 #include <Eigen/LU>
@@ -241,6 +243,61 @@ namespace iDynTree
                 // anyways, check https://github.com/zaki/irrlicht/blob/97472da9c22ae4a49dfcefb9da5156601fa6a82a/include/IVideoDriver.h#L671
 
                 irr::scene::CDynamicMeshBuffer *meshBuffer = new irr::scene::CDynamicMeshBuffer(irr::video::EVT_TANGENTS, irr::video::EIT_32BIT);
+
+#ifdef IDYNTREE_USES_ASSIMP
+                Assimp::Importer importer;
+                const aiScene *scene = importer.ReadFile(externalMesh->getFileLocationOnLocalFileSystem().c_str(),
+                                                         aiProcess_Triangulate | aiProcess_JoinIdenticalVertices |
+                                                             aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace |
+                                                             aiProcess_OptimizeMeshes | aiProcess_OptimizeGraph);
+
+                if (!scene || !scene->HasMeshes())
+                {
+                    std::cerr << "[addGeometryToSceneManager] Assimp failed to load or no meshes found in the mesh file." << std::endl;
+                }
+
+                const aiMesh *mesh = scene->mMeshes[0];
+                const unsigned int numVertices = mesh->mNumVertices;
+                const unsigned int numFaces = mesh->mNumFaces;
+
+                meshBuffer->getVertexBuffer().set_used(numVertices);
+                meshBuffer->getIndexBuffer().set_used(numFaces * 3);
+
+                for (unsigned int i = 0; i < numVertices; ++i)
+                {
+                    irr::video::S3DVertex vtx;
+                    vtx.Pos.X = mesh->mVertices[i].x;
+                    vtx.Pos.Y = mesh->mVertices[i].y;
+                    vtx.Pos.Z = mesh->mVertices[i].z;
+                    vtx.Normal.X = mesh->mNormals[i].x;
+                    vtx.Normal.Y = mesh->mNormals[i].y;
+                    vtx.Normal.Z = mesh->mNormals[i].z;
+                    vtx.Color = irr::video::SColor(255, 255, 255, 255);
+                    meshBuffer->getVertexBuffer()[i] = vtx;
+                }
+
+                irr::u32* indexBuffer = static_cast<irr::u32*>(meshBuffer->getIndexBuffer().pointer());
+                for (unsigned int i = 0; i < numFaces; ++i) {
+                    indexBuffer[i * 3] = mesh->mFaces[i].mIndices[0];
+                    indexBuffer[i * 3 + 1] = mesh->mFaces[i].mIndices[1];
+                    indexBuffer[i * 3 + 2] = mesh->mFaces[i].mIndices[2];
+                }
+                irr::scene::SMesh *irrMesh = new irr::scene::SMesh();
+                irrMesh->addMeshBuffer(meshBuffer);
+                irrMesh->setHardwareMappingHint(irr::scene::EHM_STATIC);
+                irrMesh->recalculateBoundingBox();
+
+                auto animatedMesh = smgr->getMeshManipulator()->createAnimatedMesh(irrMesh);
+                geomNode = smgr->addMeshSceneNode(animatedMesh, linkNode);
+                scale(0) = -scale(0); // assimp does not need to flip x
+                geomNode->setScale(idyntree2irr_pos(scale));
+
+                // Remember to release resources
+                animatedMesh->drop();
+                irrMesh->drop();
+#else
+                std::cerr << "[Info] addGeometryToSceneManager: if rendering issues still occur, consider reducing the number of vertices in the mesh (e.g. via meshlab)" << std::endl;
+
                 meshBuffer->getVertexBuffer().reallocate(vCount);
                 meshBuffer->getIndexBuffer().reallocate(loadedAnimatedMesh->getMesh(0)->getMeshBuffer(0)->getIndexCount());
                 for (irr::u64 i = 0; i < vCount; i++)
@@ -264,7 +321,7 @@ namespace iDynTree
 
                 animatedMesh->drop();
                 meshBuffer->drop();
-
+#endif
             }
             else
             {
