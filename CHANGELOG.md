@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [10.2.0] - 2024-01-12
 
-### Added 
+### Added
 
 - MeshcatVisualizer: Add the possibility to draw lines in MeshcatVisualizer (https://github.com/robotology/idyntree/pull/1141)
 
