@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.1.0] - 2024-01-09
+
 ### Added
 
 - CMake: Permit to explicitly specify Python installation directory by setting the `IDYNTREE_PYTHON_INSTALL_DIR` CMake variable (https://github.com/robotology/idyntree/pull/1124).
@@ -19,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed compilation of pybind11 bindings (https://github.com/robotology/idyntree/pull/1128).
 - Fixed support for handling correctly STL files that end with `.STL` in iDynTree Irrlicht-based visualizer (https://github.com/robotology/idyntree/pull/1136).
 - Fixed handling meshes with vertix count larger than a limit set in Irrlicht used by idyntree-yarp-visualizer (https://github.com/robotology/idyntree/pull/1139)
+
+
 ## [10.0.0] - 2023-10-16
 
 ### Added
