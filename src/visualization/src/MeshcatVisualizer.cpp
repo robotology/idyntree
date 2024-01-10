@@ -131,6 +131,11 @@ struct MeshcatVisualizer::Impl
 
                 const iDynTree::Vector4 color = externalMesh->getMaterial().color();
                 material.set_color(color(0) * 255, color(1) * 255, color(2) * 255);
+                if (color(3) < 1)
+                {
+                    material.opacity = color(3);
+                    material.transparent = true;
+                }
 
                 const iDynTree::Transform transform = (world_H_frame * linkSolidShape->getLink_H_geometry());
 
