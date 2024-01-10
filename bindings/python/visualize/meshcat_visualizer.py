@@ -7,6 +7,22 @@ import numpy as np
 import warnings
 from pathlib import Path
 
+class Line:
+    """
+    A class representing a line
+    """
+    def __init__(self, vertices, linewidth=1.0):
+        self.vertices = vertices
+        self.linewidth = linewidth
+
+    def isBox(self):
+        return False
+
+    def isSphere(self):
+        return False
+
+    def isCylinder(self):
+        return False
 
 class MeshcatVisualizer:
     """
@@ -102,7 +118,6 @@ class MeshcatVisualizer:
             (meshcat.geometry.Cylinder,),
             {"intrinsic_transform": lambda self: R},
         )
-
         if geometry_object.isCylinder():
             obj = RotatedCylinder(
                 geometry_object.asCylinder().getLength(),
@@ -118,6 +133,9 @@ class MeshcatVisualizer:
             )
         elif geometry_object.isSphere():
             obj = meshcat.geometry.Sphere(geometry_object.asSphere().getRadius())
+        elif isinstance(geometry_object, Line):
+            # transpose the vertices to have the correct shape
+            obj = meshcat.geometry.PointsGeometry(geometry_object.vertices)
         else:
             msg = "Unsupported geometry type (%s)" % type(geometry_object)
             warnings.warn(msg, category=UserWarning, stacklevel=2)
@@ -370,8 +388,11 @@ class MeshcatVisualizer:
 
         if isinstance(obj, meshcat.geometry.Object):
             self.viewer[viewer_name].set_object(obj)
-        elif isinstance(obj, meshcat.geometry.Geometry):
-            material = meshcat.geometry.MeshPhongMaterial()
+        elif isinstance(obj, meshcat.geometry.Geometry) or isinstance(obj, meshcat.geometry.PointsGeometry):
+            if not isinstance(obj, meshcat.geometry.PointsGeometry):
+                material = meshcat.geometry.MeshPhongMaterial()
+            else:
+                material = meshcat.geometry.MeshBasicMaterial()
 
             mesh_color = self.__get_color_from_shape(solid_shape, color)
             material.color = (
@@ -385,7 +406,13 @@ class MeshcatVisualizer:
                 material.transparent = True
                 material.opacity = float(mesh_color[3])
 
-            self.viewer[viewer_name].set_object(obj, material)
+            # If it is a line we need to manually set the material
+            if isinstance(obj, meshcat.geometry.PointsGeometry):
+                material.linewidth = solid_shape.linewidth
+                self.viewer[viewer_name].set_object(meshcat.geometry.Line(obj, material))
+            else:
+                self.viewer[viewer_name].set_object(obj, material)
+
             self.primitive_geometries_names.append(viewer_name)
 
     def set_primitive_geometry_transform(
@@ -512,6 +539,16 @@ class MeshcatVisualizer:
             solid_shape=box, shape_name=shape_name, color=color
         )
 
+    def load_line(self, vertices, linewidth, shape_name="iDynTree", color=None):
+        if vertices.shape[0] != 3:
+            msg = "The vertices must be a 3xN matrix."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+            return
+        line = Line(vertices=vertices, linewidth=linewidth)
+        self.load_primitive_geometry(
+            solid_shape=line, shape_name=shape_name, color=color
+        )
+
     def delete(self, shape_name="iDynTree"):
         if self.__primitive_geometry_exists(shape_name):
             self.viewer[shape_name].delete()
@@ -525,5 +562,5 @@ class MeshcatVisualizer:
             del self.traversal[shape_name]
             del self.link_pos[shape_name]
         else:
-            msg = "The object named: " + name + " does not exist."
+            msg = "The object named: " + shape_name + " does not exist."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
