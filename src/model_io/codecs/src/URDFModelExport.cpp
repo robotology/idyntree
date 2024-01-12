@@ -283,7 +283,7 @@ bool exportLink(const Link &link, const std::string linkName, const Model& model
  * Add a <joint> URDF element to the specified parent element with the specified joint info.
  *
  * At the moment, only the URDF joint of types revolute, continuous, prismatic and fixed are supported, as they are the only one supported
- * in the iDynTree::Model class. Furthermore, it is not supported the export of joint limits and friction.
+ * in the iDynTree::Model class.
  *
  * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
  *
