@@ -99,6 +99,8 @@ jobs:
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
           CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_28_x86_64
           CIBW_BEFORE_BUILD_LINUX: |
+            # workaround for https://almalinux.org/blog/2023-12-20-almalinux-8-key-update/
+            rpm --import https://repo.almalinux.org/almalinux/RPM-GPG-KEY-AlmaLinux &&\
             dnf update -y &&\
             dnf install -y eigen3-devel libxml2-devel
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
