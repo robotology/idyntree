@@ -102,11 +102,17 @@ if(IDYNTREE_USES_MESHCATCPP)
     target_link_libraries(${libraryname} PRIVATE MeshcatCpp::MeshcatCpp)
 endif()
 
-if(IDYNTREE_USES_ASSIMP)
-    target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_ASSIMP)
+if (IDYNTREE_USES_ASSIMP)
+  target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_ASSIMP)
+  # See similar code in solid-shapes CMakeLists.txt
+  if((assimp_VERSION AND assimp_VERSION VERSION_GREATER_EQUAL 5.0) OR WIN32)
     target_link_libraries(${libraryname} PRIVATE assimp::assimp)
+  else()
+    target_include_directories(${libraryname} PRIVATE "${ASSIMP_INCLUDE_DIRS}")
+    link_directories("${ASSIMP_LIBRARY_DIRS}")
+    target_link_libraries(${libraryname} PRIVATE "${ASSIMP_LIBRARIES}")
+  endif()
 endif()
-
 
 
 install(TARGETS ${libraryname}
