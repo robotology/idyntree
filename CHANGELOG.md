@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.2.1] - 2024-02-01
+
 ### Fixed
 
 - Fixed compilation of IDYNTREE_USES_ASSIMP option in Debian 10 Buster (https://github.com/robotology/idyntree/pull/1148).
