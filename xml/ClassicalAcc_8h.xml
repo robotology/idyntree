@@ -3,8 +3,8 @@
   <compounddef id="ClassicalAcc_8h" kind="file" language="C++">
     <compoundname>ClassicalAcc.h</compoundname>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
-    <includedby refid="Core_2ClassicalAcc_8h" local="no">iDynTree/Core/ClassicalAcc.h</includedby>
     <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/GravityCompensationHelpers.h</includedby>
+    <includedby refid="Core_2ClassicalAcc_8h" local="no">iDynTree/Core/ClassicalAcc.h</includedby>
     <innerclass refid="classiDynTree_1_1ClassicalAcc" prot="public">iDynTree::ClassicalAcc</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
