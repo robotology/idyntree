@@ -113,15 +113,19 @@ void testRelativeTransform(iDynTree::KinDynComputations & dynComp)
 
 void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & dynComp)
 {
-    iDynTree::Twist avgVel;
-    iDynTree::SpatialMomentum mom, centroidalMom;
-    iDynTree::Vector6 avgVelCheck, momCheck, centroidalMomCheck;
+    iDynTree::Twist avgVel, centroidalAvgVel;
+    iDynTree::SpatialMomentum mom, centroidalMom, computedMom, computedCentroidalMom;
+    iDynTree::Vector6 avgVelCheck, centroidalAvgVelCheck, momCheck, centroidalMomCheck;
     iDynTree::VectorDynSize nu(dynComp.getNrOfDegreesOfFreedom()+6);
+    iDynTree::SpatialInertia lockedInertia, centroidalLockedInertia;
     dynComp.getModelVel(nu);
 
     MomentumFreeFloatingJacobian momJac(dynComp.getRobotModel());
     MomentumFreeFloatingJacobian centroidalMomJac(dynComp.getRobotModel());
     FrameFreeFloatingJacobian    avgVelJac(dynComp.getRobotModel());
+    FrameFreeFloatingJacobian    centroidalAvgVelJac(dynComp.getRobotModel());
+
+    // momentum quantities
 
     avgVel = dynComp.getAverageVelocity();
     bool ok = dynComp.getAverageVelocityJacobian(avgVelJac);
@@ -133,17 +137,36 @@ void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & 
 
     ASSERT_IS_TRUE(ok);
 
+    lockedInertia = dynComp.getRobotLockedInertia();
+    computedMom = lockedInertia * avgVel;
+
+    // centroidal quantities
+
+    centroidalAvgVel = dynComp.getCentroidalAverageVelocity();
+    ok = dynComp.getCentroidalAverageVelocityJacobian(centroidalAvgVelJac);
+
+    ASSERT_IS_TRUE(ok);
+
     centroidalMom = dynComp.getCentroidalTotalMomentum();
     ok = dynComp.getCentroidalTotalMomentumJacobian(centroidalMomJac);
     ASSERT_IS_TRUE(ok);
 
+    centroidalLockedInertia = dynComp.getCentroidalRobotLockedInertia();
+    computedCentroidalMom = centroidalLockedInertia * centroidalAvgVel;
+
     toEigen(momCheck) = toEigen(momJac)*toEigen(nu);
     toEigen(centroidalMomCheck) = toEigen(centroidalMomJac)*toEigen(nu);
     toEigen(avgVelCheck) = toEigen(avgVelJac)*toEigen(nu);
+    toEigen(centroidalAvgVelCheck) = toEigen(centroidalAvgVelJac)*toEigen(nu);
 
     ASSERT_EQUAL_VECTOR(momCheck,mom.asVector());
     ASSERT_EQUAL_VECTOR(centroidalMomCheck,centroidalMom.asVector());
+
     ASSERT_EQUAL_VECTOR(avgVelCheck,avgVel.asVector());
+    ASSERT_EQUAL_VECTOR(centroidalAvgVelCheck, centroidalAvgVel.asVector());
+
+    ASSERT_EQUAL_VECTOR(mom.asVector(), computedMom);
+    ASSERT_EQUAL_VECTOR(centroidalMom.asVector(), computedCentroidalMom);
 }
 
 inline Eigen::VectorXd toEigen(const Vector6 & baseAcc, const VectorDynSize & jntAccs)

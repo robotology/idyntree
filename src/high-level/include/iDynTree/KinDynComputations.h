@@ -917,6 +917,15 @@ public:
     bool getAverageVelocityJacobian(iDynTree::MatrixView<double> avgVelocityJacobian);
 
     /**
+     * Get the robot locked inertia matrix.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * @return the locked inertia matrix of the robot.
+     *
+     */
+    SpatialInertia getRobotLockedInertia();
+
+    /**
      * Get the centroidal average velocity of the robot.
      *
      * The quantity is the average velocity returned by getAverageVelocity, but computed in the center of mass
@@ -959,6 +968,15 @@ public:
      * @return true on success, false otherwise.
      */
     bool getCentroidalAverageVelocityJacobian(iDynTree::MatrixView<double> centroidalAvgVelocityJacobian);
+
+    /**
+     * Get the robot locked centroidal inertia matrix.
+     * The quantity is expressed in (G[A]) or (G[B]) depending on the FrameVelocityConvention used.
+     *
+     * @return the locked inertia centroidal matrix of the robot.
+     *
+     */
+    SpatialInertia getCentroidalRobotLockedInertia();
 
     /**
      * Get the linear and angular momentum of the robot.

@@ -2199,6 +2199,29 @@ bool KinDynComputations::getAverageVelocityJacobian(MatrixView<double> avgVeloci
     return true;
 }
 
+SpatialInertia KinDynComputations::getRobotLockedInertia()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+    const SpatialInertia & base_lockedInertia = pimpl->getRobotLockedInertia();
+
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // the computeRawMassMatrixAndTotalMomentum generates the lockedInertia in body frame.
+        // So in this case there is no need to conversion
+        return base_lockedInertia;
+    }
+    else if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        iDynTree::Transform B_A_H_B(pimpl->m_pos.worldBasePos().getRotation(),  Position::Zero());
+
+        // the following is not a classical multiplication. Indeed it transform the spatial inertia in a different frame.
+        return B_A_H_B * base_lockedInertia;
+    }
+
+    assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+    return pimpl->m_pos.worldBasePos()*base_lockedInertia;
+}
+
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(
     MatrixView<double> jac, const FrameVelocityRepresentation & leftSideRepresentation)
 {
@@ -2260,6 +2283,37 @@ Twist KinDynComputations::getCentroidalAverageVelocity()
     }
 
     return newOutputFrame_X_oldOutputFrame*base_averageVelocity;
+}
+
+SpatialInertia KinDynComputations::getCentroidalRobotLockedInertia()
+{
+    this->computeRawMassMatrixAndTotalMomentum();
+
+
+    const SpatialInertia & base_lockedInertia = pimpl->getRobotLockedInertia();
+
+    // Get the center of mass in the base frame
+    const Position vectorFromComToBaseWithRotationOfBase = Position::inverse(pimpl->getRobotLockedInertia().getCenterOfMass());
+
+    Transform newOutputFrame_X_oldOutputFrame;
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // oldOutputFrame is B
+        // newOutputFrame is G[B]
+
+        newOutputFrame_X_oldOutputFrame =  Transform(Rotation::Identity(),vectorFromComToBaseWithRotationOfBase);
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION ||
+               pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+        // oldOutputFrame is B
+        // newOutputFrame is G[A]
+        const Rotation & A_R_B = pimpl->m_pos.worldBasePos().getRotation();
+        newOutputFrame_X_oldOutputFrame = Transform(pimpl->m_pos.worldBasePos().getRotation(),A_R_B*(vectorFromComToBaseWithRotationOfBase));
+    }
+
+    return newOutputFrame_X_oldOutputFrame*base_lockedInertia;
 }
 
 bool KinDynComputations::getCentroidalAverageVelocity(Span<double> vel)
