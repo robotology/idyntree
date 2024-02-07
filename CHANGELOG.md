@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [10.3.0] - 2024-02-07
+
+### Added
+
+- Added getCentroidalRobotLockedInertia and getRobotLockedInertia to KinDynComputations class (https://github.com/robotology/idyntree/pull/1153).
+
 ## [10.2.1] - 2024-02-01
 
 ### Fixed
