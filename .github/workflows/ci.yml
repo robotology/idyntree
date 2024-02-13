@@ -62,6 +62,7 @@ jobs:
       shell: bash
       run: |
         echo $PATH
+        where git
         where cygpath
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexw64.zip
         unzip msdk_R2020a_mexw64.zip
