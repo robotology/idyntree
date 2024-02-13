@@ -61,6 +61,8 @@ jobs:
       if: contains(matrix.os, 'windows')
       shell: bash
       run: |
+        echo $PATH
+        where cygpath
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexw64.zip
         unzip msdk_R2020a_mexw64.zip
         rm msdk_R2020a_mexw64.zip
