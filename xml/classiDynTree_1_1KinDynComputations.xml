@@ -2656,8 +2656,8 @@
 </listitem><listitem><para><formula id="330">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula> is the vector of gravity generalized forces,</para>
 </listitem><listitem><para><formula id="331">$\tau \in \mathbb{R}^6$</formula> is the vector of torques applied on the joint of the multibody model,</para>
 </listitem><listitem><para><formula id="332">$\mathcal{L}$</formula> is the set of all the links contained in the multibody model,</para>
-</listitem><listitem><para><formula id="333">$J_L \in \mathbb{R}^{6+n_{DOF}}$</formula> is the free floating jacobian of link <formula id="148">$L$</formula> as obtained by <ref refid="classiDynTree_1_1KinDynComputations_1a27ae295bad4b1a53f7b26dc454edd52b" kindref="member">KinDynComputations::getFrameFreeFloatingJacobian</ref>,</para>
-</listitem><listitem><para><formula id="334">$\mathrm{f}_L^x$</formula> is the 6D force/torque applied by the enviroment on link <formula id="148">$L$</formula>.</para>
+</listitem><listitem><para><formula id="333">$J_L \in \mathbb{R}^{6+n_{DOF}}$</formula> is the free floating jacobian of link <formula id="0">$L$</formula> as obtained by <ref refid="classiDynTree_1_1KinDynComputations_1a27ae295bad4b1a53f7b26dc454edd52b" kindref="member">KinDynComputations::getFrameFreeFloatingJacobian</ref>,</para>
+</listitem><listitem><para><formula id="334">$\mathrm{f}_L^x$</formula> is the 6D force/torque applied by the enviroment on link <formula id="0">$L$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para>The precise definition of each quantity (in particular the part related to the base) actually depends on the choice of FrameVelocityRepresentation, specified with the setFrameVelocityRepresentation method. </para>
@@ -2899,7 +2899,7 @@
 <para>This method is similar to inverseDynamics, but provides as an additional output the internal 6D force/torques (aka wrenches) excerted by the two links connected to each joint, in the linkInternalWrenches argument. </para>
         </briefdescription>
         <detaileddescription>
-<para>The <computeroutput>linkInternalWrenches</computeroutput> is a container of <formula id="324">$n_{L}$</formula> (number of links) 6D Force/Torques, one associated to each link. In particular, if the link <formula id="148">$L$</formula> is the link with index <formula id="148">$L$</formula> the element linkInternalWrenches(i) contains, depending on the choice of <computeroutput>FrameVelocityRepresentation</computeroutput>:</para>
+<para>The <computeroutput>linkInternalWrenches</computeroutput> is a container of <formula id="324">$n_{L}$</formula> (number of links) 6D Force/Torques, one associated to each link. In particular, if the link <formula id="0">$L$</formula> is the link with index <formula id="0">$L$</formula> the element linkInternalWrenches(i) contains, depending on the choice of <computeroutput>FrameVelocityRepresentation</computeroutput>:</para>
 <para><table rows="4" cols="2"><row>
 <entry thead="yes" align='center'><para><computeroutput>FrameVelocityRepresentation</computeroutput>   </para>
 </entry><entry thead="yes" align='center'><para><computeroutput>linkInternalWrenches(i)</computeroutput>    </para>
@@ -2918,8 +2918,8 @@
 </entry></row>
 </table>
 </para>
-<para>Where if <formula id="186">$C$</formula> is a given frame, <formula id="339">$ {}_{C} \mathrm{f}_{\lambda(L), L} $</formula> is the 6D force/torque that the parent link <formula id="340">$\lambda(L)$</formula> excerts on its child <formula id="148">$L$</formula> expressed in frame <formula id="186">$C$</formula>.</para>
-<para><simplesect kind="warning"><para>Note that this definition strictly depends on the floating base specified in the <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">KinDynComputations</ref> instances, as given a link <formula id="148">$L$</formula>, its parent \lambda(L) depends on the choosen base link. </para>
+<para>Where if <formula id="286">$C$</formula> is a given frame, <formula id="339">$ {}_{C} \mathrm{f}_{\lambda(L), L} $</formula> is the 6D force/torque that the parent link <formula id="340">$\lambda(L)$</formula> excerts on its child <formula id="0">$L$</formula> expressed in frame <formula id="286">$C$</formula>.</para>
+<para><simplesect kind="warning"><para>Note that this definition strictly depends on the floating base specified in the <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">KinDynComputations</ref> instances, as given a link <formula id="0">$L$</formula>, its parent \lambda(L) depends on the choosen base link. </para>
 </simplesect>
 </para>
         </detaileddescription>

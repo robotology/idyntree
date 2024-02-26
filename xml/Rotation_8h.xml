@@ -8,7 +8,6 @@
     <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/AttitudeEstimator.h</includedby>
-    <includedby refid="YARPConfigurationsLoader_8h" local="no">iDynTree/YARPConfigurationsLoader.h</includedby>
     <includedby refid="Core_2Rotation_8h" local="no">iDynTree/Core/Rotation.h</includedby>
     <includedby refid="Core_2RotationRaw_8h" local="no">iDynTree/Core/RotationRaw.h</includedby>
     <includedby refid="InertiaNonLinearParametrization_8h" local="no">iDynTree/InertiaNonLinearParametrization.h</includedby>
@@ -17,6 +16,7 @@
     <includedby refid="SO3Utils_8h" local="no">iDynTree/SO3Utils.h</includedby>
     <includedby refid="SpatialVector_8h" local="yes">iDynTree/SpatialVector.h</includedby>
     <includedby refid="Transform_8h" local="no">iDynTree/Transform.h</includedby>
+    <includedby refid="YARPConfigurationsLoader_8h" local="no">iDynTree/YARPConfigurationsLoader.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Rotation.h</label>

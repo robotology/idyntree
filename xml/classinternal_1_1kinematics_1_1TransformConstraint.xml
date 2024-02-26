@@ -757,7 +757,7 @@
 <para>Class representing a constraint (full or partial) on a transform between a given frame and the absolute frame. </para>
     </briefdescription>
     <detaileddescription>
-<para>The constraint can be of the following type, where we indicate with <formula id="111">$A$</formula> the absolute (world) frame and with <formula id="186">$C$</formula> the constrained frame.</para>
+<para>The constraint can be of the following type, where we indicate with <formula id="4">$A$</formula> the absolute (world) frame and with <formula id="286">$C$</formula> the constrained frame.</para>
 <para>Full Transform constraint: the transform ${}^A H_C$ is constrained to a given constant value. Rotation Constraint: the rotation ${}^A R_C$ is constrained to a given constant value. Position Constraint: the linear position ${}^A o_C$ is constrained to a given constant value. </para>
     </detaileddescription>
     <location file="private/TransformConstraint.h" line="36" column="1" bodyfile="private/TransformConstraint.h" bodystart="36" bodyend="229"/>

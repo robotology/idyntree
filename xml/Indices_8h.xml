@@ -5,10 +5,6 @@
     <includes local="no">cstddef</includes>
     <includes local="no">string</includes>
     <includes local="yes">ModelExport.h</includes>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
-    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
-    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
-    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
     <includedby refid="Centroidal_8h" local="no">iDynTree/Centroidal.h</includedby>
     <includedby refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includedby>
     <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/DenavitHartenberg.h</includedby>
@@ -29,6 +25,10 @@
     <includedby refid="SolidShapes_8h" local="no">iDynTree/SolidShapes.h</includedby>
     <includedby refid="SubModel_8h" local="no">iDynTree/SubModel.h</includedby>
     <includedby refid="Traversal_8h" local="no">iDynTree/Traversal.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
     <includedby refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <incdepgraph>
