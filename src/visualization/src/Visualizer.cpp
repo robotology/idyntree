@@ -29,7 +29,6 @@
 #endif
 
 #include <GLFW/glfw3.h>
-#include <GLFW/glfw3native.h>
 
 #if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
 // Required by SetEnvironmentVariableA, _putenv is not unsetting
