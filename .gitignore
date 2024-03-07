@@ -7,3 +7,6 @@ build/*
 .DS_Store
 *.txt.user*
 .idea/*
+
+.vs/*
+CMakeSettings.json
