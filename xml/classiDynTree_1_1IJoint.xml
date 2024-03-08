@@ -191,7 +191,7 @@
 <para>Get the derivative of the transform with respect to a position coordinate. </para>
         </briefdescription>
         <detaileddescription>
-<para>In particular, if the selected position coordinate is <formula id="19">$q$</formula>, return the derivative: <formula id="20">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
+<para>In particular, if the selected position coordinate is <formula id="7">$q$</formula>, return the derivative: <formula id="38">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
 <para>If posCoord_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" kindref="member">getNrOfPosCoords()</ref>, the returned value is undefined. </para>
         </detaileddescription>
         <inbodydescription>
@@ -775,24 +775,24 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </inbodydescription>
         <location file="iDynTree/IJoint.h" line="367" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1abe8111f1f3c76043300efbb3c7f2a3b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
         <definition>virtual bool iDynTree::IJoint::setPosLimits</definition>
-        <argsstring>(const size_t _index, double &amp;min, double &amp;max)=0</argsstring>
+        <argsstring>(const size_t _index, double min, double max)=0</argsstring>
         <name>setPosLimits</name>
-        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ab64556dab725cdd0634d3ad4fca9311b">setPosLimits</reimplementedby>
-        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a52256e40dd9de343d01815f8b5020569">setPosLimits</reimplementedby>
-        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1abbea73315ff8ea7f81b9c3d27d32f05c">setPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ad8d72a026fc780db22e875ce6cf0083b">setPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a19279437d49ffc3a6975eb807bdd97cb">setPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a8e7bcad217abd4fb929edcb3cf9bbeab">setPosLimits</reimplementedby>
         <param>
           <type>const size_t</type>
           <declname>_index</declname>
         </param>
         <param>
-          <type>double &amp;</type>
+          <type>double</type>
           <declname>min</declname>
         </param>
         <param>
-          <type>double &amp;</type>
+          <type>double</type>
           <declname>max</declname>
         </param>
         <briefdescription>
@@ -867,20 +867,20 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </inbodydescription>
         <location file="iDynTree/IJoint.h" line="409" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1aeee6672963b46042d8ea39cfc0d21815" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
         <definition>virtual bool iDynTree::IJoint::setDamping</definition>
-        <argsstring>(const size_t _index, double &amp;damping)=0</argsstring>
+        <argsstring>(const size_t _index, double damping)=0</argsstring>
         <name>setDamping</name>
-        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a4c3d17770fa1b70fdabccc40cd49628e">setDamping</reimplementedby>
-        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a19f03f6f51f848a19579caf86d63de16">setDamping</reimplementedby>
-        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a17a88c97ad95a5f4bc71aedfd41fb7cf">setDamping</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a5dcd9b8fe58cb9714a418e77e7ca4a74">setDamping</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a4dadd621bb599c952316a4dc4dadeee2">setDamping</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a011fc7911d5e330ee4cbfcc380cd37b1">setDamping</reimplementedby>
         <param>
           <type>const size_t</type>
           <declname>_index</declname>
         </param>
         <param>
-          <type>double &amp;</type>
+          <type>double</type>
           <declname>damping</declname>
         </param>
         <briefdescription>
@@ -909,20 +909,20 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </inbodydescription>
         <location file="iDynTree/IJoint.h" line="421" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1ab82b3ad35b2de9b0ef8ab96b851213d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
         <definition>virtual bool iDynTree::IJoint::setStaticFriction</definition>
-        <argsstring>(const size_t _index, double &amp;staticFriction)=0</argsstring>
+        <argsstring>(const size_t _index, double staticFriction)=0</argsstring>
         <name>setStaticFriction</name>
-        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a0912b49e9b2d5cd41c52f3218a1c24d6">setStaticFriction</reimplementedby>
-        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1ac69cf18efdbabe8e9da3dbd225cd02fc">setStaticFriction</reimplementedby>
-        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a33a03be41e423704f17f94c0c58193db">setStaticFriction</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a7264012c0a773725d792afe9c7239509">setStaticFriction</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a8d5de10ec591002d8305fe53b4d3d4c7">setStaticFriction</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1ad5d152ac28c6c35795f47ff496b924ad">setStaticFriction</reimplementedby>
         <param>
           <type>const size_t</type>
           <declname>_index</declname>
         </param>
         <param>
-          <type>double &amp;</type>
+          <type>double</type>
           <declname>staticFriction</declname>
         </param>
         <briefdescription>
@@ -1147,14 +1147,14 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
       <member refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getTransformDerivative</name></member>
       <member refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>hasPosLimits</name></member>
       <member refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setAttachedLinks</name></member>
-      <member refid="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setDamping</name></member>
+      <member refid="classiDynTree_1_1IJoint_1aeee6672963b46042d8ea39cfc0d21815" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setDamping</name></member>
       <member refid="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setDOFsOffset</name></member>
       <member refid="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setIndex</name></member>
       <member refid="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setJointDynamicsType</name></member>
       <member refid="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setPosCoordsOffset</name></member>
-      <member refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setPosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1abe8111f1f3c76043300efbb3c7f2a3b5" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setPosLimits</name></member>
       <member refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setRestTransform</name></member>
-      <member refid="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setStaticFriction</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ab82b3ad35b2de9b0ef8ab96b851213d3" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setStaticFriction</name></member>
       <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>~IJoint</name></member>
     </listofallmembers>
   </compounddef>

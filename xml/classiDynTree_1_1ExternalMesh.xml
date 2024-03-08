@@ -58,12 +58,12 @@
         </inbodydescription>
         <location file="iDynTree/SolidShapes.h" line="228" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ExternalMesh_1a9f3ed8fc497fd41ddb1d7dfef6caa24d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ExternalMesh_1a94f914b61600c496d73c6b32d3ebc231" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> *</type>
         <definition>virtual SolidShape* iDynTree::ExternalMesh::clone</definition>
-        <argsstring>()</argsstring>
+        <argsstring>() const</argsstring>
         <name>clone</name>
-        <reimplements refid="classiDynTree_1_1SolidShape_1a0e17798de0579d18260b629fdd8b09a8">clone</reimplements>
+        <reimplements refid="classiDynTree_1_1SolidShape_1ab72ea2c024bd7e1d45ca3daba3039e5a">clone</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -225,7 +225,7 @@
       <member refid="classiDynTree_1_1SolidShape_1a18dc4e95d85822018507b4a813f69340" prot="public" virt="non-virtual"><scope>iDynTree::ExternalMesh</scope><name>asExternalMesh</name></member>
       <member refid="classiDynTree_1_1SolidShape_1afb0d282d22dce28a6f45de0c1d81d494" prot="public" virt="non-virtual"><scope>iDynTree::ExternalMesh</scope><name>asSphere</name></member>
       <member refid="classiDynTree_1_1SolidShape_1a01f73fdb47553ba4f1d817a6feb6beef" prot="public" virt="non-virtual"><scope>iDynTree::ExternalMesh</scope><name>asSphere</name></member>
-      <member refid="classiDynTree_1_1ExternalMesh_1a9f3ed8fc497fd41ddb1d7dfef6caa24d" prot="public" virt="virtual"><scope>iDynTree::ExternalMesh</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1ExternalMesh_1a94f914b61600c496d73c6b32d3ebc231" prot="public" virt="virtual"><scope>iDynTree::ExternalMesh</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1ExternalMesh_1addb8f54db0f412195238d5f478b63fa6" prot="private" virt="non-virtual"><scope>iDynTree::ExternalMesh</scope><name>filename</name></member>
       <member refid="classiDynTree_1_1ExternalMesh_1a4cbaeab3dab062b9b838d3d677e92e3f" prot="public" virt="non-virtual"><scope>iDynTree::ExternalMesh</scope><name>getFileLocationOnLocalFileSystem</name></member>
       <member refid="classiDynTree_1_1ExternalMesh_1a86f36de36504433e33b596144100419b" prot="public" virt="non-virtual"><scope>iDynTree::ExternalMesh</scope><name>getFilename</name></member>

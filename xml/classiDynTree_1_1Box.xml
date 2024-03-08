@@ -59,12 +59,12 @@
         </inbodydescription>
         <location file="iDynTree/SolidShapes.h" line="155" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1Box_1ab7328592c2163c117835f224e1a5c5b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1Box_1a22b04d21df67e23759a3c934e21316d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> *</type>
         <definition>virtual SolidShape* iDynTree::Box::clone</definition>
-        <argsstring>()</argsstring>
+        <argsstring>() const</argsstring>
         <name>clone</name>
-        <reimplements refid="classiDynTree_1_1SolidShape_1a0e17798de0579d18260b629fdd8b09a8">clone</reimplements>
+        <reimplements refid="classiDynTree_1_1SolidShape_1ab72ea2c024bd7e1d45ca3daba3039e5a">clone</reimplements>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -211,7 +211,7 @@
       <member refid="classiDynTree_1_1SolidShape_1a18dc4e95d85822018507b4a813f69340" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>asExternalMesh</name></member>
       <member refid="classiDynTree_1_1SolidShape_1afb0d282d22dce28a6f45de0c1d81d494" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>asSphere</name></member>
       <member refid="classiDynTree_1_1SolidShape_1a01f73fdb47553ba4f1d817a6feb6beef" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>asSphere</name></member>
-      <member refid="classiDynTree_1_1Box_1ab7328592c2163c117835f224e1a5c5b1" prot="public" virt="virtual"><scope>iDynTree::Box</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1Box_1a22b04d21df67e23759a3c934e21316d8" prot="public" virt="virtual"><scope>iDynTree::Box</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1SolidShape_1adf7c9968426d13ca501bf91eb3440d65" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>getLink_H_geometry</name></member>
       <member refid="classiDynTree_1_1SolidShape_1a4b0b5a8cc055ce533bbd79f804bae432" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>getMaterial</name></member>
       <member refid="classiDynTree_1_1SolidShape_1a0c3339721b95e2e969f7725d21c25e40" prot="public" virt="non-virtual"><scope>iDynTree::Box</scope><name>getName</name></member>

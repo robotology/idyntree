@@ -162,6 +162,44 @@
         </inbodydescription>
         <location file="iDynTree/SolidShapes.h" line="297" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelSolidShapes_1a67bcbce1f485a82de83364843d986217" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ModelSolidShapes::clearSingleLinkSolidShapes</definition>
+        <argsstring>(LinkIndex linkIndex)</argsstring>
+        <name>clearSingleLinkSolidShapes</name>
+        <param>
+          <type>LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SolidShapes.h" line="299" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelSolidShapes_1a5f5907eb6ed1ac628d4d8419c9718b72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ModelSolidShapes::addSingleLinkSolidShape</definition>
+        <argsstring>(LinkIndex linkIndex, const SolidShape &amp;shape)</argsstring>
+        <name>addSingleLinkSolidShape</name>
+        <param>
+          <type>LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> &amp;</type>
+          <declname>shape</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SolidShapes.h" line="300" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelSolidShapes_1a7c09f498a3b709929fcad003df961eec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; std::vector&lt; <ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> * &gt; &gt; &amp;</type>
         <definition>std::vector&lt;std::vector&lt;SolidShape *&gt; &gt;&amp; iDynTree::ModelSolidShapes::getLinkSolidShapes</definition>
@@ -173,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SolidShapes.h" line="299" column="21"/>
+        <location file="iDynTree/SolidShapes.h" line="302" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelSolidShapes_1ac0632e3d06e6b5f3e48859e8edba7ee8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::vector&lt; std::vector&lt; <ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> * &gt; &gt; &amp;</type>
@@ -186,16 +224,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SolidShapes.h" line="301" column="27"/>
+        <location file="iDynTree/SolidShapes.h" line="304" column="27"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/SolidShapes.h" line="278" column="5" bodyfile="iDynTree/SolidShapes.h" bodystart="279" bodyend="302"/>
+    <location file="iDynTree/SolidShapes.h" line="278" column="5" bodyfile="iDynTree/SolidShapes.h" bodystart="279" bodyend="305"/>
     <listofallmembers>
+      <member refid="classiDynTree_1_1ModelSolidShapes_1a5f5907eb6ed1ac628d4d8419c9718b72" prot="public" virt="non-virtual"><scope>iDynTree::ModelSolidShapes</scope><name>addSingleLinkSolidShape</name></member>
       <member refid="classiDynTree_1_1ModelSolidShapes_1a521f88e8304f6987beb3286ba68ceb24" prot="public" virt="non-virtual"><scope>iDynTree::ModelSolidShapes</scope><name>clear</name></member>
+      <member refid="classiDynTree_1_1ModelSolidShapes_1a67bcbce1f485a82de83364843d986217" prot="public" virt="non-virtual"><scope>iDynTree::ModelSolidShapes</scope><name>clearSingleLinkSolidShapes</name></member>
       <member refid="classiDynTree_1_1ModelSolidShapes_1ab2a349f4f1c9f44ac089b9d61dfea0e7" prot="private" virt="non-virtual"><scope>iDynTree::ModelSolidShapes</scope><name>copy</name></member>
       <member refid="classiDynTree_1_1ModelSolidShapes_1a7c09f498a3b709929fcad003df961eec" prot="public" virt="non-virtual"><scope>iDynTree::ModelSolidShapes</scope><name>getLinkSolidShapes</name></member>
       <member refid="classiDynTree_1_1ModelSolidShapes_1ac0632e3d06e6b5f3e48859e8edba7ee8" prot="public" virt="non-virtual"><scope>iDynTree::ModelSolidShapes</scope><name>getLinkSolidShapes</name></member>

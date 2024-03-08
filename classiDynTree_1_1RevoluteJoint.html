@@ -257,9 +257,9 @@
             </dt>
             <dd>Get the max position limit of the joint, bindings-friendly version.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abbea73315ff8ea7f81b9c3d27d32f05c" class="m-doc">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double&amp; min,
-              double&amp; max) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8e7bcad217abd4fb929edcb3cf9bbeab" class="m-doc">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double min,
+              double max) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the position limits for a dof the joint.</dd>
             <dt>
@@ -279,13 +279,13 @@
             </dt>
             <dd>Get the static friction coefficient of the joint.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a17a88c97ad95a5f4bc71aedfd41fb7cf" class="m-doc">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double&amp; damping) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a011fc7911d5e330ee4cbfcc380cd37b1" class="m-doc">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double damping) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set damping parameter of the joint, for the _index dof.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a33a03be41e423704f17f94c0c58193db" class="m-doc">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double&amp; staticFriction) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad5d152ac28c6c35795f47ff496b924ad" class="m-doc">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double staticFriction) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set static friction parameter of the joint, for the _index dof.</dd>
           </dl>
@@ -556,11 +556,11 @@ $q$
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="abbea73315ff8ea7f81b9c3d27d32f05c"><div>
+          <section class="m-doc-details" id="a8e7bcad217abd4fb929edcb3cf9bbeab"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abbea73315ff8ea7f81b9c3d27d32f05c" class="m-doc-self">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double&amp; min,
-              double&amp; max) <span class="m-label m-warning">virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e7bcad217abd4fb929edcb3cf9bbeab" class="m-doc-self">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double min,
+              double max) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set the position limits for a dof the joint.</p>
 <aside class="m-note m-info"><h4>Note</h4><p>This just sets the internal position limits of the joint. To set them as enabled, you need to call the enablePosLimits(true) method.</p></aside>
@@ -609,10 +609,10 @@ $q$
             <p>Get the static friction coefficient of the joint.</p>
 <p>The unit is N for a prismatic joint, N∙m for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
           </div></section>
-          <section class="m-doc-details" id="a17a88c97ad95a5f4bc71aedfd41fb7cf"><div>
+          <section class="m-doc-details" id="a011fc7911d5e330ee4cbfcc380cd37b1"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a17a88c97ad95a5f4bc71aedfd41fb7cf" class="m-doc-self">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double&amp; damping) <span class="m-label m-warning">virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a011fc7911d5e330ee4cbfcc380cd37b1" class="m-doc-self">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double damping) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set damping parameter of the joint, for the _index dof.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -638,10 +638,10 @@ $q$
             </table>
 <p>The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
           </div></section>
-          <section class="m-doc-details" id="a33a03be41e423704f17f94c0c58193db"><div>
+          <section class="m-doc-details" id="ad5d152ac28c6c35795f47ff496b924ad"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a33a03be41e423704f17f94c0c58193db" class="m-doc-self">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double&amp; staticFriction) <span class="m-label m-warning">virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad5d152ac28c6c35795f47ff496b924ad" class="m-doc-self">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double staticFriction) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set static friction parameter of the joint, for the _index dof.</p>
             <table class="m-table m-fullwidth m-flat">
