@@ -387,7 +387,7 @@ double RevoluteJoint::getMaxPosLimit(const size_t /*_index*/) const
     return m_maxPos;
 }
 
-bool RevoluteJoint::setPosLimits(const size_t /*_index*/, double & min, double & max)
+bool RevoluteJoint::setPosLimits(const size_t /*_index*/, double min, double max)
 {
     m_minPos = min;
     m_maxPos = max;
@@ -423,14 +423,14 @@ double RevoluteJoint::getStaticFriction(const size_t _index) const
     return m_static_friction;
 }
 
-bool RevoluteJoint::setDamping(const size_t _index, double& damping)
+bool RevoluteJoint::setDamping(const size_t _index, double damping)
 {
     m_damping = damping;
 
     return true;
 }
 
-bool RevoluteJoint::setStaticFriction(const size_t _index, double& staticFriction)
+bool RevoluteJoint::setStaticFriction(const size_t _index, double staticFriction)
 {
     m_static_friction = staticFriction;
 

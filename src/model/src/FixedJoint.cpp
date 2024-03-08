@@ -255,7 +255,7 @@ double FixedJoint::getMaxPosLimit(const size_t _index) const
     return 0.0;
 }
 
-bool FixedJoint::setPosLimits(const size_t /*_index*/, double & /*min*/, double & /*max*/)
+bool FixedJoint::setPosLimits(const size_t /*_index*/, double /*min*/, double /*max*/)
 {
     return false;
 }
@@ -279,12 +279,12 @@ double FixedJoint::getStaticFriction(const size_t _index) const
     return 0.0;
 }
 
-bool FixedJoint::setDamping(const size_t /*_index*/, double& /*damping*/)
+bool FixedJoint::setDamping(const size_t /*_index*/, double /*damping*/)
 {
     return false;
 }
 
-bool FixedJoint::setStaticFriction(const size_t /*_index*/, double& /*staticFriction*/)
+bool FixedJoint::setStaticFriction(const size_t /*_index*/, double /*staticFriction*/)
 {
     return false;
 }
