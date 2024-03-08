@@ -305,7 +305,7 @@ void ForwardDynamicsLinearizationWrtJointPos(const Model& model,
                double invD = 1/(bufs.aba.D(dofIndex));
                double d_invD = - invD * bufs.dPos[dofDeriv].D(dofIndex) * invD;
                double dPos_ddq =
-                    (bufs.aba.u(dofIndex)-bufs.aba.U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex)))*d_invD;
+                    (bufs.aba.u(dofIndex)-bufs.aba.U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex)))*d_invD+
                     (bufs.dPos[dofDeriv].u(dofIndex)
                         -bufs.dPos[dofDeriv].U(dofIndex).dot(bufs.aba.linksAccelerations(visitedLinkIndex))
                         -bufs.aba.U(dofIndex).dot(bufs.dPos[dofDeriv].linksAccelerations(visitedLinkIndex)))*invD;

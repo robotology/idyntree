@@ -505,8 +505,6 @@ int main()
     std::cerr << "Checking DynamicsLinearization test on a point mass model" << std::endl;
     checkABAandABALinearizationAreConsistent(doubleBodyModel);
 
-    return 0;
-
     // Then test random generated chains
     for(unsigned int joints =0; joints < 20; joints++)
     {
