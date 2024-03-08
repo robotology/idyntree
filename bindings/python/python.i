@@ -73,7 +73,7 @@ import_array();
                 IndexError(f"Index {index} not valid. The vector has a size of {self.size()}.")
 
             return self.getVal(index)
-            
+
         def __len__(self):
             return self.size()
     %}
@@ -114,7 +114,7 @@ import_array();
 // Magic Python method for using [] on matrices
 %define PYTHON_MAGIC_SET_GET_LEN_MATRIX()
     %pythoncode %{
-        def __setitem__(self, indices, value):            
+        def __setitem__(self, indices, value):
             if not (len(indices) == 2 and indices[0] < self.rows() and indices[1] < self.cols()):
                 raise IndexError(f"Indices {indices} not valid. The matrix has dimesions of ({self.rows()}, {self.cols()}).")
 
@@ -126,7 +126,7 @@ import_array();
                 raise IndexError(f"Indices {indices} not valid. The matrix has dimesions of ({self.rows()}, {self.cols()}).")
 
             return self.getVal(indices[0], indices[1])
-        
+
         def __len__(self):
             return self.rows() * self.cols()
     %}
@@ -145,7 +145,7 @@ import_array();
 // New constructors to build objects inheriting from SpatialVector with two 1x3 arrays
 // and one 1x6 array
 %define CPP_SPATIAL_CLASS_LINANG_CONSTRUCTOR(SpatialClass)
-    SpatialClass(const double* linear_data, const unsigned linear_size, 
+    SpatialClass(const double* linear_data, const unsigned linear_size,
                  const double* angular_data, const unsigned angular_size)
     {
         if (linear_size != 3)
@@ -153,17 +153,17 @@ import_array();
 
         if (angular_size != 3)
             throw std::runtime_error("Wrong size of angular component");
-        
-        return new iDynTree::SpatialClass({linear_data, linear_size}, 
+
+        return new iDynTree::SpatialClass({linear_data, linear_size},
                                           {angular_data, angular_size});
     }
-    
+
     SpatialClass(const double* in_data, const unsigned in_size)
     {
         if (in_size != 6)
             throw std::runtime_error("Wrong size of input spatial vector");
-        
-        return new iDynTree::SpatialClass({in_data, 3}, 
+
+        return new iDynTree::SpatialClass({in_data, 3},
                                           {in_data + 3, 3});
     }
 %enddef
@@ -213,7 +213,7 @@ import_array();
 
     PYTHON_MAGIC_SET_GET_LEN_VECTOR()
 
-    void toNumPy(double** out, int* size) {        
+    void toNumPy(double** out, int* size) {
         *out = static_cast<double*>(malloc(self->size() * sizeof(double)));
         std::copy(self->begin(), self->end(), *out);
         *size = self->size();
@@ -270,7 +270,7 @@ import_array();
 %extend iDynTree::Wrench {
 
     PYTHON_MAGIC_SET_GET_LEN_VECTOR()
-    
+
     CPP_SPATIAL_CLASS_LINANG_CONSTRUCTOR(Wrench);
     CPP_TO_NUMPY_SPATIAL_VECTOR(iDynTree::Wrench)
 
@@ -282,7 +282,7 @@ import_array();
 %extend iDynTree::Twist {
 
     PYTHON_MAGIC_SET_GET_LEN_VECTOR()
-    
+
     CPP_SPATIAL_CLASS_LINANG_CONSTRUCTOR(Twist);
     CPP_TO_NUMPY_SPATIAL_VECTOR(iDynTree::Twist)
 
@@ -294,7 +294,7 @@ import_array();
 %extend iDynTree::SpatialAcc {
 
     PYTHON_MAGIC_SET_GET_LEN_VECTOR()
-    
+
     CPP_SPATIAL_CLASS_LINANG_CONSTRUCTOR(SpatialAcc);
     CPP_TO_NUMPY_SPATIAL_VECTOR(iDynTree::SpatialAcc)
 

@@ -46,7 +46,7 @@ namespace iDynTree
         explicit SolidShape();
 
         virtual ~SolidShape()=0;
-        virtual SolidShape* clone()=0;
+        virtual SolidShape* clone() const = 0;
 
         /**
          * Returns the name of the shape.
@@ -125,7 +125,7 @@ namespace iDynTree
     public:
         virtual ~Sphere();
 
-        virtual SolidShape* clone();
+        virtual SolidShape* clone() const;
 
         /**
          * Returns the current radius.
@@ -153,7 +153,7 @@ namespace iDynTree
     {
     public:
         virtual ~Box();
-        virtual SolidShape* clone();
+        virtual SolidShape* clone() const;
 
         /**
          * Returns the current x side length.
@@ -195,7 +195,7 @@ namespace iDynTree
     {
     public:
         virtual ~Cylinder();
-        virtual SolidShape* clone();
+        virtual SolidShape* clone() const;
 
         /**
          * Returns the current cylinder length.
@@ -226,7 +226,7 @@ namespace iDynTree
     {
     public:
         virtual ~ExternalMesh();
-        virtual SolidShape* clone();
+        virtual SolidShape* clone() const;
 
         /**
          * Returns the current filename.
@@ -295,6 +295,9 @@ namespace iDynTree
         void resize(size_t nrOfLinks);
         void resize(const Model& model);
         bool isConsistent(const Model & model) const;
+
+        void clearSingleLinkSolidShapes(LinkIndex linkIndex);
+        void addSingleLinkSolidShape(LinkIndex linkIndex, const SolidShape& shape);
 
         std::vector<std::vector<SolidShape *> >& getLinkSolidShapes();
 

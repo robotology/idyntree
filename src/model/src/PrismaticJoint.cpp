@@ -372,7 +372,7 @@ double PrismaticJoint::getMaxPosLimit(const size_t /*_index*/) const
     return m_maxPos;
 }
 
-bool PrismaticJoint::setPosLimits(const size_t /*_index*/, double & min, double & max)
+bool PrismaticJoint::setPosLimits(const size_t /*_index*/, double min, double max)
 {
     m_minPos = min;
     m_maxPos = max;
@@ -407,14 +407,14 @@ double PrismaticJoint::getStaticFriction(const size_t _index) const
     return m_static_friction;
 }
 
-bool PrismaticJoint::setDamping(const size_t _index, double& damping)
+bool PrismaticJoint::setDamping(const size_t _index, double damping)
 {
     m_damping = damping;
 
     return true;
 }
 
-bool PrismaticJoint::setStaticFriction(const size_t _index, double& staticFriction)
+bool PrismaticJoint::setStaticFriction(const size_t _index, double staticFriction)
 {
     m_static_friction = staticFriction;
 

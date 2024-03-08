@@ -137,7 +137,7 @@ namespace iDynTree
     {
     }
 
-    SolidShape* Sphere::clone()
+    SolidShape* Sphere::clone() const
     {
         return new Sphere(*this);
     }
@@ -150,7 +150,7 @@ namespace iDynTree
     {
     }
 
-    SolidShape* Box::clone()
+    SolidShape* Box::clone() const
     {
         return new Box(*this);
     }
@@ -171,7 +171,7 @@ namespace iDynTree
     {
     }
 
-    SolidShape* Cylinder::clone()
+    SolidShape* Cylinder::clone() const
     {
         return new Cylinder(*this);
     }
@@ -188,7 +188,7 @@ namespace iDynTree
     {
     }
 
-    SolidShape* ExternalMesh::clone()
+    SolidShape* ExternalMesh::clone() const
     {
         return new ExternalMesh(*this);
     }
@@ -385,6 +385,31 @@ namespace iDynTree
     bool ModelSolidShapes::isConsistent(const Model& model) const
     {
         return (this->linkSolidShapes.size() == model.getNrOfLinks());
+    }
+
+    void ModelSolidShapes::clearSingleLinkSolidShapes(LinkIndex linkIndex)
+    {
+        if (linkIndex >= linkSolidShapes.size())
+        {
+            return;
+        }
+
+        for (size_t geom = 0; geom < linkSolidShapes[linkIndex].size(); geom++)
+        {
+            delete linkSolidShapes[linkIndex][geom];
+            linkSolidShapes[linkIndex][geom] = 0;
+        }
+        linkSolidShapes[linkIndex].resize(0);
+    }
+
+    void ModelSolidShapes::addSingleLinkSolidShape(LinkIndex linkIndex, const SolidShape& shape)
+    {
+        if (linkIndex >= linkSolidShapes.size())
+        {
+            return;
+        }
+
+        linkSolidShapes[linkIndex].push_back(shape.clone());
     }
 
     std::vector<std::vector<SolidShape *>>& ModelSolidShapes::getLinkSolidShapes() {
