@@ -43,7 +43,6 @@ add_integration_test(Dynamics)
 add_integration_test(DenavitHartenberg)
 add_integration_test(ReducedModelWithFT)
 
-
 # See issue https://github.com/robotology/idyntree/issues/367
 add_integration_test_no_valgrind(iCubTorqueEstimation)
 
