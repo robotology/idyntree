@@ -21,7 +21,6 @@ iDynTree::ShapeVisualization::Shape& iDynTree::ShapeVisualization::Shape::operat
     if (node)
     {
         node->remove();
-        node->drop();
     }
     node = other.node;
     other.node = nullptr;
@@ -35,7 +34,7 @@ iDynTree::ShapeVisualization::Shape::~Shape()
     if (node)
     {
         node->remove();
-        node->drop();
+        node = nullptr;
     }
 }
 

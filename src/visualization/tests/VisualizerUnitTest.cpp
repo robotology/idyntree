@@ -278,6 +278,64 @@ void checkDoubleViz()
     viz2.close();
 }
 
+void checkShapes()
+{
+    // Check visualizer of simple model
+    iDynTree::ModelLoader mdlLoader, mdlLoaderReduced;
+
+    // Load full model
+    bool ok = mdlLoader.loadModelFromFile(getAbsModelPath("threeLinks.urdf"));
+    ASSERT_IS_TRUE(ok);
+
+    // Open visualizer
+    iDynTree::Visualizer viz;
+
+    ok = viz.addModel(mdlLoader.model(), "model");
+    ASSERT_IS_TRUE(ok);
+
+    viz.camera().setPosition(iDynTree::Position(4.0, 0.0, 4.0));
+
+    iDynTree::Sphere sphere;
+    sphere.setRadius(0.8);
+    iDynTree::ColorViz color(1.0, 0.0, 0.0, 0.5);
+    iDynTree::Material material = sphere.getMaterial();
+    material.setColor(color.toVector4());
+    sphere.setMaterial(material);
+
+    iDynTree::IShapeVisualization& shapes = viz.shapes();
+    size_t index = shapes.addShape(sphere);
+    ASSERT_IS_TRUE(index == 0);
+
+    color.r = 0.0;
+    color.g = 1.0;
+    material.setColor(color.toVector4());
+    sphere.setMaterial(material);
+    size_t index2 = shapes.addShape(sphere, "model", mdlLoader.model().getFrameName(mdlLoader.model().getNrOfFrames() - 1));
+    ASSERT_IS_TRUE(index2 == 1);
+    ASSERT_IS_TRUE(shapes.getNrOfShapes() == 2);
+    color.g = 0;
+    color.b = 1.0;
+    ok = shapes.setShapeColor(index2, color);
+    ASSERT_IS_TRUE(ok);
+    ok = shapes.setShapeTransform(index2, iDynTree::Transform(iDynTree::Rotation::Identity(), iDynTree::Position(1.0, 0.0, 0.0)));
+    ASSERT_IS_TRUE(ok);
+    ok = shapes.changeShape(index, sphere);
+    ASSERT_IS_TRUE(ok);
+
+    // Check if run is returning true
+    // Regression test for https://github.com/robotology/idyntree/issues/986
+    ok = viz.run();
+    ASSERT_IS_TRUE(ok);
+
+
+    for (int i = 0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
+    viz.close();
+}
+
 int main()
 {
     threeLinksReducedTest();
@@ -287,6 +345,7 @@ int main()
     checkLabelVisualization();
     checkViewPorts();
     checkDoubleViz();
+    checkShapes();
 
     return EXIT_SUCCESS;
 }
