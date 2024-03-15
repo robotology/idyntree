@@ -120,6 +120,20 @@ public:
     virtual ILabel* getVectorLabel(size_t ) override {return nullptr;}
 };
 
+class DummyShapeVisualization : public IShapeVisualization {
+public:
+    virtual ~DummyShapeVisualization() override { };
+    virtual size_t addShape(const iDynTree::SolidShape&, const std::string& = "", const std::string& = "") override { return 0; };
+    virtual bool setVisible(size_t, bool) override { return false; };
+    virtual size_t getNrOfShapes() const override { return 0; };
+    virtual bool getShapeTransform(size_t, Transform&) const override { return false; };
+    virtual bool setShapeTransform(size_t, const Transform&) override { return false; };
+    virtual bool setShapeColor(size_t, const ColorViz&) override { return false; };
+    virtual bool changeShape(size_t, const iDynTree::SolidShape&) override { return false; };
+    virtual ILabel* getShapeLabel(size_t) override { return nullptr; };
+};
+
+
 class DummyFrameVisualization : public IFrameVisualization
 {
 public:

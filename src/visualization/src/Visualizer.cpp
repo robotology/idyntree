@@ -13,6 +13,7 @@
 #include "ModelVisualization.h"
 #include "VectorsVisualization.h"
 #include "FrameVisualization.h"
+#include "ShapesVisualization.h"
 #include "TexturesHandler.h"
 #include "CameraAnimator.h"
 #include "Label.h"
@@ -52,6 +53,7 @@
 
 #include <unordered_map>
 #include <cassert>
+#include <memory>
 
 namespace iDynTree
 {
@@ -74,6 +76,10 @@ IVectorsVisualization::~IVectorsVisualization()
 }
 
 IFrameVisualization::~IFrameVisualization()
+{
+}
+
+IShapeVisualization::~IShapeVisualization()
 {
 }
 
@@ -112,6 +118,16 @@ ColorViz::ColorViz(float _r, float _g, float _b, float _a): r(_r), g(_g), b(_b),
 ColorViz::ColorViz(const Vector4& rgba): r(rgba(0)), g(rgba(1)), b(rgba(2)), a(rgba(3))
 {
 
+}
+
+Vector4 ColorViz::toVector4() const
+{
+    Vector4 ret;
+    ret(0) = r;
+    ret(1) = g;
+    ret(2) = b;
+    ret(3) = a;
+    return ret;
 }
 
 struct Visualizer::VisualizerPimpl
@@ -153,7 +169,7 @@ struct Visualizer::VisualizerPimpl
     /**
      * Collection of model visualization.
      */
-    std::vector<ModelVisualization*> m_modelViz;
+    std::shared_ptr<std::vector<ModelVisualization*>> m_modelViz;
 
     /**
      * Irrlicht device used by the visualizer.
@@ -194,6 +210,11 @@ struct Visualizer::VisualizerPimpl
      * Frames visualization
      */
     FrameVisualization m_frames;
+
+    /**
+     * Shapes visualization
+     */
+    ShapeVisualization m_shapes;
 
     /**
      * Textures handling
@@ -393,6 +414,7 @@ struct Visualizer::VisualizerPimpl
     DummyVectorsVisualization m_invalidVectors;
     DummyFrameVisualization m_invalidFrames;
     DummyTexturesHandler m_invalidTextures;
+    DummyShapeVisualization m_invalidShapes;
     DummyLabel m_invalidLabel;
 #endif
 
@@ -402,7 +424,8 @@ struct Visualizer::VisualizerPimpl
         lastFPS = -1;
 
 #ifdef IDYNTREE_USES_IRRLICHT
-        m_modelViz.resize(0);
+        m_modelViz = std::make_shared<std::vector<ModelVisualization*>>();
+        m_modelViz->resize(0);
         m_irrDevice  = 0;
         m_irrSmgr    = 0;
         m_irrDriver  = 0;
@@ -559,6 +582,8 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     pimpl->m_frames.init(pimpl->m_irrSmgr);
 
+    pimpl->m_shapes.init(pimpl->m_irrSmgr, pimpl->m_modelViz);
+
     pimpl->m_textures.init(pimpl->m_irrDriver, pimpl->m_irrSmgr);
 
 #ifdef IDYNTREE_USE_GLFW_WINDOW
@@ -582,7 +607,7 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 size_t Visualizer::getNrOfVisualizedModels()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    return pimpl->m_modelViz.size();
+    return pimpl->m_modelViz->size();
 #else
     return 0;
 #endif
@@ -597,7 +622,7 @@ std::string Visualizer::getModelInstanceName(size_t modelInstanceIndex)
     }
 
 #ifdef IDYNTREE_USES_IRRLICHT
-    return pimpl->m_modelViz[modelInstanceIndex]->getInstanceName();
+    return pimpl->m_modelViz->at(modelInstanceIndex)->getInstanceName();
 #else
     return "";
 #endif
@@ -609,7 +634,7 @@ int Visualizer::getModelInstanceIndex(const std::string instanceName)
 #ifdef IDYNTREE_USES_IRRLICHT
     for(size_t mdlInst=0; mdlInst < getNrOfVisualizedModels(); mdlInst++)
     {
-        if( pimpl->m_modelViz[mdlInst]->getInstanceName() == instanceName )
+        if( pimpl->m_modelViz->at(mdlInst)->getInstanceName() == instanceName )
         {
             return static_cast<int>(mdlInst);
         }
@@ -645,7 +670,7 @@ bool Visualizer::addModel(const Model& model, const std::string& instanceName)
         return false;
     }
 
-    this->pimpl->m_modelViz.push_back(newModelViz);
+    this->pimpl->m_modelViz->push_back(newModelViz);
 
     return true;
 #else
@@ -832,7 +857,7 @@ IModelVisualization& Visualizer::modelViz(const std::string& instanceName)
     }
 
 #ifdef IDYNTREE_USES_IRRLICHT
-    return *(this->pimpl->m_modelViz[idx]);
+    return *(this->pimpl->m_modelViz->at(idx));
 #else
     return this->pimpl->m_invalidModelViz;
 #endif
@@ -841,7 +866,7 @@ IModelVisualization& Visualizer::modelViz(const std::string& instanceName)
 IModelVisualization& Visualizer::modelViz(size_t modelIdx)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    return *(this->pimpl->m_modelViz[modelIdx]);
+    return *(this->pimpl->m_modelViz->at(modelIdx));
 #else
     return this->pimpl->m_invalidModelViz;
 #endif
@@ -894,6 +919,19 @@ ITexturesHandler &Visualizer::textures()
     return this->pimpl->m_textures;
 #else
     return this->pimpl->m_invalidTextures;
+#endif
+}
+
+IShapeVisualization& Visualizer::shapes()
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    if (!this->pimpl->m_isInitialized)
+    {
+        init();
+    }
+    return this->pimpl->m_shapes;
+#else
+    return this->pimpl->m_invalidShapes;
 #endif
 }
 
@@ -1001,16 +1039,16 @@ void Visualizer::close()
     pimpl->m_irrDevice = nullptr;
     pimpl->m_isInitialized = false;
 
-    for(size_t mdl=0; mdl < pimpl->m_modelViz.size(); mdl++)
+    for(size_t mdl=0; mdl < pimpl->m_modelViz->size(); mdl++)
     {
-        if( pimpl->m_modelViz[mdl] )
+        if( pimpl->m_modelViz->at(mdl))
         {
-            delete pimpl->m_modelViz[mdl];
-            pimpl->m_modelViz[mdl] = nullptr;
+            delete pimpl->m_modelViz->at(mdl);
+            pimpl->m_modelViz->at(mdl) = nullptr;
         }
     }
 
-    pimpl->m_modelViz.resize(0);
+    pimpl->m_modelViz->resize(0);
 
 #ifdef IDYNTREE_USE_GLFW_WINDOW
     if (pimpl->m_window)

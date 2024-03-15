@@ -26,6 +26,8 @@ public:
     bool init(const Model& model, const std::string instanceName, irr::scene::ISceneManager * sceneManager);
     void close();
 
+    irr::scene::ISceneNode * getFrameSceneNode(const std::string& frameName);
+
     virtual bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
     virtual bool setLinkPositions(const LinkPositions & linkPos);
     virtual Model & model();

@@ -13,6 +13,8 @@
 #include <iDynTree/JointState.h>
 #include <iDynTree/LinkState.h>
 
+#include <iDynTree/SolidShapes.h>
+
 namespace iDynTree
 {
 class Model;
@@ -149,6 +151,11 @@ public:
      * Build a color from a Vector4 rgba.
      */
     ColorViz(const Vector4 & rgba);
+
+    /**
+     * Return as a Vector4.
+     */
+    Vector4 toVector4() const;
 };
 
 /**
@@ -587,6 +594,71 @@ public:
     virtual ILabel* getFrameLabel(size_t frameIndex) = 0;
 };
 
+/**
+ * Interface to the visualization of generic solid shapes.
+ */
+ class IShapeVisualization
+ {
+public:
+        /**
+        * Destructor
+        */
+        virtual ~IShapeVisualization() = 0;
+
+        /**
+        * Add a shape in the visualization.
+        * If the modelName and linkName are specified, the shape is attached to the specific frame.
+        * If they are not specified, or cannot be found, the shape is attached to the world.
+        * The initial transform is specified by the shape itself (Link_H_geometry).
+        * Returns the shape index.
+        */
+        virtual size_t addShape(const iDynTree::SolidShape& shape,
+                                const std::string& modelName = "",
+                                const std::string& frameName = "") = 0;
+
+        /**
+        * Set the specified shape visible or not.
+        * Returns true in case of success, false otherwise (for example if the shape does not exists).
+        */
+        virtual bool setVisible(size_t shapeIndex, bool isVisible) = 0;
+
+        /**
+        * Get the number of visualized shapes.
+        *
+        */
+        virtual size_t getNrOfShapes() const = 0;
+
+        /**
+        * Get shape transform with respect the parent frame (world if the shape is attached to the world).
+        */
+        virtual bool getShapeTransform(size_t shapeIndex, Transform& currentTransform) const = 0;
+
+        /**
+        * Set the shape transform with respect the parent frame (world if the shape is attached to the world).
+        */
+        virtual bool setShapeTransform(size_t shapeIndex, const Transform& transformation) = 0;
+
+        /**
+        * Set the color of the shape.
+        * Returns true in case of success, false otherwise (for example if the shape does not exists).
+        */
+        virtual bool setShapeColor(size_t shapeIndex, const ColorViz& shapeColor) = 0;
+
+        /**
+        * Change the shape.
+        * The previous shape is removed.
+        * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
+        */
+        virtual bool changeShape(size_t shapeIndex, const iDynTree::SolidShape& newShape) = 0;
+
+        /**
+        * Get the label of a shape.
+        *
+        * Returns nullptr of the shape index is out of bounds.
+        */
+        virtual ILabel* getShapeLabel(size_t shapeIndex) = 0;
+    };
+
 
 /**
  * Interface to the visualization of a model istance.
@@ -942,6 +1014,11 @@ public:
      * Get a reference to the internal ITexturesHandler interface.
      */
     ITexturesHandler& textures();
+
+    /**
+     * Get a reference to the internal IShapeVisualization interface.
+     */
+    IShapeVisualization& shapes();
 
     /**
      * Get a label given a name. Note: this does not set the text in the label.

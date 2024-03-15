@@ -473,6 +473,18 @@ void ModelVisualization::close()
 
 }
 
+irr::scene::ISceneNode* ModelVisualization::getFrameSceneNode(const std::string& frameName)
+{
+    size_t frameIndex = pimpl->m_model.getFrameIndex(frameName);
+    if (frameIndex == FRAME_INVALID_INDEX)
+    {
+        std::string errorMsg = "Frame " + frameName + " not found";
+        reportError("ModelVisualization","getFrameSceneNode", errorMsg.c_str());
+        return nullptr;
+    }
+    return pimpl->frameNodes[frameIndex];
+}
+
 std::vector<std::string> ModelVisualization::getFeatures()
 {
     std::vector<std::string> ret;
