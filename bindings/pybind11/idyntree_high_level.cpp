@@ -1,3 +1,5 @@
+// clang-format off
+
 #include <iDynTree/Transform.h>
 #include <iDynTree/Twist.h>
 #include <iDynTree/VectorDynSize.h>
@@ -40,6 +42,9 @@ void iDynTreeHighLevelBindings(pybind11::module& module) {
       .def("set_joint_positions",
            py::overload_cast<const iDynTree::VectorDynSize&>(
                &KinDynComputations::setJointPos))
+      .def("set_world_base_transform",
+           py::overload_cast<const iDynTree::Transform&>(
+               &KinDynComputations::setWorldBaseTransform))
       //
       .def("get_frame_index", &KinDynComputations::getFrameIndex)
       .def("get_frame_name", &KinDynComputations::getFrameName)
