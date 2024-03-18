@@ -56,6 +56,7 @@ void iDynTree::ShapeVisualization::init(irr::scene::ISceneManager* smgr, std::sh
 void iDynTree::ShapeVisualization::close()
 {
     m_shapes.clear();
+    m_models = nullptr;
     if (m_smgr)
     {
         m_smgr->drop(); //Decrement the reference count
@@ -217,7 +218,7 @@ bool iDynTree::ShapeVisualization::setShapeParent(size_t shapeIndex, const std::
     m_shapes[shapeIndex].modelName = modelName;
     m_shapes[shapeIndex].frameName = actualFrameName;
 
-    return false;
+    return true;
 }
 
 iDynTree::ILabel* iDynTree::ShapeVisualization::getShapeLabel(size_t shapeIndex)

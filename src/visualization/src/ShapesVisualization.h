@@ -106,7 +106,7 @@ namespace iDynTree {
         /**
         * Get the parent of a shape.
         * Returns a pair with the first element being the model name, and the second the frame name.
-        * If the shape is attached to the world, the both elements are empty strings.
+        * If the shape is attached to the world, both elements are empty strings.
         */
         virtual std::pair<std::string, std::string> getShapeParent(size_t shapeIndex) const final;
 
@@ -114,6 +114,7 @@ namespace iDynTree {
         * Set the parent of a shape.
         * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
         * If the modelName and frameName are empty strings, the shape is attached to the world.
+        * If the model name is specified, but not the frame name, it is attached to the root link of the model.
         */
         virtual bool setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName) final;
 
