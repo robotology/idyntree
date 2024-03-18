@@ -6,6 +6,7 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 
 #include <iDynTree/Direction.h>
 #include <iDynTree/Position.h>
@@ -609,6 +610,7 @@ public:
         * Add a shape in the visualization.
         * If the modelName and linkName are specified, the shape is attached to the specific frame.
         * If they are not specified, or cannot be found, the shape is attached to the world.
+        * If the model name is specified, but not the frame name, it is attached to the root link of the model.
         * The initial transform is specified by the shape itself (Link_H_geometry).
         * Returns the shape index.
         */
@@ -650,6 +652,21 @@ public:
         * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
         */
         virtual bool changeShape(size_t shapeIndex, const iDynTree::SolidShape& newShape) = 0;
+
+
+        /**
+        * Get the parent of a shape.
+        * Returns a pair with the first element being the model name, and the second the frame name.
+        * If the shape is attached to the world, the both elements are empty strings.
+        */
+        virtual std::pair<std::string, std::string> getShapeParent(size_t shapeIndex) const = 0;
+
+        /**
+        * Set the parent of a shape.
+        * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
+        * If the modelName and frameName are empty strings, the shape is attached to the world.
+        */
+        virtual bool setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName) = 0;
 
         /**
         * Get the label of a shape.

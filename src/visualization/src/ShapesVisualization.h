@@ -22,9 +22,11 @@ namespace iDynTree {
             std::unique_ptr<SolidShape> shape;
             irr::scene::ISceneNode* node{ nullptr };
             Label label;
+            std::string modelName;
+            std::string frameName;
 
             Shape() = delete;
-            Shape(const SolidShape& input_shape, irr::scene::ISceneNode* parent, irr::scene::ISceneManager* sceneManager);
+            Shape(const SolidShape& input_shape, irr::scene::ISceneManager* sceneManager);
             Shape(const Shape& other) = delete;
             Shape& operator=(const Shape& other) = delete;
             Shape(Shape&& other);
@@ -56,7 +58,11 @@ namespace iDynTree {
         ~ShapeVisualization();
 
         /**
-        * Add a shape in the visualization
+        * Add a shape in the visualization.
+        * If the modelName and linkName are specified, the shape is attached to the specific frame.
+        * If they are not specified, or cannot be found, the shape is attached to the world.
+        * If the model name is specified, but not the frame name, it is attached to the root link of the model.
+        * The initial transform is specified by the shape itself (Link_H_geometry).
         * Returns the shape index.
         */
         virtual size_t addShape(const iDynTree::SolidShape& shape,
@@ -96,6 +102,20 @@ namespace iDynTree {
         * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
         */
         virtual bool changeShape(size_t shapeIndex, const iDynTree::SolidShape& newShape) final;
+
+        /**
+        * Get the parent of a shape.
+        * Returns a pair with the first element being the model name, and the second the frame name.
+        * If the shape is attached to the world, the both elements are empty strings.
+        */
+        virtual std::pair<std::string, std::string> getShapeParent(size_t shapeIndex) const final;
+
+        /**
+        * Set the parent of a shape.
+        * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
+        * If the modelName and frameName are empty strings, the shape is attached to the world.
+        */
+        virtual bool setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName) final;
 
         /**
         * Get the label of a shape.

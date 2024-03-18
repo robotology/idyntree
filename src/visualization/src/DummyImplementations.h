@@ -130,6 +130,8 @@ public:
     virtual bool setShapeTransform(size_t, const Transform&) override { return false; };
     virtual bool setShapeColor(size_t, const ColorViz&) override { return false; };
     virtual bool changeShape(size_t, const iDynTree::SolidShape&) override { return false; };
+    virtual std::pair<std::string, std::string> getShapeParent(size_t shapeIndex) const override { return std::pair<std::string, std::string>("", ""); };
+    virtual bool setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName) override { return false; };
     virtual ILabel* getShapeLabel(size_t) override { return nullptr; };
 };
 

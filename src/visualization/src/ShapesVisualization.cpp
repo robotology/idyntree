@@ -3,11 +3,14 @@
 #include "ShapesVisualization.h"
 #include "IrrlichtUtils.h"
 
+#include <iDynTree/Model.h>
 
-iDynTree::ShapeVisualization::Shape::Shape(const SolidShape& input_shape, irr::scene::ISceneNode* parent, irr::scene::ISceneManager* sceneManager)
+
+iDynTree::ShapeVisualization::Shape::Shape(const SolidShape& input_shape, irr::scene::ISceneManager* sceneManager)
 {
     shape.reset(input_shape.clone());
-    node = addGeometryToSceneManager(shape.get(), parent, sceneManager);
+    node = addGeometryToSceneManager(shape.get(), nullptr, sceneManager);
+    node->grab(); //Increment the reference count, otherwise it can be deleted when setting the parent
     label.init(sceneManager, node);
 }
 
@@ -21,11 +24,14 @@ iDynTree::ShapeVisualization::Shape& iDynTree::ShapeVisualization::Shape::operat
     if (node)
     {
         node->remove();
+        node->drop(); //Decrement the reference count
     }
     node = other.node;
     other.node = nullptr;
     shape = std::move(other.shape);
     label = std::move(other.label);
+    modelName = std::move(other.modelName);
+    frameName = std::move(other.frameName);
     return *this;
 }
 
@@ -34,6 +40,7 @@ iDynTree::ShapeVisualization::Shape::~Shape()
     if (node)
     {
         node->remove();
+        node->drop(); //Decrement the reference count
         node = nullptr;
     }
 }
@@ -63,38 +70,8 @@ iDynTree::ShapeVisualization::~ShapeVisualization()
 
 size_t iDynTree::ShapeVisualization::addShape(const iDynTree::SolidShape& shape,const std::string& modelName, const std::string& frameName)
 {
-    irr::scene::ISceneNode* parent = nullptr;
-
-    if (!modelName.empty() && !frameName.empty())
-    {
-        bool found = false;
-        for (auto& model : *m_models)
-        {
-            if (model->getInstanceName() == modelName)
-            {
-                found = true;
-                parent = model->getFrameSceneNode(frameName);
-                break;
-            }
-        }
-        if (!parent)
-        {
-            std::string error;
-            if (!found)
-            {
-                error = "Model " + modelName + " not found";
-            }
-            else
-            {
-                error = "Frame " + frameName + " not found in model " + modelName;
-            }
-            reportError("ShapesVisualization", "addShape", error.c_str());
-            return -1;
-        }
-
-    }
-
-    m_shapes.emplace_back(shape, m_smgr->getRootSceneNode(), m_smgr);
+    m_shapes.emplace_back(shape, m_smgr);
+    setShapeParent(m_shapes.size() - 1, modelName, frameName);
     return m_shapes.size() - 1;
 }
 
@@ -162,8 +139,74 @@ bool iDynTree::ShapeVisualization::changeShape(size_t shapeIndex, const iDynTree
         reportError("ShapesVisualization", "changeShape", "Shape index out of range");
         return false;
     }
-    m_shapes[shapeIndex] = std::move(Shape(newShape, m_shapes[shapeIndex].node->getParent(), m_smgr));
+    m_shapes[shapeIndex] = std::move(Shape(newShape, m_smgr));
     return true;
+}
+
+std::pair<std::string, std::string> iDynTree::ShapeVisualization::getShapeParent(size_t shapeIndex) const
+{
+    if (shapeIndex >= m_shapes.size())
+    {
+        reportError("ShapesVisualization", "getShapeParent", "Shape index out of range");
+        return std::make_pair<std::string, std::string>("", "");
+    }
+    return std::make_pair(m_shapes[shapeIndex].modelName, m_shapes[shapeIndex].frameName);
+}
+
+bool iDynTree::ShapeVisualization::setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName)
+{
+    if (shapeIndex >= m_shapes.size())
+    {
+        reportError("ShapesVisualization", "setShapeParent", "Shape index out of range");
+        return false;
+    }
+
+    irr::scene::ISceneNode* parent = nullptr;
+    std::string actualFrameName = "";
+
+    if (!modelName.empty())
+    {
+        bool found = false;
+        for (auto& model : *m_models)
+        {
+            if (model->getInstanceName() == modelName)
+            {
+                found = true;
+                if (frameName.empty())
+                {
+                    iDynTree::LinkIndex root_link_index = model->model().getDefaultBaseLink();
+                    actualFrameName = model->model().getLinkName(root_link_index);
+                    parent = model->getFrameSceneNode(actualFrameName);
+                }
+                else
+                {
+                    actualFrameName = frameName;
+                    parent = model->getFrameSceneNode(frameName);
+                }
+                break;
+            }
+        }
+        if (!parent)
+        {
+            std::string error;
+            if (!found)
+            {
+                error = "Model " + modelName + " not found";
+            }
+            else
+            {
+                error = "Frame " + frameName + " not found in model " + modelName;
+            }
+            reportError("ShapesVisualization", "setShapeParent", error.c_str());
+            return false;
+        }
+    }
+
+    m_shapes[shapeIndex].node->setParent(parent);
+    m_shapes[shapeIndex].modelName = modelName;
+    m_shapes[shapeIndex].frameName = actualFrameName;
+
+    return false;
 }
 
 iDynTree::ILabel* iDynTree::ShapeVisualization::getShapeLabel(size_t shapeIndex)
