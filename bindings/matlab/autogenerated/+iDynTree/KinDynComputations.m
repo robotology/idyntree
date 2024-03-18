@@ -1,3 +1,5 @@
+// clang-format off
+
 classdef KinDynComputations < iDynTreeSwigRef
   methods
     function this = swig_this(self)
@@ -181,6 +183,9 @@ classdef KinDynComputations < iDynTreeSwigRef
     end
     function varargout = inverseDynamicsInertialParametersRegressor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1907, self, varargin{:});
+    end
+    function varargout = setWorldBaseTransform(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1908, self, varargin{:});
     end
   end
   methods(Static)

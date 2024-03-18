@@ -65,6 +65,7 @@ The purpose of the wrapper is therefore to provide a simpler and easy-to-use int
 ### Set the model-related quantities
 
 - [setJointPos](setJointPos.m)
+- [setWorldBaseTransform](setWorldBaseTransform.m)
 - [setFrameVelocityRepresentation](setFrameVelocityRepresentation.m)
 - [setFloatingBase](setFloatingBase.m)
 - [setRobotState](setRobotState.m)
