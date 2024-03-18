@@ -146,6 +146,8 @@ public:
     virtual size_t getNrOfFrames() const override {return 0; };
     virtual bool getFrameTransform(size_t , Transform& ) const override {return false;};
     virtual bool updateFrame(size_t, const Transform&) override {return false;};
+    virtual std::pair<std::string, std::string> getFrameParent(size_t frameIndex) const override { return std::pair<std::string, std::string>("", ""); };
+    virtual bool setFrameParent(size_t frameIndex, const std::string& modelName, const std::string& frameName) override { return false; };
     virtual ILabel* getFrameLabel(size_t) override {return nullptr;};
 };
 

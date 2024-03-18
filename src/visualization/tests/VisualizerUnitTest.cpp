@@ -342,6 +342,51 @@ void checkShapes()
     viz.close();
 }
 
+void checkFrameAttachedToModel()
+{
+    // Check visualizer of simple model
+    iDynTree::ModelLoader mdlLoader, mdlLoaderReduced;
+
+    // Load full model
+    bool ok = mdlLoader.loadModelFromFile(getAbsModelPath("threeLinks.urdf"));
+    ASSERT_IS_TRUE(ok);
+
+    // Open visualizer
+    iDynTree::Visualizer viz;
+
+    ok = viz.addModel(mdlLoader.model(), "model");
+    ASSERT_IS_TRUE(ok);
+
+    viz.camera().setPosition(iDynTree::Position(6.0, 0.0, 4.0));
+
+    iDynTree::IFrameVisualization& frames = viz.frames();
+    for (iDynTree::LinkIndex l = 0; l < mdlLoader.model().getNrOfLinks(); l++)
+    {
+        std::string linkName = mdlLoader.model().getLinkName(l);
+        size_t index = frames.addFrame(iDynTree::Transform::Identity());
+        ASSERT_IS_TRUE(index >= 0);
+        ok = frames.setFrameParent(index, "model", linkName);
+        ASSERT_IS_TRUE(ok);
+        iDynTree::ILabel* label = frames.getFrameLabel(index);
+        ASSERT_IS_TRUE(label != nullptr);
+        label->setText(linkName);
+        label->setPosition(iDynTree::Position(1.0, 1.0, 1.0));
+    }
+
+    // Check if run is returning true
+    // Regression test for https://github.com/robotology/idyntree/issues/986
+    ok = viz.run();
+    ASSERT_IS_TRUE(ok);
+
+
+    for (int i = 0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
+    viz.close();
+}
+
 int main()
 {
     threeLinksReducedTest();
@@ -352,6 +397,7 @@ int main()
     checkViewPorts();
     checkDoubleViz();
     checkShapes();
+    checkFrameAttachedToModel();
 
     return EXIT_SUCCESS;
 }

@@ -578,14 +578,29 @@ public:
     virtual size_t getNrOfFrames() const = 0;
 
     /**
-     * Get frame transform.
+     * Get frame transform, relative to the parent frame (world if the frame is attached to the world).
      */
     virtual bool getFrameTransform(size_t frameIndex, Transform& currentTransform) const = 0;
 
     /**
-     * Update Frame
+     * Update Frame, the transformation is relative to the parent frame (world if the frame is attached to the world).
      */
     virtual bool updateFrame(size_t frameIndex, const Transform& transformation) = 0;
+
+    /**
+    * Get the parent of a frame.
+    * Returns a pair with the first element being the model name, and the second the frame name to which it is attached.
+    * If the frame is attached to the world, both elements are empty strings.
+    */
+    virtual std::pair<std::string, std::string> getFrameParent(size_t frameIndex) const = 0;
+
+    /**
+    * Set the parent of a frame.
+    * Returns true in case of success, false otherwise (for example if the frame index is out of bounds).
+    * If the modelName and frameName are empty strings, the frame is attached to the world.
+    * If the model name is specified, but not the frame name, it is attached to the root link of the model.
+    */
+    virtual bool setFrameParent(size_t frameIndex, const std::string& modelName, const std::string& frameName) = 0;
 
     /**
      * Get the label of a frame.

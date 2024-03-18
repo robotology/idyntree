@@ -580,7 +580,7 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
-    pimpl->m_frames.init(pimpl->m_irrSmgr);
+    pimpl->m_frames.init(pimpl->m_irrSmgr, pimpl->m_modelViz);
 
     pimpl->m_shapes.init(pimpl->m_irrSmgr, pimpl->m_modelViz);
 
