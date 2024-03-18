@@ -20,6 +20,11 @@ void addOptions(cmdline::parser &cmd)
                          "Model to load.",
                          true);
 
+    cmd.add<std::string>("frames", 'f',
+                         "Frames to visualize, defined as a single string with a \", \" as separator. "
+                         "For example \"l_sole, r_sole\".",
+                         false);
+
     cmd.add<std::string>("color-palette", 'c',
                          "Color palette.",
                          false);
@@ -53,6 +58,41 @@ int main(int argc, char** argv)
         {
             std::cerr << "Impossible to set the color palette." << std::endl;
             return EXIT_FAILURE;
+        }
+    }
+
+    std::string frames = cmd.get<std::string>("frames");
+    if (!frames.empty())
+    {
+        std::vector<std::string> framesList;
+        std::string delimiter = ",";
+        size_t pos = frames.find(delimiter);
+        std::string token;
+        while (pos != std::string::npos)
+        {
+            framesList.push_back(frames.substr(0, pos));
+            if (pos + 1 < frames.length() && frames[pos + 1] == ' ')
+            {
+                pos += 1;
+            }
+            frames.erase(0, pos + delimiter.length());
+            pos = frames.find(delimiter);
+        }
+        framesList.push_back(frames);
+
+        for (const std::string& frame : framesList)
+        {
+            iDynTree::IFrameVisualization& frameViz = visualizer.frames();
+            size_t frameIndex = frameViz.addFrame(iDynTree::Transform::Identity(), 0.2);
+            ok = frameViz.setFrameParent(frameIndex, "model", frame);
+            if (!ok)
+            {
+                std::cerr << "Impossible to add frame " << frame << std::endl;
+                return EXIT_FAILURE;
+            }
+            iDynTree::ILabel* label = frameViz.getFrameLabel(frameIndex);
+            label->setText(frame);
+            label->setPosition(iDynTree::Position(0.1, 0.1, -0.01));
         }
     }
 
