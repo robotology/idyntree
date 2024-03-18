@@ -1,3 +1,5 @@
+// clang-format off
+
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
@@ -970,6 +972,30 @@ bool KinDynComputations::setJointPos(const VectorDynSize& s)
 Transform KinDynComputations::getWorldBaseTransform() const
 {
     return this->pimpl->m_pos.worldBasePos();
+}
+
+bool KinDynComputations::setWorldBaseTransform(const Transform& world_T_base)
+{
+    this->pimpl->m_pos.worldBasePos() = world_T_base;
+
+    // Invalidate cache
+    this->invalidateCache();
+
+    return true;
+}
+
+bool KinDynComputations::setWorldBaseTransform(iDynTree::MatrixView<const double> &world_T_base)
+{
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    bool ok = (world_T_base.rows() == expected_transform_rows) && (world_T_base.cols() == expected_transform_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","setWorldBaseTransform","Wrong size in input world_T_base");
+        return false;
+    }
+
+    return setWorldBaseTransform(iDynTree::Transform(world_T_base));
 }
 
 bool KinDynComputations::getWorldBaseTransform(iDynTree::MatrixView<double> world_T_base) const
