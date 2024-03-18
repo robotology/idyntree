@@ -72,6 +72,7 @@ size_t iDynTree::ShapeVisualization::addShape(const iDynTree::SolidShape& shape,
 {
     m_shapes.emplace_back(shape, m_smgr);
     setShapeParent(m_shapes.size() - 1, modelName, frameName);
+    setShapeColor(m_shapes.size() - 1, shape.getMaterial().color());
     return m_shapes.size() - 1;
 }
 
@@ -127,8 +128,17 @@ bool iDynTree::ShapeVisualization::setShapeColor(size_t shapeIndex, const ColorV
     m_shapes[shapeIndex].shape->setMaterial(newMaterial);
     for (irr::u32 mat = 0; mat < m_shapes[shapeIndex].node->getMaterialCount(); mat++)
     {
-        m_shapes[shapeIndex].node->getMaterial(mat) = idyntree2irr(m_shapes[shapeIndex].shape->getMaterial().color());
+        irr::video::SMaterial& material = m_shapes[shapeIndex].node->getMaterial(mat);
+        material = idyntree2irr(m_shapes[shapeIndex].shape->getMaterial().color());
+        double alpha = m_shapes[shapeIndex].shape->getMaterial().color()[3];
+        material.MaterialType = irr::video::EMT_TRANSPARENT_ADD_COLOR;
+        material.AmbientColor.setAlpha(alpha);
+        material.DiffuseColor.setAlpha(alpha);
+        material.SpecularColor.setAlpha(alpha);
+        material.EmissiveColor.setAlpha(alpha);
     }
+    m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
+    m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
     return true;
 }
 
@@ -140,6 +150,7 @@ bool iDynTree::ShapeVisualization::changeShape(size_t shapeIndex, const iDynTree
         return false;
     }
     m_shapes[shapeIndex] = std::move(Shape(newShape, m_smgr));
+    setShapeColor(shapeIndex, newShape.getMaterial().color());
     return true;
 }
 
