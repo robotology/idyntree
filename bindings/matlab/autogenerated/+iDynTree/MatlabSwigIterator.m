@@ -1,4 +1,4 @@
-classdef MatlabSwigIterator < iDynTreeSwigRef
+classdef MatlabSwigIterator < SwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -55,7 +55,7 @@ classdef MatlabSwigIterator < iDynTreeSwigRef
       [varargout{1:nargout}] = iDynTreeMEX(20, self, varargin{:});
     end
     function self = MatlabSwigIterator(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

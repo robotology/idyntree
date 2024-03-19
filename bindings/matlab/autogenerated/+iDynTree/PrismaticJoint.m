@@ -1,8 +1,8 @@
 classdef PrismaticJoint < iDynTree.MovableJointImpl1
   methods
     function self = PrismaticJoint(varargin)
-      self@iDynTree.MovableJointImpl1(iDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      self@iDynTree.MovableJointImpl1(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

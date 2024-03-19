@@ -1,19 +1,9 @@
-classdef ModelExporterOptions < iDynTreeSwigRef
+classdef ModelExporterOptions < SwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
     end
     function varargout = baseLink(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1540, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(1541, self, varargin{1});
-      end
-    end
-    function varargout = exportFirstBaseLinkAdditionalFrameAsFakeURDFBase(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -23,7 +13,7 @@ classdef ModelExporterOptions < iDynTreeSwigRef
         iDynTreeMEX(1543, self, varargin{1});
       end
     end
-    function varargout = robotExportedName(self, varargin)
+    function varargout = exportFirstBaseLinkAdditionalFrameAsFakeURDFBase(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -33,7 +23,7 @@ classdef ModelExporterOptions < iDynTreeSwigRef
         iDynTreeMEX(1545, self, varargin{1});
       end
     end
-    function varargout = xmlBlobs(self, varargin)
+    function varargout = robotExportedName(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -43,20 +33,30 @@ classdef ModelExporterOptions < iDynTreeSwigRef
         iDynTreeMEX(1547, self, varargin{1});
       end
     end
+    function varargout = xmlBlobs(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(1548, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(1549, self, varargin{1});
+      end
+    end
     function self = ModelExporterOptions(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1548, varargin{:});
+        tmp = iDynTreeMEX(1550, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1549, self);
+        iDynTreeMEX(1551, self);
         self.SwigClear();
       end
     end

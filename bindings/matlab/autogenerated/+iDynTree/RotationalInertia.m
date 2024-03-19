@@ -1,8 +1,8 @@
 classdef RotationalInertia < iDynTree.Matrix3x3
   methods
     function self = RotationalInertia(varargin)
-      self@iDynTree.Matrix3x3(iDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      self@iDynTree.Matrix3x3(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

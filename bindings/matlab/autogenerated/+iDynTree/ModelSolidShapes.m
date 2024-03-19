@@ -1,4 +1,4 @@
-classdef ModelSolidShapes < iDynTreeSwigRef
+classdef ModelSolidShapes < SwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -10,7 +10,7 @@ classdef ModelSolidShapes < iDynTreeSwigRef
       end
     end
     function self = ModelSolidShapes(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
@@ -29,8 +29,14 @@ classdef ModelSolidShapes < iDynTreeSwigRef
     function varargout = isConsistent(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1114, self, varargin{:});
     end
-    function varargout = getLinkSolidShapes(self,varargin)
+    function varargout = clearSingleLinkSolidShapes(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1115, self, varargin{:});
+    end
+    function varargout = addSingleLinkSolidShape(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1116, self, varargin{:});
+    end
+    function varargout = getLinkSolidShapes(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1117, self, varargin{:});
     end
   end
   methods(Static)

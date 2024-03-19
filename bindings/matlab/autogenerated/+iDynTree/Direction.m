@@ -1,8 +1,8 @@
 classdef Direction < iDynTree.Vector3
   methods
     function self = Direction(varargin)
-      self@iDynTree.Vector3(iDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      self@iDynTree.Vector3(SwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

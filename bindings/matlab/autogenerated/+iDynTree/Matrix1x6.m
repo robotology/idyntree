@@ -1,10 +1,10 @@
-classdef Matrix1x6 < iDynTreeSwigRef
+classdef Matrix1x6 < SwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
     end
     function self = Matrix1x6(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

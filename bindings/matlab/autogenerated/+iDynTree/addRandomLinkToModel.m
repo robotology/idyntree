@@ -1,3 +1,3 @@
 function varargout = addRandomLinkToModel(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1287, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1289, varargin{:});
 end

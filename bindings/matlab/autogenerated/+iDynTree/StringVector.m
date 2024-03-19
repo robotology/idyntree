@@ -1,4 +1,4 @@
-classdef StringVector < iDynTreeSwigRef
+classdef StringVector < SwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -49,7 +49,7 @@ classdef StringVector < iDynTreeSwigRef
       [varargout{1:nargout}] = iDynTreeMEX(35, self, varargin{:});
     end
     function self = StringVector(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
