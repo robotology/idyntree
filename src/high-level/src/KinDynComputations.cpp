@@ -969,12 +969,7 @@ bool KinDynComputations::setJointPos(const VectorDynSize& s)
     return this->setJointPos(make_span(s));
 }
 
-Transform KinDynComputations::getWorldBaseTransform() const
-{
-    return this->pimpl->m_pos.worldBasePos();
-}
-
-bool KinDynComputations::setWorldBaseTransform(const Transform& world_T_base)
+bool KinDynComputations::setWorldBaseTransform(const iDynTree::Transform &world_T_base)
 {
     this->pimpl->m_pos.worldBasePos() = world_T_base;
 
@@ -996,6 +991,11 @@ bool KinDynComputations::setWorldBaseTransform(iDynTree::MatrixView<const double
     }
 
     return setWorldBaseTransform(iDynTree::Transform(world_T_base));
+}
+
+Transform KinDynComputations::getWorldBaseTransform() const
+{
+    return this->pimpl->m_pos.worldBasePos();
 }
 
 bool KinDynComputations::getWorldBaseTransform(iDynTree::MatrixView<double> world_T_base) const
