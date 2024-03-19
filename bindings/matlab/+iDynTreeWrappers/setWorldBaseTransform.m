@@ -1,5 +1,3 @@
-// clang-format off
-
 function [] = setWorldBaseTransform(KinDynModel,basePose)
 
     % SETWORLDBASETRANSFORM sets the joints configuration for kino-dynamic 

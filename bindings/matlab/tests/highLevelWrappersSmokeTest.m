@@ -1,5 +1,3 @@
-// clang-format off
-
 function test_suite = highLevelWrappersSmokeTest
     try % assignment of 'localfunctions' is necessary in Matlab >= 2016
         test_functions=localfunctions();

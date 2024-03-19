@@ -1,5 +1,3 @@
-// clang-format off
-
 #include <iDynTree/Transform.h>
 #include <iDynTree/Twist.h>
 #include <iDynTree/VectorDynSize.h>
