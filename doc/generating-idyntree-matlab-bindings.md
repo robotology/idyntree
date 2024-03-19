@@ -33,7 +33,9 @@ Now, all is left is to compile and generate the bindings.
 
 ## Generating the bindings
 - In the build folder of `iDynTree`, run `ccmake` to open the CMake Gui.
+    - Set the CMake option `SWIG_DIR` to `<swig_install_dir>/share/swig/<version>`.
     - Set the CMake option `SWIG_EXECUTABLE` to `<swig_install_dir>/bin/swig`.
+    - Set the CMake option `SWIG_VERSION` to `<version>`.
     - Set the CMake option `IDYNTREE_GENERATE_MATLAB` to `ON`.
     - Set the CMake option `IDYNTREE_USES_MATLAB` or `IDYNTREE_USES_OCTAVE` to `ON`.
 - Having configured the CMake, run `make` and `make install` to install the bindings in the `mex` directory of the iDynTree install location.
