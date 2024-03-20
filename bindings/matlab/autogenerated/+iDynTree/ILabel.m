@@ -1,4 +1,4 @@
-classdef ILabel < SwigRef
+classdef ILabel < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -37,7 +37,7 @@ classdef ILabel < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(2011, self, varargin{:});
     end
     function self = ILabel(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

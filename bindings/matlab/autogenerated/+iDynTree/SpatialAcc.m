@@ -1,8 +1,8 @@
 classdef SpatialAcc < iDynTree.SpatialMotionVector
   methods
     function self = SpatialAcc(varargin)
-      self@iDynTree.SpatialMotionVector(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.SpatialMotionVector(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

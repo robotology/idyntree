@@ -1,8 +1,8 @@
 classdef FixedJoint < iDynTree.IJoint
   methods
     function self = FixedJoint(varargin)
-      self@iDynTree.IJoint(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.IJoint(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
