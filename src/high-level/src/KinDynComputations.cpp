@@ -85,7 +85,7 @@ public:
     iDynTree::FreeFloatingVel m_vel;
 
     // Base velocity expressed in the m_frameVelRepr representation
-    iDynTree::Twist m_baseVel;
+    iDynTree::Twist m_baseVelSetViaRobotState;
 
     // 3d gravity vector, expressed with the orientation of the inertial (world) frame
     iDynTree::Vector3 m_gravityAcc;
@@ -187,7 +187,7 @@ public:
         m_isFwdKinematicsUpdated = false;
         m_isRawMassMatrixUpdated = false;
         m_areBiasAccelerationsUpdated = false;
-        m_baseVel = iDynTree::Twist::Zero();
+        m_baseVelSetViaRobotState = iDynTree::Twist::Zero();
     }
 };
 
@@ -816,7 +816,7 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
 
     // Save vel
     toEigen(pimpl->m_vel.jointVel()) = toEigen(s_dot);
-    this->pimpl->m_baseVel = base_velocity;
+    this->pimpl->m_baseVelSetViaRobotState = base_velocity;
 
     // Account for the different possible representations
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
@@ -976,7 +976,7 @@ bool KinDynComputations::setWorldBaseTransform(const iDynTree::Transform &world_
 {
     return setRobotState(world_T_base,
                          this->pimpl->m_pos.jointPos(),
-                         this->pimpl->m_baseVel,
+                         this->pimpl->m_baseVelSetViaRobotState,
                          this->pimpl->m_vel.jointVel(), 
                          this->pimpl->m_gravityAcc);
 }
