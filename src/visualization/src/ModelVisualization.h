@@ -40,6 +40,8 @@ public:
     virtual std::vector< std::string > getLinkNames();
     virtual bool setLinkVisibility(const std::string & linkName, bool isVisible);
     virtual std::vector<std::string> getFeatures();
+    virtual void setModelTransparency(const double transparency);
+    virtual bool setLinkTransparency(const LinkIndex& linkIndex, const double transparency);
     virtual bool setFeatureVisibility(const std::string & elementKey, bool isVisible);
     void setWireframeVisibility(bool isVisible);
     void setTransparent(bool isTransparent);

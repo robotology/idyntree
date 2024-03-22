@@ -751,6 +751,22 @@ public:
     virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor) = 0;
 
     /**
+     * Set the transparency of a given link of the model.
+     *
+     * This will overwrite the material of the link, but it can be
+     * reset by resetLinkColor.
+     */
+    virtual bool setLinkTransparency(const LinkIndex& linkIndex, const double transparency) = 0;
+
+    /**
+     * Set the transparency of all the links of the model.
+     *
+     * This will overwrite the material of the links, but they can be
+     * reset by resetLinkColor.
+     */
+    virtual void setModelTransparency(const double transparency) = 0;
+
+    /**
      * Reset the colors of given link.
      */
     virtual bool resetLinkColor(const LinkIndex& linkIndex) = 0;

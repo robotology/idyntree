@@ -131,15 +131,12 @@ bool iDynTree::ShapeVisualization::setShapeColor(size_t shapeIndex, const ColorV
     {
         irr::video::SMaterial& material = m_shapes[shapeIndex].node->getMaterial(mat);
         material = idyntree2irr(m_shapes[shapeIndex].shape->getMaterial().color());
-        double alpha = m_shapes[shapeIndex].shape->getMaterial().color()[3];
-        material.MaterialType = irr::video::EMT_TRANSPARENT_ADD_COLOR;
-        material.AmbientColor.setAlpha(alpha);
-        material.DiffuseColor.setAlpha(alpha);
-        material.SpecularColor.setAlpha(alpha);
-        material.EmissiveColor.setAlpha(alpha);
+        material.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
     }
     m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
     m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+    m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, false);
+    m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, true);
     return true;
 }
 
