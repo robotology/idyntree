@@ -1942,6 +1942,8 @@
     <member refid="classiDynTree_1_1KinDynComputations_1a17c3a2be18ebd68a9860ccfeac1b12b3" kind="function"><name>getFrameFreeFloatingJacobianSparsityPattern</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a55c2232d8d0069af6a3e80d0f901be02" kind="function"><name>setJointPos</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1afa8862b110bf511a724028bf86eb42a0" kind="function"><name>setJointPos</name></member>
+    <member refid="classiDynTree_1_1KinDynComputations_1a3eee3e784003d54a13e0d4e709bd25db" kind="function"><name>setWorldBaseTransform</name></member>
+    <member refid="classiDynTree_1_1KinDynComputations_1aecb1ebd721765d1fdc2799b169e1b548" kind="function"><name>setWorldBaseTransform</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a2e499491547624639c1765216e0d1f38" kind="function"><name>setRobotState</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a991bbdf0c9d047562fc51e4993ce0b1f" kind="function"><name>setRobotState</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1adee49677666e96c5d4253e919a7a1fa4" kind="function"><name>setRobotState</name></member>

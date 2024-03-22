@@ -198,6 +198,14 @@
             </dt>
             <dd>Set the (internal) joint positions.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3eee3e784003d54a13e0d4e709bd25db" class="m-doc">setWorldBaseTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base) -&gt; bool</span>
+            </dt>
+            <dd>Set the world base transform.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aecb1ebd721765d1fdc2799b169e1b548" class="m-doc">setWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_base) -&gt; bool</span>
+            </dt>
+            <dd>Set the world base transform (<a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> implementation).</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a2e499491547624639c1765216e0d1f38" class="m-doc">setRobotState</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s,
               const <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a>&amp; base_velocity,
@@ -1374,6 +1382,54 @@ $L$
               </tfoot>
             </table>
 <p>(<a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> implementation)</p><aside class="m-note m-info"><h4>Note</h4><p>This method sets only the joint positions, leaving all the other components of the state to their previous value.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a3eee3e784003d54a13e0d4e709bd25db"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3eee3e784003d54a13e0d4e709bd25db" class="m-doc-self">setWorldBaseTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base)</span></span>
+            </h3>
+            <p>Set the world base transform.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world_T_base&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This method sets only the world base transform, leaving all the other components of the state to their previous value.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aecb1ebd721765d1fdc2799b169e1b548"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aecb1ebd721765d1fdc2799b169e1b548" class="m-doc-self">setWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_base)</span></span>
+            </h3>
+            <p>Set the world base transform (<a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> implementation).</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">world_T_base&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>This method sets only the world base transform, leaving all the other components of the state to their previous value.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a2e499491547624639c1765216e0d1f38"><div>
             <h3>
