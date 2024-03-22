@@ -19,7 +19,7 @@ set_target_properties(pybind11_idyntree PROPERTIES
     OUTPUT_NAME "pybind")
 
 # if compile tests execute also python tests
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 

@@ -79,6 +79,6 @@ endif()
 install(DIRECTORY include/iDynTree/Estimation
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
-endif(IDYNTREE_COMPILE_TESTS)
+endif(BUILD_TESTING)

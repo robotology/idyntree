@@ -55,7 +55,7 @@ install(TARGETS ${libraryname}
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 
-if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_IPOPT)
+if(BUILD_TESTING AND IDYNTREE_USES_IPOPT)
   add_subdirectory(tests)
 endif()
 

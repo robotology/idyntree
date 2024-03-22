@@ -115,9 +115,9 @@ install(TARGETS ${libraryname}
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
-endif(IDYNTREE_COMPILE_TESTS)
+endif(BUILD_TESTING)
 
 # Add deprecated target iDynTree::idyntree-sensors
 add_library(idyntree-sensors INTERFACE)

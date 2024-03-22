@@ -137,6 +137,6 @@ set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 install(DIRECTORY include/iDynTree/Core
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
-endif(IDYNTREE_COMPILE_TESTS)
+endif(BUILD_TESTING)

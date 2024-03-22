@@ -17,13 +17,13 @@ class is used a lot. Please check [Eigen documentation](https://eigen.tuxfamily.
 
 ## How to run the tests 
 iDynTree uses tests to prevent regressions caused by modification in the source code of the library. 
-To compile and run the test locally, enable the `IDYNTREE_COMPILE_TESTS` CMake option and then compile
+To compile and run the test locally, enable the `BUILD_TESTING` CMake option and then compile
 iDynTree as usual. Once you have compiled the library, run the `ctest` program from the build directory 
 to run all the tests. If you enabled the compilation of MATLAB bindings using the `IDYNTREE_USES_MATLAB` options, 
 test validating the functionality of the MATLAB interface will be automatically run. 
 
 ## How to run the Valgrind-based tests 
-[Valgrind MemCheck](http://valgrind.org/) is a tool to identify memory related software bugs (use of initialize memory, memory leaks, ...). To automatically run the iDynTree test suite under Valgrind, just enabled the `IDYNTREE_RUN_VALGRIND_TESTS` CMake option (together with the `IDYNTREE_COMPILE_TESTS` option). 
+[Valgrind MemCheck](http://valgrind.org/) is a tool to identify memory related software bugs (use of initialize memory, memory leaks, ...). To automatically run the iDynTree test suite under Valgrind, just enabled the `IDYNTREE_RUN_VALGRIND_TESTS` CMake option (together with the `BUILD_TESTING` option). 
 
 ## What are the things that needs to be done before merging a pull request?
 * Check if the GitHub Actions jobs compiles and run the test without any failure.  

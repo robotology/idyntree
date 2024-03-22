@@ -66,6 +66,6 @@ install(
 add_subdirectory(scripts)
 
 # if compile tests execute also python tests
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()

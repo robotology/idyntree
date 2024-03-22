@@ -4,7 +4,7 @@
 # include test data before everything,
 # to be sure that is available to test
 # of all components
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests/data)
 endif()
 
@@ -34,6 +34,6 @@ if(IDYNTREE_COMPILES_TOOLS)
     add_subdirectory(tools)
 endif()
 
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
