@@ -27,7 +27,7 @@ sure that proposed changes in the library do not cause regression. In particular
 [GitHub Actions](https://travis-ci.org/robotology/idyntree) for Continuous Integration on Linux, macOS and Windows. 
 
 In all this build systems the compilation of the tests is enabled by setting to true 
-the `IDYNTREE_COMPILE_TESTS` CMake flag. 
+the `BUILD_TESTING` CMake flag. 
 
 Almost all the dependencies are enabled in the Linux build. 
 Furthermore on Linux builds the `IDYNTREE_RUN_VALGRIND_TESTS` flag is enabled, to 

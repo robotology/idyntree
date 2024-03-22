@@ -14,10 +14,10 @@ option(CMAKE_POSITION_INDEPENDENT_CODE "When compiling static libraries generate
 
 #########################################################################
 # Turn on testing.
-option(IDYNTREE_COMPILE_TESTS "Compile iDynTree tests" FALSE)
+option(BUILD_TESTING "Compile iDynTree tests" FALSE)
 option(IDYNTREE_RUN_VALGRIND_TESTS "Run iDynTree tests with Valgrind" FALSE)
 mark_as_advanced(IDYNTREE_RUN_VALGRIND_TESTS)
-if(IDYNTREE_COMPILE_TESTS)
+if(BUILD_TESTING)
    include( CTest )
    enable_testing()
 

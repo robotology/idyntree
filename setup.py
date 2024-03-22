@@ -18,7 +18,7 @@ setuptools.setup(
             cmake_configure_options=[
                 "-DBUILD_SHARED_LIBS:BOOL=OFF",
                 "-DIDYNTREE_USES_PYTHON:BOOL=ON",
-                "-DIDYNTREE_COMPILE_TESTS:BOOL=OFF",
+                "-DBUILD_TESTING:BOOL=OFF",
                 "-DIDYNTREE_PACKAGE_FOR_PYPI:BOOL=ON",
                 "-DIDYNTREE_USES_IPOPT:BOOL=OFF",
                 "-DIDYNTREE_USES_ASSIMP:BOOL=OFF",
