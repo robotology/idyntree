@@ -311,6 +311,28 @@ public:
     bool setJointPos(iDynTree::Span<const double> s);
 
     /**
+     * @brief Set the world base transform.
+     *
+     * \note This method sets only the world base transform, leaving all the other components of the state to their previous value.
+     *
+     * @param[in] world_T_base the homogeneous transformation that transforms position vectors expressed in the base reference frame
+     *                         in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
+     * @return true if all went well, false otherwise.
+     */
+    bool setWorldBaseTransform(const iDynTree::Transform &world_T_base);
+
+    /**
+     * @brief Set the world base transform (MatrixView implementation).
+     *
+     * \note This method sets only the world base transform, leaving all the other components of the state to their previous value.
+     *
+     * @param[in] world_T_base the homogeneous transformation that transforms position vectors expressed in the base reference frame
+     *                         in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
+     * @return true if all went well, false otherwise.
+     */
+    bool setWorldBaseTransform(iDynTree::MatrixView<const double> &world_T_base);
+
+    /**
      * Set the state for the robot (floating base)
      *
      * @param world_T_base  the homogeneous transformation that transforms position vectors expressed in the base reference frame

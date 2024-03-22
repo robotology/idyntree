@@ -84,6 +84,9 @@ public:
     // conversion is performed on set/get .
     iDynTree::FreeFloatingVel m_vel;
 
+    // Base velocity expressed in the m_frameVelRepr representation
+    iDynTree::Twist m_baseVelSetViaRobotState;
+
     // 3d gravity vector, expressed with the orientation of the inertial (world) frame
     iDynTree::Vector3 m_gravityAcc;
 
@@ -184,6 +187,7 @@ public:
         m_isFwdKinematicsUpdated = false;
         m_isRawMassMatrixUpdated = false;
         m_areBiasAccelerationsUpdated = false;
+        m_baseVelSetViaRobotState = iDynTree::Twist::Zero();
     }
 };
 
@@ -812,6 +816,7 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
 
     // Save vel
     toEigen(pimpl->m_vel.jointVel()) = toEigen(s_dot);
+    this->pimpl->m_baseVelSetViaRobotState = base_velocity;
 
     // Account for the different possible representations
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
@@ -965,6 +970,29 @@ bool KinDynComputations::setJointPos(Span<const double> s)
 bool KinDynComputations::setJointPos(const VectorDynSize& s)
 {
     return this->setJointPos(make_span(s));
+}
+
+bool KinDynComputations::setWorldBaseTransform(const iDynTree::Transform &world_T_base)
+{
+    return setRobotState(world_T_base,
+                         this->pimpl->m_pos.jointPos(),
+                         this->pimpl->m_baseVelSetViaRobotState,
+                         this->pimpl->m_vel.jointVel(), 
+                         this->pimpl->m_gravityAcc);
+}
+
+bool KinDynComputations::setWorldBaseTransform(iDynTree::MatrixView<const double> &world_T_base)
+{
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    bool ok = (world_T_base.rows() == expected_transform_rows) && (world_T_base.cols() == expected_transform_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","setWorldBaseTransform","Wrong size in input world_T_base");
+        return false;
+    }
+
+    return setWorldBaseTransform(iDynTree::Transform(world_T_base));
 }
 
 Transform KinDynComputations::getWorldBaseTransform() const

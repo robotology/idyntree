@@ -9,28 +9,18 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1465, varargin{:});
+        tmp = iDynTreeMEX(1467, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1466, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1468, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1467, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1469, self, varargin{:});
     end
     function varargout = S(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1468, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(1469, self, varargin{1});
-      end
-    end
-    function varargout = U(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -40,7 +30,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1471, self, varargin{1});
       end
     end
-    function varargout = D(self, varargin)
+    function varargout = U(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -50,7 +40,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1473, self, varargin{1});
       end
     end
-    function varargout = u(self, varargin)
+    function varargout = D(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -60,7 +50,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1475, self, varargin{1});
       end
     end
-    function varargout = linksVel(self, varargin)
+    function varargout = u(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -70,7 +60,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1477, self, varargin{1});
       end
     end
-    function varargout = linksBiasAcceleration(self, varargin)
+    function varargout = linksVel(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -80,7 +70,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1479, self, varargin{1});
       end
     end
-    function varargout = linksAccelerations(self, varargin)
+    function varargout = linksBiasAcceleration(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -90,7 +80,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1481, self, varargin{1});
       end
     end
-    function varargout = linkABIs(self, varargin)
+    function varargout = linksAccelerations(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -100,7 +90,7 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1483, self, varargin{1});
       end
     end
-    function varargout = linksBiasWrench(self, varargin)
+    function varargout = linkABIs(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -110,9 +100,19 @@ classdef ArticulatedBodyAlgorithmInternalBuffers < iDynTreeSwigRef
         iDynTreeMEX(1485, self, varargin{1});
       end
     end
+    function varargout = linksBiasWrench(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(1486, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(1487, self, varargin{1});
+      end
+    end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1486, self);
+        iDynTreeMEX(1488, self);
         self.SwigClear();
       end
     end

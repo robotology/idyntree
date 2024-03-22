@@ -41,116 +41,120 @@ function test__high_level_wrappers
     %% TESTS LIST
     try
         % test 1
-        disp('1/28: testing loadReducedModel...')
+        disp('1/29: testing loadReducedModel...')
         KinDynModel = iDynTreeWrappers.loadReducedModel(jointList, baseLinkName, './', modelName, true);
 
         % test 2
-        disp('2/28: testing setRobotState...')
+        disp('2/29: testing setRobotState...')
         iDynTreeWrappers.setRobotState(KinDynModel, jointPos_init, jointVel_init, gravityAcc)
 
         % test 3
-        disp('3/28: testing setJointPos...')
+        disp('3/29: testing setJointPos...')
         iDynTreeWrappers.setJointPos(KinDynModel, jointPos_init) 
 
         % test 4
-        disp('4/28: testing setFrameVelocityRepresentation...')
+        disp('4/29: testing setFrameVelocityRepresentation...')
         iDynTreeWrappers.setFrameVelocityRepresentation(KinDynModel, frameVelRepr)
 
         % test 5
-        disp('5/28: testing setFloatingBase...')
+        disp('5/29: testing setFloatingBase...')
         iDynTreeWrappers.setFloatingBase(KinDynModel, baseLinkName)
  
         % test 6
-        disp('6/28: testing getJointPos...')
+        disp('6/29: testing getJointPos...')
         iDynTreeWrappers.getJointPos(KinDynModel);
 
         % test 7
-        disp('7/28: testing getJointVel...')
+        disp('7/29: testing getJointVel...')
         iDynTreeWrappers.getJointVel(KinDynModel);
 
         % test 8
-        disp('8/28: testing getCentroidalTotalMomentum...')
+        disp('8/29: testing getCentroidalTotalMomentum...')
         iDynTreeWrappers.getCentroidalTotalMomentum(KinDynModel);
     
         % test 9
-        disp('9/28: testing getNrOfDegreesOfFreedom...')
+        disp('9/29: testing getNrOfDegreesOfFreedom...')
         iDynTreeWrappers.getNrOfDegreesOfFreedom(KinDynModel);
 
         % test 10
-        disp('10/28: testing getCenterOfMassPosition...')
+        disp('10/29: testing getCenterOfMassPosition...')
         iDynTreeWrappers.getCenterOfMassPosition(KinDynModel);
 
         % test 11
-        disp('11/28: testing getBaseTwist...')
+        disp('11/29: testing getBaseTwist...')
         iDynTreeWrappers.getBaseTwist(KinDynModel);
 
         % test 12
-        disp('12/28: testing generalizedBiasForces...')
+        disp('12/29: testing generalizedBiasForces...')
         iDynTreeWrappers.generalizedBiasForces(KinDynModel);
 
         % test 13
-        disp('13/28: testing generalizedGravityForces...')
+        disp('13/29: testing generalizedGravityForces...')
         iDynTreeWrappers.generalizedGravityForces(KinDynModel);
 
         % test 14
-        disp('14/28: testing getWorldBaseTransform...')
+        disp('14/29: testing getWorldBaseTransform...')
         iDynTreeWrappers.getWorldBaseTransform(KinDynModel);
 
         % test 15
-        disp('15/28: testing getModelVel...')
+        disp('15/29: testing getModelVel...')
         iDynTreeWrappers.getModelVel(KinDynModel);
     
         % test 16
-        disp('16/28: testing getFrameVelocityRepresentation...')
+        disp('16/29: testing getFrameVelocityRepresentation...')
         iDynTreeWrappers.getFrameVelocityRepresentation(KinDynModel);
 
         % test 17
-        disp('17/28: testing getFloatingBase...')
+        disp('17/29: testing getFloatingBase...')
         iDynTreeWrappers.getFloatingBase(KinDynModel);
 
         % test 18
-        disp('18/28: testing getFrameIndex...')
+        disp('18/29: testing getFrameIndex...')
         iDynTreeWrappers.getFrameIndex(KinDynModel, frameName);
 
         % test 19
-        disp('19/28: testing getFrameName...')
+        disp('19/29: testing getFrameName...')
         iDynTreeWrappers.getFrameName(KinDynModel, frameID);
 
         % test 20
-        disp('20/28: testing getWorldTransform...')
+        disp('20/29: testing getWorldTransform...')
         iDynTreeWrappers.getWorldTransform(KinDynModel, frameName);
 
         % test 21
-        disp('21/28: testing getRelativeTransform...')
+        disp('21/29: testing getRelativeTransform...')
         iDynTreeWrappers.getRelativeTransform(KinDynModel, frameName, frame2Name);
 
         % test 22
-        disp('22/28: testing getRelativeJacobian...')
+        disp('22/29: testing getRelativeJacobian...')
         iDynTreeWrappers.getRelativeJacobian(KinDynModel, frameID, frame2ID);
 
         % test 23
-        disp('23/28: testing getFreeFloatingMassMatrix...')
+        disp('23/29: testing getFreeFloatingMassMatrix...')
         iDynTreeWrappers.getFreeFloatingMassMatrix(KinDynModel);
 
         % test 24
-        disp('24/28: testing getRobotState...')
+        disp('24/29: testing getRobotState...')
         iDynTreeWrappers.getRobotState(KinDynModel);
 
         % test 25
-        disp('25/28: testing getFrameBiasAcc...')
+        disp('25/29: testing getFrameBiasAcc...')
         iDynTreeWrappers.getFrameBiasAcc(KinDynModel, frameName);
 
         % test 26
-        disp('26/28: testing getCenterOfMassJacobian...')
+        disp('26/29: testing getCenterOfMassJacobian...')
         iDynTreeWrappers.getCenterOfMassJacobian(KinDynModel);
 
         % test 27
-        disp('27/28: testing getCenterOfMassVelocity...')
+        disp('27/29: testing getCenterOfMassVelocity...')
         iDynTreeWrappers.getCenterOfMassVelocity(KinDynModel);
         
         % test 28
-        disp('28/28: testing getFrameFreeFloatingJacobian...')
+        disp('28/29: testing getFrameFreeFloatingJacobian...')
         iDynTreeWrappers.getFrameFreeFloatingJacobian(KinDynModel, frameName);
+
+        % test 29
+        disp('29/29: testing setWorldBaseTransform...')
+        iDynTreeWrappers.setWorldBaseTransform(KinDynModel, eye(4)) 
         
     catch ME
        disp('[High Level Wappers]: test failed. Message: ')

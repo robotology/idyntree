@@ -29,8 +29,14 @@ classdef ModelSolidShapes < iDynTreeSwigRef
     function varargout = isConsistent(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1114, self, varargin{:});
     end
-    function varargout = getLinkSolidShapes(self,varargin)
+    function varargout = clearSingleLinkSolidShapes(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1115, self, varargin{:});
+    end
+    function varargout = addSingleLinkSolidShape(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1116, self, varargin{:});
+    end
+    function varargout = getLinkSolidShapes(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1117, self, varargin{:});
     end
   end
   methods(Static)

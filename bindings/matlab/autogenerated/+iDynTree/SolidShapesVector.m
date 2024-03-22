@@ -4,49 +4,49 @@ classdef SolidShapesVector < iDynTreeSwigRef
       this = iDynTreeMEX(3, self);
     end
     function varargout = pop(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1405, self, varargin{:});
-    end
-    function varargout = brace(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1406, self, varargin{:});
-    end
-    function varargout = setbrace(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1407, self, varargin{:});
     end
-    function varargout = append(self,varargin)
+    function varargout = brace(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1408, self, varargin{:});
     end
-    function varargout = empty(self,varargin)
+    function varargout = setbrace(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1409, self, varargin{:});
     end
-    function varargout = size(self,varargin)
+    function varargout = append(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1410, self, varargin{:});
     end
-    function varargout = swap(self,varargin)
+    function varargout = empty(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1411, self, varargin{:});
     end
-    function varargout = begin(self,varargin)
+    function varargout = size(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1412, self, varargin{:});
     end
-    function varargout = end(self,varargin)
+    function varargout = swap(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1413, self, varargin{:});
     end
-    function varargout = rbegin(self,varargin)
+    function varargout = begin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1414, self, varargin{:});
     end
-    function varargout = rend(self,varargin)
+    function varargout = end(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1415, self, varargin{:});
     end
-    function varargout = clear(self,varargin)
+    function varargout = rbegin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1416, self, varargin{:});
     end
-    function varargout = get_allocator(self,varargin)
+    function varargout = rend(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1417, self, varargin{:});
     end
-    function varargout = pop_back(self,varargin)
+    function varargout = clear(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1418, self, varargin{:});
     end
-    function varargout = erase(self,varargin)
+    function varargout = get_allocator(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1419, self, varargin{:});
+    end
+    function varargout = pop_back(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1420, self, varargin{:});
+    end
+    function varargout = erase(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1421, self, varargin{:});
     end
     function self = SolidShapesVector(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
@@ -54,38 +54,38 @@ classdef SolidShapesVector < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1420, varargin{:});
+        tmp = iDynTreeMEX(1422, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = push_back(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1421, self, varargin{:});
-    end
-    function varargout = front(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1422, self, varargin{:});
-    end
-    function varargout = back(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1423, self, varargin{:});
     end
-    function varargout = assign(self,varargin)
+    function varargout = front(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1424, self, varargin{:});
     end
-    function varargout = resize(self,varargin)
+    function varargout = back(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1425, self, varargin{:});
     end
-    function varargout = insert(self,varargin)
+    function varargout = assign(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1426, self, varargin{:});
     end
-    function varargout = reserve(self,varargin)
+    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1427, self, varargin{:});
     end
-    function varargout = capacity(self,varargin)
+    function varargout = insert(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1428, self, varargin{:});
+    end
+    function varargout = reserve(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1429, self, varargin{:});
+    end
+    function varargout = capacity(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1430, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1429, self);
+        iDynTreeMEX(1431, self);
         self.SwigClear();
       end
     end

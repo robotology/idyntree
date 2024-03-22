@@ -7,20 +7,20 @@ classdef JointPosDoubleArray < iDynTree.VectorDynSize
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1219, varargin{:});
+        tmp = iDynTreeMEX(1221, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1220, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1222, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1221, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1223, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1222, self);
+        iDynTreeMEX(1224, self);
         self.SwigClear();
       end
     end
