@@ -6,12 +6,15 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 
 #include <iDynTree/Direction.h>
 #include <iDynTree/Position.h>
 
 #include <iDynTree/JointState.h>
 #include <iDynTree/LinkState.h>
+
+#include <iDynTree/SolidShapes.h>
 
 namespace iDynTree
 {
@@ -149,6 +152,11 @@ public:
      * Build a color from a Vector4 rgba.
      */
     ColorViz(const Vector4 & rgba);
+
+    /**
+     * Return as a Vector4.
+     */
+    Vector4 toVector4() const;
 };
 
 /**
@@ -570,14 +578,29 @@ public:
     virtual size_t getNrOfFrames() const = 0;
 
     /**
-     * Get frame transform.
+     * Get frame transform, relative to the parent frame (world if the frame is attached to the world).
      */
     virtual bool getFrameTransform(size_t frameIndex, Transform& currentTransform) const = 0;
 
     /**
-     * Update Frame
+     * Update Frame, the transformation is relative to the parent frame (world if the frame is attached to the world).
      */
     virtual bool updateFrame(size_t frameIndex, const Transform& transformation) = 0;
+
+    /**
+    * Get the parent of a frame.
+    * Returns a pair with the first element being the model name, and the second the frame name to which it is attached.
+    * If the frame is attached to the world, both elements are empty strings.
+    */
+    virtual std::pair<std::string, std::string> getFrameParent(size_t frameIndex) const = 0;
+
+    /**
+    * Set the parent of a frame.
+    * Returns true in case of success, false otherwise (for example if the frame index is out of bounds).
+    * If the modelName and frameName are empty strings, the frame is attached to the world.
+    * If the model name is specified, but not the frame name, it is attached to the root link of the model.
+    */
+    virtual bool setFrameParent(size_t frameIndex, const std::string& modelName, const std::string& frameName) = 0;
 
     /**
      * Get the label of a frame.
@@ -586,6 +609,88 @@ public:
      */
     virtual ILabel* getFrameLabel(size_t frameIndex) = 0;
 };
+
+/**
+ * Interface to the visualization of generic solid shapes.
+ */
+ class IShapeVisualization
+ {
+public:
+        /**
+        * Destructor
+        */
+        virtual ~IShapeVisualization() = 0;
+
+        /**
+        * Add a shape in the visualization.
+        * If the modelName and linkName are specified, the shape is attached to the specific frame.
+        * If they are not specified, or cannot be found, the shape is attached to the world.
+        * If the model name is specified, but not the frame name, it is attached to the root link of the model.
+        * The initial transform is specified by the shape itself (Link_H_geometry).
+        * Returns the shape index.
+        */
+        virtual size_t addShape(const iDynTree::SolidShape& shape,
+                                const std::string& modelName = "",
+                                const std::string& frameName = "") = 0;
+
+        /**
+        * Set the specified shape visible or not.
+        * Returns true in case of success, false otherwise (for example if the shape does not exists).
+        */
+        virtual bool setVisible(size_t shapeIndex, bool isVisible) = 0;
+
+        /**
+        * Get the number of visualized shapes.
+        *
+        */
+        virtual size_t getNrOfShapes() const = 0;
+
+        /**
+        * Get shape transform with respect the parent frame (world if the shape is attached to the world).
+        */
+        virtual bool getShapeTransform(size_t shapeIndex, Transform& currentTransform) const = 0;
+
+        /**
+        * Set the shape transform with respect the parent frame (world if the shape is attached to the world).
+        */
+        virtual bool setShapeTransform(size_t shapeIndex, const Transform& transformation) = 0;
+
+        /**
+        * Set the color of the shape.
+        * Returns true in case of success, false otherwise (for example if the shape does not exists).
+        */
+        virtual bool setShapeColor(size_t shapeIndex, const ColorViz& shapeColor) = 0;
+
+        /**
+        * Change the shape.
+        * The previous shape is removed.
+        * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
+        */
+        virtual bool changeShape(size_t shapeIndex, const iDynTree::SolidShape& newShape) = 0;
+
+
+        /**
+        * Get the parent of a shape.
+        * Returns a pair with the first element being the model name, and the second the frame name.
+        * If the shape is attached to the world, both elements are empty strings.
+        */
+        virtual std::pair<std::string, std::string> getShapeParent(size_t shapeIndex) const = 0;
+
+        /**
+        * Set the parent of a shape.
+        * Returns true in case of success, false otherwise (for example if the shape index is out of bounds).
+        * If the modelName and frameName are empty strings, the shape is attached to the world.
+        * If the model name is specified, but not the frame name, it is attached to the root link of the model.
+        */
+        virtual bool setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName) = 0;
+
+        /**
+        * Get the label of a shape.
+        *
+        * Returns nullptr of the shape index is out of bounds.
+        */
+        virtual ILabel* getShapeLabel(size_t shapeIndex) = 0;
+    };
 
 
 /**
@@ -644,6 +749,22 @@ public:
      * reset by resetLinkColor.
      */
     virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor) = 0;
+
+    /**
+     * Set the transparency of a given link of the model.
+     *
+     * This will overwrite the material of the link, but it can be
+     * reset by resetLinkColor.
+     */
+    virtual bool setLinkTransparency(const LinkIndex& linkIndex, const double transparency) = 0;
+
+    /**
+     * Set the transparency of all the links of the model.
+     *
+     * This will overwrite the material of the links, but they can be
+     * reset by resetLinkColor.
+     */
+    virtual void setModelTransparency(const double transparency) = 0;
 
     /**
      * Reset the colors of given link.
@@ -942,6 +1063,11 @@ public:
      * Get a reference to the internal ITexturesHandler interface.
      */
     ITexturesHandler& textures();
+
+    /**
+     * Get a reference to the internal IShapeVisualization interface.
+     */
+    IShapeVisualization& shapes();
 
     /**
      * Get a label given a name. Note: this does not set the text in the label.

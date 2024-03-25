@@ -367,8 +367,27 @@ bool ModelVisualization::setLinkColor(const LinkIndex& linkIndex, const ColorViz
                 geomMat.SpecularColor.setBlue(col.getBlue());
                 geomMat.EmissiveColor.setBlue(col.getBlue());
 
+                geomMat.AmbientColor.setAlpha(col.getAlpha());
+                geomMat.DiffuseColor.setAlpha(col.getAlpha());
+                geomMat.SpecularColor.setAlpha(col.getAlpha());
+                geomMat.EmissiveColor.setAlpha(col.getAlpha());
+
+                if (linkColor.a < 1.0)
+                {
+                    geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+                }
+                else
+                {
+                    geomMat.MaterialType = irr::video::EMT_SOLID;
+                }
+
+
                 geomNode->getMaterial(mat) = geomMat;
             }
+            geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
+            geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+            geomNode->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, false);
+            geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, true);
         }
     }
     return true;
@@ -411,8 +430,14 @@ bool ModelVisualization::resetLinkColor(const LinkIndex& linkIndex)
                 geomMat.SpecularColor.setBlue(materialCache[mat].SpecularColor.getBlue());
                 geomMat.EmissiveColor.setBlue(materialCache[mat].EmissiveColor.getBlue());
 
+                geomMat.MaterialType = irr::video::EMT_SOLID;
+
                 geomNode->getMaterial(mat) = geomMat;
             }
+            geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
+            geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+            geomNode->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, true);
+            geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, false);
         }
     }
    return true;
@@ -473,6 +498,18 @@ void ModelVisualization::close()
 
 }
 
+irr::scene::ISceneNode* ModelVisualization::getFrameSceneNode(const std::string& frameName)
+{
+    size_t frameIndex = pimpl->m_model.getFrameIndex(frameName);
+    if (frameIndex == FRAME_INVALID_INDEX)
+    {
+        std::string errorMsg = "Frame " + frameName + " not found";
+        reportError("ModelVisualization","getFrameSceneNode", errorMsg.c_str());
+        return nullptr;
+    }
+    return pimpl->frameNodes[frameIndex];
+}
+
 std::vector<std::string> ModelVisualization::getFeatures()
 {
     std::vector<std::string> ret;
@@ -480,6 +517,61 @@ std::vector<std::string> ModelVisualization::getFeatures()
     ret.push_back("transparent");
 
     return ret;
+}
+
+void ModelVisualization::setModelTransparency(const double transparency)
+{
+    for (size_t linkIdx = 0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    {
+        setLinkTransparency(linkIdx, transparency);
+    }
+}
+
+bool ModelVisualization::setLinkTransparency(const LinkIndex& linkIndex, const double transparency)
+{
+    if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
+    {
+        reportError("ModelVisualization", "setLinkTransparency", "invalid link index");
+        return false;
+    }
+    irr::u32 alphaValue = static_cast<irr::u32>(255.0 * transparency);
+
+
+    for (size_t geom = 0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
+    {
+        if (pimpl->geomNodes[linkIndex][geom])
+        {
+            irr::scene::ISceneNode* geomNode = pimpl->geomNodes[linkIndex][geom];
+
+            for (size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+            {
+                irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
+
+                geomMat.AmbientColor.setAlpha(alphaValue);
+                geomMat.DiffuseColor.setAlpha(alphaValue);
+                geomMat.SpecularColor.setAlpha(alphaValue);
+                geomMat.EmissiveColor.setAlpha(alphaValue);
+
+                if (transparency < 1.0)
+                {
+                    geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+                }
+                else
+                {
+                    geomMat.MaterialType = irr::video::EMT_SOLID;
+                }
+
+
+                geomNode->getMaterial(mat) = geomMat;
+            }
+            geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
+            geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+            geomNode->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, false); //Do not use vertex color
+            geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, true); //Blend colors to have the transparency effect
+        }
+    }
+
+    return true;
 }
 
 bool ModelVisualization::setFeatureVisibility(const std::string& elementKey, bool isVisible)

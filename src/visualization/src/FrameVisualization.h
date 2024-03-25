@@ -5,9 +5,11 @@
 
 #include <iDynTree/Visualizer.h>
 #include "Label.h"
+#include "ModelVisualization.h"
 
 #include <vector>
 #include <irrlicht.h>
+#include <memory>
 
 namespace iDynTree
 {
@@ -17,10 +19,13 @@ namespace iDynTree
         {
             irr::scene::ISceneNode * visualizationNode = nullptr;
             Label label;
+            std::string parentModel;
+            std::string parentFrame;
         };
 
         std::vector<Frame> m_frames;
         irr::scene::ISceneManager* m_smgr;
+        std::shared_ptr<std::vector<ModelVisualization*>> m_models;
 
         void setFrameTransform(size_t index, const Transform& transformation);
 
@@ -30,7 +35,7 @@ namespace iDynTree
 
         ~FrameVisualization();
 
-        void init(irr::scene::ISceneManager* smgr);
+        void init(irr::scene::ISceneManager* smgr, std::shared_ptr<std::vector<ModelVisualization*>> models);
 
         void close();
 
@@ -47,6 +52,10 @@ namespace iDynTree
         virtual bool getFrameTransform(size_t frameIndex, Transform& currentTransform) const final;
 
         virtual bool updateFrame(size_t frameIndex, const Transform& transformation) final;
+
+        virtual std::pair<std::string, std::string> getFrameParent(size_t frameIndex) const final;
+
+        virtual bool setFrameParent(size_t frameIndex, const std::string& modelName, const std::string& frameName) final;
 
         virtual ILabel* getFrameLabel(size_t frameIndex) final;
 

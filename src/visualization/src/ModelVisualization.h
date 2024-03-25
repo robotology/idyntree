@@ -26,6 +26,8 @@ public:
     bool init(const Model& model, const std::string instanceName, irr::scene::ISceneManager * sceneManager);
     void close();
 
+    irr::scene::ISceneNode * getFrameSceneNode(const std::string& frameName);
+
     virtual bool setPositions(const Transform & world_H_base, const VectorDynSize & jointPos);
     virtual bool setLinkPositions(const LinkPositions & linkPos);
     virtual Model & model();
@@ -38,6 +40,8 @@ public:
     virtual std::vector< std::string > getLinkNames();
     virtual bool setLinkVisibility(const std::string & linkName, bool isVisible);
     virtual std::vector<std::string> getFeatures();
+    virtual void setModelTransparency(const double transparency);
+    virtual bool setLinkTransparency(const LinkIndex& linkIndex, const double transparency);
     virtual bool setFeatureVisibility(const std::string & elementKey, bool isVisible);
     void setWireframeVisibility(bool isVisible);
     void setTransparent(bool isTransparent);

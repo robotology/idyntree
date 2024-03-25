@@ -120,6 +120,22 @@ public:
     virtual ILabel* getVectorLabel(size_t ) override {return nullptr;}
 };
 
+class DummyShapeVisualization : public IShapeVisualization {
+public:
+    virtual ~DummyShapeVisualization() override { };
+    virtual size_t addShape(const iDynTree::SolidShape&, const std::string& = "", const std::string& = "") override { return 0; };
+    virtual bool setVisible(size_t, bool) override { return false; };
+    virtual size_t getNrOfShapes() const override { return 0; };
+    virtual bool getShapeTransform(size_t, Transform&) const override { return false; };
+    virtual bool setShapeTransform(size_t, const Transform&) override { return false; };
+    virtual bool setShapeColor(size_t, const ColorViz&) override { return false; };
+    virtual bool changeShape(size_t, const iDynTree::SolidShape&) override { return false; };
+    virtual std::pair<std::string, std::string> getShapeParent(size_t shapeIndex) const override { return std::pair<std::string, std::string>("", ""); };
+    virtual bool setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName) override { return false; };
+    virtual ILabel* getShapeLabel(size_t) override { return nullptr; };
+};
+
+
 class DummyFrameVisualization : public IFrameVisualization
 {
 public:
@@ -130,6 +146,8 @@ public:
     virtual size_t getNrOfFrames() const override {return 0; };
     virtual bool getFrameTransform(size_t , Transform& ) const override {return false;};
     virtual bool updateFrame(size_t, const Transform&) override {return false;};
+    virtual std::pair<std::string, std::string> getFrameParent(size_t frameIndex) const override { return std::pair<std::string, std::string>("", ""); };
+    virtual bool setFrameParent(size_t frameIndex, const std::string& modelName, const std::string& frameName) override { return false; };
     virtual ILabel* getFrameLabel(size_t) override {return nullptr;};
 };
 
@@ -153,6 +171,8 @@ public:
     virtual void setModelColor(const ColorViz & ) {}
     virtual void resetModelColor() {}
     virtual bool setLinkColor(const LinkIndex &, const ColorViz &) { return false; }
+    virtual bool setLinkTransparency(const LinkIndex&, const double) { return false; }
+    virtual void setModelTransparency(const double ) {}
     virtual bool resetLinkColor(const LinkIndex &) { return false; }
     virtual std::vector< std::string > getLinkNames() { return std::vector<std::string>(); };
     virtual bool setLinkVisibility(const std::string &, bool) { return false; }
