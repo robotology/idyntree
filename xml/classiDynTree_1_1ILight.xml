@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="190" column="13"/>
+        <location file="iDynTree/Visualizer.h" line="198" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a02bc591f676443c5f4819b2e7b4e0052" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>const std::string &amp;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="195" column="32"/>
+        <location file="iDynTree/Visualizer.h" line="203" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a3e4d47366695389be0c404989aeefe9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="200" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="208" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a3961e631d5d488f6186ad526e56a6484" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>LightType</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="205" column="23"/>
+        <location file="iDynTree/Visualizer.h" line="213" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a2fc31019584faf778feeca251c53e532" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="210" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="218" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a8cfd7f00d979aef04e491ad96052b6a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="215" column="32"/>
+        <location file="iDynTree/Visualizer.h" line="223" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a79ad79bcb170f0832d2797c0f9b4dab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="220" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="228" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1aa527fd62b167d7521076619bf6a1ebd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="225" column="23"/>
+        <location file="iDynTree/Visualizer.h" line="233" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a58ff9a230c6a871b0cb5bf78c15ab0e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="230" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="238" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a40f048da7681b93d29e2ff20658e66e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="235" column="22"/>
+        <location file="iDynTree/Visualizer.h" line="243" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a2f9c33f94d5c606b5dbbacaa9507e950" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="240" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="248" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a6aa174b0fbd96c011880bdf2fa137737" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
@@ -190,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="245" column="22"/>
+        <location file="iDynTree/Visualizer.h" line="253" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a0992a9767b6e8834c97de5125639e27f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="250" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="258" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ILight_1a0b173883888a9e197d118615af387610" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="255" column="22"/>
+        <location file="iDynTree/Visualizer.h" line="263" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -230,7 +230,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Visualizer.h" line="184" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="185" bodyend="256"/>
+    <location file="iDynTree/Visualizer.h" line="192" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="193" bodyend="264"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ILight_1a40f048da7681b93d29e2ff20658e66e0" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getAmbientColor</name></member>
       <member refid="classiDynTree_1_1ILight_1a0b173883888a9e197d118615af387610" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getDiffuseColor</name></member>

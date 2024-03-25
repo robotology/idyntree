@@ -104,12 +104,22 @@
               <span class="m-doc-wrap-bumper">auto <a href="#aae2ffba4369ca31174b22485ed437ad4" class="m-doc-self">getFrameTransform</a>(</span><span class="m-doc-wrap">size_t frameIndex,
               <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; currentTransform) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Get frame transform.</dd>
+            <dd>Get frame transform, relative to the parent frame (world if the frame is attached to the world).</dd>
             <dt id="a23f8d062de4ab19c7cdcc29fc9c329e4">
               <span class="m-doc-wrap-bumper">auto <a href="#a23f8d062de4ab19c7cdcc29fc9c329e4" class="m-doc-self">updateFrame</a>(</span><span class="m-doc-wrap">size_t frameIndex,
               const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; transformation) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
-            <dd>Update Frame.</dd>
+            <dd>Update Frame, the transformation is relative to the parent frame (world if the frame is attached to the world).</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8720527e95d43c253c60c11d2489ccf1" class="m-doc">getFrameParent</a>(</span><span class="m-doc-wrap">size_t frameIndex) const -&gt; std::pair&lt;std::string, std::string&gt; <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Get the parent of a frame.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5f3001f2c5ba61fb6a68c9828016af70" class="m-doc">setFrameParent</a>(</span><span class="m-doc-wrap">size_t frameIndex,
+              const std::string&amp; modelName,
+              const std::string&amp; frameName) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Set the parent of a frame.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ae7d29e6ef3940b5cd519b1772f459c56" class="m-doc">getFrameLabel</a>(</span><span class="m-doc-wrap">size_t frameIndex) -&gt; <a href="classiDynTree_1_1ILabel.html" class="m-doc">ILabel</a>* <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -125,6 +135,22 @@
             </h3>
             <p>Set the specified frame visible or not.</p>
 <p>Returns true in case of success, false otherwise (for example if the frame does not exists).</p>
+          </div></section>
+          <section class="m-doc-details" id="a8720527e95d43c253c60c11d2489ccf1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::pair&lt;std::string, std::string&gt; iDynTree::<wbr />IFrameVisualization::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8720527e95d43c253c60c11d2489ccf1" class="m-doc-self">getFrameParent</a>(</span><span class="m-doc-wrap">size_t frameIndex) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Get the parent of a frame.</p>
+<p>Returns a pair with the first element being the model name, and the second the frame name to which it is attached. If the frame is attached to the world, both elements are empty strings.</p>
+          </div></section>
+          <section class="m-doc-details" id="a5f3001f2c5ba61fb6a68c9828016af70"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IFrameVisualization::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5f3001f2c5ba61fb6a68c9828016af70" class="m-doc-self">setFrameParent</a>(</span><span class="m-doc-wrap">size_t frameIndex,
+              const std::string&amp; modelName,
+              const std::string&amp; frameName) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Set the parent of a frame.</p>
+<p>Returns true in case of success, false otherwise (for example if the frame index is out of bounds). If the modelName and frameName are empty strings, the frame is attached to the world. If the model name is specified, but not the frame name, it is attached to the root link of the model.</p>
           </div></section>
           <section class="m-doc-details" id="ae7d29e6ef3940b5cd519b1772f459c56"><div>
             <h3>

@@ -4,10 +4,12 @@
     <compoundname>Visualizer.h</compoundname>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
+    <includes local="no">utility</includes>
     <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
     <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
+    <includes refid="SolidShapes_8h" local="no">iDynTree/SolidShapes.h</includes>
     <incdepgraph>
       <node id="2">
         <label>string</label>
@@ -22,6 +24,11 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>utility</label>
       </node>
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1ICameraAnimator" prot="public">iDynTree::ICameraAnimator</innerclass>
@@ -34,6 +41,7 @@
     <innerclass refid="classiDynTree_1_1ILabel" prot="public">iDynTree::ILabel</innerclass>
     <innerclass refid="classiDynTree_1_1IVectorsVisualization" prot="public">iDynTree::IVectorsVisualization</innerclass>
     <innerclass refid="classiDynTree_1_1IFrameVisualization" prot="public">iDynTree::IFrameVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1IShapeVisualization" prot="public">iDynTree::IShapeVisualization</innerclass>
     <innerclass refid="classiDynTree_1_1IModelVisualization" prot="public">iDynTree::IModelVisualization</innerclass>
     <innerclass refid="classiDynTree_1_1ITexture" prot="public">iDynTree::ITexture</innerclass>
     <innerclass refid="structiDynTree_1_1VisualizerOptions" prot="public">iDynTree::VisualizerOptions</innerclass>
@@ -66,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="173" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="174" bodyend="179"/>
+        <location file="iDynTree/Visualizer.h" line="181" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="182" bodyend="187"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IShapeVisualization" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IShapeVisualization</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1aab23b6fb01a7aa3f84ee34b7bd0d6a49" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::IShapeVisualization::~IShapeVisualization</definition>
+        <argsstring>()=0</argsstring>
+        <name>~IShapeVisualization</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="622" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1af9eaa04388fe031d2b53574005555b66" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IShapeVisualization::addShape</definition>
+        <argsstring>(const iDynTree::SolidShape &amp;shape, const std::string &amp;modelName=&quot;&quot;, const std::string &amp;frameName=&quot;&quot;)=0</argsstring>
+        <name>addShape</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SolidShape" kindref="compound">iDynTree::SolidShape</ref> &amp;</type>
+          <declname>shape</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelName</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Add a shape in the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the modelName and linkName are specified, the shape is attached to the specific frame. If they are not specified, or cannot be found, the shape is attached to the world. If the model name is specified, but not the frame name, it is attached to the root link of the model. The initial transform is specified by the shape itself (Link_H_geometry). Returns the shape index. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="632" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1aa24f4211e1161155f73746d72fe32fa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IShapeVisualization::setVisible</definition>
+        <argsstring>(size_t shapeIndex, bool isVisible)=0</argsstring>
+        <name>setVisible</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isVisible</declname>
+        </param>
+        <briefdescription>
+<para>Set the specified shape visible or not. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns true in case of success, false otherwise (for example if the shape does not exists). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="640" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1a4e643930cd98cbd4a1518427a980e240" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IShapeVisualization::getNrOfShapes</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getNrOfShapes</name>
+        <briefdescription>
+<para>Get the number of visualized shapes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="646" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1a58e9a33ae1f895be43c367e3b0474a89" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IShapeVisualization::getShapeTransform</definition>
+        <argsstring>(size_t shapeIndex, Transform &amp;currentTransform) const =0</argsstring>
+        <name>getShapeTransform</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>currentTransform</declname>
+        </param>
+        <briefdescription>
+<para>Get shape transform with respect the parent frame (world if the shape is attached to the world). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="651" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1a73eea34ab11493a5c7bca51b90bddbe1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IShapeVisualization::setShapeTransform</definition>
+        <argsstring>(size_t shapeIndex, const Transform &amp;transformation)=0</argsstring>
+        <name>setShapeTransform</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>transformation</declname>
+        </param>
+        <briefdescription>
+<para>Set the shape transform with respect the parent frame (world if the shape is attached to the world). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="656" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1aa0964efcd584ce19766ebc56fd59b263" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IShapeVisualization::setShapeColor</definition>
+        <argsstring>(size_t shapeIndex, const ColorViz &amp;shapeColor)=0</argsstring>
+        <name>setShapeColor</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>shapeColor</declname>
+        </param>
+        <briefdescription>
+<para>Set the color of the shape. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns true in case of success, false otherwise (for example if the shape does not exists). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="662" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1a6a9f8bfc87468a1e10233a0cf63e2845" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IShapeVisualization::changeShape</definition>
+        <argsstring>(size_t shapeIndex, const iDynTree::SolidShape &amp;newShape)=0</argsstring>
+        <name>changeShape</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SolidShape" kindref="compound">iDynTree::SolidShape</ref> &amp;</type>
+          <declname>newShape</declname>
+        </param>
+        <briefdescription>
+<para>Change the shape. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The previous shape is removed. Returns true in case of success, false otherwise (for example if the shape index is out of bounds). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="669" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1a07a19691ff38f84f78e5977efe4a91c7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::pair&lt; std::string, std::string &gt;</type>
+        <definition>virtual std::pair&lt;std::string, std::string&gt; iDynTree::IShapeVisualization::getShapeParent</definition>
+        <argsstring>(size_t shapeIndex) const =0</argsstring>
+        <name>getShapeParent</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the parent of a shape. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns a pair with the first element being the model name, and the second the frame name. If the shape is attached to the world, both elements are empty strings. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="677" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1ac49b5a34b05f162e5bcb674490232652" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IShapeVisualization::setShapeParent</definition>
+        <argsstring>(size_t shapeIndex, const std::string &amp;modelName, const std::string &amp;frameName)=0</argsstring>
+        <name>setShapeParent</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelName</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+<para>Set the parent of a shape. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns true in case of success, false otherwise (for example if the shape index is out of bounds). If the modelName and frameName are empty strings, the shape is attached to the world. If the model name is specified, but not the frame name, it is attached to the root link of the model. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="685" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IShapeVisualization_1ac873271d90d2c8e3d67d624ae8cc7acb" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ILabel" kindref="compound">ILabel</ref> *</type>
+        <definition>virtual ILabel* iDynTree::IShapeVisualization::getShapeLabel</definition>
+        <argsstring>(size_t shapeIndex)=0</argsstring>
+        <name>getShapeLabel</name>
+        <param>
+          <type>size_t</type>
+          <declname>shapeIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the label of a shape. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns nullptr of the shape index is out of bounds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="692" column="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to the visualization of generic solid shapes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="616" column="2" bodyfile="iDynTree/Visualizer.h" bodystart="617" bodyend="693"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IShapeVisualization_1af9eaa04388fe031d2b53574005555b66" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>addShape</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1a6a9f8bfc87468a1e10233a0cf63e2845" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>changeShape</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1a4e643930cd98cbd4a1518427a980e240" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>getNrOfShapes</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1ac873271d90d2c8e3d67d624ae8cc7acb" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>getShapeLabel</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1a07a19691ff38f84f78e5977efe4a91c7" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>getShapeParent</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1a58e9a33ae1f895be43c367e3b0474a89" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>getShapeTransform</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1aa0964efcd584ce19766ebc56fd59b263" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>setShapeColor</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1ac49b5a34b05f162e5bcb674490232652" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>setShapeParent</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1a73eea34ab11493a5c7bca51b90bddbe1" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>setShapeTransform</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1aa24f4211e1161155f73746d72fe32fa9" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>setVisible</name></member>
+      <member refid="classiDynTree_1_1IShapeVisualization_1aab23b6fb01a7aa3f84ee34b7bd0d6a49" prot="public" virt="pure-virtual"><scope>iDynTree::IShapeVisualization</scope><name>~IShapeVisualization</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

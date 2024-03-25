@@ -449,6 +449,7 @@
     <member refid="classiDynTree_1_1ColorViz_1a76f94a49b08d57cfcbd1153324f5cc42" kind="function"><name>ColorViz</name></member>
     <member refid="classiDynTree_1_1ColorViz_1afa1267993192af9e91a8a4b63a9f41f9" kind="function"><name>ColorViz</name></member>
     <member refid="classiDynTree_1_1ColorViz_1a66c1f26b9f0ab71c5a0424b7138e4801" kind="function"><name>ColorViz</name></member>
+    <member refid="classiDynTree_1_1ColorViz_1a471d1a7d7fdc27b82545b229ec5690fb" kind="function"><name>toVector4</name></member>
   </compound>
   <compound refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo" kind="struct"><name>internal::kinematics::InverseKinematicsNLP::COMInfo</name>
     <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a41d6a2088ab38e4d65948fe335f89585" kind="variable"><name>com</name></member>
@@ -1308,6 +1309,8 @@
     <member refid="classiDynTree_1_1IFrameVisualization_1a90152872bbbd16ef21e9a8c4e58274de" kind="function"><name>getNrOfFrames</name></member>
     <member refid="classiDynTree_1_1IFrameVisualization_1aae2ffba4369ca31174b22485ed437ad4" kind="function"><name>getFrameTransform</name></member>
     <member refid="classiDynTree_1_1IFrameVisualization_1a23f8d062de4ab19c7cdcc29fc9c329e4" kind="function"><name>updateFrame</name></member>
+    <member refid="classiDynTree_1_1IFrameVisualization_1a8720527e95d43c253c60c11d2489ccf1" kind="function"><name>getFrameParent</name></member>
+    <member refid="classiDynTree_1_1IFrameVisualization_1a5f3001f2c5ba61fb6a68c9828016af70" kind="function"><name>setFrameParent</name></member>
     <member refid="classiDynTree_1_1IFrameVisualization_1ae7d29e6ef3940b5cd519b1772f459c56" kind="function"><name>getFrameLabel</name></member>
   </compound>
   <compound refid="classiDynTree_1_1IJetsVisualization" kind="class"><name>iDynTree::IJetsVisualization</name>
@@ -1403,6 +1406,8 @@
     <member refid="classiDynTree_1_1IModelVisualization_1ab76d9b8e6720e724a4dc3a77c15f01c6" kind="function"><name>setModelColor</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1aae4fd91e3244e38cc00da2460e24d058" kind="function"><name>resetModelColor</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1abe6388fc1ac461069a69f434606104ae" kind="function"><name>setLinkColor</name></member>
+    <member refid="classiDynTree_1_1IModelVisualization_1a47a8c09072212540ab0e233b1981254a" kind="function"><name>setLinkTransparency</name></member>
+    <member refid="classiDynTree_1_1IModelVisualization_1ae9b1507fd93b3c47b62b69293dd0f7b3" kind="function"><name>setModelTransparency</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1a17fc5c0d21dbd2480e28afda70955804" kind="function"><name>resetLinkColor</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1a4d216f8ba410a9a827b6e5495d1fa441" kind="function"><name>getLinkNames</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1a86dcccc124cafe7280578d9f66dd13fd" kind="function"><name>setLinkVisibility</name></member>
@@ -1791,6 +1796,19 @@
   <compound refid="structiDynTree_1_1SpanUtils_1_1is__value__defined" kind="struct"><name>iDynTree::SpanUtils::is_value_defined</name>
   </compound>
   <compound refid="structiDynTree_1_1SpanUtils_1_1is__value__defined_3_01T_00_01void__t_3_01typename_01T_1_1value__type_01_4_01_4" kind="struct"><name>iDynTree::SpanUtils::is_value_defined&lt; T, void_t&lt; typename T::value_type &gt; &gt;</name>
+  </compound>
+  <compound refid="classiDynTree_1_1IShapeVisualization" kind="class"><name>iDynTree::IShapeVisualization</name>
+    <member refid="classiDynTree_1_1IShapeVisualization_1aab23b6fb01a7aa3f84ee34b7bd0d6a49" kind="function"><name>~IShapeVisualization</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1af9eaa04388fe031d2b53574005555b66" kind="function"><name>addShape</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1aa24f4211e1161155f73746d72fe32fa9" kind="function"><name>setVisible</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1a4e643930cd98cbd4a1518427a980e240" kind="function"><name>getNrOfShapes</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1a58e9a33ae1f895be43c367e3b0474a89" kind="function"><name>getShapeTransform</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1a73eea34ab11493a5c7bca51b90bddbe1" kind="function"><name>setShapeTransform</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1aa0964efcd584ce19766ebc56fd59b263" kind="function"><name>setShapeColor</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1a6a9f8bfc87468a1e10233a0cf63e2845" kind="function"><name>changeShape</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1a07a19691ff38f84f78e5977efe4a91c7" kind="function"><name>getShapeParent</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1ac49b5a34b05f162e5bcb674490232652" kind="function"><name>setShapeParent</name></member>
+    <member refid="classiDynTree_1_1IShapeVisualization_1ac873271d90d2c8e3d67d624ae8cc7acb" kind="function"><name>getShapeLabel</name></member>
   </compound>
   <compound refid="classiDynTree_1_1SensorsList_1_1Iterator" kind="class"><name>iDynTree::SensorsList::Iterator</name>
     <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1acd63c8936ef18a499d255dea8dfb02e6" kind="typedef"><name>difference_type</name></member>
@@ -4099,6 +4117,7 @@
     <member refid="classiDynTree_1_1Visualizer_1ad4761debeba7c653950ab787eb6ef8b0" kind="function"><name>vectors</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a3f444edda1dfd065fadc647f2f1db9e1" kind="function"><name>frames</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a15f64be8e23de06b9a99fd7920380c71" kind="function"><name>textures</name></member>
+    <member refid="classiDynTree_1_1Visualizer_1aad226dd32e2bc57917718fc609d761b8" kind="function"><name>shapes</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a346dd8b22b45d1251581ccbcc8882e57" kind="function"><name>getLabel</name></member>
     <member refid="classiDynTree_1_1Visualizer_1aa95587b7992c90383ff4ab25c9fc4102" kind="function"><name>width</name></member>
     <member refid="classiDynTree_1_1Visualizer_1acb040534c8e4e16e5a067c2319dfedb7" kind="function"><name>height</name></member>
