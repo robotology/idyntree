@@ -372,6 +372,16 @@ bool ModelVisualization::setLinkColor(const LinkIndex& linkIndex, const ColorViz
                 geomMat.SpecularColor.setAlpha(col.getAlpha());
                 geomMat.EmissiveColor.setAlpha(col.getAlpha());
 
+                if (linkColor.a < 1.0)
+                {
+                    geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+                }
+                else
+                {
+                    geomMat.MaterialType = irr::video::EMT_SOLID;
+                }
+
+
                 geomNode->getMaterial(mat) = geomMat;
             }
             geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
@@ -419,6 +429,8 @@ bool ModelVisualization::resetLinkColor(const LinkIndex& linkIndex)
                 geomMat.DiffuseColor.setBlue(materialCache[mat].DiffuseColor.getBlue());
                 geomMat.SpecularColor.setBlue(materialCache[mat].SpecularColor.getBlue());
                 geomMat.EmissiveColor.setBlue(materialCache[mat].EmissiveColor.getBlue());
+
+                geomMat.MaterialType = irr::video::EMT_SOLID;
 
                 geomNode->getMaterial(mat) = geomMat;
             }
@@ -539,6 +551,16 @@ bool ModelVisualization::setLinkTransparency(const LinkIndex& linkIndex, const d
                 geomMat.DiffuseColor.setAlpha(alphaValue);
                 geomMat.SpecularColor.setAlpha(alphaValue);
                 geomMat.EmissiveColor.setAlpha(alphaValue);
+
+                if (transparency < 1.0)
+                {
+                    geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+                }
+                else
+                {
+                    geomMat.MaterialType = irr::video::EMT_SOLID;
+                }
+
 
                 geomNode->getMaterial(mat) = geomMat;
             }

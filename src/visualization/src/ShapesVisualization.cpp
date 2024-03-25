@@ -131,7 +131,14 @@ bool iDynTree::ShapeVisualization::setShapeColor(size_t shapeIndex, const ColorV
     {
         irr::video::SMaterial& material = m_shapes[shapeIndex].node->getMaterial(mat);
         material = idyntree2irr(m_shapes[shapeIndex].shape->getMaterial().color());
-        material.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+        if (shapeColor.a < 1.0)
+        {
+            material.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+        }
+        else
+        {
+            material.MaterialType = irr::video::EMT_SOLID;
+        }
     }
     m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
     m_shapes[shapeIndex].node->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
