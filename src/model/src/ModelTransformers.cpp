@@ -21,12 +21,10 @@ namespace iDynTree
 {
 
 /**
- * Check the condition for deciding if a model has a fake base link.
- * The three conditions for a base link to be considered "fake" are:
- *  * if the base link is massless,
- *  * if the base link has only one child,
- *  * if the base link is attached to its only child with a fixed joint,
- *
+ * The condition for a link to be classified as "fake link" are:
+ *  * The link has a zero mass.
+ *  * The link is a leaf, i.e. it is connected to only one neighbor.
+ *  * The link is connected to its only neighbor with a fixed joint.
  */
 bool isFakeLink(const Model& modelWithFakeLinks, const LinkIndex linkToCheck)
 {
