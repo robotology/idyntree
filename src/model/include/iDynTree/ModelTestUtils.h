@@ -120,7 +120,7 @@ inline std::string int2string(int i)
     return ss.str();
 }
 
-inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10)
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false)
 {
     Model model;
 
@@ -130,7 +130,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = getRandomLinkOfModel(model);
         std::string linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName);
+        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
