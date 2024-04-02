@@ -3992,10 +3992,10 @@
         </inbodydescription>
         <location file="iDynTree/ModelTestUtils.h" line="114" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="114" bodyend="121"/>
       </memberdef>
-      <memberdef kind="function" id="ModelTestUtils_8h_1ab524c8553e271868a40123e2e7d9ae7d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="ModelTestUtils_8h_1a0aa7e6e0780497939a29fe8d6b635834" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
         <definition>Model iDynTree::getRandomModel</definition>
-        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10)</argsstring>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, bool onlyRevoluteJoints=false)</argsstring>
         <name>getRandomModel</name>
         <param>
           <type>unsigned int</type>
@@ -4005,6 +4005,11 @@
           <type>size_t</type>
           <declname>nrOfAdditionalFrames</declname>
           <defval>10</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>onlyRevoluteJoints</declname>
+          <defval>false</defval>
         </param>
         <briefdescription>
         </briefdescription>

@@ -4439,7 +4439,7 @@
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" kind="function"><name>int2string</name></member>
-    <member refid="ModelTestUtils_8h_1ab524c8553e271868a40123e2e7d9ae7d" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a0aa7e6e0780497939a29fe8d6b635834" kind="function"><name>getRandomModel</name></member>
     <member refid="ModelTestUtils_8h_1aced0d1a54a20c982a5d1ec11f40d8b2f" kind="function"><name>getRandomChain</name></member>
     <member refid="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" kind="function"><name>getRandomJointPositions</name></member>
     <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
@@ -5280,7 +5280,7 @@
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" kind="function"><name>int2string</name></member>
-    <member refid="ModelTestUtils_8h_1ab524c8553e271868a40123e2e7d9ae7d" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a0aa7e6e0780497939a29fe8d6b635834" kind="function"><name>getRandomModel</name></member>
     <member refid="ModelTestUtils_8h_1aced0d1a54a20c982a5d1ec11f40d8b2f" kind="function"><name>getRandomChain</name></member>
     <member refid="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" kind="function"><name>getRandomJointPositions</name></member>
     <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
