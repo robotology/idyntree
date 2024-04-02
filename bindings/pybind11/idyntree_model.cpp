@@ -121,11 +121,12 @@ void traversalClassDefinition(py::class_<Traversal>& traversal) {
         module
             .def("get_random_model",
                  iDynTree::getRandomModel,
-                 py::arg("nr_of_joints"), py::arg("nr_of_additional_frames") = 10)
+                 py::arg("nr_of_joints"), py::arg("nr_of_additional_frames") = 10,
+                 py::arg("only_revolute_joints") = false)
             .def("get_random_chain",
                  iDynTree::getRandomChain,
                  py::arg("nr_of_joints"), py::arg("nr_of_additional_frames") = 10,
-                 py::arg("nr_fixed") = false);
+                 py::arg("only_revolute_joints") = false);
     }
 
 }  // namespace
