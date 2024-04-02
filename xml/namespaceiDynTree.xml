@@ -7,6 +7,35 @@
     <innerclass refid="classiDynTree_1_1Polygon2D" prot="public">iDynTree::Polygon2D</innerclass>
     <innerclass refid="classiDynTree_1_1ConvexHullProjectionConstraint" prot="public">iDynTree::ConvexHullProjectionConstraint</innerclass>
     <innerclass refid="classiDynTree_1_1InverseKinematics" prot="public">iDynTree::InverseKinematics</innerclass>
+    <innerclass refid="structiDynTree_1_1AttitudeEstimatorState" prot="public">iDynTree::AttitudeEstimatorState</innerclass>
+    <innerclass refid="classiDynTree_1_1IAttitudeEstimator" prot="public">iDynTree::IAttitudeEstimator</innerclass>
+    <innerclass refid="structiDynTree_1_1AttitudeMahonyFilterParameters" prot="public">iDynTree::AttitudeMahonyFilterParameters</innerclass>
+    <innerclass refid="classiDynTree_1_1AttitudeMahonyFilter" prot="public">iDynTree::AttitudeMahonyFilter</innerclass>
+    <innerclass refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" prot="public">iDynTree::AttitudeQuaternionEKFParameters</innerclass>
+    <innerclass refid="classiDynTree_1_1AttitudeQuaternionEKF" prot="public">iDynTree::AttitudeQuaternionEKF</innerclass>
+    <innerclass refid="structiDynTree_1_1BerdyOptions" prot="public">iDynTree::BerdyOptions</innerclass>
+    <innerclass refid="structiDynTree_1_1BerdySensor" prot="public">iDynTree::BerdySensor</innerclass>
+    <innerclass refid="structiDynTree_1_1BerdyDynamicVariable" prot="public">iDynTree::BerdyDynamicVariable</innerclass>
+    <innerclass refid="classiDynTree_1_1BerdyHelper" prot="public">iDynTree::BerdyHelper</innerclass>
+    <innerclass refid="classiDynTree_1_1SparseMatrix" prot="public">iDynTree::SparseMatrix</innerclass>
+    <innerclass refid="classiDynTree_1_1BerdySparseMAPSolver" prot="public">iDynTree::BerdySparseMAPSolver</innerclass>
+    <innerclass refid="classiDynTree_1_1BipedFootContactClassifier" prot="public">iDynTree::BipedFootContactClassifier</innerclass>
+    <innerclass refid="structiDynTree_1_1SchmittParams" prot="public">iDynTree::SchmittParams</innerclass>
+    <innerclass refid="classiDynTree_1_1ContactStateMachine" prot="public">iDynTree::ContactStateMachine</innerclass>
+    <innerclass refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper" prot="public">iDynTree::DiscreteExtendedKalmanFilterHelper</innerclass>
+    <innerclass refid="structiDynTree_1_1UnknownWrenchContact" prot="public">iDynTree::UnknownWrenchContact</innerclass>
+    <innerclass refid="classiDynTree_1_1LinkUnknownWrenchContacts" prot="public">iDynTree::LinkUnknownWrenchContacts</innerclass>
+    <innerclass refid="structiDynTree_1_1estimateExternalWrenchesBuffers" prot="public">iDynTree::estimateExternalWrenchesBuffers</innerclass>
+    <innerclass refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator" prot="public">iDynTree::ExtWrenchesAndJointTorquesEstimator</innerclass>
+    <innerclass refid="classiDynTree_1_1GravityCompensationHelper" prot="public">iDynTree::GravityCompensationHelper</innerclass>
+    <innerclass refid="classiDynTree_1_1DiscreteKalmanFilterHelper" prot="public">iDynTree::DiscreteKalmanFilterHelper</innerclass>
+    <innerclass refid="classiDynTree_1_1SchmittTrigger" prot="public">iDynTree::SchmittTrigger</innerclass>
+    <innerclass refid="classiDynTree_1_1SimpleLeggedOdometry" prot="public">iDynTree::SimpleLeggedOdometry</innerclass>
+    <innerclass refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" prot="public">iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions</innerclass>
+    <innerclass refid="classiDynTree_1_1iKinLimbImported" prot="public">iDynTree::iKinLimbImported</innerclass>
+    <innerclass refid="classiDynTree_1_1skinDynLibLinkID" prot="public">iDynTree::skinDynLibLinkID</innerclass>
+    <innerclass refid="classiDynTree_1_1iDynTreeLinkAndFrame" prot="public">iDynTree::iDynTreeLinkAndFrame</innerclass>
+    <innerclass refid="classiDynTree_1_1skinDynLibConversionsHelper" prot="public">iDynTree::skinDynLibConversionsHelper</innerclass>
     <innerclass refid="classiDynTree_1_1AccelerometerSensor" prot="public">iDynTree::AccelerometerSensor</innerclass>
     <innerclass refid="classiDynTree_1_1ContactWrench" prot="public">iDynTree::ContactWrench</innerclass>
     <innerclass refid="classiDynTree_1_1LinkContactWrenches" prot="public">iDynTree::LinkContactWrenches</innerclass>
@@ -62,6 +91,23 @@
     <innerclass refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" prot="public">iDynTree::ThreeAxisAngularAccelerometerSensor</innerclass>
     <innerclass refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" prot="public">iDynTree::ThreeAxisForceTorqueContactSensor</innerclass>
     <innerclass refid="classiDynTree_1_1Traversal" prot="public">iDynTree::Traversal</innerclass>
+    <innerclass refid="classiDynTree_1_1MeshcatVisualizer" prot="public">iDynTree::MeshcatVisualizer</innerclass>
+    <innerclass refid="classiDynTree_1_1ICameraAnimator" prot="public">iDynTree::ICameraAnimator</innerclass>
+    <innerclass refid="classiDynTree_1_1ICamera" prot="public">iDynTree::ICamera</innerclass>
+    <innerclass refid="classiDynTree_1_1ColorViz" prot="public">iDynTree::ColorViz</innerclass>
+    <innerclass refid="classiDynTree_1_1PixelViz" prot="public">iDynTree::PixelViz</innerclass>
+    <innerclass refid="classiDynTree_1_1ILight" prot="public">iDynTree::ILight</innerclass>
+    <innerclass refid="classiDynTree_1_1IEnvironment" prot="public">iDynTree::IEnvironment</innerclass>
+    <innerclass refid="classiDynTree_1_1IJetsVisualization" prot="public">iDynTree::IJetsVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1ILabel" prot="public">iDynTree::ILabel</innerclass>
+    <innerclass refid="classiDynTree_1_1IVectorsVisualization" prot="public">iDynTree::IVectorsVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1IFrameVisualization" prot="public">iDynTree::IFrameVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1IShapeVisualization" prot="public">iDynTree::IShapeVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1IModelVisualization" prot="public">iDynTree::IModelVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1ITexture" prot="public">iDynTree::ITexture</innerclass>
+    <innerclass refid="structiDynTree_1_1VisualizerOptions" prot="public">iDynTree::VisualizerOptions</innerclass>
+    <innerclass refid="classiDynTree_1_1ITexturesHandler" prot="public">iDynTree::ITexturesHandler</innerclass>
+    <innerclass refid="classiDynTree_1_1Visualizer" prot="public">iDynTree::Visualizer</innerclass>
     <innerclass refid="classiDynTree_1_1KinDynComputations" prot="public">iDynTree::KinDynComputations</innerclass>
     <innerclass refid="classiDynTree_1_1ArticulatedBodyInertia" prot="public">iDynTree::ArticulatedBodyInertia</innerclass>
     <innerclass refid="classiDynTree_1_1Axis" prot="public">iDynTree::Axis</innerclass>
@@ -79,7 +125,6 @@
     <innerclass refid="classiDynTree_1_1RotationalInertia" prot="public">iDynTree::RotationalInertia</innerclass>
     <innerclass refid="structiDynTree_1_1GeodesicL2MeanOptions" prot="public">iDynTree::GeodesicL2MeanOptions</innerclass>
     <innerclass refid="classiDynTree_1_1Span" prot="public">iDynTree::Span</innerclass>
-    <innerclass refid="classiDynTree_1_1SparseMatrix" prot="public">iDynTree::SparseMatrix</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialAcc" prot="public">iDynTree::SpatialAcc</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialForceVector" prot="public">iDynTree::SpatialForceVector</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialInertia" prot="public">iDynTree::SpatialInertia</innerclass>
@@ -103,52 +148,6 @@
     <innerclass refid="classiDynTree_1_1VectorDynSize" prot="public">iDynTree::VectorDynSize</innerclass>
     <innerclass refid="classiDynTree_1_1VectorFixSize" prot="public">iDynTree::VectorFixSize</innerclass>
     <innerclass refid="classiDynTree_1_1Wrench" prot="public">iDynTree::Wrench</innerclass>
-    <innerclass refid="structiDynTree_1_1AttitudeEstimatorState" prot="public">iDynTree::AttitudeEstimatorState</innerclass>
-    <innerclass refid="classiDynTree_1_1IAttitudeEstimator" prot="public">iDynTree::IAttitudeEstimator</innerclass>
-    <innerclass refid="structiDynTree_1_1AttitudeMahonyFilterParameters" prot="public">iDynTree::AttitudeMahonyFilterParameters</innerclass>
-    <innerclass refid="classiDynTree_1_1AttitudeMahonyFilter" prot="public">iDynTree::AttitudeMahonyFilter</innerclass>
-    <innerclass refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" prot="public">iDynTree::AttitudeQuaternionEKFParameters</innerclass>
-    <innerclass refid="classiDynTree_1_1AttitudeQuaternionEKF" prot="public">iDynTree::AttitudeQuaternionEKF</innerclass>
-    <innerclass refid="structiDynTree_1_1BerdyOptions" prot="public">iDynTree::BerdyOptions</innerclass>
-    <innerclass refid="structiDynTree_1_1BerdySensor" prot="public">iDynTree::BerdySensor</innerclass>
-    <innerclass refid="structiDynTree_1_1BerdyDynamicVariable" prot="public">iDynTree::BerdyDynamicVariable</innerclass>
-    <innerclass refid="classiDynTree_1_1BerdyHelper" prot="public">iDynTree::BerdyHelper</innerclass>
-    <innerclass refid="classiDynTree_1_1BerdySparseMAPSolver" prot="public">iDynTree::BerdySparseMAPSolver</innerclass>
-    <innerclass refid="classiDynTree_1_1BipedFootContactClassifier" prot="public">iDynTree::BipedFootContactClassifier</innerclass>
-    <innerclass refid="structiDynTree_1_1SchmittParams" prot="public">iDynTree::SchmittParams</innerclass>
-    <innerclass refid="classiDynTree_1_1ContactStateMachine" prot="public">iDynTree::ContactStateMachine</innerclass>
-    <innerclass refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper" prot="public">iDynTree::DiscreteExtendedKalmanFilterHelper</innerclass>
-    <innerclass refid="structiDynTree_1_1UnknownWrenchContact" prot="public">iDynTree::UnknownWrenchContact</innerclass>
-    <innerclass refid="classiDynTree_1_1LinkUnknownWrenchContacts" prot="public">iDynTree::LinkUnknownWrenchContacts</innerclass>
-    <innerclass refid="structiDynTree_1_1estimateExternalWrenchesBuffers" prot="public">iDynTree::estimateExternalWrenchesBuffers</innerclass>
-    <innerclass refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator" prot="public">iDynTree::ExtWrenchesAndJointTorquesEstimator</innerclass>
-    <innerclass refid="classiDynTree_1_1GravityCompensationHelper" prot="public">iDynTree::GravityCompensationHelper</innerclass>
-    <innerclass refid="classiDynTree_1_1DiscreteKalmanFilterHelper" prot="public">iDynTree::DiscreteKalmanFilterHelper</innerclass>
-    <innerclass refid="classiDynTree_1_1SchmittTrigger" prot="public">iDynTree::SchmittTrigger</innerclass>
-    <innerclass refid="classiDynTree_1_1SimpleLeggedOdometry" prot="public">iDynTree::SimpleLeggedOdometry</innerclass>
-    <innerclass refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" prot="public">iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions</innerclass>
-    <innerclass refid="classiDynTree_1_1MeshcatVisualizer" prot="public">iDynTree::MeshcatVisualizer</innerclass>
-    <innerclass refid="classiDynTree_1_1ICameraAnimator" prot="public">iDynTree::ICameraAnimator</innerclass>
-    <innerclass refid="classiDynTree_1_1ICamera" prot="public">iDynTree::ICamera</innerclass>
-    <innerclass refid="classiDynTree_1_1ColorViz" prot="public">iDynTree::ColorViz</innerclass>
-    <innerclass refid="classiDynTree_1_1PixelViz" prot="public">iDynTree::PixelViz</innerclass>
-    <innerclass refid="classiDynTree_1_1ILight" prot="public">iDynTree::ILight</innerclass>
-    <innerclass refid="classiDynTree_1_1IEnvironment" prot="public">iDynTree::IEnvironment</innerclass>
-    <innerclass refid="classiDynTree_1_1IJetsVisualization" prot="public">iDynTree::IJetsVisualization</innerclass>
-    <innerclass refid="classiDynTree_1_1ILabel" prot="public">iDynTree::ILabel</innerclass>
-    <innerclass refid="classiDynTree_1_1IVectorsVisualization" prot="public">iDynTree::IVectorsVisualization</innerclass>
-    <innerclass refid="classiDynTree_1_1IFrameVisualization" prot="public">iDynTree::IFrameVisualization</innerclass>
-    <innerclass refid="classiDynTree_1_1IShapeVisualization" prot="public">iDynTree::IShapeVisualization</innerclass>
-    <innerclass refid="classiDynTree_1_1IModelVisualization" prot="public">iDynTree::IModelVisualization</innerclass>
-    <innerclass refid="classiDynTree_1_1ITexture" prot="public">iDynTree::ITexture</innerclass>
-    <innerclass refid="structiDynTree_1_1VisualizerOptions" prot="public">iDynTree::VisualizerOptions</innerclass>
-    <innerclass refid="classiDynTree_1_1ITexturesHandler" prot="public">iDynTree::ITexturesHandler</innerclass>
-    <innerclass refid="classiDynTree_1_1Visualizer" prot="public">iDynTree::Visualizer</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLAttribute" prot="public">iDynTree::XMLAttribute</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLDocument" prot="public">iDynTree::XMLDocument</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLElement" prot="public">iDynTree::XMLElement</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLParser" prot="public">iDynTree::XMLParser</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLParserState" prot="public">iDynTree::XMLParserState</innerclass>
     <innerclass refid="classiDynTree_1_1ModelCalibrationHelper" prot="public">iDynTree::ModelCalibrationHelper</innerclass>
     <innerclass refid="structiDynTree_1_1ModelExporterOptions" prot="public">iDynTree::ModelExporterOptions</innerclass>
     <innerclass refid="classiDynTree_1_1ModelExporter" prot="public">iDynTree::ModelExporter</innerclass>
@@ -169,10 +168,11 @@
     <innerclass refid="classiDynTree_1_1GyroscopeSensorHelper" prot="public">iDynTree::GyroscopeSensorHelper</innerclass>
     <innerclass refid="classiDynTree_1_1URDFDocument" prot="public">iDynTree::URDFDocument</innerclass>
     <innerclass refid="classiDynTree_1_1VisualElement" prot="public">iDynTree::VisualElement</innerclass>
-    <innerclass refid="classiDynTree_1_1iKinLimbImported" prot="public">iDynTree::iKinLimbImported</innerclass>
-    <innerclass refid="classiDynTree_1_1skinDynLibLinkID" prot="public">iDynTree::skinDynLibLinkID</innerclass>
-    <innerclass refid="classiDynTree_1_1iDynTreeLinkAndFrame" prot="public">iDynTree::iDynTreeLinkAndFrame</innerclass>
-    <innerclass refid="classiDynTree_1_1skinDynLibConversionsHelper" prot="public">iDynTree::skinDynLibConversionsHelper</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLAttribute" prot="public">iDynTree::XMLAttribute</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLDocument" prot="public">iDynTree::XMLDocument</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLElement" prot="public">iDynTree::XMLElement</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLParser" prot="public">iDynTree::XMLParser</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLParserState" prot="public">iDynTree::XMLParserState</innerclass>
     <innernamespace refid="namespaceiDynTree_1_1details">iDynTree::details</innernamespace>
     <innernamespace refid="namespaceiDynTree_1_1MatrixViewInternal">iDynTree::MatrixViewInternal</innernamespace>
     <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
@@ -254,160 +254,6 @@
         </inbodydescription>
         <location file="iDynTree/InverseKinematics.h" line="66" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="66" bodyend="71"/>
       </memberdef>
-      <memberdef kind="enum" id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375a" prot="public" static="no" strong="no">
-        <type></type>
-        <name>FrameVelocityRepresentation</name>
-        <enumvalue id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" prot="public">
-          <name>INERTIAL_FIXED_REPRESENTATION</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" prot="public">
-          <name>BODY_FIXED_REPRESENTATION</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" prot="public">
-          <name>MIXED_REPRESENTATION</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-<para>Possible frame velocity representation convention. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Given a link <formula id="20">$L$</formula> and an absolute frame <formula id="18">$A$</formula>, the the possible frame velocity representation are the following:<itemizedlist>
-<listitem><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="35">${}^{A} \mathrm{v}_{A,B}$</formula>,</para>
-</listitem><listitem><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="36">${}^{B} \mathrm{v}_{A,B}$</formula>,</para>
-</listitem><listitem><para><computeroutput>MIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="37">${}^{B[A]} \mathrm{v}_{A,B}$</formula>.</para>
-</listitem></itemizedlist>
-</para>
-<para>See <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> documentation for more details. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/FreeFloatingMatrices.h" line="25" column="1" bodyfile="iDynTree/FreeFloatingMatrices.h" bodystart="26" bodyend="30"/>
-      </memberdef>
-      <memberdef kind="enum" id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" prot="public" static="no" strong="no">
-        <type></type>
-        <name>JointDynamicsType</name>
-        <enumvalue id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" prot="public">
-          <name>NoJointDynamics</name>
-          <initializer>= 0</initializer>
-          <briefdescription>
-<para>NoDynamics: No joint dynamics is assumed for the joint. </para>
-          </briefdescription>
-          <detaileddescription>
-<para>This joint dynamics type does not consider any parameter. </para>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" prot="public">
-          <name>URDFJointDynamics</name>
-          <initializer>= 1</initializer>
-          <briefdescription>
-<para>URDFJointDynamics: Dynamics described by the URDF 1.0 specification. </para>
-          </briefdescription>
-          <detaileddescription>
-<para>This joint dynamics type consider the following parameters:<itemizedlist>
-<listitem><para><computeroutput>Damping</computeroutput></para>
-</listitem><listitem><para><computeroutput>StaticFriction</computeroutput> </para>
-</listitem></itemizedlist>
-</para>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/IJoint.h" line="21" column="5" bodyfile="iDynTree/IJoint.h" bodystart="22" bodyend="37"/>
-      </memberdef>
-      <memberdef kind="enum" id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" prot="public" static="no" strong="no">
-        <type></type>
-        <name>SensorType</name>
-        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" prot="public">
-          <name>SIX_AXIS_FORCE_TORQUE</name>
-          <initializer>= 0</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" prot="public">
-          <name>ACCELEROMETER</name>
-          <initializer>= 1</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" prot="public">
-          <name>GYROSCOPE</name>
-          <initializer>= 2</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" prot="public">
-          <name>THREE_AXIS_ANGULAR_ACCELEROMETER</name>
-          <initializer>= 3</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" prot="public">
-          <name>THREE_AXIS_FORCE_TORQUE_CONTACT</name>
-          <initializer>= 4</initializer>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/Sensors.h" line="28" column="5" bodyfile="iDynTree/Sensors.h" bodystart="29" bodyend="35"/>
-      </memberdef>
-      <memberdef kind="enum" id="Utils_8h_1a1d9848852f7effdff0a7206e361759dc" prot="public" static="no" strong="no">
-        <type></type>
-        <name>MatrixStorageOrdering</name>
-        <enumvalue id="Utils_8h_1a1d9848852f7effdff0a7206e361759dca2b26025c525aa73dc7d5a8ab6b75c277" prot="public">
-          <name>RowMajor</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-<para>Row Major ordering, i.e. matrix is serialized row by row </para>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="Utils_8h_1a1d9848852f7effdff0a7206e361759dcaa2d6963e41f11651763298147696f0dc" prot="public">
-          <name>ColumnMajor</name>
-          <briefdescription>
-          </briefdescription>
-          <detaileddescription>
-<para>Column Major ordering, i.e. matrix is serialized row by column </para>
-          </detaileddescription>
-        </enumvalue>
-        <briefdescription>
-<para>Enum describing the possible matrix storage ordering. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/Utils.h" line="117" column="5" bodyfile="iDynTree/Utils.h" bodystart="117" bodyend="120"/>
-      </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" prot="public" static="no" strong="no">
         <type></type>
         <name>BerdyVariants</name>
@@ -461,7 +307,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="288">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="289">$ f^B_i $</formula> </para>
+<para><formula id="85">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="86">$ f^B_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" prot="public">
@@ -469,7 +315,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="290">$ f_i $</formula> </para>
+<para><formula id="87">$ f_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312adaecc7fb3d43b48487ae03dfec685fb8" prot="public">
@@ -477,7 +323,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="291">$ \tau_i $</formula> </para>
+<para><formula id="88">$ \tau_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a80199996cf9e8b7d5171d762533f6c0c" prot="public">
@@ -485,7 +331,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="292">$ f^x_i $</formula> </para>
+<para><formula id="89">$ f^x_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312aa13efb04f5c05ca865f2aee0fd03fe68" prot="public">
@@ -493,7 +339,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="293">$ \ddot{q}_i $</formula> </para>
+<para><formula id="90">$ \ddot{q}_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a9a69ec4d25d83b00175dc3adb8edce00" prot="public">
@@ -727,6 +573,132 @@
         </inbodydescription>
         <location file="iDynTree/ModelTransformersSolidShapes.h" line="21" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="21" bodyend="23"/>
       </memberdef>
+      <memberdef kind="enum" id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375a" prot="public" static="no" strong="no">
+        <type></type>
+        <name>FrameVelocityRepresentation</name>
+        <enumvalue id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" prot="public">
+          <name>INERTIAL_FIXED_REPRESENTATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" prot="public">
+          <name>BODY_FIXED_REPRESENTATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" prot="public">
+          <name>MIXED_REPRESENTATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Possible frame velocity representation convention. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given a link <formula id="164">$L$</formula> and an absolute frame <formula id="18">$A$</formula>, the the possible frame velocity representation are the following:<itemizedlist>
+<listitem><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="179">${}^{A} \mathrm{v}_{A,B}$</formula>,</para>
+</listitem><listitem><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="180">${}^{B} \mathrm{v}_{A,B}$</formula>,</para>
+</listitem><listitem><para><computeroutput>MIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="181">${}^{B[A]} \mathrm{v}_{A,B}$</formula>.</para>
+</listitem></itemizedlist>
+</para>
+<para>See <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> documentation for more details. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/FreeFloatingMatrices.h" line="25" column="1" bodyfile="iDynTree/FreeFloatingMatrices.h" bodystart="26" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="enum" id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" prot="public" static="no" strong="no">
+        <type></type>
+        <name>JointDynamicsType</name>
+        <enumvalue id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" prot="public">
+          <name>NoJointDynamics</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>NoDynamics: No joint dynamics is assumed for the joint. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>This joint dynamics type does not consider any parameter. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" prot="public">
+          <name>URDFJointDynamics</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>URDFJointDynamics: Dynamics described by the URDF 1.0 specification. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>This joint dynamics type consider the following parameters:<itemizedlist>
+<listitem><para><computeroutput>Damping</computeroutput></para>
+</listitem><listitem><para><computeroutput>StaticFriction</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/IJoint.h" line="21" column="5" bodyfile="iDynTree/IJoint.h" bodystart="22" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="enum" id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" prot="public" static="no" strong="no">
+        <type></type>
+        <name>SensorType</name>
+        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" prot="public">
+          <name>SIX_AXIS_FORCE_TORQUE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" prot="public">
+          <name>ACCELEROMETER</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" prot="public">
+          <name>GYROSCOPE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" prot="public">
+          <name>THREE_AXIS_ANGULAR_ACCELEROMETER</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" prot="public">
+          <name>THREE_AXIS_FORCE_TORQUE_CONTACT</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors.h" line="28" column="5" bodyfile="iDynTree/Sensors.h" bodystart="29" bodyend="35"/>
+      </memberdef>
       <memberdef kind="enum" id="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515a" prot="public" static="no" strong="no">
         <type></type>
         <name>LightType</name>
@@ -754,8 +726,101 @@
         </inbodydescription>
         <location file="iDynTree/Visualizer.h" line="181" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="182" bodyend="187"/>
       </memberdef>
+      <memberdef kind="enum" id="Utils_8h_1a1d9848852f7effdff0a7206e361759dc" prot="public" static="no" strong="no">
+        <type></type>
+        <name>MatrixStorageOrdering</name>
+        <enumvalue id="Utils_8h_1a1d9848852f7effdff0a7206e361759dca2b26025c525aa73dc7d5a8ab6b75c277" prot="public">
+          <name>RowMajor</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Row Major ordering, i.e. matrix is serialized row by row </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_8h_1a1d9848852f7effdff0a7206e361759dcaa2d6963e41f11651763298147696f0dc" prot="public">
+          <name>ColumnMajor</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Column Major ordering, i.e. matrix is serialized row by column </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum describing the possible matrix storage ordering. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Utils.h" line="117" column="5" bodyfile="iDynTree/Utils.h" bodystart="117" bodyend="120"/>
+      </memberdef>
       </sectiondef>
       <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="AttitudeEstimator_8h_1adcfa60b3d3580f517fd47c8864534b36" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
+        <definition>typedef iDynTree::Vector3 iDynTree::LinearAccelerometerMeasurements</definition>
+        <argsstring></argsstring>
+        <name>LinearAccelerometerMeasurements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeEstimator.h" line="14" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="AttitudeEstimator_8h_1a94dcb1f9c90a22269981469e229ed6ce" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
+        <definition>typedef iDynTree::Vector3 iDynTree::GyroscopeMeasurements</definition>
+        <argsstring></argsstring>
+        <name>GyroscopeMeasurements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeEstimator.h" line="15" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="AttitudeEstimator_8h_1ad170eb4fd0bd13bfb0bdbdb6460d28bc" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
+        <definition>typedef iDynTree::Vector3 iDynTree::MagnetometerMeasurements</definition>
+        <argsstring></argsstring>
+        <name>MagnetometerMeasurements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeEstimator.h" line="16" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="AttitudeEstimator_8h_1a8953e202971beb38867767ab9f002c42" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref></type>
+        <definition>typedef iDynTree::Vector4 iDynTree::UnitQuaternion</definition>
+        <argsstring></argsstring>
+        <name>UnitQuaternion</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeEstimator.h" line="18" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="AttitudeEstimator_8h_1a48e2955e462d28103d57a10634d0654d" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
+        <definition>typedef iDynTree::Vector3 iDynTree::RPY</definition>
+        <argsstring></argsstring>
+        <name>RPY</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeEstimator.h" line="19" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="AccelerometerSensor_8h_1ae032ae81e0b23b33446033eefb13e629" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">LinearMotionVector3</ref></type>
         <definition>typedef LinearMotionVector3 iDynTree::LinAcceleration</definition>
@@ -1452,73 +1517,53 @@
         </inbodydescription>
         <location file="iDynTree/VectorFixSize.h" line="396" column="27" bodyfile="iDynTree/VectorFixSize.h" bodystart="396" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="AttitudeEstimator_8h_1adcfa60b3d3580f517fd47c8864534b36" prot="public" static="no">
-        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
-        <definition>typedef iDynTree::Vector3 iDynTree::LinearAccelerometerMeasurements</definition>
-        <argsstring></argsstring>
-        <name>LinearAccelerometerMeasurements</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="14" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="14" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="AttitudeEstimator_8h_1a94dcb1f9c90a22269981469e229ed6ce" prot="public" static="no">
-        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
-        <definition>typedef iDynTree::Vector3 iDynTree::GyroscopeMeasurements</definition>
-        <argsstring></argsstring>
-        <name>GyroscopeMeasurements</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="15" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="15" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="AttitudeEstimator_8h_1ad170eb4fd0bd13bfb0bdbdb6460d28bc" prot="public" static="no">
-        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
-        <definition>typedef iDynTree::Vector3 iDynTree::MagnetometerMeasurements</definition>
-        <argsstring></argsstring>
-        <name>MagnetometerMeasurements</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="16" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="16" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="AttitudeEstimator_8h_1a8953e202971beb38867767ab9f002c42" prot="public" static="no">
-        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref></type>
-        <definition>typedef iDynTree::Vector4 iDynTree::UnitQuaternion</definition>
-        <argsstring></argsstring>
-        <name>UnitQuaternion</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="18" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="18" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="AttitudeEstimator_8h_1a48e2955e462d28103d57a10634d0654d" prot="public" static="no">
-        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
-        <definition>typedef iDynTree::Vector3 iDynTree::RPY</definition>
-        <argsstring></argsstring>
-        <name>RPY</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="19" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="19" bodyend="-1"/>
-      </memberdef>
       </sectiondef>
       <sectiondef kind="var">
+      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::output_dimensions_with_magnetometer</definition>
+        <argsstring></argsstring>
+        <name>output_dimensions_with_magnetometer</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+<para>dimension of <formula id="56">$ \mathbb{R}^3 \times \mathbb{R} $</formula> accelerometer measurements and magnetometer yaw measurement </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="13" column="24" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::output_dimensions_without_magnetometer</definition>
+        <argsstring></argsstring>
+        <name>output_dimensions_without_magnetometer</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+<para>dimension of <formula id="21">$ \mathbb{R}^3 $</formula> accelerometer measurements </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="14" column="24" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1ae4a3a4ece8b00835bf57f387795ba015" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::input_dimensions</definition>
+        <argsstring></argsstring>
+        <name>input_dimensions</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+<para>dimension of <formula id="21">$ \mathbb{R}^3 $</formula> gyroscope measurements </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/AttitudeQuaternionEKF.h" line="15" column="24" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="Indices_8h_1abb454ae2b12be8622ba842c70450352d" prot="public" static="no" mutable="no">
         <type>IDYNTREE_MODEL_EXPORT LinkIndex</type>
         <definition>IDYNTREE_MODEL_EXPORT LinkIndex iDynTree::LINK_INVALID_INDEX</definition>
@@ -1691,51 +1736,6 @@
         </inbodydescription>
         <location file="iDynTree/Utils.h" line="42" column="40" declfile="iDynTree/Utils.h" declline="42" declcolumn="40"/>
       </memberdef>
-      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" prot="public" static="no" mutable="no">
-        <type>const unsigned int</type>
-        <definition>const unsigned int iDynTree::output_dimensions_with_magnetometer</definition>
-        <argsstring></argsstring>
-        <name>output_dimensions_with_magnetometer</name>
-        <initializer>= 4</initializer>
-        <briefdescription>
-<para>dimension of <formula id="259">$ \mathbb{R}^3 \times \mathbb{R} $</formula> accelerometer measurements and magnetometer yaw measurement </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeQuaternionEKF.h" line="13" column="24" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="13" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" prot="public" static="no" mutable="no">
-        <type>const unsigned int</type>
-        <definition>const unsigned int iDynTree::output_dimensions_without_magnetometer</definition>
-        <argsstring></argsstring>
-        <name>output_dimensions_without_magnetometer</name>
-        <initializer>= 3</initializer>
-        <briefdescription>
-<para>dimension of <formula id="225">$ \mathbb{R}^3 $</formula> accelerometer measurements </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeQuaternionEKF.h" line="14" column="24" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="14" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1ae4a3a4ece8b00835bf57f387795ba015" prot="public" static="no" mutable="no">
-        <type>const unsigned int</type>
-        <definition>const unsigned int iDynTree::input_dimensions</definition>
-        <argsstring></argsstring>
-        <name>input_dimensions</name>
-        <initializer>= 3</initializer>
-        <briefdescription>
-<para>dimension of <formula id="225">$ \mathbb{R}^3 $</formula> gyroscope measurements </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/AttitudeQuaternionEKF.h" line="15" column="24" bodyfile="iDynTree/AttitudeQuaternionEKF.h" bodystart="15" bodyend="-1"/>
-      </memberdef>
       </sectiondef>
       <sectiondef kind="func">
       <memberdef kind="function" id="InverseKinematics_8h_1a399f5a8eff425f1036038ee927fb81cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -1754,6 +1754,897 @@
         <inbodydescription>
         </inbodydescription>
         <location file="iDynTree/InverseKinematics.h" line="47" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="47" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="BerdyHelper_8h_1a39f8730ab92b19678c82e418b8c0f2a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::isLinkBerdyDynamicVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
+        <name>isLinkBerdyDynamicVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BerdyHelper.h" line="141" column="6" declfile="iDynTree/BerdyHelper.h" declline="141" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::isJointBerdyDynamicVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
+        <name>isJointBerdyDynamicVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BerdyHelper.h" line="142" column="6" declfile="iDynTree/BerdyHelper.h" declline="142" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::isDOFBerdyDynamicVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
+        <name>isDOFBerdyDynamicVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BerdyHelper.h" line="143" column="6" declfile="iDynTree/BerdyHelper.h" declline="143" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1ad96bdadc6f50434261b8fdab971904e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateExternalWrenchesWithoutInternalFT</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const LinkUnknownWrenchContacts &amp;unknownWrenches, const JointPosDoubleArray &amp;jointPos, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, estimateExternalWrenchesBuffers &amp;bufs, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
+        <name>estimateExternalWrenchesWithoutInternalFT</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
+          <declname>unknownWrenches</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="structiDynTree_1_1estimateExternalWrenchesBuffers" kindref="compound">estimateExternalWrenchesBuffers</ref> &amp;</type>
+          <declname>bufs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
+          <declname>outputContactWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Estimate the external contact wrenches using the MultiBody Newton-Euler equations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is used to estimate the external contacts forces <bold>without</bold> using any measurement of the internal FT sensors. It is tipically used to get data for calibrating the offset of the internal FT sensors. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="261" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="261" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4c628669d7801fee070c5ac32312b45d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateExternalWrenches</definition>
+        <argsstring>(const Model &amp;model, const SubModelDecomposition &amp;subModels, const SensorsList &amp;sensors, const LinkUnknownWrenchContacts &amp;unknownWrenches, const JointPosDoubleArray &amp;jointPos, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, const SensorsMeasurements &amp;ftSensorsMeasurements, estimateExternalWrenchesBuffers &amp;bufs, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
+        <name>estimateExternalWrenches</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref> &amp;</type>
+          <declname>subModels</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+          <declname>sensors</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
+          <declname>unknownWrenches</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsMeasurements" kindref="compound">SensorsMeasurements</ref> &amp;</type>
+          <declname>ftSensorsMeasurements</declname>
+        </param>
+        <param>
+          <type><ref refid="structiDynTree_1_1estimateExternalWrenchesBuffers" kindref="compound">estimateExternalWrenchesBuffers</ref> &amp;</type>
+          <declname>bufs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
+          <declname>outputContactWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Estimate the external wrenches trasmitted by the contacts between the model and the external environment. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function exploits the measurements of internal FT sensors (whose structure is contained in the sensors parameters and which measurements are contained in the ftSensorsMeasurements parameters) to compute an estimation of the values of the unknown wrenches specified in the unknownWrenches parameter.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the considered model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">subModels</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a decomposition of the model along the joint of the six axis F/T sensors. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sensors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a description of the sensors available in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">unknownWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a description of the contacts for which the contact wrench is unknown. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link twists, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ftSensorsMeasurements</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the measurements of the internal six axis F/T sensors. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">outputContactWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the estimated contact wrenches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (the dimension of the inputs are consistent), false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="289" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="289" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4552fdf67855209419f189466fbb8e69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dynamicsEstimationForwardVelAccKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const Vector3 &amp;base_classicalProperAcc, const Vector3 &amp;base_angularVel, const Vector3 &amp;base_angularAcc, const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, const JointDOFsDoubleArray &amp;jointAcc, LinkVelArray &amp;linkVel, LinkAccArray &amp;linkProperAcc)</argsstring>
+        <name>dynamicsEstimationForwardVelAccKinematics</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>base_classicalProperAcc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>base_angularVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>base_angularAcc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <briefdescription>
+<para>Modified forward kinematics for torque/force estimation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a version of forward kinematics modified to fit the needs of joint torques/external wrenches estimation.</para>
+<para>There are several difference with respect to the classical forward kinematics. The first one is that the only inputs necessary related to the base link are the base link classical proper acceleration, the base link angular velocity and the base link angular acceleration. This is because the dynamics of an articulated system does not depend on an offset in linear velocity, and hence the estimation of joint torques/external wrenches is not affected by the base link linear velocity. This will mean that the link velocitity computed by this algorithm are not the velocity of the links with respect to an inertial frame. Nevertherless they can still be used for estimation.</para>
+<para>There are two main ways in which the base information is computed: one is exploiting the knoledge that a link is not moving with respect to an inertial frame: in this case the classical proper acceleration boils down to the inverted gravitational acceleration, while the angular velocity and angular accelerations are equal to zero. The other way is to exploit the measure of an accelerometer and of a gyroscope mounted on the base link of the traversal: the accelerometer will then measure directly the classical proper acceleration, while the gyroscope will measure the angular velocity. The angular acceleration can be computed by numerical derivation, or simply neglected if its effect on the estimation is minimal.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the traversal used to propagate the velocity and the proper acceleration </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_classicalProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>classical proper acceleration of the base origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_angularVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of the base link frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_angularAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular acceleration of the base link frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint positions </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint velocities </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint accelerations </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of link twists, expressed in the link frame for both orientation and origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="341" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="341" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a9c5c034c8fc89c4d0d19f17d2134a7a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dynamicsEstimationForwardVelKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const Vector3 &amp;base_angularVel, const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, LinkVelArray &amp;linkVel)</argsstring>
+        <name>dynamicsEstimationForwardVelKinematics</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>base_angularVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <briefdescription>
+<para>Modified forward kinematics for floating basedynamics estimation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a version of velocity forward kinematics modified to fit the needs of free floating dynamics estimation.</para>
+<para>There are several difference with respect to the classical forward kinematics. The first one is that the only inputs necessary related to the base link is the base link angular velocity. This is because the dynamics of an articulated system does not depend on an offset in linear velocity. This will mean that the link velocities computed by this algorithm are not the velocity of the links with respect to an inertial frame. Nevertherless they can still be used for estimation.</para>
+<para>There are two main ways in which the base information is computed: one is exploiting the knoledge that a link is not moving with respect to an inertial frame: in this case the angular velocity is equal to zero. The other way is to exploit the measure of a gyroscope mounted on the base link of the traversal: the gyroscope will measure the link angular velocity.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the traversal used to propagate the velocity and the proper acceleration </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_angularVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of the base link frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint positions </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint velocities </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of link twists, expressed in the link frame for both orientation and origin </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="382" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="382" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a2cf3011d218d8a98440bdcafdd1d54e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::computeLinkNetWrenchesWithoutGravity</definition>
+        <argsstring>(const Model &amp;model, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, LinkNetTotalWrenchesWithoutGravity &amp;linkNetWrenchesWithoutGravity)</argsstring>
+        <name>computeLinkNetWrenchesWithoutGravity</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetTotalWrenchesWithoutGravity</ref> &amp;</type>
+          <declname>linkNetWrenchesWithoutGravity</declname>
+        </param>
+        <briefdescription>
+<para>Compute the net internal and external wrenches (excluding gravity forces) acting on the links. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link twists, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkNetWrenchesWithoutGravity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on link i, expressed (both orientation and point) with respect to the reference frame of link i </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="396" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="396" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1ab6c0784c22088705cc07732b5b29dd4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateLinkContactWrenchesFromLinkNetExternalWrenches</definition>
+        <argsstring>(const Model &amp;model, const LinkUnknownWrenchContacts &amp;unknownWrenches, const LinkNetExternalWrenches &amp;netExtWrenches, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
+        <name>estimateLinkContactWrenchesFromLinkNetExternalWrenches</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
+          <declname>unknownWrenches</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
+          <declname>outputContactWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Compute the link contact wrenches from the net external wrenches. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If there are more than 6 unknows for link, the problem becomes ill-defined and the function just assign all the external wrench to the first contact.  </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="410" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="410" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a4ed7d9dcd80664b1b86236a0f1086cda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</definition>
+        <argsstring>(const double totalMass, iDynTree::Model &amp;model, VectorDynSize &amp;estimatedInertialParams)</argsstring>
+        <name>estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</name>
+        <param>
+          <type>const double</type>
+          <declname>totalMass</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>estimatedInertialParams</declname>
+        </param>
+        <briefdescription>
+<para>Estimate the inertial parameters of a model using link bounding boxes and the total mass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">totalMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The total mass of the model, in Kilograms. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model, used to extract the bounding box of the links. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">inertialParameters</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of inertial parameters, in the format used by <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise .</para>
+</simplesect>
+<simplesect kind="note"><para>if inertialParameters does not have the correct size, it will be resized. </para>
+</simplesect>
+<simplesect kind="warning"><para>This function needs to allocate some internal buffers, and so it performs dynamic memory allocation.</para>
+</simplesect>
+<simplesect kind="note"><para>This function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="26" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="26" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a3fc080109daad044981533bc143d1bee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::computeBoundingBoxFromShape</definition>
+        <argsstring>(const SolidShape &amp;geom, Box &amp;box)</argsstring>
+        <name>computeBoundingBoxFromShape</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> &amp;</type>
+          <declname>geom</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> &amp;</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Compute bounding box from a solid shape object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">geom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The link collision as a iDynTree solid shape object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bounding box for the solid shape object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise .</para>
+</simplesect>
+<simplesect kind="note"><para>If the shape is an <ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> type, this function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false. </para>
+</simplesect>
+<simplesect kind="note"><para>If the shape is an <ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> type, an Axis-Aligned Bounding <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> (AABB) is computed from the mesh vertices. This means that the returned bounding box is neither unique nor a minimum volume bounding box for the given mesh. The axes alignment to compute AABB is done with respect to the frame associated with the shape. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="41" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="41" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a22b1c506654dc8a1589bbccc2ba32deb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &gt;</type>
+        <definition>std::vector&lt;Position&gt; iDynTree::computeBoxVertices</definition>
+        <argsstring>(const Box box)</argsstring>
+        <name>computeBoxVertices</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref></type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Get the bounding box vertices in the link frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The link collision solid shape as a <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> object. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>vector of vertex positions in the link frame. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="49" column="13" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="49" declcolumn="13"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformersSolidShapes_8h_1adbe329aea649b6a379dfd7077ceb1eb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::approximateSolidShapesWithPrimitiveShape</definition>
+        <argsstring>(const Model &amp;inputModel, Model &amp;outputModel, ApproximateSolidShapesWithPrimitiveShapeOptions options=ApproximateSolidShapesWithPrimitiveShapeOptions())</argsstring>
+        <name>approximateSolidShapesWithPrimitiveShape</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>inputModel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <param>
+          <type><ref refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" kindref="compound">ApproximateSolidShapesWithPrimitiveShapeOptions</ref></type>
+          <declname>options</declname>
+          <defval><ref refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" kindref="compound">ApproximateSolidShapesWithPrimitiveShapeOptions</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>\function Approximate solid shapes of the input model with some primitive shapes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>, and returns in output the same model, but with all solid shapes of the model (both collision and visual) substituted with a primitive shape that approximates in some way the original solid shape.</para>
+<para><simplesect kind="note"><para>At the moment, the only conversion type provided is to approximate each solid shape of the model with its axis aligned bounding box, using the iDynTree::computeBoundingBoxFromShape function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="42" column="6" declfile="iDynTree/ModelTransformersSolidShapes.h" declline="42" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeICUB_1ga93e84fbc1880a920199aae0cbabd76ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DHChainFromiKinChain</definition>
+        <argsstring>(iCub::iKin::iKinChain &amp;ikinChain, DHChain &amp;out)</argsstring>
+        <name>DHChainFromiKinChain</name>
+        <param>
+          <type>iCub::iKin::iKinChain &amp;</type>
+          <declname>ikinChain</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1DHChain" kindref="compound">DHChain</ref> &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>Load a <ref refid="classiDynTree_1_1DHChain" kindref="compound">iDynTree::DHChain</ref> object from a iCub::iKin::iKinChain . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="40" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="40" bodyend="63" declfile="iDynTree/iKinConversions.h" declline="25" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeICUB_1gadb9ad80c8043481f2bb8f013542db690" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::modelFromiKinChain</definition>
+        <argsstring>(iCub::iKin::iKinChain &amp;ikinChain, Model &amp;output)</argsstring>
+        <name>modelFromiKinChain</name>
+        <param>
+          <type>iCub::iKin::iKinChain &amp;</type>
+          <declname>ikinChain</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+<para>Load a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object from a iCub::iKin::iKinChain . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="65" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="65" bodyend="78" declfile="iDynTree/iKinConversions.h" declline="35" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeICUB_1ga681d23161951646fcb60dc7681e59482" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::iKinLimbFromModel</definition>
+        <argsstring>(const Model &amp;model, const std::string &amp;baseFrame, const std::string &amp;distalFrame, iCub::iKin::iKinLimb &amp;ikinLimb)</argsstring>
+        <name>iKinLimbFromModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>baseFrame</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>distalFrame</declname>
+        </param>
+        <param>
+          <type>iCub::iKin::iKinLimb &amp;</type>
+          <declname>ikinLimb</declname>
+        </param>
+        <briefdescription>
+<para>Extract an iCub::iKin::iKinLimb from an <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="131" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="131" bodyend="140" declfile="iDynTree/iKinConversions.h" declline="76" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeICUB_1gaaedc638580c296a9a355975268ea25bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::iKinLimbFromDHChain</definition>
+        <argsstring>(const DHChain &amp;dhChain, iCub::iKin::iKinLimb &amp;ikinLimb)</argsstring>
+        <name>iKinLimbFromDHChain</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1DHChain" kindref="compound">DHChain</ref> &amp;</type>
+          <declname>dhChain</declname>
+        </param>
+        <param>
+          <type>iCub::iKin::iKinLimb &amp;</type>
+          <declname>ikinLimb</declname>
+        </param>
+        <briefdescription>
+<para>Create a iCub::iKin::iKinLimb from an <ref refid="classiDynTree_1_1DHChain" kindref="compound">iDynTree::DHChain</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="119" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="119" bodyend="129" declfile="iDynTree/iKinConversions.h" declline="86" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="iKinConversionsImplementation_8h_1a907871ccc9e6e56fb19fa0af4c0854c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref></type>
+        <definition>DHLink iDynTree::iKinLink2DHLink</definition>
+        <argsstring>(const iCub::iKin::iKinLink &amp;ikinlink)</argsstring>
+        <name>iKinLink2DHLink</name>
+        <param>
+          <type>const iCub::iKin::iKinLink &amp;</type>
+          <declname>ikinlink</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="19" column="15" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="19" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="iKinConversionsImplementation_8h_1ae6d845189d4491128320b2c78c6082ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>iCub::iKin::iKinLink</type>
+        <definition>iCub::iKin::iKinLink iDynTree::DHLink2iKinLink</definition>
+        <argsstring>(const DHLink &amp;dhLink)</argsstring>
+        <name>DHLink2iKinLink</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref> &amp;</type>
+          <declname>dhLink</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="33" column="29" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="33" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="skinDynLibConversionsImplementation_8h_1abd0cb602d0a91817a13e042d47004d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class contactsList</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool iDynTree::fromSkinDynLibToiDynTreeHelper</definition>
+        <argsstring>(const Model &amp;model, const contactsList &amp;dynList, LinkUnknownWrenchContacts &amp;unknowns, const skinDynLibConversionsHelper &amp;conversionHelper)</argsstring>
+        <name>fromSkinDynLibToiDynTreeHelper</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const contactsList &amp;</type>
+          <declname>dynList</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
+          <declname>unknowns</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1skinDynLibConversionsHelper" kindref="compound">skinDynLibConversionsHelper</ref> &amp;</type>
+          <declname>conversionHelper</declname>
+        </param>
+        <briefdescription>
+<para>Templated version of fromSkinDynLibToiDynTree, useful to implement the exact same function for dynContactList and skinContactList, that have exactly the same interface, but they don&apos;t have any common ancestor in the class structure. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversionsImplementation.h" line="159" column="6" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="159" bodyend="233"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1a9f5fda0dc8377f9fad3f8b60d73f1c7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -2058,7 +2949,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding velocity is <formula id="21">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="164">$L$</formula>, the corresponding velocity is <formula id="165">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2066,7 +2957,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding proper acceleration is <formula id="22">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="23">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="18">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="164">$L$</formula>, the corresponding proper acceleration is <formula id="166">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="167">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="18">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2074,7 +2965,7 @@
 <parametername direction="in">linkExtForces</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of external 6D force/torques applied to the links. For each link <formula id="20">$L$</formula>, the corresponding external force is <formula id="24">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="20">$L$</formula>, expressed in the link frame <formula id="20">$L$</formula>. </para>
+<para>Vector of external 6D force/torques applied to the links. For each link <formula id="164">$L$</formula>, the corresponding external force is <formula id="168">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="164">$L$</formula>, expressed in the link frame <formula id="164">$L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2238,7 +3129,7 @@
 <parametername direction="in">referenceFrame_H_link</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="20">$L$</formula>, the corresponding transform is <formula id="25">${}^D H_L$</formula>. </para>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="164">$L$</formula>, the corresponding transform is <formula id="169">${}^D H_L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2246,7 +3137,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding velocity is <formula id="21">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="164">$L$</formula>, the corresponding velocity is <formula id="165">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2254,7 +3145,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding proper acceleration is <formula id="22">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="23">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="18">$A$</formula> . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="164">$L$</formula>, the corresponding proper acceleration is <formula id="166">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="167">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="18">$A$</formula> . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2387,10 +3278,10 @@
           <declname>V</declname>
         </param>
         <briefdescription>
-<para>Given a rigid body inertia <formula id="27">$M$</formula> and spatial motion vector <formula id="28">$V$</formula>, the bias wrench <formula id="29">$B$</formula> of rigid body is defined as: </para>
+<para>Given a rigid body inertia <formula id="171">$M$</formula> and spatial motion vector <formula id="172">$V$</formula>, the bias wrench <formula id="173">$B$</formula> of rigid body is defined as: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="30">\[ B = \times \]</formula> </para>
+<para><formula id="174">\[ B = \times \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -2743,7 +3634,7 @@
 <parametername direction="in">robotPos</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the position of the robot, i.e. <formula id="31">$ ({}^A H_B, s)$</formula>, </para>
+<para>the position of the robot, i.e. <formula id="175">$ ({}^A H_B, s)$</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2751,7 +3642,7 @@
 <parametername direction="in">robotVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the velocity of the robot, with the base velocity expressed in BODY_FIXED representation i.e. <formula id="32">$ \nu = \begin{bmatrix} {}^B \mathrm{v}_{A,B} \newline \dot{s} \end{bmatrix} $</formula>, </para>
+<para>the velocity of the robot, with the base velocity expressed in BODY_FIXED representation i.e. <formula id="176">$ \nu = \begin{bmatrix} {}^B \mathrm{v}_{A,B} \newline \dot{s} \end{bmatrix} $</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -2767,7 +3658,7 @@
 <parametername direction="in">linkVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the velocity of each link of the robot, with velocity expressed with BODY_FIXED representation i.e. for each link <formula id="33">$ $</formula> we have <formula id="34">$ {}^L \mathrm{v}_{A,L} $</formula>, </para>
+<para>the velocity of each link of the robot, with velocity expressed with BODY_FIXED representation i.e. for each link <formula id="177">$ $</formula> we have <formula id="178">$ {}^L \mathrm{v}_{A,L} $</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -6235,7 +7126,7 @@
 <para>Computes the geodesic distance between two rotation matrices. </para>
         </briefdescription>
         <detaileddescription>
-<para>It implements the angular distance presented in Sec. 4 of &quot;Rotation Averaging&quot; (available at <ulink url="http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf">http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf</ulink>), in particular <formula id="133">$d = ||log(R_1^\top R_2)||^2 $</formula>. <parameterlist kind="param"><parameteritem>
+<para>It implements the angular distance presented in Sec. 4 of &quot;Rotation Averaging&quot; (available at <ulink url="http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf">http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf</ulink>), in particular <formula id="255">$d = ||log(R_1^\top R_2)||^2 $</formula>. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>rotation1</parametername>
 </parameternamelist>
@@ -7719,723 +8610,6 @@
         </inbodydescription>
         <location file="iDynTree/Utils.h" line="125" column="10" declfile="iDynTree/Utils.h" declline="125" declcolumn="10"/>
       </memberdef>
-      <memberdef kind="function" id="BerdyHelper_8h_1a39f8730ab92b19678c82e418b8c0f2a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::isLinkBerdyDynamicVariable</definition>
-        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
-        <name>isLinkBerdyDynamicVariable</name>
-        <param>
-          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
-          <declname>dynamicVariableType</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="141" column="6" declfile="iDynTree/BerdyHelper.h" declline="141" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::isJointBerdyDynamicVariable</definition>
-        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
-        <name>isJointBerdyDynamicVariable</name>
-        <param>
-          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
-          <declname>dynamicVariableType</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="142" column="6" declfile="iDynTree/BerdyHelper.h" declline="142" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::isDOFBerdyDynamicVariable</definition>
-        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
-        <name>isDOFBerdyDynamicVariable</name>
-        <param>
-          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
-          <declname>dynamicVariableType</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="143" column="6" declfile="iDynTree/BerdyHelper.h" declline="143" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1ad96bdadc6f50434261b8fdab971904e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::estimateExternalWrenchesWithoutInternalFT</definition>
-        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const LinkUnknownWrenchContacts &amp;unknownWrenches, const JointPosDoubleArray &amp;jointPos, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, estimateExternalWrenchesBuffers &amp;bufs, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
-        <name>estimateExternalWrenchesWithoutInternalFT</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
-          <declname>traversal</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
-          <declname>unknownWrenches</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
-          <declname>jointPos</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
-          <declname>linkVel</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
-          <declname>linkProperAcc</declname>
-        </param>
-        <param>
-          <type><ref refid="structiDynTree_1_1estimateExternalWrenchesBuffers" kindref="compound">estimateExternalWrenchesBuffers</ref> &amp;</type>
-          <declname>bufs</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
-          <declname>outputContactWrenches</declname>
-        </param>
-        <briefdescription>
-<para>Estimate the external contact wrenches using the MultiBody Newton-Euler equations. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This function is used to estimate the external contacts forces <bold>without</bold> using any measurement of the internal FT sensors. It is tipically used to get data for calibrating the offset of the internal FT sensors. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="261" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="261" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4c628669d7801fee070c5ac32312b45d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::estimateExternalWrenches</definition>
-        <argsstring>(const Model &amp;model, const SubModelDecomposition &amp;subModels, const SensorsList &amp;sensors, const LinkUnknownWrenchContacts &amp;unknownWrenches, const JointPosDoubleArray &amp;jointPos, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, const SensorsMeasurements &amp;ftSensorsMeasurements, estimateExternalWrenchesBuffers &amp;bufs, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
-        <name>estimateExternalWrenches</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref> &amp;</type>
-          <declname>subModels</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
-          <declname>sensors</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
-          <declname>unknownWrenches</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
-          <declname>jointPos</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
-          <declname>linkVel</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
-          <declname>linkProperAcc</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1SensorsMeasurements" kindref="compound">SensorsMeasurements</ref> &amp;</type>
-          <declname>ftSensorsMeasurements</declname>
-        </param>
-        <param>
-          <type><ref refid="structiDynTree_1_1estimateExternalWrenchesBuffers" kindref="compound">estimateExternalWrenchesBuffers</ref> &amp;</type>
-          <declname>bufs</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
-          <declname>outputContactWrenches</declname>
-        </param>
-        <briefdescription>
-<para>Estimate the external wrenches trasmitted by the contacts between the model and the external environment. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This function exploits the measurements of internal FT sensors (whose structure is contained in the sensors parameters and which measurements are contained in the ftSensorsMeasurements parameters) to compute an estimation of the values of the unknown wrenches specified in the unknownWrenches parameter.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">model</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the considered model. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">subModels</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>a decomposition of the model along the joint of the six axis F/T sensors. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">sensors</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>a description of the sensors available in the model. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">unknownWrenches</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>a description of the contacts for which the contact wrench is unknown. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">linkVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>a vector of link twists, expressed w.r.t to the link orientation and the link origin </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">linkProperAcc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">ftSensorsMeasurements</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the measurements of the internal six axis F/T sensors. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">outputContactWrenches</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the estimated contact wrenches. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>true if all went well (the dimension of the inputs are consistent), false otherwise </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="289" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="289" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4552fdf67855209419f189466fbb8e69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::dynamicsEstimationForwardVelAccKinematics</definition>
-        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const Vector3 &amp;base_classicalProperAcc, const Vector3 &amp;base_angularVel, const Vector3 &amp;base_angularAcc, const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, const JointDOFsDoubleArray &amp;jointAcc, LinkVelArray &amp;linkVel, LinkAccArray &amp;linkProperAcc)</argsstring>
-        <name>dynamicsEstimationForwardVelAccKinematics</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
-          <declname>traversal</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
-          <declname>base_classicalProperAcc</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
-          <declname>base_angularVel</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
-          <declname>base_angularAcc</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
-          <declname>jointPos</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
-          <declname>jointVel</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
-          <declname>jointAcc</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
-          <declname>linkVel</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
-          <declname>linkProperAcc</declname>
-        </param>
-        <briefdescription>
-<para>Modified forward kinematics for torque/force estimation. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This is a version of forward kinematics modified to fit the needs of joint torques/external wrenches estimation.</para>
-<para>There are several difference with respect to the classical forward kinematics. The first one is that the only inputs necessary related to the base link are the base link classical proper acceleration, the base link angular velocity and the base link angular acceleration. This is because the dynamics of an articulated system does not depend on an offset in linear velocity, and hence the estimation of joint torques/external wrenches is not affected by the base link linear velocity. This will mean that the link velocitity computed by this algorithm are not the velocity of the links with respect to an inertial frame. Nevertherless they can still be used for estimation.</para>
-<para>There are two main ways in which the base information is computed: one is exploiting the knoledge that a link is not moving with respect to an inertial frame: in this case the classical proper acceleration boils down to the inverted gravitational acceleration, while the angular velocity and angular accelerations are equal to zero. The other way is to exploit the measure of an accelerometer and of a gyroscope mounted on the base link of the traversal: the accelerometer will then measure directly the classical proper acceleration, while the gyroscope will measure the angular velocity. The angular acceleration can be computed by numerical derivation, or simply neglected if its effect on the estimation is minimal.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">model</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the input model </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">traversal</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the traversal used to propagate the velocity and the proper acceleration </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">base_classicalProperAcc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>classical proper acceleration of the base origin </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">base_angularVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>angular velocity of the base link frame </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">base_angularAcc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>angular acceleration of the base link frame </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">jointPos</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>joint positions </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">jointVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>joint velocities </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">jointAcc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>joint accelerations </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">linkVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>vector of link twists, expressed in the link frame for both orientation and origin </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">linkProperAcc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>true if all went well, false otherwise </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="341" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="341" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a9c5c034c8fc89c4d0d19f17d2134a7a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::dynamicsEstimationForwardVelKinematics</definition>
-        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const Vector3 &amp;base_angularVel, const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, LinkVelArray &amp;linkVel)</argsstring>
-        <name>dynamicsEstimationForwardVelKinematics</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
-          <declname>traversal</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
-          <declname>base_angularVel</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
-          <declname>jointPos</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
-          <declname>jointVel</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
-          <declname>linkVel</declname>
-        </param>
-        <briefdescription>
-<para>Modified forward kinematics for floating basedynamics estimation. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This is a version of velocity forward kinematics modified to fit the needs of free floating dynamics estimation.</para>
-<para>There are several difference with respect to the classical forward kinematics. The first one is that the only inputs necessary related to the base link is the base link angular velocity. This is because the dynamics of an articulated system does not depend on an offset in linear velocity. This will mean that the link velocities computed by this algorithm are not the velocity of the links with respect to an inertial frame. Nevertherless they can still be used for estimation.</para>
-<para>There are two main ways in which the base information is computed: one is exploiting the knoledge that a link is not moving with respect to an inertial frame: in this case the angular velocity is equal to zero. The other way is to exploit the measure of a gyroscope mounted on the base link of the traversal: the gyroscope will measure the link angular velocity.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">model</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the input model </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">traversal</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the traversal used to propagate the velocity and the proper acceleration </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">base_angularVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>angular velocity of the base link frame </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">jointPos</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>joint positions </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">jointVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>joint velocities </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">linkVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>vector of link twists, expressed in the link frame for both orientation and origin </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>true if all went well, false otherwise </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="382" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="382" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a2cf3011d218d8a98440bdcafdd1d54e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::computeLinkNetWrenchesWithoutGravity</definition>
-        <argsstring>(const Model &amp;model, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, LinkNetTotalWrenchesWithoutGravity &amp;linkNetWrenchesWithoutGravity)</argsstring>
-        <name>computeLinkNetWrenchesWithoutGravity</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
-          <declname>linkVel</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
-          <declname>linkProperAcc</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetTotalWrenchesWithoutGravity</ref> &amp;</type>
-          <declname>linkNetWrenchesWithoutGravity</declname>
-        </param>
-        <briefdescription>
-<para>Compute the net internal and external wrenches (excluding gravity forces) acting on the links. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">model</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the input model </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">linkVel</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>a vector of link twists, expressed w.r.t to the link orientation and the link origin </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">linkProperAcc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">linkNetWrenchesWithoutGravity</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>the vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on link i, expressed (both orientation and point) with respect to the reference frame of link i </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="396" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="396" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1ab6c0784c22088705cc07732b5b29dd4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::estimateLinkContactWrenchesFromLinkNetExternalWrenches</definition>
-        <argsstring>(const Model &amp;model, const LinkUnknownWrenchContacts &amp;unknownWrenches, const LinkNetExternalWrenches &amp;netExtWrenches, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
-        <name>estimateLinkContactWrenchesFromLinkNetExternalWrenches</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
-          <declname>unknownWrenches</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
-          <declname>netExtWrenches</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
-          <declname>outputContactWrenches</declname>
-        </param>
-        <briefdescription>
-<para>Compute the link contact wrenches from the net external wrenches. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>If there are more than 6 unknows for link, the problem becomes ill-defined and the function just assign all the external wrench to the first contact.  </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="410" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="410" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a4ed7d9dcd80664b1b86236a0f1086cda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</definition>
-        <argsstring>(const double totalMass, iDynTree::Model &amp;model, VectorDynSize &amp;estimatedInertialParams)</argsstring>
-        <name>estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</name>
-        <param>
-          <type>const double</type>
-          <declname>totalMass</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
-          <declname>estimatedInertialParams</declname>
-        </param>
-        <briefdescription>
-<para>Estimate the inertial parameters of a model using link bounding boxes and the total mass. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">totalMass</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The total mass of the model, in Kilograms. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">model</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The model, used to extract the bounding box of the links. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">inertialParameters</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>vector of inertial parameters, in the format used by <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>true if all went well, false otherwise .</para>
-</simplesect>
-<simplesect kind="note"><para>if inertialParameters does not have the correct size, it will be resized. </para>
-</simplesect>
-<simplesect kind="warning"><para>This function needs to allocate some internal buffers, and so it performs dynamic memory allocation.</para>
-</simplesect>
-<simplesect kind="note"><para>This function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="26" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="26" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a3fc080109daad044981533bc143d1bee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::computeBoundingBoxFromShape</definition>
-        <argsstring>(const SolidShape &amp;geom, Box &amp;box)</argsstring>
-        <name>computeBoundingBoxFromShape</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> &amp;</type>
-          <declname>geom</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> &amp;</type>
-          <declname>box</declname>
-        </param>
-        <briefdescription>
-<para>Compute bounding box from a solid shape object. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">geom</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The link collision as a iDynTree solid shape object </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">box</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The bounding box for the solid shape object </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>true if all went well, false otherwise .</para>
-</simplesect>
-<simplesect kind="note"><para>If the shape is an <ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> type, this function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false. </para>
-</simplesect>
-<simplesect kind="note"><para>If the shape is an <ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> type, an Axis-Aligned Bounding <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> (AABB) is computed from the mesh vertices. This means that the returned bounding box is neither unique nor a minimum volume bounding box for the given mesh. The axes alignment to compute AABB is done with respect to the frame associated with the shape. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="41" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="41" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a22b1c506654dc8a1589bbccc2ba32deb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>std::vector&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &gt;</type>
-        <definition>std::vector&lt;Position&gt; iDynTree::computeBoxVertices</definition>
-        <argsstring>(const Box box)</argsstring>
-        <name>computeBoxVertices</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref></type>
-          <declname>box</declname>
-        </param>
-        <briefdescription>
-<para>Get the bounding box vertices in the link frame. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">box</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The link collision solid shape as a <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> object. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>vector of vertex positions in the link frame. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="49" column="13" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="49" declcolumn="13"/>
-      </memberdef>
-      <memberdef kind="function" id="ModelTransformersSolidShapes_8h_1adbe329aea649b6a379dfd7077ceb1eb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::approximateSolidShapesWithPrimitiveShape</definition>
-        <argsstring>(const Model &amp;inputModel, Model &amp;outputModel, ApproximateSolidShapesWithPrimitiveShapeOptions options=ApproximateSolidShapesWithPrimitiveShapeOptions())</argsstring>
-        <name>approximateSolidShapesWithPrimitiveShape</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>inputModel</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>outputModel</declname>
-        </param>
-        <param>
-          <type><ref refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" kindref="compound">ApproximateSolidShapesWithPrimitiveShapeOptions</ref></type>
-          <declname>options</declname>
-          <defval><ref refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" kindref="compound">ApproximateSolidShapesWithPrimitiveShapeOptions</ref>()</defval>
-        </param>
-        <briefdescription>
-<para>\function Approximate solid shapes of the input model with some primitive shapes. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>, and returns in output the same model, but with all solid shapes of the model (both collision and visual) substituted with a primitive shape that approximates in some way the original solid shape.</para>
-<para><simplesect kind="note"><para>At the moment, the only conversion type provided is to approximate each solid shape of the model with its axis aligned bounding box, using the iDynTree::computeBoundingBoxFromShape function. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/ModelTransformersSolidShapes.h" line="42" column="6" declfile="iDynTree/ModelTransformersSolidShapes.h" declline="42" declcolumn="6"/>
-      </memberdef>
       <memberdef kind="function" id="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::dofsListFromURDF</definition>
@@ -8787,180 +8961,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="private/URDFParsingUtils.h" line="160" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="160" bodyend="195"/>
-      </memberdef>
-      <memberdef kind="function" id="group__iDynTreeICUB_1ga93e84fbc1880a920199aae0cbabd76ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::DHChainFromiKinChain</definition>
-        <argsstring>(iCub::iKin::iKinChain &amp;ikinChain, DHChain &amp;out)</argsstring>
-        <name>DHChainFromiKinChain</name>
-        <param>
-          <type>iCub::iKin::iKinChain &amp;</type>
-          <declname>ikinChain</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1DHChain" kindref="compound">DHChain</ref> &amp;</type>
-          <declname>out</declname>
-        </param>
-        <briefdescription>
-<para>Load a <ref refid="classiDynTree_1_1DHChain" kindref="compound">iDynTree::DHChain</ref> object from a iCub::iKin::iKinChain . </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="40" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="40" bodyend="63" declfile="iDynTree/iKinConversions.h" declline="25" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="group__iDynTreeICUB_1gadb9ad80c8043481f2bb8f013542db690" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::modelFromiKinChain</definition>
-        <argsstring>(iCub::iKin::iKinChain &amp;ikinChain, Model &amp;output)</argsstring>
-        <name>modelFromiKinChain</name>
-        <param>
-          <type>iCub::iKin::iKinChain &amp;</type>
-          <declname>ikinChain</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>output</declname>
-        </param>
-        <briefdescription>
-<para>Load a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object from a iCub::iKin::iKinChain . </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="65" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="65" bodyend="78" declfile="iDynTree/iKinConversions.h" declline="35" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="group__iDynTreeICUB_1ga681d23161951646fcb60dc7681e59482" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::iKinLimbFromModel</definition>
-        <argsstring>(const Model &amp;model, const std::string &amp;baseFrame, const std::string &amp;distalFrame, iCub::iKin::iKinLimb &amp;ikinLimb)</argsstring>
-        <name>iKinLimbFromModel</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>baseFrame</declname>
-        </param>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>distalFrame</declname>
-        </param>
-        <param>
-          <type>iCub::iKin::iKinLimb &amp;</type>
-          <declname>ikinLimb</declname>
-        </param>
-        <briefdescription>
-<para>Extract an iCub::iKin::iKinLimb from an <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> . </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="131" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="131" bodyend="140" declfile="iDynTree/iKinConversions.h" declline="76" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="group__iDynTreeICUB_1gaaedc638580c296a9a355975268ea25bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::iKinLimbFromDHChain</definition>
-        <argsstring>(const DHChain &amp;dhChain, iCub::iKin::iKinLimb &amp;ikinLimb)</argsstring>
-        <name>iKinLimbFromDHChain</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1DHChain" kindref="compound">DHChain</ref> &amp;</type>
-          <declname>dhChain</declname>
-        </param>
-        <param>
-          <type>iCub::iKin::iKinLimb &amp;</type>
-          <declname>ikinLimb</declname>
-        </param>
-        <briefdescription>
-<para>Create a iCub::iKin::iKinLimb from an <ref refid="classiDynTree_1_1DHChain" kindref="compound">iDynTree::DHChain</ref>. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="119" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="119" bodyend="129" declfile="iDynTree/iKinConversions.h" declline="86" declcolumn="6"/>
-      </memberdef>
-      <memberdef kind="function" id="iKinConversionsImplementation_8h_1a907871ccc9e6e56fb19fa0af4c0854c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref></type>
-        <definition>DHLink iDynTree::iKinLink2DHLink</definition>
-        <argsstring>(const iCub::iKin::iKinLink &amp;ikinlink)</argsstring>
-        <name>iKinLink2DHLink</name>
-        <param>
-          <type>const iCub::iKin::iKinLink &amp;</type>
-          <declname>ikinlink</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="19" column="15" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="19" bodyend="31"/>
-      </memberdef>
-      <memberdef kind="function" id="iKinConversionsImplementation_8h_1ae6d845189d4491128320b2c78c6082ec" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>iCub::iKin::iKinLink</type>
-        <definition>iCub::iKin::iKinLink iDynTree::DHLink2iKinLink</definition>
-        <argsstring>(const DHLink &amp;dhLink)</argsstring>
-        <name>DHLink2iKinLink</name>
-        <param>
-          <type>const <ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref> &amp;</type>
-          <declname>dhLink</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="33" column="29" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="33" bodyend="38"/>
-      </memberdef>
-      <memberdef kind="function" id="skinDynLibConversionsImplementation_8h_1abd0cb602d0a91817a13e042d47004d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class contactsList</type>
-          </param>
-        </templateparamlist>
-        <type>bool</type>
-        <definition>bool iDynTree::fromSkinDynLibToiDynTreeHelper</definition>
-        <argsstring>(const Model &amp;model, const contactsList &amp;dynList, LinkUnknownWrenchContacts &amp;unknowns, const skinDynLibConversionsHelper &amp;conversionHelper)</argsstring>
-        <name>fromSkinDynLibToiDynTreeHelper</name>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const contactsList &amp;</type>
-          <declname>dynList</declname>
-        </param>
-        <param>
-          <type><ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
-          <declname>unknowns</declname>
-        </param>
-        <param>
-          <type>const <ref refid="classiDynTree_1_1skinDynLibConversionsHelper" kindref="compound">skinDynLibConversionsHelper</ref> &amp;</type>
-          <declname>conversionHelper</declname>
-        </param>
-        <briefdescription>
-<para>Templated version of fromSkinDynLibToiDynTree, useful to implement the exact same function for dynContactList and skinContactList, that have exactly the same interface, but they don&apos;t have any common ancestor in the class structure. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/skinDynLibConversionsImplementation.h" line="159" column="6" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="159" bodyend="233"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
