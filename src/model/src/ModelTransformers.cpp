@@ -15,6 +15,7 @@
 
 #include <cassert>
 #include <set>
+#include <vector>
 
 
 namespace iDynTree
@@ -803,6 +804,72 @@ bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal
     }
 
     return  true;
+}
+
+void addValidNamesToAllSolidShapesHelper(iDynTree::Model& outputModel,
+                                         std::vector<std::vector<SolidShape *>> solidShapes,
+                                         std::string suffix)
+{
+    for (iDynTree::LinkIndex lnkIndex = 0; lnkIndex < outputModel.getNrOfLinks(); lnkIndex++)
+    {
+        // Check the number of solid shapes for this link
+        size_t nrOfSolidShapes = solidShapes[lnkIndex].size();
+
+        // If there are not shapes, we just continue
+        if (nrOfSolidShapes==0)
+        {
+            continue;
+        }
+
+        if (nrOfSolidShapes == 1)
+        {
+            // In this case, if there is no valid name the shape will just be called <linkName>_collision or <linkName>_visual
+            if (!solidShapes[lnkIndex][0]->isNameValid())
+            {
+                std::string shapeName = outputModel.getLinkName(lnkIndex) + "_" + suffix;
+                solidShapes[lnkIndex][0]->setName(shapeName);
+            }
+        }
+
+
+        if (nrOfSolidShapes > 1)
+        {
+            bool isThereAtLeastAValidName = false;
+            // In this case, if there is no valid name the shape will just be called <linkName>_collision_0, <linkName>_collision_1, etc etc
+            for(int shapeIdx=0; shapeIdx < solidShapes[lnkIndex].size(); shapeIdx++)
+            {
+                if (solidShapes[lnkIndex][shapeIdx]->isNameValid())
+                {
+                    isThereAtLeastAValidName = true;
+                }
+            }
+
+            // In case all names are invalid, set names
+            if (!isThereAtLeastAValidName)
+            {
+                for(int shapeIdx=0; shapeIdx < solidShapes[lnkIndex].size(); shapeIdx++)
+                {
+                    std::string shapeName = outputModel.getLinkName(lnkIndex) + "_" + suffix + "_" + std::to_string(shapeIdx);
+                    solidShapes[lnkIndex][shapeIdx]->setName(shapeName);
+                }
+            }
+        }
+    }
+
+}
+
+bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
+                                   iDynTree::Model& outputModel)
+{
+    outputModel = inputModel;
+
+    auto& visualSolidShapes = outputModel.visualSolidShapes().getLinkSolidShapes();
+    auto& collisionSolidShapes = outputModel.collisionSolidShapes().getLinkSolidShapes();
+
+    addValidNamesToAllSolidShapesHelper(outputModel, visualSolidShapes, "visual");
+    addValidNamesToAllSolidShapesHelper(outputModel, collisionSolidShapes, "collision");
+
+    return true;
 }
 
 }
