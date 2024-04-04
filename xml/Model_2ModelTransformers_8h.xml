@@ -7,12 +7,22 @@
       <node id="2">
         <label>iDynTree/ModelTransformers.h</label>
         <link refid="ModelTransformers_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>iDynTree/Model/ModelTransformers.h</label>
         <link refid="Model_2ModelTransformers_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <briefdescription>

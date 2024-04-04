@@ -4447,6 +4447,7 @@
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
+    <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>
     <member refid="group__iDynTreeSensors_1ga26f5afdf5245848ed0cf946cab8510d6" kind="function"><name>predictSensorsMeasurements</name></member>
     <member refid="group__iDynTreeSensors_1ga85a09204a0c57c96bb77548d2a633677" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
     <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
@@ -5292,6 +5293,7 @@
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
+    <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>
   </compound>
   <compound refid="Model_2MovableJointImpl_8h" kind="file"><name>MovableJointImpl.h</name>
   </compound>

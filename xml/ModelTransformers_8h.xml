@@ -2,7 +2,25 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ModelTransformers_8h" kind="file" language="C++">
     <compoundname>ModelTransformers.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
     <includedby refid="Model_2ModelTransformers_8h" local="no">iDynTree/Model/ModelTransformers.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/ModelTransformers.h</label>
+        <link refid="ModelTransformers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
       <memberdef kind="function" id="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -38,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="45" column="6" declfile="iDynTree/ModelTransformers.h" declline="45" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="49" column="6" declfile="iDynTree/ModelTransformers.h" declline="49" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -65,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="60" column="6" declfile="iDynTree/ModelTransformers.h" declline="60" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="64" column="6" declfile="iDynTree/ModelTransformers.h" declline="64" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -99,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="83" column="6" declfile="iDynTree/ModelTransformers.h" declline="83" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="87" column="6" declfile="iDynTree/ModelTransformers.h" declline="87" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -131,7 +149,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="101" column="6" declfile="iDynTree/ModelTransformers.h" declline="101" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="105" column="6" declfile="iDynTree/ModelTransformers.h" declline="105" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::addValidNamesToAllSolidShapes</definition>
+        <argsstring>(const iDynTree::Model &amp;inputModel, iDynTree::Model &amp;outputModel)</argsstring>
+        <name>addValidNamesToAllSolidShapes</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>inputModel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <briefdescription>
+<para>Add automatically generated names to all visual and collision solid shapes of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function creates a new <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> that is identical to the input one, but that sets a valid name for all the visual and collision solid shapes of the model.</para>
+<para>For links that already have at least either collision or visual with valid name, <bold>all</bold> the corresponding shapes (collision or visual) will not be modified.</para>
+<para>For links in which all shapes of a given type that do not have a valid name, a name will be generated as the following:<itemizedlist>
+<listitem><para>If there is a single collision or visual element in the link, it will be named &lt;linkName&gt;_collision or &lt;linkName&gt;_visual</para>
+</listitem><listitem><para>If there are multiple collision or visual elements in the link, the solid shapes will be &lt;linkName&gt;_collision_0, &lt;linkName&gt;_collision_1, ... &lt;linkName&gt;_collision_n or &lt;linkName&gt;_visual_0, &lt;linkName&gt;_visual_1, ... &lt;linkName&gt;_visual_n</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="return"><para>true if all went well, false if there was an error in creating the sub model. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="128" column="6" declfile="iDynTree/ModelTransformers.h" declline="128" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

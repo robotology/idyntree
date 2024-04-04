@@ -107,6 +107,11 @@
               <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputSubModel) -&gt; bool</span>
             </dt>
             <dd>Extract sub model from sub model traversal.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a43a3d5de5f629b00c5c7a607278a4f20" class="m-doc">addValidNamesToAllSolidShapes</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; inputModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputModel) -&gt; bool</span>
+            </dt>
+            <dd>Add automatically generated names to all visual and collision solid shapes of the model.</dd>
           </dl>
         </section>
         <section>
@@ -161,6 +166,22 @@
               </tfoot>
             </table>
 <p>This function creates a new <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> containing links and joints composing the subModelTraversal. The function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and a <a href="classiDynTree_1_1Traversal.html" class="m-doc">iDynTree::<wbr />Traversal</a>. The new model will contain joints and links composing the subModelTraversal, with the same order. The FT sensor frames are added as additional frames.</p><aside class="m-note m-danger"><h4>Warning</h4><p>This function does not handle <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> contained inside the input model.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a43a3d5de5f629b00c5c7a607278a4f20"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a43a3d5de5f629b00c5c7a607278a4f20" class="m-doc-self">addValidNamesToAllSolidShapes</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; inputModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputModel)</span></span>
+            </h3>
+            <p>Add automatically generated names to all visual and collision solid shapes of the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if all went well, false if there was an error in creating the sub model.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This function creates a new <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> that is identical to the input one, but that sets a valid name for all the visual and collision solid shapes of the model.</p><p>For links that already have at least either collision or visual with valid name, <strong>all</strong> the corresponding shapes (collision or visual) will not be modified.</p><p>For links in which all shapes of a given type that do not have a valid name, a name will be generated as the following:</p><ul><li>If there is a single collision or visual element in the link, it will be named &lt;linkName&gt;_collision or &lt;linkName&gt;_visual</li><li>If there are multiple collision or visual elements in the link, the solid shapes will be &lt;linkName&gt;_collision_0, &lt;linkName&gt;_collision_1, ... &lt;linkName&gt;_collision_n or &lt;linkName&gt;_visual_0, &lt;linkName&gt;_visual_1, ... &lt;linkName&gt;_visual_n</li></ul>
           </div></section>
         </section>
       </div>
