@@ -14,10 +14,14 @@
 #ifndef IDYNTREE_MODEL_TRANSFORMERS_H
 #define IDYNTREE_MODEL_TRANSFORMERS_H
 
+#include <string>
+#include <vector>
+
 namespace iDynTree
 {
 class Model;
 class SensorsList;
+class Traversal;
 
 /**
  * \function Remove all fake links in the model, transforming them in frames.
@@ -100,6 +104,29 @@ bool createModelWithNormalizedJointNumbering(const Model& model,
  */
 bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal& subModelTraversal,
                      iDynTree::Model& outputSubModel);
+
+/**
+ * Add automatically generated names to all visual and collision solid shapes of the model.
+ *
+ * This function creates a new iDynTree::Model that is identical to the input one,
+ * but that sets a valid name for all the visual and collision solid shapes of the model.
+ *
+ * For links that already have at least either collision or visual with valid name,
+ * **all** the corresponding shapes (collision or visual) will not be modified.
+ *
+ * For links in which all shapes of a given type that do not have a valid name, a name will
+ * be generated as the following:
+ *   * If there is a single collision or visual element in the link, it will be named
+ *     <linkName>_collision or <linkName>_visual
+ *   * If there are multiple collision or visual elements in the link, the solid shapes will be
+ *     <linkName>_collision_0, <linkName>_collision_1, ... <linkName>_collision_n or
+ *     <linkName>_visual_0, <linkName>_visual_1, ... <linkName>_visual_n
+ *
+ *
+ * @return true if all went well, false if there was an error in creating the sub model.
+ */
+bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
+                                   iDynTree::Model& outputModel);
 
 }
 
