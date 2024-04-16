@@ -92,6 +92,29 @@ void getRandomSubsetOfJoints(const Model & model,
     }
 }
 
+void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
+                                                       const std::vector<std::string>& subsetOfJointsInReducedModel,
+                                                       std::unordered_map<std::string, double>& removedJointPositions,
+                                                       FreeFloatingPos& fullModelPos)
+{
+    for(auto jntName: subsetOfJointsInReducedModel)
+    {
+        std::cerr << " " << jntName;
+    }
+    std::cerr << std::endl;
+    for(JointIndex jntIndex = 0; jntIndex < fullModel.getNrOfJoints(); jntIndex++)
+    {
+        // Check if joint is in reduced model
+        std::string jointName = fullModel.getJointName(jntIndex);
+        if (!isStringInVector(jointName, subsetOfJointsInReducedModel))
+        {
+            double jointConf = iDynTree::getRandomDouble();
+            removedJointPositions[jointName] = jointConf;
+            fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset()) = jointConf;
+        }
+    }
+}
+
 class RNEAHelperClass
 {
 private:
@@ -196,6 +219,10 @@ void checkReducedModel(const Model & model)
     {
         std::vector<std::string> jointInReducedModel;
         getRandomSubsetOfJoints(model,jnts,jointInReducedModel);
+
+        // Get random positions for reduced models
+        std::unordered_map<std::string, double> removedJointPositions;
+        getRandomJointPositonsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
 
         Model reducedModel;
         bool ok = createReducedModel(model,jointInReducedModel,reducedModel);

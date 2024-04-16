@@ -8,7 +8,6 @@
 #include <iDynTree/XMLParser.h>
 #include <iDynTree/ModelTransformers.h>
 
-
 #include <string>
 #include <vector>
 
@@ -128,11 +127,38 @@ namespace iDynTree
 
     bool ModelLoader::loadReducedModelFromFullModel(const Model& fullModel,
                                                     const std::vector< std::string >& consideredJoints,
+                                                    const std::string filetype)
+    {
+        std::unordered_map<std::string, double> emptyRemovedJointPositions;
+        return this->loadReducedModelFromFullModel(fullModel, consideredJoints, emptyRemovedJointPositions, filetype);
+    }
+
+    bool ModelLoader::loadReducedModelFromString(const std::string modelString,
+                                                 const std::vector< std::string >& consideredJoints,
+                                                 const std::string filetype,
+                                                 const std::vector<std::string>& packageDirs /*= {}*/)
+    {
+        std::unordered_map<std::string, double> emptyRemovedJointPositions;
+        return this->loadReducedModelFromString(modelString, consideredJoints, emptyRemovedJointPositions, filetype, packageDirs);
+    }
+
+    bool ModelLoader::loadReducedModelFromFile(const std::string filename,
+                                               const std::vector< std::string >& consideredJoints,
+                                               const std::string filetype,
+                                               const std::vector<std::string>& packageDirs /*= {}*/)
+    {
+        std::unordered_map<std::string, double> emptyRemovedJointPositions;
+        return this->loadReducedModelFromFile(filename, consideredJoints, emptyRemovedJointPositions, filetype, packageDirs);
+    }
+
+    bool ModelLoader::loadReducedModelFromFullModel(const Model& fullModel,
+                                                    const std::vector< std::string >& consideredJoints,
+                                                    const std::unordered_map<std::string, double>& removedJointPositions,
                                                     const std::string /*filetype*/)
     {
         Model _modelReduced;
         _modelReduced.setPackageDirs(fullModel.getPackageDirs());
-        bool ok = createReducedModel(fullModel,consideredJoints,_modelReduced);
+        bool ok = createReducedModel(fullModel,consideredJoints,_modelReduced, removedJointPositions);
 
         if( !ok )
         {
@@ -144,6 +170,7 @@ namespace iDynTree
 
     bool ModelLoader::loadReducedModelFromString(const std::string modelString,
                                                  const std::vector< std::string >& consideredJoints,
+                                                 const std::unordered_map<std::string, double>& removedJointPositions,
                                                  const std::string filetype,
                                                  const std::vector<std::string>& packageDirs /*= {}*/)
     {
@@ -153,7 +180,7 @@ namespace iDynTree
         _modelReduced.setPackageDirs(packageDirs);
 
         parsingCorrect = createReducedModel(_modelFull, consideredJoints,
-                                            _modelReduced);
+                                            _modelReduced, removedJointPositions);
 
         if (!parsingCorrect)
         {
@@ -165,6 +192,7 @@ namespace iDynTree
 
     bool ModelLoader::loadReducedModelFromFile(const std::string filename,
                                                const std::vector< std::string >& consideredJoints,
+                                               const std::unordered_map<std::string, double>& removedJointPositions,
                                                const std::string filetype,
                                                const std::vector<std::string>& packageDirs /*= {}*/)
     {
@@ -173,7 +201,7 @@ namespace iDynTree
         Model _modelFull = m_pimpl->m_model, _modelReduced;
         _modelReduced.setPackageDirs(packageDirs);
 
-        parsingCorrect = createReducedModel(_modelFull,consideredJoints,_modelReduced);
+        parsingCorrect = createReducedModel(_modelFull,consideredJoints,_modelReduced,removedJointPositions);
 
         if (!parsingCorrect)
         {

@@ -14,6 +14,7 @@
 #ifndef IDYNTREE_MODEL_TRANSFORMERS_H
 #define IDYNTREE_MODEL_TRANSFORMERS_H
 
+#include <unordered_map>
 #include <string>
 #include <vector>
 
@@ -41,7 +42,7 @@ class Traversal;
  * and with the same transform is added to the model.
  *
  * @warning This function does not handle SensorsList contained inside the input model.
- * 
+ *
  * \note The definition of "fake link" used in this function excludes
  *       the case in which two fake links are attached to one another.
  *
@@ -66,6 +67,22 @@ bool createReducedModel(const Model& fullModel,
                         Model& reducedModel);
 
 /**
+ * This function takes in input a iDynTree::Model and
+ * an ordered list of joints and returns a model with
+ * just the joint specified in the list, with that exact order.
+ *
+ * All other joints are be removed by lumping (i.e. fusing together)
+ * the inertia of the links that are connected by that joint, assuming the joint
+ * to be in "rest" position (i.e. zero for revolute or prismatic joints), or the position
+ * specified in the removedJointPositions if a given joint is specified in removedJointPositions
+ *
+ */
+bool createReducedModel(const Model& fullModel,
+                        const std::vector<std::string>& jointsInReducedModel,
+                        Model& reducedModel,
+                        const std::unordered_map<std::string, double>& removedJointPositions);
+
+/**
  * @brief Given a specified base, return a model with a "normalized" joint numbering for that base.
  *
  * This function takes in input a iDynTree::Model and a name of a link in that model.
@@ -79,7 +96,7 @@ bool createReducedModel(const Model& fullModel,
  *       this numbering is not required by any algorithm in iDynTree, but it may be useful for
  *       example to ensure that for a chain model the joint numbering is the one induced by the
  *       kinematic structure.
- * 
+ *
  * @warning This function does not handle SensorsList contained inside the input model.
  *
  * @return true if all went well, false if there was an error in conversion.
