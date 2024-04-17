@@ -164,7 +164,6 @@ jobs:
         os:
           - ubuntu-latest
         docker_image:
-          - "debian:buster-backports"
           - "ubuntu:20.04"
           - "ubuntu:22.04"
 
@@ -183,11 +182,6 @@ jobs:
         apt-get -y install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
             libxml2-dev liboctave-dev python3-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip libglfw3-dev
-
-    - name: Install CMake 3.16 [Docker/Debian Buster]
-      if: matrix.docker_image == 'debian:buster-backports'
-      run: |
-        apt-get -y -t buster-backports install cmake
 
     - name: Install files to enable compilation of mex files [apt]
       run: |
