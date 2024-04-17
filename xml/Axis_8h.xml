@@ -6,10 +6,10 @@
     <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
     <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
-    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/PrismaticJoint.h</includedby>
-    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/RevoluteJoint.h</includedby>
     <includedby refid="Core_2Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
     <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
+    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/PrismaticJoint.h</includedby>
+    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/RevoluteJoint.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>string</label>
