@@ -294,6 +294,7 @@ void checkAll(const Model & model)
     createCopyAndDestroy(model);
     checkNeighborSanity(model,false);
     checkComputeTraversal(model);
+    checkReducedModel(model);
     checkExtractSubModel(model);
 }
 
