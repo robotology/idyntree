@@ -3,6 +3,8 @@ build/*
 *~
 *pyc
 **/build/*
+.build/*
+.pixi/*
 
 .DS_Store
 *.txt.user*
