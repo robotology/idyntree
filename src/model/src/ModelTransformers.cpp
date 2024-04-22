@@ -14,6 +14,7 @@
 #include <iDynTree/SixAxisForceTorqueSensor.h>
 
 #include <cassert>
+#include <unordered_map>
 #include <set>
 #include <vector>
 
@@ -329,7 +330,8 @@ void reducedModelAddSolidShapes(const Model& fullModel,
 
 bool createReducedModel(const Model& fullModel,
                         const std::vector< std::string >& jointsInReducedModel,
-                        Model& reducedModel)
+                        Model& reducedModel,
+                        const std::unordered_map<std::string, double>& removedJointPositions)
 {
     // We use the default traversal for deciding the base links of the reduced model
     Traversal fullModelTraversal;
@@ -361,10 +363,45 @@ bool createReducedModel(const Model& fullModel,
 
     // The position for the joint removed from the model is supposed to be 0
     FreeFloatingPos jointPos(fullModel);
+
     // \todo used an appropriate method here
-    for(size_t posCoord=0; posCoord < fullModel.getNrOfPosCoords(); posCoord++)
+    for(JointIndex jntIdx=0; jntIdx < fullModel.getNrOfJoints(); jntIdx++)
     {
-        jointPos.jointPos()(posCoord) = 0.0;
+        // Get nr of DOFs for joint
+        size_t nrOfDofs = fullModel.getJoint(jntIdx)->getNrOfDOFs();
+
+        // Nothing to do if the joint is fixed
+        if (nrOfDofs == 0)
+        {
+            continue;
+        }
+
+        // If the joint has 1 DOF, either use the value specified in removedJointPositions
+        // or if no value is found in removedJointPositions, use 0
+        if (nrOfDofs == 1)
+        {
+            auto it = removedJointPositions.find(fullModel.getJointName(jntIdx));
+
+            if (it != removedJointPositions.end())
+            {
+                jointPos.jointPos()(fullModel.getJoint(jntIdx)->getPosCoordsOffset()) = it->second;
+            }
+            else
+            {
+                jointPos.jointPos()(fullModel.getJoint(jntIdx)->getPosCoordsOffset()) = 0.0;
+            }
+
+            continue;
+        }
+
+        // If the joint has nrOfDofs > 1, we do not support specifying it in removedJointPositions
+        if (nrOfDofs > 1)
+        {
+            for (size_t j=0; j < nrOfDofs; j++)
+            {
+                jointPos.jointPos()(fullModel.getJoint(jntIdx)->getPosCoordsOffset() + j) = 0.0;
+            }
+        }
     }
 
     for(size_t linkInReducedModel = 0;
@@ -692,6 +729,14 @@ bool createReducedModel(const Model& fullModel,
     }
 
     return ok;
+}
+
+bool createReducedModel(const Model& fullModel,
+                        const std::vector< std::string >& jointsInReducedModel,
+                        Model& reducedModel)
+{
+    std::unordered_map<std::string, double> emptyRemovedJointPositions;
+    return createReducedModel(fullModel, jointsInReducedModel, reducedModel, emptyRemovedJointPositions);
 }
 
 bool createModelWithNormalizedJointNumbering(const Model& model,

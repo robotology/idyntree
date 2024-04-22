@@ -92,6 +92,29 @@ void getRandomSubsetOfJoints(const Model & model,
     }
 }
 
+void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
+                                                       const std::vector<std::string>& subsetOfJointsInReducedModel,
+                                                       std::unordered_map<std::string, double>& removedJointPositions,
+                                                       FreeFloatingPos& fullModelPos)
+{
+    for(JointIndex jntIndex = 0; jntIndex < fullModel.getNrOfJoints(); jntIndex++)
+    {
+        // Check if joint is in reduced model
+        std::string jointName = fullModel.getJointName(jntIndex);
+
+        // Only set non-zero position if the DOF size is exactly 1
+        if (!isStringInVector(jointName, subsetOfJointsInReducedModel))
+        {
+            if (fullModel.getJoint(jntIndex)->getNrOfDOFs() == 1)
+            {
+                double jointConf = iDynTree::getRandomDouble();
+                removedJointPositions[jointName] = jointConf;
+                fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset()) = jointConf;
+            }
+        }
+    }
+}
+
 class RNEAHelperClass
 {
 private:
@@ -194,11 +217,17 @@ void checkReducedModel(const Model & model)
     // is giving the same results
     for(size_t jnts=0; jnts < model.getNrOfJoints(); jnts += 5)
     {
+        FreeFloatingPos fullPos(model);
+
         std::vector<std::string> jointInReducedModel;
         getRandomSubsetOfJoints(model,jnts,jointInReducedModel);
 
+        // Get random positions for reduced models
+        std::unordered_map<std::string, double> removedJointPositions;
+        getRandomJointPositonsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
+
         Model reducedModel;
-        bool ok = createReducedModel(model,jointInReducedModel,reducedModel);
+        bool ok = createReducedModel(model, jointInReducedModel, reducedModel, removedJointPositions);
 
         ASSERT_EQUAL_DOUBLE(ok,1.0);
 
@@ -226,7 +255,6 @@ void checkReducedModel(const Model & model)
         reducedAcc.baseAcc() = getRandomTwist();
         getRandomVector(reducedAcc.jointAcc());
 
-        FreeFloatingPos fullPos(model);
         FreeFloatingVel fullVel(model);
         FreeFloatingAcc fullAcc(model);
         FreeFloatingGeneralizedTorques fullTrqs(model);
