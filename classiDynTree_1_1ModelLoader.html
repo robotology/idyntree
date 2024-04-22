@@ -132,6 +132,29 @@
               const std::vector&lt;std::string&gt;&amp; packageDirs = {}) -&gt; bool</span>
             </dt>
             <dd>Load reduced model from file, specifyng only the desired joints in the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8b32ce23af25ee6cd0a8f77bb95d752e" class="m-doc">loadReducedModelFromFullModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions,
+              const std::string filetype = &quot;&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Load reduced model from another model, specifyng only the desired joints in the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1ea528a324efa1fc36dd0803148d37ac" class="m-doc">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions,
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {}) -&gt; bool</span>
+            </dt>
+            <dd>Load reduced model from string, specifyng only the desired joints in the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5a8d8b9ebf6b22f4db8b580897d5b2ce" class="m-doc">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions,
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {}) -&gt; bool</span>
+            </dt>
+            <dd>Load reduced model from file, specifyng only the desired joints in the model.</dd>
             <dt id="abfea0564c6c01dc8a90bab55df13b533">
               <span class="m-doc-wrap-bumper">auto <a href="#abfea0564c6c01dc8a90bab55df13b533" class="m-doc-self">model</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp;</span>
             </dt>
@@ -297,6 +320,133 @@
                 <tr>
                   <td>consideredJoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td>list of joints to consider in the model.</td>
+                </tr>
+                <tr>
+                  <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment.</td>
+                </tr>
+                <tr>
+                  <td>packageDirs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) a vector containing the different directories where to search for model meshes</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well (files were correctly loaded and consistent), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p><aside class="m-note m-info"><h4>Note</h4><p>In case no package is specified <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a> will look for the meshes in <code>GAZEBO_MODEL_PATH</code>, <code>ROS_PACKAGE_PATH</code> and <code>AMENT_PREFIX_PATH</code></p><p>If a given model searches for the meshes in <code>package://StrangeModel/Nested/mesh.stl</code>, and the actual mesh is in <code>/usr/local/share/StrangeModel/Nested/mesh.stl</code>, <code>packageDirs</code> should contain <code>/usr/local/share</code>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a8b32ce23af25ee6cd0a8f77bb95d752e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b32ce23af25ee6cd0a8f77bb95d752e" class="m-doc-self">loadReducedModelFromFullModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions,
+              const std::string filetype = &quot;&quot;)</span></span>
+            </h3>
+            <p>Load reduced model from another model, specifyng only the desired joints in the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">fullModel</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>consideredJoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>list of joints to consider in the model.</td>
+                </tr>
+                <tr>
+                  <td>removedJointPositions&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model</td>
+                </tr>
+                <tr>
+                  <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) explicit definition of the type of the loaded file. Only &quot;urdf&quot; is supported at the moment.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well (files were correctly loaded and consistent), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p><aside class="m-note m-info"><h4>Note</h4><p>the order of the degreese of freedom of the newly loaded model will be the one specified by the input joints serialization, i.e. consideredJoints</p></aside><aside class="m-note m-info"><h4>Note</h4><p>Until <a href="https://github.com/robotology/idyntree/issues/132">https:/<wbr />/<wbr />github.com/<wbr />robotology/<wbr />idyntree/<wbr />issues/<wbr />132</a> is fixed, this method does not accounts for sensors.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a1ea528a324efa1fc36dd0803148d37ac"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ea528a324efa1fc36dd0803148d37ac" class="m-doc-self">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions,
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {})</span></span>
+            </h3>
+            <p>Load reduced model from string, specifyng only the desired joints in the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">modelString&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>string containg the model of the robot.</td>
+                </tr>
+                <tr>
+                  <td>consideredJoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>list of joints to consider in the model.</td>
+                </tr>
+                <tr>
+                  <td>removedJointPositions&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model</td>
+                </tr>
+                <tr>
+                  <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment.</td>
+                </tr>
+                <tr>
+                  <td>packageDirs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) a vector containing the different directories where to search for model meshes</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well (files were correctly loaded and consistent), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p><aside class="m-note m-info"><h4>Note</h4><p>In case no package is specified <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a> will look for the meshes in <code>GAZEBO_MODEL_PATH</code>, <code>ROS_PACKAGE_PATH</code> and <code>AMENT_PREFIX_PATH</code></p><p>If a given model searches for the meshes in <code>package://StrangeModel/Nested/mesh.stl</code>, and the actual mesh is in <code>/usr/local/share/StrangeModel/Nested/mesh.stl</code>, <code>packageDirs</code> should contain <code>/usr/local/share</code>.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a5a8d8b9ebf6b22f4db8b580897d5b2ce"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5a8d8b9ebf6b22f4db8b580897d5b2ce" class="m-doc-self">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions,
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {})</span></span>
+            </h3>
+            <p>Load reduced model from file, specifyng only the desired joints in the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">filename&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>path to the file to load.</td>
+                </tr>
+                <tr>
+                  <td>consideredJoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>list of joints to consider in the model.</td>
+                </tr>
+                <tr>
+                  <td>removedJointPositions&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model</td>
                 </tr>
                 <tr>
                   <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>

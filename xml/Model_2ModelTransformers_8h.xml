@@ -11,6 +11,8 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>iDynTree/Model/ModelTransformers.h</label>
@@ -18,11 +20,14 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="3">
+      <node id="4">
         <label>string</label>
       </node>
-      <node id="4">
+      <node id="5">
         <label>vector</label>
+      </node>
+      <node id="3">
+        <label>unordered_map</label>
       </node>
     </incdepgraph>
     <briefdescription>

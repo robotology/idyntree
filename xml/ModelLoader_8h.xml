@@ -4,6 +4,7 @@
     <compoundname>ModelLoader.h</compoundname>
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
+    <includes local="no">unordered_map</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
@@ -19,14 +20,19 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-      </node>
-      <node id="3">
-        <label>string</label>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
       <node id="4">
+        <label>string</label>
+      </node>
+      <node id="5">
         <label>vector</label>
       </node>
       <node id="2">
+        <label>unordered_map</label>
+      </node>
+      <node id="3">
         <label>memory</label>
       </node>
     </incdepgraph>

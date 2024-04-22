@@ -96,6 +96,13 @@
             </dt>
             <dd>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae25f91a29dc9b01ae310d5e1526fa273" class="m-doc">createReducedModel</a>(</span><span class="m-doc-wrap">const Model&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
+              Model&amp; reducedModel,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions) -&gt; bool</span>
+            </dt>
+            <dd>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa6a9c44d5b80ede19b30f721f88d3679" class="m-doc">createModelWithNormalizedJointNumbering</a>(</span><span class="m-doc-wrap">const Model&amp; model,
               const std::string&amp; baseForNormalizedJointNumbering,
               Model&amp; reducedModel) -&gt; bool</span>
@@ -132,6 +139,16 @@
             </h3>
             <p>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</p>
 <p>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints). The links eliminated with this process are be added back to the reduced model as &quot;frames&quot;, and are copied in the same way all the additional frames of the lumped links.</p>
+          </div></section>
+          <section class="m-doc-details" id="ae25f91a29dc9b01ae310d5e1526fa273"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae25f91a29dc9b01ae310d5e1526fa273" class="m-doc-self">createReducedModel</a>(</span><span class="m-doc-wrap">const Model&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
+              Model&amp; reducedModel,
+              const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions)</span></span>
+            </h3>
+            <p>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</p>
+<p>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions</p>
           </div></section>
           <section class="m-doc-details" id="aa6a9c44d5b80ede19b30f721f88d3679"><div>
             <h3>

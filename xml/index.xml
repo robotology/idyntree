@@ -2549,6 +2549,9 @@
     <member refid="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" kind="function"><name>loadReducedModelFromFullModel</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" kind="function"><name>loadReducedModelFromString</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" kind="function"><name>loadReducedModelFromFile</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a8b32ce23af25ee6cd0a8f77bb95d752e" kind="function"><name>loadReducedModelFromFullModel</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a1ea528a324efa1fc36dd0803148d37ac" kind="function"><name>loadReducedModelFromString</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a5a8d8b9ebf6b22f4db8b580897d5b2ce" kind="function"><name>loadReducedModelFromFile</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" kind="function"><name>sensors</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" kind="function"><name>isValid</name></member>
@@ -4557,6 +4560,7 @@
     <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
     <member refid="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" kind="function"><name>removeFakeLinks</name></member>
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
+    <member refid="ModelTransformers_8h_1ae25f91a29dc9b01ae310d5e1526fa273" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
     <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>
@@ -5291,6 +5295,7 @@
   <compound refid="ModelTransformers_8h" kind="file"><name>ModelTransformers.h</name>
     <member refid="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" kind="function"><name>removeFakeLinks</name></member>
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
+    <member refid="ModelTransformers_8h_1ae25f91a29dc9b01ae310d5e1526fa273" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
     <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>
