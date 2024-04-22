@@ -42,6 +42,7 @@ uninstall = { cmd = ["cmake", "--build", ".build", "--target", "uninstall"]}
 
 
 [dependencies]
+cmake = "*"
 c-compiler = "*"
 cxx-compiler = "*"
 ninja = "*"
