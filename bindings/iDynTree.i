@@ -6,6 +6,7 @@
 #endif
 
 %include "std_string.i"
+%include "std_unordered_map.i"
 %include "std_vector.i"
 
 // std::shared_ptr holder is currently supported only for python bindings
@@ -18,6 +19,9 @@
 
 // Wrap the std::vector<std::int> params
 %template(IntVector) std::vector<int>;
+
+// Wrap the std::unordered_map<std::string, double>
+%template(StringToDoubleUnorderedMap) std::unordered_map<std::string, double>;
 
 // Ignore some methods to avoid warnings
 %include "./ignore.i"
