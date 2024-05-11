@@ -1,11 +1,13 @@
 # SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 # SPDX-License-Identifier: BSD-3-Clause
 
+from enum import Enum
 import os
 import idyntree.bindings as idyn
 import numpy as np
 import warnings
 from pathlib import Path
+
 
 class Line:
     """
@@ -23,6 +25,22 @@ class Line:
 
     def isCylinder(self):
         return False
+
+
+class LinkVisualizedObject:
+    """
+    A class representing storing the data about a link visualized object
+    """
+    class Type(Enum):
+        MESH = 0
+        PRIMITIVE_GEOMETRY = 1
+
+    def __init__(self, name, meshcat_object, material, viz_type):
+        self.name = name
+        self.meshcat_object = meshcat_object
+        self.material = material
+        self.type = viz_type
+
 
 class MeshcatVisualizer:
     """
@@ -46,6 +64,7 @@ class MeshcatVisualizer:
         self.link_pos = dict()
         self.primitive_geometries_names = []
         self.arrow_names = []
+        self.link_visuals = dict()
 
     @staticmethod
     def __is_mesh(geometry_object: idyn.SolidShape) -> bool:
@@ -232,19 +251,17 @@ class MeshcatVisualizer:
 
             world_H_frame = self.link_pos[model_name](link_index)
             link_name = self.model[model_name].getLinkName(link_index)
+            self.link_visuals[link_name] = []
 
             for geom in range(0, len(link_solid_shapes[link_index])):
                 solid_shape = model_geometry.getLinkSolidShapes()[link_index][geom]
 
-                is_mesh = False
-                is_primitive_geomety = False
-
                 if self.__is_mesh(solid_shape):
                     obj = self.__load_mesh(solid_shape)
-                    is_mesh = True
+                    viz_type = LinkVisualizedObject.Type.MESH
                 else:
                     obj = self.__load_primitive_geometry(solid_shape)
-                    is_primitive_geomety = True
+                    viz_type = LinkVisualizedObject.Type.PRIMITIVE_GEOMETRY
 
                 if obj is None:
                     msg = (
@@ -255,7 +272,7 @@ class MeshcatVisualizer:
                     warnings.warn(msg, category=UserWarning, stacklevel=2)
                     continue
 
-                if is_mesh:
+                if viz_type is LinkVisualizedObject.Type.MESH:
                     viewer_name = (
                         model_name
                         + "/"
@@ -285,9 +302,13 @@ class MeshcatVisualizer:
 
                     self.viewer[viewer_name].set_object(obj, material)
 
-                    if is_mesh:
+                    self.link_visuals[link_name].append(
+                        LinkVisualizedObject(viewer_name, obj, material, viz_type)
+                    )
+
+                    if viz_type is LinkVisualizedObject.Type.MESH:
                         self.__apply_transform(world_H_frame, solid_shape, viewer_name)
-                    elif is_primitive_geomety:
+                    else:
                         self.__apply_transform_to_primitive_geomety(
                             world_H_frame, solid_shape, viewer_name
                         )
@@ -358,6 +379,26 @@ class MeshcatVisualizer:
                     self.__apply_transform_to_primitive_geomety(
                         self.link_pos[model_name](link_index), solid_shape, viewer_name
                     )
+
+    def set_link_color(self, model_name, link_name, color):
+        if not self.__model_exists(model_name):
+            msg = "The multi-body system named: " + model_name + " does not exist."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+            return
+
+        if link_name not in self.link_visuals:
+            msg = "The link named: " + link_name + " does not exist."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+            return
+
+        for link_visual in self.link_visuals[link_name]:
+            link_visual.material.color = (
+                int(color[0] * 255) * 256 ** 2
+                + int(color[1] * 255) * 256
+                + int(color[2] * 255)
+            )
+            self.viewer[link_visual.name].set_object(link_visual.meshcat_object,
+                                                     link_visual.material)
 
     def open(self):
         self.viewer.open()
