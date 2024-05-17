@@ -433,6 +433,18 @@ class MeshcatVisualizer:
             msg = "The link named: " + link_name + " does not have any material."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
 
+    def set_model_color(self, model_name, color):
+
+        if not self.__model_exists(model_name):
+            msg = "The multi-body system named: " + model_name + " does not exist."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+            return
+
+        for link_index in range(self.model[model_name].getNrOfLinks()):
+            self.set_link_color(model_name,
+                                self.model[model_name].getLinkName(link_index),
+                                color)
+
     def open(self):
         self.viewer.open()
 
