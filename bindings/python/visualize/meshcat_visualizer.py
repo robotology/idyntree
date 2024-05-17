@@ -248,11 +248,13 @@ class MeshcatVisualizer:
 
         link_solid_shapes = model_geometry.getLinkSolidShapes()
 
+        self.link_visuals[model_name] = dict()
+
         for link_index in range(0, self.model[model_name].getNrOfLinks()):
 
             world_H_frame = self.link_pos[model_name](link_index)
             link_name = self.model[model_name].getLinkName(link_index)
-            self.link_visuals[link_index] = []
+            self.link_visuals[model_name][link_index] = []
 
             for geom in range(0, len(link_solid_shapes[link_index])):
                 solid_shape = model_geometry.getLinkSolidShapes()[link_index][geom]
@@ -304,7 +306,7 @@ class MeshcatVisualizer:
 
                     self.viewer[viewer_name].set_object(obj, material)
 
-                self.link_visuals[link_index].append(
+                self.link_visuals[model_name][link_index].append(
                     LinkVisualizedObject(name=viewer_name,
                                          meshcat_object=obj,
                                          material=material,
@@ -362,10 +364,10 @@ class MeshcatVisualizer:
         # Update the visual shapes
         for link_index in range(0, self.model[model_name].getNrOfLinks()):
 
-            if link_index not in self.link_visuals:
+            if link_index not in self.link_visuals[model_name]:
                 continue
 
-            for link_visual in self.link_visuals[link_index]:
+            for link_visual in self.link_visuals[model_name][link_index]:
                 if link_visual.type is LinkVisualizedObject.Type.MESH:
                     self.__apply_transform(
                         self.link_pos[model_name](link_index),
@@ -402,13 +404,13 @@ class MeshcatVisualizer:
             warnings.warn(msg, category=UserWarning, stacklevel=2)
             return
 
-        if link_index not in self.link_visuals:
+        if link_index not in self.link_visuals[model_name]:
             msg = "The link named: " + link_name + " does not have any visual geometry."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
             return
 
         has_material = False
-        for link_visual in self.link_visuals[link_index]:
+        for link_visual in self.link_visuals[model_name][link_index]:
             if link_visual.material is None:
                 continue
 
