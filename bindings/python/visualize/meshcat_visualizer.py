@@ -35,10 +35,11 @@ class LinkVisualizedObject:
         MESH = 0
         PRIMITIVE_GEOMETRY = 1
 
-    def __init__(self, name, meshcat_object, material, viz_type):
+    def __init__(self, name, meshcat_object, material, solid_shape, viz_type):
         self.name = name
         self.meshcat_object = meshcat_object
         self.material = material
+        self.solid_shape = solid_shape
         self.type = viz_type
 
 
@@ -251,7 +252,7 @@ class MeshcatVisualizer:
 
             world_H_frame = self.link_pos[model_name](link_index)
             link_name = self.model[model_name].getLinkName(link_index)
-            self.link_visuals[link_name] = []
+            self.link_visuals[link_index] = []
 
             for geom in range(0, len(link_solid_shapes[link_index])):
                 solid_shape = model_geometry.getLinkSolidShapes()[link_index][geom]
@@ -283,6 +284,7 @@ class MeshcatVisualizer:
                 else:
                     viewer_name = model_name + "/" + link_name + "/geometry" + str(geom)
 
+                material = None
                 if isinstance(obj, meshcat.geometry.Object):
                     self.viewer[viewer_name].set_object(obj)
                 elif isinstance(obj, meshcat.geometry.Geometry):
@@ -302,16 +304,20 @@ class MeshcatVisualizer:
 
                     self.viewer[viewer_name].set_object(obj, material)
 
-                    self.link_visuals[link_name].append(
-                        LinkVisualizedObject(viewer_name, obj, material, viz_type)
-                    )
+                self.link_visuals[link_index].append(
+                    LinkVisualizedObject(name=viewer_name,
+                                         meshcat_object=obj,
+                                         material=material,
+                                         solid_shape=solid_shape,
+                                         viz_type=viz_type)
+                )
 
-                    if viz_type is LinkVisualizedObject.Type.MESH:
-                        self.__apply_transform(world_H_frame, solid_shape, viewer_name)
-                    else:
-                        self.__apply_transform_to_primitive_geomety(
-                            world_H_frame, solid_shape, viewer_name
-                        )
+                if viz_type is LinkVisualizedObject.Type.MESH:
+                    self.__apply_transform(world_H_frame, solid_shape, viewer_name)
+                else:
+                    self.__apply_transform_to_primitive_geomety(
+                        world_H_frame, solid_shape, viewer_name
+                    )
 
     def set_multibody_system_state(
         self, base_position, base_rotation, joint_value, model_name="iDynTree"
@@ -354,51 +360,76 @@ class MeshcatVisualizer:
         )
 
         # Update the visual shapes
-        model_geometry = self.model[model_name].visualSolidShapes()
-        link_solid_shapes = model_geometry.getLinkSolidShapes()
-
         for link_index in range(0, self.model[model_name].getNrOfLinks()):
 
-            link_name = self.model[model_name].getLinkName(link_index)
-            for geom in range(0, len(link_solid_shapes[link_index])):
-                solid_shape = model_geometry.getLinkSolidShapes()[link_index][geom]
-                if self.__is_mesh(solid_shape):
-                    viewer_name = (
-                        model_name
-                        + "/"
-                        + link_name
-                        + "/"
-                        + solid_shape.asExternalMesh().getName()
-                    )
+            if link_index not in self.link_visuals:
+                continue
+
+            for link_visual in self.link_visuals[link_index]:
+                if link_visual.type is LinkVisualizedObject.Type.MESH:
                     self.__apply_transform(
-                        self.link_pos[model_name](link_index), solid_shape, viewer_name
+                        self.link_pos[model_name](link_index),
+                        link_visual.solid_shape,
+                        link_visual.name,
                     )
-                # is a primitive shape
                 else:
-                    viewer_name = model_name + "/" + link_name + "/geometry" + str(geom)
                     self.__apply_transform_to_primitive_geomety(
-                        self.link_pos[model_name](link_index), solid_shape, viewer_name
+                        self.link_pos[model_name](link_index),
+                        link_visual.solid_shape,
+                        link_visual.name,
                     )
 
     def set_link_color(self, model_name, link_name, color):
+        if not isinstance(color, list) and not isinstance(color, float):
+            msg = "The color must be a list or a float."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+            return
+
+        if isinstance(color, list) and len(color) != 3 and len(color) != 4:
+            msg = "The color must be a list of 3 or 4 elements."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+            return
+
         if not self.__model_exists(model_name):
             msg = "The multi-body system named: " + model_name + " does not exist."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
             return
 
-        if link_name not in self.link_visuals:
+        link_index = self.model[model_name].getLinkIndex(link_name)
+
+        if link_index < 0:
             msg = "The link named: " + link_name + " does not exist."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
             return
 
-        for link_visual in self.link_visuals[link_name]:
-            link_visual.material.color = (
-                int(color[0] * 255) * 256 ** 2
-                + int(color[1] * 255) * 256
-                + int(color[2] * 255)
-            )
+        if link_index not in self.link_visuals:
+            msg = "The link named: " + link_name + " does not have any visual geometry."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+            return
+
+        has_material = False
+        for link_visual in self.link_visuals[link_index]:
+            if link_visual.material is None:
+                continue
+
+            has_material = True
+            if (isinstance(color, float) or
+               (isinstance(color, list) and len(color) == 4)):
+                opacity = color if isinstance(color, float) else color[3]
+                link_visual.material.transparent = float(opacity) != 1.0
+                link_visual.material.opacity = float(opacity)
+            if isinstance(color, list) and len(color) >= 3:
+                link_visual.material.color = (
+                    int(color[0] * 255) * 256 ** 2
+                    + int(color[1] * 255) * 256
+                    + int(color[2] * 255)
+                )
             self.viewer[link_visual.name].set_object(link_visual.meshcat_object,
                                                      link_visual.material)
+
+        if not has_material:
+            msg = "The link named: " + link_name + " does not have any material."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
 
     def open(self):
         self.viewer.open()
