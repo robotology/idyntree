@@ -32,9 +32,9 @@
         </inbodydescription>
         <location file="private/InverseKinematicsData.h" line="71" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="71" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a800b27768852ee09b3d4f455db133f0d" prot="public" static="no" mutable="no">
-        <type>struct internal::kinematics::InverseKinematicsData::@4</type>
-        <definition>struct internal::kinematics::InverseKinematicsData::@4 internal::kinematics::InverseKinematicsData::m_state</definition>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ad020ee1289099bede3a3c6fa9ab9eea3" prot="public" static="no" mutable="no">
+        <type>struct internal::kinematics::InverseKinematicsData::@2</type>
+        <definition>struct internal::kinematics::InverseKinematicsData::@2 internal::kinematics::InverseKinematicsData::m_state</definition>
         <argsstring></argsstring>
         <name>m_state</name>
         <briefdescription>
@@ -60,9 +60,9 @@
         </inbodydescription>
         <location file="private/InverseKinematicsData.h" line="85" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="85" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a596e5dd0d908f75ca67683f9e5bc349e" prot="public" static="no" mutable="no">
-        <type>struct internal::kinematics::InverseKinematicsData::@5</type>
-        <definition>struct internal::kinematics::InverseKinematicsData::@5 internal::kinematics::InverseKinematicsData::m_reducedVariablesInfo</definition>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ad5a0f6758c7f1c183d22924db182cd7f" prot="public" static="no" mutable="no">
+        <type>struct internal::kinematics::InverseKinematicsData::@3</type>
+        <definition>struct internal::kinematics::InverseKinematicsData::@3 internal::kinematics::InverseKinematicsData::m_reducedVariablesInfo</definition>
         <argsstring></argsstring>
         <name>m_reducedVariablesInfo</name>
         <briefdescription>
@@ -584,7 +584,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>joint configuration <formula id="303">$ q_j \in \mathbb{R}^n $</formula> </para>
+<para>joint configuration <formula id="8">$ q_j \in \mathbb{R}^n $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -598,7 +598,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>base position <formula id="304">$ {}^w H_{base} \in SE(3) $</formula> </para>
+<para>base position <formula id="9">$ {}^w H_{base} \in SE(3) $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -612,7 +612,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>joint velotiy <formula id="305">$ \dot{q}_j \in \mathbb{R}^n $</formula> </para>
+<para>joint velotiy <formula id="10">$ \dot{q}_j \in \mathbb{R}^n $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -626,7 +626,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>base velocity <formula id="306">$ [\dot{p}, {}^I \omega] \in se(3) $</formula> </para>
+<para>base velocity <formula id="11">$ [\dot{p}, {}^I \omega] \in se(3) $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -766,9 +766,9 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aba7b2e764e0951b43b16a62049496948" prot="private" static="no" mutable="no">
-        <type>struct internal::kinematics::InverseKinematicsData::@3</type>
-        <definition>struct internal::kinematics::InverseKinematicsData::@3 internal::kinematics::InverseKinematicsData::m_comTarget</definition>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a57b827800b8b37ff77dd299e5abd8eb8" prot="private" static="no" mutable="no">
+        <type>struct internal::kinematics::InverseKinematicsData::@1</type>
+        <definition>struct internal::kinematics::InverseKinematicsData::@1 internal::kinematics::InverseKinematicsData::m_comTarget</definition>
         <argsstring></argsstring>
         <name>m_comTarget</name>
         <briefdescription>
@@ -1881,7 +1881,7 @@
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1accffb6a1b2c7d84372b3816ef1fd6938" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_comHullConstraint_supportPolygons</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0e1f2fa42cee1d5ee1c694db3e62c7b1" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_comHullConstraint_xAxisOfPlaneInWorld</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4132256ebe3a580e7bb1eda9abf33ecb" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_comHullConstraint_yAxisOfPlaneInWorld</name></member>
-      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aba7b2e764e0951b43b16a62049496948" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_comTarget</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a57b827800b8b37ff77dd299e5abd8eb8" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_comTarget</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a558eb1949d06bae51c90b897f50ab0c6" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_constraintMultipliers</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ae37acd832ddc894dbcbf6e0a7b888139" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_constraints</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a12d5cf9bda5ea843e13d7e02b7657477" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_constrTol</name></member>
@@ -1900,11 +1900,11 @@
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1afd3c21e52af07cbe5eed2975f4ea1542" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_preferredJointsConfiguration</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ace62864b8c7c036cb75e6f3596f49273" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_preferredJointsWeight</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a60936bb71ca4e3ea53ca44e96fcceaeb" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_problemInitialized</name></member>
-      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a596e5dd0d908f75ca67683f9e5bc349e" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_reducedVariablesInfo</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ad5a0f6758c7f1c183d22924db182cd7f" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_reducedVariablesInfo</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4295e14928ac5b8c84ec92b56bfbdf51" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_rotationParametrization</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a2dca851484e008c10320a02d7d0cade9" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_solver</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a9014bd8584d52f9d12e5d46b3702f505" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_solverName</name></member>
-      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a800b27768852ee09b3d4f455db133f0d" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_state</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ad020ee1289099bede3a3c6fa9ab9eea3" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_state</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a7bedc79c4659da0b1fc90b082adaf1a8" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_targets</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a618a99cb734358131863f013698e6f51" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_tol</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aae45e2f08dd38410d10fd73430596b3a" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>m_upperBoundMultipliers</name></member>

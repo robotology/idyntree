@@ -7,11 +7,11 @@
     <includes local="no">vector</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
-    <includedby refid="InertialParametersSolidShapesHelpers_8h" local="no">iDynTree/InertialParametersSolidShapesHelpers.h</includedby>
     <includedby refid="VisualElement_8h" local="no">private/VisualElement.h</includedby>
+    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
+    <includedby refid="InertialParametersSolidShapesHelpers_8h" local="no">iDynTree/InertialParametersSolidShapesHelpers.h</includedby>
     <includedby refid="Model_2SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includedby>
     <includedby refid="Model_8h" local="no">iDynTree/Model.h</includedby>
-    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>string</label>
