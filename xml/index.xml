@@ -220,6 +220,7 @@
     <member refid="classiDynTree_1_1Axis_1a1355ccdd4ea9f7dbf775920e3b2a694c" kind="function"><name>getTranslationSpatialAcc</name></member>
     <member refid="classiDynTree_1_1Axis_1a5f9e8b8b7d511a6662d21be27570b1c4" kind="function"><name>isParallel</name></member>
     <member refid="classiDynTree_1_1Axis_1ab473268436d3549692c5ef59b7ad5730" kind="function"><name>reverse</name></member>
+    <member refid="classiDynTree_1_1Axis_1a4ccdcaeb59a5a21c216519cdd8e55f4a" kind="function"><name>getDistanceBetweenAxisAndPoint</name></member>
   </compound>
   <compound refid="structiDynTree_1_1BerdyDynamicVariable" kind="struct"><name>iDynTree::BerdyDynamicVariable</name>
     <member refid="structiDynTree_1_1BerdyDynamicVariable_1a589e92c8f4542ad8b0bab669103fdac0" kind="variable"><name>type</name></member>
@@ -4256,6 +4257,9 @@
   <compound refid="namespaceiCub_1_1iKin" kind="namespace"><name>iCub::iKin</name>
   </compound>
   <compound refid="namespaceiDynTree" kind="namespace"><name>iDynTree</name>
+    <member refid="Utils_8h_1a1d9848852f7effdff0a7206e361759dc" kind="enum"><name>MatrixStorageOrdering</name></member>
+    <member refid="Utils_8h_1a1d9848852f7effdff0a7206e361759dca2b26025c525aa73dc7d5a8ab6b75c277" kind="enumvalue"><name>RowMajor</name></member>
+    <member refid="Utils_8h_1a1d9848852f7effdff0a7206e361759dcaa2d6963e41f11651763298147696f0dc" kind="enumvalue"><name>ColumnMajor</name></member>
     <member refid="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6c" kind="enum"><name>InverseKinematicsRotationParametrization</name></member>
     <member refid="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6ca6bbd58481084418979b449c46aff99a8" kind="enumvalue"><name>InverseKinematicsRotationParametrizationQuaternion</name></member>
     <member refid="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6caad8ec2efa81330efbf416e7550113ca5" kind="enumvalue"><name>InverseKinematicsRotationParametrizationRollPitchYaw</name></member>
@@ -4264,27 +4268,6 @@
     <member refid="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2a786b8aeaff64c77f025cec462c47206b" kind="enumvalue"><name>InverseKinematicsTreatTargetAsConstraintPositionOnly</name></member>
     <member refid="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2aad1cbbc20ef9d02ff21364a90f781681" kind="enumvalue"><name>InverseKinematicsTreatTargetAsConstraintRotationOnly</name></member>
     <member refid="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2a90e54d63819ec0bff0f8eec68beff50b" kind="enumvalue"><name>InverseKinematicsTreatTargetAsConstraintFull</name></member>
-    <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515a" kind="enum"><name>LightType</name></member>
-    <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aa7552ee08212d810760cfcca2c9e26976" kind="enumvalue"><name>POINT_LIGHT</name></member>
-    <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aac19ca7f555771da916a01ed3fa781d21" kind="enumvalue"><name>DIRECTIONAL_LIGHT</name></member>
-    <member refid="Utils_8h_1a1d9848852f7effdff0a7206e361759dc" kind="enum"><name>MatrixStorageOrdering</name></member>
-    <member refid="Utils_8h_1a1d9848852f7effdff0a7206e361759dca2b26025c525aa73dc7d5a8ab6b75c277" kind="enumvalue"><name>RowMajor</name></member>
-    <member refid="Utils_8h_1a1d9848852f7effdff0a7206e361759dcaa2d6963e41f11651763298147696f0dc" kind="enumvalue"><name>ColumnMajor</name></member>
-    <member refid="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357" kind="enum"><name>ApproximateSolidShapesWithPrimitiveShapeConversionType</name></member>
-    <member refid="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" kind="enumvalue"><name>ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</name></member>
-    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375a" kind="enum"><name>FrameVelocityRepresentation</name></member>
-    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" kind="enumvalue"><name>INERTIAL_FIXED_REPRESENTATION</name></member>
-    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" kind="enumvalue"><name>BODY_FIXED_REPRESENTATION</name></member>
-    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" kind="enumvalue"><name>MIXED_REPRESENTATION</name></member>
-    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" kind="enum"><name>JointDynamicsType</name></member>
-    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" kind="enumvalue"><name>NoJointDynamics</name></member>
-    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" kind="enumvalue"><name>URDFJointDynamics</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" kind="enum"><name>SensorType</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" kind="enumvalue"><name>SIX_AXIS_FORCE_TORQUE</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" kind="enumvalue"><name>ACCELEROMETER</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" kind="enumvalue"><name>GYROSCOPE</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" kind="enumvalue"><name>THREE_AXIS_ANGULAR_ACCELEROMETER</name></member>
-    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" kind="enumvalue"><name>THREE_AXIS_FORCE_TORQUE_CONTACT</name></member>
     <member refid="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" kind="enum"><name>BerdyVariants</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21faf59c4a22cd72d6e001dbba40910e9c32" kind="enumvalue"><name>ORIGINAL_BERDY_FIXED_BASE</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" kind="enumvalue"><name>BERDY_FLOATING_BASE</name></member>
@@ -4317,6 +4300,24 @@
     <member refid="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26aeb51903155017085b84cc6aac2e2bba6" kind="enumvalue"><name>PURE_FORCE</name></member>
     <member refid="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26a7e0e568e396d7cd82bf2fa23ca525a3a" kind="enumvalue"><name>PURE_FORCE_WITH_KNOWN_DIRECTION</name></member>
     <member refid="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26a40b36711643e2573ff0f03773c0555e2" kind="enumvalue"><name>NO_UNKNOWNS</name></member>
+    <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515a" kind="enum"><name>LightType</name></member>
+    <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aa7552ee08212d810760cfcca2c9e26976" kind="enumvalue"><name>POINT_LIGHT</name></member>
+    <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aac19ca7f555771da916a01ed3fa781d21" kind="enumvalue"><name>DIRECTIONAL_LIGHT</name></member>
+    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375a" kind="enum"><name>FrameVelocityRepresentation</name></member>
+    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" kind="enumvalue"><name>INERTIAL_FIXED_REPRESENTATION</name></member>
+    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" kind="enumvalue"><name>BODY_FIXED_REPRESENTATION</name></member>
+    <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" kind="enumvalue"><name>MIXED_REPRESENTATION</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" kind="enum"><name>JointDynamicsType</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" kind="enumvalue"><name>NoJointDynamics</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" kind="enumvalue"><name>URDFJointDynamics</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" kind="enum"><name>SensorType</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" kind="enumvalue"><name>SIX_AXIS_FORCE_TORQUE</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" kind="enumvalue"><name>ACCELEROMETER</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" kind="enumvalue"><name>GYROSCOPE</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" kind="enumvalue"><name>THREE_AXIS_ANGULAR_ACCELEROMETER</name></member>
+    <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" kind="enumvalue"><name>THREE_AXIS_FORCE_TORQUE_CONTACT</name></member>
+    <member refid="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357" kind="enum"><name>ApproximateSolidShapesWithPrimitiveShapeConversionType</name></member>
+    <member refid="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" kind="enumvalue"><name>ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</name></member>
     <member refid="EigenHelpers_8h_1acad81b92d9885b5eec826b3066af8960" kind="typedef"><name>iDynTreeEigenVector</name></member>
     <member refid="EigenHelpers_8h_1a60faf8b72189d4496f7b7920d5ea3b01" kind="typedef"><name>iDynTreeEigenConstVector</name></member>
     <member refid="EigenHelpers_8h_1a8dd9b043a4e3ceaa1b9a173e826020aa" kind="typedef"><name>iDynTreeEigenMatrix</name></member>
@@ -4350,6 +4351,11 @@
     <member refid="VectorFixSize_8h_1aacbdf066949a170899a2e43ad52987d8" kind="typedef"><name>Vector6</name></member>
     <member refid="VectorFixSize_8h_1a658ee3743c3ccf3d61c38e4fa1c81ec9" kind="typedef"><name>Vector10</name></member>
     <member refid="VectorFixSize_8h_1a68b87219f8e66c52f9d5de9d84aef7c9" kind="typedef"><name>Vector16</name></member>
+    <member refid="AttitudeEstimator_8h_1adcfa60b3d3580f517fd47c8864534b36" kind="typedef"><name>LinearAccelerometerMeasurements</name></member>
+    <member refid="AttitudeEstimator_8h_1a94dcb1f9c90a22269981469e229ed6ce" kind="typedef"><name>GyroscopeMeasurements</name></member>
+    <member refid="AttitudeEstimator_8h_1ad170eb4fd0bd13bfb0bdbdb6460d28bc" kind="typedef"><name>MagnetometerMeasurements</name></member>
+    <member refid="AttitudeEstimator_8h_1a8953e202971beb38867767ab9f002c42" kind="typedef"><name>UnitQuaternion</name></member>
+    <member refid="AttitudeEstimator_8h_1a48e2955e462d28103d57a10634d0654d" kind="typedef"><name>RPY</name></member>
     <member refid="IJoint_8h_1ade0c4658492d5288102a323d704a2a1c" kind="typedef"><name>IJointPtr</name></member>
     <member refid="IJoint_8h_1ac8fef24361e5d31b7bb1c5e468ea9513" kind="typedef"><name>IJointConstPtr</name></member>
     <member refid="Indices_8h_1a7b1bbb834d5bf0d3c64cdf91ab3d6e72" kind="typedef"><name>LinkIndex</name></member>
@@ -4370,14 +4376,12 @@
     <member refid="MovableJointImpl_8h_1a66158274373829ef7c8694995a9d6929" kind="typedef"><name>MovableJointImpl4</name></member>
     <member refid="MovableJointImpl_8h_1a5b8dfe13ce097fa3e505f492b7906c63" kind="typedef"><name>MovableJointImpl5</name></member>
     <member refid="MovableJointImpl_8h_1af1c9c077a2177994db5ee45257af1d48" kind="typedef"><name>MovableJointImpl6</name></member>
-    <member refid="AttitudeEstimator_8h_1adcfa60b3d3580f517fd47c8864534b36" kind="typedef"><name>LinearAccelerometerMeasurements</name></member>
-    <member refid="AttitudeEstimator_8h_1a94dcb1f9c90a22269981469e229ed6ce" kind="typedef"><name>GyroscopeMeasurements</name></member>
-    <member refid="AttitudeEstimator_8h_1ad170eb4fd0bd13bfb0bdbdb6460d28bc" kind="typedef"><name>MagnetometerMeasurements</name></member>
-    <member refid="AttitudeEstimator_8h_1a8953e202971beb38867767ab9f002c42" kind="typedef"><name>UnitQuaternion</name></member>
-    <member refid="AttitudeEstimator_8h_1a48e2955e462d28103d57a10634d0654d" kind="typedef"><name>RPY</name></member>
     <member refid="Span_8h_1a10c045523612bc8183a496020fecf982" kind="variable"><name>dynamic_extent</name></member>
     <member refid="Utils_8h_1a09f55e26767f7112939284cfcea999f7" kind="variable"><name>UNKNOWN</name></member>
     <member refid="Utils_8h_1abe71efaac97b8e18f842ccc49d07026a" kind="variable"><name>DEFAULT_TOL</name></member>
+    <member refid="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" kind="variable"><name>output_dimensions_with_magnetometer</name></member>
+    <member refid="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" kind="variable"><name>output_dimensions_without_magnetometer</name></member>
+    <member refid="AttitudeQuaternionEKF_8h_1ae4a3a4ece8b00835bf57f387795ba015" kind="variable"><name>input_dimensions</name></member>
     <member refid="Indices_8h_1abb454ae2b12be8622ba842c70450352d" kind="variable"><name>LINK_INVALID_INDEX</name></member>
     <member refid="Indices_8h_1a159509c5b039dff9c6d63dd349e5b11b" kind="variable"><name>LINK_INVALID_NAME</name></member>
     <member refid="Indices_8h_1a00a66679a08e686adb0ee06a7bd1aabc" kind="variable"><name>JOINT_INVALID_INDEX</name></member>
@@ -4388,43 +4392,6 @@
     <member refid="Indices_8h_1a6d57d4391d58c8fd9470846d4a72118f" kind="variable"><name>FRAME_INVALID_NAME</name></member>
     <member refid="Indices_8h_1a1ceb2215b00eb2c21af358eb9b7d88f4" kind="variable"><name>TRAVERSAL_INVALID_INDEX</name></member>
     <member refid="Sensors_8h_1a27f6da1749325b5fabe94ceb7278f0df" kind="variable"><name>NR_OF_SENSOR_TYPES</name></member>
-    <member refid="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" kind="variable"><name>output_dimensions_with_magnetometer</name></member>
-    <member refid="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" kind="variable"><name>output_dimensions_without_magnetometer</name></member>
-    <member refid="AttitudeQuaternionEKF_8h_1ae4a3a4ece8b00835bf57f387795ba015" kind="variable"><name>input_dimensions</name></member>
-    <member refid="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" kind="function"><name>dofsListFromURDF</name></member>
-    <member refid="group__iDynTreeModelIO_1ga657c7f9a0eedd9b8f71a54e6a83acdc0" kind="function"><name>dofsListFromURDFString</name></member>
-    <member refid="group__iDynTreeModelIO_1gaeaa7b0320760138dab8d2e7ba5525b2a" kind="function"><name>URDFFromModel</name></member>
-    <member refid="group__iDynTreeModelIO_1gab9223d51ca118bea013bbbde14d6e054" kind="function"><name>URDFStringFromModel</name></member>
-    <member refid="URDFParsingUtils_8h_1a91b6a382b3717636fb3a45a8ba4f8850" kind="function"><name>stringToDoubleWithClassicLocale</name></member>
-    <member refid="URDFParsingUtils_8h_1a9c8ea4244ff5dc2276f8008b53a609e8" kind="function"><name>stringToIntWithClassicLocale</name></member>
-    <member refid="URDFParsingUtils_8h_1ab5e3c195abc73e35657df0f831daab96" kind="function"><name>stringToUnsignedIntWithClassicLocale</name></member>
-    <member refid="URDFParsingUtils_8h_1a072b6eff9a6c9173d96ebef185343d90" kind="function"><name>doubleToStringWithClassicLocale</name></member>
-    <member refid="URDFParsingUtils_8h_1adffeb935ed6aad8d6f30705238117df8" kind="function"><name>intToString</name></member>
-    <member refid="URDFParsingUtils_8h_1a49c5650f4d8f43d3af304224dcf880c0" kind="function"><name>intToString</name></member>
-    <member refid="URDFParsingUtils_8h_1ab77f7c41e63dbfbfc327283490b7cb92" kind="function"><name>splitString</name></member>
-    <member refid="URDFParsingUtils_8h_1a8645d0238ce891d16d8d7be074bd33dc" kind="function"><name>vector3FromString</name></member>
-    <member refid="URDFParsingUtils_8h_1a5872c10e6e9f23dbeeb87ad4b503a5ba" kind="function"><name>vectorToString</name></member>
-    <member refid="URDFParsingUtils_8h_1ab55f4fdf60c8947b61adde47e0495b10" kind="function"><name>vector4FromString</name></member>
-    <member refid="InverseKinematics_8h_1a399f5a8eff425f1036038ee927fb81cb" kind="function"><name>sizeOfRotationParametrization</name></member>
-    <member refid="YARPConfigurationsLoader_8h_1a51e39202a162fa642eed01df66c75878" kind="function"><name>parseRotationMatrix</name></member>
-    <member refid="group__iDynTreeYARP_1ga5043dfa20b4ffc99d8dbdae5b15c0dae" kind="function"><name>toiDynTree</name></member>
-    <member refid="group__iDynTreeYARP_1gaa28c5100610c33e81bafbdad8cd65f74" kind="function"><name>toYarp</name></member>
-    <member refid="group__iDynTreeYARP_1gaf7ed1a24bb847b7742685eb9f59bb92b" kind="function"><name>toiDynTree</name></member>
-    <member refid="group__iDynTreeYARP_1gafcb81129ef0d16f5f1eb1cc6e1df4252" kind="function"><name>toiDynTree</name></member>
-    <member refid="group__iDynTreeYARP_1ga9020f2412b884fd0ef63e726c1342947" kind="function"><name>toYarp</name></member>
-    <member refid="group__iDynTreeYARP_1gaea2d5b8825259e8fa15c166cb843ee40" kind="function"><name>toiDynTree</name></member>
-    <member refid="group__iDynTreeYARP_1ga6b716f09fcb568a6b3eea04b44160f19" kind="function"><name>toYarp</name></member>
-    <member refid="group__iDynTreeYARP_1gaa01de51e3acfd87599aa688e4c3d32c0" kind="function"><name>toiDynTree</name></member>
-    <member refid="group__iDynTreeYARP_1ga0c1a2189345fb926b98f2d82219d5dd1" kind="function"><name>toYarp</name></member>
-    <member refid="group__iDynTreeYARP_1ga8c4d32377000e6629f2855a6d5aebf72" kind="function"><name>toiDynTree</name></member>
-    <member refid="group__iDynTreeYARP_1ga3e0ac29c597c34c171d29fb18127ab3b" kind="function"><name>toYarp</name></member>
-    <member refid="group__iDynTreeYARP_1ga63598edaacfc53e5728e944a0dab5ebb" kind="function"><name>toYarp</name></member>
-    <member refid="group__iDynTreeYARP_1ga056a45c2887a5f314c963c89bb16a270" kind="function"><name>toiDynTree</name></member>
-    <member refid="group__iDynTreeYARP_1gae1c1d7e3baf33d9b84f593330a3cf199" kind="function"><name>toiDynTree</name></member>
-    <member refid="YARPEigenConversions_8h_1ae7c28c545c2775b437536fd84dabc97d" kind="function"><name>toEigen</name></member>
-    <member refid="YARPEigenConversions_8h_1a19f060a1b963d4cdd58a142372675f6b" kind="function"><name>toEigen</name></member>
-    <member refid="YARPEigenConversions_8h_1a0fc1ec0d7de0f823d4a8c32524aaecd7" kind="function"><name>toEigen</name></member>
-    <member refid="YARPEigenConversions_8h_1a4f400cf54f7b7757adbaa768205b9df9" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a5481a54f7c787fd4cf55a0f5fd21bbb0" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a0d2e67fee79a1191ed16ab1d522b0078" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a3f48b18c53414248343c3adaf5db988c" kind="function"><name>toEigen</name></member>
@@ -4531,10 +4498,49 @@
     <member refid="Utils_8h_1a2099697a85abd10017e2ab2ca9f3336e" kind="function"><name>deg2rad</name></member>
     <member refid="Utils_8h_1a3ffc4d06e77379cc44c32f2ea44df1d5" kind="function"><name>rad2deg</name></member>
     <member refid="Utils_8h_1a3f330bf40f3d09799c2b4923f79173ff" kind="function"><name>checkDoublesAreEqual</name></member>
-    <member refid="InertialParametersSolidShapesHelpers_8h_1a4ed7d9dcd80664b1b86236a0f1086cda" kind="function"><name>estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</name></member>
-    <member refid="InertialParametersSolidShapesHelpers_8h_1a3fc080109daad044981533bc143d1bee" kind="function"><name>computeBoundingBoxFromShape</name></member>
-    <member refid="InertialParametersSolidShapesHelpers_8h_1a22b1c506654dc8a1589bbccc2ba32deb" kind="function"><name>computeBoxVertices</name></member>
-    <member refid="ModelTransformersSolidShapes_8h_1adbe329aea649b6a379dfd7077ceb1eb9" kind="function"><name>approximateSolidShapesWithPrimitiveShape</name></member>
+    <member refid="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" kind="function"><name>dofsListFromURDF</name></member>
+    <member refid="group__iDynTreeModelIO_1ga657c7f9a0eedd9b8f71a54e6a83acdc0" kind="function"><name>dofsListFromURDFString</name></member>
+    <member refid="group__iDynTreeModelIO_1gaeaa7b0320760138dab8d2e7ba5525b2a" kind="function"><name>URDFFromModel</name></member>
+    <member refid="group__iDynTreeModelIO_1gab9223d51ca118bea013bbbde14d6e054" kind="function"><name>URDFStringFromModel</name></member>
+    <member refid="URDFParsingUtils_8h_1a91b6a382b3717636fb3a45a8ba4f8850" kind="function"><name>stringToDoubleWithClassicLocale</name></member>
+    <member refid="URDFParsingUtils_8h_1a9c8ea4244ff5dc2276f8008b53a609e8" kind="function"><name>stringToIntWithClassicLocale</name></member>
+    <member refid="URDFParsingUtils_8h_1ab5e3c195abc73e35657df0f831daab96" kind="function"><name>stringToUnsignedIntWithClassicLocale</name></member>
+    <member refid="URDFParsingUtils_8h_1a072b6eff9a6c9173d96ebef185343d90" kind="function"><name>doubleToStringWithClassicLocale</name></member>
+    <member refid="URDFParsingUtils_8h_1adffeb935ed6aad8d6f30705238117df8" kind="function"><name>intToString</name></member>
+    <member refid="URDFParsingUtils_8h_1a49c5650f4d8f43d3af304224dcf880c0" kind="function"><name>intToString</name></member>
+    <member refid="URDFParsingUtils_8h_1ab77f7c41e63dbfbfc327283490b7cb92" kind="function"><name>splitString</name></member>
+    <member refid="URDFParsingUtils_8h_1a8645d0238ce891d16d8d7be074bd33dc" kind="function"><name>vector3FromString</name></member>
+    <member refid="URDFParsingUtils_8h_1a5872c10e6e9f23dbeeb87ad4b503a5ba" kind="function"><name>vectorToString</name></member>
+    <member refid="URDFParsingUtils_8h_1ab55f4fdf60c8947b61adde47e0495b10" kind="function"><name>vector4FromString</name></member>
+    <member refid="InverseKinematics_8h_1a399f5a8eff425f1036038ee927fb81cb" kind="function"><name>sizeOfRotationParametrization</name></member>
+    <member refid="BerdyHelper_8h_1a39f8730ab92b19678c82e418b8c0f2a3" kind="function"><name>isLinkBerdyDynamicVariable</name></member>
+    <member refid="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" kind="function"><name>isJointBerdyDynamicVariable</name></member>
+    <member refid="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" kind="function"><name>isDOFBerdyDynamicVariable</name></member>
+    <member refid="ExternalWrenchesEstimation_8h_1ad96bdadc6f50434261b8fdab971904e6" kind="function"><name>estimateExternalWrenchesWithoutInternalFT</name></member>
+    <member refid="ExternalWrenchesEstimation_8h_1a4c628669d7801fee070c5ac32312b45d" kind="function"><name>estimateExternalWrenches</name></member>
+    <member refid="ExternalWrenchesEstimation_8h_1a4552fdf67855209419f189466fbb8e69" kind="function"><name>dynamicsEstimationForwardVelAccKinematics</name></member>
+    <member refid="ExternalWrenchesEstimation_8h_1a9c5c034c8fc89c4d0d19f17d2134a7a4" kind="function"><name>dynamicsEstimationForwardVelKinematics</name></member>
+    <member refid="ExternalWrenchesEstimation_8h_1a2cf3011d218d8a98440bdcafdd1d54e6" kind="function"><name>computeLinkNetWrenchesWithoutGravity</name></member>
+    <member refid="ExternalWrenchesEstimation_8h_1ab6c0784c22088705cc07732b5b29dd4b" kind="function"><name>estimateLinkContactWrenchesFromLinkNetExternalWrenches</name></member>
+    <member refid="YARPConfigurationsLoader_8h_1a51e39202a162fa642eed01df66c75878" kind="function"><name>parseRotationMatrix</name></member>
+    <member refid="group__iDynTreeYARP_1ga5043dfa20b4ffc99d8dbdae5b15c0dae" kind="function"><name>toiDynTree</name></member>
+    <member refid="group__iDynTreeYARP_1gaa28c5100610c33e81bafbdad8cd65f74" kind="function"><name>toYarp</name></member>
+    <member refid="group__iDynTreeYARP_1gaf7ed1a24bb847b7742685eb9f59bb92b" kind="function"><name>toiDynTree</name></member>
+    <member refid="group__iDynTreeYARP_1gafcb81129ef0d16f5f1eb1cc6e1df4252" kind="function"><name>toiDynTree</name></member>
+    <member refid="group__iDynTreeYARP_1ga9020f2412b884fd0ef63e726c1342947" kind="function"><name>toYarp</name></member>
+    <member refid="group__iDynTreeYARP_1gaea2d5b8825259e8fa15c166cb843ee40" kind="function"><name>toiDynTree</name></member>
+    <member refid="group__iDynTreeYARP_1ga6b716f09fcb568a6b3eea04b44160f19" kind="function"><name>toYarp</name></member>
+    <member refid="group__iDynTreeYARP_1gaa01de51e3acfd87599aa688e4c3d32c0" kind="function"><name>toiDynTree</name></member>
+    <member refid="group__iDynTreeYARP_1ga0c1a2189345fb926b98f2d82219d5dd1" kind="function"><name>toYarp</name></member>
+    <member refid="group__iDynTreeYARP_1ga8c4d32377000e6629f2855a6d5aebf72" kind="function"><name>toiDynTree</name></member>
+    <member refid="group__iDynTreeYARP_1ga3e0ac29c597c34c171d29fb18127ab3b" kind="function"><name>toYarp</name></member>
+    <member refid="group__iDynTreeYARP_1ga63598edaacfc53e5728e944a0dab5ebb" kind="function"><name>toYarp</name></member>
+    <member refid="group__iDynTreeYARP_1ga056a45c2887a5f314c963c89bb16a270" kind="function"><name>toiDynTree</name></member>
+    <member refid="group__iDynTreeYARP_1gae1c1d7e3baf33d9b84f593330a3cf199" kind="function"><name>toiDynTree</name></member>
+    <member refid="YARPEigenConversions_8h_1ae7c28c545c2775b437536fd84dabc97d" kind="function"><name>toEigen</name></member>
+    <member refid="YARPEigenConversions_8h_1a19f060a1b963d4cdd58a142372675f6b" kind="function"><name>toEigen</name></member>
+    <member refid="YARPEigenConversions_8h_1a0fc1ec0d7de0f823d4a8c32524aaecd7" kind="function"><name>toEigen</name></member>
+    <member refid="YARPEigenConversions_8h_1a4f400cf54f7b7757adbaa768205b9df9" kind="function"><name>toEigen</name></member>
     <member refid="DenavitHartenberg_8h_1a9f5fda0dc8377f9fad3f8b60d73f1c7c" kind="function"><name>TransformFromDHCraig1989</name></member>
     <member refid="DenavitHartenberg_8h_1a259b4c68b0f4b9ae9ce389ed14f4c712" kind="function"><name>TransformFromDH</name></member>
     <member refid="DenavitHartenberg_8h_1ada11245ee6d17f4d64ccf59eeead8f07" kind="function"><name>ExtractDHChainFromModel</name></member>
@@ -4584,6 +4590,10 @@
     <member refid="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" kind="function"><name>getSensorTypeSize</name></member>
     <member refid="SubModel_8h_1a2f7475185a0d9ae6c7dcd2048d4a23fb" kind="function"><name>computeTransformToTraversalBase</name></member>
     <member refid="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" kind="function"><name>computeTransformToSubModelBase</name></member>
+    <member refid="InertialParametersSolidShapesHelpers_8h_1a4ed7d9dcd80664b1b86236a0f1086cda" kind="function"><name>estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</name></member>
+    <member refid="InertialParametersSolidShapesHelpers_8h_1a3fc080109daad044981533bc143d1bee" kind="function"><name>computeBoundingBoxFromShape</name></member>
+    <member refid="InertialParametersSolidShapesHelpers_8h_1a22b1c506654dc8a1589bbccc2ba32deb" kind="function"><name>computeBoxVertices</name></member>
+    <member refid="ModelTransformersSolidShapes_8h_1adbe329aea649b6a379dfd7077ceb1eb9" kind="function"><name>approximateSolidShapesWithPrimitiveShape</name></member>
     <member refid="group__iDynTreeICUB_1ga93e84fbc1880a920199aae0cbabd76ea" kind="function"><name>DHChainFromiKinChain</name></member>
     <member refid="group__iDynTreeICUB_1gadb9ad80c8043481f2bb8f013542db690" kind="function"><name>modelFromiKinChain</name></member>
     <member refid="group__iDynTreeICUB_1ga681d23161951646fcb60dc7681e59482" kind="function"><name>iKinLimbFromModel</name></member>
@@ -4591,15 +4601,6 @@
     <member refid="iKinConversionsImplementation_8h_1a907871ccc9e6e56fb19fa0af4c0854c8" kind="function"><name>iKinLink2DHLink</name></member>
     <member refid="iKinConversionsImplementation_8h_1ae6d845189d4491128320b2c78c6082ec" kind="function"><name>DHLink2iKinLink</name></member>
     <member refid="skinDynLibConversionsImplementation_8h_1abd0cb602d0a91817a13e042d47004d79" kind="function"><name>fromSkinDynLibToiDynTreeHelper</name></member>
-    <member refid="BerdyHelper_8h_1a39f8730ab92b19678c82e418b8c0f2a3" kind="function"><name>isLinkBerdyDynamicVariable</name></member>
-    <member refid="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" kind="function"><name>isJointBerdyDynamicVariable</name></member>
-    <member refid="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" kind="function"><name>isDOFBerdyDynamicVariable</name></member>
-    <member refid="ExternalWrenchesEstimation_8h_1ad96bdadc6f50434261b8fdab971904e6" kind="function"><name>estimateExternalWrenchesWithoutInternalFT</name></member>
-    <member refid="ExternalWrenchesEstimation_8h_1a4c628669d7801fee070c5ac32312b45d" kind="function"><name>estimateExternalWrenches</name></member>
-    <member refid="ExternalWrenchesEstimation_8h_1a4552fdf67855209419f189466fbb8e69" kind="function"><name>dynamicsEstimationForwardVelAccKinematics</name></member>
-    <member refid="ExternalWrenchesEstimation_8h_1a9c5c034c8fc89c4d0d19f17d2134a7a4" kind="function"><name>dynamicsEstimationForwardVelKinematics</name></member>
-    <member refid="ExternalWrenchesEstimation_8h_1a2cf3011d218d8a98440bdcafdd1d54e6" kind="function"><name>computeLinkNetWrenchesWithoutGravity</name></member>
-    <member refid="ExternalWrenchesEstimation_8h_1ab6c0784c22088705cc07732b5b29dd4b" kind="function"><name>estimateLinkContactWrenchesFromLinkNetExternalWrenches</name></member>
   </compound>
   <compound refid="namespaceiDynTree_1_1details" kind="namespace"><name>iDynTree::details</name>
     <member refid="Span_8h_1adf168de4de79fc034114dd1bb64d9cca" kind="function"><name>operator+</name></member>

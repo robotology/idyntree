@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="140" column="21"/>
+        <location file="iDynTree/Axis.h" line="145" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a80528ce33353f585f61f967e86f9e9ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="142" column="21"/>
+        <location file="iDynTree/Axis.h" line="147" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -412,6 +412,24 @@
         </inbodydescription>
         <location file="iDynTree/Axis.h" line="133" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a4ccdcaeb59a5a21c216519cdd8e55f4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::Axis::getDistanceBetweenAxisAndPoint</definition>
+        <argsstring>(const iDynTree::Position &amp;point) const</argsstring>
+        <name>getDistanceBetweenAxisAndPoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Compute distance between the axis and a given point. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Axis.h" line="138" column="16"/>
+      </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Class representing an axis (a directed line) in space. </para>
@@ -419,13 +437,14 @@
     <detaileddescription>
 <para>The axis is represented as a origin plus a direction. </para>
     </detaileddescription>
-    <location file="iDynTree/Axis.h" line="28" column="5" bodyfile="iDynTree/Axis.h" bodystart="29" bodyend="144"/>
+    <location file="iDynTree/Axis.h" line="28" column="5" bodyfile="iDynTree/Axis.h" bodystart="29" bodyend="149"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Axis_1aa1aff15197c9bdb23d6a8a397cfa5d79" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
       <member refid="classiDynTree_1_1Axis_1a56cbca5b0f569174b2f8ce96b2b645e0" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
       <member refid="classiDynTree_1_1Axis_1add0c40dde7f3dc9e4c05f633a74354b2" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
       <member refid="classiDynTree_1_1Axis_1ab104372d1fc89c821174a62f6a26db11" prot="private" virt="non-virtual"><scope>iDynTree::Axis</scope><name>direction</name></member>
       <member refid="classiDynTree_1_1Axis_1a1bdc98a69afe6ba3ddc9f0c5c52f836e" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getDirection</name></member>
+      <member refid="classiDynTree_1_1Axis_1a4ccdcaeb59a5a21c216519cdd8e55f4a" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getDistanceBetweenAxisAndPoint</name></member>
       <member refid="classiDynTree_1_1Axis_1a601caad683259796af973dc9a5767f2d" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getOrigin</name></member>
       <member refid="classiDynTree_1_1Axis_1a847202356c483a5b60f628c22712c04b" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationSpatialAcc</name></member>
       <member refid="classiDynTree_1_1Axis_1a80b21674827ef8701daed4addc4e1ee1" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationTransform</name></member>
