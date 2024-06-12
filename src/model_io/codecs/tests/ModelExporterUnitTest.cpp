@@ -163,7 +163,6 @@ void checkImportExportURDF(std::string fileName)
 
 void testFramesNotInTraversal() {
     // Create a model with two different roots and export only one.
-
     Model model;
     SpatialInertia zeroInertia;
     zeroInertia.zero();
@@ -214,6 +213,99 @@ void testFramesNotInTraversal() {
     ASSERT_EQUAL_DOUBLE(modelReloaded.getNrOfFrames(), 2 + 1);
 }
 
+void testJointAxisWithNonZeroOriginButPassingThroughChildLinkFrameOrigin() {
+    // iDynTree has no constraint of where the joint axis passes w.r.t. to
+    // the link frames of the link it connects, while URDF constraints the
+    // joint axis to pass through the origin of the child link frame
+
+    // This test checks that a model with a non-zero offset origin but that
+    // passes through the child link origin is correctly exported
+    Model model;
+    SpatialInertia zeroInertia;
+    zeroInertia.zero();
+
+    Link link;
+    link.setInertia(zeroInertia);
+
+    // Create a 2 links - one joint model.
+    std::string link1Name = "link_1";
+    std::string link2Name = "link_2";
+    std::string jointName = "j1";
+
+    model.addLink(link1Name, link);
+    model.addLink(link2Name, link);
+
+    auto joint = std::make_unique<RevoluteJoint>();
+
+    // Add a offset in the x direction between link_1 and link_2
+    iDynTree::Transform link1_X_link2 = iDynTree::Transform::Identity();
+    link1_X_link2.setPosition(iDynTree::Position(1.0, 0.0, 0.0));
+    joint->setRestTransform(link1_X_link2);
+
+    // Mark the rotation of the joint along z, and add a offset of the axis along z
+    iDynTree::Axis axis;
+    axis.setDirection(iDynTree::Direction(0.0, 0.0, 1.0));
+    axis.setOrigin(iDynTree::Position(0.0, 0.0, 1.0));
+    joint->setAxis(axis, model.getLinkIndex(link2Name));
+
+    model.addJoint(link1Name, link2Name, jointName, joint.get());
+
+    ModelExporter exporter;
+    bool ok = exporter.init(model);
+    ASSERT_IS_TRUE(ok);
+    std::string urdfString;
+    ok = exporter.exportModelToString(urdfString);
+    ASSERT_IS_TRUE(ok);
+    // Reload the model.
+    ModelLoader loader;
+
+    ok = loader.loadModelFromString(urdfString);
+    ASSERT_IS_TRUE(ok);
+
+    // Reload model
+    Model modelReloaded = loader.model();
+
+    // Check that the reloaded have the same transform of the original model
+    iDynTree::VectorDynSize jointPos;
+    jointPos.resize(model.getNrOfPosCoords());
+    for (size_t i=0; i++; i<10)
+    {
+        // Arbitrary joint angles
+        jointPos(0) = 0.1*i-0.5;
+        iDynTree::Transform link1_H_link2_orig =
+            model.getJoint(model.getJointIndex(jointName))->getTransform(jointPos, model.getLinkIndex(link1Name), model.getLinkIndex(link2Name));
+        iDynTree::Transform link1_H_link2_reloaded =
+            modelReloaded.getJoint(modelReloaded.getJointIndex(jointName))->getTransform(jointPos, modelReloaded.getLinkIndex(link1Name), modelReloaded.getLinkIndex(link2Name));
+
+        ASSERT_EQUAL_TRANSFORM(link1_H_link2_orig, link1_H_link2_reloaded);
+    }
+
+    // Create a new model with an axis that does not pass through the origin of the child link and verify that it can't be loaded
+    Model modelThatCantBeExportedToUrdf;
+    modelThatCantBeExportedToUrdf.addLink(link1Name, link);
+    modelThatCantBeExportedToUrdf.addLink(link2Name, link);
+    auto jointNew = std::make_unique<RevoluteJoint>();
+
+    // Add a offset in the x direction between link_1 and link_2
+    iDynTree::Transform link1_X_link2New = iDynTree::Transform::Identity();
+    link1_X_link2New.setPosition(iDynTree::Position(1.0, 0.0, 0.0));
+    jointNew->setRestTransform(link1_X_link2);
+
+    // Mark the rotation of the joint along z, and add a offset of the axis along y
+    iDynTree::Axis axisNew;
+    axisNew.setDirection(iDynTree::Direction(0.0, 0.0, 1.0));
+    axisNew.setOrigin(iDynTree::Position(0.0, 1.0, 0.0));
+    jointNew->setAxis(axisNew, modelThatCantBeExportedToUrdf.getLinkIndex(link2Name));
+
+    modelThatCantBeExportedToUrdf.addJoint(link1Name, link2Name, jointName, jointNew.get());
+
+    ModelExporter exporterNew;
+    ok = exporterNew.init(modelThatCantBeExportedToUrdf);
+    ASSERT_IS_TRUE(ok);
+    ok = exporterNew.exportModelToString(urdfString);
+    ASSERT_IS_FALSE(ok);
+}
+
 
 int main()
 {
@@ -231,6 +323,7 @@ int main()
     }
 
     testFramesNotInTraversal();
+    testJointAxisWithNonZeroOriginButPassingThroughChildLinkFrameOrigin();
 
 
     return EXIT_SUCCESS;

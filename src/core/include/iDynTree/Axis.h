@@ -133,6 +133,11 @@ namespace iDynTree
         Axis reverse() const;
 
         /**
+         * Compute distance between the axis and a given point
+         */
+        double getDistanceBetweenAxisAndPoint(const iDynTree::Position& point) const;
+
+        /**
          * @name Output helpers.
          *  Output helpers.
          */

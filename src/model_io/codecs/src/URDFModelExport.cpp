@@ -357,13 +357,16 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
             return false;
         }
 
-        // Check that the axis is URDF-compatible
-        if (toEigen(axis.getOrigin()).norm() > 1e-7)
+        // Check that the axis is URDF-compatible, i.e. that the distance between the
+        // axis and the child link origin is zero
+        double distanceBetweenAxisAndOrigin = axis.getDistanceBetweenAxisAndPoint(iDynTree::Position::Zero());
+        if (distanceBetweenAxisAndOrigin > 1e-7)
         {
             std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint "
                       <<   model.getJointName(joint->getIndex()) << " to a URDF joint without moving the link frame of link "
-                      << model.getLinkName(childLink->getIndex()) << " , because its origin is "
-                      << axis.getOrigin().toString()  << std::endl;
+                      << model.getLinkName(childLink->getIndex()) << " , because the axis origin is "
+                      << axis.getOrigin().toString() << " the axis direction is " << axis.getDirection().toString() 
+                      << " and the distance between the axis and (0,0,0) is " << distanceBetweenAxisAndOrigin << std::endl;
             return false;
         }
 
