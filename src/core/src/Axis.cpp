@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Axis.h>
+#include <iDynTree/EigenHelpers.h>
 #include <iDynTree/Transform.h>
 #include <iDynTree/TransformDerivative.h>
 #include <iDynTree/Twist.h>
@@ -257,6 +258,24 @@ namespace iDynTree
         return Axis(this->getDirection().reverse(),
                     this->getOrigin());
     }
+
+    double Axis::getDistanceBetweenAxisAndPoint(const iDynTree::Position& point) const
+    {
+        Eigen::Vector3d direction = iDynTree::toEigen(this->getDirection()).normalized();
+
+        // Vector from the offset point of the to the given point
+        Eigen::Vector3d axisOrigin_p_point = iDynTree::toEigen(point) - iDynTree::toEigen(this->getOrigin());
+
+        // Project the axisOrigin_p_point onto the axis direction
+        Eigen::Vector3d projection = direction * axisOrigin_p_point.dot(direction);
+
+        // Calculate the closest point on the axis to the given point
+        Eigen::Vector3d closestPointOnAxis = iDynTree::toEigen(this->getOrigin()) + projection;
+
+        // Calculate the distance between the closest point on the axis and the given point
+        return (closestPointOnAxis - iDynTree::toEigen(point)).norm();
+    }
+
 
     std::string Axis::toString() const
     {
