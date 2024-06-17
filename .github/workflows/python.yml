@@ -104,7 +104,7 @@ jobs:
             dnf update -y &&\
             dnf install -y eigen3-devel libxml2-devel
             # Pre-install NumPy > 2.0
-            pip install "numpy>2.0"
+            pip install "numpy>=2.0.0"
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
       - uses: actions/upload-artifact@v3
