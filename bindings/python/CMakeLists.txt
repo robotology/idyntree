@@ -14,6 +14,7 @@ swig_add_library(${target_name}
     OUTFILE_DIR ${CMAKE_CURRENT_BINARY_DIR}
     OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
 
+message(STATUS "Linking SWIG Python bindings against NumPy '${Python3_NumPy_VERSION}'")
 target_link_libraries(${target_name} PUBLIC Python3::NumPy)
 
 set_target_properties(${target_name} PROPERTIES
