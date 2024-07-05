@@ -30,9 +30,9 @@
         </inbodydescription>
         <location file="private/URDFDocument.h" line="32" column="34" bodyfile="private/URDFDocument.h" bodystart="32" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1URDFDocument_1a3a5265471f7ef8f2af0013a04eac2acf" prot="private" static="no" mutable="no">
-        <type>struct iDynTree::URDFDocument::@0</type>
-        <definition>struct iDynTree::URDFDocument::@0 iDynTree::URDFDocument::m_buffers</definition>
+      <memberdef kind="variable" id="classiDynTree_1_1URDFDocument_1a391509911f58db3563dbc1a45a4f541b" prot="private" static="no" mutable="no">
+        <type>struct iDynTree::URDFDocument::@3</type>
+        <definition>struct iDynTree::URDFDocument::@3 iDynTree::URDFDocument::m_buffers</definition>
         <argsstring></argsstring>
         <name>m_buffers</name>
         <briefdescription>
@@ -125,14 +125,18 @@
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classiDynTree_1_1URDFDocument_1a40136b807f102707cd388ecaec05e54e" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1URDFDocument_1a3f1afc0c242c04e4310e4efae091cf4c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>iDynTree::URDFDocument::URDFDocument</definition>
-        <argsstring>(XMLParserState &amp;parserState)</argsstring>
+        <argsstring>(XMLParserState &amp;parserState, const iDynTree::ModelParserOptions &amp;parserOptions)</argsstring>
         <name>URDFDocument</name>
         <param>
           <type><ref refid="classiDynTree_1_1XMLParserState" kindref="compound">XMLParserState</ref> &amp;</type>
           <declname>parserState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1ModelParserOptions" kindref="compound">iDynTree::ModelParserOptions</ref> &amp;</type>
+          <declname>parserOptions</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -514,7 +518,7 @@
       <member refid="classiDynTree_1_1URDFDocument_1af869c50633a0784f6452ed0e6a5ed176" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>fixedJoints</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a50a4ed8a7c02beff7438e100ad0e70dd" prot="protected" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>getParserState</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a94c9fb5372fff427e6eefa501fa9d2a8" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>joints</name></member>
-      <member refid="classiDynTree_1_1URDFDocument_1a3a5265471f7ef8f2af0013a04eac2acf" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_buffers</name></member>
+      <member refid="classiDynTree_1_1URDFDocument_1a391509911f58db3563dbc1a45a4f541b" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_buffers</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a02d7c7d35dce069c5665f177896f6a60" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_model</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a549f3e8d21c8ac65721bc9b49c1b1f51" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_options</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a71e86291a5b358bb75fed272e2e1e304" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>materials</name></member>
@@ -524,7 +528,7 @@
       <member refid="classiDynTree_1_1URDFDocument_1a767a44a4d8c3db4bcc7e78fb2273e2ef" prot="public" virt="virtual"><scope>iDynTree::URDFDocument</scope><name>rootElementForName</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1aeee45e879a758d6074a9c58390ff3a15" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>sensorHelpers</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1ac6370e22cd6cd18196c63bcc9b5e6f9f" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>sensors</name></member>
-      <member refid="classiDynTree_1_1URDFDocument_1a40136b807f102707cd388ecaec05e54e" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>URDFDocument</name></member>
+      <member refid="classiDynTree_1_1URDFDocument_1a3f1afc0c242c04e4310e4efae091cf4c" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>URDFDocument</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1ad6c09ba92ed27b5fb377d933293c9326" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>visuals</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a4a06a29e49c4aae08d658b530898b3e2" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>XMLDocument</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1aa13d227666daa2e893613220697b3a69" prot="public" virt="virtual"><scope>iDynTree::URDFDocument</scope><name>~URDFDocument</name></member>
