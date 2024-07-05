@@ -293,7 +293,6 @@ void checkaddSensorFramesAsAdditionalFramesOption() {
         parserOptions.addSensorFramesAsAdditionalFrames = false;
         mdlLoader.setParsingOptions(parserOptions);
         ASSERT_IS_TRUE(mdlLoader.loadModelFromString(urdf));
-        std::cerr << mdlLoader.model().toString() << std::endl;
         ASSERT_IS_FALSE(mdlLoader.model().isFrameNameUsed("l_leg_ft"));
     }
 
