@@ -27,8 +27,8 @@ namespace iDynTree {
                                            const std::unordered_map<std::string, MaterialElement::MaterialInfo>& materialDatabase,
                                            ModelSolidShapes &modelGeometries);
     
-    URDFDocument::URDFDocument(XMLParserState& parserState)
-    : XMLDocument(parserState) {}
+    URDFDocument::URDFDocument(XMLParserState& parserState, const iDynTree::ModelParserOptions& options)
+    : XMLDocument(parserState), m_options(options) {}
 
     iDynTree::ModelParserOptions& URDFDocument::options() { return m_options; }
     

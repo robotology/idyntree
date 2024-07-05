@@ -43,7 +43,7 @@ class iDynTree::URDFDocument: public iDynTree::XMLDocument {
     } m_buffers;
 
 public:
-    explicit URDFDocument(XMLParserState& parserState);
+    explicit URDFDocument(XMLParserState& parserState, const iDynTree::ModelParserOptions& parserOptions);
     virtual ~URDFDocument();
 
     iDynTree::ModelParserOptions& options();
