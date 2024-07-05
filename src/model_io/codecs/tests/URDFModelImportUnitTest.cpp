@@ -255,6 +255,60 @@ void checkDuplicateJointsReturnsError() {
 
 }
 
+void checkaddSensorFramesAsAdditionalFramesOption() {
+    std::string urdf = R"(
+  <robot name="robot">
+  <link name="link_1">
+    <inertial>
+      <mass value="1"/>
+    </inertial>
+  </link>
+  <link name="link_2">
+    <inertial>
+      <mass value="2"/>
+    </inertial>
+  </link>
+  <joint name="joint_1" type="fixed">
+    <origin xyz="0.0 0.0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <parent link="link_1"/>
+    <child link="link_2"/>
+    <limit lower="-1.0" upper="1.0"/>
+  </joint>
+  <sensor name="l_leg_ft" type="force_torque">
+    <parent joint="joint_1"/>
+    <force_torque>
+      <frame>sensor</frame>
+      <measure_direction>child_to_parent</measure_direction>
+    </force_torque>
+    <origin rpy="2.220446049250313e-16 -2.220446049250314e-16 2.220446049250313e-16" xyz="0.0 -1.3877787807814457e-17 0.0"/>
+  </sensor>
+</robot>
+)";
+
+    // Let's first load with the option disabled
+    {
+        iDynTree::ModelLoader mdlLoader;
+        iDynTree::ModelParserOptions parserOptions;
+        parserOptions.addSensorFramesAsAdditionalFrames = false;
+        mdlLoader.setParsingOptions(parserOptions);
+        ASSERT_IS_TRUE(mdlLoader.loadModelFromString(urdf));
+        std::cerr << mdlLoader.model().toString() << std::endl;
+        ASSERT_IS_FALSE(mdlLoader.model().isFrameNameUsed("l_leg_ft"));
+    }
+
+    // Then with the option enabled
+    {
+        iDynTree::ModelLoader mdlLoader;
+        iDynTree::ModelParserOptions parserOptions;
+        parserOptions.addSensorFramesAsAdditionalFrames = true;
+        mdlLoader.setParsingOptions(parserOptions);
+        ASSERT_IS_TRUE(mdlLoader.loadModelFromString(urdf));
+        ASSERT_IS_TRUE(mdlLoader.model().isFrameNameUsed("l_leg_ft"));
+    }
+
+}
+
 int main()
 {
     checkURDF(getAbsModelPath("/simple_model.urdf"),1,0,0,1, 1, 0, "link1");
@@ -270,6 +324,7 @@ int main()
     checkLimitsForJointsAreDefinedFromFileName(getAbsModelPath("iCubGenova02.urdf"));
 
     checkLoadReducedModelOrderIsKept(getAbsModelPath("iCubGenova02.urdf"));
+    checkaddSensorFramesAsAdditionalFramesOption();
 
     return EXIT_SUCCESS;
 }

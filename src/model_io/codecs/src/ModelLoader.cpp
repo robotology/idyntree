@@ -81,9 +81,11 @@ namespace iDynTree
     {
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
-        parser->setDocumentFactory([](XMLParserState& state){ 
-            return std::shared_ptr<XMLDocument>(new URDFDocument(state)); 
-            });
+        auto parserOptions =  this->m_pimpl->m_options;
+        auto documentFactoryWithOptions = [parserOptions](XMLParserState& state){
+            return std::shared_ptr<XMLDocument>(new URDFDocument(state, parserOptions));
+            };
+        parser->setDocumentFactory(documentFactoryWithOptions);
         parser->setPackageDirs(packageDirs);
         if (!parser->parseXMLFile(filename)) {
             reportError("ModelLoader", "loadModelFromFile", "Error in parsing model from URDF.");
@@ -106,9 +108,12 @@ namespace iDynTree
     {
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
-        parser->setDocumentFactory([](XMLParserState& state){
-            return std::shared_ptr<XMLDocument>(new URDFDocument(state)); 
-            });
+        auto parserOptions =  this->m_pimpl->m_options;
+        auto documentFactoryWithOptions = [parserOptions](XMLParserState& state){
+            return std::shared_ptr<XMLDocument>(new URDFDocument(state, parserOptions));
+            };
+
+        parser->setDocumentFactory(documentFactoryWithOptions);
         parser->setPackageDirs(packageDirs);
         if (!parser->parseXMLString(modelString)) {
             reportError("ModelLoader", "loadModelFromString", "Error in parsing model from URDF.");
