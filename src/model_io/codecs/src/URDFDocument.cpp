@@ -133,7 +133,6 @@ namespace iDynTree {
             return false;
         }
 
-        std::cerr << "m_options.addSensorFramesAsAdditionalFrame:" << m_options.addSensorFramesAsAdditionalFrames << std::endl;
         if (m_options.addSensorFramesAsAdditionalFrames)
         {
             if (!addSensorFramesAsAdditionalFramesToModel(m_model)) {
