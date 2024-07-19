@@ -917,4 +917,11 @@ bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
     return true;
 }
 
+bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model& inputModel,
+                                                           const std::string& baseLink,
+                                                           iDynTree::Model& outputModel)
+{
+    return false;
+}
+
 }
