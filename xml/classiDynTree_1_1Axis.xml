@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="145" column="21"/>
+        <location file="iDynTree/Axis.h" line="150" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a80528ce33353f585f61f967e86f9e9ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="147" column="21"/>
+        <location file="iDynTree/Axis.h" line="152" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -412,6 +412,24 @@
         </inbodydescription>
         <location file="iDynTree/Axis.h" line="133" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1ad16da2abcd0d966f2814e93be10b63f2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::Axis::getPointOnAxisClosestToGivenPoint</definition>
+        <argsstring>(const iDynTree::Position &amp;point) const</argsstring>
+        <name>getPointOnAxisClosestToGivenPoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>point</declname>
+        </param>
+        <briefdescription>
+<para>Compute the point on the axis that is closest to a given opoint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Axis.h" line="138" column="18"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a4ccdcaeb59a5a21c216519cdd8e55f4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
         <definition>double iDynTree::Axis::getDistanceBetweenAxisAndPoint</definition>
@@ -428,7 +446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="138" column="16"/>
+        <location file="iDynTree/Axis.h" line="143" column="16"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -437,7 +455,7 @@
     <detaileddescription>
 <para>The axis is represented as a origin plus a direction. </para>
     </detaileddescription>
-    <location file="iDynTree/Axis.h" line="28" column="5" bodyfile="iDynTree/Axis.h" bodystart="29" bodyend="149"/>
+    <location file="iDynTree/Axis.h" line="28" column="5" bodyfile="iDynTree/Axis.h" bodystart="29" bodyend="154"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Axis_1aa1aff15197c9bdb23d6a8a397cfa5d79" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
       <member refid="classiDynTree_1_1Axis_1a56cbca5b0f569174b2f8ce96b2b645e0" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
@@ -446,6 +464,7 @@
       <member refid="classiDynTree_1_1Axis_1a1bdc98a69afe6ba3ddc9f0c5c52f836e" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getDirection</name></member>
       <member refid="classiDynTree_1_1Axis_1a4ccdcaeb59a5a21c216519cdd8e55f4a" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getDistanceBetweenAxisAndPoint</name></member>
       <member refid="classiDynTree_1_1Axis_1a601caad683259796af973dc9a5767f2d" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getOrigin</name></member>
+      <member refid="classiDynTree_1_1Axis_1ad16da2abcd0d966f2814e93be10b63f2" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getPointOnAxisClosestToGivenPoint</name></member>
       <member refid="classiDynTree_1_1Axis_1a847202356c483a5b60f628c22712c04b" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationSpatialAcc</name></member>
       <member refid="classiDynTree_1_1Axis_1a80b21674827ef8701daed4addc4e1ee1" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationTransform</name></member>
       <member refid="classiDynTree_1_1Axis_1a134ff8af97722174e27fbb47db6fa729" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationTransformDerivative</name></member>

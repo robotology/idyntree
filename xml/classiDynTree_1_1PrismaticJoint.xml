@@ -620,7 +620,7 @@ See</para>
 <para>Get the derivative of the transform with respect to a position coordinate. </para>
         </briefdescription>
         <detaileddescription>
-<para>In particular, if the selected position coordinate is <formula id="7">$q$</formula>, return the derivative: <formula id="166">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
+<para>In particular, if the selected position coordinate is <formula id="41">$q$</formula>, return the derivative: <formula id="344">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
 <para>If posCoord_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref>, the returned value is undefined. </para>
         </detaileddescription>
         <inbodydescription>

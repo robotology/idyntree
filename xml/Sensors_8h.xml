@@ -9,13 +9,6 @@
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
-    <includedby refid="AccelerometerSensor_8h" local="no">iDynTree/AccelerometerSensor.h</includedby>
-    <includedby refid="GyroscopeSensor_8h" local="no">iDynTree/GyroscopeSensor.h</includedby>
-    <includedby refid="Model_8h" local="no">iDynTree/Model.h</includedby>
-    <includedby refid="Sensors_2Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
-    <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/SixAxisForceTorqueSensor.h</includedby>
-    <includedby refid="ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/ThreeAxisAngularAccelerometerSensor.h</includedby>
-    <includedby refid="ThreeAxisForceTorqueContactSensor_8h" local="no">iDynTree/ThreeAxisForceTorqueContactSensor.h</includedby>
     <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelCalibrationHelper.h</includedby>
     <includedby refid="ModelExporter_8h" local="no">iDynTree/ModelExporter.h</includedby>
     <includedby refid="ModelLoader_8h" local="no">iDynTree/ModelLoader.h</includedby>
@@ -23,6 +16,13 @@
     <includedby refid="URDFDocument_8h" local="no">private/URDFDocument.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="AccelerometerSensor_8h" local="no">iDynTree/AccelerometerSensor.h</includedby>
+    <includedby refid="GyroscopeSensor_8h" local="no">iDynTree/GyroscopeSensor.h</includedby>
+    <includedby refid="Model_8h" local="no">iDynTree/Model.h</includedby>
+    <includedby refid="Sensors_2Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
+    <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/SixAxisForceTorqueSensor.h</includedby>
+    <includedby refid="ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/ThreeAxisAngularAccelerometerSensor.h</includedby>
+    <includedby refid="ThreeAxisForceTorqueContactSensor_8h" local="no">iDynTree/ThreeAxisForceTorqueContactSensor.h</includedby>
     <incdepgraph>
       <node id="4">
         <label>iterator</label>

@@ -119,6 +119,11 @@
               <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputModel) -&gt; bool</span>
             </dt>
             <dd>Add automatically generated names to all visual and collision solid shapes of the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a133a097cc3ef37982c00cdd729829118" class="m-doc">moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; inputModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputModel) -&gt; bool</span>
+            </dt>
+            <dd><a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> the input model in model that can be exported as URDF with the given base link.</dd>
           </dl>
         </section>
         <section>
@@ -199,6 +204,22 @@
               </tfoot>
             </table>
 <p>This function creates a new <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> that is identical to the input one, but that sets a valid name for all the visual and collision solid shapes of the model.</p><p>For links that already have at least either collision or visual with valid name, <strong>all</strong> the corresponding shapes (collision or visual) will not be modified.</p><p>For links in which all shapes of a given type that do not have a valid name, a name will be generated as the following:</p><ul><li>If there is a single collision or visual element in the link, it will be named &lt;linkName&gt;_collision or &lt;linkName&gt;_visual</li><li>If there are multiple collision or visual elements in the link, the solid shapes will be &lt;linkName&gt;_collision_0, &lt;linkName&gt;_collision_1, ... &lt;linkName&gt;_collision_n or &lt;linkName&gt;_visual_0, &lt;linkName&gt;_visual_1, ... &lt;linkName&gt;_visual_n</li></ul>
+          </div></section>
+          <section class="m-doc-details" id="a133a097cc3ef37982c00cdd729829118"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a133a097cc3ef37982c00cdd729829118" class="m-doc-self">moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; inputModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputModel)</span></span>
+            </h3>
+            <p><a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> the input model in model that can be exported as URDF with the given base link.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if all went well, false if there was an error in creating the sub model.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>In iDynTree, the link frame can be placed without constraint w.r.t. to the joints to which the link is connected. On the other hand, in the URDF format, the origin of the frame of the child link connected to its parent with a non-fixed joint <strong>must</strong> lay on the axis of the joint.</p><p>That means that if you want to export a model with an arbitrary base link, some link frame will need to be moved to respect the constraint given by the URDF format. This function perform exactly this transformation, ensuring that inertia, visual and collision information is probably accounted for, and leaving the original link frames in the model as &quot;additional frames&quot; with the naming scheme &lt;linkName&gt;_original_frame .</p><p>Note that the operation done depends on the base link used, if you want to use a different base link, change the default base link of the model via inputModel.setDefaultBaseLink method.</p>
           </div></section>
         </section>
       </div>
