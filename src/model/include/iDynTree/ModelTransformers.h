@@ -145,6 +145,27 @@ bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal
 bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
                                    iDynTree::Model& outputModel);
 
+/**
+ * Transform the input model in model that can be exported as URDF with the given base link.
+ *
+ * In iDynTree, the link frame can be placed without constraint w.r.t. to the joints to which
+ * the link is connected. On the other hand, in the URDF format, the origin of the frame of the child link
+ * connected to its parent with a non-fixed joint **must** lay on the axis of the joint.
+ *
+ * That means that if you want to export a model with an arbitrary base link, some link frame will need
+ * to be moved to respect the constraint given by the URDF format. This function perform exactly this
+ * transformation, ensuring that inertia, visual and collision information is probably accounted for,
+ * and leaving the original link frames in the model as "additional frames" with the naming scheme
+ * <linkName>_original_frame .
+ *
+ * Note that the operation done depends on the base link used, if you want to use a different
+ * base link, change the default base link of the model via inputModel.setDefaultBaseLink method.
+ *
+ * @return true if all went well, false if there was an error in creating the sub model.
+ */
+bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model& inputModel,
+                                                           iDynTree::Model& outputModel);
+
 }
 
 

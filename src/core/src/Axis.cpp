@@ -261,21 +261,29 @@ namespace iDynTree
 
     double Axis::getDistanceBetweenAxisAndPoint(const iDynTree::Position& point) const
     {
-        Eigen::Vector3d direction = iDynTree::toEigen(this->getDirection()).normalized();
-
-        // Vector from the offset point of the to the given point
-        Eigen::Vector3d axisOrigin_p_point = iDynTree::toEigen(point) - iDynTree::toEigen(this->getOrigin());
-
-        // Project the axisOrigin_p_point onto the axis direction
-        Eigen::Vector3d projection = direction * axisOrigin_p_point.dot(direction);
-
         // Calculate the closest point on the axis to the given point
-        Eigen::Vector3d closestPointOnAxis = iDynTree::toEigen(this->getOrigin()) + projection;
+        iDynTree::Position closestPointOnAxis = getPointOnAxisClosestToGivenPoint(point);
 
         // Calculate the distance between the closest point on the axis and the given point
-        return (closestPointOnAxis - iDynTree::toEigen(point)).norm();
+        return (iDynTree::toEigen(closestPointOnAxis) - iDynTree::toEigen(point)).norm();
     }
 
+    iDynTree::Position Axis::getPointOnAxisClosestToGivenPoint(const iDynTree::Position& point) const
+    {
+            Eigen::Vector3d direction = iDynTree::toEigen(this->getDirection()).normalized();
+
+            // Vector from the offset point of the to the given point
+            Eigen::Vector3d axisOrigin_p_point = iDynTree::toEigen(point) - iDynTree::toEigen(this->getOrigin());
+
+            // Project the axisOrigin_p_point onto the axis direction
+            Eigen::Vector3d projection = direction * axisOrigin_p_point.dot(direction);
+
+            // Calculate the closest point on the axis to the given point
+            iDynTree::Position closestPointOnAxis;
+            iDynTree::toEigen(closestPointOnAxis) = iDynTree::toEigen(this->getOrigin()) + projection;
+
+            return closestPointOnAxis;
+    }
 
     std::string Axis::toString() const
     {
