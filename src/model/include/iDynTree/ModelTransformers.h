@@ -158,10 +158,12 @@ bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
  * and leaving the original link frames in the model as "additional frames" with the naming scheme
  * <linkName>_original_frame .
  *
+ * Note that the operation done depends on the base link used, if you want to use a different
+ * base link, change the default base link of the model via inputModel.setDefaultBaseLink method.
+ *
  * @return true if all went well, false if there was an error in creating the sub model.
  */
 bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model& inputModel,
-                                                           const std::string& baseLink,
                                                            iDynTree::Model& outputModel);
 
 }

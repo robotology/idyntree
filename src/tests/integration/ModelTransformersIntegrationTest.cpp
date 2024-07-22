@@ -76,24 +76,24 @@ void setRandomState(iDynTree::KinDynComputations & originalKinDyn, iDynTree::Kin
 void checkThatMoveLinkFramesToBeCompatibleWithURDFWithGivenBaseLinkIsConsistent()
 {
 
-    for (size_t i=0; i < 20; i++)
+    for (size_t i=0; i < 10; i++)
     {
         // Generate random model
-        size_t nrOfJoints = 10;
+        size_t nrOfJoints = 20;
         size_t nrOFAdditionalFrames = 10;
 
         iDynTree::Model originalModel = iDynTree::getRandomModel(nrOfJoints, nrOFAdditionalFrames);
 
         // Get random base link
-        iDynTree::LinkIndex baseLinkIndex = static_cast<iDynTree::LinkIndex>(rand() % originalModel.getNrOfLinks());
-        originalModel.setDefaultBaseLink(baseLinkIndex);
-        std::string baseLink = originalModel.getLinkName(baseLinkIndex);
+        iDynTree::LinkIndex originalBaseLinkIndex = static_cast<iDynTree::LinkIndex>(rand() % originalModel.getNrOfLinks());
+        originalModel.setDefaultBaseLink(originalBaseLinkIndex);
+        std::string baseLink = originalModel.getLinkName(originalBaseLinkIndex);
 
         iDynTree::Model transformedModel;
-        ASSERT_IS_TRUE(moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(originalModel, baseLink, transformedModel));
+        ASSERT_IS_TRUE(moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(originalModel, transformedModel));
 
         // Check that the default base link is propagated
-        ASSERT_IS_TRUE(originalModel.getDefaultBaseLink() == transformedModel.getDefaultBaseLink());
+        ASSERT_IS_TRUE(originalModel.getLinkName(originalModel.getDefaultBaseLink()) == transformedModel.getLinkName(transformedModel.getDefaultBaseLink()));
 
         // Check consistency
         ASSERT_IS_TRUE(originalModel.getNrOfJoints() == transformedModel.getNrOfJoints());
@@ -116,6 +116,10 @@ void checkThatMoveLinkFramesToBeCompatibleWithURDFWithGivenBaseLinkIsConsistent(
         ASSERT_IS_TRUE(transformedKinDyn.setFloatingBase(baseLink));
         setRandomState(originalKinDyn, transformedKinDyn);
 
+        // Check kinematics: make sure that the base link did not moved and the world_H_base is the same for both models
+        ASSERT_EQUAL_TRANSFORM(originalKinDyn.getWorldTransform(originalModel.getLinkIndex(baseLink)),
+                               transformedKinDyn.getWorldTransform(transformedModel.getLinkIndex(baseLink)));
+
         // Check kinematics: make sure that the kinematics between additional frames remain consistent
         // (as only the link frame can be moved by the function)
         std::string firstAdditionalFrame = originalModel.getFrameName(originalModel.getNrOfLinks());
@@ -125,10 +129,29 @@ void checkThatMoveLinkFramesToBeCompatibleWithURDFWithGivenBaseLinkIsConsistent(
 
             ASSERT_EQUAL_TRANSFORM(originalKinDyn.getRelativeTransform(firstAdditionalFrame, secondAdditionalFrame),
                                    transformedKinDyn.getRelativeTransform(firstAdditionalFrame, secondAdditionalFrame));
+
+            // As the base link can't be moved, we also check that the world transform of additional frames is consistent
+            ASSERT_EQUAL_TRANSFORM(originalKinDyn.getWorldTransform(secondAdditionalFrame),
+                                   transformedKinDyn.getWorldTransform(secondAdditionalFrame));
         }
 
+        // Check inertia: make sure that the inertia of each link (projected back in world) is the same
+        for(iDynTree::LinkIndex lnkIdx=0; lnkIdx < originalModel.getNrOfLinks(); lnkIdx++)
+        {
+            std::string linkName = originalModel.getLinkName(lnkIdx);
+            iDynTree::SpatialInertia originalLinkInertia = originalKinDyn.getWorldTransform(originalModel.getLinkIndex(linkName))*(originalModel.getLink(originalModel.getLinkIndex(linkName))->getInertia());
+            iDynTree::SpatialInertia transformedLinkInertia = transformedKinDyn.getWorldTransform(transformedModel.getLinkIndex(linkName))*(transformedModel.getLink(transformedModel.getLinkIndex(linkName))->getInertia());
+            ASSERT_EQUAL_MATRIX(originalLinkInertia.asMatrix(), transformedLinkInertia.asMatrix());
+        }
+
+        // Check inertia: make sure that COM is the same
+        iDynTree::Position originalCOM = originalKinDyn.getCenterOfMassPosition();
+        iDynTree::Position transformedCOM = transformedKinDyn.getCenterOfMassPosition();
+
+        ASSERT_EQUAL_VECTOR(originalCOM, transformedCOM);
+
         // Check inertia: make sure that mass matrix is the same
-        iDynTree::FreeFloatingMassMatrix originalMassMatrix(originalMassMatrix);
+        iDynTree::FreeFloatingMassMatrix originalMassMatrix(originalModel);
         iDynTree::FreeFloatingMassMatrix transformedMassMatrix(transformedModel);
         ASSERT_IS_TRUE(originalKinDyn.getFreeFloatingMassMatrix(originalMassMatrix));
         ASSERT_IS_TRUE(transformedKinDyn.getFreeFloatingMassMatrix(transformedMassMatrix));
@@ -178,15 +201,11 @@ void checkThatMoveLinkFramesToBeCompatibleWithURDFWithGivenBaseLinkIsConsistent(
             }
         }
 
-        // Verify that the original model can't be exported to URDF, while the transformed yes
-        iDynTree::ModelExporter originalModelExporter;
-        originalModelExporter.init(originalModel);
-        std::string originalURDFStringExported;
-        ASSERT_IS_FALSE(originalModelExporter.exportModelToString(originalURDFStringExported));
+        // Verify that the transformed model can be exported
         iDynTree::ModelExporter transformedModelExporter;
         transformedModelExporter.init(transformedModel);
         std::string transformedURDFStringExported;
-        ASSERT_IS_TRUE(originalModelExporter.exportModelToString(transformedURDFStringExported));
+        ASSERT_IS_TRUE(transformedModelExporter.exportModelToString(transformedURDFStringExported));
     }
 }
 

@@ -133,6 +133,11 @@ namespace iDynTree
         Axis reverse() const;
 
         /**
+         * Compute the point on the axis that is closest to a given opoint
+         */
+        Position getPointOnAxisClosestToGivenPoint(const iDynTree::Position& point) const;
+
+        /**
          * Compute distance between the axis and a given point
          */
         double getDistanceBetweenAxisAndPoint(const iDynTree::Position& point) const;

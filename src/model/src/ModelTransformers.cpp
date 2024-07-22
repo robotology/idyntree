@@ -214,15 +214,77 @@ void buildLinkToAdditionalFramesList(const Model& fullModel,
     }
 }
 
+void computeTransformToTraversalBaseWithAdditionalTransform(const Model& fullModel,
+                                                            const Traversal& subModelTraversal,
+                                                            const JointPosDoubleArray& jointPos,
+                                                                  LinkPositions& traversalBase_H_link,
+                                                            const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink)
+{
+    for(unsigned int traversalEl=0; traversalEl < subModelTraversal.getNrOfVisitedLinks(); traversalEl++)
+    {
+        LinkConstPtr visitedLink = subModelTraversal.getLink(traversalEl);
+        LinkConstPtr parentLink  = subModelTraversal.getParentLink(traversalEl);
+        IJointConstPtr toParentJoint = subModelTraversal.getParentJoint(traversalEl);
+
+        // If this is the traversal base
+        if( parentLink == 0 )
+        {
+            // If the visited link is the base, the base has no parent.
+            // In this case the position of the base with respect to the base is simply
+            // an identity transform, or a given transform if the link is in newLink_H_oldLink
+            auto it = newLink_H_oldLink.find(fullModel.getLinkName(visitedLink->getIndex()));
+
+            if (it != newLink_H_oldLink.end())
+            {
+                traversalBase_H_link(visitedLink->getIndex()) = it->second;
+            }
+            else
+            {
+                traversalBase_H_link(visitedLink->getIndex()) = iDynTree::Transform::Identity();
+            }
+        }
+        else
+        {
+            // Otherwise we compute the world_H_link transform as:
+            // world_H_link = world_H_parentLink * parentLink_H_link
+            traversalBase_H_link(visitedLink->getIndex()) =
+                traversalBase_H_link(parentLink->getIndex())*
+                    toParentJoint->getTransform(jointPos,parentLink->getIndex(),visitedLink->getIndex());
+        }
+    }
+
+    return;
+}
+
+void computeTransformToSubModelBaseWithAdditionalTransform(const Model& fullModel,
+                                    const SubModelDecomposition& subModelDecomposition,
+                                    const JointPosDoubleArray& jointPos,
+                                          LinkPositions& subModelBase_H_link,
+                                    const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink)
+{
+    for(size_t subModel = 0;
+               subModel < subModelDecomposition.getNrOfSubModels();
+               subModel++ )
+    {
+        computeTransformToTraversalBaseWithAdditionalTransform(fullModel,
+                                        subModelDecomposition.getTraversal(subModel),
+                                        jointPos,
+                                        subModelBase_H_link,
+                                        newLink_H_oldLink);
+    }
+}
+
 void reducedModelAddAdditionalFrames(const Model& fullModel,
                                            Model& reducedModel,
                                      const std::string linkInReducedModel,
                                      const Traversal& linkSubModel,
                                      const FreeFloatingPos& pos,
-                                           LinkPositions& subModelBase_X_link)
+                                           LinkPositions& subModelBase_X_link,
+                                     const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink
+                                     )
 {
     // First compute the transform between each link in the submodel and the submodel base
-    computeTransformToTraversalBase(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link);
+    computeTransformToTraversalBaseWithAdditionalTransform(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link,newLink_H_oldLink);
 
     // We then need to compute the list of additional frames for each link
     // This is a rather inefficient operation (given how frame information is stored in the Model
@@ -276,11 +338,8 @@ void reducedModelAddSolidShapes(const Model& fullModel,
                                 const std::string linkInReducedModel,
                                 const Traversal& linkSubModel,
                                 const FreeFloatingPos& pos,
-                                      LinkPositions& subModelBase_X_link)
+                                const LinkPositions& subModelBase_X_link)
 {
-    // First compute the transform between each link in the submodel and the submodel base
-    computeTransformToTraversalBase(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link);
-
     LinkIndex subModelBaseIndexInReducedModel = reducedModel.getLinkIndex(linkInReducedModel);
 
     // All the geometries collected in the traversal are lumped into the base link
@@ -328,10 +387,19 @@ void reducedModelAddSolidShapes(const Model& fullModel,
 
 }
 
-bool createReducedModel(const Model& fullModel,
-                        const std::vector< std::string >& jointsInReducedModel,
-                        Model& reducedModel,
-                        const std::unordered_map<std::string, double>& removedJointPositions)
+// This function is a private function that is not exposed in the headers, but it used as a backend
+// of both:
+//  * createReducedModel : function to create a reduced model given the specified joints
+//  * moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink: function to make sure a model is URDF compatible
+// The logic is similar to the createReducedModel, but as an additional option this function takes in input
+// a std::vector<iDynTree::Transform> newLink_H_oldLink vector (of size fullModel.getNrOfLinks() that can be used
+// to specify an optional additional transform of the final link used in the "reduced model"
+bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
+                                           const std::vector< std::string >& jointsInReducedModel,
+                                           Model& reducedModel,
+                                           const std::unordered_map<std::string, double>& removedJointPositions,
+                                           const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
+                                           bool addOriginalLinkFrameWith_original_frame_suffix)
 {
     // We use the default traversal for deciding the base links of the reduced model
     Traversal fullModelTraversal;
@@ -359,7 +427,6 @@ bool createReducedModel(const Model& fullModel,
     // We need the buffer to for each link the transform to its submodel base
     // and the composite rigid body inertia wrt to the submodel
     LinkInertias crbas(fullModel);
-    LinkPositions subModelBase_X_link(fullModel);
 
     // The position for the joint removed from the model is supposed to be 0
     FreeFloatingPos jointPos(fullModel);
@@ -404,6 +471,7 @@ bool createReducedModel(const Model& fullModel,
         }
     }
 
+    LinkPositions subModelBase_X_link(fullModel);
     for(size_t linkInReducedModel = 0;
                linkInReducedModel < nrOfLinksInReducedModel;
                linkInReducedModel++)
@@ -419,8 +487,21 @@ bool createReducedModel(const Model& fullModel,
         computeCompositeRigidBodyInertiaSubModel(fullModel,subModels.getTraversal(linkInReducedModel),
                                                  jointPos,crbas);
 
-        // The link inertia is just its own CRBA in the submodel
-        iDynTree::SpatialInertia linkInertia = crbas(linkFullModelIndex);
+        // The link inertia is just its own CRBA in the submodel, eventually considering the offset
+        // between the link frame and the new link frame
+        iDynTree::Transform newLink_H_oldLink_trans;
+        auto it = newLink_H_oldLink.find(fullModel.getLinkName(linkFullModelIndex));
+
+        if (it != newLink_H_oldLink.end())
+        {
+            newLink_H_oldLink_trans = it->second;
+        }
+        else
+        {
+            newLink_H_oldLink_trans = iDynTree::Transform::Identity();
+        }
+
+        iDynTree::SpatialInertia linkInertia = newLink_H_oldLink_trans*crbas(linkFullModelIndex);
 
         Link newLinkForReducedModel;
         newLinkForReducedModel.setInertia(linkInertia);
@@ -430,10 +511,14 @@ bool createReducedModel(const Model& fullModel,
 
         // Get not-base links of the submodel and transform
         // them in additional frames in the reduced model
-        // and get additional frames and copy them to reduced model
+        // and get additional frames and copy them to reduced e
+        // This function is the one that computes the subModelBase_X_link
+        // that contains the transform between the link in the original model
+        // and the corresponding link in the transformed model, that is used in the rest of the function
+        // As this quantity is influenced by newLink_H_oldLink, this is passed along
         reducedModelAddAdditionalFrames(fullModel,reducedModel,
                                         linkName,subModels.getTraversal(linkInReducedModel),
-                                        jointPos,subModelBase_X_link);
+                                        jointPos,subModelBase_X_link,newLink_H_oldLink);
 
         // Lump the visual and collision shapes in the new model
         reducedModelAddSolidShapes(fullModel,reducedModel,
@@ -506,18 +591,18 @@ bool createReducedModel(const Model& fullModel,
         else if( dynamic_cast<const PrismaticJoint*>(oldJoint) )
         {
             const PrismaticJoint* oldJointPrismatic = dynamic_cast<const PrismaticJoint*>(oldJoint);
-            
+
             Transform oldLink1_X_oldLink2 = oldJointPrismatic->getRestTransform(oldLink1,oldLink2);
             Transform newLink1_X_newLink2 = newLink1_X_oldLink1*oldLink1_X_oldLink2*newLink2_X_oldLink2.inverse();
-            
+
             Axis prismaticAxis_wrt_newLink2 = newLink2_X_oldLink2*oldJointPrismatic->getAxis(oldLink2);
-            
+
             PrismaticJoint* newJointPrismatic = new PrismaticJoint(*oldJointPrismatic);
-            
+
             newJointPrismatic->setAttachedLinks(newLink1,newLink2);
             newJointPrismatic->setRestTransform(newLink1_X_newLink2);
             newJointPrismatic->setAxis(prismaticAxis_wrt_newLink2, newLink2);
-            
+
             newJoint = (IJointPtr) newJointPrismatic;
         }
         else
@@ -733,6 +818,17 @@ bool createReducedModel(const Model& fullModel,
 
 bool createReducedModel(const Model& fullModel,
                         const std::vector< std::string >& jointsInReducedModel,
+                        Model& reducedModel,
+                        const std::unordered_map<std::string, double>& removedJointPositions)
+{
+    // We do not want to move the link frames in createReducedModel
+    std::unordered_map<std::string, iDynTree::Transform> newLink_H_oldLink;
+    bool addOriginalLinkFrameWith_original_frame_suffix = false;
+    return createReducedModelAndChangeLinkFrames(fullModel, jointsInReducedModel, reducedModel, removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix);
+}
+
+bool createReducedModel(const Model& fullModel,
+                        const std::vector< std::string >& jointsInReducedModel,
                         Model& reducedModel)
 {
     std::unordered_map<std::string, double> emptyRemovedJointPositions;
@@ -918,10 +1014,89 @@ bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
 }
 
 bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model& inputModel,
-                                                           const std::string& baseLink,
-                                                           iDynTree::Model& outputModel)
+                                                                 iDynTree::Model& outputModel)
 {
-    return false;
+
+    // In this transformer we do not remove any joint, so the list of considered joints is exactly the list of joints in the input model
+    std::vector<std::string> consideredJoints;
+    for(iDynTree::JointIndex jntIdx=0; jntIdx < inputModel.getNrOfJoints(); jntIdx++)
+    {
+        consideredJoints.push_back(inputModel.getJointName(jntIdx));
+    }
+
+    // As we do not remove any joint, this map is empty
+    std::unordered_map<std::string, double> removedJointPositions;
+
+    // We now need to compute the newLink_H_oldLink transform for each link we need to transform
+    std::unordered_map<std::string, iDynTree::Transform> newLink_H_oldLink;
+
+    // First of all, compute the traversal for the default base of the model
+    iDynTree::Traversal fullTraversal;
+    bool ok = inputModel.computeFullTreeTraversal(fullTraversal);
+
+    if (!ok)
+    {
+        return false;
+    }
+
+    // We start from 1 as the first link does not have any joint to the aparent link
+    for (iDynTree::TraversalIndex trvIdx=1; trvIdx < static_cast<TraversalIndex>(fullTraversal.getNrOfVisitedLinks()); trvIdx++)
+    {
+        LinkConstPtr childLink = fullTraversal.getLink(trvIdx);
+        std::string childLinkName = inputModel.getLinkName(childLink->getIndex());
+        LinkConstPtr parentLink = fullTraversal.getParentLink(trvIdx);
+        IJointConstPtr jointToParent = fullTraversal.getParentJoint(trvIdx);
+
+
+        if (jointToParent->getNrOfDOFs() != 0)
+        {
+            iDynTree::Axis axis;
+
+            // Check that the axis of the joint is supported by URDF
+            if (dynamic_cast<const RevoluteJoint*>(jointToParent))
+            {
+                const RevoluteJoint* revJoint = dynamic_cast<const RevoluteJoint*>(jointToParent);
+                axis = revJoint->getAxis(childLink->getIndex());
+            }
+            else if (dynamic_cast<const PrismaticJoint*>(jointToParent))
+            {
+                const PrismaticJoint* prismJoint = dynamic_cast<const PrismaticJoint*>(jointToParent);
+                axis = prismJoint->getAxis(childLink->getIndex());
+            }
+
+            // If the axis is not URDF-compatible, move it to ensure that the new link frame lays on the
+            // The threshold of 1e-7 is the same used in URDFStringFromModel, if you change it here also change it there
+            double distanceBetweenAxisAndOrigin = axis.getDistanceBetweenAxisAndPoint(iDynTree::Position::Zero());
+            if (distanceBetweenAxisAndOrigin > 1e-7)
+            {
+
+                // First of all, we get the point on the child axis closest to the existing origin
+                iDynTree::Position oldLink_o_newLink = axis.getPointOnAxisClosestToGivenPoint(iDynTree::Position::Zero());
+
+                // We invert the sign
+                iDynTree::Position newLink_o_oldLink = -oldLink_o_newLink;
+
+
+                newLink_H_oldLink[childLinkName] = iDynTree::Transform(iDynTree::Rotation::Identity(), newLink_o_oldLink);
+            }
+        }
+    }
+
+    bool addOriginalLinkFrameWith_original_frame_suffix = true;
+    bool okReduced = createReducedModelAndChangeLinkFrames(inputModel, consideredJoints, outputModel,
+                                                 removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix);
+
+    if (okReduced)
+    {
+        // In general createReducedModelAndChangeLinkFrames do not preserve the existance of the base link,
+        // but as in this case the link existence is preserved, we also preserve the default base link
+        outputModel.setDefaultBaseLink(outputModel.getLinkIndex(inputModel.getLinkName(inputModel.getDefaultBaseLink())));
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 }
