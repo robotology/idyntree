@@ -4,9 +4,9 @@
     <compoundname>Link.h</compoundname>
     <includes refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
-    <includedby refid="LinkElement_8h" local="no">private/LinkElement.h</includedby>
     <includedby refid="Model_2Link_8h" local="no">iDynTree/Model/Link.h</includedby>
     <includedby refid="Model_8h" local="no">iDynTree/Model.h</includedby>
+    <includedby refid="LinkElement_8h" local="no">private/LinkElement.h</includedby>
     <innerclass refid="classiDynTree_1_1Link" prot="public">iDynTree::Link</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="typedef">

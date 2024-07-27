@@ -230,7 +230,7 @@
 <para>Get the <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> as a 6x6 matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para>If <formula id="91">$ m \in \mathbb{R} $</formula> is the mass, <formula id="92">$ c \in \mathbb{R}^3 $</formula> is the center of mass, <formula id="93">$ I \in \mathbb{R}^{3 \times 3} $</formula> is the 3d inertia, and <formula id="94">$ 1_3 \in \mathbb{R}^{3 \times 3} $</formula> is the 3d identity matrix this method returns the <formula id="95">$ \mathbb{M} \in \mathbb{R}^{6 \times 6} $</formula> matrix such that: <formula id="96">\[ \mathbb{M} = \begin{bmatrix} m 1_3 &amp; -m c \times \\ m c \times &amp; I \end{bmatrix} \]</formula>.</para>
+<para>If <formula id="229">$ m \in \mathbb{R} $</formula> is the mass, <formula id="230">$ c \in \mathbb{R}^3 $</formula> is the center of mass, <formula id="231">$ I \in \mathbb{R}^{3 \times 3} $</formula> is the 3d inertia, and <formula id="232">$ 1_3 \in \mathbb{R}^{3 \times 3} $</formula> is the 3d identity matrix this method returns the <formula id="233">$ \mathbb{M} \in \mathbb{R}^{6 \times 6} $</formula> matrix such that: <formula id="234">\[ \mathbb{M} = \begin{bmatrix} m 1_3 &amp; -m c \times \\ m c \times &amp; I \end{bmatrix} \]</formula>.</para>
 <para><simplesect kind="note"><para>As all quantities in iDynTree, this inertia assumes the linear-angular serialization. </para>
 </simplesect>
 </para>
@@ -350,7 +350,7 @@
 <para>Return the bias wrench v.cross(M*v). </para>
         </briefdescription>
         <detaileddescription>
-<para>Defining <formula id="97">$ \mathbb{M} $</formula> as this inertia, return the bias wrench v.cross(M*v), defined in math as: <formula id="98">\[ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\ \begin{bmatrix} \omega \times &amp; 0 \\ v \times &amp; \omega \times \end{bmatrix} \begin{bmatrix} m 1_3 &amp; -mc\times \\ mc\times &amp; I \end{bmatrix} \begin{bmatrix} v \\ \omega \end{bmatrix} = \\ \begin{bmatrix} m \omega \times v - \omega \times ( m c \times \omega) \\ m c \times ( \omega \times v ) + \omega \times I \omega \end{bmatrix} \]</formula> </para>
+<para>Defining <formula id="235">$ \mathbb{M} $</formula> as this inertia, return the bias wrench v.cross(M*v), defined in math as: <formula id="236">\[ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\ \begin{bmatrix} \omega \times &amp; 0 \\ v \times &amp; \omega \times \end{bmatrix} \begin{bmatrix} m 1_3 &amp; -mc\times \\ mc\times &amp; I \end{bmatrix} \begin{bmatrix} v \\ \omega \end{bmatrix} = \\ \begin{bmatrix} m \omega \times v - \omega \times ( m c \times \omega) \\ m c \times ( \omega \times v ) + \omega \times I \omega \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -369,9 +369,9 @@
 <para>Return the derivative of the bias wrench with respect to the link 6D velocity. </para>
         </briefdescription>
         <detaileddescription>
-<para>Defining <formula id="95">$ \mathbb{M} \in \mathbb{R}^{6 \times 6} $</formula> as this inertia, return the derivative with respect to <formula id="99">$ \mathrm{v} = \begin{bmatrix} v \\ \omega \end{bmatrix} \in \mathbb{R}^6 $</formula> of the bias wrench <formula id="100">$ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} $</formula> (i.e. v.cross(M*v)).</para>
-<para>The bias wrench is: <formula id="101">\[ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\ \begin{bmatrix} m \omega \times v - \omega \times ( m c \times \omega) \\ m c \times ( \omega \times v ) + \omega \times I \omega \end{bmatrix} \]</formula></para>
-<para>So the derivative with respect to the twist V is : <formula id="102">\[ \partial_\mathrm{v} ( \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} ) = \\ \begin{bmatrix} m \omega \times &amp; - m v \times + ( m c \times \omega) \times - (\omega \times) (mc \times) \\ (m c \times) ( \omega \times) &amp; - (m c \times )(v \times) + \omega \times I - (I \omega) \times \end{bmatrix} \]</formula> </para>
+<para>Defining <formula id="233">$ \mathbb{M} \in \mathbb{R}^{6 \times 6} $</formula> as this inertia, return the derivative with respect to <formula id="237">$ \mathrm{v} = \begin{bmatrix} v \\ \omega \end{bmatrix} \in \mathbb{R}^6 $</formula> of the bias wrench <formula id="238">$ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} $</formula> (i.e. v.cross(M*v)).</para>
+<para>The bias wrench is: <formula id="239">\[ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\ \begin{bmatrix} m \omega \times v - \omega \times ( m c \times \omega) \\ m c \times ( \omega \times v ) + \omega \times I \omega \end{bmatrix} \]</formula></para>
+<para>So the derivative with respect to the twist V is : <formula id="240">\[ \partial_\mathrm{v} ( \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} ) = \\ \begin{bmatrix} m \omega \times &amp; - m v \times + ( m c \times \omega) \times - (\omega \times) (mc \times) \\ (m c \times) ( \omega \times) &amp; - (m c \times )(v \times) + \omega \times I - (I \omega) \times \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -394,23 +394,23 @@
 </entry></row>
 <row>
 <entry thead="no" align='center'><para>0   </para>
-</entry><entry thead="no" align='center'><para><formula id="103">$ m $</formula>   </para>
+</entry><entry thead="no" align='center'><para><formula id="241">$ m $</formula>   </para>
 </entry><entry thead="no" align='center'><para>The mass of the rigid body    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para>1-3   </para>
-</entry><entry thead="no" align='center'><para><formula id="104">$ m c $</formula>   </para>
+</entry><entry thead="no" align='center'><para><formula id="242">$ m c $</formula>   </para>
 </entry><entry thead="no" align='center'><para>The first moment of mass of the rigid body    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para>4-9   </para>
-</entry><entry thead="no" align='center'><para><formula id="105">$ \mathop{vech}(I) $</formula>   </para>
-</entry><entry thead="no" align='center'><para>The 6 independent elements of the 3d inertia matrix, i.e. <formula id="106">$ \begin{bmatrix} I_{xx} \\ I_{xy} \\ I_{xz} \\ I_{yy} \\ I_{yz} \\ I_{zz} \end{bmatrix} $</formula> .   </para>
+</entry><entry thead="no" align='center'><para><formula id="243">$ \mathop{vech}(I) $</formula>   </para>
+</entry><entry thead="no" align='center'><para>The 6 independent elements of the 3d inertia matrix, i.e. <formula id="244">$ \begin{bmatrix} I_{xx} \\ I_{xy} \\ I_{xz} \\ I_{yy} \\ I_{yz} \\ I_{zz} \end{bmatrix} $</formula> .   </para>
 </entry></row>
 </table>
 </para>
-<para>The first moment of mass is the center of mass ( <formula id="92">$ c \in \mathbb{R}^3 $</formula> ) w.r.t. to the frame where this rigid body inertia is expressed multiplied by the rigid body mass <formula id="103">$ m $</formula>.</para>
-<para>The 3d rigid body inertia <formula id="93">$ I \in \mathbb{R}^{3 \times 3} $</formula> is expressed with the orientation of the frame in which this rigid body inertia is expressed, and with respect to the frame origin. </para>
+<para>The first moment of mass is the center of mass ( <formula id="230">$ c \in \mathbb{R}^3 $</formula> ) w.r.t. to the frame where this rigid body inertia is expressed multiplied by the rigid body mass <formula id="241">$ m $</formula>.</para>
+<para>The 3d rigid body inertia <formula id="231">$ I \in \mathbb{R}^{3 \times 3} $</formula> is expressed with the orientation of the frame in which this rigid body inertia is expressed, and with respect to the frame origin. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -505,8 +505,8 @@
 <para>Get the momentum inertial parameters regressor. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get the matrix <formula id="107">\[ Y(\mathrm{v}) \in \mathbb{R}^{6 \times 10} \]</formula> such that: <formula id="108">\[ \mathbb{M} \mathrm{v} = Y(\mathrm{v}) \alpha \]</formula></para>
-<para>If <formula id="109">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="97">$ \mathbb{M} $</formula>, as returned by the asVector method. </para>
+<para>Get the matrix <formula id="245">\[ Y(\mathrm{v}) \in \mathbb{R}^{6 \times 10} \]</formula> such that: <formula id="246">\[ \mathbb{M} \mathrm{v} = Y(\mathrm{v}) \alpha \]</formula></para>
+<para>If <formula id="247">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="235">$ \mathbb{M} $</formula>, as returned by the asVector method. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -529,8 +529,8 @@
 <para>Get the momentum derivative inertial parameters regressor. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get the matrix <formula id="110">\[ Y(\mathrm{v},a) \in \mathbb{R}^{6 \times 10} \]</formula> such that: <formula id="111">\[ \mathbb{M} a + \mathrm{v} \overline{\times}^{*} \mathbb{M} \mathrm{v} = Y(\mathrm{v}, a)\alpha \]</formula></para>
-<para>If <formula id="109">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="97">$ \mathbb{M} $</formula>, as returned by the asVector method.</para>
+<para>Get the matrix <formula id="248">\[ Y(\mathrm{v},a) \in \mathbb{R}^{6 \times 10} \]</formula> such that: <formula id="249">\[ \mathbb{M} a + \mathrm{v} \overline{\times}^{*} \mathbb{M} \mathrm{v} = Y(\mathrm{v}, a)\alpha \]</formula></para>
+<para>If <formula id="247">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="235">$ \mathbb{M} $</formula>, as returned by the asVector method.</para>
 <para>This is also the regressor of the net wrench acting on a rigid body. As such, it is the building block of all other algorithms to compute dynamics regressors. </para>
         </detaileddescription>
         <inbodydescription>
@@ -558,9 +558,9 @@
 <para>Get the momentum derivative inertial parameters regressor. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get the matrix <formula id="112">\[ Y(\mathrm{v},\mathrm{v}_r,a_r) \in \mathbb{R}^{6\times10} \]</formula> such that: <formula id="113">\[ \mathbb{M} a_r + (\mathrm{v} \overline{\times}^{*} \mathbb{M} - \mathbb{M} \mathrm{v} \times) \mathrm{v}_r = Y(\mathrm{v},\mathrm{v}_r,a_r)\alpha \]</formula></para>
-<para>If <formula id="109">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="97">$ \mathbb{M} $</formula>, as returned by the asVector method.</para>
-<para>Notice that if <formula id="114">$ \mathrm{v} = \mathrm{v}_r $</formula>, this regressor reduces to the one computed by momentumDerivativeRegressor. The main difference is that (assuming constant <formula id="97">$ \mathbb{M} $</formula>) this regressor respect the passivity condition and thus is the basic building block for building Slotine Li style regressors.</para>
+<para>Get the matrix <formula id="250">\[ Y(\mathrm{v},\mathrm{v}_r,a_r) \in \mathbb{R}^{6\times10} \]</formula> such that: <formula id="251">\[ \mathbb{M} a_r + (\mathrm{v} \overline{\times}^{*} \mathbb{M} - \mathbb{M} \mathrm{v} \times) \mathrm{v}_r = Y(\mathrm{v},\mathrm{v}_r,a_r)\alpha \]</formula></para>
+<para>If <formula id="247">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="235">$ \mathbb{M} $</formula>, as returned by the asVector method.</para>
+<para>Notice that if <formula id="252">$ \mathrm{v} = \mathrm{v}_r $</formula>, this regressor reduces to the one computed by momentumDerivativeRegressor. The main difference is that (assuming constant <formula id="235">$ \mathbb{M} $</formula>) this regressor respect the passivity condition and thus is the basic building block for building Slotine Li style regressors.</para>
 <para>For more on this, please check:</para>
 <para>Garofalo, G.; Ott, C.; Albu-Schaffer, A., &quot;On the closed form computation of the dynamic matrices and their differentiations,&quot; in Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on doi: 10.1109/IROS.2013.6696688 URL: <ulink url="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6696688&amp;isnumber=6696319">http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6696688&amp;isnumber=6696319</ulink> </para>
         </detaileddescription>
