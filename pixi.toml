@@ -17,6 +17,9 @@ scripts = ["pixi_activation.sh"]
 [target.win-64.activation]
 scripts = ["pixi_activation.bat"]
 
+[system-requirements]
+macos = "11.0"
+
 
 [tasks]
 configure = { cmd = [
@@ -60,3 +63,6 @@ yarp = "*"
 osqp-eigen = "*"
 # Find a way to add this only for supported envs
 # icub-main = "*"
+
+[target.osx-arm64.dependencies]
+libcxx = "18.*"
