@@ -840,6 +840,12 @@ bool estimateLinkContactWrenchesFromLinkNetExternalWrenches(const Model& model,
             continue;
         }
 
+        // If the link has no contact, we can just go to next link
+        if (unknownWrenches.getNrOfContactsForLink(lnkIdx) == 0)
+        {
+            continue;
+        }
+
         const UnknownWrenchContact& unknownWrench = unknownWrenches.contactWrench(lnkIdx, 0);
         outputContactWrenches.setNrOfContactsForLink(lnkIdx, unknownWrenches.getNrOfContactsForLink(lnkIdx));
         ContactWrench& knownWrench          = outputContactWrenches.contactWrench(lnkIdx, 0);
