@@ -4,9 +4,8 @@ on:
   push:
   pull_request:
   schedule:
-  # * is a special character in YAML so you have to quote this string
-  # Execute a "nightly" build at 2 AM UTC
-  - cron:  '0 2 * * *'
+  # Execute a "nightly" build twice a week 2 AM UTC
+  - cron:  '0 2 * * 2,5'
 
 jobs:
   build-matlab-tests:
@@ -23,7 +22,7 @@ jobs:
         matlab_version: [R2022a, R2022b, R2023a]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
 
     - uses: conda-incubator/setup-miniconda@v2
       with:
@@ -32,7 +31,7 @@ jobs:
         channels: conda-forge,robotology
 
     - name: Setup MATLAB
-      uses: matlab-actions/setup-matlab@v1
+      uses: matlab-actions/setup-matlab@v2
       with:
         release: ${{ matrix.matlab_version }}
 
