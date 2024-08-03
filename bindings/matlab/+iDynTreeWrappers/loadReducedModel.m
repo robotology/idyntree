@@ -59,4 +59,22 @@ function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelNa
     KinDynModel.kinDynComp.setFloatingBase(KinDynModel.BASE_LINK);
 
     disp(['[loadReducedModel]: loaded model: ',fullfile(modelPath,modelName),', number of joints: ',num2str(KinDynModel.NDOF)]);
+
+    % initialize all dynamics and kinematics quantities used inside the
+    % wrappers. This procedure optimizes the wrappers speed, as the
+    % iDyntree objects are created only once and then updated runtime
+    KinDynModel.kinematics.baseRotation_iDyntree = iDynTree.Rotation();
+    KinDynModel.kinematics.baseOrigin_iDyntree = iDynTree.Position();
+    KinDynModel.kinematics.basePose_iDyntree = iDynTree.Transform();
+    KinDynModel.kinematics.baseVel_iDyntree = iDynTree.Twist();
+    KinDynModel.kinematics.jointPos_iDyntree = iDynTree.VectorDynSize(KinDynModel.NDOF);
+    KinDynModel.kinematics.jointVel_iDyntree = iDynTree.VectorDynSize(KinDynModel.NDOF);
+    KinDynModel.kinematics.stateVel_iDyntree = iDynTree.VectorDynSize(6+KinDynModel.NDOF);
+    KinDynModel.kinematics.gravityVec_iDyntree = iDynTree.Vector3();
+    KinDynModel.kinematics.J_CoM_iDyntree = iDynTree.MatrixDynSize(3,KinDynModel.NDOF+6);
+    KinDynModel.kinematics.J_frame_iDyntree = iDynTree.MatrixDynSize(6,KinDynModel.NDOF+6);
+    KinDynModel.kinematics.J_frameVel_iDyntree = iDynTree.MatrixDynSize(6,KinDynModel.NDOF);
+    KinDynModel.dynamics.M_iDyntree = iDynTree.MatrixDynSize(KinDynModel.NDOF+6,KinDynModel.NDOF+6);
+    KinDynModel.dynamics.h_iDyntree = iDynTree.FreeFloatingGeneralizedTorques(KinDynModel.kinDynComp.model);
+    KinDynModel.dynamics.g_iDyntree = iDynTree.FreeFloatingGeneralizedTorques(KinDynModel.kinDynComp.model);
 end
