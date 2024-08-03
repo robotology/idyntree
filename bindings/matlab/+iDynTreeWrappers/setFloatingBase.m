@@ -2,7 +2,7 @@ function [] = setFloatingBase(KinDynModel,floatBaseLinkName)
 
     % SETFLOATINGBASE sets the link that is used as floating base.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT: [] = setFloatingBase(KinDynModel,floatBaseLinkName)
@@ -14,15 +14,15 @@ function [] = setFloatingBase(KinDynModel,floatBaseLinkName)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
-    
+
     % set the floating base link
     ack = KinDynModel.kinDynComp.setFloatingBase(floatBaseLinkName);
-    
+
     % check for errors
-    if ~ack  
+    if ~ack
         error('[setFloatingBase]: unable to set the floating base link.')
-    end  
+    end
 end

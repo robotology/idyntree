@@ -1,9 +1,9 @@
 function frameVelRepr = getFrameVelocityRepresentation(KinDynModel)
 
     % GETFRAMEVELOCITYREPRESENTATION retrieves the current frame velocity
-    %                                representation. 
+    %                                representation.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  frameVelRepr = getFrameVelocityRepresentation(KinDynModel)
@@ -15,7 +15,7 @@ function frameVelRepr = getFrameVelocityRepresentation(KinDynModel)
     %
     % Possible frame velocity representations:
     %
-    %  0 = INERTIAL_FIXED_REPRESENTATION 	
+    %  0 = INERTIAL_FIXED_REPRESENTATION
     %
     %  1 = BODY_FIXED_REPRESENTATION
     %
@@ -24,28 +24,28 @@ function frameVelRepr = getFrameVelocityRepresentation(KinDynModel)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
-    
-    frameVelRepr_idyntree = KinDynModel.kinDynComp.getFrameVelocityRepresentation();   
-    
+
+    frameVelRepr_idyntree = KinDynModel.kinDynComp.getFrameVelocityRepresentation();
+
     % output the current frame velocity representation
-    switch frameVelRepr_idyntree  
-        
+    switch frameVelRepr_idyntree
+
         case 2
-            
+
             frameVelRepr = 'mixed';
-                    
+
         case 1
-            
+
             frameVelRepr = 'body';
-                    
+
         case 0
-            
+
             frameVelRepr = 'inertial';
-                    
-        otherwise        
+
+        otherwise
             error('[setFrameVelocityRepresentation]: frameVelRepr is not a valid string.')
-    end   
+    end
 end

@@ -2,7 +2,7 @@ function baseVel = getBaseTwist(KinDynModel)
 
     % GETBASETWIST retrieves the robot base velocity from the reduced model.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  baseVel = getBaseTwist(KinDynModel)
@@ -14,13 +14,13 @@ function baseVel = getBaseTwist(KinDynModel)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
 
     % get the base velocities
     baseVel_iDyntree = KinDynModel.kinDynComp.getBaseTwist();
-    
+
     % convert to Matlab format
     baseVel = baseVel_iDyntree.toMatlab;
 end

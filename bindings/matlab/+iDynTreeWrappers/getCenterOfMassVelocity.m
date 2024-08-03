@@ -2,7 +2,7 @@ function velCoM = getCenterOfMassVelocity(KinDynModel)
 
     % GETCENTEROFMASSVELOCITY retrieves the CoM velocity in world coordinates.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  velCoM = getCenterOfMassVelocity(KinDynModel)
@@ -14,13 +14,13 @@ function velCoM = getCenterOfMassVelocity(KinDynModel)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
-    %% ------------Initialization----------------  
-    
+    %% ------------Initialization----------------
+
     % get the CoM velocity
-    velCoM_iDyntree = KinDynModel.kinDynComp.getCenterOfMassVelocity(); 
-    
+    velCoM_iDyntree = KinDynModel.kinDynComp.getCenterOfMassVelocity();
+
     % covert to matlab
     velCoM = velCoM_iDyntree.toMatlab;
 end

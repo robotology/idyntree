@@ -2,7 +2,7 @@ function frameName = getFrameName(KinDynModel,frameID)
 
     % GETFRAMENAME gets the name corresponding to a given frame index.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  frameName = getFrameName(KinDynModel,frameID)
@@ -15,10 +15,10 @@ function frameName = getFrameName(KinDynModel,frameID)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
 
     % get the ID of the given frame
-    frameName = KinDynModel.kinDynComp.getFrameName(frameID);   
+    frameName = KinDynModel.kinDynComp.getFrameName(frameID);
 end
