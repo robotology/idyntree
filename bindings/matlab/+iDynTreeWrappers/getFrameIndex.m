@@ -1,8 +1,8 @@
 function frameID = getFrameIndex(KinDynModel,frameName)
 
-    % GETFRAMEINDEX gets the index corresponding to a given frame name. 
+    % GETFRAMEINDEX gets the index corresponding to a given frame name.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  frameID = getFrameIndex(KinDynModel,frameName)
@@ -15,10 +15,10 @@ function frameID = getFrameIndex(KinDynModel,frameName)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
-    
+
     % get the ID of the given frame
-    frameID = KinDynModel.kinDynComp.getFrameIndex(frameName); 
+    frameID = KinDynModel.kinDynComp.getFrameIndex(frameName);
 end

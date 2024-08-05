@@ -2,7 +2,7 @@ function posCoM = getCenterOfMassPosition(KinDynModel)
 
     % GETCENTEROFMASSPOSITION retrieves the CoM position in world coordinates.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  posCoM = getCenterOfMassPosition(KinDynModel)
@@ -14,13 +14,13 @@ function posCoM = getCenterOfMassPosition(KinDynModel)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
-    
+
     % get the CoM position
-    posCoM_iDyntree = KinDynModel.kinDynComp.getCenterOfMassPosition(); 
-    
+    posCoM_iDyntree = KinDynModel.kinDynComp.getCenterOfMassPosition();
+
     % covert to matlab
     posCoM = posCoM_iDyntree.toMatlab;
 end

@@ -1,10 +1,10 @@
 function J_frameVel = getRelativeJacobian(KinDynModel,frameVelID,frameRefID)
 
     % GETRELATIVEJACOBIAN gets the relative jacobian, i.e. the matrix that
-    %                          maps the velocity of frameVel expressed w.r.t.
-    %                          frameRef, to the joint velocity. 
+    %                     maps the velocity of frameVel expressed w.r.t.
+    %                     frameRef, to the joint velocity.
     %
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  J_frameVel = getRelativeJacobian(KinDynModel,frameVelID,frameRefID)
@@ -20,21 +20,18 @@ function J_frameVel = getRelativeJacobian(KinDynModel,frameVelID,frameRefID)
     % Author : Gabriele Nava (gabriele.nava@iit.it)
     %
     % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
-% SPDX-License-Identifier: BSD-3-Clause
+    % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
 
-    % create the matrix that must be populated with the jacobian map
-    J_frameVel_iDyntree = iDynTree.MatrixDynSize(6,KinDynModel.NDOF);
-    
     % get the relative jacobian
-    ack = KinDynModel.kinDynComp.getRelativeJacobian(frameVelID,frameRefID,J_frameVel_iDyntree);  
-    
+    ack = KinDynModel.kinDynComp.getRelativeJacobian(frameVelID,frameRefID,KinDynModel.kinematics.J_frameVel_iDyntree);
+
     % check for errors
-    if ~ack  
+    if ~ack
         error('[getRelativeJacobian]: unable to get the relative jacobian from the reduced model.')
     end
-    
+
     % covert to Matlab format
-    J_frameVel = J_frameVel_iDyntree.toMatlab; 
+    J_frameVel = KinDynModel.kinematics.J_frameVel_iDyntree.toMatlab;
 end
