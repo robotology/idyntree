@@ -103,14 +103,6 @@ jobs:
         # See https://github.com/robotology/robotology-superbuild/issues/477
         micromamba install xorg-libx11 xorg-libxrandr freeglut mesa-libgl-cos6-x86_64 mesa-libgl-devel-cos6-x86_64
 
-    # Additional dependencies useful only on macos-12
-    - name: Dependencies [Conda/Linux]
-      if: contains(matrix.os, 'macos-12')
-      shell: bash -l {0}
-      run: |
-        # See https://github.com/robotology/idyntree/issues/1192
-        micromamba install libcxx==17.*
-
     - name: Print used environment [Conda]
       shell: bash -l {0}
       run: |
