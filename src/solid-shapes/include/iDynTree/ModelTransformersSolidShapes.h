@@ -18,13 +18,24 @@ namespace iDynTree
 class Model;
 class SensorsList;
 
-enum ApproximateSolidShapesWithPrimitiveShapeConversionType {
+enum class ApproximateSolidShapesWithPrimitiveShapeConversionType {
     ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes
+};
+
+/**
+ * Enum class representing which shape should be approximated.
+ * Namely teh visual, collision or both shapes.
+ */
+enum class ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate {
+    VisualShapes,
+    CollisionShapes,
+    BothShapes
 };
 
 struct ApproximateSolidShapesWithPrimitiveShapeOptions 
 {
-    ApproximateSolidShapesWithPrimitiveShapeConversionType conversionType = ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
+    ApproximateSolidShapesWithPrimitiveShapeConversionType conversionType = ApproximateSolidShapesWithPrimitiveShapeConversionType::ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
+    ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate shapesToApproximate = ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes;
 };
 
 /**

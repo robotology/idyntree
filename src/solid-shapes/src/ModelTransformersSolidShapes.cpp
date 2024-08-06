@@ -39,7 +39,7 @@ bool approximateSolidShapesWithBoundingBoxes(const iDynTree::ModelSolidShapes& i
 
 bool approximateSolidShapesWithPrimitiveShape(const Model& inputModel,
                                               Model& outputModel,
-                                              ApproximateSolidShapesWithPrimitiveShapeOptions /*options*/)
+                                              ApproximateSolidShapesWithPrimitiveShapeOptions options)
 {
     bool retValue = true;
 
@@ -50,10 +50,17 @@ bool approximateSolidShapesWithPrimitiveShape(const Model& inputModel,
     // that approximates the solid shapes via the iDynTree::computeBoundingBoxFromShape function
 
     // Approximate visual shapes
-    retValue = retValue && approximateSolidShapesWithBoundingBoxes(inputModel.visualSolidShapes(), outputModel.visualSolidShapes());
+    if (options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::VisualShapes ||
+       options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes)
+    {
+        retValue = retValue && approximateSolidShapesWithBoundingBoxes(inputModel.visualSolidShapes(), outputModel.visualSolidShapes());
+    }
 
-    // Approximate collision shapes
-    retValue = retValue && approximateSolidShapesWithBoundingBoxes(inputModel.collisionSolidShapes(), outputModel.collisionSolidShapes());
+    if (options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::CollisionShapes ||
+        options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes)
+    {
+        retValue = retValue && approximateSolidShapesWithBoundingBoxes(inputModel.collisionSolidShapes(), outputModel.collisionSolidShapes());
+    }
 
     return retValue;
 }

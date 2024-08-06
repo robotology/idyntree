@@ -29,6 +29,11 @@ void addOptions(cmdline::parser &cmd)
     cmd.add<std::string>("output-model", 'o',
                          "Output simplified model.",
                          true);
+
+    // Specify which shapes need to be approximated
+    cmd.add<std::string>("shapes-approximation", 's',
+                         "Specify which shapes need to be approximated. Supported values are: visual, collision, both.",
+                         false, "both");
 }
 
 int main(int argc, char** argv)
@@ -40,6 +45,14 @@ int main(int argc, char** argv)
     // Read model
     const std::string& modelPath = cmd.get<std::string>("model");
     const std::string& outputModelPath = cmd.get<std::string>("output-model");
+    const std::string& shapesApproximation = cmd.get<std::string>("shapes-approximation");
+
+    // check if the shapes approximation is valid
+    if (shapesApproximation != "visual" && shapesApproximation != "collision" && shapesApproximation != "both")
+    {
+        std::cerr << "Invalid shapes approximation value: " << shapesApproximation << " . Supported values are: visual, collision, both." << std::endl;
+        return EXIT_FAILURE;
+    }
 
     iDynTree::ModelLoader mdlLoader;
     bool ok = mdlLoader.loadModelFromFile(modelPath);
@@ -53,9 +66,22 @@ int main(int argc, char** argv)
     // Simplify the model
     iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions options = 
         iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions();
-    options.conversionType = iDynTree::ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
+    options.conversionType = iDynTree::ApproximateSolidShapesWithPrimitiveShapeConversionType::ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
+    if (shapesApproximation == "visual")
+    {
+        options.shapesToApproximate = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::VisualShapes;
+    }
+    else if (shapesApproximation == "collision")
+    {
+        options.shapesToApproximate = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::CollisionShapes;
+    }
+    else if (shapesApproximation == "both")
+    {
+        options.shapesToApproximate = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes;
+    }
+
     iDynTree::Model simplifiedModel;
-    ok = approximateSolidShapesWithPrimitiveShape(mdlLoader.model(), simplifiedModel);
+    ok = approximateSolidShapesWithPrimitiveShape(mdlLoader.model(), simplifiedModel, options);
 
     if (!ok)
     {
