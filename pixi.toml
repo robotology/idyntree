@@ -14,8 +14,14 @@ platforms = ["linux-64", "linux-aarch64", "win-64", "osx-64", "osx-arm64"]
 [activation]
 scripts = ["pixi_activation.sh"]
 
+[activation.env]
+CMAKE_LINKER_TYPE = "MOLD"
+
 [target.win-64.activation]
 scripts = ["pixi_activation.bat"]
+
+[target.win-64.activation.env]
+CMAKE_LINKER_TYPE = "DEFAULT"
 
 
 [tasks]
@@ -24,6 +30,7 @@ configure = { cmd = [
     "-DCMAKE_BUILD_TYPE=Release",
     "-DCMAKE_INSTALL_PREFIX=$CMAKE_INSTALL_PREFIX",
     "-DBUILD_TESTING:BOOL=ON",
+    "-DCMAKE_LINKER_TYPE:STRING=$CMAKE_LINKER_TYPE",
     # Use the cross-platform Ninja generator
     "-G",
     "Ninja",
@@ -42,7 +49,7 @@ uninstall = { cmd = ["cmake", "--build", ".build", "--target", "uninstall"]}
 
 
 [dependencies]
-cmake = "*"
+cmake = ">=3.29"
 c-compiler = "*"
 cxx-compiler = "*"
 ninja = "*"
@@ -60,3 +67,6 @@ yarp = "*"
 osqp-eigen = "*"
 # Find a way to add this only for supported envs
 # icub-main = "*"
+
+[target.unix.dependencies]
+mold = "*"
