@@ -167,6 +167,68 @@ ModelVisualization& ModelVisualization::operator=(const ModelVisualization& /*ot
     return *this;
 }
 
+bool ModelVisualization::changeVisualsColor(const LinkIndex& linkIndex, const ColorViz& color, const std::string& name)
+{
+    irr::video::SColor col = idyntree2irrlicht(color).toSColor();
+    bool changed = false;
+
+    for (size_t geom = 0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
+    {
+        if (pimpl->geomNodes[linkIndex][geom] && (name.empty() ||
+            std::string(pimpl->geomNodes[linkIndex][geom]->getName()) == name))
+        {
+            irr::scene::ISceneNode* geomNode = pimpl->geomNodes[linkIndex][geom];
+
+            for (size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+            {
+                irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
+
+                // R
+                geomMat.AmbientColor.setRed(col.getRed());
+                geomMat.DiffuseColor.setRed(col.getRed());
+                geomMat.SpecularColor.setRed(col.getRed());
+                geomMat.EmissiveColor.setRed(col.getRed());
+
+                // G
+                geomMat.AmbientColor.setGreen(col.getGreen());
+                geomMat.DiffuseColor.setGreen(col.getGreen());
+                geomMat.SpecularColor.setGreen(col.getGreen());
+                geomMat.EmissiveColor.setGreen(col.getGreen());
+
+                // B
+                geomMat.AmbientColor.setBlue(col.getBlue());
+                geomMat.DiffuseColor.setBlue(col.getBlue());
+                geomMat.SpecularColor.setBlue(col.getBlue());
+                geomMat.EmissiveColor.setBlue(col.getBlue());
+
+                geomMat.AmbientColor.setAlpha(col.getAlpha());
+                geomMat.DiffuseColor.setAlpha(col.getAlpha());
+                geomMat.SpecularColor.setAlpha(col.getAlpha());
+                geomMat.EmissiveColor.setAlpha(col.getAlpha());
+
+                if (color.a < 1.0)
+                {
+                    geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
+                }
+                else
+                {
+                    geomMat.MaterialType = irr::video::EMT_SOLID;
+                }
+
+
+                geomNode->getMaterial(mat) = geomMat;
+            }
+            geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
+            geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
+            geomNode->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, false);
+            geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, true);
+
+            changed = true;
+        }
+    }
+    return changed;
+}
+
 bool ModelVisualization::init(const Model& model,
                               const std::string instanceName,
                               irr::scene::ISceneManager * sceneManager)
@@ -338,57 +400,22 @@ bool ModelVisualization::setLinkColor(const LinkIndex& linkIndex, const ColorViz
         return false;
     }
 
-    irr::video::SColor col = idyntree2irrlicht(linkColor).toSColor();
-    for(size_t geom=0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
+    changeVisualsColor(linkIndex, linkColor);
+    return true;
+}
+
+bool ModelVisualization::setVisualColor(const LinkIndex& linkIndex, const std::string& visualName, const ColorViz& visualColor)
+{
+    if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
     {
-        if( pimpl->geomNodes[linkIndex][geom] )
-        {
-            irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIndex][geom];
+        reportError("ModelVisualization", "setVisualColor", "invalid link index");
+        return false;
+    }
 
-            for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
-            {
-                irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
-
-                // R
-                geomMat.AmbientColor.setRed(col.getRed());
-                geomMat.DiffuseColor.setRed(col.getRed());
-                geomMat.SpecularColor.setRed(col.getRed());
-                geomMat.EmissiveColor.setRed(col.getRed());
-
-                // G
-                geomMat.AmbientColor.setGreen(col.getGreen());
-                geomMat.DiffuseColor.setGreen(col.getGreen());
-                geomMat.SpecularColor.setGreen(col.getGreen());
-                geomMat.EmissiveColor.setGreen(col.getGreen());
-
-                // B
-                geomMat.AmbientColor.setBlue(col.getBlue());
-                geomMat.DiffuseColor.setBlue(col.getBlue());
-                geomMat.SpecularColor.setBlue(col.getBlue());
-                geomMat.EmissiveColor.setBlue(col.getBlue());
-
-                geomMat.AmbientColor.setAlpha(col.getAlpha());
-                geomMat.DiffuseColor.setAlpha(col.getAlpha());
-                geomMat.SpecularColor.setAlpha(col.getAlpha());
-                geomMat.EmissiveColor.setAlpha(col.getAlpha());
-
-                if (linkColor.a < 1.0)
-                {
-                    geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
-                }
-                else
-                {
-                    geomMat.MaterialType = irr::video::EMT_SOLID;
-                }
-
-
-                geomNode->getMaterial(mat) = geomMat;
-            }
-            geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
-            geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
-            geomNode->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, false);
-            geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, true);
-        }
+    if (!changeVisualsColor(linkIndex, visualColor, visualName))
+    {
+        reportError("ModelVisualization", "setVisualColor", "Visual name not found");
+        return false;
     }
     return true;
 }
