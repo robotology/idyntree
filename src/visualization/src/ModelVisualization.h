@@ -21,7 +21,13 @@ private:
     ModelVisualization(const ModelVisualization& other);
     ModelVisualization& operator=(const ModelVisualization& other);
 
-    bool changeVisualsColor(const LinkIndex& linkIndex, const ColorViz& color, const std::string& name = "");
+    /**
+     * @param[in] linkIndex Index of the link
+     * @param[in] color The color to assign to the specified visual
+     * @param[in] visualName the name of the visual for which to change the color, or "" to set all the visual of the links
+     * @return true if all went ok, false otherwise
+     */
+    bool changeVisualsColor(const LinkIndex& linkIndex, const ColorViz& color, const std::string& visualName = "");
 public:
     ModelVisualization();
     ~ModelVisualization();
