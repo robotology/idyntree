@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="950" column="13"/>
+        <location file="iDynTree/Visualizer.h" line="958" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexturesHandler_1a24295be20a80e131edb753f3c8028524" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1ITexture" kindref="compound">ITexture</ref> *</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="959" column="22"/>
+        <location file="iDynTree/Visualizer.h" line="967" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexturesHandler_1a65ff5e3485df6258e805616a05997b6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1ITexture" kindref="compound">ITexture</ref> *</type>
@@ -92,14 +92,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="967" column="22"/>
+        <location file="iDynTree/Visualizer.h" line="975" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Visualizer.h" line="943" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="944" bodyend="968"/>
+    <location file="iDynTree/Visualizer.h" line="951" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="952" bodyend="976"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ITexturesHandler_1a24295be20a80e131edb753f3c8028524" prot="public" virt="pure-virtual"><scope>iDynTree::ITexturesHandler</scope><name>add</name></member>
       <member refid="classiDynTree_1_1ITexturesHandler_1a65ff5e3485df6258e805616a05997b6a" prot="public" virt="pure-virtual"><scope>iDynTree::ITexturesHandler</scope><name>get</name></member>

@@ -10,7 +10,7 @@
         <name>time_step_in_seconds</name>
         <initializer>{0.001}</initializer>
         <briefdescription>
-<para>discretization time step in seconds, default value: <formula id="88">$ 0.001 s $</formula> </para>
+<para>discretization time step in seconds, default value: <formula id="186">$ 0.001 s $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -25,7 +25,7 @@
         <name>kp</name>
         <initializer>{1.0}</initializer>
         <briefdescription>
-<para>Mahony <formula id="89">$ K_p $</formula> gain over the correction from IMU measurements, default value: <formula id="90">$ 1.0 $</formula>. </para>
+<para>Mahony <formula id="187">$ K_p $</formula> gain over the correction from IMU measurements, default value: <formula id="188">$ 1.0 $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -40,7 +40,7 @@
         <name>ki</name>
         <initializer>{1.0}</initializer>
         <briefdescription>
-<para>Mahony <formula id="91">$ K_i $</formula> gain over the gyro bias evolution, default value: <formula id="90">$ 1.0 $</formula>. </para>
+<para>Mahony <formula id="189">$ K_i $</formula> gain over the gyro bias evolution, default value: <formula id="188">$ 1.0 $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -69,7 +69,7 @@
         <name>confidence_magnetometer_measurements</name>
         <initializer>{0.0}</initializer>
         <briefdescription>
-<para>confidence on magnetometer measurements, default value: <formula id="92">$ 0.0 $</formula> </para>
+<para>confidence on magnetometer measurements, default value: <formula id="190">$ 0.0 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="918" column="10" bodyfile="iDynTree/Visualizer.h" bodystart="918" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="926" column="10" bodyfile="iDynTree/Visualizer.h" bodystart="926" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1VisualizerOptions_1a27dd48cc4e8277f38f07a4778dcbac88" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="923" column="9" bodyfile="iDynTree/Visualizer.h" bodystart="923" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="931" column="9" bodyfile="iDynTree/Visualizer.h" bodystart="931" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1VisualizerOptions_1ac52ea0cc43febc857569c192a0919d06" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="928" column="9" bodyfile="iDynTree/Visualizer.h" bodystart="928" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="936" column="9" bodyfile="iDynTree/Visualizer.h" bodystart="936" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1VisualizerOptions_1aed0f49333d9da8f0db94c98f8aae77ec" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="933" column="12" bodyfile="iDynTree/Visualizer.h" bodystart="933" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="941" column="12" bodyfile="iDynTree/Visualizer.h" bodystart="941" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="935" column="5" bodyfile="iDynTree/Visualizer.h" bodystart="935" bodyend="940"/>
+        <location file="iDynTree/Visualizer.h" line="943" column="5" bodyfile="iDynTree/Visualizer.h" bodystart="943" bodyend="948"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -81,7 +81,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Visualizer.h" line="913" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="914" bodyend="941"/>
+    <location file="iDynTree/Visualizer.h" line="921" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="922" bodyend="949"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1VisualizerOptions_1aed0f49333d9da8f0db94c98f8aae77ec" prot="public" virt="non-virtual"><scope>iDynTree::VisualizerOptions</scope><name>rootFrameArrowsDimension</name></member>
       <member refid="structiDynTree_1_1VisualizerOptions_1a93881c95c54057b6d81685d91576770e" prot="public" virt="non-virtual"><scope>iDynTree::VisualizerOptions</scope><name>verbose</name></member>

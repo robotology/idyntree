@@ -6,8 +6,8 @@
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="Model_2DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
     <includedby refid="iKinConversionsImplementation_8h" local="no">iDynTree/iKinConversionsImplementation.h</includedby>
+    <includedby refid="Model_2DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/DenavitHartenberg.h</label>

@@ -121,6 +121,12 @@
             </dt>
             <dd>Set the color of all the geometries of the given link.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7aba10fc521f39eb04caa9733d511670" class="m-doc">setVisualColor</a>(</span><span class="m-doc-wrap">const LinkIndex&amp; linkIndex,
+              const std::string&amp; visualName,
+              const <a href="classiDynTree_1_1ColorViz.html" class="m-doc">ColorViz</a>&amp; visualColor) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Set the color of a single visual of a given link.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a47a8c09072212540ab0e233b1981254a" class="m-doc">setLinkTransparency</a>(</span><span class="m-doc-wrap">const LinkIndex&amp; linkIndex,
               const double transparency) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
@@ -279,6 +285,15 @@ $ {}^w H_{frame}$
             </h3>
             <p>Set the color of all the geometries of the given link.</p>
 <p>This will overwrite the material of the link, but it can be reset by resetLinkColor.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7aba10fc521f39eb04caa9733d511670"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IModelVisualization::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7aba10fc521f39eb04caa9733d511670" class="m-doc-self">setVisualColor</a>(</span><span class="m-doc-wrap">const LinkIndex&amp; linkIndex,
+              const std::string&amp; visualName,
+              const <a href="classiDynTree_1_1ColorViz.html" class="m-doc">ColorViz</a>&amp; visualColor) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Set the color of a single visual of a given link.</p>
+<p>This will overwrite the material of the visual, but it can be reset by resetLinkColor.</p>
           </div></section>
           <section class="m-doc-details" id="a47a8c09072212540ab0e233b1981254a"><div>
             <h3>

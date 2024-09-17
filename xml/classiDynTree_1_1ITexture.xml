@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="843" column="13"/>
+        <location file="iDynTree/Visualizer.h" line="851" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1acc2e8c7c5e02bf901b7df10c4b7d1af3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1IEnvironment" kindref="compound">IEnvironment</ref> &amp;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="848" column="26"/>
+        <location file="iDynTree/Visualizer.h" line="856" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1ad2c45cf8667d339d91567bfd58c33471" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="858" column="22"/>
+        <location file="iDynTree/Visualizer.h" line="866" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1accfd16dd44c6bb16c076398081965bce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="871" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="879" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1a54b05365c8136ec72b76bac964d3b403" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="883" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="891" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1ac37428ca8f11fb8fa749f2cddb328c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="889" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="897" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1acd258bc165fe99ed6fe987ed2aab682d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>int</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="894" column="17"/>
+        <location file="iDynTree/Visualizer.h" line="902" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1a92644f4603752dccf3188b6de6b26288" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>int</type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="899" column="17"/>
+        <location file="iDynTree/Visualizer.h" line="907" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ITexture_1aabd49737df8e97ee6e76c7f96ce41950" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="906" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="914" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -225,7 +225,7 @@
     <detaileddescription>
 <para>This allows rendering the scene using dimensions and environment that are different from the main window. The camera is in common. Any camera change in the main window is also reflected in the other textures. </para>
     </detaileddescription>
-    <location file="iDynTree/Visualizer.h" line="836" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="837" bodyend="908"/>
+    <location file="iDynTree/Visualizer.h" line="844" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="845" bodyend="916"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ITexture_1a54b05365c8136ec72b76bac964d3b403" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>drawToFile</name></member>
       <member refid="classiDynTree_1_1ITexture_1ac37428ca8f11fb8fa749f2cddb328c7a" prot="public" virt="pure-virtual"><scope>iDynTree::ITexture</scope><name>enableDraw</name></member>

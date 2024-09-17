@@ -5,10 +5,10 @@
     <innerclass refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" prot="public">iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="enum">
-      <memberdef kind="enum" id="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357" prot="public" static="no" strong="no">
+      <memberdef kind="enum" id="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357" prot="public" static="no" strong="yes">
         <type></type>
         <name>ApproximateSolidShapesWithPrimitiveShapeConversionType</name>
-        <enumvalue id="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" prot="public">
+        <enumvalue id="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357aefb5cb99d45dcda9ffe319455772cc74" prot="public">
           <name>ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</name>
           <briefdescription>
           </briefdescription>
@@ -22,6 +22,40 @@
         <inbodydescription>
         </inbodydescription>
         <location file="iDynTree/ModelTransformersSolidShapes.h" line="21" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="21" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="enum" id="ModelTransformersSolidShapes_8h_1a406a37da4e2a7b314679f42210e17496" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate</name>
+        <enumvalue id="ModelTransformersSolidShapes_8h_1a406a37da4e2a7b314679f42210e17496af8627c06e14c7be7e55266f664e41df1" prot="public">
+          <name>VisualShapes</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ModelTransformersSolidShapes_8h_1a406a37da4e2a7b314679f42210e17496a36b6a35779ae883db4d5eae25858bc62" prot="public">
+          <name>CollisionShapes</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ModelTransformersSolidShapes_8h_1a406a37da4e2a7b314679f42210e17496a1a96a1824b9b2103e329a71d173cabbf" prot="public">
+          <name>BothShapes</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum class representing which shape should be approximated. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Namely teh visual, collision or both shapes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="29" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="29" bodyend="33"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -54,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformersSolidShapes.h" line="42" column="6" declfile="iDynTree/ModelTransformersSolidShapes.h" declline="42" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="53" column="6" declfile="iDynTree/ModelTransformersSolidShapes.h" declline="53" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

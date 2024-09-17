@@ -27,7 +27,7 @@
 <para>Get a roll, pitch and yaw corresponding to this rotation. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get <formula id="195">$ (r,p,y) \in ( (-\pi, \pi] \times (-\frac{\pi}{2}, \frac{\pi}{2}) \times (-\pi, \pi] ) \cup ( \{0\} \times \{-\frac{\pi}{2}\} \times (-\pi,\pi] ) \cup ( \{0\} \times \{\frac{\pi}{2}\} \times [-\pi,\pi) )$</formula> such that *this == RotZ(y)*RotY(p)*RotX(r)</para>
+<para>Get <formula id="3">$ (r,p,y) \in ( (-\pi, \pi] \times (-\frac{\pi}{2}, \frac{\pi}{2}) \times (-\pi, \pi] ) \cup ( \{0\} \times \{-\frac{\pi}{2}\} \times (-\pi,\pi] ) \cup ( \{0\} \times \{\frac{\pi}{2}\} \times [-\pi,\pi) )$</formula> such that *this == RotZ(y)*RotY(p)*RotX(r)</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">r</parametername>
@@ -90,7 +90,7 @@
 <para>Get a unit quaternion corresponding to this rotation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The quaternion is defined as [s, r] where <formula id="196">$s \in \mathbb{R}$</formula> is the real and <formula id="197">$r \in \mathbb{R}^3$</formula> is the imaginary part.</para>
+<para>The quaternion is defined as [s, r] where <formula id="4">$s \in \mathbb{R}$</formula> is the real and <formula id="5">$r \in \mathbb{R}^3$</formula> is the imaginary part.</para>
 <para>The returned quaternion is such that *this is equal to RotationFromQuaternion(quaternion).</para>
 <para><simplesect kind="note"><para>For each rotation, there are two quaternion corresponding to it. In this method we return the one that has the first non-zero (with a tolerance of 1e-7) component positive. If the real part is non-zero, this mean that we return the quaternion with positive real part.</para>
 </simplesect>
@@ -134,7 +134,7 @@
 <para>Get a unit quaternion corresponding to this rotation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The unit quaternion is defined as [s, r] where <formula id="196">$s \in \mathbb{R}$</formula> is the real and <formula id="197">$r \in \mathbb{R}^3$</formula> is the imaginary part.</para>
+<para>The unit quaternion is defined as [s, r] where <formula id="4">$s \in \mathbb{R}$</formula> is the real and <formula id="5">$r \in \mathbb{R}^3$</formula> is the imaginary part.</para>
 <para>The returned quaternion is such that *this is equal to RotationFromQuaternion(quaternion).</para>
 <para><simplesect kind="note"><para>For each rotation, there are two quaternion corresponding to it. In this method we return the one that has the first non-zero (with a tolerance of 1e-7) component positive. If the real part is non-zero, this mean that we return the quaternion with positive real part.</para>
 </simplesect>
@@ -186,7 +186,7 @@
 <para>Get a unit quaternion corresponding to this rotation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The quaternion is defined as [s, r] where <formula id="196">$s \in \mathbb{R}$</formula> is the costituent and <formula id="197">$r \in \mathbb{R}^3$</formula> is the imaginary part.</para>
+<para>The quaternion is defined as [s, r] where <formula id="4">$s \in \mathbb{R}$</formula> is the costituent and <formula id="5">$r \in \mathbb{R}^3$</formula> is the imaginary part.</para>
 <para>The returned quaternion is such that *this is equal to RotationFromQuaternion(quaternion).</para>
 <para><simplesect kind="note"><para>For each rotation, there are two quaternion corresponding to it. In this method we return the one that has the first non-zero (with a tolerance of 1e-7) component positive. If the real part is non-zero, this mean that we return the quaternion with positive real part.</para>
 </simplesect>
@@ -245,7 +245,7 @@
 <para>Return a <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> around axis X of given angle. </para>
         </briefdescription>
         <detaileddescription>
-<para>If <formula id="198">$ \theta $</formula> is the input angle, this function returns the <formula id="199">$ R_x(\theta) $</formula> rotation matrix such that : <formula id="200">\[ R_x(\theta) = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \cos(\theta) &amp; - \sin(\theta) \\ 0 &amp; \sin(\theta) &amp; \cos(\theta) \\ \end{bmatrix} \]</formula></para>
+<para>If <formula id="6">$ \theta $</formula> is the input angle, this function returns the <formula id="7">$ R_x(\theta) $</formula> rotation matrix such that : <formula id="8">\[ R_x(\theta) = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \cos(\theta) &amp; - \sin(\theta) \\ 0 &amp; \sin(\theta) &amp; \cos(\theta) \\ \end{bmatrix} \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>angle</parametername>
@@ -274,7 +274,7 @@
 <para>Return a <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> around axis Y of given angle. </para>
         </briefdescription>
         <detaileddescription>
-<para>If <formula id="198">$ \theta $</formula> is the input angle, this function returns the <formula id="201">$ R_y(\theta) $</formula> rotation matrix such that : <formula id="202">\[ R_y(\theta) = \begin{bmatrix} \cos(\theta) &amp; 0 &amp; \sin(\theta) \\ 0 &amp; 1 &amp; 0 \\ -\sin(\theta) &amp; 0 &amp; \cos(\theta) \\ \end{bmatrix} \]</formula></para>
+<para>If <formula id="6">$ \theta $</formula> is the input angle, this function returns the <formula id="9">$ R_y(\theta) $</formula> rotation matrix such that : <formula id="10">\[ R_y(\theta) = \begin{bmatrix} \cos(\theta) &amp; 0 &amp; \sin(\theta) \\ 0 &amp; 1 &amp; 0 \\ -\sin(\theta) &amp; 0 &amp; \cos(\theta) \\ \end{bmatrix} \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>angle</parametername>
@@ -303,7 +303,7 @@
 <para>Return a <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> around axis Z of given angle. </para>
         </briefdescription>
         <detaileddescription>
-<para>If <formula id="198">$ \theta $</formula> is the input angle, this function returns the <formula id="203">$ R_z(\theta) $</formula> rotation matrix such that : <formula id="204">\[ R_z(\theta) = \begin{bmatrix} \cos(\theta) &amp; -\sin(\theta) &amp; 0 \\ \sin(\theta) &amp; \cos(\theta) &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix} \]</formula></para>
+<para>If <formula id="6">$ \theta $</formula> is the input angle, this function returns the <formula id="11">$ R_z(\theta) $</formula> rotation matrix such that : <formula id="12">\[ R_z(\theta) = \begin{bmatrix} \cos(\theta) &amp; -\sin(\theta) &amp; 0 \\ \sin(\theta) &amp; \cos(\theta) &amp; 0 \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix} \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>angle</parametername>
@@ -336,7 +336,7 @@
 <para>Return a <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> around axis given by direction of given angle. </para>
         </briefdescription>
         <detaileddescription>
-<para>If we indicate with <formula id="205">$ d \in \mathbb{R}^3 $</formula> the unit norm of the direction, and with <formula id="198">$ \theta $</formula> the input angle, the return rotation matrix <formula id="206">$ R $</formula> can be computed using the Rodrigues&apos; rotation formula [1] : <formula id="207">\[ R = I_{3\times3} + d^{\wedge} \sin(\theta) + {d^{\wedge}}^2 (1-\cos(\theta)) \]</formula></para>
+<para>If we indicate with <formula id="13">$ d \in \mathbb{R}^3 $</formula> the unit norm of the direction, and with <formula id="6">$ \theta $</formula> the input angle, the return rotation matrix <formula id="14">$ R $</formula> can be computed using the Rodrigues&apos; rotation formula [1] : <formula id="15">\[ R = I_{3\times3} + d^{\wedge} \sin(\theta) + {d^{\wedge}}^2 (1-\cos(\theta)) \]</formula></para>
 <para>[1] : <ulink url="http://mathworld.wolfram.com/RodriguesRotationFormula.html">http://mathworld.wolfram.com/RodriguesRotationFormula.html</ulink> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>direction</parametername>
@@ -377,7 +377,7 @@
 <para>Return the derivative of the RotAxis function with respect to the angle argument. </para>
         </briefdescription>
         <detaileddescription>
-<para>If we indicate with <formula id="205">$ d \in \mathbb{R}^3 $</formula> the unit norm of the direction, and with <formula id="198">$ \theta $</formula> the input angle, the derivative of the rotation matrix <formula id="208">$ \frac{\partial R}{\partial \theta} $</formula> can be computed using the derivative of the Rodrigues&apos; rotation formula [1] : <formula id="209">\[ \frac{\partial R}{\partial \theta} = d^{\vee} \cos(\theta) + {d^{\vee}}^2 \sin(\theta) \]</formula></para>
+<para>If we indicate with <formula id="13">$ d \in \mathbb{R}^3 $</formula> the unit norm of the direction, and with <formula id="6">$ \theta $</formula> the input angle, the derivative of the rotation matrix <formula id="16">$ \frac{\partial R}{\partial \theta} $</formula> can be computed using the derivative of the Rodrigues&apos; rotation formula [1] : <formula id="17">\[ \frac{\partial R}{\partial \theta} = d^{\vee} \cos(\theta) + {d^{\vee}}^2 \sin(\theta) \]</formula></para>
 <para>[1] : <ulink url="http://mathworld.wolfram.com/RodriguesRotationFormula.html">http://mathworld.wolfram.com/RodriguesRotationFormula.html</ulink></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
@@ -454,7 +454,7 @@
 <para>Return the right-trivialized derivative of the RPY function. </para>
         </briefdescription>
         <detaileddescription>
-<para>If we indicate with <formula id="210">$ rpy \in \mathbb{R}^3 $</formula> the roll pitch yaw vector, and with <formula id="211">$ RPY(rpy) : \mathbb{R}^3 \mapsto SO(3) $</formula> the function implemented in the <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref> method, this method returns the right-trivialized partial derivative of <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref>, i.e. : <formula id="212">\[ (RPY(rpy) \frac{\partial RPY(rpy)}{\partial rpy})^\vee \]</formula> </para>
+<para>If we indicate with <formula id="18">$ rpy \in \mathbb{R}^3 $</formula> the roll pitch yaw vector, and with <formula id="19">$ RPY(rpy) : \mathbb{R}^3 \mapsto SO(3) $</formula> the function implemented in the <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref> method, this method returns the right-trivialized partial derivative of <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref>, i.e. : <formula id="20">\[ (RPY(rpy) \frac{\partial RPY(rpy)}{\partial rpy})^\vee \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -493,7 +493,7 @@
 <para>Return the rate of change of the right-trivialized derivative of the RPY function. </para>
         </briefdescription>
         <detaileddescription>
-<para>If we indicate with <formula id="210">$ rpy \in \mathbb{R}^3 $</formula> the roll pitch yaw vector, and with <formula id="211">$ RPY(rpy) : \mathbb{R}^3 \mapsto SO(3) $</formula> the function implemented in the <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref> method, this method returns the right-trivialized partial derivative of <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref>, i.e. : <formula id="213">\[ (RPY(rpy) \frac{d}{d t}\frac{\partial RPY(rpy)}{\partial rpy})^\vee \]</formula> </para>
+<para>If we indicate with <formula id="18">$ rpy \in \mathbb{R}^3 $</formula> the roll pitch yaw vector, and with <formula id="19">$ RPY(rpy) : \mathbb{R}^3 \mapsto SO(3) $</formula> the function implemented in the <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref> method, this method returns the right-trivialized partial derivative of <ref refid="classiDynTree_1_1Rotation_1a83f63fc37c1284f1688f75e7df03b6ac" kindref="member">Rotation::RPY</ref>, i.e. : <formula id="21">\[ (RPY(rpy) \frac{d}{d t}\frac{\partial RPY(rpy)}{\partial rpy})^\vee \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -578,7 +578,7 @@
 <para>Return the right-trivialized derivative of the Quaternion function. </para>
         </briefdescription>
         <detaileddescription>
-<para>If we indicate with <formula id="214">$ quat \in \mathbb{Q} $</formula> the quaternion, and with <formula id="215">$ QUAT(quat) : \mathbb{Q} \mapsto SO(3) $</formula> the function implemented in the <ref refid="classiDynTree_1_1Rotation_1ae67bd6a8021cd2d43dde159e7e294822" kindref="member">Rotation::RotationFromQuaternion</ref> method, this method returns the right-trivialized partial derivative of <ref refid="classiDynTree_1_1Rotation_1ae67bd6a8021cd2d43dde159e7e294822" kindref="member">Rotation::RotationFromQuaternion</ref>, i.e. : <formula id="216">\[ (QUAT(quat) \frac{\partial QUAT(quat)}{\partial quat})^\vee \]</formula> </para>
+<para>If we indicate with <formula id="22">$ quat \in \mathbb{Q} $</formula> the quaternion, and with <formula id="23">$ QUAT(quat) : \mathbb{Q} \mapsto SO(3) $</formula> the function implemented in the <ref refid="classiDynTree_1_1Rotation_1ae67bd6a8021cd2d43dde159e7e294822" kindref="member">Rotation::RotationFromQuaternion</ref> method, this method returns the right-trivialized partial derivative of <ref refid="classiDynTree_1_1Rotation_1ae67bd6a8021cd2d43dde159e7e294822" kindref="member">Rotation::RotationFromQuaternion</ref>, i.e. : <formula id="24">\[ (QUAT(quat) \frac{\partial QUAT(quat)}{\partial quat})^\vee \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -633,11 +633,11 @@
         </briefdescription>
         <detaileddescription>
 <para>The quaternion is expected to be ordered in the following way:<itemizedlist>
-<listitem><para><formula id="196">$s \in \mathbb{R}$</formula> the real part of the quaterion</para>
-</listitem><listitem><para><formula id="197">$r \in \mathbb{R}^3$</formula> the imaginary part of the quaternion</para>
+<listitem><para><formula id="4">$s \in \mathbb{R}$</formula> the real part of the quaterion</para>
+</listitem><listitem><para><formula id="5">$r \in \mathbb{R}^3$</formula> the imaginary part of the quaternion</para>
 </listitem></itemizedlist>
 </para>
-<para>The returned rotation matrix is given by the following formula: <formula id="217">\[ R(s,r) = I_{3\times3} + 2s r^{\wedge} + 2{r^\wedge}^2, \]</formula> where <formula id="218">$ r^{\wedge} $</formula> is the skew-symmetric matrix such that: <formula id="219">\[ r \times v = r^\wedge v \]</formula></para>
+<para>The returned rotation matrix is given by the following formula: <formula id="25">\[ R(s,r) = I_{3\times3} + 2s r^{\wedge} + 2{r^\wedge}^2, \]</formula> where <formula id="26">$ r^{\wedge} $</formula> is the skew-symmetric matrix such that: <formula id="27">\[ r \times v = r^\wedge v \]</formula></para>
 <para><simplesect kind="note"><para>the quaternion is normalized </para>
 </simplesect>
 <parameterlist kind="param"><parameteritem>
@@ -670,9 +670,9 @@
 <para>Get the left Jacobian of rotation matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="220">$ \omega \in \mathbb{R}^3 $</formula> is the angular motion vector <formula id="221">$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) $</formula> where <formula id="222">$ \mathfrak{so}(3) $</formula> is the set of skew symmetric matrices or the Lie algebra of <formula id="223">$ SO(3) $</formula> <formula id="224">\[ J_{l_{SO(3)}} = \sum_{n = 0}^{\infty} \frac{1}{(n+1)!} [\omega_\times]^n = (I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||^{2}} [\omega _{\times}] + \frac{||\omega|| - \text{sin}(||\omega||)}{||\omega||^{3}} [\omega _{\times}]^{2} \]</formula></para>
-<para>When simplified further, <formula id="225">\[ J_{l_{SO(3)}} = \frac{\text{sin}(||\omega||)}{||\omega||}I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||} [\phi _{\times}] + \bigg(1 - \frac{\text{sin}(||\omega||)}{||\omega||}\bigg) \phi\phi^T \]</formula></para>
-<para>where <formula id="226">$ \phi = \frac{\omega}{||\omega||} $</formula></para>
+<para><formula id="28">$ \omega \in \mathbb{R}^3 $</formula> is the angular motion vector <formula id="29">$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) $</formula> where <formula id="30">$ \mathfrak{so}(3) $</formula> is the set of skew symmetric matrices or the Lie algebra of <formula id="31">$ SO(3) $</formula> <formula id="32">\[ J_{l_{SO(3)}} = \sum_{n = 0}^{\infty} \frac{1}{(n+1)!} [\omega_\times]^n = (I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||^{2}} [\omega _{\times}] + \frac{||\omega|| - \text{sin}(||\omega||)}{||\omega||^{3}} [\omega _{\times}]^{2} \]</formula></para>
+<para>When simplified further, <formula id="33">\[ J_{l_{SO(3)}} = \frac{\text{sin}(||\omega||)}{||\omega||}I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||} [\phi _{\times}] + \bigg(1 - \frac{\text{sin}(||\omega||)}{||\omega||}\bigg) \phi\phi^T \]</formula></para>
+<para>where <formula id="34">$ \phi = \frac{\omega}{||\omega||} $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">omega</parametername>
@@ -682,7 +682,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para><formula id="85">$ 3 \times 3 $</formula> left Jacobian matrix </para>
+<simplesect kind="return"><para><formula id="35">$ 3 \times 3 $</formula> left Jacobian matrix </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -703,8 +703,8 @@
 <para>Get the left Jacobian inverse of rotation matrix. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="220">$ \omega \in \mathbb{R}^3 $</formula> is the angular motion vector <formula id="221">$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) $</formula> where <formula id="222">$ \mathfrak{so}(3) $</formula> is the set of skew symmetric matrices or the Lie algebra of <formula id="223">$ SO(3) $</formula> <formula id="227">\[ J^{-1} _{l _{SO(3)}} = \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) I _3 + \bigg( 1 - \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) \bigg) \phi \phi^T - \frac{||\omega||}{2} [\phi _{\times}] \]</formula></para>
-<para>where <formula id="226">$ \phi = \frac{\omega}{||\omega||} $</formula></para>
+<para><formula id="28">$ \omega \in \mathbb{R}^3 $</formula> is the angular motion vector <formula id="29">$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) $</formula> where <formula id="30">$ \mathfrak{so}(3) $</formula> is the set of skew symmetric matrices or the Lie algebra of <formula id="31">$ SO(3) $</formula> <formula id="36">\[ J^{-1} _{l _{SO(3)}} = \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) I _3 + \bigg( 1 - \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) \bigg) \phi \phi^T - \frac{||\omega||}{2} [\phi _{\times}] \]</formula></para>
+<para>where <formula id="34">$ \phi = \frac{\omega}{||\omega||} $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">omega</parametername>
@@ -714,7 +714,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para><formula id="85">$ 3 \times 3 $</formula> left Jacobian inverse matrix </para>
+<simplesect kind="return"><para><formula id="35">$ 3 \times 3 $</formula> left Jacobian inverse matrix </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -1337,7 +1337,7 @@
 <para>Set the rotation matrix as the passed rotation expressed in quaternion. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="note"><para>the quaternion is expressed as (real, imaginary) part with real <formula id="193">$\in \mathbb{R}$</formula> and imaginary <formula id="194">$\in \mathbb{R}^3$</formula> </para>
+<para><simplesect kind="note"><para>the quaternion is expressed as (real, imaginary) part with real <formula id="1">$\in \mathbb{R}$</formula> and imaginary <formula id="2">$\in \mathbb{R}^3$</formula> </para>
 </simplesect>
 <simplesect kind="note"><para>the quaternion is normalized </para>
 </simplesect>
