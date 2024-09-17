@@ -751,6 +751,14 @@ public:
     virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor) = 0;
 
     /**
+     * Set the color of a single visual of a given link.
+     *
+     * This will overwrite the material of the visual, but it can be
+     * reset by resetLinkColor.
+     */
+    virtual bool setVisualColor(const LinkIndex& linkIndex, const std::string& visualName, const ColorViz& visualColor) = 0;
+
+    /**
      * Set the transparency of a given link of the model.
      *
      * This will overwrite the material of the link, but it can be

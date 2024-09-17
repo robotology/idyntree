@@ -20,6 +20,8 @@ private:
     // Disable copy for now
     ModelVisualization(const ModelVisualization& other);
     ModelVisualization& operator=(const ModelVisualization& other);
+
+    bool changeVisualsColor(const LinkIndex& linkIndex, const ColorViz& color, const std::string& name = "");
 public:
     ModelVisualization();
     ~ModelVisualization();
@@ -36,6 +38,7 @@ public:
     virtual void setModelColor(const ColorViz & modelColor);
     virtual void resetModelColor();
     virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor);
+    virtual bool setVisualColor(const LinkIndex& linkIndex, const std::string& visualName, const ColorViz& visualColor);
     virtual bool resetLinkColor(const LinkIndex& linkIndex);
     virtual std::vector< std::string > getLinkNames();
     virtual bool setLinkVisibility(const std::string & linkName, bool isVisible);

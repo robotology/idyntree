@@ -350,6 +350,8 @@ namespace iDynTree
         geomNode->setPosition(idyntree2irr_pos(geom->getLink_H_geometry().getPosition()));
         geomNode->setRotation(idyntree2irr_rot(geom->getLink_H_geometry().getRotation()));
 
+        geomNode->setName(geom->getName().c_str());
+
         return geomNode;
     }
 

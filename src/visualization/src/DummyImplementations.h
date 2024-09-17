@@ -171,6 +171,7 @@ public:
     virtual void setModelColor(const ColorViz & ) {}
     virtual void resetModelColor() {}
     virtual bool setLinkColor(const LinkIndex &, const ColorViz &) { return false; }
+    virtual bool setVisualColor(const LinkIndex& , const std::string& , const ColorViz& ) { return false; };
     virtual bool setLinkTransparency(const LinkIndex&, const double) { return false; }
     virtual void setModelTransparency(const double ) {}
     virtual bool resetLinkColor(const LinkIndex &) { return false; }
