@@ -107,7 +107,7 @@ jobs:
             pip install "numpy>=2.0.0"
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: ./wheelhouse/*.whl
