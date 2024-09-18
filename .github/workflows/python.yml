@@ -61,7 +61,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: dist
+          name: sdist
           path: dist/*.tar.gz
 
   build_wheels:
@@ -107,9 +107,9 @@ jobs:
             pip install "numpy>=2.0.0"
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
-          name: dist
+          name: wheels
           path: ./wheelhouse/*.whl
 
   upload_pypi:
@@ -124,7 +124,6 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: dist
           path: dist
 
       - name: Inspect dist folder
