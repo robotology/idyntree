@@ -129,7 +129,7 @@ jobs:
       - name: Move sdist and wheels
         run: |
           mkdir -p dist/
-          mv dist/* dist/
+          mv sdist/* dist/
           mv wheels/* dist/
 
       - name: Inspect dist folder
