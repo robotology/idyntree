@@ -117,14 +117,20 @@ jobs:
       - build_sdist
       - build_wheels
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     # Devel branch produces pre-releases.
     # Master branch produces stable releases linked to GitHub releases.
 
     steps:
 
       - uses: actions/download-artifact@v4
-        with:
-          path: dist
+
+      - name: Move sdist and wheels
+        run: |
+          mkdir -p dist/
+          mv dist/* dist/
+          mv wheels/* dist/
 
       - name: Inspect dist folder
         run: ls -lah dist/
@@ -134,6 +140,3 @@ jobs:
           github.repository == 'robotology/idyntree' &&
           ((github.event_name == 'release' && github.event.action == 'published') ||
            (github.event_name == 'push' && github.ref == 'refs/heads/devel'))
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_TOKEN }}
