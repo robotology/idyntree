@@ -357,7 +357,7 @@
           <declname>linkIndex</declname>
         </param>
         <briefdescription>
-<para>Get the transformation of given link with respect to visualizer world <formula id="129">$ {}^w wH_{link}$</formula>. </para>
+<para>Get the transformation of given link with respect to visualizer world <formula id="140">$ {}^w wH_{link}$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -375,7 +375,7 @@
           <declname>linkName</declname>
         </param>
         <briefdescription>
-<para>Get the transformation of given link with respect to visualizer world <formula id="130">$ {}^w H_{link}$</formula>. </para>
+<para>Get the transformation of given link with respect to visualizer world <formula id="141">$ {}^w H_{link}$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -393,7 +393,7 @@
           <declname>frameIndex</declname>
         </param>
         <briefdescription>
-<para>Get the transformation of given frame with respect to visualizer world <formula id="131">$ {}^w H_{frame}$</formula>. </para>
+<para>Get the transformation of given frame with respect to visualizer world <formula id="142">$ {}^w H_{frame}$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -411,7 +411,7 @@
           <declname>frameName</declname>
         </param>
         <briefdescription>
-<para>Get the transformation of given frame with respect to visualizer world <formula id="131">$ {}^w H_{frame}$</formula>. </para>
+<para>Get the transformation of given frame with respect to visualizer world <formula id="142">$ {}^w H_{frame}$</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
