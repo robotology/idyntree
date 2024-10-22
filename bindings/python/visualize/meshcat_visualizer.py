@@ -66,6 +66,22 @@ class MeshcatVisualizer:
         self.primitive_geometries_names = []
         self.arrow_names = []
         self.link_visuals = dict()
+        self._animation = None
+        self._current_frame = 0
+
+    def start_recording_animation(self):
+        from meshcat.animation import Animation
+        self._animation = Animation()
+
+    def stop_recording_animation(self):
+        self._animation = None
+
+    def set_animation_frame(self, frame_number):
+        self._current_frame = frame_number
+
+    def publish_animation(self):
+        if self._animation is not None:
+            self.viewer.set_animation(self._animation)
 
     @staticmethod
     def __is_mesh(geometry_object: idyn.SolidShape) -> bool:
@@ -174,7 +190,11 @@ class MeshcatVisualizer:
         world_H_geometry_scaled = np.array(world_H_geometry)
 
         # Update viewer configuration.
-        self.viewer[viewer_name].set_transform(world_H_geometry_scaled)
+        if self._animation is None:
+            self.viewer[viewer_name].set_transform(world_H_geometry_scaled)
+        else:
+            with self._animation.at_frame(self.viewer, self._current_frame) as frame:
+                frame[viewer_name].set_transform(world_H_geometry_scaled)
 
     def __apply_transform(self, world_H_frame, solid_shape, viewer_name):
         world_H_geometry = (
@@ -187,7 +207,11 @@ class MeshcatVisualizer:
         world_H_geometry_scaled = np.array(world_H_geometry).dot(extended_scale)
 
         # Update viewer configuration.
-        self.viewer[viewer_name].set_transform(world_H_geometry_scaled)
+        if self._animation is None:
+            self.viewer[viewer_name].set_transform(world_H_geometry_scaled)
+        else:
+            with self._animation.at_frame(self.viewer, self._current_frame) as frame:
+                frame[viewer_name].set_transform(world_H_geometry_scaled)
 
     def __model_exists(self, model_name):
         return (
@@ -509,7 +533,11 @@ class MeshcatVisualizer:
             transform[0:3, 0:3] = rotation
             transform[0:3, 3] = position
             transform[3, 3] = 1
-            self.viewer[shape_name].set_transform(transform)
+            if self._animation is None:
+                self.viewer[shape_name].set_transform(transform)
+            else:
+                with self._animation.at_frame(self.viewer, self._current_frame) as frame:
+                    frame[shape_name].set_transform(transform)
 
     def set_arrow_transform(self, origin, vector, shape_name="iDynTree"):
         if not self.__arrow_exists(shape_name):
@@ -523,7 +551,11 @@ class MeshcatVisualizer:
         transform[3, 3] = 1
 
         if np.linalg.norm(vector) < 1e-6:
-            self.viewer[shape_name].set_transform(transform)
+            if self._animation is None:
+                self.viewer[shape_name].set_transform(transform)
+            else:
+                with self._animation.at_frame(self.viewer, self._current_frame) as frame:
+                    frame[shape_name].set_transform(transform)
             return
 
         # extract rotation matrix from a normalized vector
@@ -543,7 +575,11 @@ class MeshcatVisualizer:
             R = np.eye(3) + skew_symmetric_matrix + np.dot(skew_symmetric_matrix, skew_symmetric_matrix) * ((1 - c) / (s ** 2))
 
         transform[0:3, 0:3] = R @ S
-        self.viewer[shape_name].set_transform(transform)
+        if self._animation is None:
+            self.viewer[shape_name].set_transform(transform)
+        else:
+            with self._animation.at_frame(self.viewer, self._current_frame) as frame:
+                frame[shape_name].set_transform(transform)
 
     def load_model_from_file(
         self, model_path: str, considered_joints=None, model_name="iDynTree", color=None
