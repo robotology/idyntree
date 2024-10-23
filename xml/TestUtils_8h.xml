@@ -11,8 +11,8 @@
     <includes local="no">vector</includes>
     <includes local="no">cstdlib</includes>
     <includes local="no">cmath</includes>
-    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <includedby refid="Core_2TestUtils_8h" local="no">iDynTree/Core/TestUtils.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>iomanip</label>

@@ -428,7 +428,7 @@
 <para>Map between RPY angles and angular velocity in the inertial frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The angular velocity <formula id="14">$ \omega $</formula> is related with the derivative of the RPY angles by a 3x3 matrix, i.e. <formula id="15">\[ {}^I \omega = M(w) \frac{d w}{dt}, \]</formula> where <formula id="16">$ w \in \mathbb{R}^3 $</formula> are the roll, pitch and yaw angles. <parameterlist kind="param"><parameteritem>
+<para>The angular velocity <formula id="177">$ \omega $</formula> is related with the derivative of the RPY angles by a 3x3 matrix, i.e. <formula id="178">\[ {}^I \omega = M(w) \frac{d w}{dt}, \]</formula> where <formula id="179">$ w \in \mathbb{R}^3 $</formula> are the roll, pitch and yaw angles. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">rpyAngles</parametername>
 </parameternamelist>
@@ -1088,7 +1088,7 @@
 <para>Implementation of the inverse kinematics with IPOPT. </para>
     </briefdescription>
     <detaileddescription>
-<para>Implements the following optimization problem <formula id="12">\begin{align} \min_{x} &amp; \sum_i || {}^w H_{f_i} ( {}^w H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\ \text{s.t.} &amp; {}^w H_{f_i} = {}^w H_{f_i}^d \\ &amp; q_{min} \leq q \leq q_{max} \end{align}</formula> where <formula id="13">\begin{align} &amp; q = \{ {}^w H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\ &amp; {}^w H_{f_i} \in SE(3) \end{align}</formula></para>
+<para>Implements the following optimization problem <formula id="175">\begin{align} \min_{x} &amp; \sum_i || {}^w H_{f_i} ( {}^w H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\ \text{s.t.} &amp; {}^w H_{f_i} = {}^w H_{f_i}^d \\ &amp; q_{min} \leq q \leq q_{max} \end{align}</formula> where <formula id="176">\begin{align} &amp; q = \{ {}^w H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\ &amp; {}^w H_{f_i} \in SE(3) \end{align}</formula></para>
 <para>A target (entirely or partially, with partial meaning the two components composing a tranform, i.e. position and orientation) can be enforced by either considering it as a constraint or as a cost</para>
 <para><simplesect kind="note"><para>Implementation details this class coordinates with <ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> to manages internal data In particular to manages constraints and targets it uses an std::map which is an ordered container. Once the order is defined at configuration time, it is exploited during the optimization by iterating on its elements. As this order is the same as the IPOPT variables the fact that we use a map instead of an unordered_map (which is faster at construction and for random access) is relevant.</para>
 </simplesect>

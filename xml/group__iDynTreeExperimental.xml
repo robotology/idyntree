@@ -4,10 +4,6 @@
     <compoundname>iDynTreeExperimental</compoundname>
     <title>Experimental classes, for which the interface is currently under active development and is not stable.</title>
     <innerclass refid="classiDynTree_1_1InverseKinematics" prot="public">iDynTree::InverseKinematics</innerclass>
-    <innerclass refid="structiDynTree_1_1BerdyOptions" prot="public">iDynTree::BerdyOptions</innerclass>
-    <innerclass refid="structiDynTree_1_1BerdySensor" prot="public">iDynTree::BerdySensor</innerclass>
-    <innerclass refid="classiDynTree_1_1BerdyHelper" prot="public">iDynTree::BerdyHelper</innerclass>
-    <innerclass refid="classiDynTree_1_1BerdySparseMAPSolver" prot="public">iDynTree::BerdySparseMAPSolver</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1Constraint" prot="public">iDynTree::optimalcontrol::Constraint</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup" prot="public">iDynTree::optimalcontrol::ConstraintsGroup</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" prot="public">iDynTree::optimalcontrol::ControlledDynamicalSystem</innerclass>
@@ -43,6 +39,10 @@
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" prot="public">iDynTree::optimalcontrol::TimeRange</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" prot="public">iDynTree::optimalcontrol::TimeVaryingObject</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject" prot="public">iDynTree::optimalcontrol::TimeInvariantObject</innerclass>
+    <innerclass refid="structiDynTree_1_1BerdyOptions" prot="public">iDynTree::BerdyOptions</innerclass>
+    <innerclass refid="structiDynTree_1_1BerdySensor" prot="public">iDynTree::BerdySensor</innerclass>
+    <innerclass refid="classiDynTree_1_1BerdyHelper" prot="public">iDynTree::BerdyHelper</innerclass>
+    <innerclass refid="classiDynTree_1_1BerdySparseMAPSolver" prot="public">iDynTree::BerdySparseMAPSolver</innerclass>
       <sectiondef kind="enum">
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" prot="public" static="no" strong="no">
         <type></type>
@@ -97,7 +97,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="85">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="86">$ f^B_i $</formula> </para>
+<para><formula id="291">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="292">$ f^B_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" prot="public">
@@ -105,7 +105,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="87">$ f_i $</formula> </para>
+<para><formula id="293">$ f_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312adaecc7fb3d43b48487ae03dfec685fb8" prot="public">
@@ -113,7 +113,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="88">$ \tau_i $</formula> </para>
+<para><formula id="294">$ \tau_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a80199996cf9e8b7d5171d762533f6c0c" prot="public">
@@ -121,7 +121,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="89">$ f^x_i $</formula> </para>
+<para><formula id="295">$ f^x_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312aa13efb04f5c05ca865f2aee0fd03fe68" prot="public">
@@ -129,7 +129,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="90">$ \ddot{q}_i $</formula> </para>
+<para><formula id="296">$ \ddot{q}_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a9a69ec4d25d83b00175dc3adb8edce00" prot="public">
