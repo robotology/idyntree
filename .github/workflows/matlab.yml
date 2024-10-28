@@ -37,6 +37,8 @@ jobs:
 
     - name: Dependencies
       run: |
+        # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
+        conda config --remove channels defaults
         conda install cmake compilers make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen glfw
 
     # Additional dependencies useful only on Linux
@@ -45,7 +47,7 @@ jobs:
       run: |
         # Additional dependencies only useful on Linux
         # See https://github.com/robotology/robotology-superbuild/issues/477
-        conda install libgl-devel
+        conda install xorg-libxrandr libgl-devel
 
     # Additional dependencies useful only on Windows
     - name: Dependencies [Conda/Windows]
