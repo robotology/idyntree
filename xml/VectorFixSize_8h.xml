@@ -9,15 +9,7 @@
     <includes local="no">cassert</includes>
     <includes local="no">cstddef</includes>
     <includes local="no">cstring</includes>
-    <includedby refid="MaterialElement_8h" local="no">private/MaterialElement.h</includedby>
-    <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
-    <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
-    <includedby refid="JointState_8h" local="no">iDynTree/JointState.h</includedby>
-    <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/AttitudeEstimator.h</includedby>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
-    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
-    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
     <includedby refid="ClassicalAcc_8h" local="no">iDynTree/ClassicalAcc.h</includedby>
     <includedby refid="Core_2VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includedby>
     <includedby refid="CubicSpline_8h" local="no">iDynTree/CubicSpline.h</includedby>
@@ -30,6 +22,14 @@
     <includedby refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includedby>
     <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includedby>
     <includedby refid="TransformDerivative_8h" local="no">iDynTree/TransformDerivative.h</includedby>
+    <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
+    <includedby refid="MaterialElement_8h" local="no">private/MaterialElement.h</includedby>
+    <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
+    <includedby refid="JointState_8h" local="no">iDynTree/JointState.h</includedby>
+    <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/AttitudeEstimator.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
     <incdepgraph>
       <node id="4">
         <label>cassert</label>

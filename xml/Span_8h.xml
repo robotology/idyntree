@@ -12,11 +12,11 @@
     <includes local="no">type_traits</includes>
     <includes local="no">utility</includes>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
-    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <includedby refid="Core_2Span_8h" local="no">iDynTree/Core/Span.h</includedby>
     <includedby refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includedby>
     <includedby refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includedby>
     <includedby refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includedby>
+    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <incdepgraph>
       <node id="7">
         <label>limits</label>
