@@ -17,7 +17,7 @@
         <name>output_dimensions_with_magnetometer</name>
         <initializer>= 4</initializer>
         <briefdescription>
-<para>dimension of <formula id="262">$ \mathbb{R}^3 \times \mathbb{R} $</formula> accelerometer measurements and magnetometer yaw measurement </para>
+<para>dimension of <formula id="132">$ \mathbb{R}^3 \times \mathbb{R} $</formula> accelerometer measurements and magnetometer yaw measurement </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -32,7 +32,7 @@
         <name>output_dimensions_without_magnetometer</name>
         <initializer>= 3</initializer>
         <briefdescription>
-<para>dimension of <formula id="228">$ \mathbb{R}^3 $</formula> accelerometer measurements </para>
+<para>dimension of <formula id="97">$ \mathbb{R}^3 $</formula> accelerometer measurements </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -47,7 +47,7 @@
         <name>input_dimensions</name>
         <initializer>= 3</initializer>
         <briefdescription>
-<para>dimension of <formula id="228">$ \mathbb{R}^3 $</formula> gyroscope measurements </para>
+<para>dimension of <formula id="97">$ \mathbb{R}^3 $</formula> gyroscope measurements </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

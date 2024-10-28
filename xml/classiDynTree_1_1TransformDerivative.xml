@@ -17,7 +17,7 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="142">\[ {}^{\texttt{refFrame}} \dot{H}_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} \dot{R}_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} \dot{p}_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula></para>
+<para><formula id="326">\[ {}^{\texttt{refFrame}} \dot{H}_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} \dot{R}_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} \dot{p}_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula></para>
 <para>For details on this notation, check the <ref refid="classiDynTree_1_1Transform_1a8db2358dc66b742a7dcc19e5e43f4e39" kindref="member">Transform::asHomogeneousTransform()</ref> method . </para>
         </detaileddescription>
         <inbodydescription>
@@ -38,10 +38,10 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="143">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; \dot{p} \times R + p \times \dot{R} \\ 0_{3\times3} &amp; \dot{R} \end{bmatrix} \]</formula></para>
-<para>Where <formula id="137">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="138">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="139">$p \times$</formula> is the skew simmetric matrix such that <formula id="140">$(p \times) v = p \times v$</formula> .</para>
-<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="144">$ \dot{R} $</formula> and <formula id="145">$ \dot{p} $</formula>, you need to provide <formula id="48">$ R $</formula> and <formula id="146">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
+<para><formula id="327">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; \dot{p} \times R + p \times \dot{R} \\ 0_{3\times3} &amp; \dot{R} \end{bmatrix} \]</formula></para>
+<para>Where <formula id="321">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="322">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="323">$p \times$</formula> is the skew simmetric matrix such that <formula id="324">$(p \times) v = p \times v$</formula> .</para>
+<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="328">$ \dot{R} $</formula> and <formula id="329">$ \dot{p} $</formula>, you need to provide <formula id="233">$ R $</formula> and <formula id="330">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
@@ -64,10 +64,10 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="147">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; 0_{3\times3} \\ \dot{p} \times R + p \times \dot{R} &amp; \dot{R} \end{bmatrix} \]</formula></para>
-<para>Where <formula id="137">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="138">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="139">$p \times$</formula> is the skew simmetric matrix such that <formula id="140">$(p \times) v = p \times v$</formula> .</para>
-<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="144">$ \dot{R} $</formula> and <formula id="145">$ \dot{p} $</formula>, you need to provide <formula id="48">$ R $</formula> and <formula id="146">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
+<para><formula id="331">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; 0_{3\times3} \\ \dot{p} \times R + p \times \dot{R} &amp; \dot{R} \end{bmatrix} \]</formula></para>
+<para>Where <formula id="321">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="322">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="323">$p \times$</formula> is the skew simmetric matrix such that <formula id="324">$(p \times) v = p \times v$</formula> .</para>
+<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="328">$ \dot{R} $</formula> and <formula id="329">$ \dot{p} $</formula>, you need to provide <formula id="233">$ R $</formula> and <formula id="330">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
@@ -90,7 +90,7 @@
         </briefdescription>
         <detaileddescription>
 <para>This operation is useful to compose the derivative of a transform for a constant transform.</para>
-<para>If this transform derivative represent the derivative of a transform with respect to time <formula id="148">$ ~^a \dot{H}_b $</formula>, and we have a constant transform <formula id="149">$ ~^b H_c $</formula>, then this operation returns the derivative of the transform <formula id="150">$ ~^a H_c $</formula> : <formula id="151">\[ ~^a \dot{H}_c = ~^a \dot{H}_b ~^b H_c \]</formula></para>
+<para>If this transform derivative represent the derivative of a transform with respect to time <formula id="332">$ ~^a \dot{H}_b $</formula>, and we have a constant transform <formula id="333">$ ~^b H_c $</formula>, then this operation returns the derivative of the transform <formula id="334">$ ~^a H_c $</formula> : <formula id="335">\[ ~^a \dot{H}_c = ~^a \dot{H}_b ~^b H_c \]</formula></para>
 <para><simplesect kind="warning"><para>the otherTransform must be a quantity that does not depend on the derivation variable. </para>
 </simplesect>
 </para>
@@ -112,7 +112,7 @@
 <para>Get the derivative of the inverse of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> is <formula id="148">$ ~^a \dot{H}_b $</formula> and the transform argument is <formula id="152">$ ~^a H_b $</formula>, returns the derivative of the inverse transform <formula id="153">$ ~^b {H}_a $</formula> computed as: <formula id="154">\[ ~^b \dot{H}_a = - ~^b {H}_a ~^a \dot{H}_b ~^b H_a \]</formula> </para>
+<para>If this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> is <formula id="332">$ ~^a \dot{H}_b $</formula> and the transform argument is <formula id="336">$ ~^a H_b $</formula>, returns the derivative of the inverse transform <formula id="337">$ ~^b {H}_a $</formula> computed as: <formula id="338">\[ ~^b \dot{H}_a = - ~^b {H}_a ~^a \dot{H}_b ~^b H_a \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -132,10 +132,10 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Given a articulated inertia <formula id="155">$I$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="156">$ ~^a\dot{X}_b $</formula> and a transform <formula id="157">$ ~^a{X}_b $</formula> return the articulated body inertia: </para>
+<para>Given a articulated inertia <formula id="339">$I$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="340">$ ~^a\dot{X}_b $</formula> and a transform <formula id="341">$ ~^a{X}_b $</formula> return the articulated body inertia: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="158">\[ ~_a \dot{X}^b Ia ~^a X_b + ~_a {X}^b Ia ~^a \dot{X}_b \]</formula> </para>
+<para><formula id="342">\[ ~_a \dot{X}^b Ia ~^a X_b + ~_a {X}^b Ia ~^a \dot{X}_b \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -155,10 +155,10 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Given a <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> <formula id="159">$F$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="156">$ ~^a\dot{X}_b $</formula> and a transform <formula id="157">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
+<para>Given a <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> <formula id="343">$F$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="340">$ ~^a\dot{X}_b $</formula> and a transform <formula id="341">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="160">\[ ~_a \dot{X}^b F \]</formula> </para>
+<para><formula id="344">\[ ~_a \dot{X}^b F \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -178,10 +178,10 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Given a <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> <formula id="161">$V$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="156">$ ~^a\dot{X}_b $</formula> and a transform <formula id="157">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
+<para>Given a <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> <formula id="60">$V$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="340">$ ~^a\dot{X}_b $</formula> and a transform <formula id="341">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="162">\[ ~^a \dot{X}_b F \]</formula> </para>
+<para><formula id="345">\[ ~^a \dot{X}_b F \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
