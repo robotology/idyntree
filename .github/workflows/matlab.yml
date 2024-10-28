@@ -25,11 +25,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: conda-incubator/setup-miniconda@v2
+    - uses: conda-incubator/setup-miniconda@v3
       with:
-        miniforge-variant: Mambaforge
         miniforge-version: latest
-        channels: conda-forge,robotology
+        channels: conda-forge
 
     - name: Setup MATLAB
       uses: matlab-actions/setup-matlab@v1
@@ -40,10 +39,7 @@ jobs:
       run: |
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
         conda config --remove channels defaults
-        # Compilation related dependencies
-        mamba install cmake compilers make ninja pkg-config
-        # Actual dependencies
-        mamba install eigen libxml2 assimp ipopt irrlicht osqp-eigen glfw
+        conda install cmake compilers make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen glfw
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
@@ -51,7 +47,7 @@ jobs:
       run: |
         # Additional dependencies only useful on Linux
         # See https://github.com/robotology/robotology-superbuild/issues/477
-        mamba install xorg-libx11 xorg-libxrandr freeglut mesa-libgl-cos6-x86_64 mesa-libgl-devel-cos6-x86_64
+        conda install xorg-libxrandr libgl-devel
 
     # Additional dependencies useful only on Windows
     - name: Dependencies [Conda/Windows]
@@ -59,13 +55,13 @@ jobs:
       run: |
         # Additional dependencies only useful on Windows
         # See https://github.com/robotology/robotology-superbuild/issues/477
-        mamba install vs2019_win-64
+        conda install vs2019_win-64
 
     # Workaround for https://github.com/robotology/idyntree/issues/1109
     - name: Dependencies [Conda/macOS]
       if: contains(matrix.os, 'macos')
       run: |
-        mamba install libblas=*=*netlib
+        conda install libblas=*=*netlib
 
     # workaround for https://github.com/robotology/robotology-superbuild/issues/64
     # and https://github.com/robotology/idyntree/issues/995
@@ -77,7 +73,7 @@ jobs:
     - name: Print used environment [Conda]
       shell: bash -l {0}
       run: |
-        mamba list
+        conda list
         env
 
     - name: Configure [Conda - Linux or  macOS]
