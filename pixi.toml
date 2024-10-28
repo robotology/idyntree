@@ -24,6 +24,9 @@ configure = { cmd = [
     "-DCMAKE_BUILD_TYPE=Release",
     "-DCMAKE_INSTALL_PREFIX=$CMAKE_INSTALL_PREFIX",
     "-DBUILD_TESTING:BOOL=ON",
+    "-DIDYNTREE_USES_PYTHON:BOOL=ON",
+    "-DIDYNTREE_USES_PYTHON_PYBIND11:BOOL=ON",
+    "-DIDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES:BOOL=ON",
     # Use the cross-platform Ninja generator
     "-G",
     "Ninja",

@@ -20,6 +20,8 @@ target_link_libraries(${target_name} PUBLIC Python3::NumPy)
 set_target_properties(${target_name} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
 
+# numpy.i is copied from
+# https://raw.githubusercontent.com/numpy/numpy/65d5b867cd1045bbc007cce8780e088142770b88/tools/swig/numpy.i
 set_property(
     TARGET ${target_name}
     PROPERTY SWIG_DEPENDS python.i numpy.i)
