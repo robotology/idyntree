@@ -28,6 +28,7 @@ void addOptions(cmdline::parser &cmd)
     cmd.add<std::string>("color-palette", 'c',
                          "Color palette.",
                          false);
+    cmd.add("print", 'p', "Print the model.");
 }
 
 int main(int argc, char** argv)
@@ -45,6 +46,11 @@ int main(int argc, char** argv)
     {
         std::cerr << "Impossible to read model at file " << modelPath << std::endl;
         return EXIT_FAILURE;
+    }
+
+    if (cmd.exist("print"))
+    {
+        std::cout << mdlLoader.model().toString() << std::endl;
     }
 
     // Visualize the model
