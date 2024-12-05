@@ -166,6 +166,27 @@ bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
 bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model& inputModel,
                                                            iDynTree::Model& outputModel);
 
+/**
+ * \function Remove all additional frames from the model, except a specified allowlist.
+ *
+ * This function takes in input a model, and return a model with all the additional 
+ * frame list removed, except for the additional frames whose name is specified in
+ * the specified allowlist.
+ *
+ * @note The main use of this function is for processing models that need to be 
+ *       passed to other libraries or physics engines, where the additional frames
+ *       may create problems or create performance problem. As long as you are using
+ *       iDynTree, the presence of additional frames does not impact the performance
+ *       of kinematics or dynamics algorithms, so there is no need to call this function
+ *       to remove the additional frames.
+ *
+ * @return true if all went well, false if there was an error.
+ *
+ */
+bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
+                                           Model& modelWithOnlyAllowedAdditionalFrames,
+                                           const std::vector<std::string> allowedAdditionalFrames = std::vector<std::string>());
+
 }
 
 

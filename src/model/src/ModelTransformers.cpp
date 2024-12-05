@@ -13,6 +13,7 @@
 #include <iDynTree/Sensors.h>
 #include <iDynTree/SixAxisForceTorqueSensor.h>
 
+#include <algorithm>
 #include <cassert>
 #include <unordered_map>
 #include <set>
@@ -280,8 +281,8 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
                                      const Traversal& linkSubModel,
                                      const FreeFloatingPos& pos,
                                            LinkPositions& subModelBase_X_link,
-                                     const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink
-                                     )
+                                     const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
+                                     const std::optional<std::vector<std::string>>>& allowedAdditionalFrames)
 {
     // First compute the transform between each link in the submodel and the submodel base
     computeTransformToTraversalBaseWithAdditionalTransform(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link,newLink_H_oldLink);
@@ -300,19 +301,16 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
     {
         LinkConstPtr visitedLink = linkSubModel.getLink(traversalEl);
         LinkConstPtr parentLink  = linkSubModel.getParentLink(traversalEl);
+        std::string additionalFrameName;
+        Transform subModelBase_H_additionalFrame;
 
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
 
         // Add the link frame as an additional frame only for link that are not the submodel base
         if( parentLink != 0 )
         {
-            std::string additionalFrameName = fullModel.getFrameName(visitedLinkIndex);
-
-            Transform subModelBase_H_additionalFrame = subModelBase_X_link(visitedLinkIndex);
-
-
-            reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
-                                               subModelBase_H_additionalFrame);
+            additionalFrameName = fullModel.getFrameName(visitedLinkIndex);
+            subModelBase_H_additionalFrame = subModelBase_X_link(visitedLinkIndex);
         }
 
         // For all the link of the submodel, transfer their additional frame
@@ -320,15 +318,30 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
         for(size_t i = 0; i < link2additionalFramesAdjacencyList[visitedLinkIndex].size(); i++ )
         {
             FrameIndex additionalFrame = link2additionalFramesAdjacencyList[visitedLinkIndex][i];
-            std::string additionalFrameName = fullModel.getFrameName(additionalFrame);
+            additionalFrameName = fullModel.getFrameName(additionalFrame);
 
             Transform visitedLink_H_additionalFrame  = fullModel.getFrameTransform(additionalFrame);
             Transform subModelBase_H_visitedLink     = subModelBase_X_link(visitedLinkIndex);
-            Transform subModelBase_H_additionalFrame =
+            subModelBase_H_additionalFrame =
                 subModelBase_H_visitedLink*visitedLink_H_additionalFrame;
+        }
 
+        bool shouldWeAddTheAdditionalFrame = true; 
+
+        // Check if we need to add the additional frame or not
+        if (allowedAdditionalFrames.has_value())
+        {
+            // If allowedAdditionalFrames has a value, we only need to add additional frames specified ther 
+            if (std::find(vec.begin(), vec.end(), value) == vec.end())
+            {
+                shouldWeAddTheAdditionalFrame = false;
+            }
+        }
+
+        if (shouldWeAddTheAdditionalFrame)
+        {
             reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
-                                               subModelBase_H_additionalFrame);
+                                                   subModelBase_H_additionalFrame);
         }
     }
 }
@@ -391,15 +404,21 @@ void reducedModelAddSolidShapes(const Model& fullModel,
 // of both:
 //  * createReducedModel : function to create a reduced model given the specified joints
 //  * moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink: function to make sure a model is URDF compatible
-// The logic is similar to the createReducedModel, but as an additional option this function takes in input
-// a std::vector<iDynTree::Transform> newLink_H_oldLink vector (of size fullModel.getNrOfLinks() that can be used
-// to specify an optional additional transform of the final link used in the "reduced model"
+//  * removeAdditionalFramesFromModel: function to remove additional frames from a URDF
+//  
+// The logic is similar to the createReducedModel, but with additional options:
+// * std::vector<iDynTree::Transform> newLink_H_oldLink vector (of size fullModel.getNrOfLinks() that can be used
+//    to specify an optional additional transform of the final link used in the "reduced model"
+// * std::optional<std::vector<std::string>>> allowedAdditionalFrames : If allowedAdditionalFrames.has_value is False, 
+//   all the additional frames are of the input model are copied in the reduced model, if allowedAdditionalFrames.has_value 
+//   is True only the additional frames with the name contained in allowedAdditionalFrames are copied to the reduce model
 bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
                                            const std::vector< std::string >& jointsInReducedModel,
                                            Model& reducedModel,
                                            const std::unordered_map<std::string, double>& removedJointPositions,
                                            const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
-                                           bool addOriginalLinkFrameWith_original_frame_suffix)
+                                           bool addOriginalLinkFrameWith_original_frame_suffix,
+                                           const std::optional<std::vector<std::string>>>& allowedAdditionalFrames)
 {
     // We use the default traversal for deciding the base links of the reduced model
     Traversal fullModelTraversal;
@@ -1097,6 +1116,13 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
     {
         return false;
     }
+}
+
+bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
+                                           Model& modelWithOnlyAllowedAdditionalFrames,
+                                           const std::vector<std::string> allowedAdditionalFrames)
+{
+
 }
 
 }

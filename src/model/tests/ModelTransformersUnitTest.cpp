@@ -43,6 +43,8 @@ void checkThatOneSphereGetsAName()
     ASSERT_IS_TRUE(oneSphereModelWithValidName.collisionSolidShapes().getLinkSolidShapes()[0][0]->getName() == "link0_collision");
 }
 
+void check
+
 
 int main()
 {
