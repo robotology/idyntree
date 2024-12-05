@@ -341,6 +341,8 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
 
         if (shouldWeAddTheAdditionalFrame)
         {
+            std::cerr << "===========> adding " << additionalFrameName << std::endl;
+
             reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
                                                    subModelBase_H_additionalFrame);
         } else {
