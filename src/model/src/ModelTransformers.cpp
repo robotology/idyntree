@@ -16,7 +16,6 @@
 #include <algorithm>
 #include <cassert>
 #include <unordered_map>
-#include <optional>
 #include <set>
 #include <vector>
 
@@ -283,7 +282,8 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
                                      const FreeFloatingPos& pos,
                                            LinkPositions& subModelBase_X_link,
                                      const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
-                                     const std::optional<std::vector<std::string>>& allowedAdditionalFrames)
+                                     bool includeAllAdditionalFrames,
+                                     const std::vector<std::string>& allowedAdditionalFrames)
 {
     // First compute the transform between each link in the submodel and the submodel base
     computeTransformToTraversalBaseWithAdditionalTransform(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link,newLink_H_oldLink);
@@ -330,10 +330,10 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
         bool shouldWeAddTheAdditionalFrame = true;
 
         // Check if we need to add the additional frame or not
-        if (allowedAdditionalFrames.has_value())
+        if (!includeAllAdditionalFrames)
         {
             // If allowedAdditionalFrames has a value, we only need to add additional frames specified ther
-            if (std::find(allowedAdditionalFrames.value().begin(), allowedAdditionalFrames.value().end(), additionalFrameName) == allowedAdditionalFrames.value().end())
+            if (std::find(allowedAdditionalFrames.begin(), allowedAdditionalFrames.end(), additionalFrameName) == allowedAdditionalFrames.end())
             {
                 shouldWeAddTheAdditionalFrame = false;
             }
@@ -541,7 +541,8 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
         // As this quantity is influenced by newLink_H_oldLink, this is passed along
         reducedModelAddAdditionalFrames(fullModel,reducedModel,
                                         linkName,subModels.getTraversal(linkInReducedModel),
-                                        jointPos,subModelBase_X_link,newLink_H_oldLink,{});
+                                        jointPos,subModelBase_X_link,newLink_H_oldLink,
+                                        includeAllAdditionalFrames,allowedAdditionalFrames);
 
         // Lump the visual and collision shapes in the new model
         reducedModelAddSolidShapes(fullModel,reducedModel,
