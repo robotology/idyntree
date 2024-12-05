@@ -412,8 +412,8 @@ void reducedModelAddSolidShapes(const Model& fullModel,
 // The logic is similar to the createReducedModel, but with additional options:
 // * std::vector<iDynTree::Transform> newLink_H_oldLink vector (of size fullModel.getNrOfLinks() that can be used
 //    to specify an optional additional transform of the final link used in the "reduced model"
-// * std::optional<std::vector<std::string>> allowedAdditionalFrames : If allowedAdditionalFrames.has_value is False,
-//   all the additional frames are of the input model are copied in the reduced model, if allowedAdditionalFrames.has_value 
+// * includeAllAdditionalFrames, std::vector<std::string> : If includeAllAdditionalFrames is true,
+//   all the additional frames are of the input model are copied in the reduced model, if includeAllAdditionalFrames is true
 //   is True only the additional frames with the name contained in allowedAdditionalFrames are copied to the reduce model
 bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
                                            const std::vector< std::string >& jointsInReducedModel,
@@ -421,7 +421,8 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
                                            const std::unordered_map<std::string, double>& removedJointPositions,
                                            const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
                                            bool addOriginalLinkFrameWith_original_frame_suffix,
-                                           const std::optional<std::vector<std::string>>& allowedAdditionalFrames)
+                                           bool includeAllAdditionalFrames,
+                                           const std::vector<std::string>& allowedAdditionalFrames)
 {
     // We use the default traversal for deciding the base links of the reduced model
     Traversal fullModelTraversal;
@@ -846,7 +847,8 @@ bool createReducedModel(const Model& fullModel,
     // We do not want to move the link frames in createReducedModel
     std::unordered_map<std::string, iDynTree::Transform> newLink_H_oldLink;
     bool addOriginalLinkFrameWith_original_frame_suffix = false;
-    return createReducedModelAndChangeLinkFrames(fullModel, jointsInReducedModel, reducedModel, removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, {});
+    bool includeAllAdditionalFrames = true;
+    return createReducedModelAndChangeLinkFrames(fullModel, jointsInReducedModel, reducedModel, removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, includeAllAdditionalFrames, {});
 }
 
 bool createReducedModel(const Model& fullModel,
@@ -1105,8 +1107,9 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
     }
 
     bool addOriginalLinkFrameWith_original_frame_suffix = true;
+    bool includeAllAdditionalFrames = true;
     bool okReduced = createReducedModelAndChangeLinkFrames(inputModel, consideredJoints, outputModel,
-                                                 removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, {});
+                                                 removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, includeAllAdditionalFrames, {});
 
     if (okReduced)
     {
@@ -1132,12 +1135,14 @@ bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
         consideredJoints.push_back(modelWithAllAdditionalFrames.getJointName(jntIdx));
     }
 
+    bool includeAllAdditionalFrames = false;
     return createReducedModelAndChangeLinkFrames(modelWithAllAdditionalFrames,
                                                  consideredJoints,
                                                  modelWithOnlyAllowedAdditionalFrames,
                                                  std::unordered_map<std::string, double>(),
                                                  std::unordered_map<std::string, iDynTree::Transform>(),
                                                  false,
+                                                 includeAllAdditionalFrames,
                                                  allowedAdditionalFrames);
 
 }
