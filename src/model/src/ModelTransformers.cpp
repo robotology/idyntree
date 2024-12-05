@@ -13,6 +13,7 @@
 #include <iDynTree/Sensors.h>
 #include <iDynTree/SixAxisForceTorqueSensor.h>
 
+#include <algorithm>
 #include <cassert>
 #include <unordered_map>
 #include <set>
@@ -274,14 +275,41 @@ void computeTransformToSubModelBaseWithAdditionalTransform(const Model& fullMode
     }
 }
 
+void addAdditionalFrameIfAllowed(Model& reducedModel,
+                                 const std::string linkInReducedModel,
+                                 const std::string additionalFrameName,
+                                 const Transform& subModelBase_H_additionalFrame,
+                                 bool includeAllAdditionalFrames,
+                                 const std::vector<std::string>& allowedAdditionalFrames)
+{
+    bool shouldWeAddTheAdditionalFrame = true;
+
+    // Check if we need to add the additional frame or not
+    if (!includeAllAdditionalFrames)
+    {
+        // If allowedAdditionalFrames has a value, we only need to add additional frames specified ther
+        if (std::find(allowedAdditionalFrames.begin(), allowedAdditionalFrames.end(), additionalFrameName) == allowedAdditionalFrames.end())
+        {
+            shouldWeAddTheAdditionalFrame = false;
+        }
+    }
+
+    if (shouldWeAddTheAdditionalFrame)
+    {
+        reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
+                                               subModelBase_H_additionalFrame);
+    }
+}
+
 void reducedModelAddAdditionalFrames(const Model& fullModel,
                                            Model& reducedModel,
                                      const std::string linkInReducedModel,
                                      const Traversal& linkSubModel,
                                      const FreeFloatingPos& pos,
                                            LinkPositions& subModelBase_X_link,
-                                     const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink
-                                     )
+                                     const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
+                                     bool includeAllAdditionalFrames,
+                                     const std::vector<std::string>& allowedAdditionalFrames)
 {
     // First compute the transform between each link in the submodel and the submodel base
     computeTransformToTraversalBaseWithAdditionalTransform(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link,newLink_H_oldLink);
@@ -307,12 +335,11 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
         if( parentLink != 0 )
         {
             std::string additionalFrameName = fullModel.getFrameName(visitedLinkIndex);
-
             Transform subModelBase_H_additionalFrame = subModelBase_X_link(visitedLinkIndex);
 
-
-            reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
-                                               subModelBase_H_additionalFrame);
+            addAdditionalFrameIfAllowed(reducedModel, linkInReducedModel,
+                                        additionalFrameName, subModelBase_H_additionalFrame,
+                                        includeAllAdditionalFrames, allowedAdditionalFrames);
         }
 
         // For all the link of the submodel, transfer their additional frame
@@ -327,8 +354,9 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
             Transform subModelBase_H_additionalFrame =
                 subModelBase_H_visitedLink*visitedLink_H_additionalFrame;
 
-            reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
-                                               subModelBase_H_additionalFrame);
+            addAdditionalFrameIfAllowed(reducedModel, linkInReducedModel,
+                                        additionalFrameName, subModelBase_H_additionalFrame,
+                                        includeAllAdditionalFrames, allowedAdditionalFrames);
         }
     }
 }
@@ -391,15 +419,22 @@ void reducedModelAddSolidShapes(const Model& fullModel,
 // of both:
 //  * createReducedModel : function to create a reduced model given the specified joints
 //  * moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink: function to make sure a model is URDF compatible
-// The logic is similar to the createReducedModel, but as an additional option this function takes in input
-// a std::vector<iDynTree::Transform> newLink_H_oldLink vector (of size fullModel.getNrOfLinks() that can be used
-// to specify an optional additional transform of the final link used in the "reduced model"
+//  * removeAdditionalFramesFromModel: function to remove additional frames from a URDF
+//
+// The logic is similar to the createReducedModel, but with additional options:
+// * std::vector<iDynTree::Transform> newLink_H_oldLink vector (of size fullModel.getNrOfLinks() that can be used
+//    to specify an optional additional transform of the final link used in the "reduced model"
+// * includeAllAdditionalFrames, std::vector<std::string> : If includeAllAdditionalFrames is true,
+//   all the additional frames are of the input model are copied in the reduced model, if includeAllAdditionalFrames is true
+//   is True only the additional frames with the name contained in allowedAdditionalFrames are copied to the reduce model
 bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
                                            const std::vector< std::string >& jointsInReducedModel,
                                            Model& reducedModel,
                                            const std::unordered_map<std::string, double>& removedJointPositions,
                                            const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
-                                           bool addOriginalLinkFrameWith_original_frame_suffix)
+                                           bool addOriginalLinkFrameWith_original_frame_suffix,
+                                           bool includeAllAdditionalFrames,
+                                           const std::vector<std::string>& allowedAdditionalFrames)
 {
     // We use the default traversal for deciding the base links of the reduced model
     Traversal fullModelTraversal;
@@ -518,7 +553,8 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
         // As this quantity is influenced by newLink_H_oldLink, this is passed along
         reducedModelAddAdditionalFrames(fullModel,reducedModel,
                                         linkName,subModels.getTraversal(linkInReducedModel),
-                                        jointPos,subModelBase_X_link,newLink_H_oldLink);
+                                        jointPos,subModelBase_X_link,newLink_H_oldLink,
+                                        includeAllAdditionalFrames,allowedAdditionalFrames);
 
         // Lump the visual and collision shapes in the new model
         reducedModelAddSolidShapes(fullModel,reducedModel,
@@ -824,7 +860,8 @@ bool createReducedModel(const Model& fullModel,
     // We do not want to move the link frames in createReducedModel
     std::unordered_map<std::string, iDynTree::Transform> newLink_H_oldLink;
     bool addOriginalLinkFrameWith_original_frame_suffix = false;
-    return createReducedModelAndChangeLinkFrames(fullModel, jointsInReducedModel, reducedModel, removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix);
+    bool includeAllAdditionalFrames = true;
+    return createReducedModelAndChangeLinkFrames(fullModel, jointsInReducedModel, reducedModel, removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, includeAllAdditionalFrames, {});
 }
 
 bool createReducedModel(const Model& fullModel,
@@ -1083,8 +1120,9 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
     }
 
     bool addOriginalLinkFrameWith_original_frame_suffix = true;
+    bool includeAllAdditionalFrames = true;
     bool okReduced = createReducedModelAndChangeLinkFrames(inputModel, consideredJoints, outputModel,
-                                                 removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix);
+                                                 removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, includeAllAdditionalFrames, {});
 
     if (okReduced)
     {
@@ -1097,6 +1135,29 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
     {
         return false;
     }
+}
+
+bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
+                                           Model& modelWithOnlyAllowedAdditionalFrames,
+                                           const std::vector<std::string> allowedAdditionalFrames)
+{
+    // Get list of all joints to pass as considered joints
+    std::vector<std::string> consideredJoints;
+    for(iDynTree::JointIndex jntIdx=0; jntIdx < modelWithAllAdditionalFrames.getNrOfJoints(); jntIdx++)
+    {
+        consideredJoints.push_back(modelWithAllAdditionalFrames.getJointName(jntIdx));
+    }
+
+    bool includeAllAdditionalFrames = false;
+    return createReducedModelAndChangeLinkFrames(modelWithAllAdditionalFrames,
+                                                 consideredJoints,
+                                                 modelWithOnlyAllowedAdditionalFrames,
+                                                 std::unordered_map<std::string, double>(),
+                                                 std::unordered_map<std::string, iDynTree::Transform>(),
+                                                 false,
+                                                 includeAllAdditionalFrames,
+                                                 allowedAdditionalFrames);
+
 }
 
 }
