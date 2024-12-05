@@ -11,9 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: conda-incubator/setup-miniconda@v3
         with:
-          miniforge-variant: Mambaforge
           miniforge-version: latest
 
       - name: Dependencies [apt]
@@ -31,7 +30,7 @@ jobs:
           conda config --remove channels defaults
 
           # Dependencies
-          mamba install doxygen=1.9.1 toml pygments docutils jinja2
+          conda install doxygen=1.9.1 toml pygments docutils jinja2
 
       - name: Fetch m.css
         shell: bash -l {0}
