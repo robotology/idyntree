@@ -7,9 +7,9 @@
     <includes local="no">iterator</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="Core_2Triplets_8h" local="no">iDynTree/Core/Triplets.h</includedby>
     <includedby refid="SparseMatrix_8h" local="no">iDynTree/SparseMatrix.h</includedby>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>iterator</label>

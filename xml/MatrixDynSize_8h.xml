@@ -5,9 +5,6 @@
     <includes local="no">string</includes>
     <includes refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includes>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
-    <includedby refid="Core_2MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includedby>
-    <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
-    <includedby refid="TestUtils_8h" local="no">iDynTree/TestUtils.h</includedby>
     <includedby refid="BoundingBoxHelpers_8h" local="no">iDynTree/BoundingBoxHelpers.h</includedby>
     <includedby refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includedby>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
@@ -23,6 +20,9 @@
     <includedby refid="ExtendedKalmanFilter_8h" local="no">iDynTree/ExtendedKalmanFilter.h</includedby>
     <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
     <includedby refid="KalmanFilter_8h" local="no">iDynTree/KalmanFilter.h</includedby>
+    <includedby refid="Core_2MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>
+    <includedby refid="TestUtils_8h" local="no">iDynTree/TestUtils.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/MatrixDynSize.h</label>

@@ -403,7 +403,7 @@
 <para>Describes the state propagation for a given dynamical system and the measurement model given the available measurements. </para>
         </briefdescription>
         <detaileddescription>
-<para>If state of the system is denoted by <formula id="297">$ x $</formula>, the control input by <formula id="298">$ u $</formula> and the measurements by <formula id="330">$ y $</formula>, then the system dynamics is given as <formula id="331">$ x_{k+1} = A x_{k} + B u_{k} + w_k $</formula> and the measurement model is given by <formula id="332">$ y_{k+1} = C x_{k+1} + D u_{k} + v_k $</formula></para>
+<para>If state of the system is denoted by <formula id="167">$ x $</formula>, the control input by <formula id="168">$ u $</formula> and the measurements by <formula id="200">$ y $</formula>, then the system dynamics is given as <formula id="201">$ x_{k+1} = A x_{k} + B u_{k} + w_k $</formula> and the measurement model is given by <formula id="202">$ y_{k+1} = C x_{k+1} + D u_{k} + v_k $</formula></para>
 <para><simplesect kind="note"><para>all matrices are assumed to be time-invariant </para>
 </simplesect>
 <parameterlist kind="param"><parameteritem>
@@ -515,7 +515,7 @@
 <parametername direction="in">x0</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>initial state of dimension <formula id="333">$ dim_x \times 1 $</formula> </para>
+<para>initial state of dimension <formula id="203">$ dim_x \times 1 $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -547,7 +547,7 @@
 <parametername direction="in">P</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>state covariance matrix of dimensions <formula id="334">$ dim_x \times dim_x $</formula> </para>
+<para>state covariance matrix of dimensions <formula id="204">$ dim_x \times dim_x $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -579,7 +579,7 @@
 <parametername direction="in">Q</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>system noise covariance matrix of dimensions <formula id="334">$ dim_x \times dim_x $</formula> </para>
+<para>system noise covariance matrix of dimensions <formula id="204">$ dim_x \times dim_x $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -611,7 +611,7 @@
 <parametername direction="in">R</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>measurement covariance matrix of dimensions <formula id="335">$ dim_y \times dim_y $</formula> </para>
+<para>measurement covariance matrix of dimensions <formula id="205">$ dim_y \times dim_y $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -660,7 +660,7 @@
 <parametername direction="in">u</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>input vector of dimension <formula id="336">$ dim_u \times 1 $</formula> </para>
+<para>input vector of dimension <formula id="206">$ dim_u \times 1 $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -678,7 +678,7 @@
         <argsstring>()</argsstring>
         <name>kfPredict</name>
         <briefdescription>
-<para>Runs one step of the Discrete Kalman Filter prediction equation described by <formula id="337">$ \hat{x}_{k+1} = A x_{k} + B u_{k} $</formula> <formula id="338">$ \hat{P}_{k+1} = A_k P_k A_k^T + Q $</formula>. </para>
+<para>Runs one step of the Discrete Kalman Filter prediction equation described by <formula id="207">$ \hat{x}_{k+1} = A x_{k} + B u_{k} $</formula> <formula id="208">$ \hat{P}_{k+1} = A_k P_k A_k^T + Q $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="warning"><para>this function can be called only after setting up the filter properly through <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> step </para>
@@ -711,7 +711,7 @@
 <parametername direction="in">y</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>input vector of dimension <formula id="339">$ dim_y \times 1 $</formula> </para>
+<para>input vector of dimension <formula id="209">$ dim_y \times 1 $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -729,7 +729,7 @@
         <argsstring>()</argsstring>
         <name>kfUpdate</name>
         <briefdescription>
-<para>Runs one step of the Discrete Kalman Filter update equation described by <formula id="340">$ \tilde{y}_{k+1} = C \hat{x}_{k+1} + D u_{k} $</formula> <formula id="341">$ x_{k+1} = \hat{x}_{k+1} + K_{k+1}(\tilde{y}_{k+1} - z_{k+1}) $</formula> <formula id="342">$ P_{k+1} = (I - K_{k+1} C) \hat{P}_{k+1} $</formula> where K is the Kalman gain. </para>
+<para>Runs one step of the Discrete Kalman Filter update equation described by <formula id="210">$ \tilde{y}_{k+1} = C \hat{x}_{k+1} + D u_{k} $</formula> <formula id="211">$ x_{k+1} = \hat{x}_{k+1} + K_{k+1}(\tilde{y}_{k+1} - z_{k+1}) $</formula> <formula id="212">$ P_{k+1} = (I - K_{k+1} C) \hat{P}_{k+1} $</formula> where K is the Kalman gain. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="warning"><para>this function can be called only after setting up the filter properly through <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> step </para>
@@ -762,7 +762,7 @@
 <parametername direction="out">x</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>system state of dimension <formula id="333">$ dim_x \times 1 $</formula> </para>
+<para>system state of dimension <formula id="203">$ dim_x \times 1 $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -792,7 +792,7 @@
 <parametername direction="out">P</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>system state covariance matrix of dimension <formula id="334">$ dim_x \times dim_x $</formula> </para>
+<para>system state covariance matrix of dimension <formula id="204">$ dim_x \times dim_x $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -850,7 +850,7 @@
 <parametername direction="in">x0</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>initial state vector of dimensions <formula id="333">$ dim_x \times 1 $</formula> </para>
+<para>initial state vector of dimensions <formula id="203">$ dim_x \times 1 $</formula> </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -858,7 +858,7 @@
 <parametername direction="in">P</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>state covariance matrix of dimensions <formula id="334">$ dim_x \times dim_x $</formula> </para>
+<para>state covariance matrix of dimensions <formula id="204">$ dim_x \times dim_x $</formula> </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -866,7 +866,7 @@
 <parametername direction="in">Q</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>system noise covariance matrix of dimensions <formula id="334">$ dim_x \times dim_x $</formula> </para>
+<para>system noise covariance matrix of dimensions <formula id="204">$ dim_x \times dim_x $</formula> </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -874,7 +874,7 @@
 <parametername direction="in">R</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>measurement noise covariance matrix of dimensions <formula id="335">$ dim_y \times dim_y $</formula> </para>
+<para>measurement noise covariance matrix of dimensions <formula id="205">$ dim_y \times dim_y $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -890,7 +890,7 @@
     </briefdescription>
     <detaileddescription>
 <para>The Kalman filter can be constructed by giving the system design matrices A, B, C and D. where A is the state transition matrix, B is the control input matrix, C is the output matrix and D the feed through matrix. These matrices can be used to describe a stochastic model for a linear dynamical system.</para>
-<para><formula id="328">\[ x_{k+1} = A x_{k} + B u_{k} + w_k \]</formula> <formula id="329">\[ y_{k+1} = C x_{k+1} + D u_{k} + v_k \]</formula></para>
+<para><formula id="198">\[ x_{k+1} = A x_{k} + B u_{k} + w_k \]</formula> <formula id="199">\[ y_{k+1} = C x_{k+1} + D u_{k} + v_k \]</formula></para>
 <para>Once the filter is constructed, the system noise and measurement noise covariance matrices can be set. The filter can be run, after setting initial state and state covariance matrix. The filter init method is called to check if the filter is properly configured and is ready to use.</para>
 <para><simplesect kind="warning"><para>care must be taken to design these matrices with proper dimensions, so that the filter does not crash</para>
 </simplesect>
