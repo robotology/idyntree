@@ -124,6 +124,12 @@
               <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputModel) -&gt; bool</span>
             </dt>
             <dd><a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> the input model in model that can be exported as URDF with the given base link.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9a8fd1db7c7bbfb060362056a4ec65ee" class="m-doc">removeAdditionalFramesFromModel</a>(</span><span class="m-doc-wrap">const Model&amp; modelWithAllAdditionalFrames,
+              Model&amp; modelWithOnlyAllowedAdditionalFrames,
+              const std::vector&lt;std::string&gt; allowedAdditionalFrames = std::vector&lt;std::string&gt;()) -&gt; bool</span>
+            </dt>
+            <dd>\function Remove all additional frames from the model, except a specified allowlist.</dd>
           </dl>
         </section>
         <section>
@@ -220,6 +226,23 @@
               </tfoot>
             </table>
 <p>In iDynTree, the link frame can be placed without constraint w.r.t. to the joints to which the link is connected. On the other hand, in the URDF format, the origin of the frame of the child link connected to its parent with a non-fixed joint <strong>must</strong> lay on the axis of the joint.</p><p>That means that if you want to export a model with an arbitrary base link, some link frame will need to be moved to respect the constraint given by the URDF format. This function perform exactly this transformation, ensuring that inertia, visual and collision information is probably accounted for, and leaving the original link frames in the model as &quot;additional frames&quot; with the naming scheme &lt;linkName&gt;_original_frame .</p><p>Note that the operation done depends on the base link used, if you want to use a different base link, change the default base link of the model via inputModel.setDefaultBaseLink method.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9a8fd1db7c7bbfb060362056a4ec65ee"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a8fd1db7c7bbfb060362056a4ec65ee" class="m-doc-self">removeAdditionalFramesFromModel</a>(</span><span class="m-doc-wrap">const Model&amp; modelWithAllAdditionalFrames,
+              Model&amp; modelWithOnlyAllowedAdditionalFrames,
+              const std::vector&lt;std::string&gt; allowedAdditionalFrames = std::vector&lt;std::string&gt;())</span></span>
+            </h3>
+            <p>\function Remove all additional frames from the model, except a specified allowlist.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if all went well, false if there was an error.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This function takes in input a model, and return a model with all the additional frame list removed, except for the additional frames whose name is specified in the specified allowlist.</p><aside class="m-note m-info"><h4>Note</h4><p>The main use of this function is for processing models that need to be passed to other libraries or physics engines, where the additional frames may create problems or create performance problem. As long as you are using iDynTree, the presence of additional frames does not impact the performance of kinematics or dynamics algorithms, so there is no need to call this function to remove the additional frames.</p></aside>
           </div></section>
         </section>
       </div>

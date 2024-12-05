@@ -3813,6 +3813,39 @@
         </inbodydescription>
         <location file="iDynTree/ModelTransformers.h" line="166" column="6" declfile="iDynTree/ModelTransformers.h" declline="166" declcolumn="6"/>
       </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a9a8fd1db7c7bbfb060362056a4ec65ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::removeAdditionalFramesFromModel</definition>
+        <argsstring>(const Model &amp;modelWithAllAdditionalFrames, Model &amp;modelWithOnlyAllowedAdditionalFrames, const std::vector&lt; std::string &gt; allowedAdditionalFrames=std::vector&lt; std::string &gt;())</argsstring>
+        <name>removeAdditionalFramesFromModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>modelWithAllAdditionalFrames</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>modelWithOnlyAllowedAdditionalFrames</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt;</type>
+          <declname>allowedAdditionalFrames</declname>
+          <defval>std::vector&lt; std::string &gt;()</defval>
+        </param>
+        <briefdescription>
+<para>\function Remove all additional frames from the model, except a specified allowlist. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes in input a model, and return a model with all the additional frame list removed, except for the additional frames whose name is specified in the specified allowlist.</para>
+<para><simplesect kind="note"><para>The main use of this function is for processing models that need to be passed to other libraries or physics engines, where the additional frames may create problems or create performance problem. As long as you are using iDynTree, the presence of additional frames does not impact the performance of kinematics or dynamics algorithms, so there is no need to call this function to remove the additional frames.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went well, false if there was an error. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="186" column="6" declfile="iDynTree/ModelTransformers.h" declline="186" declcolumn="6"/>
+      </memberdef>
       <memberdef kind="function" id="group__iDynTreeSensors_1ga26f5afdf5245848ed0cf946cab8510d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::predictSensorsMeasurements</definition>
