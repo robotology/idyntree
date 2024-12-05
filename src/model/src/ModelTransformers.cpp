@@ -275,6 +275,32 @@ void computeTransformToSubModelBaseWithAdditionalTransform(const Model& fullMode
     }
 }
 
+void addAdditionalFrameIfAllowed(Model& reducedModel,
+                                 const std::string linkInReducedModel,
+                                 const std::string additionalFrameName,
+                                 const Transform& subModelBase_H_additionalFrame,
+                                 bool includeAllAdditionalFrames,
+                                 const std::vector<std::string>& allowedAdditionalFrames)
+{
+    bool shouldWeAddTheAdditionalFrame = true;
+
+    // Check if we need to add the additional frame or not
+    if (!includeAllAdditionalFrames)
+    {
+        // If allowedAdditionalFrames has a value, we only need to add additional frames specified ther
+        if (std::find(allowedAdditionalFrames.begin(), allowedAdditionalFrames.end(), additionalFrameName) == allowedAdditionalFrames.end())
+        {
+            shouldWeAddTheAdditionalFrame = false;
+        }
+    }
+
+    if (shouldWeAddTheAdditionalFrame)
+    {
+        reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
+                                               subModelBase_H_additionalFrame);
+    }
+}
+
 void reducedModelAddAdditionalFrames(const Model& fullModel,
                                            Model& reducedModel,
                                      const std::string linkInReducedModel,
@@ -302,16 +328,18 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
     {
         LinkConstPtr visitedLink = linkSubModel.getLink(traversalEl);
         LinkConstPtr parentLink  = linkSubModel.getParentLink(traversalEl);
-        std::string additionalFrameName;
-        Transform subModelBase_H_additionalFrame;
 
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
 
         // Add the link frame as an additional frame only for link that are not the submodel base
         if( parentLink != 0 )
         {
-            additionalFrameName = fullModel.getFrameName(visitedLinkIndex);
-            subModelBase_H_additionalFrame = subModelBase_X_link(visitedLinkIndex);
+            std::string additionalFrameName = fullModel.getFrameName(visitedLinkIndex);
+            Transform subModelBase_H_additionalFrame = subModelBase_X_link(visitedLinkIndex);
+
+            addAdditionalFrameIfAllowed(reducedModel, linkInReducedModel,
+                                        additionalFrameName, subModelBase_H_additionalFrame,
+                                        includeAllAdditionalFrames, allowedAdditionalFrames);
         }
 
         // For all the link of the submodel, transfer their additional frame
@@ -319,34 +347,16 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
         for(size_t i = 0; i < link2additionalFramesAdjacencyList[visitedLinkIndex].size(); i++ )
         {
             FrameIndex additionalFrame = link2additionalFramesAdjacencyList[visitedLinkIndex][i];
-            additionalFrameName = fullModel.getFrameName(additionalFrame);
+            std::string additionalFrameName = fullModel.getFrameName(additionalFrame);
 
             Transform visitedLink_H_additionalFrame  = fullModel.getFrameTransform(additionalFrame);
             Transform subModelBase_H_visitedLink     = subModelBase_X_link(visitedLinkIndex);
-            subModelBase_H_additionalFrame =
+            Transform subModelBase_H_additionalFrame =
                 subModelBase_H_visitedLink*visitedLink_H_additionalFrame;
-        }
 
-        bool shouldWeAddTheAdditionalFrame = true;
-
-        // Check if we need to add the additional frame or not
-        if (!includeAllAdditionalFrames)
-        {
-            // If allowedAdditionalFrames has a value, we only need to add additional frames specified ther
-            if (std::find(allowedAdditionalFrames.begin(), allowedAdditionalFrames.end(), additionalFrameName) == allowedAdditionalFrames.end())
-            {
-                shouldWeAddTheAdditionalFrame = false;
-            }
-        }
-
-        if (shouldWeAddTheAdditionalFrame)
-        {
-            std::cerr << "===========> adding " << additionalFrameName << std::endl;
-
-            reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
-                                                   subModelBase_H_additionalFrame);
-        } else {
-            std::cerr << " ==================> skipping frame " << additionalFrameName << std::endl;
+            addAdditionalFrameIfAllowed(reducedModel, linkInReducedModel,
+                                        additionalFrameName, subModelBase_H_additionalFrame,
+                                        includeAllAdditionalFrames, allowedAdditionalFrames);
         }
     }
 }
