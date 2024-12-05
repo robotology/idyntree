@@ -7,6 +7,7 @@
 #include <iDynTree/Link.h>
 
 #include <iDynTree/TestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 
 #include <algorithm>
 #include <cassert>
@@ -43,12 +44,37 @@ void checkThatOneSphereGetsAName()
     ASSERT_IS_TRUE(oneSphereModelWithValidName.collisionSolidShapes().getLinkSolidShapes()[0][0]->getName() == "link0_collision");
 }
 
-void check
+void checkRemoveAdditionalFramesFromModel()
+{
+    // Create random model with 10 links and 10 additional frames
+    iDynTree::Model modelWithAllAdditionalFrames = getRandomModel(10, 10);
+
+    // Create an allow list of three additional frames
+    std::vector<std::string> allowedAdditionalFrames;
+    allowedAdditionalFrames.push_back(modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 7));
+    allowedAdditionalFrames.push_back(modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 1));
+    allowedAdditionalFrames.push_back(modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 3));
+
+    // Create a model with only the allowed additional frames
+    iDynTree::Model modelWithOnlyAllowedAdditionalFrames;
+    ASSERT_IS_TRUE(removeAdditionalFramesFromModel(modelWithAllAdditionalFrames, modelWithOnlyAllowedAdditionalFrames, allowedAdditionalFrames));
+
+    // Check that the model with only the allowed additional frames has the correct number of links and additional frames
+    ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.getNrOfLinks() == modelWithAllAdditionalFrames.getNrOfLinks());
+    ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.getNrOfFrames() == modelWithOnlyAllowedAdditionalFrames.getNrOfLinks() + allowedAdditionalFrames.size());
+
+    // Check that the additional frames contained in the modelWithOnlyAllowedAdditionalFrames are the one specified in modelWithOnlyAllowedAdditionalFrames
+    for (size_t i = 0; i < allowedAdditionalFrames.size(); i++)
+    {
+        ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.isFrameNameUsed(allowedAdditionalFrames[i]));
+    }
+}
 
 
 int main()
 {
     checkThatOneSphereGetsAName();
+    checkRemoveAdditionalFramesFromModel();
 
     return EXIT_SUCCESS;
 }

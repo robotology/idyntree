@@ -16,6 +16,7 @@
 #include <algorithm>
 #include <cassert>
 #include <unordered_map>
+#include <optional>
 #include <set>
 #include <vector>
 
@@ -282,7 +283,7 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
                                      const FreeFloatingPos& pos,
                                            LinkPositions& subModelBase_X_link,
                                      const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
-                                     const std::optional<std::vector<std::string>>>& allowedAdditionalFrames)
+                                     const std::optional<std::vector<std::string>>& allowedAdditionalFrames)
 {
     // First compute the transform between each link in the submodel and the submodel base
     computeTransformToTraversalBaseWithAdditionalTransform(fullModel,linkSubModel,pos.jointPos(),subModelBase_X_link,newLink_H_oldLink);
@@ -326,13 +327,13 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
                 subModelBase_H_visitedLink*visitedLink_H_additionalFrame;
         }
 
-        bool shouldWeAddTheAdditionalFrame = true; 
+        bool shouldWeAddTheAdditionalFrame = true;
 
         // Check if we need to add the additional frame or not
         if (allowedAdditionalFrames.has_value())
         {
-            // If allowedAdditionalFrames has a value, we only need to add additional frames specified ther 
-            if (std::find(vec.begin(), vec.end(), value) == vec.end())
+            // If allowedAdditionalFrames has a value, we only need to add additional frames specified ther
+            if (std::find(allowedAdditionalFrames.value().begin(), allowedAdditionalFrames.value().end(), additionalFrameName) == allowedAdditionalFrames.value().end())
             {
                 shouldWeAddTheAdditionalFrame = false;
             }
@@ -342,6 +343,8 @@ void reducedModelAddAdditionalFrames(const Model& fullModel,
         {
             reducedModel.addAdditionalFrameToLink(linkInReducedModel,additionalFrameName,
                                                    subModelBase_H_additionalFrame);
+        } else {
+            std::cerr << " ==================> skipping frame " << additionalFrameName << std::endl;
         }
     }
 }
@@ -405,11 +408,11 @@ void reducedModelAddSolidShapes(const Model& fullModel,
 //  * createReducedModel : function to create a reduced model given the specified joints
 //  * moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink: function to make sure a model is URDF compatible
 //  * removeAdditionalFramesFromModel: function to remove additional frames from a URDF
-//  
+//
 // The logic is similar to the createReducedModel, but with additional options:
 // * std::vector<iDynTree::Transform> newLink_H_oldLink vector (of size fullModel.getNrOfLinks() that can be used
 //    to specify an optional additional transform of the final link used in the "reduced model"
-// * std::optional<std::vector<std::string>>> allowedAdditionalFrames : If allowedAdditionalFrames.has_value is False, 
+// * std::optional<std::vector<std::string>> allowedAdditionalFrames : If allowedAdditionalFrames.has_value is False,
 //   all the additional frames are of the input model are copied in the reduced model, if allowedAdditionalFrames.has_value 
 //   is True only the additional frames with the name contained in allowedAdditionalFrames are copied to the reduce model
 bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
@@ -418,7 +421,7 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
                                            const std::unordered_map<std::string, double>& removedJointPositions,
                                            const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
                                            bool addOriginalLinkFrameWith_original_frame_suffix,
-                                           const std::optional<std::vector<std::string>>>& allowedAdditionalFrames)
+                                           const std::optional<std::vector<std::string>>& allowedAdditionalFrames)
 {
     // We use the default traversal for deciding the base links of the reduced model
     Traversal fullModelTraversal;
@@ -537,7 +540,7 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
         // As this quantity is influenced by newLink_H_oldLink, this is passed along
         reducedModelAddAdditionalFrames(fullModel,reducedModel,
                                         linkName,subModels.getTraversal(linkInReducedModel),
-                                        jointPos,subModelBase_X_link,newLink_H_oldLink);
+                                        jointPos,subModelBase_X_link,newLink_H_oldLink,{});
 
         // Lump the visual and collision shapes in the new model
         reducedModelAddSolidShapes(fullModel,reducedModel,
@@ -843,7 +846,7 @@ bool createReducedModel(const Model& fullModel,
     // We do not want to move the link frames in createReducedModel
     std::unordered_map<std::string, iDynTree::Transform> newLink_H_oldLink;
     bool addOriginalLinkFrameWith_original_frame_suffix = false;
-    return createReducedModelAndChangeLinkFrames(fullModel, jointsInReducedModel, reducedModel, removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix);
+    return createReducedModelAndChangeLinkFrames(fullModel, jointsInReducedModel, reducedModel, removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, {});
 }
 
 bool createReducedModel(const Model& fullModel,
@@ -1103,7 +1106,7 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
 
     bool addOriginalLinkFrameWith_original_frame_suffix = true;
     bool okReduced = createReducedModelAndChangeLinkFrames(inputModel, consideredJoints, outputModel,
-                                                 removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix);
+                                                 removedJointPositions, newLink_H_oldLink, addOriginalLinkFrameWith_original_frame_suffix, {});
 
     if (okReduced)
     {
@@ -1122,6 +1125,20 @@ bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
                                            Model& modelWithOnlyAllowedAdditionalFrames,
                                            const std::vector<std::string> allowedAdditionalFrames)
 {
+    // Get list of all joints to pass as considered joints
+    std::vector<std::string> consideredJoints;
+    for(iDynTree::JointIndex jntIdx=0; jntIdx < modelWithAllAdditionalFrames.getNrOfJoints(); jntIdx++)
+    {
+        consideredJoints.push_back(modelWithAllAdditionalFrames.getJointName(jntIdx));
+    }
+
+    return createReducedModelAndChangeLinkFrames(modelWithAllAdditionalFrames,
+                                                 consideredJoints,
+                                                 modelWithOnlyAllowedAdditionalFrames,
+                                                 std::unordered_map<std::string, double>(),
+                                                 std::unordered_map<std::string, iDynTree::Transform>(),
+                                                 false,
+                                                 allowedAdditionalFrames);
 
 }
 
