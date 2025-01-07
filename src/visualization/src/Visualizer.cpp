@@ -28,6 +28,7 @@
  #define GLFW_EXPOSE_NATIVE_X11
  #define GLFW_EXPOSE_NATIVE_WAYLAND
  #define GLFW_EXPOSE_NATIVE_GLX
+ #define IDYNTREE_USES_WAYLAND
 #endif
 
 #include <GLFW/glfw3.h>
@@ -506,10 +507,16 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     pimpl->m_windowId = glfwGetCocoaWindow(pimpl->m_window);
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #elif defined(__linux__)
+
     void* nativeWindow = nullptr;
 
-    // Try Wayland first
-    struct wl_surface* waylandWindow = glfwGetWaylandWindow(pimpl->m_window);
+    #ifdef IDYNTREE_USES_WAYLAND
+        // Try Wayland first
+        struct wl_surface* waylandWindow = glfwGetWaylandWindow(pimpl->m_window);
+    #else
+        void* waylandWindow = nullptr;
+    #endif
+
     if (waylandWindow)
     {
         nativeWindow = static_cast<void*>(waylandWindow);
