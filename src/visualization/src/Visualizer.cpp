@@ -28,7 +28,6 @@
  #define GLFW_EXPOSE_NATIVE_X11
  #define GLFW_EXPOSE_NATIVE_WAYLAND
  #define GLFW_EXPOSE_NATIVE_GLX
- #define IDYNTREE_USES_WAYLAND
 #endif
 
 #include <GLFW/glfw3.h>
