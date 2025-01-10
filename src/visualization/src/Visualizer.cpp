@@ -26,6 +26,9 @@
  #define GLFW_EXPOSE_NATIVE_NSGL
 #elif defined(__linux__)
  #define GLFW_EXPOSE_NATIVE_X11
+ #if defined(IDYNTREE_GLFW_TRY_WAYLAND_FIRST)
+   #define GLFW_EXPOSE_NATIVE_WAYLAND
+ #endif
  #define GLFW_EXPOSE_NATIVE_GLX
 #endif
 
@@ -162,7 +165,7 @@ struct Visualizer::VisualizerPimpl
 #elif defined(__APPLE__)
     id m_windowId;
 #elif defined(__linux__)
-    Window m_windowId;
+    void* m_windowId; // Pointer to either wl_surface* or X11 Window
 #endif
 #endif
 
@@ -505,8 +508,28 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     pimpl->m_windowId = glfwGetCocoaWindow(pimpl->m_window);
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #elif defined(__linux__)
-    pimpl->m_windowId = glfwGetX11Window(pimpl->m_window);
-    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
+
+    void* nativeWindow = nullptr;
+
+    #ifdef IDYNTREE_GLFW_TRY_WAYLAND_FIRST
+        // Try Wayland first
+        struct wl_surface* waylandWindow = glfwGetWaylandWindow(pimpl->m_window);
+    #else
+        void* waylandWindow = nullptr;
+    #endif
+
+    if (waylandWindow)
+    {
+        nativeWindow = static_cast<void*>(waylandWindow);
+    }
+    else
+    {
+        // Fallback to X11
+        Window x11Window = glfwGetX11Window(pimpl->m_window);
+        if (x11Window)
+            nativeWindow = static_cast<void*>(reinterpret_cast<void*>(x11Window));
+    }
+    irrDevParams.WindowId = nativeWindow;
 #endif
 
     irrDevParams.DeviceType = irr::EIDT_SDL;
