@@ -26,7 +26,9 @@
  #define GLFW_EXPOSE_NATIVE_NSGL
 #elif defined(__linux__)
  #define GLFW_EXPOSE_NATIVE_X11
- #define GLFW_EXPOSE_NATIVE_WAYLAND
+ #if defined(IDYNTREE_GLFW_TRY_WAYLAND_FIRST)
+   #define GLFW_EXPOSE_NATIVE_WAYLAND
+ #endif
  #define GLFW_EXPOSE_NATIVE_GLX
 #endif
 
@@ -509,7 +511,7 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     void* nativeWindow = nullptr;
 
-    #ifdef IDYNTREE_USES_WAYLAND
+    #ifdef IDYNTREE_GLFW_TRY_WAYLAND_FIRST
         // Try Wayland first
         struct wl_surface* waylandWindow = glfwGetWaylandWindow(pimpl->m_window);
     #else
