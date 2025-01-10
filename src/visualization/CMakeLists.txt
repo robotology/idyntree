@@ -97,6 +97,25 @@ if(IDYNTREE_USES_IRRLICHT)
         find_library(IOKIT_LIBRARY IOKit)
         target_link_libraries(${libraryname} LINK_PRIVATE ${CARBON_LIBRARY} ${COCOA_LIBRARY} ${IOKIT_LIBRARY})
     endif ()
+
+    # On Linux, in some system for some reason creating a windows with X does not work, but creating it with Wayland
+    # yes. For this reason, we expose an option to permit to try to create a glfw window via wayland. This is an
+    # option and is not enabled by default as the glfw version shipped via apt with Ubuntu version before 24.10, so
+    # we expose this as an option and we enable it by default only if we are configuring inside a conda environment
+    # Once we drop support for apt dependencies on Ubuntu 24.04, we will be able to remove this code and always
+    # try wayland first
+    if(NOT WIN32 AND NOT APPLE)
+        if(DEFINED ENV{CONDA_PREFIX})
+            set(IDYNTREE_GLFW_TRY_WAYLAND_FIRST_DEFAULT_VALUE ON)
+        else()
+            set(IDYNTREE_GLFW_TRY_WAYLAND_FIRST_DEFAULT_VALUE OFF)
+        endif()
+        option(IDYNTREE_GLFW_TRY_WAYLAND_FIRST "If enabled, when creating a window iDynTree will try first to use wayland and only on failure X11" ${IDYNTREE_GLFW_TRY_WAYLAND_FIRST_DEFAULT_VALUE})
+        mark_as_advanced(IDYNTREE_GLFW_TRY_WAYLAND_FIRST)
+        if(IDYNTREE_GLFW_TRY_WAYLAND_FIRST)
+            add_definitions(-DIDYNTREE_GLFW_TRY_WAYLAND_FIRST)
+        endif()
+    endif()
 endif()
 
 if(IDYNTREE_USES_MESHCATCPP)
