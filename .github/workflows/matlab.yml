@@ -1,4 +1,4 @@
-maname: MATLAB Tests Workflow
+name: MATLAB Tests Workflow
 
 on:
   push:
