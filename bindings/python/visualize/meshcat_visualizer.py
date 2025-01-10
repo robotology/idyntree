@@ -581,6 +581,16 @@ class MeshcatVisualizer:
             with self._animation.at_frame(self.viewer, self._current_frame) as frame:
                 frame[shape_name].set_transform(transform)
 
+    def set_primitive_geometry_property(
+        self, property_name, value, shape_name="iDynTree"
+    ):
+        if self.__primitive_geometry_exists(shape_name):
+            if self._animation is None:
+                self.viewer[shape_name].set_property(key=property_name, value=value)
+            else:
+                with self._animation.at_frame(self.viewer, self._current_frame) as frame:
+                    raise NotImplementedError("The set_property method is not implemented for animations.")
+    
     def load_model_from_file(
         self, model_path: str, considered_joints=None, model_name="iDynTree", color=None
     ):
