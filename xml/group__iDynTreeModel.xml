@@ -149,7 +149,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding velocity is <formula id="53">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding velocity is <formula id="166">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -157,7 +157,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding proper acceleration is <formula id="54">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="55">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="52">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding proper acceleration is <formula id="167">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="168">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="169">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -165,7 +165,7 @@
 <parametername direction="in">linkExtForces</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of external 6D force/torques applied to the links. For each link <formula id="20">$L$</formula>, the corresponding external force is <formula id="56">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="20">$L$</formula>, expressed in the link frame <formula id="20">$L$</formula>. </para>
+<para>Vector of external 6D force/torques applied to the links. For each link <formula id="20">$L$</formula>, the corresponding external force is <formula id="170">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="20">$L$</formula>, expressed in the link frame <formula id="20">$L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -295,7 +295,7 @@
 <parametername direction="in">referenceFrame_H_link</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="20">$L$</formula>, the corresponding transform is <formula id="57">${}^D H_L$</formula>. </para>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="20">$L$</formula>, the corresponding transform is <formula id="171">${}^D H_L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -303,7 +303,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding velocity is <formula id="53">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding velocity is <formula id="166">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -311,7 +311,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding proper acceleration is <formula id="54">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="55">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="52">$A$</formula> . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="20">$L$</formula>, the corresponding proper acceleration is <formula id="167">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="168">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="169">$A$</formula> . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
