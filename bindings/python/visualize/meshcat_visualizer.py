@@ -590,7 +590,7 @@ class MeshcatVisualizer:
             else:
                 with self._animation.at_frame(self.viewer, self._current_frame) as frame:
                     raise NotImplementedError("The set_property method is not implemented for animations.")
-    
+
     def load_model_from_file(
         self, model_path: str, considered_joints=None, model_name="iDynTree", color=None
     ):
@@ -621,7 +621,7 @@ class MeshcatVisualizer:
 
         self.load_model(model=model_loader.model(), model_name=model_name, color=color)
 
-    def load_model(self, model: idyn.Model, model_name="iDynTree", color=None):
+    def load_model(self, model: idyn.Model, base_frame = None, model_name="iDynTree", color=None):
 
         # check if the model already exist
         if self.__model_exists(model_name):
@@ -633,7 +633,12 @@ class MeshcatVisualizer:
         self.traversal[model_name] = idyn.Traversal()
         self.link_pos[model_name] = idyn.LinkPositions()
 
-        self.model[model_name].computeFullTreeTraversal(self.traversal[model_name])
+        if base_frame is None:
+            self.model[model_name].computeFullTreeTraversal(self.traversal[model_name])
+        else:
+            base_frame_index = self.model[model_name].getFrameIndex(base_frame)
+            self.model[model_name].computeFullTreeTraversal(self.traversal[model_name], base_frame_index)
+
         self.link_pos[model_name].resize(self.model[model_name])
 
         self.__add_model_geometry_to_viewer(
