@@ -633,7 +633,7 @@ class MeshcatVisualizer:
         self.traversal[model_name] = idyn.Traversal()
         self.link_pos[model_name] = idyn.LinkPositions()
 
-        if base_frame is None:
+        if base_link is None:
             self.model[model_name].computeFullTreeTraversal(self.traversal[model_name])
         else:
             base_link_index = self.model[model_name].getFrameIndex(base_link)
