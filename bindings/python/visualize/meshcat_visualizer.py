@@ -627,17 +627,28 @@ class MeshcatVisualizer:
         if self.__model_exists(model_name):
             msg = "The model named: " + model_name + " already exists."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
-            return
+            return False
 
         self.model[model_name] = model.copy()
         self.traversal[model_name] = idyn.Traversal()
         self.link_pos[model_name] = idyn.LinkPositions()
 
         if base_link is None:
-            self.model[model_name].computeFullTreeTraversal(self.traversal[model_name])
+            if not self.model[model_name].computeFullTreeTraversal(self.traversal[model_name]):
+                msg = "Unable to compute the full traversal for the model named:" + model_name + "."
+                warnings.warn(msg, category=UserWarning, stacklevel=2)
+                return False
         else:
             base_link_index = self.model[model_name].getLinkIndex(base_link)
-            self.model[model_name].computeFullTreeTraversal(self.traversal[model_name], base_link_index)
+            if base_link_index == idyn.LINK_INVALID_INDEX:
+                msg = "The link " + base_link + " not found in the model named: " + model_name + "."
+                warnings.warn(msg, category=UserWarning, stacklevel=2)
+                return False
+
+            if not self.model[model_name].computeFullTreeTraversal(self.traversal[model_name], base_link_index):
+                msg = "Unable to compute the full traversal for the model named: " + model_name + " starting from the link " + base_link + "."
+                warnings.warn(msg, category=UserWarning, stacklevel=2)
+                return False
 
         self.link_pos[model_name].resize(self.model[model_name])
 
@@ -646,6 +657,8 @@ class MeshcatVisualizer:
             model_name=model_name,
             color=color,
         )
+
+        return True
 
     def load_sphere(self, radius, shape_name="iDynTree", color=None):
         sphere = idyn.Sphere()
