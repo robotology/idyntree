@@ -640,7 +640,8 @@ class MeshcatVisualizer:
                 return False
         else:
             base_link_index = self.model[model_name].getLinkIndex(base_link)
-            if base_link_index == idyn.LINK_INVALID_INDEX:
+            link_invalid_index = -1 # idyn.LINK_INVALID_INDEX
+            if base_link_index == link_invalid_index:
                 msg = "The link " + base_link + " not found in the model named: " + model_name + "."
                 warnings.warn(msg, category=UserWarning, stacklevel=2)
                 return False
