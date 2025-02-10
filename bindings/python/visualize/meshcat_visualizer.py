@@ -621,7 +621,7 @@ class MeshcatVisualizer:
 
         self.load_model(model=model_loader.model(), model_name=model_name, color=color)
 
-    def load_model(self, model: idyn.Model, base_frame = None, model_name="iDynTree", color=None):
+    def load_model(self, model: idyn.Model, base_link = None, model_name="iDynTree", color=None):
 
         # check if the model already exist
         if self.__model_exists(model_name):
@@ -636,8 +636,8 @@ class MeshcatVisualizer:
         if base_frame is None:
             self.model[model_name].computeFullTreeTraversal(self.traversal[model_name])
         else:
-            base_frame_index = self.model[model_name].getFrameIndex(base_frame)
-            self.model[model_name].computeFullTreeTraversal(self.traversal[model_name], base_frame_index)
+            base_link_index = self.model[model_name].getFrameIndex(base_link)
+            self.model[model_name].computeFullTreeTraversal(self.traversal[model_name], base_link_index)
 
         self.link_pos[model_name].resize(self.model[model_name])
 
