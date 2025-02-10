@@ -636,7 +636,7 @@ class MeshcatVisualizer:
         if base_link is None:
             self.model[model_name].computeFullTreeTraversal(self.traversal[model_name])
         else:
-            base_link_index = self.model[model_name].getFrameIndex(base_link)
+            base_link_index = self.model[model_name].getLinkIndex(base_link)
             self.model[model_name].computeFullTreeTraversal(self.traversal[model_name], base_link_index)
 
         self.link_pos[model_name].resize(self.model[model_name])
