@@ -180,6 +180,15 @@ public:
     /** Buffer of link proper accelerations, always set to zero for external forces */
     LinkAccArray m_invDynZeroLinkProperAcc;
 
+    /** Buffers for aba */
+    ArticulatedBodyAlgorithmInternalBuffers m_abaBuffers;
+
+    /** Buffer for aba output */
+    FreeFloatingAcc m_abaOutput;
+
+    /** Buffer for aba input (zero wrenches) */
+    LinkNetExternalWrenches m_zeroExtWrenches;
+
     KinDynComputationsPrivateAttributes()
     {
         m_isModelValid = false;
@@ -348,6 +357,10 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_invDynZeroVel.jointVel().zero();
     this->pimpl->m_invDynZeroLinkVel.resize(this->pimpl->m_robot_model);
     this->pimpl->m_invDynZeroLinkProperAcc.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_abaBuffers.resize(this->m_robot_model);
+    this->pimpl->m_abaOutput.resize(this->m_robot_model);
+    this->pimpl->m_abaExtWrenches.resize(this->m_robot_model);
+    this->pimpl->m_abaExtWrenches.zero();
     this->pimpl->m_traversalCache.resize(this->pimpl->m_robot_model);
     this->pimpl->m_generalizedForcesContainer.resize(this->pimpl->m_robot_model);
 
@@ -3078,6 +3091,42 @@ bool KinDynComputations::inverseDynamicsInertialParametersRegressor(const Vector
         toEigen(regressor).block(0, 0, 6, cols) =
             toEigen(B_A_X_A)*toEigen(regressor).block(0, 0, 6, cols);
     }
+
+    return true;
+}
+
+bool KinDynComputations::forwardDynamics((iDynTree::Span<const double> totalBase6DForce,
+                                          iDynTree::Span<const double> totalJointTorques,
+                                          iDynTree::Span<double> base6DAccelerations,
+                                          iDynTree::Span<double> totalJointAccelerations);
+
+{
+    if (pimpl->m_frameVelRepr != BODY_FIXED_REPRESENTATION)
+    {
+        reportError("KinDynComputations","forwardDynamics","Only BODY_FIXED_REPRESENTATION is currently supported in forwardDynamics");
+        return false;
+    }
+
+    iDynTree::toEigen(pimpl->m_abaExtWrenches[pimpl->m_traversal->getBaseLink()]) = iDynTree::toEigen(totalBase6DForce);
+    iDynTree::toEigen(pimpl->m_abaInputJointTorques) = iDynTree::toEigen(totalJointTorques);
+
+    bool ok = ArticulatedBodyAlgorithm(pimpl->m_robot_model,
+                                       pimpl->m_traversal,
+                                       pimpl->m_pos,
+                                       pimpl->m_vel,
+                                       pimpl->m_abaExtWrenches,
+                                       pimpl->m_abaInputJointTorques,
+                                       pimpl->m_abaBuffers,
+                                       pimpl->m_abaOutput);
+
+    if (!ok)
+    {
+        reportError("KinDynComputations","forwardDynamics","ArticulatedBodyAlgorithm failed.");
+        return false;
+    }
+
+    iDynTree::toEigen(base6DAccelerations) = iDynTree::toEigen(pimpl->m_abaOutput.baseAcc());
+    iDynTree::toEigen(totalJointAccelerations) = iDynTree::toEigen(pimpl->m_abaOutput.jointAcc());
 
     return true;
 }

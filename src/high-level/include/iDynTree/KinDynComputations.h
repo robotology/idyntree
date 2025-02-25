@@ -1356,6 +1356,27 @@ public:
                                                     const VectorDynSize& s_ddot,
                                                           MatrixDynSize& baseForceAndJointTorquesRegressor);
 
+    /**
+     * @brief Compute the free floating forward dynamics.
+     *
+     * This method computes \f$ M(q)^{-1} (\tau_{gen} - C(q, \nu) \nu - G(q)) \f$.
+     *
+     * The semantics of the generalized torques and depend on the choosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * In particular $\tau_{gen}$ is composed by stacking the inputs totalBase6DForce and totalJointTorques.
+     *
+     *
+     * @param[in] totalBase6DForce the total base 6D force due to external 6D forces on all links
+     * @param[out] totalJointTorques the  total joint torque, due to internal torques and torques induced by the external 6D forces on all links
+     * @return true if all went well, false otherwise
+     */
+     bool forwardDynamics(iDynTree::Span<const double> totalBase6DForce,
+                          iDynTree::Span<const double> totalJointTorques,
+                          iDynTree::Span<double> base6DAccelerations,
+                          iDynTree::Span<double> totalJointAccelerations);
+
     //@}
 
 
