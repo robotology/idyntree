@@ -386,12 +386,24 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
     xmlNewProp(child_xml, BAD_CAST "link", BAD_CAST model.getLinkName(childLink->getIndex()).c_str());
 
     // Position limits
-    if (joint->hasPosLimits() && joint->getNrOfDOFs() == 1)
+    // Limits are required for prismatic joints even if no limits are enabled, see URDF spec for reference
+    bool isJointPrismatic = dynamic_cast<const PrismaticJoint*>(joint);
+    if ( (joint->hasPosLimits() && joint->getNrOfDOFs() == 1) || isJointPrismatic)
     {
         xmlNodePtr limit_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "limit", NULL);
         std::string bufStr;
         double min, max;
-        ok = ok && joint->getPosLimits(0, min, max);
+        double reallyHighLimit = 1e9;
+
+        // If joint is prismatic and has no limits, we just put really high values as limits are required
+        if (isJointPrismatic && !joint->hasPosLimits())
+        {
+            min = -reallyHighLimit;
+            max = +reallyHighLimit;
+        } else
+        {
+            ok = ok && joint->getPosLimits(0, min, max);
+        }
 
         ok = ok && doubleToStringWithClassicLocale(min, bufStr);
         xmlNewProp(limit_xml, BAD_CAST "lower", BAD_CAST bufStr.c_str());
@@ -399,7 +411,6 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
         xmlNewProp(limit_xml, BAD_CAST "upper", BAD_CAST bufStr.c_str());
 
         // Workaround for https://github.com/robotology/idyntree/issues/955
-        double reallyHighLimit = 1e9;
         ok = ok && doubleToStringWithClassicLocale(reallyHighLimit, bufStr);
         xmlNewProp(limit_xml, BAD_CAST "effort", BAD_CAST bufStr.c_str());
         ok = ok && doubleToStringWithClassicLocale(reallyHighLimit, bufStr);
