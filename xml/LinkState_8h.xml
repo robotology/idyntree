@@ -9,8 +9,11 @@
     <includes refid="ArticulatedBodyInertia_8h" local="no">iDynTree/ArticulatedBodyInertia.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includedby>
     <includedby refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includedby>
@@ -18,9 +21,6 @@
     <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <includedby refid="PredictSensorsMeasurements_8h" local="no">iDynTree/PredictSensorsMeasurements.h</includedby>
     <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/SixAxisForceTorqueSensor.h</includedby>
-    <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
-    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
-    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>vector</label>

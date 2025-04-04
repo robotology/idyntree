@@ -262,7 +262,7 @@
         </briefdescription>
         <detaileddescription>
 <para>Adds a (constancy) constraint for the specified frame</para>
-<para>The constraint is <formula id="192">$ {}^w X_{frame}(q) = {}^w X_{frame}(q^0) $</formula> where the robot configuration <formula id="183">$q$</formula> is the one specified with setRobotConfiguration <simplesect kind="note"><para>you should specify first the robot configuration. Otherwise call the versions with explicit constraint value </para>
+<para>The constraint is <formula id="335">$ {}^w X_{frame}(q) = {}^w X_{frame}(q^0) $</formula> where the robot configuration <formula id="326">$q$</formula> is the one specified with setRobotConfiguration <simplesect kind="note"><para>you should specify first the robot configuration. Otherwise call the versions with explicit constraint value </para>
 </simplesect>
 <parameterlist kind="param"><parameteritem>
 <parameternamelist>
@@ -3196,7 +3196,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
 <para>NLP-based Inverse kinematics. </para>
     </briefdescription>
     <detaileddescription>
-<para>Given a mechanical structure configuration <formula id="186">\[ q \in \operatorname{SE}(3) \times \mathbb{R}^n \]</formula> and possibly multiple target frames <formula id="187">\[ F_i^d \in \operatorname{SE}(3) \]</formula> the inverse kinematics is responsible to find the configuration <formula id="188">$ q^* $</formula> such that <formula id="189">\[ F_i(q^*) = F_i^d \forall i, \]</formula> where the meaning of the <formula id="190">$=$</formula> and <formula id="191">$\forall$</formula> depends on the resolution mode and on the references specified</para>
+<para>Given a mechanical structure configuration <formula id="329">\[ q \in \operatorname{SE}(3) \times \mathbb{R}^n \]</formula> and possibly multiple target frames <formula id="330">\[ F_i^d \in \operatorname{SE}(3) \]</formula> the inverse kinematics is responsible to find the configuration <formula id="331">$ q^* $</formula> such that <formula id="332">\[ F_i(q^*) = F_i^d \forall i, \]</formula> where the meaning of the <formula id="333">$=$</formula> and <formula id="334">$\forall$</formula> depends on the resolution mode and on the references specified</para>
 <para>Example <programlisting><codeline><highlight class="normal">//Allocate<sp/>an<sp/>inverse<sp/>kinematics<sp/>object</highlight></codeline>
 <codeline><highlight class="normal">iDynTree::InverseKinematric<sp/>ik;</highlight></codeline>
 </programlisting></para>

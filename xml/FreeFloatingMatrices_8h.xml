@@ -38,10 +38,10 @@
 <para>Possible frame velocity representation convention. </para>
         </briefdescription>
         <detaileddescription>
-<para>Given a link <formula id="20">$L$</formula> and an absolute frame <formula id="169">$A$</formula>, the the possible frame velocity representation are the following:<itemizedlist>
-<listitem><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="180">${}^{A} \mathrm{v}_{A,B}$</formula>,</para>
-</listitem><listitem><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="181">${}^{B} \mathrm{v}_{A,B}$</formula>,</para>
-</listitem><listitem><para><computeroutput>MIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="182">${}^{B[A]} \mathrm{v}_{A,B}$</formula>.</para>
+<para>Given a link <formula id="296">$L$</formula> and an absolute frame <formula id="242">$A$</formula>, the the possible frame velocity representation are the following:<itemizedlist>
+<listitem><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="323">${}^{A} \mathrm{v}_{A,B}$</formula>,</para>
+</listitem><listitem><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="324">${}^{B} \mathrm{v}_{A,B}$</formula>,</para>
+</listitem><listitem><para><computeroutput>MIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="325">${}^{B[A]} \mathrm{v}_{A,B}$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para>See <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> documentation for more details. </para>

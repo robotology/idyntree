@@ -353,7 +353,7 @@
 <parametername direction="in">robotPos</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the position of the robot, i.e. <formula id="176">$ ({}^A H_B, s)$</formula>, </para>
+<para>the position of the robot, i.e. <formula id="319">$ ({}^A H_B, s)$</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -361,7 +361,7 @@
 <parametername direction="in">robotVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the velocity of the robot, with the base velocity expressed in BODY_FIXED representation i.e. <formula id="177">$ \nu = \begin{bmatrix} {}^B \mathrm{v}_{A,B} \newline \dot{s} \end{bmatrix} $</formula>, </para>
+<para>the velocity of the robot, with the base velocity expressed in BODY_FIXED representation i.e. <formula id="320">$ \nu = \begin{bmatrix} {}^B \mathrm{v}_{A,B} \newline \dot{s} \end{bmatrix} $</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -377,7 +377,7 @@
 <parametername direction="in">linkVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the velocity of each link of the robot, with velocity expressed with BODY_FIXED representation i.e. for each link <formula id="178">$ $</formula> we have <formula id="179">$ {}^L \mathrm{v}_{A,L} $</formula>, </para>
+<para>the velocity of each link of the robot, with velocity expressed with BODY_FIXED representation i.e. for each link <formula id="321">$ $</formula> we have <formula id="322">$ {}^L \mathrm{v}_{A,L} $</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
