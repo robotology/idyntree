@@ -250,6 +250,52 @@ import_array();
 };
 
 //
+// JointPosDoubleArray
+//
+%extend iDynTree::JointPosDoubleArray {
+    static iDynTree::JointPosDoubleArray FromPython(double* in, int size) {
+        iDynTree::JointPosDoubleArray jntPos;
+        jntPos.resize(static_cast<unsigned>(size));
+        for (int i = 0; i < size; i++) {
+            jntPos(static_cast<unsigned>(i)) = in[i];
+        }
+        return jntPos;
+    }
+
+    JointPosDoubleArray(const double* in_data, const unsigned in_size) {
+        iDynTree::JointPosDoubleArray* jntPos = new iDynTree::JointPosDoubleArray();
+        jntPos->resize(in_size);
+        for (unsigned i = 0; i < in_size; i++) {
+            (*jntPos)(i) = in_data[i];
+        }
+        return jntPos;
+    }
+}
+
+//
+// JointDOFsDoubleArray
+//
+%extend iDynTree::JointDOFsDoubleArray {
+    static iDynTree::JointDOFsDoubleArray FromPython(double* in, int size) {
+        iDynTree::JointDOFsDoubleArray jntDOFs;
+        jntDOFs.resize(static_cast<unsigned>(size));
+        for (int i = 0; i < size; i++) {
+            jntDOFs(static_cast<unsigned>(i)) = in[i];
+        }
+        return jntDOFs;
+    }
+
+    JointDOFsDoubleArray(const double* in_data, const unsigned in_size) {
+        iDynTree::JointDOFsDoubleArray* jntDOFs = new iDynTree::JointDOFsDoubleArray();
+        jntDOFs->resize(in_size);
+        for (unsigned i = 0; i < in_size; i++) {
+            (*jntDOFs)(i) = in_data[i];
+        }
+        return jntDOFs;
+    }
+}
+
+//
 // SpatialVector
 //
 %extend iDynTree::SpatialVector {
