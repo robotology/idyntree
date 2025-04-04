@@ -159,3 +159,4 @@ The development is now supported by the [Artificial Mechanical Intelligence rese
 ## License
 
 iDynTree is licensed under either the BSD-3-Clause license : https://spdx.org/licenses/BSD-3-Clause.html .
+
