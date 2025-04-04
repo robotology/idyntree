@@ -545,7 +545,7 @@ namespace kinematics {
         return true;
     }
 
-    bool setJointLimits(iDynTree::Span<const double> jointLimitsMin, iDynTree::Span<const double> jointLimitsMax)
+    bool InverseKinematicsData::setJointLimits(iDynTree::Span<const double> jointLimitsMin, iDynTree::Span<const double> jointLimitsMax)
     {
         // check that the dimension of the vector is correct
         if((jointLimitsMin.size() != m_jointLimits.size()) || (jointLimitsMax.size() != m_jointLimits.size()))
@@ -573,7 +573,7 @@ namespace kinematics {
       return true;
     }
 
-    bool getJointLimits(iDynTree::Span<double> jointLimitsMin, iDynTree::Span< double> jointLimitsMax)
+    bool InverseKinematicsData::getJointLimits(iDynTree::Span<double> jointLimitsMin, iDynTree::Span< double> jointLimitsMax)
     {
         // check that the dimension of the vector is correct
         if((jointLimitsMin.size() != m_jointLimits.size()) || (jointLimitsMax.size() != m_jointLimits.size()))
