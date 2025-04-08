@@ -21,3 +21,4 @@ dependencies:
   - yarp
   - icub-main 
   - osqp-eigen
+  - xorg-libxrandr
