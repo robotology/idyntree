@@ -47,7 +47,7 @@ jobs:
       run: |
         # Additional dependencies only useful on Linux
         # See https://github.com/robotology/robotology-superbuild/issues/477
-        conda install xorg-libxrandr libgl-devel
+        conda install xorg-xorgproto libgl-devel xorg-libxrandr wayland
 
     # Additional dependencies useful only on Windows
     - name: Dependencies [Conda/Windows]

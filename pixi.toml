@@ -61,7 +61,12 @@ python = "*"
 numpy = "*"
 yarp = "*"
 osqp-eigen = "*"
-# Transitive Irrlicht/SDL dependency
-xorg-libxrandr = "*"
 # Find a way to add this only for supported envs
 # icub-main = "*"
+
+[target.linux.dependencies]
+# Transitive Irrlicht/SDL dependency
+xorg-xorgproto = "*"
+libgl-devel = "*"
+xorg-libxrandr = "*"
+wayland = "*"

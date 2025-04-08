@@ -100,7 +100,7 @@ jobs:
       shell: bash -l {0}
       run: |
         # Additional dependencies only useful on Linux
-        micromamba install xorg-xorgproto libgl-devel
+        micromamba install xorg-xorgproto libgl-devel xorg-libxrandr wayland
 
     - name: Print used environment [Conda]
       shell: bash -l {0}
