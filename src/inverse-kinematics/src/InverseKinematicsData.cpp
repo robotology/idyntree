@@ -545,6 +545,22 @@ namespace kinematics {
         return true;
     }
 
+    bool InverseKinematicsData::setJointLimits(iDynTree::Span<const double> jointLimitsMin, iDynTree::Span<const double> jointLimitsMax)
+    {
+        // check that the dimension of the vector is correct
+        if((jointLimitsMin.size() != m_jointLimits.size()) || (jointLimitsMax.size() != m_jointLimits.size()))
+        {
+            return false;
+        }
+
+        for(size_t i=0; i < m_jointLimits.size(); i++)
+        {
+            m_jointLimits[i] = std::pair<double, double>(jointLimitsMin[i], jointLimitsMax[i]);
+        }
+
+        return true;
+    }
+
     bool InverseKinematicsData::getJointLimits(std::vector<std::pair<double, double> >& jointLimits)
     {
       // check that the dimension of the vector is correct
@@ -555,6 +571,23 @@ namespace kinematics {
       jointLimits = m_jointLimits;
 
       return true;
+    }
+
+    bool InverseKinematicsData::getJointLimits(iDynTree::Span<double> jointLimitsMin, iDynTree::Span< double> jointLimitsMax)
+    {
+        // check that the dimension of the vector is correct
+        if((jointLimitsMin.size() != m_jointLimits.size()) || (jointLimitsMax.size() != m_jointLimits.size()))
+        {
+            return false;
+        }
+
+        for(size_t i=0; i < m_jointLimits.size(); i++)
+        {
+            jointLimitsMin[i] = m_jointLimits[i].first;
+            jointLimitsMax[i] = m_jointLimits[i].second;
+        }
+
+        return true;
     }
 
 }
