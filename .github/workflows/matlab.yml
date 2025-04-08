@@ -28,6 +28,7 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-version: latest
+        environment-file: ci_env.yml
         channels: conda-forge
 
     - name: Setup MATLAB
@@ -39,7 +40,6 @@ jobs:
       run: |
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
         conda config --remove channels defaults
-        conda install cmake compilers make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen glfw
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
