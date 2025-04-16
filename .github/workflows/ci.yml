@@ -21,7 +21,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Release]
-        os: [ubuntu-20.04, macos-13, windows-2019]
+        os: [ubuntu-22.04, macos-13, windows-2019]
 
     steps:
     - uses: actions/checkout@v3
@@ -163,7 +163,6 @@ jobs:
         os:
           - ubuntu-latest
         docker_image:
-          - "ubuntu:20.04"
           - "ubuntu:22.04"
 
     container:
