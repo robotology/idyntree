@@ -55,6 +55,38 @@ import_array();
 %apply (double* IN_ARRAY1, int DIM1) {(const double* linear_data, const std::ptrdiff_t linear_size)};
 %apply (double* IN_ARRAY1, int DIM1) {(const double* angular_data, const std::ptrdiff_t angular_size)};
 
+// NumPy typemaps for Span passed as input argument
+// Custom typemap for a iDynTree::Span<const double> input, or iDynTree::Span<double> input (that is actually an output buffer)
+%define SPAN_TYPEMAP(CTYPE, SPANTYPE)
+  // shared “in” typemap
+  %typemap(in) SPANTYPE {
+    if (!PyArray_Check($input)) {
+      SWIG_exception_fail(SWIG_TypeError, "Expected a numpy array.");
+    }
+    PyArrayObject *arr = reinterpret_cast<PyArrayObject*>($input);
+    if (PyArray_NDIM(arr) != 1 || PyArray_TYPE(arr) != NPY_DOUBLE) {
+      SWIG_exception_fail(SWIG_TypeError,
+          "Expected a 1D numpy array of type float64.");
+    }
+    auto * data = static_cast<CTYPE*>(PyArray_DATA(arr));
+    npy_intp n = PyArray_SIZE(arr);
+    $1 = iDynTree::Span<CTYPE>(data, static_cast<size_t>(n));
+  }
+
+  // shared “typecheck” typemap
+  %typemap(typecheck, precedence=SWIG_TYPECHECK_DOUBLE_PTR) SPANTYPE {
+    PyArrayObject* arr = reinterpret_cast<PyArrayObject*>($input);
+    $1 = ( PyArray_Check($input)
+           && PyArray_NDIM(arr) == 1
+           && PyArray_TYPE(arr) == NPY_DOUBLE )
+         ? 1 : 0;
+  }
+%enddef
+
+// Instantiate for const and non‐const
+SPAN_TYPEMAP(const double,   iDynTree::Span<const double>)
+SPAN_TYPEMAP(double,         iDynTree::Span<double>)
+
 // Map the <Class>::reservedToString method to __str__ so that print(<Object>) automatically works in Python
 %rename(__str__) reservedToString;
 
