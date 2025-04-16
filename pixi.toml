@@ -1,9 +1,5 @@
 [project]
 name = "idyntree"
-# As this version is currently ignored, we do not
-# waste effort in mantain it in synch with the value
-# specified in CMakeLists.txt
-version = "0.0.0"
 description = "iDynTree"
 authors = ["Silvio Traversaro <silvio@traversaro.it>"]
 channels = ["conda-forge"]
@@ -38,9 +34,9 @@ configure = { cmd = [
     ".build",
 ]}
 
-build = { cmd = "cmake --build .build --config Release", depends_on = ["configure"] }
-test = { cmd = "ctest --test-dir .build --build-config Release", depends_on = ["build"] }
-install = { cmd = ["cmake", "--install", ".build", "--config", "Release"], depends_on = ["build"] }
+build = { cmd = "cmake --build .build --config Release", depends-on = ["configure"] }
+test = { cmd = "ctest --test-dir .build --build-config Release", depends-on = ["build"] }
+install = { cmd = ["cmake", "--install", ".build", "--config", "Release"], depends-on = ["build"] }
 uninstall = { cmd = ["cmake", "--build", ".build", "--target", "uninstall"]}
 
 
