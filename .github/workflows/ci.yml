@@ -9,9 +9,9 @@ on:
   - cron:  '0 2 * * *'
 
 env:
-  YCM_TAG: v0.15.1
-  YARP_TAG: v3.8.0
-  ICUB_TAG: v2.1.1
+  YCM_TAG: v0.18.3
+  YARP_TAG: v3.11.2
+  ICUB_TAG: v2.8.2
 
 jobs:
   build-with-conda-dependencies:
