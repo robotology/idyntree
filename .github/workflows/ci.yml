@@ -164,7 +164,6 @@ jobs:
           - ubuntu-latest
         docker_image:
           - "ubuntu:22.04"
-          - "ubuntu:24.04"
 
     container:
       image: ${{ matrix.docker_image }}
