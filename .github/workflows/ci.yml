@@ -164,6 +164,7 @@ jobs:
           - ubuntu-latest
         docker_image:
           - "ubuntu:22.04"
+          - "ubuntu:24.04"
 
     container:
       image: ${{ matrix.docker_image }}
@@ -179,7 +180,7 @@ jobs:
         apt-get -y update
         apt-get -y install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
-            libxml2-dev liboctave-dev python3-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip libglfw3-dev
+            libxml2-dev octave-dev python3-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip libglfw3-dev
 
     - name: Install files to enable compilation of mex files [apt]
       run: |
