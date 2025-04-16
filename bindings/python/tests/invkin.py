@@ -62,8 +62,8 @@ class InvKinTest(unittest.TestCase):
         maxPosWrite = maxPosRead.copy()
         maxPosWrite[0] = 100.0
 
-
-        self.assertTrue(ik.setJointLimits(minPosWrite, maxPosWrite))
+        # For methods that take the data in input, we can pass also a list
+        self.assertTrue(ik.setJointLimits(minPosWrite, list(maxPosWrite)))
         self.assertTrue(ik.getJointLimits(minPosRead, maxPosRead))
 
         self.checkVectorEqual(minPosRead, minPosWrite, "set min joint limits are not equal to the ones read")
