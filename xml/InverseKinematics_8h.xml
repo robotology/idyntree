@@ -6,6 +6,7 @@
     <includes local="no">vector</includes>
     <includes refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includes>
     <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
+    <includes refid="Span_8h" local="no">iDynTree/Span.h</includes>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
     <includedby refid="TransformConstraint_8h" local="no">private/TransformConstraint.h</includedby>
     <incdepgraph>
@@ -55,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="30" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="30" bodyend="45"/>
+        <location file="iDynTree/InverseKinematics.h" line="31" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="31" bodyend="46"/>
       </memberdef>
       <memberdef kind="enum" id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2" prot="public" static="no" strong="no">
         <type></type>
@@ -100,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="66" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="66" bodyend="71"/>
+        <location file="iDynTree/InverseKinematics.h" line="67" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="67" bodyend="72"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -119,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="47" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="47" bodyend="57"/>
+        <location file="iDynTree/InverseKinematics.h" line="48" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="48" bodyend="58"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

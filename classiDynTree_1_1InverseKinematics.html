@@ -230,7 +230,17 @@ $\forall$
             </dt>
             <dd></dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a5b4b33b310711d69dc2b6d840f159df0" class="m-doc">setJointLimits</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jointLimitsMin,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jointLimitsMax) -&gt; bool</span>
+            </dt>
+            <dd></dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a1ad4371be984af63072d7f7ffa1f79ca" class="m-doc">getJointLimits</a>(</span><span class="m-doc-wrap">std::vector&lt;std::pair&lt;double, double&gt;&gt;&amp; jointLimits) -&gt; bool</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8b6f1ca189e803b63fdff9cef7efc691" class="m-doc">getJointLimits</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jointLimitsMin,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jointLimitsMax) -&gt; bool</span>
             </dt>
             <dd></dd>
             <dt>
@@ -772,6 +782,34 @@ $\forall$
             </table>
 <p>Set new joint limits</p><aside class="m-note m-default"><h4>Author</h4><p>Yue Hu</p></aside>
           </div></section>
+          <section class="m-doc-details" id="a5b4b33b310711d69dc2b6d840f159df0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />InverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b4b33b310711d69dc2b6d840f159df0" class="m-doc-self">setJointLimits</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jointLimitsMin,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jointLimitsMax)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">jointLimitsMin</td>
+                  <td>vector of new joint minimum limits to be imposed</td>
+                </tr>
+                <tr>
+                  <td>jointLimitsMax</td>
+                  <td>vector of new joint minimum limits to be imposed</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if successfull, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Set new joint limits (<a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree.Span</a> variant) The input vector must be of size <a href="classiDynTree_1_1Model.html#aca35ec05d4b7358b38df769deb0513a6" class="m-doc">iDynTree::<wbr />Model::<wbr />getNrOfDOFs()</a></p>
+          </div></section>
           <section class="m-doc-details" id="a1ad4371be984af63072d7f7ffa1f79ca"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />InverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ad4371be984af63072d7f7ffa1f79ca" class="m-doc-self">getJointLimits</a>(</span><span class="m-doc-wrap">std::vector&lt;std::pair&lt;double, double&gt;&gt;&amp; jointLimits)</span></span>
@@ -794,6 +832,34 @@ $\forall$
               </tfoot>
             </table>
 <p>Get current joint limits</p><aside class="m-note m-default"><h4>Author</h4><p>Yue Hu</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a8b6f1ca189e803b63fdff9cef7efc691"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />InverseKinematics::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b6f1ca189e803b63fdff9cef7efc691" class="m-doc-self">getJointLimits</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jointLimitsMin,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jointLimitsMax)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">jointLimitsMin</td>
+                  <td>vector of current min joint limits</td>
+                </tr>
+                <tr>
+                  <td>jointLimitsMax</td>
+                  <td>vector of current max joint limits</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if successfull, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Get current joint limits (<a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree.Span</a> variant) The input vector must be of size <a href="classiDynTree_1_1Model.html#aca35ec05d4b7358b38df769deb0513a6" class="m-doc">iDynTree::<wbr />Model::<wbr />getNrOfDOFs()</a></p>
           </div></section>
           <section class="m-doc-details" id="a1d54045ad46403179e3cd3c076802978"><div>
             <h3>

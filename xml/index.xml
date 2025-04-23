@@ -1582,7 +1582,9 @@
     <member refid="classiDynTree_1_1InverseKinematics_1ac3e893981cbfa2afc88a231d1cace9a4" kind="function"><name>loadModelFromFile</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1abb9706235b5fe16f951731ba285582ae" kind="function"><name>setModel</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1aa6e7d22dbc79871a62a0ba4c6e79fb97" kind="function"><name>setJointLimits</name></member>
+    <member refid="classiDynTree_1_1InverseKinematics_1a5b4b33b310711d69dc2b6d840f159df0" kind="function"><name>setJointLimits</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a1ad4371be984af63072d7f7ffa1f79ca" kind="function"><name>getJointLimits</name></member>
+    <member refid="classiDynTree_1_1InverseKinematics_1a8b6f1ca189e803b63fdff9cef7efc691" kind="function"><name>getJointLimits</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a1d54045ad46403179e3cd3c076802978" kind="function"><name>clearProblem</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a238847f4a1308b661cdf14ac4d10caf7" kind="function"><name>setFloatingBaseOnFrameNamed</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a4ed57acc6905dcaeb4596c46ab6d7a47" kind="function"><name>setCurrentRobotConfiguration</name></member>
@@ -1684,7 +1686,9 @@
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aad369db9c76d864b74e07d458f347687" kind="function"><name>InverseKinematicsData</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4024cf4ac217ef5026669d42a2941fdb" kind="function"><name>setModel</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1afd414dae2211bf7ce1422dd6ce3d363a" kind="function"><name>setJointLimits</name></member>
+    <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aac691fcf35654be5bcc87bf945534cef" kind="function"><name>setJointLimits</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aab5189ec5428a2f06d2bd159aca76c8f" kind="function"><name>getJointLimits</name></member>
+    <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ac3931acff44363b905fc43c4f6f35efd" kind="function"><name>getJointLimits</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1af233d4272bccaf07f8bb18a601409312" kind="function"><name>clearProblem</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c744c6b526f138c1144e9339cc55663" kind="function"><name>addFrameConstraint</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a35cf37e77215dd3b862f977a2dee6e05" kind="function"><name>addTarget</name></member>

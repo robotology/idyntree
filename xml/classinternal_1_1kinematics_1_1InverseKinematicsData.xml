@@ -963,6 +963,47 @@
         </inbodydescription>
         <location file="private/InverseKinematicsData.h" line="193" column="10"/>
       </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aac691fcf35654be5bcc87bf945534cef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::InverseKinematicsData::setJointLimits</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; jointLimitsMin, iDynTree::Span&lt; const double &gt; jointLimitsMax)</argsstring>
+        <name>setJointLimits</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>jointLimitsMin</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>jointLimitsMax</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set new joint limits (<ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree.Span</ref> variant) <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>jointLimitsMin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of new joint minimum limits to be imposed </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>jointLimitsMax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of new joint minimum limits to be imposed </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsData.h" line="201" column="11"/>
+      </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aab5189ec5428a2f06d2bd159aca76c8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool internal::kinematics::InverseKinematicsData::getJointLimits</definition>
@@ -992,7 +1033,48 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="201" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="210" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ac3931acff44363b905fc43c4f6f35efd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::InverseKinematicsData::getJointLimits</definition>
+        <argsstring>(iDynTree::Span&lt; double &gt; jointLimitsMin, iDynTree::Span&lt; double &gt; jointLimitsMax)</argsstring>
+        <name>getJointLimits</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jointLimitsMin</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jointLimitsMax</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get current joint limits (<ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree.Span</ref> variant) <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>jointLimitsMin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of current min joint limits </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>jointLimitsMax</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of current max joint limits </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsData.h" line="218" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1af233d4272bccaf07f8bb18a601409312" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1007,7 +1089,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="210" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="227" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c744c6b526f138c1144e9339cc55663" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1037,7 +1119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="218" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="235" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a35cf37e77215dd3b862f977a2dee6e05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1067,7 +1149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="226" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="243" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8ebb124ee9beb562dbc38e9648e7186d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>TransformMap::iterator</type>
@@ -1086,7 +1168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="234" column="28"/>
+        <location file="private/InverseKinematicsData.h" line="251" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0c39acd186e7fb5f5c722540477b2a4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1112,7 +1194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="240" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="257" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a35b4a679bf622ac22edb71b01af50805" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1138,7 +1220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="246" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="263" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a1775720a85f826243379718218e8d53e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1185,7 +1267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="262" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="279" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8de8a8968ae6a9f79db1a97f5e34b529" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1227,7 +1309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="271" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="288" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0cacbe18891573e85909ad4f8529a8a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1254,7 +1336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="278" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="295" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aa8f65f9250c8a39ae91cf01bf28a40ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsRotationParametrization</type>
@@ -1270,7 +1352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="278" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="295" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a68221784c17bc058ab124c0b0e3bb255" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1298,7 +1380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="291" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="308" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c929ce2e94a2edfe1ea6393d2c77e0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -1311,7 +1393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="291" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="308" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aa9604e8cabf70ec1756c26f0584f9f50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1343,7 +1425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="301" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="318" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ad91ba72d38ca2329922b419a8fd506ac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -1363,7 +1445,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="301" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="318" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1abf797e16ca56cefd1fc2bc649c7bc466" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1380,7 +1462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="312" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="329" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aada9e4e0110afc7d4e2e399b1baf620e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> &amp;</type>
@@ -1397,7 +1479,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="319" column="34"/>
+        <location file="private/InverseKinematicsData.h" line="336" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4e71b9e0ec1b1dc245fb8cc57ef4d9e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1418,7 +1500,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="321" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="338" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8ba499d6a8da51f087c2d3878217433b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1435,7 +1517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="323" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="340" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a70d398a424a4c79ddb55922369e27d5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1448,7 +1530,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="325" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="342" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aacbe9650fd690849c7bcf68180ed9087" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1465,7 +1547,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="327" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="344" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0d53088c887338434c5bc3c6dbacc002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1478,7 +1560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="329" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="346" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aa0472bed5ec2d61dbcfce0d1c3d75373" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1491,7 +1573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="331" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="348" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1842,7 +1924,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/InverseKinematicsData.h" line="36" column="1" bodyfile="private/InverseKinematicsData.h" bodystart="36" bodyend="333"/>
+    <location file="private/InverseKinematicsData.h" line="36" column="1" bodyfile="private/InverseKinematicsData.h" bodystart="36" bodyend="350"/>
     <listofallmembers>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c744c6b526f138c1144e9339cc55663" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>addFrameConstraint</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a35cf37e77215dd3b862f977a2dee6e05" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>addTarget</name></member>
@@ -1857,6 +1939,7 @@
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aada9e4e0110afc7d4e2e399b1baf620e" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>dynamics</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a97cad77853f7e239528bde2569109fac" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>fixedVariables</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aab5189ec5428a2f06d2bd159aca76c8f" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>getJointLimits</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ac3931acff44363b905fc43c4f6f35efd" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>getJointLimits</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8ebb124ee9beb562dbc38e9648e7186d" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>getTargetRefIfItExists</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a13f0d1cb435fbb091d7dc32a26cfd5ec" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>InverseKinematicsData</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aad369db9c76d864b74e07d458f347687" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>InverseKinematicsData</name></member>
@@ -1922,6 +2005,7 @@
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a68221784c17bc058ab124c0b0e3bb255" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>setDefaultTargetResolutionMode</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8de8a8968ae6a9f79db1a97f5e34b529" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>setJointConfiguration</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1afd414dae2211bf7ce1422dd6ce3d363a" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>setJointLimits</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aac691fcf35654be5bcc87bf945534cef" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>setJointLimits</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4024cf4ac217ef5026669d42a2941fdb" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>setModel</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a1775720a85f826243379718218e8d53e" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>setRobotConfiguration</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0cacbe18891573e85909ad4f8529a8a7" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>setRotationParametrization</name></member>
