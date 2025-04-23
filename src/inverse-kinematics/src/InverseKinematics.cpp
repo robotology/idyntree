@@ -97,11 +97,31 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::setJointLimits(iDynTree::Span<const double> jointLimitsMin, iDynTree::Span<const double> jointLimitsMax)
+    {
+#ifdef IDYNTREE_USES_IPOPT
+      assert(m_pimpl);
+      return IK_PIMPL(m_pimpl)->setJointLimits(jointLimitsMin, jointLimitsMax);
+#else
+        return missingIpoptErrorReport();
+#endif
+    }
+
     bool InverseKinematics::getJointLimits(std::vector<std::pair<double, double> >& jointLimits)
     {
 #ifdef IDYNTREE_USES_IPOPT
       assert(m_pimpl);
       return IK_PIMPL(m_pimpl)->getJointLimits(jointLimits);
+#else
+        return missingIpoptErrorReport();
+#endif
+    }
+
+    bool InverseKinematics::getJointLimits(iDynTree::Span<double> jointLimitsMin, iDynTree::Span< double> jointLimitsMax)
+    {
+#ifdef IDYNTREE_USES_IPOPT
+      assert(m_pimpl);
+      return IK_PIMPL(m_pimpl)->getJointLimits(jointLimitsMin, jointLimitsMax);
 #else
         return missingIpoptErrorReport();
 #endif

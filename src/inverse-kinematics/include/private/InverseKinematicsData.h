@@ -193,12 +193,29 @@ public:
     bool setJointLimits(std::vector<std::pair<double, double> >& jointLimits);
 
     /*!
+     * Set new joint limits (iDynTree.Span variant)
+     * @param jointLimitsMin vector of new joint minimum limits to be imposed
+     * @param jointLimitsMax vector of new joint minimum limits to be imposed
+     * @return true if successfull, false otherwise
+     */
+     bool setJointLimits(iDynTree::Span<const double> jointLimitsMin, iDynTree::Span<const double> jointLimitsMax);
+
+
+    /*!
      * Get current joint limits
      * \author Yue Hu
      * @param jointLimits vector of current joint limits
      * @return true if successfull, false otherwise
      */
     bool getJointLimits(std::vector<std::pair<double, double> >& jointLimits);
+
+    /*!
+     * Get current joint limits (iDynTree.Span variant)
+     * @param jointLimitsMin vector of current min joint limits
+     * @param jointLimitsMax vector of current max joint limits
+     * @return true if successfull, false otherwise
+     */
+     bool getJointLimits(iDynTree::Span<double> jointLimitsMin, iDynTree::Span< double> jointLimitsMax);
 
     /*!
      * Reset variables to defaults
