@@ -156,10 +156,12 @@ bool SixAxisForceTorqueSensor::updateIndices(const Model& model)
     iDynTree::LinkIndex link1NewIndex = model.getLinkIndex(this->pimpl->link1Name);
     iDynTree::LinkIndex link2NewIndex = model.getLinkIndex(this->pimpl->link2Name);
     iDynTree::LinkIndex appliedWrenchLinkNewIndex = model.getLinkIndex(appliedWrenchLinkName);
+    iDynTree::JointIndex parentJointNewIndex = model.getJointIndex(this->pimpl->parent_junction_name);
 
     if( (link1NewIndex == iDynTree::LINK_INVALID_INDEX) ||
         (link2NewIndex == iDynTree::LINK_INVALID_INDEX) ||
-        (appliedWrenchLinkNewIndex == iDynTree::LINK_INVALID_INDEX) )
+        (appliedWrenchLinkNewIndex == iDynTree::LINK_INVALID_INDEX) ||
+        (parentJointNewIndex == iDynTree::JOINT_INVALID_INDEX) )
     {
         return false;
     }
@@ -167,6 +169,7 @@ bool SixAxisForceTorqueSensor::updateIndices(const Model& model)
     this->pimpl->link1 = link1NewIndex;
     this->pimpl->link2 = link2NewIndex;
     this->pimpl->appliedWrenchLink = appliedWrenchLinkNewIndex;
+    this->pimpl->parent_junction_index = parentJointNewIndex;
 
     return true;
 }
