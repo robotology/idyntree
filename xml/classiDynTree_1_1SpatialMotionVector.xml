@@ -105,10 +105,10 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Cross product between two 6D motion vectors <formula id="201">$ V_1 = \begin{bmatrix} v_1 \\ \omega_1 \end{bmatrix} $</formula> and <formula id="202">$ V_2 = \begin{bmatrix} v_2 \\ \omega_2 \end{bmatrix} $</formula>. </para>
+<para>Cross product between two 6D motion vectors <formula id="62">$ V_1 = \begin{bmatrix} v_1 \\ \omega_1 \end{bmatrix} $</formula> and <formula id="63">$ V_2 = \begin{bmatrix} v_2 \\ \omega_2 \end{bmatrix} $</formula>. </para>
         </briefdescription>
         <detaileddescription>
-<para>Returns: <formula id="203">\[ V_1 \times V_2 = \begin{bmatrix} v_1 \times \omega_2 + \omega_1 \times v_2 \\ \omega_1 \times \omega_2 \end{bmatrix} \]</formula> </para>
+<para>Returns: <formula id="64">\[ V_1 \times V_2 = \begin{bmatrix} v_1 \times \omega_2 + \omega_1 \times v_2 \\ \omega_1 \times \omega_2 \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -124,10 +124,10 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Cross product between a 6D motion vector <formula id="204">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula> and a 6D force vector <formula id="205">$ F = \begin{bmatrix} f \\ \mu \end{bmatrix} $</formula>. </para>
+<para>Cross product between a 6D motion vector <formula id="65">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula> and a 6D force vector <formula id="66">$ F = \begin{bmatrix} f \\ \mu \end{bmatrix} $</formula>. </para>
         </briefdescription>
         <detaileddescription>
-<para>Returns: <formula id="206">\[ V \bar{\times}^* F = \begin{bmatrix} \omega \times f \\ v \times f + \omega \times \mu \end{bmatrix} \]</formula> </para>
+<para>Returns: <formula id="67">\[ V \bar{\times}^* F = \begin{bmatrix} \omega \times f \\ v \times f + \omega \times \mu \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -142,8 +142,8 @@
 <para>Cross product matrices. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="204">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula>, return the 6x6 matrix <formula id="207">$ V\times $</formula> such that, if U is a <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> : <formula id="208">\[ (V \times) U = V\texttt{.cross}(U) \]</formula></para>
-<para>The returned matrix is then the following one: <formula id="209">\[ V \times = \begin{bmatrix} \omega \times &amp; v \times \\ 0_{3\times3} &amp; \omega \times \end{bmatrix} \]</formula> </para>
+<para>If this object is <formula id="65">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula>, return the 6x6 matrix <formula id="68">$ V\times $</formula> such that, if U is a <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> : <formula id="69">\[ (V \times) U = V\texttt{.cross}(U) \]</formula></para>
+<para>The returned matrix is then the following one: <formula id="70">\[ V \times = \begin{bmatrix} \omega \times &amp; v \times \\ 0_{3\times3} &amp; \omega \times \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -155,11 +155,11 @@
         <argsstring>() const</argsstring>
         <name>asCrossProductMatrixWrench</name>
         <briefdescription>
-<para>If this object is <formula id="204">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula>, return the 6x6 matrix <formula id="207">$ V\times $</formula> such that, if F is a <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> : </para>
+<para>If this object is <formula id="65">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula>, return the 6x6 matrix <formula id="68">$ V\times $</formula> such that, if F is a <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> : </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="210">\[ (V \bar{\times}^*) F = V\texttt{.cross}(F) \]</formula></para>
-<para>The returned matrix is then the following one: <formula id="211">\[ V \bar{\times}^* = \begin{bmatrix} \omega \times &amp; 0_{3\times3} \\ v \times &amp; \omega \times \end{bmatrix} \]</formula> </para>
+<para><formula id="71">\[ (V \bar{\times}^*) F = V\texttt{.cross}(F) \]</formula></para>
+<para>The returned matrix is then the following one: <formula id="72">\[ V \bar{\times}^* = \begin{bmatrix} \omega \times &amp; 0_{3\times3} \\ v \times &amp; \omega \times \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>

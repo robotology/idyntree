@@ -789,30 +789,30 @@
         </briefdescription>
         <detaileddescription>
 <para>For each submodel in which there are no external forces, we can write the following equation:</para>
-<para><formula id="85">\[ A w = b \]</formula> Where:<itemizedlist>
-<listitem><para><formula id="86">$w$</formula> is the vector of dimension 6*nrOfFTSensors obtained by stacking the FT sensors measures:</para>
-</listitem><listitem><para><formula id="87">$A$</formula> is a matrix of size 6 x 6*nrOfFTSensors that depends on position in space of the FT sensors</para>
-</listitem><listitem><para><formula id="88">$b$</formula> is a vector of size 6 that depends on the position, velocity, acceleration and gravity of each link in the submodel</para>
+<para><formula id="293">\[ A w = b \]</formula> Where:<itemizedlist>
+<listitem><para><formula id="294">$w$</formula> is the vector of dimension 6*nrOfFTSensors obtained by stacking the FT sensors measures:</para>
+</listitem><listitem><para><formula id="205">$A$</formula> is a matrix of size 6 x 6*nrOfFTSensors that depends on position in space of the FT sensors</para>
+</listitem><listitem><para><formula id="295">$b$</formula> is a vector of size 6 that depends on the position, velocity, acceleration and gravity of each link in the submodel</para>
 </listitem></itemizedlist>
 </para>
 <para>This function provides an easy way to compute A and B . Typically, these quantities are not used online during the estimation of external wrenches or internal torques, but rather as an helper method when calibrating FT sensors.</para>
 <para>In the rest of the documentation, we will refer to this quantities:<itemizedlist>
-<listitem><para>nrOfSubModels ( <formula id="89">$n_{sm}$</formula>): the number of submodels in which the model is divided, as induced by the FT sensors present in the model.</para>
+<listitem><para>nrOfSubModels ( <formula id="296">$n_{sm}$</formula>): the number of submodels in which the model is divided, as induced by the FT sensors present in the model.</para>
 </listitem><listitem><para>nrOfSubModelsWithoutExtWrenches: the number of submodels on which there is no external wrench</para>
-</listitem><listitem><para>nrOfFTSensors ( <formula id="90">$n_{ft}$</formula>): the number of FT sensors present in the model In particular, the value of A and b for a given submodel is the following. First of all, for any submodel $sm$ with no external force, we can write (from Equation 4.19 of <ulink url="https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf">https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf</ulink>, modified to account for all FT sensors in the submodel and to remove external wrenches):</para>
+</listitem><listitem><para>nrOfFTSensors ( <formula id="297">$n_{ft}$</formula>): the number of FT sensors present in the model In particular, the value of A and b for a given submodel is the following. First of all, for any submodel $sm$ with no external force, we can write (from Equation 4.19 of <ulink url="https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf">https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf</ulink>, modified to account for all FT sensors in the submodel and to remove external wrenches):</para>
 </listitem></itemizedlist>
 </para>
-<para><formula id="91">\[ \sum_{s=1}^{n_ft}~\mu_{sm, ft}~\sigma_{sm, ft}~{}_{B_{sm}} X^{ft} \mathrm{f}^{meas}_{ft} = \sum_{L \in \mathbb{L}_{sm}} {}_{B_{sm}} X^{L} {}_L \phi_L \]</formula></para>
+<para><formula id="298">\[ \sum_{s=1}^{n_ft}~\mu_{sm, ft}~\sigma_{sm, ft}~{}_{B_{sm}} X^{ft} \mathrm{f}^{meas}_{ft} = \sum_{L \in \mathbb{L}_{sm}} {}_{B_{sm}} X^{L} {}_L \phi_L \]</formula></para>
 <para>where:<itemizedlist>
-<listitem><para><formula id="92">$ \mu_{sm, ft} $</formula> is equal to <formula id="93">$1$</formula> if the sensor <formula id="94">$ft$</formula> is attached to the submodel <formula id="95">$sm$</formula>, and <formula id="96">$0$</formula> otherwise</para>
-</listitem><listitem><para><formula id="97">$ \sigma_{sm, ft} $</formula> is equal to <formula id="93">$1$</formula> if the sensor <formula id="94">$ft$</formula> is measuring the force applied on submodel <formula id="95">$sm$</formula> or <formula id="98">$-1$</formula> if it is measuring the force that the submodel excerts on its neighbor submodel</para>
-</listitem><listitem><para><formula id="99">$ {B_{sm}} $</formula> is a frame in which this equation is expressed, that for this function it is the base link of the submodel.</para>
+<listitem><para><formula id="299">$ \mu_{sm, ft} $</formula> is equal to <formula id="300">$1$</formula> if the sensor <formula id="301">$ft$</formula> is attached to the submodel <formula id="302">$sm$</formula>, and <formula id="303">$0$</formula> otherwise</para>
+</listitem><listitem><para><formula id="304">$ \sigma_{sm, ft} $</formula> is equal to <formula id="300">$1$</formula> if the sensor <formula id="301">$ft$</formula> is measuring the force applied on submodel <formula id="302">$sm$</formula> or <formula id="305">$-1$</formula> if it is measuring the force that the submodel excerts on its neighbor submodel</para>
+</listitem><listitem><para><formula id="306">$ {B_{sm}} $</formula> is a frame in which this equation is expressed, that for this function it is the base link of the submodel.</para>
 </listitem></itemizedlist>
 </para>
-<para>With this definitions, we can see that A_sm and b_sm for a given submodel <formula id="95">$sm$</formula> can be simply be defined as:</para>
-<para><formula id="100">$ A_{sm} = \begin{bmatrix} \mu_{sm, ft0}~\sigma_{sm, ft(0)}~{}_C X^{ft(0)} &amp; \hdots &amp; \mu_{sm, ft(n_ft-1)}~\sigma_{sm, ft(n_ft-1)}~X^{ft(n_ft-1)} \end{bmatrix} $</formula></para>
-<para><formula id="101">$ w_{sm} = \begin{bmatrix} \mathrm{f}^{meas}_{ft(0)} \\ \vdots \\ \mathrm{f}^{meas}_{ft(n_ft-1)} \end{bmatrix} $</formula></para>
-<para><formula id="102">$ b_{sm} = \sum_{L \in \mathbb{L}_{sm}} {}_C X^{L} {}^L \phi_L $</formula></para>
+<para>With this definitions, we can see that A_sm and b_sm for a given submodel <formula id="302">$sm$</formula> can be simply be defined as:</para>
+<para><formula id="307">$ A_{sm} = \begin{bmatrix} \mu_{sm, ft0}~\sigma_{sm, ft(0)}~{}_C X^{ft(0)} &amp; \hdots &amp; \mu_{sm, ft(n_ft-1)}~\sigma_{sm, ft(n_ft-1)}~X^{ft(n_ft-1)} \end{bmatrix} $</formula></para>
+<para><formula id="308">$ w_{sm} = \begin{bmatrix} \mathrm{f}^{meas}_{ft(0)} \\ \vdots \\ \mathrm{f}^{meas}_{ft(n_ft-1)} \end{bmatrix} $</formula></para>
+<para><formula id="309">$ b_{sm} = \sum_{L \in \mathbb{L}_{sm}} {}_C X^{L} {}^L \phi_L $</formula></para>
 <para><simplesect kind="warning"><para>Before calling this method, either updateKinematicsFromFloatingBase or updateKinematicsFromFixedBase must be called.</para>
 </simplesect>
 <parameterlist kind="param"><parameteritem>
