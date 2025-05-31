@@ -25,6 +25,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Configure VS Toolchain (Windows)
+      if: contains(matrix.os, 'windows')
+      uses: ilammy/msvc-dev-cmd@v1.13.0
+
     - uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-version: latest
@@ -74,10 +78,6 @@ jobs:
         mkdir build
         cd build
         cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DBUILD_TESTING:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
-
-    - name: Configure VS Toolchain (Windows)
-      if: contains(matrix.os, 'windows')
-      uses: ilammy/msvc-dev-cmd@v1.12.1
 
     - name: Setup compilation env variables [Conda/Windows]
       if: contains(matrix.os, 'windows')
