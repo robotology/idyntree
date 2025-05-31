@@ -4,12 +4,12 @@
     <compoundname>Traversal.h</compoundname>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes local="no">vector</includes>
+    <includedby refid="Model_2Traversal_8h" local="no">iDynTree/Model/Traversal.h</includedby>
     <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/GravityCompensationHelpers.h</includedby>
     <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
-    <includedby refid="Model_2Traversal_8h" local="no">iDynTree/Model/Traversal.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Traversal.h</label>

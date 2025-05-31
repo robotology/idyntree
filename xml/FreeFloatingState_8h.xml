@@ -9,11 +9,11 @@
     <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
     <includes local="no">vector</includes>
+    <includedby refid="Model_2FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/GravityCompensationHelpers.h</includedby>
-    <includedby refid="Model_2FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
-    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/FreeFloatingState.h</label>
