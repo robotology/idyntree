@@ -18,8 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [Release]
-        os: [ubuntu-22.04, windows-2019, macos-13]
+        os: [ubuntu-22.04, windows-latest, macos-13]
         matlab_version: [R2022a, R2022b, R2023a]
 
     steps:
@@ -49,14 +48,6 @@ jobs:
         # See https://github.com/robotology/robotology-superbuild/issues/477
         conda install xorg-libxrandr libgl-devel
 
-    # Additional dependencies useful only on Windows
-    - name: Dependencies [Conda/Windows]
-      if: contains(matrix.os, 'windows')
-      run: |
-        # Additional dependencies only useful on Windows
-        # See https://github.com/robotology/robotology-superbuild/issues/477
-        conda install vs2019_win-64
-
     # Workaround for https://github.com/robotology/idyntree/issues/1109
     - name: Dependencies [Conda/macOS]
       if: contains(matrix.os, 'macos')
@@ -81,20 +72,28 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DBUILD_TESTING:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
+        cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -DCMAKE_BUILD_TYPE=Release -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DBUILD_TESTING:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
 
     - name: Configure [Conda - Windows]
+      shell: cmd /C CALL {0}
       if: contains(matrix.os, 'windows')
       run: |
         mkdir build
         cd build
-        cmake  -G"Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/Library -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DBUILD_TESTING:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
+        cmake  -GNinja -DCMAKE_INSTALL_PREFIX=%CONDA_PREFIX%\Library -DCMAKE_BUILD_TYPE=Release -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DBUILD_TESTING:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
 
-
-    - name: Build
+    - name: Build [Conda - Windows]
+      shell: cmd /C CALL {0}
+      if: contains(matrix.os, 'windows')
       run: |
         cd build
-        cmake --build . --config ${{ matrix.build_type }}
+        cmake --build . --config Release
+  
+    - name: Build [Conda - Linux or  macOS]
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+      run: |
+        cd build
+        cmake --build . --config Release
 
     - name: Inspect libraries linked by iDynTreeMEX.mexa64 [Conda/Linux]
       if: contains(matrix.os, 'ubuntu')
@@ -106,9 +105,9 @@ jobs:
       run: |
         cd build
         # Only run matlab tests as the rest of tests are already run by other jobs
-        ctest --output-on-failure -C ${{ matrix.build_type }} -R "matlab" -VV .
+        ctest --output-on-failure -C Release -R "matlab" -VV .
 
     - name: Install [Conda]
       run: |
         cd build
-        cmake --install . --config ${{ matrix.build_type }}
+        cmake --install . --config Release
