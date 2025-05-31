@@ -97,7 +97,7 @@ jobs:
       run: |
         cd build
         # Only run matlab tests as the rest of tests are already run by other jobs
-        ctest --output-on-failure -C ${{ matrix.build_type }} -R "matlab" -VV .
+        ctest --output-on-failure -C Release -R "matlab" -VV .
 
     - name: Install [Conda]
       run: |
