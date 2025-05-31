@@ -102,4 +102,4 @@ jobs:
     - name: Install [Conda]
       run: |
         cd build
-        cmake --install . --config ${{ matrix.build_type }}
+        cmake --install . --config Release
