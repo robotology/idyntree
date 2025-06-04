@@ -51,10 +51,14 @@ public:
 
         // Check the net wrench
         iDynTree::Wrench netWrench = netWrenches(m_model.getLinkIndex(m_linkName));
-        // The z component of the force should be equal to fz
+        // The z component of the force should be equal to fz, all other components should be zero
+        ASSERT_EQUAL_DOUBLE(netWrench.getLinearVec3()(0), 0.0);
+        ASSERT_EQUAL_DOUBLE(netWrench.getLinearVec3()(1), 0.0);
         ASSERT_EQUAL_DOUBLE(netWrench.getLinearVec3()(2), fz);
-        // The x component of the torque should be equal to -x * fz
-        ASSERT_EQUAL_DOUBLE(netWrench.getAngularVec3()(1), -x * fz); 
+        // The y component of the torque should be equal to -x * fz, all other components should be zero
+        ASSERT_EQUAL_DOUBLE(netWrench.getAngularVec3()(0), 0.0);
+        ASSERT_EQUAL_DOUBLE(netWrench.getAngularVec3()(1), -x * fz);
+        ASSERT_EQUAL_DOUBLE(netWrench.getAngularVec3()(2), 0.0);
 
     };
     
