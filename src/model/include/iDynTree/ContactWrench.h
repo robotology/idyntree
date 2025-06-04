@@ -136,9 +136,30 @@ namespace iDynTree
          */
         bool computeNetWrenches(LinkNetExternalWrenches & netWrenches) const;
 
+        /**
+        * Add a new contact for a link.
+        *
+        * @param[in] linkIndex the index of the link for which the contact is added.
+        * @param[in] newContact the new contact wrench to add.
+        */
+        void addNewContactForLink(const LinkIndex linkIndex, const ContactWrench& newContact);
 
         /**
-         * Get a human readable description of the LinkUnknownWrenchContacts (for debug)
+        * Add a new contact for a frame.
+        * If the specified frame is not a link frame, the method automatically convert the
+        * wrench to the relative link frame.
+        *
+        * @param[in] model the model class for getting frame information.
+        * @param[in] frameIndex the index of the frame in which you are expressing the new wrench.
+        * @param[in] newContact the new wrench to add.
+        * @return true if all went well, false otherwise
+        */
+        bool addNewContactInFrame(const Model & model,
+                                const FrameIndex frameIndex,
+                                const ContactWrench& newContact);
+
+        /**
+         * Get a human readable description of the LinkWrenchContacts (for debug)
          */
         std::string toString(const Model& model) const;
     };
