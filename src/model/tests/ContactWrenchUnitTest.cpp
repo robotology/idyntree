@@ -14,12 +14,12 @@ private:
     const std::string m_linkName = "link";
 public:
 
-    OneLinkModel(std::string modelName = "OneLinkModel")
+    OneLinkModel()
+
     {   
         // Create a model with one link
         Link link;
-        const std::string linkName = "link";
-        m_model.addLink(linkName, link);
+        m_model.addLink(m_linkName, link);
 
     }
 
@@ -27,7 +27,7 @@ public:
     {
         // Add a frame to the link. The frame will be used to apply the contact wrench.
         const std::string frameName = "frame";
-        double x = 1.0; // X coordinate of the frame
+        double x = 2.0; // X coordinate of the frame
         iDynTree::Transform link_H_frame(iDynTree::Rotation::Identity(), iDynTree::Position(x, 0, 0));
         m_model.addAdditionalFrameToLink(m_linkName, frameName, link_H_frame);
 
