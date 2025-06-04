@@ -129,6 +129,47 @@ bool LinkContactWrenches::computeNetWrenches(LinkNetExternalWrenches& netWrenche
     return true;
 }
 
+void LinkContactWrenches::addNewContactForLink(const LinkIndex linkIndex, const ContactWrench& newContact)
+{
+    m_linkContactWrenches[linkIndex].push_back(newContact);
+}
+
+bool LinkContactWrenches::addNewContactInFrame(const Model & model,
+                                               const FrameIndex frameIndex,
+                                               const ContactWrench& ContactInFrame)
+{
+    if( !model.isValidFrameIndex(frameIndex) )
+    {
+        std::stringstream err;
+        err << "Unknown frame index " << frameIndex << " in model that has " << model.getNrOfFrames() << " frames.";
+        reportError("LinkContactWrenches","addNewContactInFrame",err.str().c_str());
+        return false;
+    }
+
+    // Get link_H_frame transform
+    iDynTree::Transform link_H_frame = model.getFrameTransform(frameIndex);
+
+    // Get the link of the frame
+    LinkIndex linkIndex = model.getFrameLink(frameIndex);
+
+    if( !model.isValidLinkIndex(linkIndex) )
+    {
+        std::stringstream err;
+        err << "Unknown link index " << linkIndex << " in model that has " << model.getNrOfLinks() << " links.";
+        reportError("LinkContactWrenches","addNewContactInFrame",err.str().c_str());
+        return false;
+    }
+
+    ContactWrench ContactInLink;
+
+    ContactInLink.contactPoint() = link_H_frame*ContactInFrame.contactPoint();
+    ContactInLink.contactWrench() = ContactInFrame.contactWrench();
+
+    addNewContactForLink(linkIndex,ContactInLink);
+
+    return true;
+}
+
 std::string LinkContactWrenches::toString(const Model& model) const
 {
     std::stringstream ss;
