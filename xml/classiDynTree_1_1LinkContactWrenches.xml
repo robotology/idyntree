@@ -246,6 +246,101 @@
         </inbodydescription>
         <location file="iDynTree/ContactWrench.h" line="137" column="14"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a8b3e615ff301768656e1cfeff42086e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkContactWrenches::addNewContactForLink</definition>
+        <argsstring>(const LinkIndex linkIndex, const ContactWrench &amp;newContact)</argsstring>
+        <name>addNewContactForLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> &amp;</type>
+          <declname>newContact</declname>
+        </param>
+        <briefdescription>
+<para>Add a new contact for a link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linkIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the link for which the contact is added. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">newContact</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new contact wrench to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ContactWrench.h" line="145" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a960e471ad92a898163b91b8b01587b69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::LinkContactWrenches::addNewContactInFrame</definition>
+        <argsstring>(const Model &amp;model, const FrameIndex frameIndex, const ContactWrench &amp;newContact)</argsstring>
+        <name>addNewContactInFrame</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>frameIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> &amp;</type>
+          <declname>newContact</declname>
+        </param>
+        <briefdescription>
+<para>Add a new contact for a frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the specified frame is not a link frame, the method automatically convert the wrench to the relative link frame.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model class for getting frame information. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">frameIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the frame in which you are expressing the new wrench. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">newContact</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new wrench to add. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ContactWrench.h" line="157" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a4277c1b8738d1b6bdf5620bdf9d6d850" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
         <definition>std::string iDynTree::LinkContactWrenches::toString</definition>
@@ -256,13 +351,13 @@
           <declname>model</declname>
         </param>
         <briefdescription>
-<para>Get a human readable description of the <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> (for debug) </para>
+<para>Get a human readable description of the LinkWrenchContacts (for debug) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ContactWrench.h" line="143" column="21"/>
+        <location file="iDynTree/ContactWrench.h" line="164" column="21"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -270,8 +365,10 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/ContactWrench.h" line="80" column="5" bodyfile="iDynTree/ContactWrench.h" bodystart="81" bodyend="144"/>
+    <location file="iDynTree/ContactWrench.h" line="80" column="5" bodyfile="iDynTree/ContactWrench.h" bodystart="81" bodyend="165"/>
     <listofallmembers>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a8b3e615ff301768656e1cfeff42086e9" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>addNewContactForLink</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a960e471ad92a898163b91b8b01587b69" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>addNewContactInFrame</name></member>
       <member refid="classiDynTree_1_1LinkContactWrenches_1af2fa68582633a61f84a0865baba0a22b" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>computeNetWrenches</name></member>
       <member refid="classiDynTree_1_1LinkContactWrenches_1aa887236855b6912850f3cc6a62a78f9f" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>contactWrench</name></member>
       <member refid="classiDynTree_1_1LinkContactWrenches_1ae2bc12401d4305ad800bff6821a46ca5" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>contactWrench</name></member>

@@ -125,10 +125,21 @@
               <span class="m-doc-wrap-bumper">auto <a href="#af2fa68582633a61f84a0865baba0a22b" class="m-doc">computeNetWrenches</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; netWrenches) const -&gt; bool</span>
             </dt>
             <dd>Compute the net wrenches vector from the contacts wrenches vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8b3e615ff301768656e1cfeff42086e9" class="m-doc">addNewContactForLink</a>(</span><span class="m-doc-wrap">const LinkIndex linkIndex,
+              const <a href="classiDynTree_1_1ContactWrench.html" class="m-doc">ContactWrench</a>&amp; newContact)</span>
+            </dt>
+            <dd>Add a new contact for a link.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a960e471ad92a898163b91b8b01587b69" class="m-doc">addNewContactInFrame</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const FrameIndex frameIndex,
+              const <a href="classiDynTree_1_1ContactWrench.html" class="m-doc">ContactWrench</a>&amp; newContact) -&gt; bool</span>
+            </dt>
+            <dd>Add a new contact for a frame.</dd>
             <dt id="a4277c1b8738d1b6bdf5620bdf9d6d850">
               <span class="m-doc-wrap-bumper">auto <a href="#a4277c1b8738d1b6bdf5620bdf9d6d850" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model) const -&gt; std::string</span>
             </dt>
-            <dd>Get a human readable description of the <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a> (for debug)</dd>
+            <dd>Get a human readable description of the LinkWrenchContacts (for debug)</dd>
           </dl>
         </section>
         <section>
@@ -202,6 +213,62 @@
               </tfoot>
             </table>
 <p>This is just a loop that sums all the contact wrenches for every link and store the results (expressed in the link frame) in the netWrenches vector.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8b3e615ff301768656e1cfeff42086e9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />LinkContactWrenches::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b3e615ff301768656e1cfeff42086e9" class="m-doc-self">addNewContactForLink</a>(</span><span class="m-doc-wrap">const LinkIndex linkIndex,
+              const <a href="classiDynTree_1_1ContactWrench.html" class="m-doc">ContactWrench</a>&amp; newContact)</span></span>
+            </h3>
+            <p>Add a new contact for a link.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">linkIndex&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the index of the link for which the contact is added.</td>
+                </tr>
+                <tr>
+                  <td>newContact&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the new contact wrench to add.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a960e471ad92a898163b91b8b01587b69"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />LinkContactWrenches::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a960e471ad92a898163b91b8b01587b69" class="m-doc-self">addNewContactInFrame</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const FrameIndex frameIndex,
+              const <a href="classiDynTree_1_1ContactWrench.html" class="m-doc">ContactWrench</a>&amp; newContact)</span></span>
+            </h3>
+            <p>Add a new contact for a frame.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">model&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the model class for getting frame information.</td>
+                </tr>
+                <tr>
+                  <td>frameIndex&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the index of the frame in which you are expressing the new wrench.</td>
+                </tr>
+                <tr>
+                  <td>newContact&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the new wrench to add.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the specified frame is not a link frame, the method automatically convert the wrench to the relative link frame.</p>
           </div></section>
         </section>
       </div>

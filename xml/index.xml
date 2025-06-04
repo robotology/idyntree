@@ -2206,6 +2206,8 @@
     <member refid="classiDynTree_1_1LinkContactWrenches_1aa887236855b6912850f3cc6a62a78f9f" kind="function"><name>contactWrench</name></member>
     <member refid="classiDynTree_1_1LinkContactWrenches_1ae2bc12401d4305ad800bff6821a46ca5" kind="function"><name>contactWrench</name></member>
     <member refid="classiDynTree_1_1LinkContactWrenches_1af2fa68582633a61f84a0865baba0a22b" kind="function"><name>computeNetWrenches</name></member>
+    <member refid="classiDynTree_1_1LinkContactWrenches_1a8b3e615ff301768656e1cfeff42086e9" kind="function"><name>addNewContactForLink</name></member>
+    <member refid="classiDynTree_1_1LinkContactWrenches_1a960e471ad92a898163b91b8b01587b69" kind="function"><name>addNewContactInFrame</name></member>
     <member refid="classiDynTree_1_1LinkContactWrenches_1a4277c1b8738d1b6bdf5620bdf9d6d850" kind="function"><name>toString</name></member>
   </compound>
   <compound refid="classiDynTree_1_1LinkElement" kind="class"><name>iDynTree::LinkElement</name>
