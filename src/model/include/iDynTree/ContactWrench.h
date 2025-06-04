@@ -150,8 +150,8 @@ namespace iDynTree
         * wrench to the relative link frame.
         *
         * @param[in] model the model class for getting frame information.
-        * @param[in] frameIndex the index of the frame in which you are expressing the new unknown wrench.
-        * @param[in] newContact the new unknown wrench to add.
+        * @param[in] frameIndex the index of the frame in which you are expressing the new wrench.
+        * @param[in] newContact the new wrench to add.
         * @return true if all went well, false otherwise
         */
         bool addNewContactInFrame(const Model & model,
@@ -159,7 +159,7 @@ namespace iDynTree
                                 const ContactWrench& newContact);
 
         /**
-         * Get a human readable description of the LinkUnknownWrenchContacts (for debug)
+         * Get a human readable description of the LinkWrenchContacts (for debug)
          */
         std::string toString(const Model& model) const;
     };
