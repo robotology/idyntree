@@ -452,5 +452,5 @@ SPAN_TYPEMAP(double,         iDynTree::Span<double>)
 %attributeref(iDynTree::FreeFloatingVel, iDynTree::JointDOFsDoubleArray&, jointVel)
 %attributeref(iDynTree::FreeFloatingAcc, iDynTree::SpatialAcc&, baseAcc)
 %attributeref(iDynTree::FreeFloatingAcc, iDynTree::JointDOFsDoubleArray&, jointAcc)
-%attributeref(iDynTree::ContactWrench, iDynTree::Wrench&, contactWrench);
+%attributeref(iDynTree::ContactWrench, iDynTree::Wrench&, contactWrench)
 %attributeref(iDynTree::ContactWrench, iDynTree::Position&, contactPoint)
