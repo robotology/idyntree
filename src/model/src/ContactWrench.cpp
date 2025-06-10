@@ -163,7 +163,7 @@ bool LinkContactWrenches::addNewContactInFrame(const Model & model,
     ContactWrench ContactInLink;
 
     ContactInLink.contactPoint() = link_H_frame*ContactInFrame.contactPoint();
-    ContactInLink.contactWrench() = ContactInFrame.contactWrench();
+    ContactInLink.contactWrench() = link_H_frame.getRotation()*ContactInFrame.contactWrench();
 
     addNewContactForLink(linkIndex,ContactInLink);
 
