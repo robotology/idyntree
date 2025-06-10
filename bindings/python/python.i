@@ -18,9 +18,6 @@
 // Include attributes
 %include <attribute.i>
 
-// Include typemaps
-%include "typemaps.i"
-
 // Initialize NumPy
 %init %{
 import_array();
