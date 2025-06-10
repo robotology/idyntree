@@ -18,7 +18,7 @@
 // Include attributes
 %include <attribute.i>
 
-// include typemaps
+// Include typemaps
 %include "typemaps.i"
 
 // Initialize NumPy
