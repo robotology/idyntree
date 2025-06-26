@@ -448,7 +448,7 @@ void checkRandomModels()
 
     for(int i=2; i <= 100; i += 30 )
     {
-        Model randomModel = getRandomModel(i);
+        Model randomModel = getRandomModel(i,/*nrOfAdditionalFrames =*/10, /*onlyRevoluteJoints=*/false, /*includeSphericalJoints=*/true);
 
         std::cout << "Checking reduced model for random model of size: " << i << std::endl;
         checkAll(randomModel);
