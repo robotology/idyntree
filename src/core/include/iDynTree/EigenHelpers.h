@@ -273,6 +273,48 @@ inline Eigen::Matrix<typename Derived::Scalar, 3, 1> unskew(const Eigen::MatrixB
     return (Eigen::Matrix<typename Derived::Scalar, 3, 1>() << mat(2,1), mat(0,2), mat(1,0) ).finished();
 }
 
+/**
+ * Convert a spatial motion vector to its 4x4 matrix representation (wedge operator)
+ * For a spatial motion vector [v; ω], the wedge is [ω^, v; 0, 0]
+ */
+template<class Derived>
+inline Eigen::Matrix<typename Derived::Scalar, 4, 4, Eigen::RowMajor> wedge6dTo4x4d(const Eigen::MatrixBase<Derived> & vec)
+{
+    EIGEN_STATIC_ASSERT_VECTOR_SPECIFIC_SIZE(Derived, 6);
+
+    Eigen::Matrix<typename Derived::Scalar, 4, 4, Eigen::RowMajor> mat;
+    // Extract linear and angular parts
+    Eigen::Matrix<typename Derived::Scalar, 3, 1> linear = vec.template head<3>();
+    Eigen::Matrix<typename Derived::Scalar, 3, 1> angular = vec.template tail<3>();
+
+    // Create skew-symmetric matrix from angular part
+    mat.template block<3,3>(0,0) = skew(angular);
+    // Place linear part in the fourth column
+    mat.template block<3,1>(0,3) = linear;
+    // Fill bottom row with zeros
+    mat.template block<1,4>(3,0).setZero();
+
+    return mat;
+}
+
+/**
+ * Convert a 4x4 matrix to a spatial motion vector (vee operator)
+ * This is the inverse of the wedge operator
+ * For a 4x4 matrix [ω^, v; 0, 0], the vee is [v; ω]
+ */
+template<class Derived>
+inline Eigen::Matrix<typename Derived::Scalar, 6, 1> vee4x4dTo6d(const Eigen::MatrixBase<Derived> & mat)
+{
+    EIGEN_STATIC_ASSERT_MATRIX_SPECIFIC_SIZE(Derived, 4, 4);
+
+    Eigen::Matrix<typename Derived::Scalar, 6, 1> vec;
+    // Extract linear part from the fourth column
+    vec.template head<3>() = mat.template block<3,1>(0,3);
+    // Extract angular part by applying unskew to the top-left 3x3 block
+    vec.template tail<3>() = unskew(mat.template block<3,3>(0,0));
+
+    return vec;
+}
 
 /**
  * Submatrix helpers
