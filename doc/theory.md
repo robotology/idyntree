@@ -3,6 +3,10 @@
 This document summarises the mathematical conventions underlying the **iDynTree** library.
 It is intended to complement the API‑level documentation with a concise reference aimed at developers and researchers, suitable to be easily given in input to Large Language Models (LLMs).
 
+> [!WARNING]  
+> The Markdown+LaTeX support on GitHub has several limitations . The suggested way to consume for a human this file is to open it in Visual Studio Code, and then preview it with `Ctrl+Shift+V`, for example using Visual Studio Code online via this URL: https://github.dev/robotology/idyntree/blob/main/doc/theory.md .
+
+
 If you are not familiar with the topics, this document is probably not a good document for a first introduction, refer instead to this document and their references:
 * [Multibody dynamics notation (version 2)](https://pure.tue.nl/ws/portalfiles/portal/139293126/A_Multibody_Dynamics_Notation_Revision_2_.pdf)
 * [Modelling, Estimation and Identification of Humanoid Robots Dynamics](https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf)
