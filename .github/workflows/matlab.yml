@@ -54,6 +54,12 @@ jobs:
       run: |
         conda install libblas=*=*netlib
 
+    # Workaround for https://github.com/robotology/idyntree/issues/1109
+    - name: Install libxml2 2.10.* for MATLAB compat [Conda/Windows]
+      if: contains(matrix.os, 'windows')
+      run: |
+        conda install libxml2=2.10.*
+
     # workaround for https://github.com/robotology/robotology-superbuild/issues/64
     # and https://github.com/robotology/idyntree/issues/995
     - name: Do not use MATLAB's stdc++ to avoid incompatibilities with other libraries
