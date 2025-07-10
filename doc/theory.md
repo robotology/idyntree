@@ -45,8 +45,8 @@ Properties:
 | **Right-trivialized** | ${}^{A}{\omega}_{A,B} \in \mathbb{R}^{3}$ |  $(\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee}$  | Angular velocity vector expressed in frame $B$ coordinates |
 
 Properties:
-* Change of frame: ${}^{A}{\omega}\_{A,B} = {}^{A}R_B {}^{B}{\omega}_{A,B}$
-* Composition rule: ${}^{A}{\omega}\_{A,C} = {}^{A}{\omega}\_{A,B} + {}^{A}\omega_{B,C}$
+* Change of frame: ${}^{A}{\omega}_{A,B} = {}^{A}R_B {}^{B}{\omega}_{A,B}$
+* Composition rule: ${}^{A}{\omega}_{A,C} = {}^{A}{\omega}_{A,B} + {}^{A}\omega_{B,C}$
 
 
 
