@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, windows-latest, macos-13]
-        matlab_version: [R2022a, R2022b, R2023a]
+        matlab_version: [R2023b, R2024a, R2025a]
 
     steps:
     - uses: actions/checkout@v2
