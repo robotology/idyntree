@@ -13,17 +13,17 @@ If you are not familiar with the topics, this document is probably not a good do
 
 | Symbol | Meaning |
 |--------|---------|
-| $A,B,\dots$ | Frames (right‑handed, orthonormal) |
+| $A,B,\dots$ | Frames (right‑handed, orthonormal) \begin{bmatrix} 1 \end{bmatrix} |
 | $A$ or $W$ | $A$ (absolute) or $W$ (world) typically indicates the inertial frame w.r.t. that is used as a reference for the kinematics and dynamics computations. |
 | ${}^{A}o_{B}\in\mathbb R^{3}$ | Position vector of the origin of frame $B$ expressed in frame $A$ |
 | ${}^{A}R_{B}\in\mathbb R^{3 \times 3}$ | Rotation matrix from frame $B$ to frame $A$ |
-| ${}^{A}\overline{o}_{B}\in\mathbb R^{4}$ | Homogeneous position vector: ${}^{A}\overline{o}_{B} = \begin{bmatrix} {}^{A}o_{B} \\ 1 \end{bmatrix}$ |
+| ${}^{A}\overline{o}_{B}\in\mathbb R^{4}$ | Homogeneous position vector: ${}^{A}\overline{o}\_{B} = \begin{bmatrix} {}^{A}o_{B} \\ 1 \end{bmatrix}$ |
 | ${}^{A}H_{B}\in\mathbb R^{4 \times 4}$ | Homogeneous transformation matrix: ${}^{A}H_{B} = \begin{bmatrix} {}^{A}R_{B} & {}^{A}o_{B} \\ 0^T & 1 \end{bmatrix}$ , such that ${}^{A}\overline{o}_{C} = {}^{A}H_{B} \, {}^{B}\overline{o}_{C}$ |
 | $u^{\wedge} \in \mathbb{R}^{3 \times 3}$ | Skew-symmetric matrix of 3D vector $u = \begin{bmatrix} u_x \\ u_y \\ u_z \end{bmatrix}$: $u^{\wedge} = \begin{bmatrix} 0 & -u_z & u_y \\ u_z & 0 & -u_x \\ -u_y & u_x & 0 \end{bmatrix}$ |
 | $(\cdot)^{\vee}: \mathbb{R}^{3 \times 3} \to \mathbb{R}^3$ | 3D vee operator (inverse of wedge): $(u^{\wedge})^{\vee} = u$. |
 | $u \times v$ | 3D cross product: $u \times v = u^{\wedge} v$ for $u, v \in \mathbb{R}^3$ |
 | ${}^{A}X_B \in \mathbb{R}^{6 \times 6}$ | Transformation matrix for 6D velocities: ${}^{A}X_B = \begin{bmatrix} {}^{A}R_B & 0_{3 \times 3} \\ {}^{A}o_B^{\wedge} {}^{A}R_B & {}^{A}R_B \end{bmatrix}$ |
-| ${}_{A}X^B \in \mathbb{R}^{6 \times 6}$ | Transformation matrix for 6D forces: ${}_{A}X^B = \begin{bmatrix} {}^{A}R_B & {}^{A}o_B^{\wedge} {}^{A}R_B \\ 0_{3 \times 3} & {}^{A}R_B \end{bmatrix}$ |
+| ${}_{A}X^B \in \mathbb{R}^{6 \times 6}$ | Transformation matrix for 6D forces: ${}\_{A}X^B = \begin{bmatrix} {}^{A}R_B & {}^{A}o_B^{\wedge} {}^{A}R_B \\ 0_{3 \times 3} & {}^{A}R_B \end{bmatrix}$ |
 | $\mathrm{v}^{\wedge} \in \mathbb{R}^{4 \times 4}$ | 4D matrix representation of 6D vector $\mathrm{v} = \begin{bmatrix} v \\ \omega \end{bmatrix}$: $\mathrm{v}^{\wedge} = \begin{bmatrix} \omega^{\wedge} & v \\ 0^T & 0 \end{bmatrix}$ |
 | $(\cdot)^{\vee}: \mathbb{R}^{4 \times 4} \to \mathbb{R}^6$ | 6D vee operator (inverse of 6D wedge): $(\mathrm{v}^{\wedge})^{\vee} = \mathrm{v}$|
 | $\mathrm{v} \times \mathrm{u}$ | 6D cross product: $\mathrm{v} \times \mathrm{u} = \begin{bmatrix} \omega_v^{\wedge} & v_v^{\wedge} \\ 0_{3 \times 3} & \omega_v^{\wedge} \end{bmatrix} \mathrm{u} = \begin{bmatrix} \omega_v \times u_v + v_v \times \omega_u \\ \omega_v \times \omega_u \end{bmatrix}$ for $\mathrm{v} = \begin{bmatrix} v_v \\ \omega_v \end{bmatrix}, \mathrm{u} = \begin{bmatrix} u_v \\ \omega_u \end{bmatrix}$ |
@@ -45,8 +45,8 @@ Properties:
 | **Right-trivialized** | ${}^{A}{\omega}_{A,B} \in \mathbb{R}^{3}$ |  $(\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee}$  | Angular velocity vector expressed in frame $B$ coordinates |
 
 Properties:
-* Change of frame: ${}^{A}{\omega}_{A,B} = {}^{A}R_B \, {}^{B}{\omega}_{A,B}$
-* Composition rule: ${}^{A}{\omega}_{A,C} = {}^{A}{\omega}_{A,B} + {}^{A}\omega_{B,C}$
+* Change of frame: ${}^{A}{\omega}\_{A,B} = {}^{A}R_B {}^{B}{\omega}_{A,B}$
+* Composition rule: ${}^{A}{\omega}\_{A,C} = {}^{A}{\omega}\_{A,B} + {}^{A}\omega_{B,C}$
 
 
 
@@ -57,7 +57,7 @@ Properties:
 |----------------|--------|------------|------------|
 | **Left-trivialized** | ${}^{B}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | $({}^{A}H_{B}^{-1} \dot{{}^{A}H_{B}})^{\vee}$ | $\begin{bmatrix} {}^{B}v_{B} \\ {}^{B}\omega_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}R_{B}^{-1} {}^{A}\dot{o}_{B} \\ ({}^{A}R_{B}^{-1} \dot{{}^{A}R_{B}})^{\vee} \end{bmatrix}$ |
 | **Right-trivialized** | ${}^{A}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | $(\dot{{}^{A}H_{B}} {}^{A}H_{B}^{-1})^{\vee}$ | $\begin{bmatrix} {}^{A}v_{B} \\ {}^{A}\omega_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\dot{o}_{B} - \dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1} {}^{A}o_B \\ (\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee} \end{bmatrix}$ |
-| **Mixed** (iDynTree default) | ${}^{A[B]}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | ${}^{A[B]}X_B \, {}^{B}v_{A,B}$ = ${}^{A[B]}X_A \, {}^{A}\mathrm{v}_{A,B}$ | $\begin{bmatrix} {}^{A}v_{o_B} \\ {}^{A}{\omega}_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\dot{o}_{B} \\ (\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee} \end{bmatrix}$ |
+| **Mixed** (iDynTree default) | ${}^{A[B]}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | ${}^{A[B]}X_B {}^{B}\mathrm{v}\_{A,B}$ = ${}^{A[B]}X_A {}^{A}\mathrm{v}_{A,B}$ | $\begin{bmatrix} {}^{A}v_{o_B} \\ {}^{A}{\omega}_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\dot{o}_{B} \\ (\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee} \end{bmatrix}$ |
 
 
 ---
@@ -99,7 +99,7 @@ This quantity is the quantity that is retuned by the `iDynTree::IJoint::getTrans
 This function completely describes all the kinematic properties of the joint. However, as iDynTree is a C++ library that does not return a differentiable representation of a function, but just implements the function itself in C++, it is also necessary to expose somehow the properties related to the velocity of the joint. This is implemented by functions that return the so-called **spatial motion subspace**, that is defined as follows:
 
 $$
-{}^C \mathrm{s}_{P, C}(\theta) \in \mathbb{R}^{6 \times N_{dof}^J}, \quad {}^C \mathrm{v}_{P,C} = {}^C \mathrm{s}_{P, C}(\theta) \nu_\theta
+{}^C \mathrm{s}\_{P, C}(\theta) \in \mathbb{R}^{6 \times N_{dof}^J}, \quad {}^C \mathrm{v}_{P,C} = {}^C \mathrm{s}_{P, C}(\theta) \nu_\theta
 $$
 
 In theory, the quantity ${}^C \mathrm{s}_{P, C}(\theta)$ depends on $\theta$, but for many simple joints it doesn't, so the `iDynTree::IJoint` interface assumes that it is actually independent of $\theta$.
@@ -116,13 +116,13 @@ How are ${}^C H_P(\theta)$ and ${}^C \mathrm{s}_{P, C}(\theta)$ related?
 As you can write that using the definition of left-trivialized 6D velocity that:
 
 $$
-{}^P H_C {}^C \mathrm{v}_{P,C}^{\wedge} = {}^P \dot{H}_C
+{}^P H_C {}^C \mathrm{v}\_{P,C}^{\wedge} = {}^P \dot{H}_C
 $$
 
 substituting the spatial motion subspace matrix, we have:
 
 $$
-{}^P H_C {}^C \left(\mathrm{s}_{P, C}(\theta) \nu_\theta\right)^{\wedge} = {}^P \dot{H}_C
+{}^P H_C {}^C \left(\mathrm{s}\_{P, C}(\theta) \nu_\theta\right)^{\wedge} = {}^P \dot{H}_C
 $$
 
 This relation is used in Joint-related unit tests to make sure that the joint methods are consistent with the mathemathical definition of the `iDynTree::IJoint` interface.
