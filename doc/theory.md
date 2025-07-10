@@ -15,24 +15,24 @@ If you are not familiar with the topics, this document is probably not a good do
 |--------|---------|
 | $A,B,\dots$ | Frames (right‑handed, orthonormal) |
 | $A$ or $W$ | $A$ (absolute) or $W$ (world) typically indicates the inertial frame w.r.t. that is used as a reference for the kinematics and dynamics computations. |
-| ${}^{A}\!o_{B}\in\mathbb R^{3}$ | Position vector of the origin of frame $B$ expressed in frame $A$ |
-| ${}^{A}\!R_{B}\in\mathbb R^{3 \times 3}$ | Rotation matrix from frame $B$ to frame $A$ |
-| ${}^{A}\!\overline{o}_{B}\in\mathbb R^{4}$ | Homogeneous position vector: ${}^{A}\!\overline{o}_{B} = \begin{bmatrix} {}^{A}\!o_{B} \\ 1 \end{bmatrix}$ |
-| ${}^{A}\!H_{B}\in\mathbb R^{4 \times 4}$ | Homogeneous transformation matrix: ${}^{A}\!H_{B} = \begin{bmatrix} {}^{A}\!R_{B} & {}^{A}\!o_{B} \\ 0^T & 1 \end{bmatrix}$ , such that ${}^{A}\!\overline{o}_{C} = {}^{A}\!H_{B} \, {}^{B}\!\overline{o}_{C}$ |
+| ${}^{A}o_{B}\in\mathbb R^{3}$ | Position vector of the origin of frame $B$ expressed in frame $A$ |
+| ${}^{A}R_{B}\in\mathbb R^{3 \times 3}$ | Rotation matrix from frame $B$ to frame $A$ |
+| ${}^{A}\overline{o}_{B}\in\mathbb R^{4}$ | Homogeneous position vector: ${}^{A}\overline{o}_{B} = \begin{bmatrix} {}^{A}o_{B} \\ 1 \end{bmatrix}$ |
+| ${}^{A}H_{B}\in\mathbb R^{4 \times 4}$ | Homogeneous transformation matrix: ${}^{A}H_{B} = \begin{bmatrix} {}^{A}R_{B} & {}^{A}o_{B} \\ 0^T & 1 \end{bmatrix}$ , such that ${}^{A}\overline{o}_{C} = {}^{A}H_{B} \, {}^{B}\overline{o}_{C}$ |
 | $u^{\wedge} \in \mathbb{R}^{3 \times 3}$ | Skew-symmetric matrix of 3D vector $u = \begin{bmatrix} u_x \\ u_y \\ u_z \end{bmatrix}$: $u^{\wedge} = \begin{bmatrix} 0 & -u_z & u_y \\ u_z & 0 & -u_x \\ -u_y & u_x & 0 \end{bmatrix}$ |
 | $(\cdot)^{\vee}: \mathbb{R}^{3 \times 3} \to \mathbb{R}^3$ | 3D vee operator (inverse of wedge): $(u^{\wedge})^{\vee} = u$. |
 | $u \times v$ | 3D cross product: $u \times v = u^{\wedge} v$ for $u, v \in \mathbb{R}^3$ |
-| ${}^{A}X_B \in \mathbb{R}^{6 \times 6}$ | Transformation matrix for 6D velocities: ${}^{A}X_B = \begin{bmatrix} {}^{A}\!R_B & 0_{3 \times 3} \\ {}^{A}o_B^{\wedge} {}^{A}\!R_B & {}^{A}\!R_B \end{bmatrix}$ |
-| ${}_{A}X^B \in \mathbb{R}^{6 \times 6}$ | Transformation matrix for 6D forces: ${}_{A}X^B = \begin{bmatrix} {}^{A}\!R_B & {}^{A}o_B^{\wedge} {}^{A}\!R_B \\ 0_{3 \times 3} & {}^{A}\!R_B \end{bmatrix}$ |
+| ${}^{A}X_B \in \mathbb{R}^{6 \times 6}$ | Transformation matrix for 6D velocities: ${}^{A}X_B = \begin{bmatrix} {}^{A}R_B & 0_{3 \times 3} \\ {}^{A}o_B^{\wedge} {}^{A}R_B & {}^{A}R_B \end{bmatrix}$ |
+| ${}_{A}X^B \in \mathbb{R}^{6 \times 6}$ | Transformation matrix for 6D forces: ${}_{A}X^B = \begin{bmatrix} {}^{A}R_B & {}^{A}o_B^{\wedge} {}^{A}R_B \\ 0_{3 \times 3} & {}^{A}R_B \end{bmatrix}$ |
 | $\mathrm{v}^{\wedge} \in \mathbb{R}^{4 \times 4}$ | 4D matrix representation of 6D vector $\mathrm{v} = \begin{bmatrix} v \\ \omega \end{bmatrix}$: $\mathrm{v}^{\wedge} = \begin{bmatrix} \omega^{\wedge} & v \\ 0^T & 0 \end{bmatrix}$ |
 | $(\cdot)^{\vee}: \mathbb{R}^{4 \times 4} \to \mathbb{R}^6$ | 6D vee operator (inverse of 6D wedge): $(\mathrm{v}^{\wedge})^{\vee} = \mathrm{v}$|
 | $\mathrm{v} \times \mathrm{u}$ | 6D cross product: $\mathrm{v} \times \mathrm{u} = \begin{bmatrix} \omega_v^{\wedge} & v_v^{\wedge} \\ 0_{3 \times 3} & \omega_v^{\wedge} \end{bmatrix} \mathrm{u} = \begin{bmatrix} \omega_v \times u_v + v_v \times \omega_u \\ \omega_v \times \omega_u \end{bmatrix}$ for $\mathrm{v} = \begin{bmatrix} v_v \\ \omega_v \end{bmatrix}, \mathrm{u} = \begin{bmatrix} u_v \\ \omega_u \end{bmatrix}$ |
 
 
 Properties:
-* Rotation matrix inverse is transpose: ${}^{B}{R}_{A} = {}^{A}{R}_{B}^{-1} = {}^{A}{R}_{B}^T$
+* Rotation matrix inverse is transpose: ${}^{B}R_{A} = {}^{A}R_{B}^{-1} = {}^{A}R_{B}^T$
 * Composition rule for rotations: ${}^A R_C = {}^A R_B {}^B R_C $
-* Composition rule for homegenous transf: ${}^A H_C = {}^A H_B {}^B H_C $
+* Composition rule for homogeneous transf: ${}^A H_C = {}^A H_B {}^B H_C $
 
 
 ---
@@ -41,11 +41,11 @@ Properties:
 
 | Representation | Symbol | Definition | Physical Meaning |
 |----------------|--------|------------|------------------|
-| **Left-trivialized** | ${}^{B}{\omega}_{A,B} \in \mathbb{R}^{3}$ | $({}^{A}\!R_{B}^{-1} \dot{{}^{A}\!R_{B}})^{\vee}$ | Angular velocity vector expressed in frame $A$ coordinates |
-| **Right-trivialized** | ${}^{A}{\omega}_{A,B} \in \mathbb{R}^{3}$ |  $(\dot{{}^{A}\!R_{B}} {}^{A}\!R_{B}^{-1})^{\vee}$  | Angular velocity vector expressed in frame $B$ coordinates |
+| **Left-trivialized** | ${}^{B}{\omega}_{A,B} \in \mathbb{R}^{3}$ | $({}^{A}R_{B}^{-1} \dot{{}^{A}R_{B}})^{\vee}$ | Angular velocity vector expressed in frame $A$ coordinates |
+| **Right-trivialized** | ${}^{A}{\omega}_{A,B} \in \mathbb{R}^{3}$ |  $(\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee}$  | Angular velocity vector expressed in frame $B$ coordinates |
 
 Properties:
-* Change of frame: ${}^{A}{\omega}_{A,B} = {}^{A}\!R_B \, {}^{B}{\omega}_{A,B}$
+* Change of frame: ${}^{A}{\omega}_{A,B} = {}^{A}R_B \, {}^{B}{\omega}_{A,B}$
 * Composition rule: ${}^{A}{\omega}_{A,C} = {}^{A}{\omega}_{A,B} + {}^{A}\omega_{B,C}$
 
 
@@ -55,14 +55,14 @@ Properties:
 
 | Representation | Symbol | Definition | Components |
 |----------------|--------|------------|------------|
-| **Left-trivialized** | ${}^{B}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | $({}^{A}\!H_{B}^{-1} \dot{{}^{A}\!H_{B}})^{\vee}$ | $\begin{bmatrix} {}^{B}v_{B} \\ {}^{B}\omega_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\!R_{B}^{-1} {}^{A}\dot{o}_{B} \\ ({}^{A}\!R_{B}^{-1} \dot{{}^{A}\!R_{B}})^{\vee} \end{bmatrix}$ |
-| **Right-trivialized** | ${}^{A}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | $(\dot{{}^{A}\!H_{B}} {}^{A}\!H_{B}^{-1})^{\vee}$ | $\begin{bmatrix} {}^{A}v_{B} \\ {}^{A}\omega_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\dot{o}_{B} - \dot{{}^{A}\!R_{B}} {}^{A}\!R_{B}^{-1} {}^{A}o_B \\ (\dot{{}^{A}\!R_{B}} {}^{A}\!R_{B}^{-1})^{\vee} \end{bmatrix}$ |
-| **Mixed** (iDynTree default) | ${}^{A[B]}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | ${}^{A[B]}X_B \, {}^{B}v_{A,B}$ = ${}^{A[B]}X_A \, {}^{A}\mathrm{v}_{A,B}$ | $\begin{bmatrix} {}^{A}v_{o_B} \\ {}^{A}{\omega}_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\dot{o}_{B} \\ (\dot{{}^{A}\!R_{B}} {}^{A}\!R_{B}^{-1})^{\vee} \end{bmatrix}$ |
+| **Left-trivialized** | ${}^{B}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | $({}^{A}H_{B}^{-1} \dot{{}^{A}H_{B}})^{\vee}$ | $\begin{bmatrix} {}^{B}v_{B} \\ {}^{B}\omega_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}R_{B}^{-1} {}^{A}\dot{o}_{B} \\ ({}^{A}R_{B}^{-1} \dot{{}^{A}R_{B}})^{\vee} \end{bmatrix}$ |
+| **Right-trivialized** | ${}^{A}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | $(\dot{{}^{A}H_{B}} {}^{A}H_{B}^{-1})^{\vee}$ | $\begin{bmatrix} {}^{A}v_{B} \\ {}^{A}\omega_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\dot{o}_{B} - \dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1} {}^{A}o_B \\ (\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee} \end{bmatrix}$ |
+| **Mixed** (iDynTree default) | ${}^{A[B]}\mathrm{v}_{A,B} \in \mathbb{R}^{6}$ | ${}^{A[B]}X_B \, {}^{B}v_{A,B}$ = ${}^{A[B]}X_A \, {}^{A}\mathrm{v}_{A,B}$ | $\begin{bmatrix} {}^{A}v_{o_B} \\ {}^{A}{\omega}_{A,B} \end{bmatrix} = \begin{bmatrix} {}^{A}\dot{o}_{B} \\ (\dot{{}^{A}R_{B}} {}^{A}R_{B}^{-1})^{\vee} \end{bmatrix}$ |
 
 
 ---
 
-## Multibody model: the `iDynTree::Model` clas
+## Multibody model: the `iDynTree::Model` class
 
 ### Links, joints and the *floating* base
 
@@ -73,7 +73,7 @@ Properties:
 
 ### Frames attached to a link and additional frames
 
-Each link $L$ is associated with a body‑fixed frame, that is identified with the same name and index of the link. Furthemore, to a single link multiple "additional frames" (beside the link frame).
+Each link $L$ is associated with a body‑fixed frame, that is identified with the same name and index of the link. Furthermore, a single link can have multiple "additional frames" (besides the link frame).
 
 ---
 
@@ -81,14 +81,14 @@ Each link $L$ is associated with a body‑fixed frame, that is identified with t
 
 A joint connecting two links is represented by an instance of a class that inherits from the `iDynTree::IJoint` C++ interface (i.e. pure virtual class). As the `iDynTree::Model` represent links as joint as an *undirected graph*, a joint is associated with two links called *first* and *second* link, but that **does not mean** that the *first* is the parent and the *second* is the child: the `iDynTree::IJoint` interface is fully direction agnostic, and joint properties can be queried by the method of the interface specifying with an argument which link should be considered the parent ($P$) and which the child ($C$).
 
-The position of a joint $J$ is represented by a vector $\theta \in \mathrm{R}^{N_{pc}^J}$, where $N_{pc}$ is the number of the position coordinates of the joint (`iDynTree::Joint::getNrOfPosCoords()`), while its velocity is represented by $\nu_\theta \in \mathrm{R}^{N_{dof}^J}$, where is the number of degrees of freedom of the joint (`iDynTree::Joint::getNrOfDOFs()`).
+The position of a joint $J$ is represented by a vector $\theta \in \mathbb{R}^{N_{pc}^J}$, where $N_{pc}$ is the number of the position coordinates of the joint (`iDynTree::Joint::getNrOfPosCoords()`), while its velocity is represented by $\nu_\theta \in \mathbb{R}^{N_{dof}^J}$, where $N_{dof}^J$ is the number of degrees of freedom of the joint (`iDynTree::Joint::getNrOfDOFs()`).
 
 For simple joints we have that $N_{pc}^J = N_{dof}^J$ and $\nu_\theta  = \dot{\theta}$, while this may not be true for complex joints such as the spherical joint.
 
 The fundamental mathematical abstraction of the joint is its called forward kinematics, i.e. the mapping between its position $\theta \in \mathrm{R}^{N_{pc}^J}$ and the homogenous transform between the links $B$ and $D$ to which it is connected:
 
 $$
-{}^C H_P(\theta) : \mathrm{R}^{N_{pc}^J} \mapsto  \mathrm{R}^{4 \times 4}
+{}^C H_P(\theta) : \mathbb{R}^{N_{pc}^J} \mapsto \mathbb{R}^{4 \times 4}
 $$
 
 This quantity is the quantity that is retuned by the `iDynTree::IJoint::getTransform(const VectorDynSize& jntPos, const LinkIndex child, const LinkIndex parent)` method, where the argument are interpreted as in the following:
@@ -96,13 +96,13 @@ This quantity is the quantity that is retuned by the `iDynTree::IJoint::getTrans
 * `child` out of the two links to which the joint is connected, this is the one that should be considered as $C$
 * `parent` out of the two links to which the joint is connected, this is the one that should be considered as $P$
 
-This function describes completly all the kinematic properties of the joint. However, as iDynTree is a C++ library that does not return a diffentiable rapresentation of a function, but just implement the function itself in C++, it is also necessary to expose somehow the properties related to the velocity of the joint. This is implemented by functions that return the so **spatial motion subspace**, that is defined as in the following:
+This function completely describes all the kinematic properties of the joint. However, as iDynTree is a C++ library that does not return a differentiable representation of a function, but just implements the function itself in C++, it is also necessary to expose somehow the properties related to the velocity of the joint. This is implemented by functions that return the so-called **spatial motion subspace**, that is defined as follows:
 
 $$
-{}^C \mathrm{s}_{P, C}(\theta) \in \mathbb{R}^{6 \times N_{dof}^J} {}^C \mathrm{v}_{P,C} = {}^C \mathrm{s}_{P, C}(\theta) \nu_\theta
+{}^C \mathrm{s}_{P, C}(\theta) \in \mathbb{R}^{6 \times N_{dof}^J}, \quad {}^C \mathrm{v}_{P,C} = {}^C \mathrm{s}_{P, C}(\theta) \nu_\theta
 $$
 
-In theory, the quantity ${}^C \mathrm{s}_{P, C}(\theta)$ depends on $\theta$, but it does not depend on  $\theta$ for many simple joints, so the `iDynTree::IJoint` interface assumes that it is actually independent of $\theta$.
+In theory, the quantity ${}^C \mathrm{s}_{P, C}(\theta)$ depends on $\theta$, but for many simple joints it doesn't, so the `iDynTree::IJoint` interface assumes that it is actually independent of $\theta$.
 
 There are $N_{dof}^J$ columns in the ${}^C \mathrm{s}_{P, C}$ matrix, and each column is returned by the `iDynTree::IJoint::getMotionSubspaceVector(int dof_i, const LinkIndex child, const LinkIndex parent)` method, where the arguments are:
 * `dof_i` a number from 0 to $N_{dof}^J-1$ that identified the column to retrieve of ${}^C \mathrm{s}_{P, C}$.
@@ -119,7 +119,7 @@ $$
 {}^P H_C {}^C \mathrm{v}_{P,C}^{\wedge} = {}^P \dot{H}_C
 $$
 
-substiting the spatial motion subspace matrix, we have:
+substituting the spatial motion subspace matrix, we have:
 
 $$
 {}^P H_C {}^C \left(\mathrm{s}_{P, C}(\theta) \nu_\theta\right)^{\wedge} = {}^P \dot{H}_C
@@ -150,7 +150,7 @@ Beside this informations, each specific type of joint has its own parameters.
 | `getNrOfPosCoords()` | $N_{pc}^J$ | 0 |
 | `getNrOfDOFs()`  |  $N_{dof}^J$ | 0 |
 
-This is the simplest type of joint, it represent two links that are rigidly attached to each other. The returned transform is always the rest transform, and the ${}^C \mathrm{s}_{P, C}$ matrix$ motion subspace matrix is a matrix with $0$ columns.
+This is the simplest type of joint, it represents two links that are rigidly attached to each other. The returned transform is always the rest transform, and the ${}^C \mathrm{s}_{P, C}$ motion subspace matrix is a matrix with $0$ columns.
 
 #### 1-dof joints
 
