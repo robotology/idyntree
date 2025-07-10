@@ -13,7 +13,7 @@ If you are not familiar with the topics, this document is probably not a good do
 
 | Symbol | Meaning |
 |--------|---------|
-| $A,B,\dots$ | Frames (right‑handed, orthonormal) \begin{bmatrix} 1 \end{bmatrix} |
+| $A,B,\dots$ | Frames (right‑handed, orthonormal) |
 | $A$ or $W$ | $A$ (absolute) or $W$ (world) typically indicates the inertial frame w.r.t. that is used as a reference for the kinematics and dynamics computations. |
 | ${}^{A}o_{B}\in\mathbb R^{3}$ | Position vector of the origin of frame $B$ expressed in frame $A$ |
 | ${}^{A}R_{B}\in\mathbb R^{3 \times 3}$ | Rotation matrix from frame $B$ to frame $A$ |
