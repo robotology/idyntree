@@ -8,11 +8,11 @@
     <includes refid="SpatialMomentum_8h" local="no">iDynTree/SpatialMomentum.h</includes>
     <includes refid="SpatialAcc_8h" local="no">iDynTree/SpatialAcc.h</includes>
     <includes refid="Wrench_8h" local="no">iDynTree/Wrench.h</includes>
-    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/DynamicsUtils.h</includedby>
-    <includedby refid="Link_8h" local="no">iDynTree/Link.h</includedby>
     <includedby refid="Core_2SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
     <includedby refid="Core_2SpatialInertiaRaw_8h" local="no">iDynTree/Core/SpatialInertiaRaw.h</includedby>
     <includedby refid="SpatialInertiaRaw_8h" local="no">iDynTree/SpatialInertiaRaw.h</includedby>
+    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/DynamicsUtils.h</includedby>
+    <includedby refid="Link_8h" local="no">iDynTree/Link.h</includedby>
     <innerclass refid="classiDynTree_1_1SpatialInertia" prot="public">iDynTree::SpatialInertia</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

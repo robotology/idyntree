@@ -220,6 +220,16 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a8e4347585aaeb967bfb2916b135b9357" class="m-doc-self">unskew</a>(</span><span class="m-doc-wrap">const Eigen::MatrixBase&lt;Derived&gt;&amp; mat) -&gt; Eigen::Matrix&lt;typename Derived::Scalar, 3, 1&gt;</span>
             </dt>
             <dd><span></span></dd>
+            <dt id="afdc6aa2eb9f7336bab5dcc93ce434d69">
+              <div class="m-doc-template">template&lt;class Derived&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#afdc6aa2eb9f7336bab5dcc93ce434d69" class="m-doc-self">wedge6dTo4x4d</a>(</span><span class="m-doc-wrap">const Eigen::MatrixBase&lt;Derived&gt;&amp; vec) -&gt; Eigen::Matrix&lt;typename Derived::Scalar, 4, 4, Eigen::RowMajor&gt;</span>
+            </dt>
+            <dd>Convert a spatial motion vector to its 4x4 matrix representation (wedge operator) For a spatial motion vector [v; ω], the wedge is [ω^, v; 0, 0].</dd>
+            <dt id="aa729e01f528b84f9abd8029f3a05bc4f">
+              <div class="m-doc-template">template&lt;class Derived&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa729e01f528b84f9abd8029f3a05bc4f" class="m-doc-self">vee4x4dTo6d</a>(</span><span class="m-doc-wrap">const Eigen::MatrixBase&lt;Derived&gt;&amp; mat) -&gt; Eigen::Matrix&lt;typename Derived::Scalar, 6, 1&gt;</span>
+            </dt>
+            <dd>Convert a 4x4 matrix to a spatial motion vector (vee operator) This is the inverse of the wedge operator For a 4x4 matrix [ω^, v; 0, 0], the vee is [v; ω].</dd>
             <dt id="ab923f233e9624344a28e361ddc2c4c10">
               <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols, typename iDynTreeMatrixType&gt;</div>
               <span class="m-doc-wrap-bumper">void <a href="#ab923f233e9624344a28e361ddc2c4c10" class="m-doc-self">setSubMatrix</a>(</span><span class="m-doc-wrap">iDynTreeMatrixType&amp; mat,
