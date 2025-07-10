@@ -1,0 +1,21 @@
+name: idyntreematlabdev
+channels:
+  - conda-forge
+dependencies:
+  - cmake 
+  - cxx-compiler
+  - make 
+  - ninja
+  - pkg-config 
+  - eigen
+  # Workaround for https://github.com/robotology/idyntree/issues/1251
+  - libxml2=2.10.*
+  - assimp
+  - ipopt
+  - irrlicht
+  - glfw>=3.4
+  - swig
+  - pybind11
+  - python
+  - numpy 
+  - osqp-eigen

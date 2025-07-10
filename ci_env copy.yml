@@ -1,0 +1,22 @@
+name: idyntreedev
+channels:
+  - conda-forge
+dependencies:
+  - cmake 
+  - cxx-compiler
+  - make 
+  - ninja
+  - pkg-config 
+  - eigen
+  - libxml2
+  - assimp
+  - ipopt
+  - irrlicht
+  - glfw>=3.4
+  - swig
+  - pybind11
+  - python
+  - numpy 
+  - yarp
+  - icub-main 
+  - osqp-eigen

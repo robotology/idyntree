@@ -27,7 +27,7 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v3
       with:
         miniforge-version: latest
-        environment-file: ci_env.yml
+        environment-file: ci_env_matlab.yml
         channels: conda-forge
 
     - name: Setup MATLAB
