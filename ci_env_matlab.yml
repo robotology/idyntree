@@ -12,8 +12,6 @@ dependencies:
   - libxml2=2.10.*
   - assimp
   - ipopt
-  - irrlicht
-  - glfw>=3.4
   - swig
   - pybind11
   - python
