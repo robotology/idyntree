@@ -9,6 +9,8 @@
 #include <iDynTree/TransformDerivative.h>
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/EigenHelpers.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/MatrixFixSize.h>
 
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/PrismaticJoint.h>
@@ -106,43 +108,97 @@ void validateJointTransformDerivative(const OneDofJoint & joint, VectorDynSize& 
     ASSERT_EQUAL_MATRIX_TOL(adjWrenchTransformDerivAn,adjWrenchTransformDerivNum,tol);
 }
 
-int main()
+/**
+ * This test validates the mathematical relationship between getTransform and
+ * getMotionSubspaceVector methods as described in the theory.md document:
+ *
+ * {}^P H_C {}^C s_{P,C}(θ) ν_θ = {}^P \dot{H}_C
+ *
+ * where {}^P H_C is the transform from child to parent,
+ * {}^C s_{P,C}(θ) is the motion subspace vector expressed in child frame,
+ * and ν_θ is the joint velocity.
+ */
+template<typename OneDofJoint>
+void validateJointMotionSubspaceMatrix(const OneDofJoint & joint, VectorDynSize& theta,
+                                      const LinkIndex parent, const LinkIndex child)
+{
+    // Small time step for numerical differentiation
+    const double dt = 1e-6;
+    const double velocity = 1.0;  // Unit velocity for simplicity
+    const double tol = 1e-5;
+
+    // Get current transform from child to parent at position theta
+    Transform P_H_C = joint.getTransform(theta, parent, child);
+    Matrix4x4 P_H_C_matrix = P_H_C.asHomogeneousTransform();
+
+    // Get the motion subspace vector
+    SpatialMotionVector C_s_PC = joint.getMotionSubspaceVector(0, child, parent);
+
+    // Calculate {}^P H_C * {}^C s * v (left side of the equation)
+    // Convert the spatial motion vector to a 4x4 matrix using the wedge operator
+    // Create a temporary Eigen vector to hold the spatial motion vector data
+    Eigen::Matrix<double, 6, 1> spatialMotionEigen;
+    spatialMotionEigen << toEigen(C_s_PC.getLinearVec3()), toEigen(C_s_PC.getAngularVec3());
+    
+    // Apply the wedge operator using our helper function
+    Matrix4x4 C_s_wedge;
+    toEigen(C_s_wedge) = wedge6dTo4x4d(spatialMotionEigen);
+
+    // Calculate {}^P H_C * {}^C s * velocity
+    Matrix4x4 left_side;
+    toEigen(left_side) = toEigen(P_H_C_matrix) * toEigen(C_s_wedge) * velocity;
+
+    // Now calculate the right side: the numerical time derivative of the transform
+    Matrix4x4 right_side = getHomTransformDerivative(joint, theta, dt, parent, child);
+    toEigen(right_side) = toEigen(right_side) * velocity;
+
+    // Verify that {}^P H_C * {}^C s * velocity = {}^P \dot{H}_C
+    ASSERT_EQUAL_MATRIX_TOL(left_side, right_side, tol);
+}
+
+/**
+ * Test helper function that creates and tests a joint of a specific type
+ * using both validation methods.
+ */
+template<typename JointType>
+void testJoint(bool printProgress = false)
 {
     for(unsigned int i=0; i < 10; i++)
     {
-        // Random revolute joint
-        // connecting links 0 and 1
-        RevoluteJoint revJoint(0,1,getRandomTransform(),getRandomAxis());
-        revJoint.setPosCoordsOffset(0);
-        revJoint.setDOFsOffset(0);
+        // Create a random joint connecting links 0 and 1
+        JointType joint(0, 1, getRandomTransform(), getRandomAxis());
+        joint.setPosCoordsOffset(0);
+        joint.setDOFsOffset(0);
 
-        VectorDynSize jointPos(revJoint.getNrOfPosCoords());
-        jointPos(revJoint.getPosCoordsOffset()) = getRandomDouble();
+        VectorDynSize jointPos(joint.getNrOfPosCoords());
+        jointPos(joint.getPosCoordsOffset()) = getRandomDouble();
 
-        // Test the joint in both directions
-        validateJointTransformDerivative(revJoint,jointPos,
-                                         revJoint.getFirstAttachedLink(),revJoint.getSecondAttachedLink());
-        validateJointTransformDerivative(revJoint,jointPos,
-                                         revJoint.getSecondAttachedLink(),revJoint.getFirstAttachedLink());
+        // Test the joint transform derivatives in both directions
+        validateJointTransformDerivative(joint, jointPos,
+                                       joint.getFirstAttachedLink(), joint.getSecondAttachedLink());
+        validateJointTransformDerivative(joint, jointPos,
+                                       joint.getSecondAttachedLink(), joint.getFirstAttachedLink());
+
+        // Test the relationship between transform and motion subspace in both directions
+        validateJointMotionSubspaceMatrix(joint, jointPos,
+                                        joint.getFirstAttachedLink(), joint.getSecondAttachedLink());
+        validateJointMotionSubspaceMatrix(joint, jointPos,
+                                        joint.getSecondAttachedLink(), joint.getFirstAttachedLink());
+
+        if (printProgress) {
+            std::cout << typeid(JointType).name() << " test " << i << " passed." << std::endl;
+        }
     }
+}
+
+int main()
+{
+    // Test RevoluteJoint
+    testJoint<RevoluteJoint>();
     
-    for(unsigned int i=0; i < 10; i++)
-    {
-        // Random prismatic joint
-        // connecting links 0 and 1
-        PrismaticJoint priJoint(0, 1, getRandomTransform(), getRandomAxis());
-        priJoint.setPosCoordsOffset(0);
-        priJoint.setDOFsOffset(0);
-
-        VectorDynSize jointPos(priJoint.getNrOfPosCoords());
-        jointPos(priJoint.getPosCoordsOffset()) = getRandomDouble();
-
-        // Test the joint in both directions
-        validateJointTransformDerivative(priJoint, jointPos,
-                                         priJoint.getFirstAttachedLink(), priJoint.getSecondAttachedLink());
-        validateJointTransformDerivative(priJoint, jointPos,
-                                         priJoint.getSecondAttachedLink(), priJoint.getFirstAttachedLink());
-    }
-
+    // Test PrismaticJoint
+    testJoint<PrismaticJoint>();
+    
+    std::cout << "All joint tests passed!" << std::endl;
     return EXIT_SUCCESS;
 }
