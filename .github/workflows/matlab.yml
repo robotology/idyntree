@@ -18,7 +18,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-latest, macos-13]
+        # Skip Windows tests for now, see https://github.com/robotology/idyntree/issues/1251
+        os: [ubuntu-22.04, macos-13]
         matlab_version: [R2022a, R2022b, R2023a]
 
     steps:
