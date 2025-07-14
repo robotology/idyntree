@@ -437,4 +437,36 @@ bool RevoluteJoint::setStaticFriction(const size_t _index, double staticFriction
     return true;
 }
 
+bool RevoluteJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
+                                                       MatrixView<double>& positionDerivative_J_velocity) const
+{
+    // Revolute joint has 1 position coordinate and 1 DOF
+    // The Jacobian is a 1x1 identity matrix since position derivative = velocity
+    if (positionDerivative_J_velocity.rows() != 1 || positionDerivative_J_velocity.cols() != 1) {
+        return false; // Wrong size
+    }
+    positionDerivative_J_velocity(0, 0) = 1.0;
+    return true;
+}
+
+bool RevoluteJoint::setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const
+{
+    // Revolute joint has 1 position coordinate, set it to zero (rest position)
+    if (jntPos.size() < this->getPosCoordsOffset() + 1) {
+        return false; // Not enough data in the span
+    }
+    jntPos[this->getPosCoordsOffset()] = 0.0;
+    return true;
+}
+
+bool RevoluteJoint::normalizeJointPosCoords(iDynTree::Span<double> jntPos) const
+{
+    // Revolute joint uses a minimal representation (angle), so no normalization is needed
+    if (jntPos.size() < this->getPosCoordsOffset() + 1) {
+        return false; // Not enough data in the span
+    }
+    // No normalization needed for angular coordinates
+    return true;
+}
+
 }

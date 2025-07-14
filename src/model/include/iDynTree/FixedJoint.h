@@ -99,6 +99,16 @@ namespace iDynTree
                                                    const int posCoord_i) const;
 
         // Documentation inherited
+        virtual bool getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
+                                                           MatrixView<double>& positionDerivative_J_velocity) const;
+
+        // Documentation inherited
+        virtual bool setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const;
+
+        // Documentation inherited
+        virtual bool normalizeJointPosCoords(iDynTree::Span<double> jntPos) const;
+
+        // Documentation inherited
         virtual SpatialMotionVector getMotionSubspaceVector(int dof_i,
                                                             const LinkIndex child,
                                                             const LinkIndex parent) const;

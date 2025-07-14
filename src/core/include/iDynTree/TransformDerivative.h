@@ -59,6 +59,12 @@ namespace iDynTree
         TransformDerivative(const TransformDerivative & other);
 
         /**
+         * Set rotation and translation from a iDynTree::Matrix4x4 object
+         * @param transformDerivative The input homogeneous matrix derivative
+         */
+        void fromHomogeneousTransformDerivative(const Matrix4x4& transformDerivative);
+
+        /**
          * Default destructor.
          */
         ~TransformDerivative() {}

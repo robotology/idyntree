@@ -29,6 +29,14 @@ TransformDerivative::TransformDerivative(const TransformDerivative& other):
 {
 }
 
+void TransformDerivative::fromHomogeneousTransformDerivative(const Matrix4x4& transformDerivative)
+{
+    Eigen::Map<Eigen::Matrix<double,4,4,Eigen::RowMajor> > homogeneousMatrix((double*) transformDerivative.data());
+
+    toEigen(posDerivative) = homogeneousMatrix.block<3, 1>(0, 3);
+    toEigen(rotDerivative) = homogeneousMatrix.block<3, 3>(0, 0);
+}
+
 const Matrix3x3& TransformDerivative::getRotationDerivative() const
 {
     return this->rotDerivative;
