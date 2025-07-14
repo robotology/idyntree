@@ -304,20 +304,12 @@ bool FixedJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<cons
 bool FixedJoint::setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const
 {
     // Fixed joint has 0 position coordinates, so there's nothing to set
-    // Check that the span is empty as expected
-    if (jntPos.size() != 0) {
-        return false; // Wrong size
-    }
     return true;
 }
 
 bool FixedJoint::normalizeJointPosCoords(iDynTree::Span<double> jntPos) const
 {
     // Fixed joint has 0 position coordinates, so there's nothing to normalize
-    // Check that the span is empty as expected
-    if (jntPos.size() != 0) {
-        return false; // Wrong size
-    }
     return true;
 }
 
