@@ -9,6 +9,7 @@
 #include <iDynTree/FixedJoint.h>
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/LinkState.h>
 
@@ -45,7 +46,7 @@ inline Link getRandomLink()
 /**
  * Add a random link with random model.
  */
-inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false)
+inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false, bool includeSphericalJoints=false)
 {
     // Add Link
     LinkIndex newLinkIndex = model.addLink(newLinkName,getRandomLink());
@@ -53,7 +54,12 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     // Now add joint
     LinkIndex parentLinkIndex = model.getLinkIndex(parentLink);
 
-    int nrOfJointTypes = 3;
+    int nrOfJointTypes = 3; // 0=Fixed, 1=Revolute, 2=Prismatic,
+
+    if (includeSphericalJoints)
+    {
+        nrOfJointTypes = nrOfJointTypes + 1;  // 3=Spherical
+    }
 
     int jointType = rand() % nrOfJointTypes;
 
@@ -82,6 +88,12 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
         prismJoint.setRestTransform(getRandomTransform());
         prismJoint.setAxis(getRandomAxis(),newLinkIndex);
         model.addJoint(newLinkName+"joint",&prismJoint);
+    } else if( jointType == 3 )
+    {
+        SphericalJoint spherJoint;
+        spherJoint.setAttachedLinks(parentLinkIndex,newLinkIndex);
+        spherJoint.setRestTransform(getRandomTransform());
+        model.addJoint(newLinkName+"joint",&spherJoint);
     }
     else
     {
@@ -120,7 +132,7 @@ inline std::string int2string(int i)
     return ss.str();
 }
 
-inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false)
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false, bool includeSphericalJoints=false)
 {
     Model model;
 
@@ -130,7 +142,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = getRandomLinkOfModel(model);
         std::string linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints);
+        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints,includeSphericalJoints);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -143,7 +155,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     return model;
 }
 
-inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false)
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false, bool includeSphericalJoints=false)
 {
     Model model;
 
@@ -154,7 +166,7 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = linkName;
         linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints);
+        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints,includeSphericalJoints);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
