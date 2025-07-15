@@ -289,4 +289,28 @@ bool FixedJoint::setStaticFriction(const size_t /*_index*/, double /*staticFrict
     return false;
 }
 
+bool FixedJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
+                                                       MatrixView<double>& positionDerivative_J_velocity) const
+{
+    // Fixed joint has 0 position coordinates and 0 DOFs
+    // The Jacobian is a 0x0 matrix (empty)
+    // MatrixView should already be properly sized by the caller
+    if (positionDerivative_J_velocity.rows() != 0 || positionDerivative_J_velocity.cols() != 0) {
+        return false; // Wrong size
+    }
+    return true;
+}
+
+bool FixedJoint::setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const
+{
+    // Fixed joint has 0 position coordinates, so there's nothing to set
+    return true;
+}
+
+bool FixedJoint::normalizeJointPosCoords(iDynTree::Span<double> jntPos) const
+{
+    // Fixed joint has 0 position coordinates, so there's nothing to normalize
+    return true;
+}
+
 }

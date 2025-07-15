@@ -187,7 +187,10 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
                 (toParentJoint->getTransform(jointPos,parentLinkIndex,visitedLinkIndex))*linkCRBs(visitedLinkIndex);
 
             // For now we just implement the CRBA for 0 or 1 dofs joints.
-            assert( toParentJoint->getNrOfDOFs() <= 1 );
+            if (toParentJoint->getNrOfDOFs() > 1)
+            {
+                return false;
+            }
 
             // If the visited link is attached to its parent with a fixed joint,
             // we don't need to do anything else for this link.
@@ -230,9 +233,6 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
 
                     IJointConstPtr ancestorToParentJoint = traversal.getParentJointFromLinkIndex(ancestor->getIndex());
                     LinkIndex      ancestorParentIndex   = traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex();
-
-                    // For now we just implement the CRBA for 0 or 1 dofs joints.
-                    assert( ancestorToParentJoint->getNrOfDOFs() <= 1 );
 
                     if( ancestorToParentJoint->getNrOfDOFs() == 1 )
                     {
@@ -389,13 +389,16 @@ bool ArticulatedBodyAlgorithm(const Model& model,
             Wrench pa;
 
             // For now we support only 0 and 1 dof joints
+            if (toParentJoint->getNrOfDOFs() > 1)
+            {
+                return false;
+            }
 
             // for 1 dof joints, the articulated inertia
             // need to be propagated to the parent considering
             // the joints
             if( toParentJoint->getNrOfDOFs() > 0 )
             {
-                assert(toParentJoint->getNrOfDOFs()==1);
                 size_t dofIndex = toParentJoint->getDOFsOffset();
                 bufs.U(dofIndex) = bufs.linkABIs(visitedLinkIndex)*bufs.S(dofIndex);
                 bufs.D(dofIndex) = bufs.S(dofIndex).dot(bufs.U(dofIndex));

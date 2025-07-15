@@ -5,6 +5,8 @@
 #define IDYNTREE_I_JOINT_H
 
 #include <iDynTree/Indices.h>
+#include <iDynTree/MatrixView.h>
+#include <iDynTree/Span.h>
 
 namespace iDynTree
 {
@@ -17,7 +19,6 @@ namespace iDynTree
     class Twist;
     class VectorDynSize;
     class SpatialMotionVector;
-
     enum JointDynamicsType
     {
         /**
@@ -94,6 +95,29 @@ namespace iDynTree
          * @return the number of degrees of freedom of the joint.
          */
         virtual unsigned int getNrOfDOFs() const = 0;
+
+
+        /**
+         * Get the getNrOfPosCoords() × getNrOfDOFs() matrix that maps the joint velocity to the derivative of the joint position.
+         *
+         * This method computes the Jacobian matrix J such that:
+         * d/dt(q_pos) = J * q_vel
+         * where:
+         * - q_pos are the position coordinates of the joint (getNrOfPosCoords() elements)
+         * - q_vel are the velocity coordinates of the joint (getNrOfDOFs() elements)
+         * - J is the getNrOfPosCoords() × getNrOfDOFs() Jacobian matrix
+         *
+         * For simple joints where position and velocity have the same parameterization,
+         * this is the identity matrix. For joints with different position and velocity
+         * parameterizations (e.g., SO(2) joints using complex numbers for position
+         * but angular velocity for DOF), this matrix encodes the relationship.
+         *
+         * @param[in] jntPos Joint position coordinates (must have at least getNrOfPosCoords() elements)
+         * @param[out] positionDerivative_J_velocity The Jacobian matrix (must be properly sized)
+         * @return true if the computation was successful, false otherwise
+         */
+        virtual bool getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
+                                                           MatrixView<double>& positionDerivative_J_velocity) const = 0;
 
 
         /**
@@ -452,6 +476,35 @@ namespace iDynTree
 
 
         ///@}
+
+        /**
+         * @name Methods to manipulate joint positions
+         * Methods to manipulate joint positions
+         */
+        ///@{
+
+        /**
+         * Set the position coordinates of the joint to the rest position (i.e zero for simple joints)
+         * @param[inout] jntPos full vector of model joint positions, of dimension Model::getNrOfPosCoords()
+         * @return true if the operation was successful, false otherwise
+         */
+        virtual bool setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const = 0;
+
+        /**
+         * Normalize the position coordinates of the joint in the specified joint positios vector
+         *
+         * If the joint is using a minimal representation for the position coordinates,
+         * this method does not anything, but if the joint uses a constrained representation such
+         * as unit complex numbers of unit quaternions, this method normalizes the position coordinates,
+         * ensuring that one of the closest valid positiion coordinates is used.
+         *
+         * @param[inout] jntPos full vector of model joint positions, of dimension Model::getNrOfPosCoords()
+         * @return true if the operation was successful, false otherwise
+         */
+        virtual bool normalizeJointPosCoords(iDynTree::Span<double> jntPos) const = 0;
+
+        ///@}
+
     };
 
     typedef IJoint * IJointPtr;

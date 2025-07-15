@@ -3,7 +3,7 @@
 This document summarises the mathematical conventions underlying the **iDynTree** library.
 It is intended to complement the API‑level documentation with a concise reference aimed at developers and researchers, suitable to be easily given in input to Large Language Models (LLMs).
 
-> [!WARNING]  
+> [!WARNING]
 > The Markdown+LaTeX support on GitHub has several limitations . The suggested way to consume for a human this file is to open it in Visual Studio Code, and then preview it with `Ctrl+Shift+V`, for example using Visual Studio Code online via this URL: https://github.dev/robotology/idyntree/blob/main/doc/theory.md .
 
 
@@ -21,7 +21,7 @@ If you are not familiar with the topics, this document is probably not a good do
 | $A$ or $W$ | $A$ (absolute) or $W$ (world) typically indicates the inertial frame w.r.t. that is used as a reference for the kinematics and dynamics computations. |
 | ${}^{A}o_{B}\in\mathbb R^{3}$ | Position vector of the origin of frame $B$ expressed in frame $A$ |
 | ${}^{A}R_{B}\in\mathbb R^{3 \times 3}$ | Rotation matrix from frame $B$ to frame $A$ |
-| ${}^{A}\overline{o}_{B}\in\mathbb R^{4}$ | Homogeneous position vector: ${}^{A}\overline{o}\_{B} = \begin{bmatrix} {}^{A}o_{B} \\ 1 \end{bmatrix}$ |
+| ${}^{A}\overline{o}_{B}\in\mathbb R^{4}$ | Homogeneous position vector: ${}^{A}\overline{o}_{B} = \begin{bmatrix} {}^{A}o_{B} \\ 1 \end{bmatrix}$ |
 | ${}^{A}H_{B}\in\mathbb R^{4 \times 4}$ | Homogeneous transformation matrix: ${}^{A}H_{B} = \begin{bmatrix} {}^{A}R_{B} & {}^{A}o_{B} \\ 0^T & 1 \end{bmatrix}$ , such that ${}^{A}\overline{o}_{C} = {}^{A}H_{B} \, {}^{B}\overline{o}_{C}$ |
 | $u^{\wedge} \in \mathbb{R}^{3 \times 3}$ | Skew-symmetric matrix of 3D vector $u = \begin{bmatrix} u_x \\ u_y \\ u_z \end{bmatrix}$: $u^{\wedge} = \begin{bmatrix} 0 & -u_z & u_y \\ u_z & 0 & -u_x \\ -u_y & u_x & 0 \end{bmatrix}$ |
 | $(\cdot)^{\vee}: \mathbb{R}^{3 \times 3} \to \mathbb{R}^3$ | 3D vee operator (inverse of wedge): $(u^{\wedge})^{\vee} = u$. |
@@ -103,7 +103,7 @@ This quantity is the quantity that is retuned by the `iDynTree::IJoint::getTrans
 This function completely describes all the kinematic properties of the joint. However, as iDynTree is a C++ library that does not return a differentiable representation of a function, but just implements the function itself in C++, it is also necessary to expose somehow the properties related to the velocity of the joint. This is implemented by functions that return the so-called **spatial motion subspace**, that is defined as follows:
 
 $$
-{}^C \mathrm{s}\_{P, C}(\theta) \in \mathbb{R}^{6 \times N_{dof}^J}, \quad {}^C \mathrm{v}_{P,C} = {}^C \mathrm{s}_{P, C}(\theta) \nu_\theta
+{}^C \mathrm{s}_{P, C}(\theta) \in \mathbb{R}^{6 \times N_{dof}^J}, \quad {}^C \mathrm{v}_{P,C} = {}^C \mathrm{s}_{P, C}(\theta) \nu_\theta
 $$
 
 In theory, the quantity ${}^C \mathrm{s}_{P, C}(\theta)$ depends on $\theta$, but for many simple joints it doesn't, so the `iDynTree::IJoint` interface assumes that it is actually independent of $\theta$.
@@ -120,16 +120,36 @@ How are ${}^C H_P(\theta)$ and ${}^C \mathrm{s}_{P, C}(\theta)$ related?
 As you can write that using the definition of left-trivialized 6D velocity that:
 
 $$
-{}^P H_C {}^C \mathrm{v}\_{P,C}^{\wedge} = {}^P \dot{H}_C
+{}^P H_C {}^C \mathrm{v}_{P,C}^{\wedge} = {}^P \dot{H}_C
 $$
 
 substituting the spatial motion subspace matrix, we have:
 
 $$
-{}^P H_C {}^C \left(\mathrm{s}\_{P, C}(\theta) \nu_\theta\right)^{\wedge} = {}^P \dot{H}_C
+{}^P H_C {}^C \left(\mathrm{s}_{P, C}(\theta) \nu_\theta\right)^{\wedge} = {}^P \dot{H}_C
 $$
 
 This relation is used in Joint-related unit tests to make sure that the joint methods are consistent with the mathemathical definition of the `iDynTree::IJoint` interface.
+
+### Position Derivative-Velocity Jacobian
+
+In addition to the spatial motion subspace matrix, the `iDynTree::IJoint` interface also provides a method to compute the Jacobian matrix that relates joint velocities to the time derivative of joint position coordinates. This is particularly important for joints where the position and velocity parameterizations differ (e.g., joints using constrained representations such as unit complex numbers or unit quaternions).
+
+The **position derivative-velocity Jacobian** is defined as the matrix $J_{\theta}(\theta) \in \mathbb{R}^{N_{pc}^J \times N_{dof}^J}$ such that:
+
+$$
+\frac{d}{dt}\theta = J_{\theta}(\theta) \nu_\theta
+$$
+
+where:
+- $\theta \in \mathbb{R}^{N_{pc}^J}$ are the position coordinates of the joint
+- $\nu_\theta \in \mathbb{R}^{N_{dof}^J}$ are the velocity coordinates of the joint
+- $J_{\theta}(\theta)$ is the $N_{pc}^J \times N_{dof}^J$ Jacobian matrix
+
+This matrix is returned by the `iDynTree::IJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos, MatrixView<double>& positionDerivative_J_velocity)` method, where:
+* `jntPos` is the full vector of all position coordinates of all joints in the model
+* `positionDerivative_J_velocity` is the output matrix (properly sized by the caller)
+
 
 ### Supported joint models
 
@@ -173,6 +193,12 @@ This is the simplest type of joint, it represents two links that are rigidly att
 | `getNrOfPosCoords()` | $N_{pc}^J$ | 1 |
 | `getNrOfDOFs()`  |  $N_{dof}^J$ | 1 |
 
+##### Revolute joint using unit complex number for position coordinates `iDynTree::RevoluteSO2Joint`
+
+| Code                  | Quantity    | Value |
+|:---------------------:|:-----------:|:---:|
+| `getNrOfPosCoords()` | $N_{pc}^J$ | 2 |
+| `getNrOfDOFs()`  |  $N_{dof}^J$ | 1 |
 
 ---
 

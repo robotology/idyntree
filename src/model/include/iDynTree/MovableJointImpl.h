@@ -155,6 +155,7 @@ namespace iDynTree
     }
 
     typedef MovableJointImpl<1,1> MovableJointImpl1;
+    typedef MovableJointImpl<2,1> MovableJointImpl21;
     typedef MovableJointImpl<2,2> MovableJointImpl2;
     typedef MovableJointImpl<3,3> MovableJointImpl3;
     typedef MovableJointImpl<4,4> MovableJointImpl4;

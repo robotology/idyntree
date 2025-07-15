@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#ifndef IDYNTREE_PRISMATIC_JOINT_H
-#define IDYNTREE_PRISMATIC_JOINT_H
+#ifndef IDYNTREE_REVOLUTE_SO2_JOINT_H
+#define IDYNTREE_REVOLUTE_SO2_JOINT_H
 
 #include <iDynTree/Transform.h>
 #include <iDynTree/SpatialMotionVector.h>
@@ -14,19 +14,30 @@
 namespace iDynTree
 {
     /**
-     * Class representing a prismatic joint, i.e. a joint that
-     * constraint two links to translate only along an axis.
+     * Class representing a revolute joint using SO(2) representation, i.e. a joint that
+     * constrains two links to move only around a common axis.
+     * 
+     * Unlike the regular RevoluteJoint, this joint represents the angular
+     * position using a complex number (with real and imaginary parts)
+     * to avoid periodicity issues. Each angle corresponds to a unique
+     * complex number on the unit circle.
+     *
+     * The joint has:
+     * - 2 position coordinates: real and imaginary parts of the complex number
+     * - 1 degree of freedom: the angular velocity
+     * 
+     * The actual angle is computed as atan2(imaginary_part, real_part).
      *
      * \ingroup iDynTreeModel
      */
-    class PrismaticJoint : public MovableJointImpl1
+    class RevoluteSO2Joint : public MovableJointImpl21
     {
     private:
         // Structure attributes
         LinkIndex link1;
         LinkIndex link2;
         Transform link1_X_link2_at_rest;
-        Axis translation_axis_wrt_link1;
+        Axis rotation_axis_wrt_link1;
 
         // Limits
         void disablePosLimits();
@@ -41,35 +52,59 @@ namespace iDynTree
         double m_static_friction;
 
         // Cache attributes
-        mutable double q_previous;
+        mutable double q_real_previous;
+        mutable double q_imag_previous;
         mutable Transform link1_X_link2;
         mutable Transform link2_X_link1;
         mutable SpatialMotionVector S_link1_link2;
         mutable SpatialMotionVector S_link2_link1;
 
-        void updateBuffers(const double new_q) const;
-        void resetBuffers(const double new_q) const;
+        void updateBuffers(const double new_q_real, const double new_q_imag) const;
+        void resetBuffers(const double new_q_real, const double new_q_imag) const;
         void resetAxisBuffers() const;
+
+        /**
+         * Convert complex coordinates to angle.
+         * @param q_real real part of the complex number
+         * @param q_imag imaginary part of the complex number
+         * @return the angle in radians
+         */
+        double complexToAngle(const double q_real, const double q_imag) const;
+
+        /**
+         * Normalize the complex number to unit circle.
+         * @param q_real reference to real part (will be modified)
+         * @param q_imag reference to imaginary part (will be modified)
+         */
+        void normalizeComplex(double& q_real, double& q_imag) const;
 
     public:
         /**
          * Constructor
          */
-        PrismaticJoint();
+        RevoluteSO2Joint();
 
         IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter methods to specify the parameters of the joint")
-        PrismaticJoint(const LinkIndex link1, const LinkIndex link2,
-                      const Transform& link1_X_link2, const Axis& _translation_axis_wrt_link1);
+        RevoluteSO2Joint(const LinkIndex link1, const LinkIndex link2,
+                           const Transform& link1_X_link2, const Axis& _rotation_axis_wrt_link1);
+
+        /**
+         * Constructor in which the LinkIndex to which the joint is attached are not specified.
+         * This constructor is typically used together with the Model::addJoint or
+         * Model::addJointAndLink methods, in which the links to which the joint is attached are
+         * specified by the other arguments of the method.
+         */
+        RevoluteSO2Joint(const Transform& link1_X_link2, const Axis& _rotation_axis_wrt_link1);
 
         /**
          * Copy constructor
          */
-        PrismaticJoint(const PrismaticJoint& other);
+        RevoluteSO2Joint(const RevoluteSO2Joint& other);
 
         /**
          * Destructor
          */
-        virtual ~PrismaticJoint();
+        virtual ~RevoluteSO2Joint();
 
         // Documentation inherited
         virtual IJoint * clone() const;
@@ -81,7 +116,7 @@ namespace iDynTree
         virtual void setRestTransform(const Transform& link1_X_link2);
 
         /**
-         * Set the prismatic axis of the joint, expressed in specified link frame, that is considered the "child"
+         * Set the revolute axis of the joint, expressed in specified link frame, that is considered the "child"
          * frame regarding the sign of the axis.
          *
          * See getAxis method for more information.
@@ -89,13 +124,13 @@ namespace iDynTree
          * @warning This method should be called after a valid restTransform between link1 and link2 has been
          *          set by calling the setRestTransform method.
          */
-        virtual void setAxis(const Axis& prismaticAxis,
+        virtual void setAxis(const Axis& revoluteAxis,
                              const LinkIndex child,
                              const LinkIndex parent=LINK_INVALID_INDEX);
 
-        // Set the prismatic axis expressed in link1
+        // Set the revolute axis expressed in link1
         IDYNTREE_DEPRECATED_WITH_MSG("Please use the setAxis method in which the link considered \"child\" is explicitly specified")
-        virtual void setAxis(const Axis& prismaticAxis_wrt_link1);
+        virtual void setAxis(const Axis& revoluteAxis_wrt_link1);
 
         // Documentation inherited
         virtual LinkIndex getFirstAttachedLink() const;
@@ -104,28 +139,12 @@ namespace iDynTree
         virtual LinkIndex getSecondAttachedLink() const;
 
         /**
-         * Get the revolute axis of the robot, expressed in linkA frame.
+         * Get the revolute axis of the robot, expressed in child frame.
          *
          * @param child the link frame (one of the two at which the link is attached)
          *              in which the returned axis is expressed. Furthermore, the
          *              axis direction depends on the assumption that this frame is
          *              considered the "child" in the relationship.
-         *
-         * See
-         *
-         * Seth, A., Sherman, M., Eastman, P., & Delp, S. (2010).
-         * Minimal formulation of joint motion for biomechanisms.
-         * Nonlinear Dynamics, 62(1), 291-303.
-         * https://nmbl.stanford.edu/publications/pdf/Seth2010.pdf
-         * Section 2.4
-         *
-         * and
-         *
-         * "Modelling, Estimation and Identification of Humanoid Robots Dynamics"
-         * Traversaro - Section 3.2
-         * https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf
-         *
-         * for more details.
          */
         virtual Axis getAxis(const LinkIndex child,
                              const LinkIndex parent=LINK_INVALID_INDEX) const;
@@ -133,7 +152,6 @@ namespace iDynTree
         // Documentation inherited
         virtual Transform getRestTransform(const LinkIndex child,
                                            const LinkIndex parent) const;
-
 
         // Documentation inherited
         virtual const Transform & getTransform(const VectorDynSize & jntPos,
@@ -147,7 +165,7 @@ namespace iDynTree
                                                    const int posCoord_i) const;
 
         // Documentation inherited
-        virtual bool getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
+        virtual bool getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos, 
                                                            MatrixView<double>& positionDerivative_J_velocity) const;
 
         // Documentation inherited
@@ -221,6 +239,20 @@ namespace iDynTree
         virtual double getStaticFriction(const size_t _index) const;
         virtual bool setDamping(const size_t _index, double damping);
         virtual bool setStaticFriction(const size_t _index, double staticFriction);
+
+        /**
+         * Get the current angle from the complex representation.
+         * @param jntPos the joint positions vector
+         * @return the angle in radians
+         */
+        double getCurrentAngle(const VectorDynSize & jntPos) const;
+
+        /**
+         * Set joint position from an angle.
+         * @param jntPos the joint positions vector to modify
+         * @param angle the angle in radians
+         */
+        void setJointPositionFromAngle(VectorDynSize & jntPos, double angle) const;
     };
 }
 

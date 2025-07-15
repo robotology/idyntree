@@ -490,19 +490,17 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
             }
             else
             {
-                jointPos.jointPos()(fullModel.getJoint(jntIdx)->getPosCoordsOffset()) = 0.0;
+                fullModel.getJoint(jntIdx)->setJointPosCoordsToRest(jointPos.jointPos());
             }
 
             continue;
         }
 
         // If the joint has nrOfDofs > 1, we do not support specifying it in removedJointPositions
+        // and we always set it to the rest position
         if (nrOfDofs > 1)
         {
-            for (size_t j=0; j < nrOfDofs; j++)
-            {
-                jointPos.jointPos()(fullModel.getJoint(jntIdx)->getPosCoordsOffset() + j) = 0.0;
-            }
+            fullModel.getJoint(jntIdx)->setJointPosCoordsToRest(jointPos.jointPos());
         }
     }
 
