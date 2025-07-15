@@ -112,6 +112,10 @@
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a5b4091784bd95e9e6acc7122fd77f906" class="m-doc">fromHomogeneousTransformDerivative</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix4x4</a>&amp; transformDerivative)</span>
+            </dt>
+            <dd>Set rotation and translation from a iDynTree::Matrix4x4 object.</dd>
             <dt id="a7e62b9e5318fda029f0bb1d14ae766fb">
               <span class="m-doc-wrap-bumper">auto <a href="#a7e62b9e5318fda029f0bb1d14ae766fb" class="m-doc-self">getRotationDerivative</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix3x3</a>&amp;</span>
             </dt>
@@ -334,6 +338,23 @@ $ ~^a{X}_b $
             </h3>
             <p>Constructor from a Matrix3x3 and a Vector3 .</p>
 <p>The matrix represent the derivative of a rotation matrix, while the vector the derivative of the position part of the tranform.</p>
+          </div></section>
+          <section class="m-doc-details" id="a5b4091784bd95e9e6acc7122fd77f906"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />TransformDerivative::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5b4091784bd95e9e6acc7122fd77f906" class="m-doc-self">fromHomogeneousTransformDerivative</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix4x4</a>&amp; transformDerivative)</span></span>
+            </h3>
+            <p>Set rotation and translation from a iDynTree::Matrix4x4 object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">transformDerivative</td>
+                  <td>The input homogeneous matrix derivative</td>
+                </tr>
+              </tbody>
+            </table>
           </div></section>
           <section class="m-doc-details" id="a38890e0b6e1c6a6e65b220cf2ae598ae"><div>
             <h3>

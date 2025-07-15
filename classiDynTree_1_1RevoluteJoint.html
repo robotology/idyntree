@@ -173,6 +173,19 @@
             </dt>
             <dd>Get the derivative of the transform with respect to a position coordinate.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a43eb8eee53ab52b4f7c6477c1a873c90" class="m-doc">getPositionDerivativeVelocityJacobian</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jntPos,
+              <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&lt;double&gt;&amp; positionDerivative_J_velocity) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Get the <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> matrix that maps the joint velocity to the derivative of the joint position.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aabb880e56f74d38d32b786b7bf79a1a4" class="m-doc">setJointPosCoordsToRest</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Set the position coordinates of the joint to the rest position (i.e zero for simple joints)</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aae1d4156e453d820fd02c9131165bcb8" class="m-doc">normalizeJointPosCoords</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Normalize the position coordinates of the joint in the specified joint positios vector.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ab21df5f6c5075952811c700a9c5cd51a" class="m-doc">getMotionSubspaceVector</a>(</span><span class="m-doc-wrap">int dof_i,
               const LinkIndex child,
               const LinkIndex parent = LINK_INVALID_INDEX) const -&gt; <a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a> <span class="m-label m-flat m-warning">virtual</span></span>
@@ -426,6 +439,82 @@ $q$
 <use x='194.876859' y='-2.324596' xlink:href='#eq2-g1-113'/>
 </g>
 </svg></div><p>If posCoord_i is not &gt;= 0 and &lt; <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a>, the returned value is undefined.</p>
+          </div></section>
+          <section class="m-doc-details" id="a43eb8eee53ab52b4f7c6477c1a873c90"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a43eb8eee53ab52b4f7c6477c1a873c90" class="m-doc-self">getPositionDerivativeVelocityJacobian</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jntPos,
+              <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&lt;double&gt;&amp; positionDerivative_J_velocity) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Get the <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> matrix that maps the joint velocity to the derivative of the joint position.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">jntPos&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Joint position coordinates (must have at least <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> elements)</td>
+                </tr>
+                <tr>
+                  <td>positionDerivative_J_velocity&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>The Jacobian matrix (must be properly sized)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the computation was successful, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This method computes the Jacobian matrix J such that: d/dt(q_pos) = J * q_vel where:</p><ul><li>q_pos are the position coordinates of the joint (<a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> elements)</li><li>q_vel are the velocity coordinates of the joint (<a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> elements)</li><li>J is the <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> Jacobian matrix</li></ul><p>For simple joints where position and velocity have the same parameterization, this is the identity matrix. For joints with different position and velocity parameterizations (e.g., SO(2) joints using complex numbers for position but angular velocity for DOF), this matrix encodes the relationship.</p>
+          </div></section>
+          <section class="m-doc-details" id="aabb880e56f74d38d32b786b7bf79a1a4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aabb880e56f74d38d32b786b7bf79a1a4" class="m-doc-self">setJointPosCoordsToRest</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Set the position coordinates of the joint to the rest position (i.e zero for simple joints)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">jntPos&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>full vector of model joint positions, of dimension <a href="classiDynTree_1_1Model.html#a14bde5abaf794aa4160f09ba50c64c2e" class="m-doc">Model::<wbr />getNrOfPosCoords()</a></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the operation was successful, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aae1d4156e453d820fd02c9131165bcb8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />RevoluteJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aae1d4156e453d820fd02c9131165bcb8" class="m-doc-self">normalizeJointPosCoords</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Normalize the position coordinates of the joint in the specified joint positios vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">jntPos&nbsp;<span class="m-label m-flat m-danger">in/out</span></td>
+                  <td>full vector of model joint positions, of dimension <a href="classiDynTree_1_1Model.html#a14bde5abaf794aa4160f09ba50c64c2e" class="m-doc">Model::<wbr />getNrOfPosCoords()</a></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the operation was successful, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the joint is using a minimal representation for the position coordinates, this method does not anything, but if the joint uses a constrained representation such as unit complex numbers of unit quaternions, this method normalizes the position coordinates, ensuring that one of the closest valid positiion coordinates is used.</p>
           </div></section>
           <section class="m-doc-details" id="ab21df5f6c5075952811c700a9c5cd51a"><div>
             <h3>

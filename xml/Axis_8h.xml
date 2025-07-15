@@ -10,6 +10,7 @@
     <includedby refid="Core_2Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
     <includedby refid="PrismaticJoint_8h" local="no">iDynTree/PrismaticJoint.h</includedby>
     <includedby refid="RevoluteJoint_8h" local="no">iDynTree/RevoluteJoint.h</includedby>
+    <includedby refid="RevoluteSO2Joint_8h" local="no">iDynTree/RevoluteSO2Joint.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>string</label>

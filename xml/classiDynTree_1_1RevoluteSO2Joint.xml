@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
-  <compounddef id="classiDynTree_1_1PrismaticJoint" kind="class" language="C++" prot="public">
-    <compoundname>iDynTree::PrismaticJoint</compoundname>
-    <basecompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; 1, 1 &gt;</basecompoundref>
-    <includes local="no">iDynTree/PrismaticJoint.h</includes>
+  <compounddef id="classiDynTree_1_1RevoluteSO2Joint" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::RevoluteSO2Joint</compoundname>
+    <basecompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; 2, 1 &gt;</basecompoundref>
+    <includes local="no">iDynTree/RevoluteSO2Joint.h</includes>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1af6b5715987ab445df5c773d4133d1c19" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a929188a3f121406bcaf363e523497f4a" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
-        <definition>LinkIndex iDynTree::PrismaticJoint::link1</definition>
+        <definition>LinkIndex iDynTree::RevoluteSO2Joint::link1</definition>
         <argsstring></argsstring>
         <name>link1</name>
         <briefdescription>
@@ -16,11 +16,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="26" column="19" bodyfile="iDynTree/PrismaticJoint.h" bodystart="26" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="37" column="19" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="37" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1abcff171c5084bdc6a435f8fcd091b778" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1ad81dabbd36230d6ce324cdd6e265bd1d" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
-        <definition>LinkIndex iDynTree::PrismaticJoint::link2</definition>
+        <definition>LinkIndex iDynTree::RevoluteSO2Joint::link2</definition>
         <argsstring></argsstring>
         <name>link2</name>
         <briefdescription>
@@ -29,11 +29,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="27" column="19" bodyfile="iDynTree/PrismaticJoint.h" bodystart="27" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="38" column="19" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a0e6552482e90be482b88a75851d58ee9" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1abe826baf7ec4b2d57080d89fadc95b0a" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
-        <definition>Transform iDynTree::PrismaticJoint::link1_X_link2_at_rest</definition>
+        <definition>Transform iDynTree::RevoluteSO2Joint::link1_X_link2_at_rest</definition>
         <argsstring></argsstring>
         <name>link1_X_link2_at_rest</name>
         <briefdescription>
@@ -42,24 +42,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="28" column="19" bodyfile="iDynTree/PrismaticJoint.h" bodystart="28" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="39" column="19" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="39" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1ac1008c3d9dd5c7bff5a5a90af722fbf7" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1acd77ca591d1c854a29bef08d2f7811b7" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
-        <definition>Axis iDynTree::PrismaticJoint::translation_axis_wrt_link1</definition>
+        <definition>Axis iDynTree::RevoluteSO2Joint::rotation_axis_wrt_link1</definition>
         <argsstring></argsstring>
-        <name>translation_axis_wrt_link1</name>
+        <name>rotation_axis_wrt_link1</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="29" column="14" bodyfile="iDynTree/PrismaticJoint.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="40" column="14" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="40" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a375259f12a9804bf9482e27a3cdca74a" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1aa904847c16900d44d055d130ea512f29" prot="private" static="no" mutable="no">
         <type>bool</type>
-        <definition>bool iDynTree::PrismaticJoint::m_hasPosLimits</definition>
+        <definition>bool iDynTree::RevoluteSO2Joint::m_hasPosLimits</definition>
         <argsstring></argsstring>
         <name>m_hasPosLimits</name>
         <briefdescription>
@@ -68,11 +68,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="33" column="14" bodyfile="iDynTree/PrismaticJoint.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="44" column="14" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="44" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a668879821383b2858ea3f9079cee842b" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a227f9449025a1b30c52f5a134d22846d" prot="private" static="no" mutable="no">
         <type>double</type>
-        <definition>double iDynTree::PrismaticJoint::m_minPos</definition>
+        <definition>double iDynTree::RevoluteSO2Joint::m_minPos</definition>
         <argsstring></argsstring>
         <name>m_minPos</name>
         <briefdescription>
@@ -81,11 +81,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="34" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="45" column="16" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="45" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a1f5bdda35aa1d796773d570517693ae5" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a930974c853d285da18be68c96e4607dc" prot="private" static="no" mutable="no">
         <type>double</type>
-        <definition>double iDynTree::PrismaticJoint::m_maxPos</definition>
+        <definition>double iDynTree::RevoluteSO2Joint::m_maxPos</definition>
         <argsstring></argsstring>
         <name>m_maxPos</name>
         <briefdescription>
@@ -94,11 +94,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="35" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="46" column="16" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="46" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1affcbbcde843f22f4a82ecd0abe8d5959" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a966d965152752ea1984c39063f2a9c65" prot="private" static="no" mutable="no">
         <type>JointDynamicsType</type>
-        <definition>JointDynamicsType iDynTree::PrismaticJoint::m_joint_dynamics_type</definition>
+        <definition>JointDynamicsType iDynTree::RevoluteSO2Joint::m_joint_dynamics_type</definition>
         <argsstring></argsstring>
         <name>m_joint_dynamics_type</name>
         <briefdescription>
@@ -107,11 +107,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="39" column="27" bodyfile="iDynTree/PrismaticJoint.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="50" column="27" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="50" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a2127635356b5f4a94406eb48d3b4b6e2" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1af2e7eebc73ee65b987a55ce70c9926f8" prot="private" static="no" mutable="no">
         <type>double</type>
-        <definition>double iDynTree::PrismaticJoint::m_damping</definition>
+        <definition>double iDynTree::RevoluteSO2Joint::m_damping</definition>
         <argsstring></argsstring>
         <name>m_damping</name>
         <briefdescription>
@@ -120,11 +120,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="40" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="51" column="16" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="51" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a32e577b27db3673f0f46d3e90718ba0b" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a9df73990494e5211953cd96a0f4bb241" prot="private" static="no" mutable="no">
         <type>double</type>
-        <definition>double iDynTree::PrismaticJoint::m_static_friction</definition>
+        <definition>double iDynTree::RevoluteSO2Joint::m_static_friction</definition>
         <argsstring></argsstring>
         <name>m_static_friction</name>
         <briefdescription>
@@ -133,24 +133,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="41" column="16" bodyfile="iDynTree/PrismaticJoint.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="52" column="16" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="52" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1abd0f4f96717e4322fd0a786ba9197754" prot="private" static="no" mutable="yes">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a34ee4020ba524a3ff9074cb7617dc993" prot="private" static="no" mutable="yes">
         <type>double</type>
-        <definition>double iDynTree::PrismaticJoint::q_previous</definition>
+        <definition>double iDynTree::RevoluteSO2Joint::q_real_previous</definition>
         <argsstring></argsstring>
-        <name>q_previous</name>
+        <name>q_real_previous</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="44" column="24" bodyfile="iDynTree/PrismaticJoint.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="55" column="24" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="55" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a21357cd473ebb1ace3ad1d8be047bbc0" prot="private" static="no" mutable="yes">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a01f4f644c37ac252f42c833fbfbf7f83" prot="private" static="no" mutable="yes">
+        <type>double</type>
+        <definition>double iDynTree::RevoluteSO2Joint::q_imag_previous</definition>
+        <argsstring></argsstring>
+        <name>q_imag_previous</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="56" column="24" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a516770d3a3d302e38c6846af5708e336" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
-        <definition>Transform iDynTree::PrismaticJoint::link1_X_link2</definition>
+        <definition>Transform iDynTree::RevoluteSO2Joint::link1_X_link2</definition>
         <argsstring></argsstring>
         <name>link1_X_link2</name>
         <briefdescription>
@@ -159,11 +172,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="45" column="27" bodyfile="iDynTree/PrismaticJoint.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="57" column="27" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="57" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a6d884f6b58c3fab743af56a65d2ca9a4" prot="private" static="no" mutable="yes">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a0d81835781978e6d994feda2a02a87db" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
-        <definition>Transform iDynTree::PrismaticJoint::link2_X_link1</definition>
+        <definition>Transform iDynTree::RevoluteSO2Joint::link2_X_link1</definition>
         <argsstring></argsstring>
         <name>link2_X_link1</name>
         <briefdescription>
@@ -172,11 +185,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="46" column="27" bodyfile="iDynTree/PrismaticJoint.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="58" column="27" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="58" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1a4851266f2394dc6907522ba7d0113030" prot="private" static="no" mutable="yes">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a5518330f47b3922d38c636ee16f38c79" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
-        <definition>SpatialMotionVector iDynTree::PrismaticJoint::S_link1_link2</definition>
+        <definition>SpatialMotionVector iDynTree::RevoluteSO2Joint::S_link1_link2</definition>
         <argsstring></argsstring>
         <name>S_link1_link2</name>
         <briefdescription>
@@ -185,11 +198,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="47" column="37" bodyfile="iDynTree/PrismaticJoint.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="59" column="37" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="59" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1PrismaticJoint_1ae8bc56ca5557142f172e996639533131" prot="private" static="no" mutable="yes">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteSO2Joint_1a84ab9b046137b380aac91bae4372047b" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
-        <definition>SpatialMotionVector iDynTree::PrismaticJoint::S_link2_link1</definition>
+        <definition>SpatialMotionVector iDynTree::RevoluteSO2Joint::S_link2_link1</definition>
         <argsstring></argsstring>
         <name>S_link2_link1</name>
         <briefdescription>
@@ -198,13 +211,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="48" column="37" bodyfile="iDynTree/PrismaticJoint.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="60" column="37" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ababcade9ad1d46f97912883b78c9111c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ae42e6efcb11b5dac6ac6f4e6ed4f28ce" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void iDynTree::PrismaticJoint::disablePosLimits</definition>
+        <definition>void iDynTree::RevoluteSO2Joint::disablePosLimits</definition>
         <argsstring>()</argsstring>
         <name>disablePosLimits</name>
         <briefdescription>
@@ -213,11 +226,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="32" column="14"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="43" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ad5909faf79ce873324da7c5310f98e61" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a77d53e2b990e68c3049fc8f79c181c95" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void iDynTree::PrismaticJoint::resetJointDynamics</definition>
+        <definition>void iDynTree::RevoluteSO2Joint::resetJointDynamics</definition>
         <argsstring>()</argsstring>
         <name>resetJointDynamics</name>
         <briefdescription>
@@ -226,16 +239,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="38" column="14"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="49" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a5352289b3185771ca66b6163a32717c8" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a4619faf8d34cc078f93c878d3778539e" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void iDynTree::PrismaticJoint::updateBuffers</definition>
-        <argsstring>(const double new_q) const</argsstring>
+        <definition>void iDynTree::RevoluteSO2Joint::updateBuffers</definition>
+        <argsstring>(const double new_q_real, const double new_q_imag) const</argsstring>
         <name>updateBuffers</name>
         <param>
           <type>const double</type>
-          <declname>new_q</declname>
+          <declname>new_q_real</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>new_q_imag</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -243,16 +260,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="50" column="14"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="62" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a693283039138367a864d05a97f1d48bb" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a1875ed6790cdef1f36e32c900df61629" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void iDynTree::PrismaticJoint::resetBuffers</definition>
-        <argsstring>(const double new_q) const</argsstring>
+        <definition>void iDynTree::RevoluteSO2Joint::resetBuffers</definition>
+        <argsstring>(const double new_q_real, const double new_q_imag) const</argsstring>
         <name>resetBuffers</name>
         <param>
           <type>const double</type>
-          <declname>new_q</declname>
+          <declname>new_q_real</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>new_q_imag</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -260,11 +281,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="51" column="14"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="63" column="14"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a81d5439e47c00f25b57d4e7f4e351f0b" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1aa0c274c5663226894b92e15210d57c90" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void iDynTree::PrismaticJoint::resetAxisBuffers</definition>
+        <definition>void iDynTree::RevoluteSO2Joint::resetAxisBuffers</definition>
         <argsstring>() const</argsstring>
         <name>resetAxisBuffers</name>
         <briefdescription>
@@ -273,15 +294,97 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="52" column="14"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="64" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1aa9018cd5dfe867479fa0b499e199e3ce" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::RevoluteSO2Joint::complexToAngle</definition>
+        <argsstring>(const double q_real, const double q_imag) const</argsstring>
+        <name>complexToAngle</name>
+        <param>
+          <type>const double</type>
+          <declname>q_real</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>q_imag</declname>
+        </param>
+        <briefdescription>
+<para>Convert complex coordinates to angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>q_real</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>real part of the complex number </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>q_imag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>imaginary part of the complex number </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the angle in radians </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="72" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a0446eca7eb2cf2889d0e9d33fdf8ea92" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::RevoluteSO2Joint::normalizeComplex</definition>
+        <argsstring>(double &amp;q_real, double &amp;q_imag) const</argsstring>
+        <name>normalizeComplex</name>
+        <param>
+          <type>double &amp;</type>
+          <declname>q_real</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>q_imag</declname>
+        </param>
+        <briefdescription>
+<para>Normalize the complex number to unit circle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>q_real</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>reference to real part (will be modified) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>q_imag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>reference to imaginary part (will be modified) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="79" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a79ed0a8a9c7d67a9f47230bfc0214d7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a4ba706f7101bb9519c017d60ef197cc6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>iDynTree::PrismaticJoint::PrismaticJoint</definition>
+        <definition>iDynTree::RevoluteSO2Joint::RevoluteSO2Joint</definition>
         <argsstring>()</argsstring>
-        <name>PrismaticJoint</name>
+        <name>RevoluteSO2Joint</name>
         <briefdescription>
 <para>Constructor. </para>
         </briefdescription>
@@ -289,13 +392,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="58" column="9"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="85" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1aa83aec02a88dec71313860dcbb9a90ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a78de953da11421752e970ae2413d66fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>iDynTree::PrismaticJoint::PrismaticJoint</definition>
-        <argsstring>(const LinkIndex link1, const LinkIndex link2, const Transform &amp;link1_X_link2, const Axis &amp;_translation_axis_wrt_link1)</argsstring>
-        <name>PrismaticJoint</name>
+        <definition>iDynTree::RevoluteSO2Joint::RevoluteSO2Joint</definition>
+        <argsstring>(const LinkIndex link1, const LinkIndex link2, const Transform &amp;link1_X_link2, const Axis &amp;_rotation_axis_wrt_link1)</argsstring>
+        <name>RevoluteSO2Joint</name>
         <param>
           <type>const LinkIndex</type>
           <declname>link1</declname>
@@ -310,7 +413,7 @@
         </param>
         <param>
           <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
-          <declname>_translation_axis_wrt_link1</declname>
+          <declname>_rotation_axis_wrt_link1</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -318,15 +421,38 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="61" column="9"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="88" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a3f6bc8eedb120e0fb1c9920fea7319ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1abf579399e9be8d947cbbb9d943af170c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>iDynTree::PrismaticJoint::PrismaticJoint</definition>
-        <argsstring>(const PrismaticJoint &amp;other)</argsstring>
-        <name>PrismaticJoint</name>
+        <definition>iDynTree::RevoluteSO2Joint::RevoluteSO2Joint</definition>
+        <argsstring>(const Transform &amp;link1_X_link2, const Axis &amp;_rotation_axis_wrt_link1)</argsstring>
+        <name>RevoluteSO2Joint</name>
         <param>
-          <type>const <ref refid="classiDynTree_1_1PrismaticJoint" kindref="compound">PrismaticJoint</ref> &amp;</type>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
+          <declname>_rotation_axis_wrt_link1</declname>
+        </param>
+        <briefdescription>
+<para>Constructor in which the LinkIndex to which the joint is attached are not specified. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This constructor is typically used together with the <ref refid="classiDynTree_1_1Model_1aaead8cb8c5367589131a877ea121c573" kindref="member">Model::addJoint</ref> or <ref refid="classiDynTree_1_1Model_1a764763adb198032da5bdfcfc5f6a0748" kindref="member">Model::addJointAndLink</ref> methods, in which the links to which the joint is attached are specified by the other arguments of the method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="97" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a4b889cdfe463ddeaf592a1180bee6c30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RevoluteSO2Joint::RevoluteSO2Joint</definition>
+        <argsstring>(const RevoluteSO2Joint &amp;other)</argsstring>
+        <name>RevoluteSO2Joint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1RevoluteSO2Joint" kindref="compound">RevoluteSO2Joint</ref> &amp;</type>
           <declname>other</declname>
         </param>
         <briefdescription>
@@ -336,13 +462,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="67" column="9"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="102" column="9"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a65531e877d712df301e2cd6e0ad04b42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ae1dda38c084ce44dab4f34adfbedebc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
-        <definition>virtual iDynTree::PrismaticJoint::~PrismaticJoint</definition>
+        <definition>virtual iDynTree::RevoluteSO2Joint::~RevoluteSO2Joint</definition>
         <argsstring>()</argsstring>
-        <name>~PrismaticJoint</name>
+        <name>~RevoluteSO2Joint</name>
         <briefdescription>
 <para>Destructor. </para>
         </briefdescription>
@@ -350,11 +476,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="72" column="17"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="107" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a1ac21ca360862669e3e90dcd2674ce37" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ac856b07ede5b2564e40ecac096523f9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
-        <definition>virtual IJoint* iDynTree::PrismaticJoint::clone</definition>
+        <definition>virtual IJoint* iDynTree::RevoluteSO2Joint::clone</definition>
         <argsstring>() const</argsstring>
         <name>clone</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2">clone</reimplements>
@@ -365,11 +491,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="75" column="25"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="110" column="25"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1acc37e809466dbaa48c63d710172466d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a122f1f85c605901a5318a76aaf289748" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::setAttachedLinks</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::setAttachedLinks</definition>
         <argsstring>(const LinkIndex link1, const LinkIndex link2)</argsstring>
         <name>setAttachedLinks</name>
         <reimplements refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c">setAttachedLinks</reimplements>
@@ -406,11 +532,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="78" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="113" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ac6cf334be17f178a4b1a8b8877a034d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a196fa4d502b2ac42d6f9c82ded440ea3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::setRestTransform</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::setRestTransform</definition>
         <argsstring>(const Transform &amp;link1_X_link2)</argsstring>
         <name>setRestTransform</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84">setRestTransform</reimplements>
@@ -426,16 +552,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="81" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="116" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ab34363eae08df95076be5eb0ae54a08f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a1f3dffede2dac2a813cac411672d8094" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::setAxis</definition>
-        <argsstring>(const Axis &amp;prismaticAxis, const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX)</argsstring>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::setAxis</definition>
+        <argsstring>(const Axis &amp;revoluteAxis, const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX)</argsstring>
         <name>setAxis</name>
         <param>
           <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
-          <declname>prismaticAxis</declname>
+          <declname>revoluteAxis</declname>
         </param>
         <param>
           <type>const LinkIndex</type>
@@ -447,7 +573,7 @@
           <defval>LINK_INVALID_INDEX</defval>
         </param>
         <briefdescription>
-<para>Set the prismatic axis of the joint, expressed in specified link frame, that is considered the &quot;child&quot; frame regarding the sign of the axis. </para>
+<para>Set the revolute axis of the joint, expressed in specified link frame, that is considered the &quot;child&quot; frame regarding the sign of the axis. </para>
         </briefdescription>
         <detaileddescription>
 <para>See getAxis method for more information.</para>
@@ -457,16 +583,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="92" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="127" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ad0f4e013dee877bd775a8efafddb6f42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a97c05340151c4b146e2a3ac68113927b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::setAxis</definition>
-        <argsstring>(const Axis &amp;prismaticAxis_wrt_link1)</argsstring>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::setAxis</definition>
+        <argsstring>(const Axis &amp;revoluteAxis_wrt_link1)</argsstring>
         <name>setAxis</name>
         <param>
           <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
-          <declname>prismaticAxis_wrt_link1</declname>
+          <declname>revoluteAxis_wrt_link1</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -474,11 +600,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="98" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="133" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a213fda83fc530f350e8bde91a04e2b4e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a13f96e3e7bc95a7b359129655f98ce2a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
-        <definition>virtual LinkIndex iDynTree::PrismaticJoint::getFirstAttachedLink</definition>
+        <definition>virtual LinkIndex iDynTree::RevoluteSO2Joint::getFirstAttachedLink</definition>
         <argsstring>() const</argsstring>
         <name>getFirstAttachedLink</name>
         <reimplements refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8">getFirstAttachedLink</reimplements>
@@ -489,11 +615,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="101" column="27"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="136" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a742bd7aeca927a280704ae37daa6c55d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a72d100d095cba9b89bdd07bca658844e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
-        <definition>virtual LinkIndex iDynTree::PrismaticJoint::getSecondAttachedLink</definition>
+        <definition>virtual LinkIndex iDynTree::RevoluteSO2Joint::getSecondAttachedLink</definition>
         <argsstring>() const</argsstring>
         <name>getSecondAttachedLink</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8">getSecondAttachedLink</reimplements>
@@ -504,11 +630,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="104" column="27"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="139" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a6a54677981ef06a20d5374e212987c12" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1aae0db8853ff73a95a698dbb40530b9b8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
-        <definition>virtual Axis iDynTree::PrismaticJoint::getAxis</definition>
+        <definition>virtual Axis iDynTree::RevoluteSO2Joint::getAxis</definition>
         <argsstring>(const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX) const</argsstring>
         <name>getAxis</name>
         <param>
@@ -521,7 +647,7 @@
           <defval>LINK_INVALID_INDEX</defval>
         </param>
         <briefdescription>
-<para>Get the revolute axis of the robot, expressed in linkA frame. </para>
+<para>Get the revolute axis of the robot, expressed in child frame. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -529,23 +655,19 @@
 <parametername>child</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the link frame (one of the two at which the link is attached) in which the returned axis is expressed. Furthermore, the axis direction depends on the assumption that this frame is considered the &quot;child&quot; in the relationship.</para>
+<para>the link frame (one of the two at which the link is attached) in which the returned axis is expressed. Furthermore, the axis direction depends on the assumption that this frame is considered the &quot;child&quot; in the relationship. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-See</para>
-<para>Seth, A., Sherman, M., Eastman, P., &amp; Delp, S. (2010). Minimal formulation of joint motion for biomechanisms. Nonlinear Dynamics, 62(1), 291-303. <ulink url="https://nmbl.stanford.edu/publications/pdf/Seth2010.pdf">https://nmbl.stanford.edu/publications/pdf/Seth2010.pdf</ulink> Section 2.4</para>
-<para>and</para>
-<para>&quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Traversaro - Section 3.2 <ulink url="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf</ulink></para>
-<para>for more details. </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="130" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="149" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a373f69a06f669b0696732484469a0000" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a224463a0361a5235514b086852b7aa44" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
-        <definition>virtual Transform iDynTree::PrismaticJoint::getRestTransform</definition>
+        <definition>virtual Transform iDynTree::RevoluteSO2Joint::getRestTransform</definition>
         <argsstring>(const LinkIndex child, const LinkIndex parent) const</argsstring>
         <name>getRestTransform</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0">getRestTransform</reimplements>
@@ -565,11 +687,11 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="134" column="27"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="153" column="27"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1aa496c937ad1ca73bb90e7da79cc646b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1aa0d3075ce2f95469788fb800245b5cc4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
-        <definition>virtual const Transform&amp; iDynTree::PrismaticJoint::getTransform</definition>
+        <definition>virtual const Transform&amp; iDynTree::RevoluteSO2Joint::getTransform</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent) const</argsstring>
         <name>getTransform</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767">getTransform</reimplements>
@@ -592,11 +714,11 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="139" column="34"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="157" column="34"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a0ce9b9cd049657c73cf6b1e2461210b9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1aa6f5e906a6e1aaa3804eeba352739eff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
-        <definition>TransformDerivative iDynTree::PrismaticJoint::getTransformDerivative</definition>
+        <definition>TransformDerivative iDynTree::RevoluteSO2Joint::getTransformDerivative</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent, const int posCoord_i) const</argsstring>
         <name>getTransformDerivative</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb">getTransformDerivative</reimplements>
@@ -625,11 +747,11 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="144" column="29"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="162" column="29"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a693463b6624ee225bfafc0cd5e5484bf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ade8d5d9ccdf88c2535ab4fb3ffeaf8ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::getPositionDerivativeVelocityJacobian</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::getPositionDerivativeVelocityJacobian</definition>
         <argsstring>(const iDynTree::Span&lt; const double &gt; jntPos, MatrixView&lt; double &gt; &amp;positionDerivative_J_velocity) const</argsstring>
         <name>getPositionDerivativeVelocityJacobian</name>
         <reimplements refid="classiDynTree_1_1IJoint_1ac712be0a8eb4b09eed3f9d8a42b4e765">getPositionDerivativeVelocityJacobian</reimplements>
@@ -675,11 +797,11 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="150" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="168" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1aeee5efe6fbcb2a9cab0bec5c3da1df50" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a59bc8483ae663a73a5a16ca264f96947" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::setJointPosCoordsToRest</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::setJointPosCoordsToRest</definition>
         <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
         <name>setJointPosCoordsToRest</name>
         <reimplements refid="classiDynTree_1_1IJoint_1aadfed093b3e13c2da08668958d99167c">setJointPosCoordsToRest</reimplements>
@@ -706,11 +828,11 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="154" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="172" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a71bf599d7b26369f453ce48073c811a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a03b2ac0d01cb2e379de41ac7c4b00d5d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::normalizeJointPosCoords</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::normalizeJointPosCoords</definition>
         <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
         <name>normalizeJointPosCoords</name>
         <reimplements refid="classiDynTree_1_1IJoint_1ad0d3771bd046afa8a19d0c3af18f577c">normalizeJointPosCoords</reimplements>
@@ -738,11 +860,11 @@ See</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="157" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="175" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a6e6fb431a49f7a0215f7d4b5faa3f9f9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ac584f28ed13ea82c41259a6274179542" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
-        <definition>virtual SpatialMotionVector iDynTree::PrismaticJoint::getMotionSubspaceVector</definition>
+        <definition>virtual SpatialMotionVector iDynTree::RevoluteSO2Joint::getMotionSubspaceVector</definition>
         <argsstring>(int dof_i, const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX) const</argsstring>
         <name>getMotionSubspaceVector</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f">getMotionSubspaceVector</reimplements>
@@ -775,11 +897,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="160" column="37"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="178" column="37"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a254a889ad22326e340e31893aa3b3a17" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1abc5c0b51ef499047b35ff82f8abb74d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::computeChildPosVelAcc</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::computeChildPosVelAcc</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkPositions &amp;linkPositions, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
         <name>computeChildPosVelAcc</name>
         <reimplements refid="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881">computeChildPosVelAcc</reimplements>
@@ -823,11 +945,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="165" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="183" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ab7ee688d192b918dfb9efbe8afda0f09" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1aa5d610e35d733f1e78aa391549b4a011" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::computeChildVel</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::computeChildVel</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, LinkVelArray &amp;linkVels, const LinkIndex child, const LinkIndex parent) const</argsstring>
         <name>computeChildVel</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e">computeChildVel</reimplements>
@@ -858,11 +980,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="174" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="192" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a3f60b0d78a2065d4a6d4f470496894b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a942b5515b7d22f2edda6652d13b29495" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::computeChildVelAcc</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::computeChildVelAcc</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
         <name>computeChildVelAcc</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e">computeChildVelAcc</reimplements>
@@ -901,11 +1023,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="180" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="198" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a35f4eda7506082ee7a520df7f976da60" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a85239f035f3ee881c934b005b8cc0d27" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::computeChildAcc</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::computeChildAcc</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, const VectorDynSize &amp;jntAcc, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
         <name>computeChildAcc</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1">computeChildAcc</reimplements>
@@ -944,11 +1066,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="188" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="206" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a808c5b7e92112d346dce43905ea0a671" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a4358696e4544681a9e64a9aa5e1a4407" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::computeChildBiasAcc</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::computeChildBiasAcc</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, LinkAccArray &amp;linkBiasAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
         <name>computeChildBiasAcc</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3">computeChildBiasAcc</reimplements>
@@ -983,11 +1105,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="197" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="215" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ad2033d545ccada271a36eeecf73ccacd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1adf0bdbce9899492ecafbf6908f559d5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
-        <definition>virtual void iDynTree::PrismaticJoint::computeJointTorque</definition>
+        <definition>virtual void iDynTree::RevoluteSO2Joint::computeJointTorque</definition>
         <argsstring>(const VectorDynSize &amp;jntPos, const Wrench &amp;internalWrench, const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied, VectorDynSize &amp;jntTorques) const</argsstring>
         <name>computeJointTorque</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e">computeJointTorque</reimplements>
@@ -1060,11 +1182,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="205" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="223" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a0d0c74fb7e7ad6f9e9ddf9bef7528068" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ab2135a84df31194ac40ba6d17c8be9f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::hasPosLimits</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::hasPosLimits</definition>
         <argsstring>() const</argsstring>
         <name>hasPosLimits</name>
         <reimplements refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e">hasPosLimits</reimplements>
@@ -1078,11 +1200,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="210" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="228" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a4028e7e729f7665ed75f852e46475769" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a90a0234d37aecec4ce9d7983b57f76e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::enablePosLimits</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::enablePosLimits</definition>
         <argsstring>(const bool enable)</argsstring>
         <name>enablePosLimits</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0">enablePosLimits</reimplements>
@@ -1100,11 +1222,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="211" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="229" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a906a19995a2749717bca458338f26cc6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1af2d10c6be8bbbd511eef50f4f2a79e4f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::getPosLimits</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::getPosLimits</definition>
         <argsstring>(const size_t _index, double &amp;min, double &amp;max) const</argsstring>
         <name>getPosLimits</name>
         <reimplements refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b">getPosLimits</reimplements>
@@ -1139,11 +1261,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="212" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="230" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a8c978202c47f891a9060c8a6c8cfbb5c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a6f6114dd2b5cc16e0e62418e5725a5ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
-        <definition>virtual double iDynTree::PrismaticJoint::getMinPosLimit</definition>
+        <definition>virtual double iDynTree::RevoluteSO2Joint::getMinPosLimit</definition>
         <argsstring>(const size_t _index) const</argsstring>
         <name>getMinPosLimit</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65">getMinPosLimit</reimplements>
@@ -1158,11 +1280,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="213" column="24"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="231" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a8824f586b55d5a1c4c6348ed1264c7b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a628c4e716a0e3dcfd3cead7d294606c3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
-        <definition>virtual double iDynTree::PrismaticJoint::getMaxPosLimit</definition>
+        <definition>virtual double iDynTree::RevoluteSO2Joint::getMaxPosLimit</definition>
         <argsstring>(const size_t _index) const</argsstring>
         <name>getMaxPosLimit</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395">getMaxPosLimit</reimplements>
@@ -1177,11 +1299,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="214" column="24"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="232" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a19279437d49ffc3a6975eb807bdd97cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1aa2e6df8a09741711d9b31b44b9af936b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::setPosLimits</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::setPosLimits</definition>
         <argsstring>(const size_t _index, double min, double max)</argsstring>
         <name>setPosLimits</name>
         <reimplements refid="classiDynTree_1_1IJoint_1abe8111f1f3c76043300efbb3c7f2a3b5">setPosLimits</reimplements>
@@ -1207,11 +1329,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="215" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="233" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a5996b37c717055239c6c7004c4569ab1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a9f155972061a91f4257429d6a64d18ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointDynamicsType</type>
-        <definition>virtual JointDynamicsType iDynTree::PrismaticJoint::getJointDynamicsType</definition>
+        <definition>virtual JointDynamicsType iDynTree::RevoluteSO2Joint::getJointDynamicsType</definition>
         <argsstring>() const</argsstring>
         <name>getJointDynamicsType</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a88283dce433282d14bbef2923df51991">getJointDynamicsType</reimplements>
@@ -1227,11 +1349,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="218" column="35"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="236" column="35"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a2b605313e25fe0275a26e6a2e897159f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1abd788ccac43320ed1852d6e666145dae" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::setJointDynamicsType</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::setJointDynamicsType</definition>
         <argsstring>(const JointDynamicsType enable)</argsstring>
         <name>setJointDynamicsType</name>
         <reimplements refid="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59">setJointDynamicsType</reimplements>
@@ -1251,11 +1373,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="219" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="237" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1ac97640fe2a6e88a8fc6b1f0cab245d4c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ad3d6449d48139968ecb58eb201307110" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
-        <definition>virtual double iDynTree::PrismaticJoint::getDamping</definition>
+        <definition>virtual double iDynTree::RevoluteSO2Joint::getDamping</definition>
         <argsstring>(const size_t _index) const</argsstring>
         <name>getDamping</name>
         <reimplements refid="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d">getDamping</reimplements>
@@ -1275,11 +1397,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="220" column="24"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="238" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a81ef6901743bbc19b62977d36a933949" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1ab26273fcdf73f0c7d45623b26db8f0f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
-        <definition>virtual double iDynTree::PrismaticJoint::getStaticFriction</definition>
+        <definition>virtual double iDynTree::RevoluteSO2Joint::getStaticFriction</definition>
         <argsstring>(const size_t _index) const</argsstring>
         <name>getStaticFriction</name>
         <reimplements refid="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c">getStaticFriction</reimplements>
@@ -1299,11 +1421,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="221" column="24"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="239" column="24"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a4dadd621bb599c952316a4dc4dadeee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a981610f60f6d4224e0f9bc5fc31ff789" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::setDamping</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::setDamping</definition>
         <argsstring>(const size_t _index, double damping)</argsstring>
         <name>setDamping</name>
         <reimplements refid="classiDynTree_1_1IJoint_1aeee6672963b46042d8ea39cfc0d21815">setDamping</reimplements>
@@ -1339,11 +1461,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="222" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="240" column="22"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1PrismaticJoint_1a8d5de10ec591002d8305fe53b4d3d4c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a290bfe30846ec3eecfa21e00730430d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
-        <definition>virtual bool iDynTree::PrismaticJoint::setStaticFriction</definition>
+        <definition>virtual bool iDynTree::RevoluteSO2Joint::setStaticFriction</definition>
         <argsstring>(const size_t _index, double staticFriction)</argsstring>
         <name>setStaticFriction</name>
         <reimplements refid="classiDynTree_1_1IJoint_1ab82b3ad35b2de9b0ef8ab96b851213d3">setStaticFriction</reimplements>
@@ -1379,24 +1501,95 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrismaticJoint.h" line="223" column="22"/>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="241" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a47b578894ef007fcd14a6141c1b9b78b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::RevoluteSO2Joint::getCurrentAngle</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos) const</argsstring>
+        <name>getCurrentAngle</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <briefdescription>
+<para>Get the current angle from the complex representation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the joint positions vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the angle in radians </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="248" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteSO2Joint_1a0c8040427a9296d4ada258c6c6916a6d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::RevoluteSO2Joint::setJointPositionFromAngle</definition>
+        <argsstring>(VectorDynSize &amp;jntPos, double angle) const</argsstring>
+        <name>setJointPositionFromAngle</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>angle</declname>
+        </param>
+        <briefdescription>
+<para>Set joint position from an angle. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the joint positions vector to modify </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>angle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the angle in radians </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteSO2Joint.h" line="255" column="14"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
-<para>Class representing a prismatic joint, i.e. </para>
+<para>Class representing a revolute joint using SO(2) representation, i.e. </para>
     </briefdescription>
     <detaileddescription>
-<para>a joint that constraint two links to translate only along an axis. </para>
+<para>a joint that constrains two links to move only around a common axis.</para>
+<para>Unlike the regular <ref refid="classiDynTree_1_1RevoluteJoint" kindref="compound">RevoluteJoint</ref>, this joint represents the angular position using a complex number (with real and imaginary parts) to avoid periodicity issues. Each angle corresponds to a unique complex number on the unit circle.</para>
+<para>The joint has:<itemizedlist>
+<listitem><para>2 position coordinates: real and imaginary parts of the complex number</para>
+</listitem><listitem><para>1 degree of freedom: the angular velocity</para>
+</listitem></itemizedlist>
+</para>
+<para>The actual angle is computed as atan2(imaginary_part, real_part). </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="1">
-        <label>iDynTree::PrismaticJoint</label>
-        <link refid="classiDynTree_1_1PrismaticJoint"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="2">
-        <label>MovableJointImpl1</label>
+        <label>MovableJointImpl21</label>
         <link refid="classiDynTree_1_1MovableJointImpl"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -1404,17 +1597,17 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
       <node id="3">
         <label>iDynTree::IJoint</label>
         <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::RevoluteSO2Joint</label>
+        <link refid="classiDynTree_1_1RevoluteSO2Joint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="1">
-        <label>iDynTree::PrismaticJoint</label>
-        <link refid="classiDynTree_1_1PrismaticJoint"/>
-        <childnode refid="2" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="2">
-        <label>MovableJointImpl1</label>
+        <label>MovableJointImpl21</label>
         <link refid="classiDynTree_1_1MovableJointImpl"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -1423,79 +1616,91 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         <label>iDynTree::IJoint</label>
         <link refid="classiDynTree_1_1IJoint"/>
       </node>
+      <node id="1">
+        <label>iDynTree::RevoluteSO2Joint</label>
+        <link refid="classiDynTree_1_1RevoluteSO2Joint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
     </collaborationgraph>
-    <location file="iDynTree/PrismaticJoint.h" line="22" column="5" bodyfile="iDynTree/PrismaticJoint.h" bodystart="23" bodyend="224"/>
+    <location file="iDynTree/RevoluteSO2Joint.h" line="33" column="5" bodyfile="iDynTree/RevoluteSO2Joint.h" bodystart="34" bodyend="256"/>
     <listofallmembers>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a1ac21ca360862669e3e90dcd2674ce37" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>clone</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a35f4eda7506082ee7a520df7f976da60" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>computeChildAcc</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a808c5b7e92112d346dce43905ea0a671" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>computeChildBiasAcc</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a254a889ad22326e340e31893aa3b3a17" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>computeChildPosVelAcc</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ab7ee688d192b918dfb9efbe8afda0f09" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>computeChildVel</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a3f60b0d78a2065d4a6d4f470496894b7" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>computeChildVelAcc</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ad2033d545ccada271a36eeecf73ccacd" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>computeJointTorque</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ababcade9ad1d46f97912883b78c9111c" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>disablePosLimits</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a4028e7e729f7665ed75f852e46475769" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>enablePosLimits</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a6a54677981ef06a20d5374e212987c12" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getAxis</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ac97640fe2a6e88a8fc6b1f0cab245d4c" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getDamping</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getDOFsOffset</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a213fda83fc530f350e8bde91a04e2b4e" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getFirstAttachedLink</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getIndex</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a5996b37c717055239c6c7004c4569ab1" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getJointDynamicsType</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a8824f586b55d5a1c4c6348ed1264c7b1" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getMaxPosLimit</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a8c978202c47f891a9060c8a6c8cfbb5c" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getMinPosLimit</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a6e6fb431a49f7a0215f7d4b5faa3f9f9" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getMotionSubspaceVector</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getNrOfDOFs</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getNrOfPosCoords</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getPosCoordsOffset</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a693463b6624ee225bfafc0cd5e5484bf" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getPositionDerivativeVelocityJacobian</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a906a19995a2749717bca458338f26cc6" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getPosLimits</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a373f69a06f669b0696732484469a0000" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getRestTransform</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a742bd7aeca927a280704ae37daa6c55d" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getSecondAttachedLink</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a81ef6901743bbc19b62977d36a933949" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getStaticFriction</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1aa496c937ad1ca73bb90e7da79cc646b2" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getTransform</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a0ce9b9cd049657c73cf6b1e2461210b9" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>getTransformDerivative</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a0d0c74fb7e7ad6f9e9ddf9bef7528068" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>hasPosLimits</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1af6b5715987ab445df5c773d4133d1c19" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>link1</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a21357cd473ebb1ace3ad1d8be047bbc0" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>link1_X_link2</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a0e6552482e90be482b88a75851d58ee9" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>link1_X_link2_at_rest</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1abcff171c5084bdc6a435f8fcd091b778" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>link2</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a6d884f6b58c3fab743af56a65d2ca9a4" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>link2_X_link1</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a2127635356b5f4a94406eb48d3b4b6e2" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_damping</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a425f5ae5cc08edee16740d4b8a793360" prot="protected" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_DOFsOffset</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a375259f12a9804bf9482e27a3cdca74a" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_hasPosLimits</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a872555afe6bfd9b14fb6bbea08968003" prot="protected" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_index</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1affcbbcde843f22f4a82ecd0abe8d5959" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_joint_dynamics_type</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a1f5bdda35aa1d796773d570517693ae5" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_maxPos</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a668879821383b2858ea3f9079cee842b" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_minPos</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_posCoordsOffset</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a32e577b27db3673f0f46d3e90718ba0b" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>m_static_friction</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a71bf599d7b26369f453ce48073c811a3" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>normalizeJointPosCoords</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a79ed0a8a9c7d67a9f47230bfc0214d7b" prot="public" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>PrismaticJoint</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1aa83aec02a88dec71313860dcbb9a90ea" prot="public" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>PrismaticJoint</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a3f6bc8eedb120e0fb1c9920fea7319ca" prot="public" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>PrismaticJoint</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1abd0f4f96717e4322fd0a786ba9197754" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>q_previous</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a81d5439e47c00f25b57d4e7f4e351f0b" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>resetAxisBuffers</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a693283039138367a864d05a97f1d48bb" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>resetBuffers</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ad5909faf79ce873324da7c5310f98e61" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>resetJointDynamics</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a4851266f2394dc6907522ba7d0113030" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>S_link1_link2</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ae8bc56ca5557142f172e996639533131" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>S_link2_link1</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1acc37e809466dbaa48c63d710172466d7" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setAttachedLinks</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ab34363eae08df95076be5eb0ae54a08f" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setAxis</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ad0f4e013dee877bd775a8efafddb6f42" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setAxis</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a4dadd621bb599c952316a4dc4dadeee2" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setDamping</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setDOFsOffset</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setIndex</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a2b605313e25fe0275a26e6a2e897159f" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setJointDynamicsType</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1aeee5efe6fbcb2a9cab0bec5c3da1df50" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setJointPosCoordsToRest</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setPosCoordsOffset</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a19279437d49ffc3a6975eb807bdd97cb" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setPosLimits</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ac6cf334be17f178a4b1a8b8877a034d6" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setRestTransform</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a8d5de10ec591002d8305fe53b4d3d4c7" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>setStaticFriction</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1ac1008c3d9dd5c7bff5a5a90af722fbf7" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>translation_axis_wrt_link1</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a5352289b3185771ca66b6163a32717c8" prot="private" virt="non-virtual"><scope>iDynTree::PrismaticJoint</scope><name>updateBuffers</name></member>
-      <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::PrismaticJoint</scope><name>~IJoint</name></member>
-      <member refid="classiDynTree_1_1MovableJointImpl_1a723d226cd4e943ac3a2b5b69a3b1c833" prot="public" virt="pure-virtual"><scope>iDynTree::PrismaticJoint</scope><name>~MovableJointImpl</name></member>
-      <member refid="classiDynTree_1_1PrismaticJoint_1a65531e877d712df301e2cd6e0ad04b42" prot="public" virt="virtual"><scope>iDynTree::PrismaticJoint</scope><name>~PrismaticJoint</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ac856b07ede5b2564e40ecac096523f9b" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa9018cd5dfe867479fa0b499e199e3ce" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>complexToAngle</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a85239f035f3ee881c934b005b8cc0d27" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>computeChildAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4358696e4544681a9e64a9aa5e1a4407" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>computeChildBiasAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1abc5c0b51ef499047b35ff82f8abb74d9" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>computeChildPosVelAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa5d610e35d733f1e78aa391549b4a011" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>computeChildVel</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a942b5515b7d22f2edda6652d13b29495" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>computeChildVelAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1adf0bdbce9899492ecafbf6908f559d5b" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>computeJointTorque</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ae42e6efcb11b5dac6ac6f4e6ed4f28ce" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>disablePosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a90a0234d37aecec4ce9d7983b57f76e9" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aae0db8853ff73a95a698dbb40530b9b8" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getAxis</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a47b578894ef007fcd14a6141c1b9b78b" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getCurrentAngle</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ad3d6449d48139968ecb58eb201307110" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getDamping</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a13f96e3e7bc95a7b359129655f98ce2a" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getFirstAttachedLink</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a9f155972061a91f4257429d6a64d18ab" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getJointDynamicsType</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a628c4e716a0e3dcfd3cead7d294606c3" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getMaxPosLimit</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a6f6114dd2b5cc16e0e62418e5725a5ae" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getMinPosLimit</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ac584f28ed13ea82c41259a6274179542" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getMotionSubspaceVector</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ade8d5d9ccdf88c2535ab4fb3ffeaf8ad" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getPositionDerivativeVelocityJacobian</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1af2d10c6be8bbbd511eef50f4f2a79e4f" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getPosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a224463a0361a5235514b086852b7aa44" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getRestTransform</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a72d100d095cba9b89bdd07bca658844e" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ab26273fcdf73f0c7d45623b26db8f0f8" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getStaticFriction</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa0d3075ce2f95469788fb800245b5cc4" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getTransform</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa6f5e906a6e1aaa3804eeba352739eff" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>getTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ab2135a84df31194ac40ba6d17c8be9f8" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a929188a3f121406bcaf363e523497f4a" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>link1</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a516770d3a3d302e38c6846af5708e336" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>link1_X_link2</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1abe826baf7ec4b2d57080d89fadc95b0a" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>link1_X_link2_at_rest</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ad81dabbd36230d6ce324cdd6e265bd1d" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>link2</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0d81835781978e6d994feda2a02a87db" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>link2_X_link1</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1af2e7eebc73ee65b987a55ce70c9926f8" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_damping</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a425f5ae5cc08edee16740d4b8a793360" prot="protected" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_DOFsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa904847c16900d44d055d130ea512f29" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a872555afe6bfd9b14fb6bbea08968003" prot="protected" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_index</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a966d965152752ea1984c39063f2a9c65" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_joint_dynamics_type</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a930974c853d285da18be68c96e4607dc" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_maxPos</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a227f9449025a1b30c52f5a134d22846d" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_minPos</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_posCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a9df73990494e5211953cd96a0f4bb241" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>m_static_friction</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0446eca7eb2cf2889d0e9d33fdf8ea92" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>normalizeComplex</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a03b2ac0d01cb2e379de41ac7c4b00d5d" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>normalizeJointPosCoords</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a01f4f644c37ac252f42c833fbfbf7f83" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>q_imag_previous</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a34ee4020ba524a3ff9074cb7617dc993" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>q_real_previous</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa0c274c5663226894b92e15210d57c90" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>resetAxisBuffers</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a1875ed6790cdef1f36e32c900df61629" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>resetBuffers</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a77d53e2b990e68c3049fc8f79c181c95" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>resetJointDynamics</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4ba706f7101bb9519c017d60ef197cc6" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>RevoluteSO2Joint</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a78de953da11421752e970ae2413d66fd" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>RevoluteSO2Joint</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1abf579399e9be8d947cbbb9d943af170c" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>RevoluteSO2Joint</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4b889cdfe463ddeaf592a1180bee6c30" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>RevoluteSO2Joint</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1acd77ca591d1c854a29bef08d2f7811b7" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>rotation_axis_wrt_link1</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a5518330f47b3922d38c636ee16f38c79" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>S_link1_link2</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a84ab9b046137b380aac91bae4372047b" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>S_link2_link1</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a122f1f85c605901a5318a76aaf289748" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a1f3dffede2dac2a813cac411672d8094" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setAxis</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a97c05340151c4b146e2a3ac68113927b" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setAxis</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a981610f60f6d4224e0f9bc5fc31ff789" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setDamping</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1abd788ccac43320ed1852d6e666145dae" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setJointDynamicsType</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a59bc8483ae663a73a5a16ca264f96947" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setJointPosCoordsToRest</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0c8040427a9296d4ada258c6c6916a6d" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setJointPositionFromAngle</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa2e6df8a09741711d9b31b44b9af936b" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setPosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a196fa4d502b2ac42d6f9c82ded440ea3" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a290bfe30846ec3eecfa21e00730430d2" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>setStaticFriction</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4619faf8d34cc078f93c878d3778539e" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>updateBuffers</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>~IJoint</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a723d226cd4e943ac3a2b5b69a3b1c833" prot="public" virt="pure-virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>~MovableJointImpl</name></member>
+      <member refid="classiDynTree_1_1RevoluteSO2Joint_1ae1dda38c084ce44dab4f34adfbedebc3" prot="public" virt="virtual"><scope>iDynTree::RevoluteSO2Joint</scope><name>~RevoluteSO2Joint</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

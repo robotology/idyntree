@@ -11,6 +11,7 @@
     <includedby refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includedby>
     <includedby refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includedby>
     <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
+    <includedby refid="IJoint_8h" local="no">iDynTree/IJoint.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>cassert</label>

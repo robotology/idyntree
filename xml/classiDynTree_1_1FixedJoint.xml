@@ -418,6 +418,119 @@
         </inbodydescription>
         <location file="iDynTree/FixedJoint.h" line="96" column="29"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aaf6686affee2d8829f158476232a69cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::getPositionDerivativeVelocityJacobian</definition>
+        <argsstring>(const iDynTree::Span&lt; const double &gt; jntPos, MatrixView&lt; double &gt; &amp;positionDerivative_J_velocity) const</argsstring>
+        <name>getPositionDerivativeVelocityJacobian</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ac712be0a8eb4b09eed3f9d8a42b4e765">getPositionDerivativeVelocityJacobian</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref>&lt; double &gt; &amp;</type>
+          <declname>positionDerivative_J_velocity</declname>
+        </param>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" kindref="member">getNrOfPosCoords()</ref> × <ref refid="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" kindref="member">getNrOfDOFs()</ref> matrix that maps the joint velocity to the derivative of the joint position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method computes the Jacobian matrix J such that: d/dt(q_pos) = J * q_vel where:<itemizedlist>
+<listitem><para>q_pos are the position coordinates of the joint (<ref refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" kindref="member">getNrOfPosCoords()</ref> elements)</para>
+</listitem><listitem><para>q_vel are the velocity coordinates of the joint (<ref refid="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" kindref="member">getNrOfDOFs()</ref> elements)</para>
+</listitem><listitem><para>J is the <ref refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" kindref="member">getNrOfPosCoords()</ref> × <ref refid="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" kindref="member">getNrOfDOFs()</ref> Jacobian matrix</para>
+</listitem></itemizedlist>
+</para>
+<para>For simple joints where position and velocity have the same parameterization, this is the identity matrix. For joints with different position and velocity parameterizations (e.g., SO(2) joints using complex numbers for position but angular velocity for DOF), this matrix encodes the relationship.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Joint position coordinates (must have at least <ref refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" kindref="member">getNrOfPosCoords()</ref> elements) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">positionDerivative_J_velocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Jacobian matrix (must be properly sized) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the computation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/FixedJoint.h" line="102" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac4380bc8eef72a886fd50718f90b2f67" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::setJointPosCoordsToRest</definition>
+        <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
+        <name>setJointPosCoordsToRest</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aadfed093b3e13c2da08668958d99167c">setJointPosCoordsToRest</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the position coordinates of the joint to the rest position (i.e zero for simple joints) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full vector of model joint positions, of dimension <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords()</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the operation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/FixedJoint.h" line="106" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aecdd18f426aa92457041c7ddf221f814" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::normalizeJointPosCoords</definition>
+        <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
+        <name>normalizeJointPosCoords</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ad0d3771bd046afa8a19d0c3af18f577c">normalizeJointPosCoords</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <briefdescription>
+<para>Normalize the position coordinates of the joint in the specified joint positios vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the joint is using a minimal representation for the position coordinates, this method does not anything, but if the joint uses a constrained representation such as unit complex numbers of unit quaternions, this method normalizes the position coordinates, ensuring that one of the closest valid positiion coordinates is used.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full vector of model joint positions, of dimension <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords()</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the operation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/FixedJoint.h" line="109" column="22"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa103b6aee2a08ed32b7688f01e3c10fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
         <definition>virtual SpatialMotionVector iDynTree::FixedJoint::getMotionSubspaceVector</definition>
@@ -452,7 +565,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="102" column="37"/>
+        <location file="iDynTree/FixedJoint.h" line="112" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a5b6ba1d1c8e77ba3a6b4e2c91078388c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -500,7 +613,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="107" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="117" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1accd64e95d5df5c12cf0d15d71584cfd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -543,7 +656,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="117" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="127" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1afb8391d3ca02525af959e282e9d914ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -578,7 +691,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="125" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="135" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -621,7 +734,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="132" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="142" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a188836bc8b00a32bff5adbd1ac4549e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -660,7 +773,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="141" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="151" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a64f7e46c83d98bb5f533bee54346880a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -737,7 +850,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="149" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="159" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aff64953756add9df5c66cb2dedd08107" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -756,7 +869,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="154" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="164" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a2932d75d7bcb8717a7dc66de9f8f4ea4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointIndex</type>
@@ -771,7 +884,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="157" column="28"/>
+        <location file="iDynTree/FixedJoint.h" line="167" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a9d0e650f359f3bfec60fffe44ae7e879" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -790,7 +903,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="160" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="170" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a6b71751bb05328e175f152276351c137" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -805,7 +918,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="163" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="173" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac94388992a67d161d7b6498219e26da7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -824,7 +937,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="166" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="176" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac88c5b5c3731a56715fea48c2cf87323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -839,7 +952,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="169" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="179" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac14e8020830993efd145171a5c098197" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -857,7 +970,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="172" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="182" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac91261597acef05ed961fd5acc04dfd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -879,7 +992,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="173" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="183" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a768fb933c761bdcc63ee9d60ea1a9214" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -918,7 +1031,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="174" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="184" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d2f185b2a43a3efd46e3d40a90ea653" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -937,7 +1050,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="175" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="185" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a68f354b50ed5b9c073085f58686236e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -956,7 +1069,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="176" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="186" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ad8d72a026fc780db22e875ce6cf0083b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -986,7 +1099,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="177" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="187" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a15b1b6b5394b5a8e5891d1f9c6f76eaa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointDynamicsType</type>
@@ -1006,7 +1119,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="180" column="35"/>
+        <location file="iDynTree/FixedJoint.h" line="190" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ab092513e1e87ea380c9a14ac5e2d5152" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1030,7 +1143,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="181" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="191" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d1a2ce4b8bb1e2d8e540ab38de0d889" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1054,7 +1167,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="182" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="192" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1adb45cbcc83ae98382e7f8d01d5f1c864" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1078,7 +1191,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="183" column="24"/>
+        <location file="iDynTree/FixedJoint.h" line="193" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a5dcd9b8fe58cb9714a418e77e7ca4a74" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1118,7 +1231,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="184" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="194" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a7264012c0a773725d792afe9c7239509" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1158,7 +1271,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FixedJoint.h" line="185" column="22"/>
+        <location file="iDynTree/FixedJoint.h" line="195" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1191,7 +1304,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/FixedJoint.h" line="19" column="5" bodyfile="iDynTree/FixedJoint.h" bodystart="20" bodyend="186"/>
+    <location file="iDynTree/FixedJoint.h" line="19" column="5" bodyfile="iDynTree/FixedJoint.h" bodystart="20" bodyend="196"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1FixedJoint_1ae7ca38464efead3a54939a67e7e45077" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildAcc</name></member>
@@ -1216,6 +1329,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
       <member refid="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getNrOfDOFs</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getNrOfPosCoords</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a6b71751bb05328e175f152276351c137" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1aaf6686affee2d8829f158476232a69cc" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getPositionDerivativeVelocityJacobian</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a768fb933c761bdcc63ee9d60ea1a9214" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getPosLimits</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a11d92b8cc4f0df088f0eb972e9c70b63" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getRestTransform</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ac7311235bf7b08357a153c1321bed081" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getSecondAttachedLink</name></member>
@@ -1230,11 +1344,13 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
       <member refid="classiDynTree_1_1FixedJoint_1a107a14ac433c9d562a48ccc188701dff" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_DOFsOffset</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a12646ce63f11cc02abde41fe13e1487f" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_index</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a3f18fa59745d646643153a82e76ccb24" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_posCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1aecdd18f426aa92457041c7ddf221f814" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>normalizeJointPosCoords</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a252dce83332fd752932d3c112512a733" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setAttachedLinks</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a5dcd9b8fe58cb9714a418e77e7ca4a74" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setDamping</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ac94388992a67d161d7b6498219e26da7" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setDOFsOffset</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aff64953756add9df5c66cb2dedd08107" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setIndex</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ab092513e1e87ea380c9a14ac5e2d5152" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setJointDynamicsType</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ac4380bc8eef72a886fd50718f90b2f67" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setJointPosCoordsToRest</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a9d0e650f359f3bfec60fffe44ae7e879" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setPosCoordsOffset</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ad8d72a026fc780db22e875ce6cf0083b" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setPosLimits</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a1d24cec7f90a2b916a9f3ed7d3d49dab" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setRestTransform</name></member>

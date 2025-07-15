@@ -10,6 +10,7 @@
     <innerclass refid="classiDynTree_1_1MovableJointImpl" prot="public">iDynTree::MovableJointImpl</innerclass>
     <innerclass refid="classiDynTree_1_1PrismaticJoint" prot="public">iDynTree::PrismaticJoint</innerclass>
     <innerclass refid="classiDynTree_1_1RevoluteJoint" prot="public">iDynTree::RevoluteJoint</innerclass>
+    <innerclass refid="classiDynTree_1_1RevoluteSO2Joint" prot="public">iDynTree::RevoluteSO2Joint</innerclass>
     <innerclass refid="classiDynTree_1_1Traversal" prot="public">iDynTree::Traversal</innerclass>
       <sectiondef kind="func">
       <memberdef kind="function" id="group__iDynTreeModel_1ga1f433a6725585332945762ed4e6b5fe5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">

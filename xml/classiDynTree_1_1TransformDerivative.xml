@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="121" column="19"/>
+        <location file="iDynTree/TransformDerivative.h" line="127" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a49312f51f1958233deaeabc6338f503e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="158" column="19"/>
+        <location file="iDynTree/TransformDerivative.h" line="164" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1ab27febf007aa54fa3c88e74b37a3293c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="195" column="19"/>
+        <location file="iDynTree/TransformDerivative.h" line="201" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a1233fc928abded3318a8d34cdd6762ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="214" column="29"/>
+        <location file="iDynTree/TransformDerivative.h" line="220" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1afadded161ac37c2ace8c182817ec3c3e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="227" column="29"/>
+        <location file="iDynTree/TransformDerivative.h" line="233" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a27c594f59804d305f3fbb3e5edaff273" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="236" column="32"/>
+        <location file="iDynTree/TransformDerivative.h" line="242" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a250449a4ca6bbae36481e15bb883c5aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="245" column="28"/>
+        <location file="iDynTree/TransformDerivative.h" line="251" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a7b8b4747e5511931668ec4f1ef6159ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="254" column="29"/>
+        <location file="iDynTree/TransformDerivative.h" line="260" column="29"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -275,6 +275,34 @@
         </inbodydescription>
         <location file="iDynTree/TransformDerivative.h" line="59" column="9"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a5b4091784bd95e9e6acc7122fd77f906" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::TransformDerivative::fromHomogeneousTransformDerivative</definition>
+        <argsstring>(const Matrix4x4 &amp;transformDerivative)</argsstring>
+        <name>fromHomogeneousTransformDerivative</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix4x4</ref> &amp;</type>
+          <declname>transformDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Set rotation and translation from a iDynTree::Matrix4x4 object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>transformDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input homogeneous matrix derivative </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/TransformDerivative.h" line="65" column="14"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1aa7c10eaa9a3898fc9fb67fe6c8188e0e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>iDynTree::TransformDerivative::~TransformDerivative</definition>
@@ -287,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="64" column="9" bodyfile="iDynTree/TransformDerivative.h" bodystart="64" bodyend="64"/>
+        <location file="iDynTree/TransformDerivative.h" line="70" column="9" bodyfile="iDynTree/TransformDerivative.h" bodystart="70" bodyend="70"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a7e62b9e5318fda029f0bb1d14ae766fb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
@@ -301,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="70" column="26"/>
+        <location file="iDynTree/TransformDerivative.h" line="76" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a156f7b6ec1df03a6bdc3344e41aee40c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
@@ -315,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="76" column="24"/>
+        <location file="iDynTree/TransformDerivative.h" line="82" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a5cc3d9ce991a42f19d8858c19fd1573e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -333,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="82" column="14"/>
+        <location file="iDynTree/TransformDerivative.h" line="88" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a1da48139b879178dcefae4abf004ec15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -351,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="88" column="14"/>
+        <location file="iDynTree/TransformDerivative.h" line="94" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -370,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="95" column="36"/>
+        <location file="iDynTree/TransformDerivative.h" line="101" column="36"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -415,12 +443,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/TransformDerivative.h" line="28" column="5" bodyfile="iDynTree/TransformDerivative.h" bodystart="29" bodyend="255"/>
+    <location file="iDynTree/TransformDerivative.h" line="28" column="5" bodyfile="iDynTree/TransformDerivative.h" bodystart="29" bodyend="261"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1TransformDerivative_1a49312f51f1958233deaeabc6338f503e" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>asAdjointTransformDerivative</name></member>
       <member refid="classiDynTree_1_1TransformDerivative_1ab27febf007aa54fa3c88e74b37a3293c" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>asAdjointTransformWrenchDerivative</name></member>
       <member refid="classiDynTree_1_1TransformDerivative_1a38890e0b6e1c6a6e65b220cf2ae598ae" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>asHomogeneousTransformDerivative</name></member>
       <member refid="classiDynTree_1_1TransformDerivative_1afadded161ac37c2ace8c182817ec3c3e" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>derivativeOfInverse</name></member>
+      <member refid="classiDynTree_1_1TransformDerivative_1a5b4091784bd95e9e6acc7122fd77f906" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>fromHomogeneousTransformDerivative</name></member>
       <member refid="classiDynTree_1_1TransformDerivative_1a156f7b6ec1df03a6bdc3344e41aee40c" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>getPositionDerivative</name></member>
       <member refid="classiDynTree_1_1TransformDerivative_1a7e62b9e5318fda029f0bb1d14ae766fb" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>getRotationDerivative</name></member>
       <member refid="classiDynTree_1_1TransformDerivative_1a1233fc928abded3318a8d34cdd6762ae" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>operator*</name></member>

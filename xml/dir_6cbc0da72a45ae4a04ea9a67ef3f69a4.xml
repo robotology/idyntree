@@ -33,6 +33,7 @@
     <innerfile refid="PredictSensorsMeasurements_8h">PredictSensorsMeasurements.h</innerfile>
     <innerfile refid="PrismaticJoint_8h">PrismaticJoint.h</innerfile>
     <innerfile refid="RevoluteJoint_8h">RevoluteJoint.h</innerfile>
+    <innerfile refid="RevoluteSO2Joint_8h">RevoluteSO2Joint.h</innerfile>
     <innerfile refid="Sensors_8h">Sensors.h</innerfile>
     <innerfile refid="SixAxisForceTorqueSensor_8h">SixAxisForceTorqueSensor.h</innerfile>
     <innerfile refid="SolidShapes_8h">SolidShapes.h</innerfile>

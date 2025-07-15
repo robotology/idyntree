@@ -650,6 +650,119 @@ See</para>
         </inbodydescription>
         <location file="iDynTree/RevoluteJoint.h" line="152" column="29"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a43eb8eee53ab52b4f7c6477c1a873c90" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::RevoluteJoint::getPositionDerivativeVelocityJacobian</definition>
+        <argsstring>(const iDynTree::Span&lt; const double &gt; jntPos, MatrixView&lt; double &gt; &amp;positionDerivative_J_velocity) const</argsstring>
+        <name>getPositionDerivativeVelocityJacobian</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ac712be0a8eb4b09eed3f9d8a42b4e765">getPositionDerivativeVelocityJacobian</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref>&lt; double &gt; &amp;</type>
+          <declname>positionDerivative_J_velocity</declname>
+        </param>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> × <ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref> matrix that maps the joint velocity to the derivative of the joint position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method computes the Jacobian matrix J such that: d/dt(q_pos) = J * q_vel where:<itemizedlist>
+<listitem><para>q_pos are the position coordinates of the joint (<ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> elements)</para>
+</listitem><listitem><para>q_vel are the velocity coordinates of the joint (<ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref> elements)</para>
+</listitem><listitem><para>J is the <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> × <ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref> Jacobian matrix</para>
+</listitem></itemizedlist>
+</para>
+<para>For simple joints where position and velocity have the same parameterization, this is the identity matrix. For joints with different position and velocity parameterizations (e.g., SO(2) joints using complex numbers for position but angular velocity for DOF), this matrix encodes the relationship.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Joint position coordinates (must have at least <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> elements) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">positionDerivative_J_velocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Jacobian matrix (must be properly sized) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the computation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteJoint.h" line="158" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1aabb880e56f74d38d32b786b7bf79a1a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::RevoluteJoint::setJointPosCoordsToRest</definition>
+        <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
+        <name>setJointPosCoordsToRest</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aadfed093b3e13c2da08668958d99167c">setJointPosCoordsToRest</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the position coordinates of the joint to the rest position (i.e zero for simple joints) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full vector of model joint positions, of dimension <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords()</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the operation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteJoint.h" line="162" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1aae1d4156e453d820fd02c9131165bcb8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::RevoluteJoint::normalizeJointPosCoords</definition>
+        <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
+        <name>normalizeJointPosCoords</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ad0d3771bd046afa8a19d0c3af18f577c">normalizeJointPosCoords</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <briefdescription>
+<para>Normalize the position coordinates of the joint in the specified joint positios vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the joint is using a minimal representation for the position coordinates, this method does not anything, but if the joint uses a constrained representation such as unit complex numbers of unit quaternions, this method normalizes the position coordinates, ensuring that one of the closest valid positiion coordinates is used.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full vector of model joint positions, of dimension <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords()</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the operation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/RevoluteJoint.h" line="165" column="22"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ab21df5f6c5075952811c700a9c5cd51a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
         <definition>virtual SpatialMotionVector iDynTree::RevoluteJoint::getMotionSubspaceVector</definition>
@@ -685,7 +798,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="158" column="37"/>
+        <location file="iDynTree/RevoluteJoint.h" line="168" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4e54ab1a66775c23d867d96bc4981d89" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -733,7 +846,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="163" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="173" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1adaae229eae185031300bf171a513d181" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -768,7 +881,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="172" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="182" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1aefd91d85490aac0b9231c4624ac61175" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -811,7 +924,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="178" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="188" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a8cc08db7802d2b4f0978efc6ca6c947d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -854,7 +967,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="186" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="196" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a60ddcf0fd610a2d3ec72c05341621f09" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -893,7 +1006,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="195" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="205" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4d73857202239a3e54de8defafaf62a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -970,7 +1083,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="203" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="213" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a14b6333b82f42a82d644d341ed627c73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -988,7 +1101,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="208" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="218" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a1adadb8bf7bdc3335dfb8b90556edc94" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1010,7 +1123,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="209" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="219" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4d3db4e8079ec53967f00b2451e9651a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1049,7 +1162,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="210" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="220" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ad67f412133c3e07b6c49fd7b67b6c4aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1068,7 +1181,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="211" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="221" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a3580e3bc0eeb67b1497cbfec5945641d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1087,7 +1200,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="212" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="222" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a8e7bcad217abd4fb929edcb3cf9bbeab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1117,7 +1230,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="213" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="223" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a02116cee53bf5ff75e12dc74e9226f9d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointDynamicsType</type>
@@ -1137,7 +1250,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="216" column="35"/>
+        <location file="iDynTree/RevoluteJoint.h" line="226" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a825b9d81e7de95679fafcb473b5d05cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1161,7 +1274,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="217" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="227" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a9c11645dcc7a2a5a303d7c1de5d7fb89" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1185,7 +1298,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="218" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="228" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a6e6f4824555ea71cc71834f60bc47130" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1209,7 +1322,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="219" column="24"/>
+        <location file="iDynTree/RevoluteJoint.h" line="229" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a011fc7911d5e330ee4cbfcc380cd37b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1249,7 +1362,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="220" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="230" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ad5d152ac28c6c35795f47ff496b924ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1289,7 +1402,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RevoluteJoint.h" line="221" column="22"/>
+        <location file="iDynTree/RevoluteJoint.h" line="231" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1334,7 +1447,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         <link refid="classiDynTree_1_1IJoint"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/RevoluteJoint.h" line="22" column="5" bodyfile="iDynTree/RevoluteJoint.h" bodystart="23" bodyend="222"/>
+    <location file="iDynTree/RevoluteJoint.h" line="22" column="5" bodyfile="iDynTree/RevoluteJoint.h" bodystart="23" bodyend="232"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1RevoluteJoint_1a3dfbe0ccbbf399581aab181f86727ded" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1a8cc08db7802d2b4f0978efc6ca6c947d" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeChildAcc</name></member>
@@ -1357,6 +1470,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
       <member refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getNrOfDOFs</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getNrOfPosCoords</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a43eb8eee53ab52b4f7c6477c1a873c90" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getPositionDerivativeVelocityJacobian</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1a4d3db4e8079ec53967f00b2451e9651a" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getPosLimits</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1addfd7a524a8b455fed2e119e5337a5ef" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getRestTransform</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1ab51ac6ab6659dfdba43232dfedd24ea4" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getSecondAttachedLink</name></member>
@@ -1378,6 +1492,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
       <member refid="classiDynTree_1_1RevoluteJoint_1a5c24ef0034d0c449baba2d5fec33871c" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_minPos</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_posCoordsOffset</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1afaed8b14a45055427ba10ca53b50a991" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_static_friction</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1aae1d4156e453d820fd02c9131165bcb8" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>normalizeJointPosCoords</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1af3e89e865b6f934a00e2bfb32fee15fd" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>q_previous</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1af697ff856633860ace4df9e45ad13204" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>resetAxisBuffers</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1abea64170132558068a88804574ca7c87" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>resetBuffers</name></member>
@@ -1396,6 +1511,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
       <member refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setDOFsOffset</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setIndex</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1a825b9d81e7de95679fafcb473b5d05cf" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setJointDynamicsType</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1aabb880e56f74d38d32b786b7bf79a1a4" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setJointPosCoordsToRest</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setPosCoordsOffset</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1a8e7bcad217abd4fb929edcb3cf9bbeab" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setPosLimits</name></member>
       <member refid="classiDynTree_1_1RevoluteJoint_1a01e2fa3bcf4c67533d2869d73124aa45" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setRestTransform</name></member>

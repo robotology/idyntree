@@ -1000,6 +1000,9 @@
     <member refid="classiDynTree_1_1FixedJoint_1a11d92b8cc4f0df088f0eb972e9c70b63" kind="function"><name>getRestTransform</name></member>
     <member refid="classiDynTree_1_1FixedJoint_1a09dddd2e6d0fc043c6ffa0681b15404c" kind="function"><name>getTransform</name></member>
     <member refid="classiDynTree_1_1FixedJoint_1aac231749bf30745780aec0d876fd82ed" kind="function"><name>getTransformDerivative</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1aaf6686affee2d8829f158476232a69cc" kind="function"><name>getPositionDerivativeVelocityJacobian</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1ac4380bc8eef72a886fd50718f90b2f67" kind="function"><name>setJointPosCoordsToRest</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1aecdd18f426aa92457041c7ddf221f814" kind="function"><name>normalizeJointPosCoords</name></member>
     <member refid="classiDynTree_1_1FixedJoint_1aa103b6aee2a08ed32b7688f01e3c10fe" kind="function"><name>getMotionSubspaceVector</name></member>
     <member refid="classiDynTree_1_1FixedJoint_1a5b6ba1d1c8e77ba3a6b4e2c91078388c" kind="function"><name>computeChildPosVelAcc</name></member>
     <member refid="classiDynTree_1_1FixedJoint_1accd64e95d5df5c12cf0d15d71584cfd6" kind="function"><name>computeChildVelAcc</name></member>
@@ -1359,10 +1362,13 @@
     <member refid="classiDynTree_1_1IJoint_1ab82b3ad35b2de9b0ef8ab96b851213d3" kind="function"><name>setStaticFriction</name></member>
     <member refid="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d" kind="function"><name>getDamping</name></member>
     <member refid="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c" kind="function"><name>getStaticFriction</name></member>
+    <member refid="classiDynTree_1_1IJoint_1aadfed093b3e13c2da08668958d99167c" kind="function"><name>setJointPosCoordsToRest</name></member>
+    <member refid="classiDynTree_1_1IJoint_1ad0d3771bd046afa8a19d0c3af18f577c" kind="function"><name>normalizeJointPosCoords</name></member>
     <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" kind="function"><name>~IJoint</name></member>
     <member refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" kind="function"><name>clone</name></member>
     <member refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" kind="function"><name>getNrOfPosCoords</name></member>
     <member refid="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" kind="function"><name>getNrOfDOFs</name></member>
+    <member refid="classiDynTree_1_1IJoint_1ac712be0a8eb4b09eed3f9d8a42b4e765" kind="function"><name>getPositionDerivativeVelocityJacobian</name></member>
   </compound>
   <compound refid="classiDynTree_1_1iKinLimbImported" kind="class"><name>iDynTree::iKinLimbImported</name>
     <member refid="classiDynTree_1_1iKinLimbImported_1a1ddb6cd3ab0129374cc29ddaa0820e84" kind="function"><name>iKinLimbImported</name></member>
@@ -2938,6 +2944,9 @@
     <member refid="classiDynTree_1_1PrismaticJoint_1a373f69a06f669b0696732484469a0000" kind="function"><name>getRestTransform</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1aa496c937ad1ca73bb90e7da79cc646b2" kind="function"><name>getTransform</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a0ce9b9cd049657c73cf6b1e2461210b9" kind="function"><name>getTransformDerivative</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a693463b6624ee225bfafc0cd5e5484bf" kind="function"><name>getPositionDerivativeVelocityJacobian</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1aeee5efe6fbcb2a9cab0bec5c3da1df50" kind="function"><name>setJointPosCoordsToRest</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a71bf599d7b26369f453ce48073c811a3" kind="function"><name>normalizeJointPosCoords</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a6e6fb431a49f7a0215f7d4b5faa3f9f9" kind="function"><name>getMotionSubspaceVector</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a254a889ad22326e340e31893aa3b3a17" kind="function"><name>computeChildPosVelAcc</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ab7ee688d192b918dfb9efbe8afda0f09" kind="function"><name>computeChildVel</name></member>
@@ -3032,6 +3041,9 @@
     <member refid="classiDynTree_1_1RevoluteJoint_1addfd7a524a8b455fed2e119e5337a5ef" kind="function"><name>getRestTransform</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a4dd07d55b77a7b6063c4f677b9900499" kind="function"><name>getTransform</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1afb136bbf0c99f9bcf571dfe1d3937e18" kind="function"><name>getTransformDerivative</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a43eb8eee53ab52b4f7c6477c1a873c90" kind="function"><name>getPositionDerivativeVelocityJacobian</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1aabb880e56f74d38d32b786b7bf79a1a4" kind="function"><name>setJointPosCoordsToRest</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1aae1d4156e453d820fd02c9131165bcb8" kind="function"><name>normalizeJointPosCoords</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1ab21df5f6c5075952811c700a9c5cd51a" kind="function"><name>getMotionSubspaceVector</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a4e54ab1a66775c23d867d96bc4981d89" kind="function"><name>computeChildPosVelAcc</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1adaae229eae185031300bf171a513d181" kind="function"><name>computeChildVel</name></member>
@@ -3051,6 +3063,71 @@
     <member refid="classiDynTree_1_1RevoluteJoint_1a6e6f4824555ea71cc71834f60bc47130" kind="function"><name>getStaticFriction</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a011fc7911d5e330ee4cbfcc380cd37b1" kind="function"><name>setDamping</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1ad5d152ac28c6c35795f47ff496b924ad" kind="function"><name>setStaticFriction</name></member>
+  </compound>
+  <compound refid="classiDynTree_1_1RevoluteSO2Joint" kind="class"><name>iDynTree::RevoluteSO2Joint</name>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a929188a3f121406bcaf363e523497f4a" kind="variable"><name>link1</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ad81dabbd36230d6ce324cdd6e265bd1d" kind="variable"><name>link2</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1abe826baf7ec4b2d57080d89fadc95b0a" kind="variable"><name>link1_X_link2_at_rest</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1acd77ca591d1c854a29bef08d2f7811b7" kind="variable"><name>rotation_axis_wrt_link1</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa904847c16900d44d055d130ea512f29" kind="variable"><name>m_hasPosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a227f9449025a1b30c52f5a134d22846d" kind="variable"><name>m_minPos</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a930974c853d285da18be68c96e4607dc" kind="variable"><name>m_maxPos</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a966d965152752ea1984c39063f2a9c65" kind="variable"><name>m_joint_dynamics_type</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1af2e7eebc73ee65b987a55ce70c9926f8" kind="variable"><name>m_damping</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a9df73990494e5211953cd96a0f4bb241" kind="variable"><name>m_static_friction</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a34ee4020ba524a3ff9074cb7617dc993" kind="variable"><name>q_real_previous</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a01f4f644c37ac252f42c833fbfbf7f83" kind="variable"><name>q_imag_previous</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a516770d3a3d302e38c6846af5708e336" kind="variable"><name>link1_X_link2</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0d81835781978e6d994feda2a02a87db" kind="variable"><name>link2_X_link1</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a5518330f47b3922d38c636ee16f38c79" kind="variable"><name>S_link1_link2</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a84ab9b046137b380aac91bae4372047b" kind="variable"><name>S_link2_link1</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ae42e6efcb11b5dac6ac6f4e6ed4f28ce" kind="function"><name>disablePosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a77d53e2b990e68c3049fc8f79c181c95" kind="function"><name>resetJointDynamics</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4619faf8d34cc078f93c878d3778539e" kind="function"><name>updateBuffers</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a1875ed6790cdef1f36e32c900df61629" kind="function"><name>resetBuffers</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa0c274c5663226894b92e15210d57c90" kind="function"><name>resetAxisBuffers</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa9018cd5dfe867479fa0b499e199e3ce" kind="function"><name>complexToAngle</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0446eca7eb2cf2889d0e9d33fdf8ea92" kind="function"><name>normalizeComplex</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4ba706f7101bb9519c017d60ef197cc6" kind="function"><name>RevoluteSO2Joint</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a78de953da11421752e970ae2413d66fd" kind="function"><name>RevoluteSO2Joint</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1abf579399e9be8d947cbbb9d943af170c" kind="function"><name>RevoluteSO2Joint</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4b889cdfe463ddeaf592a1180bee6c30" kind="function"><name>RevoluteSO2Joint</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ae1dda38c084ce44dab4f34adfbedebc3" kind="function"><name>~RevoluteSO2Joint</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ac856b07ede5b2564e40ecac096523f9b" kind="function"><name>clone</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a122f1f85c605901a5318a76aaf289748" kind="function"><name>setAttachedLinks</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a196fa4d502b2ac42d6f9c82ded440ea3" kind="function"><name>setRestTransform</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a1f3dffede2dac2a813cac411672d8094" kind="function"><name>setAxis</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a97c05340151c4b146e2a3ac68113927b" kind="function"><name>setAxis</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a13f96e3e7bc95a7b359129655f98ce2a" kind="function"><name>getFirstAttachedLink</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a72d100d095cba9b89bdd07bca658844e" kind="function"><name>getSecondAttachedLink</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aae0db8853ff73a95a698dbb40530b9b8" kind="function"><name>getAxis</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a224463a0361a5235514b086852b7aa44" kind="function"><name>getRestTransform</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa0d3075ce2f95469788fb800245b5cc4" kind="function"><name>getTransform</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa6f5e906a6e1aaa3804eeba352739eff" kind="function"><name>getTransformDerivative</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ade8d5d9ccdf88c2535ab4fb3ffeaf8ad" kind="function"><name>getPositionDerivativeVelocityJacobian</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a59bc8483ae663a73a5a16ca264f96947" kind="function"><name>setJointPosCoordsToRest</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a03b2ac0d01cb2e379de41ac7c4b00d5d" kind="function"><name>normalizeJointPosCoords</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ac584f28ed13ea82c41259a6274179542" kind="function"><name>getMotionSubspaceVector</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1abc5c0b51ef499047b35ff82f8abb74d9" kind="function"><name>computeChildPosVelAcc</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa5d610e35d733f1e78aa391549b4a011" kind="function"><name>computeChildVel</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a942b5515b7d22f2edda6652d13b29495" kind="function"><name>computeChildVelAcc</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a85239f035f3ee881c934b005b8cc0d27" kind="function"><name>computeChildAcc</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4358696e4544681a9e64a9aa5e1a4407" kind="function"><name>computeChildBiasAcc</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1adf0bdbce9899492ecafbf6908f559d5b" kind="function"><name>computeJointTorque</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ab2135a84df31194ac40ba6d17c8be9f8" kind="function"><name>hasPosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a90a0234d37aecec4ce9d7983b57f76e9" kind="function"><name>enablePosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1af2d10c6be8bbbd511eef50f4f2a79e4f" kind="function"><name>getPosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a6f6114dd2b5cc16e0e62418e5725a5ae" kind="function"><name>getMinPosLimit</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a628c4e716a0e3dcfd3cead7d294606c3" kind="function"><name>getMaxPosLimit</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa2e6df8a09741711d9b31b44b9af936b" kind="function"><name>setPosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a9f155972061a91f4257429d6a64d18ab" kind="function"><name>getJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1abd788ccac43320ed1852d6e666145dae" kind="function"><name>setJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ad3d6449d48139968ecb58eb201307110" kind="function"><name>getDamping</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1ab26273fcdf73f0c7d45623b26db8f0f8" kind="function"><name>getStaticFriction</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a981610f60f6d4224e0f9bc5fc31ff789" kind="function"><name>setDamping</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a290bfe30846ec3eecfa21e00730430d2" kind="function"><name>setStaticFriction</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a47b578894ef007fcd14a6141c1b9b78b" kind="function"><name>getCurrentAngle</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0c8040427a9296d4ada258c6c6916a6d" kind="function"><name>setJointPositionFromAngle</name></member>
   </compound>
   <compound refid="classiDynTree_1_1RigidBodyInertiaNonLinearParametrization" kind="class"><name>iDynTree::RigidBodyInertiaNonLinearParametrization</name>
     <member refid="classiDynTree_1_1RigidBodyInertiaNonLinearParametrization_1ae323ec7fbb184a0d7744fa37adb427c5" kind="variable"><name>mass</name></member>
@@ -3885,6 +3962,7 @@
     <member refid="classiDynTree_1_1TransformDerivative_1adf92c041cf5c91f7a56ddac14a9f30bc" kind="function"><name>TransformDerivative</name></member>
     <member refid="classiDynTree_1_1TransformDerivative_1a86d92c6237183c73b300a3d748eda395" kind="function"><name>TransformDerivative</name></member>
     <member refid="classiDynTree_1_1TransformDerivative_1a9ce3f86db8990c49d8dd2c68db4a68f2" kind="function"><name>TransformDerivative</name></member>
+    <member refid="classiDynTree_1_1TransformDerivative_1a5b4091784bd95e9e6acc7122fd77f906" kind="function"><name>fromHomogeneousTransformDerivative</name></member>
     <member refid="classiDynTree_1_1TransformDerivative_1aa7c10eaa9a3898fc9fb67fe6c8188e0e" kind="function"><name>~TransformDerivative</name></member>
     <member refid="classiDynTree_1_1TransformDerivative_1a7e62b9e5318fda029f0bb1d14ae766fb" kind="function"><name>getRotationDerivative</name></member>
     <member refid="classiDynTree_1_1TransformDerivative_1a156f7b6ec1df03a6bdc3344e41aee40c" kind="function"><name>getPositionDerivative</name></member>
@@ -4384,6 +4462,7 @@
     <member refid="LinkState_8h_1a4eebfd4c3b5feb2154a1de101578fb4a" kind="typedef"><name>LinkCompositeRigidBodyInertias</name></member>
     <member refid="LinkState_8h_1a104b2ec0864d4c37b58b808b43630171" kind="typedef"><name>LinkProperAccArray</name></member>
     <member refid="MovableJointImpl_8h_1ac4ab72af9658e6e1503c06a97786db7f" kind="typedef"><name>MovableJointImpl1</name></member>
+    <member refid="MovableJointImpl_8h_1affe41311e5312f2897d5df6532e81143" kind="typedef"><name>MovableJointImpl21</name></member>
     <member refid="MovableJointImpl_8h_1a24b411fa2a181857fd60881b7a1fa644" kind="typedef"><name>MovableJointImpl2</name></member>
     <member refid="MovableJointImpl_8h_1ae4671e7929209092bc1d6a72f460872a" kind="typedef"><name>MovableJointImpl3</name></member>
     <member refid="MovableJointImpl_8h_1a66158274373829ef7c8694995a9d6929" kind="typedef"><name>MovableJointImpl4</name></member>
@@ -5326,6 +5405,7 @@
   </compound>
   <compound refid="MovableJointImpl_8h" kind="file"><name>MovableJointImpl.h</name>
     <member refid="MovableJointImpl_8h_1ac4ab72af9658e6e1503c06a97786db7f" kind="typedef"><name>MovableJointImpl1</name></member>
+    <member refid="MovableJointImpl_8h_1affe41311e5312f2897d5df6532e81143" kind="typedef"><name>MovableJointImpl21</name></member>
     <member refid="MovableJointImpl_8h_1a24b411fa2a181857fd60881b7a1fa644" kind="typedef"><name>MovableJointImpl2</name></member>
     <member refid="MovableJointImpl_8h_1ae4671e7929209092bc1d6a72f460872a" kind="typedef"><name>MovableJointImpl3</name></member>
     <member refid="MovableJointImpl_8h_1a66158274373829ef7c8694995a9d6929" kind="typedef"><name>MovableJointImpl4</name></member>
@@ -5366,6 +5446,8 @@
     <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
   </compound>
   <compound refid="Sensors_2PredictSensorsMeasurements_8h" kind="file"><name>PredictSensorsMeasurements.h</name>
+  </compound>
+  <compound refid="RevoluteSO2Joint_8h" kind="file"><name>RevoluteSO2Joint.h</name>
   </compound>
   <compound refid="Sensors_2Sensors_8h" kind="file"><name>Sensors.h</name>
   </compound>
