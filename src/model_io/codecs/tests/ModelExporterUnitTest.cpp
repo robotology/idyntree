@@ -242,6 +242,9 @@ void testJointAxisWithNonZeroOriginButPassingThroughChildLinkFrameOrigin() {
     link1_X_link2.setPosition(iDynTree::Position(1.0, 0.0, 0.0));
     joint->setRestTransform(link1_X_link2);
 
+    // Set the attached links first before setting the axis
+    joint->setAttachedLinks(model.getLinkIndex(link1Name), model.getLinkIndex(link2Name));
+
     // Mark the rotation of the joint along z, and add a offset of the axis along z
     iDynTree::Axis axis;
     axis.setDirection(iDynTree::Direction(0.0, 0.0, 1.0));
@@ -289,7 +292,10 @@ void testJointAxisWithNonZeroOriginButPassingThroughChildLinkFrameOrigin() {
     // Add a offset in the x direction between link_1 and link_2
     iDynTree::Transform link1_X_link2New = iDynTree::Transform::Identity();
     link1_X_link2New.setPosition(iDynTree::Position(1.0, 0.0, 0.0));
-    jointNew->setRestTransform(link1_X_link2);
+    jointNew->setRestTransform(link1_X_link2New);
+
+    // Set the attached links first before setting the axis
+    jointNew->setAttachedLinks(modelThatCantBeExportedToUrdf.getLinkIndex(link1Name), modelThatCantBeExportedToUrdf.getLinkIndex(link2Name));
 
     // Mark the rotation of the joint along z, and add a offset of the axis along y
     iDynTree::Axis axisNew;
