@@ -16,6 +16,7 @@
 #include <iDynTree/TestUtils.h>
 
 #include <cassert>
+#include <cmath>
 #include "IJoint.h"
 
 namespace iDynTree
@@ -195,14 +196,51 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
             {
                 double max = jntPtr->getMaxPosLimit(i);
                 double min = jntPtr->getMinPosLimit(i);
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble(min,max);
+                vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble(min,max);
             }
         }
         else
         {
             for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
             {
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble();
+                // For spherical joints, we need to generate a valid unit quaternion
+                if (jntPtr->getNrOfPosCoords() == 4 && jntPtr->getNrOfDOFs() == 3)
+                {
+                    // This is likely a spherical joint - generate a unit quaternion
+                    if (i == 0)
+                    {
+                        // Generate random quaternion components
+                        double w = getRandomDouble();
+                        double x = getRandomDouble();
+                        double y = getRandomDouble();
+                        double z = getRandomDouble();
+
+                        // Normalize to unit quaternion
+                        double norm = std::sqrt(w*w + x*x + y*y + z*z);
+                        if (norm > 1e-12)
+                        {
+                            w /= norm; x /= norm; y /= norm; z /= norm;
+                        }
+                        else
+                        {
+                            w = 1.0; x = 0.0; y = 0.0; z = 0.0;  // Default to identity
+                        }
+
+                        // Set all 4 quaternion components
+                        vec(jntPtr->getPosCoordsOffset() + 0) = w;
+                        vec(jntPtr->getPosCoordsOffset() + 1) = x;
+                        vec(jntPtr->getPosCoordsOffset() + 2) = y;
+                        vec(jntPtr->getPosCoordsOffset() + 3) = z;
+
+                        // Skip the remaining iterations for this joint
+                        break;
+                    }
+                    // For i > 0, we've already set all components, so skip
+                }
+                else
+                {
+                    vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble();
+                }
             }
         }
     }

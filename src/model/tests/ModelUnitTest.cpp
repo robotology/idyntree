@@ -12,10 +12,11 @@
 
 #include <algorithm>
 #include <cassert>
+#include <cmath>
 #include <cstdio>
 #include <cstdlib>
 
-// For modelTransformsers testing
+// For modelTransformers testing
 #include <iDynTree/ModelTransformers.h>
 #include <iDynTree/ForwardKinematics.h>
 #include <iDynTree/Dynamics.h>
@@ -94,7 +95,7 @@ void getRandomSubsetOfJoints(const Model & model,
 
 void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
                                                        const std::vector<std::string>& subsetOfJointsInReducedModel,
-                                                       std::unordered_map<std::string, double>& removedJointPositions,
+                                                       std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                                        FreeFloatingPos& fullModelPos)
 {
     for(JointIndex jntIndex = 0; jntIndex < fullModel.getNrOfJoints(); jntIndex++)
@@ -102,15 +103,29 @@ void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
         // Check if joint is in reduced model
         std::string jointName = fullModel.getJointName(jntIndex);
 
-        // Only set non-zero position if the DOF size is exactly 1
         if (!isStringInVector(jointName, subsetOfJointsInReducedModel))
         {
-            if (fullModel.getJoint(jntIndex)->getNrOfDOFs() == 1)
+            size_t nrOfPosCoords = fullModel.getJoint(jntIndex)->getNrOfPosCoords();
+
+            // Generate random values for all position coordinates
+            std::vector<double> jointConfigs(nrOfPosCoords);
+            for (size_t i = 0; i < nrOfPosCoords; i++)
             {
-                double jointConf = iDynTree::getRandomDouble();
-                removedJointPositions[jointName] = jointConf;
-                fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset()) = jointConf;
+                jointConfigs[i] = iDynTree::getRandomDouble();
+                fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset() + i) = jointConfigs[i];
             }
+
+            // Use normalizeJointPosCoords to handle any required normalization (e.g., quaternions for spherical joints)
+            size_t jointOffset = fullModel.getJoint(jntIndex)->getPosCoordsOffset();
+            iDynTree::Span<double> jointSpan(fullModelPos.jointPos().data() + jointOffset, nrOfPosCoords);
+            fullModel.getJoint(jntIndex)->normalizeJointPosCoords(jointSpan);
+
+            // Update the stored values with the normalized coordinates
+            for (size_t i = 0; i < nrOfPosCoords; i++)
+            {
+                jointConfigs[i] = fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset() + i);
+            }
+            removedJointPositions[jointName] = jointConfigs;
         }
     }
 }
@@ -151,7 +166,7 @@ public:
 };
 
 /**
- * Copy a vector of the dofs from the reduced model to a full model.
+ * Copy a vector of the position coordinates from the reduced model to a full model.
  *
  */
 template<typename vectorType>
@@ -175,14 +190,20 @@ void copyFromReducedToFull(const vectorType & reducedVector,
             assert(jntInFullModel->getPosCoordsOffset() < fullVector.size());
             assert(jnt->getPosCoordsOffset() < reducedVector.size());
 
-            fullVector(jntInFullModel->getPosCoordsOffset()) = reducedVector(jnt->getPosCoordsOffset());
+            // Copy all position coordinates for this joint
+            for(int i = 0; i < jnt->getNrOfPosCoords(); i++)
+            {
+                assert(jntInFullModel->getPosCoordsOffset() + i < fullVector.size());
+                assert(jnt->getPosCoordsOffset() + i < reducedVector.size());
+                fullVector(jntInFullModel->getPosCoordsOffset() + i) = reducedVector(jnt->getPosCoordsOffset() + i);
+            }
         }
     }
 }
 
 
 /**
- * Copy a vector of the dofs from the reduced model to a full model.
+ * Copy a vector of the position coordinates from the full model to a reduced model.
  *
  */
 template<typename vectorType>
@@ -200,7 +221,142 @@ void copyFromFullToReduced(      vectorType & reducedVector,
         {
             IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
 
-            reducedVector(jnt->getPosCoordsOffset()) = fullVector(jntInFullModel->getPosCoordsOffset());
+            // Copy all position coordinates for this joint
+            for(int i = 0; i < jnt->getNrOfPosCoords(); i++)
+            {
+                assert(jnt->getPosCoordsOffset() + i < reducedVector.size());
+                assert(jntInFullModel->getPosCoordsOffset() + i < fullVector.size());
+                reducedVector(jnt->getPosCoordsOffset() + i) = fullVector(jntInFullModel->getPosCoordsOffset() + i);
+            }
+        }
+    }
+}
+
+/**
+ * Specialized version of copyFromFullToReduced for JointPosDoubleArray (position coordinates)
+ */
+void copyFromFullToReduced(      JointPosDoubleArray & reducedVector,
+                      const JointPosDoubleArray & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            // Copy all position coordinates for this joint
+            for(int i = 0; i < jnt->getNrOfPosCoords(); i++)
+            {
+                assert(jnt->getPosCoordsOffset() + i < reducedVector.size());
+                assert(jntInFullModel->getPosCoordsOffset() + i < fullVector.size());
+                reducedVector(jnt->getPosCoordsOffset() + i) = fullVector(jntInFullModel->getPosCoordsOffset() + i);
+            }
+        }
+    }
+}
+
+/**
+ * Specialized version of copyFromFullToReduced for JointDOFsDoubleArray (velocity/acceleration/torque)
+ */
+void copyFromFullToReduced(      JointDOFsDoubleArray & reducedVector,
+                      const JointDOFsDoubleArray & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            // Copy all DOF values for this joint
+            for(int i = 0; i < jnt->getNrOfDOFs(); i++)
+            {
+                assert(jnt->getDOFsOffset() + i < reducedVector.size());
+                assert(jntInFullModel->getDOFsOffset() + i < fullVector.size());
+                reducedVector(jnt->getDOFsOffset() + i) = fullVector(jntInFullModel->getDOFsOffset() + i);
+            }
+        }
+    }
+}
+
+/**
+ * Specialized version of copyFromReducedToFull for JointPosDoubleArray (position coordinates)
+ */
+void copyFromReducedToFull(const JointPosDoubleArray & reducedVector,
+                            JointPosDoubleArray & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            assert(jntInFullModel->getNrOfDOFs() > 0);
+            assert(fullVector.size() == fullModel.getNrOfPosCoords());
+            assert(reducedVector.size() == reducedModel.getNrOfPosCoords());
+            assert(jntInFullModel->getPosCoordsOffset() < fullVector.size());
+            assert(jnt->getPosCoordsOffset() < reducedVector.size());
+
+            // Copy all position coordinates for this joint
+            for(int i = 0; i < jnt->getNrOfPosCoords(); i++)
+            {
+                assert(jntInFullModel->getPosCoordsOffset() + i < fullVector.size());
+                assert(jnt->getPosCoordsOffset() + i < reducedVector.size());
+                fullVector(jntInFullModel->getPosCoordsOffset() + i) = reducedVector(jnt->getPosCoordsOffset() + i);
+            }
+
+            // Use normalizeJointPosCoords to handle any required normalization (e.g., quaternions for spherical joints)
+            size_t jointOffset = jntInFullModel->getPosCoordsOffset();
+            iDynTree::Span<double> jointSpan(fullVector.data() + jointOffset, jnt->getNrOfPosCoords());
+            jntInFullModel->normalizeJointPosCoords(jointSpan);
+        }
+    }
+}
+
+/**
+ * Specialized version of copyFromReducedToFull for JointDOFsDoubleArray (velocity/acceleration/torque)
+ */
+void copyFromReducedToFull(const JointDOFsDoubleArray & reducedVector,
+                            JointDOFsDoubleArray & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            assert(jntInFullModel->getNrOfDOFs() > 0);
+            assert(fullVector.size() == fullModel.getNrOfDOFs());
+            assert(reducedVector.size() == reducedModel.getNrOfDOFs());
+            assert(jntInFullModel->getDOFsOffset() < fullVector.size());
+            assert(jnt->getDOFsOffset() < reducedVector.size());
+
+            // Copy all DOF values for this joint
+            for(int i = 0; i < jnt->getNrOfDOFs(); i++)
+            {
+                assert(jntInFullModel->getDOFsOffset() + i < fullVector.size());
+                assert(jnt->getDOFsOffset() + i < reducedVector.size());
+                fullVector(jntInFullModel->getDOFsOffset() + i) = reducedVector(jnt->getDOFsOffset() + i);
+            }
         }
     }
 }
@@ -219,11 +375,14 @@ void checkReducedModel(const Model & model)
     {
         FreeFloatingPos fullPos(model);
 
+        // Initialize the joint positions with random values first
+        getRandomJointPositions(fullPos.jointPos(), model);
+
         std::vector<std::string> jointInReducedModel;
         getRandomSubsetOfJoints(model,jnts,jointInReducedModel);
 
         // Get random positions for reduced models
-        std::unordered_map<std::string, double> removedJointPositions;
+        std::unordered_map<std::string, std::vector<double>> removedJointPositions;
         getRandomJointPositonsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
 
         Model reducedModel;
@@ -442,6 +601,88 @@ void checkRandomChains()
 
 }
 
+void checkNormalizeJointPosCoords()
+{
+    std::cout << "Checking normalizeJointPosCoords..." << std::endl;
+
+    // Test with a random model that includes spherical joints
+    Model randomModel = getRandomModel(10, /*nrOfAdditionalFrames =*/5, /*onlyRevoluteJoints=*/false, /*includeSphericalJoints=*/true);
+
+    // Create a position vector with potentially non-normalized values
+    FreeFloatingPos pos(randomModel);
+    getRandomJointPositions(pos.jointPos(), randomModel);
+
+    // Now deliberately corrupt some joint positions to be non-normalized
+    for(JointIndex jntIdx = 0; jntIdx < randomModel.getNrOfJoints(); jntIdx++)
+    {
+        IJointConstPtr joint = randomModel.getJoint(jntIdx);
+
+        if (joint->getNrOfPosCoords() == 4 && joint->getNrOfDOFs() == 3)
+        {
+            // This appears to be a spherical joint - set non-normalized quaternion values
+            size_t offset = joint->getPosCoordsOffset();
+            pos.jointPos()(offset + 0) = 2.0;  // Non-normalized quaternion
+            pos.jointPos()(offset + 1) = 3.0;
+            pos.jointPos()(offset + 2) = 4.0;
+            pos.jointPos()(offset + 3) = 5.0;
+        }
+        else if (joint->getNrOfPosCoords() == 2 && joint->getNrOfDOFs() == 1)
+        {
+            // This might be a RevoluteSO2 joint - set non-normalized complex values
+            size_t offset = joint->getPosCoordsOffset();
+            pos.jointPos()(offset + 0) = 2.0;  // Non-normalized complex number
+            pos.jointPos()(offset + 1) = 3.0;
+        }
+    }
+
+    // Store the original values for comparison
+    JointPosDoubleArray originalPos = pos.jointPos();
+
+    // Normalize all joint position coordinates
+    for(JointIndex jntIdx = 0; jntIdx < randomModel.getNrOfJoints(); jntIdx++)
+    {
+        IJointConstPtr joint = randomModel.getJoint(jntIdx);
+        size_t nrOfPosCoords = joint->getNrOfPosCoords();
+
+        if (nrOfPosCoords > 0)
+        {
+            size_t jointOffset = joint->getPosCoordsOffset();
+            iDynTree::Span<double> jointSpan(pos.jointPos().data() + jointOffset, nrOfPosCoords);
+            bool success = joint->normalizeJointPosCoords(jointSpan);
+            ASSERT_EQUAL_DOUBLE(success, true);
+        }
+    }
+
+    // Verify that spherical joints (quaternions) are now normalized
+    for(JointIndex jntIdx = 0; jntIdx < randomModel.getNrOfJoints(); jntIdx++)
+    {
+        IJointConstPtr joint = randomModel.getJoint(jntIdx);
+
+        if (joint->getNrOfPosCoords() == 4 && joint->getNrOfDOFs() == 3)
+        {
+            // Check that quaternion is normalized
+            size_t offset = joint->getPosCoordsOffset();
+            double w = pos.jointPos()(offset + 0);
+            double x = pos.jointPos()(offset + 1);
+            double y = pos.jointPos()(offset + 2);
+            double z = pos.jointPos()(offset + 3);
+            double norm = std::sqrt(w*w + x*x + y*y + z*z);
+            ASSERT_EQUAL_DOUBLE_TOL(norm, 1.0, 1e-10);
+        }
+        else if (joint->getNrOfPosCoords() == 2 && joint->getNrOfDOFs() == 1)
+        {
+            // Check that complex number is normalized (for RevoluteSO2)
+            size_t offset = joint->getPosCoordsOffset();
+            double real = pos.jointPos()(offset + 0);
+            double imag = pos.jointPos()(offset + 1);
+            double norm = std::sqrt(real*real + imag*imag);
+            ASSERT_EQUAL_DOUBLE_TOL(norm, 1.0, 1e-10);
+        }
+    }
+
+    std::cout << "normalizeJointPosCoords test passed!" << std::endl;
+}
+
 void checkRandomModels()
 {
     std::cout << "Checking random models..." << std::endl;
@@ -461,6 +702,7 @@ int main()
     checkSimpleModel();
     checkRandomChains();
     checkRandomModels();
+    checkNormalizeJointPosCoords();
     checkInsertJointAndLink();
     return EXIT_SUCCESS;
 }

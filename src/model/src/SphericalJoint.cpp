@@ -10,6 +10,8 @@
 #include <iDynTree/Twist.h>
 #include <iDynTree/Rotation.h>
 #include <iDynTree/GeomVector3.h>
+#include <iDynTree/Span.h>
+#include <iDynTree/MatrixView.h>
 
 #include <cassert>
 #include <cmath>
@@ -434,6 +436,100 @@ double SphericalJoint::getDamping(const size_t _index) const
 double SphericalJoint::getStaticFriction(const size_t _index) const
 {
     return 0.0;
+}
+
+bool SphericalJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
+                                                          iDynTree::MatrixView<double>& jac) const
+{
+    // For a spherical joint, the position derivative velocity Jacobian relates
+    // the time derivative of quaternion coordinates to angular velocity
+    // This is typically used for dynamics computations
+    if (jac.rows() != 4 || jac.cols() != 3)
+    {
+        return false;
+    }
+
+    // Extract quaternion from joint positions
+    if (jntPos.size() < 4)
+    {
+        return false;
+    }
+
+    Vector4 q;
+    q(0) = jntPos[0]; // qw (real part)
+    q(1) = jntPos[1]; // qx
+    q(2) = jntPos[2]; // qy
+    q(3) = jntPos[3]; // qz
+
+    // The relationship between quaternion derivative and angular velocity is:
+    // dq/dt = 0.5 * Q(q) * omega
+    // where Q(q) is the quaternion matrix and omega is the angular velocity
+
+    // Q(q) matrix for right quaternion multiplication
+    jac(0, 0) = -q(1); jac(0, 1) = -q(2); jac(0, 2) = -q(3);
+    jac(1, 0) =  q(0); jac(1, 1) = -q(3); jac(1, 2) =  q(2);
+    jac(2, 0) =  q(3); jac(2, 1) =  q(0); jac(2, 2) = -q(1);
+    jac(3, 0) = -q(2); jac(3, 1) =  q(1); jac(3, 2) =  q(0);
+
+    // Scale by 0.5
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            jac(i, j) *= 0.5;
+        }
+    }
+
+    return true;
+}
+
+bool SphericalJoint::setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const
+{
+    // Set the quaternion to identity (no rotation)
+    if (jntPos.size() < 4)
+    {
+        return false;
+    }
+
+    jntPos[0] = 1.0; // qw (real part)
+    jntPos[1] = 0.0; // qx
+    jntPos[2] = 0.0; // qy
+    jntPos[3] = 0.0; // qz
+
+    return true;
+}
+
+bool SphericalJoint::normalizeJointPosCoords(iDynTree::Span<double> jntPos) const
+{
+    // Normalize the quaternion to unit length
+    if (jntPos.size() < 4)
+    {
+        return false;
+    }
+
+    double norm = sqrt(jntPos[0] * jntPos[0] +
+                      jntPos[1] * jntPos[1] +
+                      jntPos[2] * jntPos[2] +
+                      jntPos[3] * jntPos[3]);
+
+    if (norm < 1e-12)
+    {
+        // If norm is too small, set to identity quaternion
+        jntPos[0] = 1.0;
+        jntPos[1] = 0.0;
+        jntPos[2] = 0.0;
+        jntPos[3] = 0.0;
+    }
+    else
+    {
+        // Normalize
+        jntPos[0] /= norm;
+        jntPos[1] /= norm;
+        jntPos[2] /= norm;
+        jntPos[3] /= norm;
+    }
+
+    return true;
 }
 
 }

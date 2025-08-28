@@ -9,6 +9,7 @@
 #include <iDynTree/FixedJoint.h>
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/SphericalJoint.h>
 
 #include <iDynTree/Sensors.h>
 #include <iDynTree/SixAxisForceTorqueSensor.h>
@@ -430,7 +431,7 @@ void reducedModelAddSolidShapes(const Model& fullModel,
 bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
                                            const std::vector< std::string >& jointsInReducedModel,
                                            Model& reducedModel,
-                                           const std::unordered_map<std::string, double>& removedJointPositions,
+                                           const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                            const std::unordered_map<std::string, iDynTree::Transform>& newLink_H_oldLink,
                                            bool addOriginalLinkFrameWith_original_frame_suffix,
                                            bool includeAllAdditionalFrames,
@@ -469,24 +470,25 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
     // \todo used an appropriate method here
     for(JointIndex jntIdx=0; jntIdx < fullModel.getNrOfJoints(); jntIdx++)
     {
-        // Get nr of DOFs for joint
+        // Get nr of position coordinates for joint (e.g., 4 for spherical joint quaternion)
+        size_t nrOfPosCoords = fullModel.getJoint(jntIdx)->getNrOfPosCoords();
         size_t nrOfDofs = fullModel.getJoint(jntIdx)->getNrOfDOFs();
 
         // Nothing to do if the joint is fixed
-        if (nrOfDofs == 0)
+        if (nrOfPosCoords == 0)
         {
             continue;
         }
 
-        // If the joint has 1 DOF, either use the value specified in removedJointPositions
-        // or if no value is found in removedJointPositions, use 0
+        std::string jointName = fullModel.getJointName(jntIdx);
+        auto it = removedJointPositions.find(jointName);
+
+        // If the joint has nrOfDofs == 1, we support specifying it in removedJointPositions
         if (nrOfDofs == 1)
         {
-            auto it = removedJointPositions.find(fullModel.getJointName(jntIdx));
-
             if (it != removedJointPositions.end())
             {
-                jointPos.jointPos()(fullModel.getJoint(jntIdx)->getPosCoordsOffset()) = it->second;
+                jointPos.jointPos()(fullModel.getJoint(jntIdx)->getPosCoordsOffset()) = it->second[0];
             }
             else
             {
@@ -496,12 +498,42 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
             continue;
         }
 
-        // If the joint has nrOfDofs > 1, we do not support specifying it in removedJointPositions
-        // and we always set it to the rest position
+        // If the joint has nrOfDofs > 1, we support specifying it in removedJointPositions
+        // for joints with multiple position coordinates (e.g., spherical joints)
         if (nrOfDofs > 1)
         {
-            fullModel.getJoint(jntIdx)->setJointPosCoordsToRest(jointPos.jointPos());
+            if (it != removedJointPositions.end() && it->second.size() == nrOfPosCoords)
+            {
+                // Use the provided joint positions
+                size_t jointOffset = fullModel.getJoint(jntIdx)->getPosCoordsOffset();
+                for (size_t i = 0; i < nrOfPosCoords; i++)
+                {
+                    jointPos.jointPos()(jointOffset + i) = it->second[i];
+                }
+            }
+            else
+            {
+                // Set to rest position if not specified or if wrong number of coordinates
+                fullModel.getJoint(jntIdx)->setJointPosCoordsToRest(jointPos.jointPos());
+            }
         }
+    }
+
+    // Second pass: normalize all joint positions (important for spherical joints)
+    for(JointIndex jntIdx=0; jntIdx < fullModel.getNrOfJoints(); jntIdx++)
+    {
+        size_t nrOfPosCoords = fullModel.getJoint(jntIdx)->getNrOfPosCoords();
+
+        // Nothing to do if the joint is fixed
+        if (nrOfPosCoords == 0)
+        {
+            continue;
+        }
+
+        // Create a span for just this joint's coordinates and normalize
+        size_t jointOffset = fullModel.getJoint(jntIdx)->getPosCoordsOffset();
+        iDynTree::Span<double> jointSpan(jointPos.jointPos().data() + jointOffset, nrOfPosCoords);
+        fullModel.getJoint(jntIdx)->normalizeJointPosCoords(jointSpan);
     }
 
     LinkPositions subModelBase_X_link(fullModel);
@@ -639,10 +671,24 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
 
             newJoint = (IJointPtr) newJointPrismatic;
         }
+        else if( dynamic_cast<const SphericalJoint*>(oldJoint) )
+        {
+            const SphericalJoint* oldJointSpherical = dynamic_cast<const SphericalJoint*>(oldJoint);
+
+            Transform oldLink1_X_oldLink2 = oldJointSpherical->getRestTransform(oldLink1,oldLink2);
+            Transform newLink1_X_newLink2 = newLink1_X_oldLink1*oldLink1_X_oldLink2*newLink2_X_oldLink2.inverse();
+
+            SphericalJoint* newJointSpherical = static_cast<SphericalJoint*>(oldJointSpherical->clone());
+
+            newJointSpherical->setAttachedLinks(newLink1,newLink2);
+            newJointSpherical->setRestTransform(newLink1_X_newLink2);
+
+            newJoint = (IJointPtr) newJointSpherical;
+        }
         else
         {
             std::cerr << "[ERROR] createReducedModel error : "
-                      << " processing joint that is not revolute, prismatic or fixed. "
+                      << " processing joint that is not revolute, prismatic, spherical or fixed. "
                       << std::endl;
             return false;
         }
@@ -853,7 +899,7 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
 bool createReducedModel(const Model& fullModel,
                         const std::vector< std::string >& jointsInReducedModel,
                         Model& reducedModel,
-                        const std::unordered_map<std::string, double>& removedJointPositions)
+                        const std::unordered_map<std::string, std::vector<double>>& removedJointPositions)
 {
     // We do not want to move the link frames in createReducedModel
     std::unordered_map<std::string, iDynTree::Transform> newLink_H_oldLink;
@@ -864,9 +910,24 @@ bool createReducedModel(const Model& fullModel,
 
 bool createReducedModel(const Model& fullModel,
                         const std::vector< std::string >& jointsInReducedModel,
+                        Model& reducedModel,
+                        const std::unordered_map<std::string, double>& removedJointPositions)
+{
+    // Convert the legacy double-based map to vector-based map
+    std::unordered_map<std::string, std::vector<double>> vectorRemovedJointPositions;
+    for (const auto& item : removedJointPositions)
+    {
+        vectorRemovedJointPositions[item.first] = {item.second};
+    }
+
+    return createReducedModel(fullModel, jointsInReducedModel, reducedModel, vectorRemovedJointPositions);
+}
+
+bool createReducedModel(const Model& fullModel,
+                        const std::vector< std::string >& jointsInReducedModel,
                         Model& reducedModel)
 {
-    std::unordered_map<std::string, double> emptyRemovedJointPositions;
+    std::unordered_map<std::string, std::vector<double>> emptyRemovedJointPositions;
     return createReducedModel(fullModel, jointsInReducedModel, reducedModel, emptyRemovedJointPositions);
 }
 
@@ -1060,7 +1121,7 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
     }
 
     // As we do not remove any joint, this map is empty
-    std::unordered_map<std::string, double> removedJointPositions;
+    std::unordered_map<std::string, std::vector<double>> removedJointPositions;
 
     // We now need to compute the newLink_H_oldLink transform for each link we need to transform
     std::unordered_map<std::string, iDynTree::Transform> newLink_H_oldLink;
@@ -1150,7 +1211,7 @@ bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
     return createReducedModelAndChangeLinkFrames(modelWithAllAdditionalFrames,
                                                  consideredJoints,
                                                  modelWithOnlyAllowedAdditionalFrames,
-                                                 std::unordered_map<std::string, double>(),
+                                                 std::unordered_map<std::string, std::vector<double>>(),
                                                  std::unordered_map<std::string, iDynTree::Transform>(),
                                                  false,
                                                  includeAllAdditionalFrames,

@@ -194,6 +194,16 @@ namespace iDynTree
 
         // Documentation inherited
         virtual double getStaticFriction(const size_t _index) const;
+
+        // Documentation inherited
+        virtual bool getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
+                                                           iDynTree::MatrixView<double>& jac) const;
+
+        // Documentation inherited
+        virtual bool setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const;
+
+        // Documentation inherited
+        virtual bool normalizeJointPosCoords(iDynTree::Span<double> jntPos) const;
     };
 }
 
