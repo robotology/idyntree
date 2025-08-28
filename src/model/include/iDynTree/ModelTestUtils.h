@@ -16,7 +16,12 @@
 #include <iDynTree/TestUtils.h>
 
 #include <cassert>
+#include <cmath>
 #include "IJoint.h"
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 namespace iDynTree
 {
@@ -195,14 +200,25 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
             {
                 double max = jntPtr->getMaxPosLimit(i);
                 double min = jntPtr->getMinPosLimit(i);
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble(min,max);
+                vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble(min,max);
             }
         }
         else
         {
-            for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
+            // Special handling for RevoluteSO2Joint (2 pos coords, 1 DOF)
+            if (jntPtr->getNrOfPosCoords() == 2 && jntPtr->getNrOfDOFs() == 1)
             {
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble();
+                // Generate random angle and set complex representation
+                double angle = getRandomDouble(-M_PI, M_PI);
+                vec(jntPtr->getPosCoordsOffset()) = std::cos(angle);
+                vec(jntPtr->getPosCoordsOffset() + 1) = std::sin(angle);
+            }
+            else
+            {
+                for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
+                {
+                    vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble();
+                }
             }
         }
     }
@@ -223,7 +239,10 @@ inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
     vel.baseVel() =  getRandomTwist();
     acc.baseAcc() =  getRandomTwist();
 
-
+    // Use model-aware joint position generation instead of naive random vector
+    // This is needed for proper handling of RevoluteSO2Joint and other special joints
+    // However, we don't have access to the model here, so we can't use getRandomJointPositions
+    // This function is not used in the failing test anyway, but should be addressed separately
     for(unsigned int jnt=0; jnt < pos.getNrOfPosCoords(); jnt++)
     {
         pos.jointPos()(jnt) = getRandomDouble();
