@@ -19,10 +19,6 @@
 #include <cmath>
 #include "IJoint.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
-
 namespace iDynTree
 {
 
@@ -205,22 +201,16 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
         }
         else
         {
-            // Special handling for RevoluteSO2Joint (2 pos coords, 1 DOF)
-            if (jntPtr->getNrOfPosCoords() == 2 && jntPtr->getNrOfDOFs() == 1)
+            // Set random values for all position coordinates
+            for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
             {
-                // Generate random angle and set complex representation
-                double angle = getRandomDouble(-M_PI, M_PI);
-                vec(jntPtr->getPosCoordsOffset()) = std::cos(angle);
-                vec(jntPtr->getPosCoordsOffset() + 1) = std::sin(angle);
-            }
-            else
-            {
-                for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
-                {
-                    vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble();
-                }
+                vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble();
             }
         }
+
+        // Use normalizeJointPosCoords to make the code more general
+        // This handles different joint types (RevoluteSO2, Revolute, Prismatic, etc.) appropriately
+        jntPtr->normalizeJointPosCoords(vec);
     }
 
     return;

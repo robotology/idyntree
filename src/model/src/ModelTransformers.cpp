@@ -9,6 +9,7 @@
 #include <iDynTree/FixedJoint.h>
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/RevoluteSO2Joint.h>
 
 #include <iDynTree/Sensors.h>
 #include <iDynTree/SixAxisForceTorqueSensor.h>
@@ -638,6 +639,23 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
             newJointPrismatic->setAxis(prismaticAxis_wrt_newLink2, newLink2);
 
             newJoint = (IJointPtr) newJointPrismatic;
+        }
+        else if (dynamic_cast<const RevoluteSO2Joint*>(oldJoint))
+        {
+            const RevoluteSO2Joint* oldJointRevoluteSO2 = dynamic_cast<const RevoluteSO2Joint*>(oldJoint);
+
+            Transform oldLink1_X_oldLink2 = oldJointRevoluteSO2->getRestTransform(oldLink1, oldLink2);
+            Transform newLink1_X_newLink2 = newLink1_X_oldLink1 * oldLink1_X_oldLink2 * newLink2_X_oldLink2.inverse();
+
+            Axis rotationAxis_wrt_newLink2 = newLink2_X_oldLink2 * oldJointRevoluteSO2->getAxis(oldLink2);
+
+            RevoluteSO2Joint* newJointRevoluteSO2 = new RevoluteSO2Joint(*oldJointRevoluteSO2);
+
+            newJointRevoluteSO2->setAttachedLinks(newLink1, newLink2);
+            newJointRevoluteSO2->setRestTransform(newLink1_X_newLink2);
+            newJointRevoluteSO2->setAxis(rotationAxis_wrt_newLink2, newLink2);
+
+            newJoint = (IJointPtr)newJointRevoluteSO2;
         }
         else
         {
