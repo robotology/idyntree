@@ -47,7 +47,7 @@ void checkThatOneSphereGetsAName()
 void checkRemoveAdditionalFramesFromModel()
 {
     // Create random model with 10 links and 10 additional frames
-    iDynTree::Model modelWithAllAdditionalFrames = getRandomModel(10, 10, DEFAULT_JOINT_TYPES | JOINT_REVOLUTE_SO2);
+    iDynTree::Model modelWithAllAdditionalFrames = getRandomModel(10, 10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2);
 
     // Create an allow list of three additional frames
     std::vector<std::string> allowedAdditionalFrames;
