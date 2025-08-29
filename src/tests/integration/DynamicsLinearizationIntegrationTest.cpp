@@ -517,7 +517,7 @@ int main()
     for(unsigned int joints =0; joints < 20; joints++)
     {
         std::cerr << "Checking DynamicsLinearization test on on random tree with " << joints  << "joints " << std::endl;
-        Model model = getRandomModel(joints);
+        Model model = getRandomModel(joints, 10, DEFAULT_JOINT_TYPES | JOINT_REVOLUTE_SO2);
         checkABAandABALinearizationAreConsistent(model);
     }
 
