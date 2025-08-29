@@ -194,6 +194,40 @@ void copyFromReducedToFull(const vectorType & reducedVector,
     }
 }
 
+/**
+ * Copy a vector of DOFs from the reduced model to the full model.
+ * This function should be used for joint torques, velocities, and accelerations.
+ */
+template<typename vectorType>
+void copyFromReducedToFullDOFs(const vectorType & reducedVector,
+                            vectorType & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            assert(jntInFullModel->getNrOfDOFs() > 0);
+            assert(fullVector.size() == fullModel.getNrOfDOFs());
+            assert(reducedVector.size() == reducedModel.getNrOfDOFs());
+            assert(jntInFullModel->getDOFsOffset() + jntInFullModel->getNrOfDOFs() <= fullVector.size());
+            assert(jnt->getDOFsOffset() + jnt->getNrOfDOFs() <= reducedVector.size());
+
+            // Copy all DOFs for this joint
+            for (size_t i = 0; i < jnt->getNrOfDOFs(); i++)
+            {
+                fullVector(jntInFullModel->getDOFsOffset() + i) = reducedVector(jnt->getDOFsOffset() + i);
+            }
+        }
+    }
+}
+
 
 /**
  * Copy a vector of the dofs from the reduced model to a full model.
@@ -218,6 +252,34 @@ void copyFromFullToReduced(      vectorType & reducedVector,
             for (size_t i = 0; i < jnt->getNrOfPosCoords(); i++)
             {
                 reducedVector(jnt->getPosCoordsOffset() + i) = fullVector(jntInFullModel->getPosCoordsOffset() + i);
+            }
+        }
+    }
+}
+
+/**
+ * Copy a vector of DOFs from the full model to the reduced model.
+ * This function should be used for joint torques, velocities, and accelerations.
+ */
+template<typename vectorType>
+void copyFromFullToReducedDOFs(      vectorType & reducedVector,
+                      const vectorType & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            // Copy all DOFs for this joint
+            for (size_t i = 0; i < jnt->getNrOfDOFs(); i++)
+            {
+                reducedVector(jnt->getDOFsOffset() + i) = fullVector(jntInFullModel->getDOFsOffset() + i);
             }
         }
     }
@@ -282,14 +344,14 @@ void checkReducedModel(const Model & model)
         fullAcc.baseAcc()      = reducedAcc.baseAcc();
 
         copyFromReducedToFull(reducedPos.jointPos(),fullPos.jointPos(),reducedModel,model);
-        copyFromReducedToFull(reducedVel.jointVel(),fullVel.jointVel(),reducedModel,model);
-        copyFromReducedToFull(reducedAcc.jointAcc(),fullAcc.jointAcc(),reducedModel,model);
+        copyFromReducedToFullDOFs(reducedVel.jointVel(),fullVel.jointVel(),reducedModel,model);
+        copyFromReducedToFullDOFs(reducedAcc.jointAcc(),fullAcc.jointAcc(),reducedModel,model);
 
         fullRNEA.runRNEA(fullPos,fullVel,fullAcc,fullTrqs);
         reducedRNEA.runRNEA(reducedPos,reducedVel,reducedAcc,reducedTrqs);
 
         reducedTrqsCheck.baseWrench() = fullTrqs.baseWrench();
-        copyFromFullToReduced(reducedTrqsCheck.jointTorques(),fullTrqs.jointTorques(),reducedModel,model);
+        copyFromFullToReducedDOFs(reducedTrqsCheck.jointTorques(),fullTrqs.jointTorques(),reducedModel,model);
 
         ASSERT_EQUAL_VECTOR_TOL(reducedTrqs.baseWrench().asVector(),reducedTrqsCheck.baseWrench().asVector(),1e-8);
         ASSERT_EQUAL_VECTOR_TOL(reducedTrqs.jointTorques(),reducedTrqsCheck.jointTorques(),1e-8);
