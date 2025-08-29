@@ -300,7 +300,8 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
  * Get random robot positions, velocities and accelerations
  * and external wrenches to be given as an input to InverseDynamics.
  */
-inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
+inline bool getRandomInverseDynamicsInputs(const Model& model,
+                                           FreeFloatingPos& pos,
                                            FreeFloatingVel& vel,
                                            FreeFloatingAcc& acc,
                                            LinkNetExternalWrenches& extWrenches)
@@ -309,14 +310,8 @@ inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
     vel.baseVel() =  getRandomTwist();
     acc.baseAcc() =  getRandomTwist();
 
-    // Use model-aware joint position generation instead of naive random vector
-    // This is needed for proper handling of RevoluteSO2Joint and other special joints
-    // However, we don't have access to the model here, so we can't use getRandomJointPositions
-    // This function is not used in the failing test anyway, but should be addressed separately
-    for(unsigned int jnt=0; jnt < pos.getNrOfPosCoords(); jnt++)
-    {
-        pos.jointPos()(jnt) = getRandomDouble();
-    }
+    // Use model-aware joint position generation for proper handling of all joint types
+    getRandomJointPositions(pos.jointPos(), model);
 
     for(unsigned int jnt=0; jnt < vel.getNrOfDOFs(); jnt++)
     {

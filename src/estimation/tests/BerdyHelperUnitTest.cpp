@@ -31,7 +31,7 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     FreeFloatingAcc generalizedProperAccs(berdy.model());
     LinkNetExternalWrenches extWrenches(berdy.model());
 
-    getRandomInverseDynamicsInputs(pos,vel,generalizedProperAccs,extWrenches);
+    getRandomInverseDynamicsInputs(berdy.model(),pos,vel,generalizedProperAccs,extWrenches);
 
     // Force the base linear velocity to be zero for ensure consistency with the compute buffers
     vel.baseVel().setLinearVec3(LinVelocity(0.0, 0.0, 0.0));
@@ -106,7 +106,7 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     */
 
     ASSERT_EQUAL_VECTOR(dynamicsResidual, zeroRes);
-    
+
     if( berdy.getNrOfSensorsMeasurements() > 0 )
     {
         std::cout << "BerdyHelperUnitTest, testing sensors matrix for model " << filename <<  std::endl;
@@ -117,14 +117,14 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
         SensorsMeasurements sensMeas(berdy.sensors());
         bool ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
                                                            linkVels,linkProperAccs,intWrenches,sensMeas);
- 
+
 	    // Handle rate of change of momentum in base
         SpatialForceVector rcm;
         rcm.zero();
         for(int linkIdx = 0; linkIdx<extWrenches.getNrOfLinks(); linkIdx++)
         {
             // compute {}^{B}H_{L}
-            Transform base_H_link = linkPos(baseIdx).inverse() * linkPos(linkIdx); 
+            Transform base_H_link = linkPos(baseIdx).inverse() * linkPos(linkIdx);
             rcm = rcm + (base_H_link * extWrenches(linkIdx));
         }
 
@@ -184,7 +184,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
     FreeFloatingAcc generalizedProperAccs(berdy.model());
     LinkNetExternalWrenches extWrenches(berdy.model());
 
-    getRandomInverseDynamicsInputs(pos,vel,generalizedProperAccs,extWrenches);
+    getRandomInverseDynamicsInputs(berdy.model(),pos,vel,generalizedProperAccs,extWrenches);
 
     Vector3 grav;
     grav.zero();
@@ -358,8 +358,8 @@ void testBerdyHelpers(std::string fileName)
     ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
     ASSERT_IS_TRUE(ok);
     testBerdySensorMatrices(berdyHelper, fileName);
-    
-    // Test includeAllJointTorqueAsSensors option 
+
+    // Test includeAllJointTorqueAsSensors option
     options.berdyVariant = iDynTree::BERDY_FLOATING_BASE;
     // For now floating berdy needs all the ext wrenches as dynamic variables
     options.includeAllNetExternalWrenchesAsDynamicVariables = true;
