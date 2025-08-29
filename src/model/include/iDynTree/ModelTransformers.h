@@ -80,6 +80,17 @@ bool createReducedModel(const Model& fullModel,
 bool createReducedModel(const Model& fullModel,
                         const std::vector<std::string>& jointsInReducedModel,
                         Model& reducedModel,
+                        const std::unordered_map<std::string, std::vector<double>>& removedJointPositions);
+
+/**
+ * Legacy overload for backward compatibility.
+ * Converts double values to single-element vectors for joints that expect 1 position coordinate.
+ *
+ * @deprecated Use the version that takes std::unordered_map<std::string, std::vector<double>> for better support of multi-DOF joints
+ */
+bool createReducedModel(const Model& fullModel,
+                        const std::vector<std::string>& jointsInReducedModel,
+                        Model& reducedModel,
                         const std::unordered_map<std::string, double>& removedJointPositions);
 
 /**
@@ -169,11 +180,11 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
 /**
  * \function Remove all additional frames from the model, except a specified allowlist.
  *
- * This function takes in input a model, and return a model with all the additional 
+ * This function takes in input a model, and return a model with all the additional
  * frame list removed, except for the additional frames whose name is specified in
  * the specified allowlist.
  *
- * @note The main use of this function is for processing models that need to be 
+ * @note The main use of this function is for processing models that need to be
  *       passed to other libraries or physics engines, where the additional frames
  *       may create problems or create performance problem. As long as you are using
  *       iDynTree, the presence of additional frames does not impact the performance

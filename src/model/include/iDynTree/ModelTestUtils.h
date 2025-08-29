@@ -9,12 +9,14 @@
 #include <iDynTree/FixedJoint.h>
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/LinkState.h>
 
 #include <iDynTree/TestUtils.h>
 
 #include <cassert>
+#include <cmath>
 #include "IJoint.h"
 
 namespace iDynTree
@@ -45,7 +47,7 @@ inline Link getRandomLink()
 /**
  * Add a random link with random model.
  */
-inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false)
+inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false, bool includeSphericalJoints=false)
 {
     // Add Link
     LinkIndex newLinkIndex = model.addLink(newLinkName,getRandomLink());
@@ -53,7 +55,12 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     // Now add joint
     LinkIndex parentLinkIndex = model.getLinkIndex(parentLink);
 
-    int nrOfJointTypes = 3;
+    int nrOfJointTypes = 3; // 0=Fixed, 1=Revolute, 2=Prismatic,
+
+    if (includeSphericalJoints)
+    {
+        nrOfJointTypes = nrOfJointTypes + 1;  // 3=Spherical
+    }
 
     int jointType = rand() % nrOfJointTypes;
 
@@ -82,6 +89,12 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
         prismJoint.setRestTransform(getRandomTransform());
         prismJoint.setAxis(getRandomAxis(),newLinkIndex);
         model.addJoint(newLinkName+"joint",&prismJoint);
+    } else if( jointType == 3 )
+    {
+        SphericalJoint spherJoint;
+        spherJoint.setAttachedLinks(parentLinkIndex,newLinkIndex);
+        spherJoint.setRestTransform(getRandomTransform());
+        model.addJoint(newLinkName+"joint",&spherJoint);
     }
     else
     {
@@ -120,7 +133,7 @@ inline std::string int2string(int i)
     return ss.str();
 }
 
-inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false)
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false, bool includeSphericalJoints=false)
 {
     Model model;
 
@@ -130,7 +143,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = getRandomLinkOfModel(model);
         std::string linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints);
+        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints,includeSphericalJoints);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -143,7 +156,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     return model;
 }
 
-inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false)
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false, bool includeSphericalJoints=false)
 {
     Model model;
 
@@ -154,7 +167,7 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = linkName;
         linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints);
+        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints,includeSphericalJoints);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -183,14 +196,51 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
             {
                 double max = jntPtr->getMaxPosLimit(i);
                 double min = jntPtr->getMinPosLimit(i);
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble(min,max);
+                vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble(min,max);
             }
         }
         else
         {
             for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
             {
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble();
+                // For spherical joints, we need to generate a valid unit quaternion
+                if (jntPtr->getNrOfPosCoords() == 4 && jntPtr->getNrOfDOFs() == 3)
+                {
+                    // This is likely a spherical joint - generate a unit quaternion
+                    if (i == 0)
+                    {
+                        // Generate random quaternion components
+                        double w = getRandomDouble();
+                        double x = getRandomDouble();
+                        double y = getRandomDouble();
+                        double z = getRandomDouble();
+
+                        // Normalize to unit quaternion
+                        double norm = std::sqrt(w*w + x*x + y*y + z*z);
+                        if (norm > 1e-12)
+                        {
+                            w /= norm; x /= norm; y /= norm; z /= norm;
+                        }
+                        else
+                        {
+                            w = 1.0; x = 0.0; y = 0.0; z = 0.0;  // Default to identity
+                        }
+
+                        // Set all 4 quaternion components
+                        vec(jntPtr->getPosCoordsOffset() + 0) = w;
+                        vec(jntPtr->getPosCoordsOffset() + 1) = x;
+                        vec(jntPtr->getPosCoordsOffset() + 2) = y;
+                        vec(jntPtr->getPosCoordsOffset() + 3) = z;
+
+                        // Skip the remaining iterations for this joint
+                        break;
+                    }
+                    // For i > 0, we've already set all components, so skip
+                }
+                else
+                {
+                    vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble();
+                }
             }
         }
     }

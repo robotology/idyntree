@@ -567,7 +567,7 @@ JointIndex Model::insertLinkToExistingJointAndAddJointForDisplacedLink(const std
 
 size_t Model::getNrOfPosCoords() const
 {
-    return nrOfDOFs;
+    return nrOfPosCoords;
 }
 
 size_t Model::getNrOfDOFs() const
