@@ -22,6 +22,20 @@
 namespace iDynTree
 {
 
+/**
+ * Bitfield enum for selecting joint types in random model generation.
+ */
+enum JointTypes : unsigned int
+{
+    JOINT_FIXED = 1 << 0,        // 0001 - FixedJoint
+    JOINT_REVOLUTE = 1 << 1,     // 0010 - RevoluteJoint
+    JOINT_PRISMATIC = 1 << 2,    // 0100 - PrismaticJoint
+    JOINT_REVOLUTE_SO2 = 1 << 3  // 1000 - RevoluteSO2Joint
+};
+
+// Default joint types: Fixed, Revolute, and Prismatic
+const unsigned int DEFAULT_JOINT_TYPES = JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC;
+
 inline Link getRandomLink()
 {
     double cxx = getRandomDouble(0,3);
@@ -47,7 +61,7 @@ inline Link getRandomLink()
 /**
  * Add a random link with random model.
  */
-inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false, bool includeRevoluteJointsSO2=false)
+inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, unsigned int allowedJointTypes = DEFAULT_JOINT_TYPES)
 {
     // Add Link
     LinkIndex newLinkIndex = model.addLink(newLinkName,getRandomLink());
@@ -55,17 +69,38 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     // Now add joint
     LinkIndex parentLinkIndex = model.getLinkIndex(parentLink);
 
-    int nrOfJointTypes = 3;
-    if (includeRevoluteJointsSO2) {
-        nrOfJointTypes = 4;
+    // Collect available joint types based on the bitfield
+    std::vector<int> availableJointTypes;
+    if (allowedJointTypes & JOINT_FIXED) {
+        availableJointTypes.push_back(0);
+    }
+    if (allowedJointTypes & JOINT_REVOLUTE) {
+        availableJointTypes.push_back(1);
+    }
+    if (allowedJointTypes & JOINT_PRISMATIC) {
+        availableJointTypes.push_back(2);
+    }
+    if (allowedJointTypes & JOINT_REVOLUTE_SO2) {
+        availableJointTypes.push_back(3);
     }
 
-    int jointType = rand() % nrOfJointTypes;
-
-    if (onlyRevoluteJoints)
-    {
-        jointType = 1;
+    // If no joint types are allowed, use default
+    if (availableJointTypes.empty()) {
+        allowedJointTypes = DEFAULT_JOINT_TYPES;
+        if (allowedJointTypes & JOINT_FIXED) {
+            availableJointTypes.push_back(0);
+        }
+        if (allowedJointTypes & JOINT_REVOLUTE) {
+            availableJointTypes.push_back(1);
+        }
+        if (allowedJointTypes & JOINT_PRISMATIC) {
+            availableJointTypes.push_back(2);
+        }
     }
+
+    // Select a random joint type from available ones
+    int jointTypeIndex = rand() % availableJointTypes.size();
+    int jointType = availableJointTypes[jointTypeIndex];
 
     if( jointType == 0 )
     {
@@ -133,7 +168,20 @@ inline std::string int2string(int i)
     return ss.str();
 }
 
-inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false, bool includeRevoluteJointsSO2=false)
+/**
+ * Generate a random model with the specified number of joints and additional frames.
+ *
+ * @param nrOfJoints Number of joints to add to the model
+ * @param nrOfAdditionalFrames Number of additional frames to add (default: 10)
+ * @param allowedJointTypes Bitfield specifying which joint types to include (default: Fixed, Revolute, Prismatic)
+ *
+ * Example usage:
+ * - getRandomModel(5) // Uses default joint types (Fixed, Revolute, Prismatic)
+ * - getRandomModel(5, 10, JOINT_REVOLUTE | JOINT_PRISMATIC) // Only revolute and prismatic joints
+ * - getRandomModel(5, 10, JOINT_REVOLUTE) // Only revolute joints
+ * - getRandomModel(5, 10, DEFAULT_JOINT_TYPES | JOINT_REVOLUTE_SO2) // All joint types including SO2
+ */
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, unsigned int allowedJointTypes = DEFAULT_JOINT_TYPES)
 {
     Model model;
 
@@ -143,7 +191,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = getRandomLinkOfModel(model);
         std::string linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints,includeRevoluteJointsSO2);
+        addRandomLinkToModel(model,parentLink,linkName,allowedJointTypes);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -156,7 +204,14 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     return model;
 }
 
-inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false, bool includeRevoluteJointsSO2=false)
+/**
+ * Generate a random chain (sequential links) with the specified number of joints and additional frames.
+ *
+ * @param nrOfJoints Number of joints to add to the chain
+ * @param nrOfAdditionalFrames Number of additional frames to add (default: 10)
+ * @param allowedJointTypes Bitfield specifying which joint types to include (default: Fixed, Revolute, Prismatic)
+ */
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, unsigned int allowedJointTypes = DEFAULT_JOINT_TYPES)
 {
     Model model;
 
@@ -167,7 +222,7 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = linkName;
         linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints,includeRevoluteJointsSO2);
+        addRandomLinkToModel(model,parentLink,linkName,allowedJointTypes);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -178,6 +233,31 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     }
 
     return model;
+}
+
+// Backward compatibility overloads
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints, bool includeRevoluteJointsSO2 = false)
+{
+    unsigned int allowedJointTypes = DEFAULT_JOINT_TYPES;
+    if (onlyRevoluteJoints) {
+        allowedJointTypes = JOINT_REVOLUTE;
+    }
+    if (includeRevoluteJointsSO2) {
+        allowedJointTypes |= JOINT_REVOLUTE_SO2;
+    }
+    return getRandomModel(nrOfJoints, nrOfAdditionalFrames, allowedJointTypes);
+}
+
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints, bool includeRevoluteJointsSO2 = false)
+{
+    unsigned int allowedJointTypes = DEFAULT_JOINT_TYPES;
+    if (onlyRevoluteJoints) {
+        allowedJointTypes = JOINT_REVOLUTE;
+    }
+    if (includeRevoluteJointsSO2) {
+        allowedJointTypes |= JOINT_REVOLUTE_SO2;
+    }
+    return getRandomChain(nrOfJoints, nrOfAdditionalFrames, allowedJointTypes);
 }
 
 /**
