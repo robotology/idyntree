@@ -236,26 +236,22 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
 }
 
 // Backward compatibility overloads
-inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints, bool includeRevoluteJointsSO2 = false)
+IDYNTREE_DEPRECATED_WITH_MSG("Use getRandomModel variant that takes in input the allowedJointTypes as bitset.")
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints)
 {
     unsigned int allowedJointTypes = DEFAULT_JOINT_TYPES;
     if (onlyRevoluteJoints) {
         allowedJointTypes = JOINT_REVOLUTE;
-    }
-    if (includeRevoluteJointsSO2) {
-        allowedJointTypes |= JOINT_REVOLUTE_SO2;
     }
     return getRandomModel(nrOfJoints, nrOfAdditionalFrames, allowedJointTypes);
 }
 
-inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints, bool includeRevoluteJointsSO2 = false)
+IDYNTREE_DEPRECATED_WITH_MSG("Use getRandomChain variant that takes in input the allowedJointTypes as bitset.")
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints)
 {
     unsigned int allowedJointTypes = DEFAULT_JOINT_TYPES;
     if (onlyRevoluteJoints) {
         allowedJointTypes = JOINT_REVOLUTE;
-    }
-    if (includeRevoluteJointsSO2) {
-        allowedJointTypes |= JOINT_REVOLUTE_SO2;
     }
     return getRandomChain(nrOfJoints, nrOfAdditionalFrames, allowedJointTypes);
 }
@@ -294,6 +290,43 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
     }
 
     return;
+}
+
+/**
+ * Get random robot positions, velocities and accelerations
+ * and external wrenches to be given as an input to InverseDynamics.
+ *
+ * @deprecated This function does not work properly with RevoluteSO2Joint joints.
+ * Use the version that takes a Model parameter instead.
+ */
+IDYNTREE_DEPRECATED_WITH_MSG("This function does not work properly with RevoluteSO2Joint joints. Use the version that takes a Model parameter instead.")
+inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
+                                           FreeFloatingVel& vel,
+                                           FreeFloatingAcc& acc,
+                                           LinkNetExternalWrenches& extWrenches)
+{
+    pos.worldBasePos() = getRandomTransform();
+    vel.baseVel() =  getRandomTwist();
+    acc.baseAcc() =  getRandomTwist();
+
+    // Simple random generation - does not work properly with RevoluteSO2Joint
+    for(unsigned int jnt=0; jnt < pos.getNrOfPosCoords(); jnt++)
+    {
+        pos.jointPos()(jnt) = getRandomDouble();
+    }
+
+    for(unsigned int jnt=0; jnt < vel.getNrOfDOFs(); jnt++)
+    {
+        vel.jointVel()(jnt) = getRandomDouble();
+        acc.jointAcc()(jnt) = getRandomDouble();
+    }
+
+    for(unsigned int link=0; link < extWrenches.getNrOfLinks(); link++ )
+    {
+        extWrenches(link) = getRandomWrench();
+    }
+
+    return true;
 }
 
 /**
