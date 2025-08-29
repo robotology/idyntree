@@ -265,7 +265,7 @@ void checkReducedModel(const Model & model)
         FreeFloatingGeneralizedTorques reducedTrqsCheck(reducedModel);
 
         reducedPos.worldBasePos() = getRandomTransform();
-        getRandomVector(reducedPos.jointPos());
+        getRandomJointPositions(reducedPos.jointPos(), reducedModel);
 
         reducedVel.baseVel() = getRandomTwist();
         getRandomVector(reducedVel.jointVel());
