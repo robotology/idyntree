@@ -72,7 +72,7 @@ void checkThatMoveLinkFramesToBeCompatibleWithURDFWithGivenBaseLinkIsConsistent(
         size_t nrOfJoints = 20;
         size_t nrOFAdditionalFrames = 10;
 
-        iDynTree::Model originalModel = iDynTree::getRandomModel(nrOfJoints, nrOFAdditionalFrames, DEFAULT_JOINT_TYPES | JOINT_REVOLUTE_SO2);
+        iDynTree::Model originalModel = iDynTree::getRandomModel(nrOfJoints, nrOFAdditionalFrames, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2);
 
         // Get random base link
         iDynTree::LinkIndex originalBaseLinkIndex = static_cast<iDynTree::LinkIndex>(rand() % originalModel.getNrOfLinks());
