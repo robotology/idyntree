@@ -95,7 +95,7 @@ void getRandomSubsetOfJoints(const Model & model,
 
 void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
                                                        const std::vector<std::string>& subsetOfJointsInReducedModel,
-                                                       std::unordered_map<std::string, double>& removedJointPositions,
+                                                       std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                                        FreeFloatingPos& fullModelPos)
 {
     for(JointIndex jntIndex = 0; jntIndex < fullModel.getNrOfJoints(); jntIndex++)
@@ -103,23 +103,37 @@ void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
         // Check if joint is in reduced model
         std::string jointName = fullModel.getJointName(jntIndex);
 
-        // Only set non-zero position if the DOF size is exactly 1
+        // Set random positions for joints not in the reduced model
         if (!isStringInVector(jointName, subsetOfJointsInReducedModel))
         {
-            if (fullModel.getJoint(jntIndex)->getNrOfDOFs() == 1)
-            {
-                double jointConf = iDynTree::getRandomDouble();
-                removedJointPositions[jointName] = jointConf;
+            // Get the number of position coordinates for this joint
+            size_t nrOfPosCoords = fullModel.getJoint(jntIndex)->getNrOfPosCoords();
 
-                // Set random values for all position coordinates
-                for (size_t coordIdx = 0; coordIdx < fullModel.getJoint(jntIndex)->getNrOfPosCoords(); coordIdx++)
+            if (nrOfPosCoords > 0)
+            {
+                // Create a vector to store all position coordinates for this joint
+                std::vector<double> jointPosCoords(nrOfPosCoords);
+
+                // Set random values for all position coordinates in the full model
+                for (size_t coordIdx = 0; coordIdx < nrOfPosCoords; coordIdx++)
                 {
-                    fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset() + coordIdx) = iDynTree::getRandomDouble();
+                    double randomValue = iDynTree::getRandomDouble();
+                    fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset() + coordIdx) = randomValue;
+                    jointPosCoords[coordIdx] = randomValue;
                 }
 
-                // Use normalizeJointPosCoords to make the code more general
+                // Use normalizeJointPosCoords to make the coordinates valid for the joint type
                 // This handles different joint types (RevoluteSO2, Revolute, Prismatic, etc.) appropriately
                 fullModel.getJoint(jntIndex)->normalizeJointPosCoords(fullModelPos.jointPos());
+
+                // After normalization, extract the normalized values for the removedJointPositions map
+                for (size_t coordIdx = 0; coordIdx < nrOfPosCoords; coordIdx++)
+                {
+                    jointPosCoords[coordIdx] = fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset() + coordIdx);
+                }
+
+                // Store the normalized position coordinates in the map
+                removedJointPositions[jointName] = jointPosCoords;
             }
         }
     }
@@ -303,7 +317,7 @@ void checkReducedModel(const Model & model)
         getRandomSubsetOfJoints(model,jnts,jointInReducedModel);
 
         // Get random positions for reduced models
-        std::unordered_map<std::string, double> removedJointPositions;
+        std::unordered_map<std::string, std::vector<double>> removedJointPositions;
         getRandomJointPositonsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
 
         Model reducedModel;

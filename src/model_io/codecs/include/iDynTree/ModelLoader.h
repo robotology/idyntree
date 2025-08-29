@@ -222,7 +222,7 @@ public:
      */
     bool loadReducedModelFromFullModel(const Model& fullModel,
                                        const std::vector<std::string> & consideredJoints,
-                                       const std::unordered_map<std::string, double>& removedJointPositions,
+                                       const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                        const std::string filetype="");
 
     /**
@@ -249,7 +249,7 @@ public:
      */
     bool loadReducedModelFromString(const std::string modelString,
                                     const std::vector<std::string> & consideredJoints,
-                                    const std::unordered_map<std::string, double>& removedJointPositions,
+                                    const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                     const std::string filetype="",
                                     const std::vector<std::string>& packageDirs = {});
 
@@ -276,7 +276,7 @@ public:
      */
     bool loadReducedModelFromFile(const std::string filename,
                                   const std::vector<std::string> & consideredJoints,
-                                  const std::unordered_map<std::string, double>& removedJointPositions,
+                                  const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                   const std::string filetype="",
                                   const std::vector<std::string>& packageDirs = {});
 
