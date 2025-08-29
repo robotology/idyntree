@@ -70,7 +70,7 @@ void checkSimpleModelExternalWrenchEstimation(size_t nrOfJoints)
     FreeFloatingAcc robotAcc(model);
 
     robotPos.worldBasePos() = getRandomTransform();
-    getRandomVector(robotPos.jointPos());
+    getRandomJointPositions(robotPos.jointPos(), model);
 
     robotVel.baseVel() = getRandomTwist();
     getRandomVector(robotVel.jointVel());
@@ -131,7 +131,7 @@ void checkRandomModelExternalWrenchEstimation(size_t nrOfJoints)
     FreeFloatingAcc robotAcc(model);
 
     robotPos.worldBasePos() = getRandomTransform();
-    getRandomVector(robotPos.jointPos());
+    getRandomJointPositions(robotPos.jointPos(), model);
 
     robotVel.baseVel() = getRandomTwist();
     getRandomVector(robotVel.jointVel());
@@ -268,7 +268,7 @@ void checkSimpleModelExternalWrenchEstimationWithFTSensors()
     FreeFloatingAcc robotAcc(model);
 
     robotPos.worldBasePos() = getRandomTransform();
-    getRandomVector(robotPos.jointPos());
+    getRandomJointPositions(robotPos.jointPos(), model);
 
     robotVel.baseVel() = getRandomTwist();
     getRandomVector(robotVel.jointVel());
