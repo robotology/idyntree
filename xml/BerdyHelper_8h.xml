@@ -88,7 +88,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="142">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="143">$ f^B_i $</formula> </para>
+<para><formula id="291">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="292">$ f^B_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" prot="public">
@@ -96,7 +96,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="144">$ f_i $</formula> </para>
+<para><formula id="293">$ f_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312adaecc7fb3d43b48487ae03dfec685fb8" prot="public">
@@ -104,7 +104,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="145">$ \tau_i $</formula> </para>
+<para><formula id="294">$ \tau_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a80199996cf9e8b7d5171d762533f6c0c" prot="public">
@@ -112,7 +112,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="146">$ f^x_i $</formula> </para>
+<para><formula id="295">$ f^x_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312aa13efb04f5c05ca865f2aee0fd03fe68" prot="public">
@@ -120,7 +120,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="147">$ \ddot{q}_i $</formula> </para>
+<para><formula id="296">$ \ddot{q}_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a9a69ec4d25d83b00175dc3adb8edce00" prot="public">

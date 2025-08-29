@@ -7,9 +7,9 @@
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
     <includedby refid="Model_2ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/ContactWrench.h</label>

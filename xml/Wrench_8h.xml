@@ -3,12 +3,12 @@
   <compounddef id="Wrench_8h" kind="file" language="C++">
     <compoundname>Wrench.h</compoundname>
     <includes refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includes>
+    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
     <includedby refid="Core_2Wrench_8h" local="no">iDynTree/Core/Wrench.h</includedby>
     <includedby refid="SpatialInertia_8h" local="no">iDynTree/SpatialInertia.h</includedby>
-    <includedby refid="YARPConversions_8h" local="no">iDynTree/YARPConversions.h</includedby>
-    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
     <includedby refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includedby>
     <includedby refid="LinkState_8h" local="no">iDynTree/LinkState.h</includedby>
+    <includedby refid="YARPConversions_8h" local="no">iDynTree/YARPConversions.h</includedby>
     <innerclass refid="classiDynTree_1_1Wrench" prot="public">iDynTree::Wrench</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
