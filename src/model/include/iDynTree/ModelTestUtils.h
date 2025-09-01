@@ -10,6 +10,7 @@
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/RevoluteSO2Joint.h>
 #include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/LinkState.h>
 
@@ -30,14 +31,15 @@ enum JointTypes : unsigned int
     JOINT_FIXED = 1 << 0,        // 0001 - FixedJoint
     JOINT_REVOLUTE = 1 << 1,     // 0010 - RevoluteJoint
     JOINT_PRISMATIC = 1 << 2,    // 0100 - PrismaticJoint
-    JOINT_REVOLUTE_SO2 = 1 << 3  // 1000 - RevoluteSO2Joint
+    JOINT_REVOLUTE_SO2 = 1 << 3, // 1000 - RevoluteSO2Joint
+    JOINT_SPHERICAL = 1 << 4     // 10000 - SphericalJoint
 };
 
 // Simple joint types: Fixed, Revolute, and Prismatic
 const unsigned int SIMPLE_JOINT_TYPES = JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC;
 
-// All available joint types: Fixed, Revolute, Prismatic, and RevoluteSO2
-const unsigned int ALL_JOINT_TYPES = JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC | JOINT_REVOLUTE_SO2;
+// All available joint types: Fixed, Revolute, Prismatic, RevoluteSO2, and Spherical
+const unsigned int ALL_JOINT_TYPES = JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC | JOINT_REVOLUTE_SO2 | JOINT_SPHERICAL;
 
 inline Link getRandomLink()
 {
@@ -86,6 +88,9 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     if (allowedJointTypes & JOINT_REVOLUTE_SO2) {
         availableJointTypes.push_back(3);
     }
+    if (allowedJointTypes & JOINT_SPHERICAL) {
+        availableJointTypes.push_back(4);
+    }
 
     // If no joint types are allowed, use default
     if (availableJointTypes.empty()) {
@@ -133,6 +138,13 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
         revSO2Joint.setRestTransform(getRandomTransform());
         revSO2Joint.setAxis(getRandomAxis(),newLinkIndex);
         model.addJoint(newLinkName+"joint",&revSO2Joint);
+    }
+    else if( jointType == 4 )
+    {
+        SphericalJoint sphericalJoint;
+        sphericalJoint.setAttachedLinks(parentLinkIndex,newLinkIndex);
+        sphericalJoint.setRestTransform(getRandomTransform());
+        model.addJoint(newLinkName+"joint",&sphericalJoint);
     }
     else
     {
@@ -183,6 +195,7 @@ inline std::string int2string(int i)
  * - getRandomModel(5, 10, JOINT_REVOLUTE | JOINT_PRISMATIC) // Only revolute and prismatic joints
  * - getRandomModel(5, 10, JOINT_REVOLUTE) // Only revolute joints
  * - getRandomModel(5, 10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2) // All joint types including SO2
+ * - getRandomModel(5, 10, ALL_JOINT_TYPES) // All available joint types including Spherical
  */
 inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES)
 {

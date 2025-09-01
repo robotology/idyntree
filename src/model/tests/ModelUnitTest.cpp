@@ -542,7 +542,7 @@ void checkRandomModels()
 
     for(int i=2; i <= 100; i += 30 )
     {
-        Model randomModel = getRandomModel(i,/*nrOfAdditionalFrames =*/10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2);
+        Model randomModel = getRandomModel(i,/*nrOfAdditionalFrames =*/10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2 | JOINT_SPHERICAL);
 
         std::cout << "Checking reduced model for random model of size: " << i << std::endl;
         checkAll(randomModel);
