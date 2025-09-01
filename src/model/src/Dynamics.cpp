@@ -15,6 +15,8 @@
 #include <iDynTree/SpatialInertia.h>
 #include <iDynTree/SpatialMomentum.h>
 #include <iDynTree/EigenHelpers.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <iDynTree/Dynamics.h>
 
@@ -186,12 +188,6 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
             linkCRBs(parentLinkIndex) = linkCRBs(parentLinkIndex) +
                 (toParentJoint->getTransform(jointPos,parentLinkIndex,visitedLinkIndex))*linkCRBs(visitedLinkIndex);
 
-            // For now we just implement the CRBA for 0 or 1 dofs joints.
-            if (toParentJoint->getNrOfDOFs() > 1)
-            {
-                return false;
-            }
-
             // If the visited link is attached to its parent with a fixed joint,
             // we don't need to do anything else for this link.
             // Otherwise we need to compute the rows and columns of the mass matrix
@@ -351,25 +347,27 @@ bool ArticulatedBodyAlgorithm(const Model& model,
         {
             LinkIndex    parentLinkIndex = parentLink->getIndex();
             // Otherwise we propagate velocity in the usual way
-            if( toParentJoint->getNrOfDOFs() == 0 )
+            // Uniform handling for any number of DOFs (including 0)
+            Twist vj = Twist::Zero();
+            const unsigned int nrOfDOFs = toParentJoint->getNrOfDOFs();
+            for (unsigned int dofIdx = 0; dofIdx < nrOfDOFs; dofIdx++)
             {
-                bufs.linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLink->getIndex())*bufs.linksVel(parentLinkIndex);
-                bufs.linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
-            }
-            else
-            {
-                size_t dofIndex = toParentJoint->getDOFsOffset();
-                bufs.S(dofIndex) = toParentJoint->getMotionSubspaceVector(0,visitedLinkIndex,parentLinkIndex);
-                Twist vj;
-                toEigen(vj.getLinearVec3()) = robotVel.jointVel()(dofIndex)*toEigen(bufs.S(dofIndex).getLinearVec3());
-                toEigen(vj.getAngularVec3()) = robotVel.jointVel()(dofIndex)*toEigen(bufs.S(dofIndex).getAngularVec3());
-                bufs.linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*bufs.linksVel(parentLinkIndex)
-                    + vj;
-                bufs.linksBiasAcceleration(visitedLinkIndex) = bufs.linksVel(visitedLinkIndex)*vj;
+                size_t globalDofIndex = toParentJoint->getDOFsOffset() + dofIdx;
+                bufs.S(globalDofIndex) = toParentJoint->getMotionSubspaceVector(dofIdx, visitedLinkIndex, parentLinkIndex);
 
+                // Accumulate joint velocity contribution
+                Twist vj_dof;
+                toEigen(vj_dof.getLinearVec3())  = robotVel.jointVel()(globalDofIndex) * toEigen(bufs.S(globalDofIndex).getLinearVec3());
+                toEigen(vj_dof.getAngularVec3()) = robotVel.jointVel()(globalDofIndex) * toEigen(bufs.S(globalDofIndex).getAngularVec3());
+                vj = vj + vj_dof;
             }
+
+            bufs.linksVel(visitedLinkIndex) =
+                toParentJoint->getTransform(robotPos.jointPos(), visitedLinkIndex, parentLinkIndex) * bufs.linksVel(parentLinkIndex)
+                + vj;
+
+            // Zero when nrOfDOFs == 0
+            bufs.linksBiasAcceleration(visitedLinkIndex) = bufs.linksVel(visitedLinkIndex) * vj;
         }
 
         // Initialize Articulated Body Inertia
