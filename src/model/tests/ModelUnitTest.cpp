@@ -93,7 +93,7 @@ void getRandomSubsetOfJoints(const Model & model,
     }
 }
 
-void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
+void getRandomJointPositionsForJointsNotInReducedModels(const Model & fullModel,
                                                        const std::vector<std::string>& subsetOfJointsInReducedModel,
                                                        std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                                        FreeFloatingPos& fullModelPos)
@@ -318,7 +318,7 @@ void checkReducedModel(const Model & model)
 
         // Get random positions for reduced models
         std::unordered_map<std::string, std::vector<double>> removedJointPositions;
-        getRandomJointPositonsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
+        getRandomJointPositionsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
 
         Model reducedModel;
         bool ok = createReducedModel(model, jointInReducedModel, reducedModel, removedJointPositions);
