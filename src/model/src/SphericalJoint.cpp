@@ -450,16 +450,17 @@ bool SphericalJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<
     }
 
     // Extract quaternion from joint positions
-    if (jntPos.size() < 4)
+    if (jntPos.size() < this->getPosCoordsOffset() + 4)
     {
         return false;
     }
 
+    size_t offset = this->getPosCoordsOffset();
     Vector4 q;
-    q(0) = jntPos[0]; // qw (real part)
-    q(1) = jntPos[1]; // qx
-    q(2) = jntPos[2]; // qy
-    q(3) = jntPos[3]; // qz
+    q(0) = jntPos[offset + 0]; // qw (real part)
+    q(1) = jntPos[offset + 1]; // qx
+    q(2) = jntPos[offset + 2]; // qy
+    q(3) = jntPos[offset + 3]; // qz
 
     // The relationship between quaternion derivative and angular velocity is:
     // dq/dt = 0.5 * Q(q) * omega
@@ -486,15 +487,16 @@ bool SphericalJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<
 bool SphericalJoint::setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const
 {
     // Set the quaternion to identity (no rotation)
-    if (jntPos.size() < 4)
+    if (jntPos.size() < this->getPosCoordsOffset() + 4)
     {
         return false;
     }
 
-    jntPos[0] = 1.0; // qw (real part)
-    jntPos[1] = 0.0; // qx
-    jntPos[2] = 0.0; // qy
-    jntPos[3] = 0.0; // qz
+    size_t offset = this->getPosCoordsOffset();
+    jntPos[offset + 0] = 1.0; // qw (real part)
+    jntPos[offset + 1] = 0.0; // qx
+    jntPos[offset + 2] = 0.0; // qy
+    jntPos[offset + 3] = 0.0; // qz
 
     return true;
 }
@@ -502,31 +504,32 @@ bool SphericalJoint::setJointPosCoordsToRest(iDynTree::Span<double> jntPos) cons
 bool SphericalJoint::normalizeJointPosCoords(iDynTree::Span<double> jntPos) const
 {
     // Normalize the quaternion to unit length
-    if (jntPos.size() < 4)
+    if (jntPos.size() < this->getPosCoordsOffset() + 4)
     {
         return false;
     }
 
-    double norm = sqrt(jntPos[0] * jntPos[0] +
-                      jntPos[1] * jntPos[1] +
-                      jntPos[2] * jntPos[2] +
-                      jntPos[3] * jntPos[3]);
+    size_t offset = this->getPosCoordsOffset();
+    double norm = sqrt(jntPos[offset + 0] * jntPos[offset + 0] +
+                      jntPos[offset + 1] * jntPos[offset + 1] +
+                      jntPos[offset + 2] * jntPos[offset + 2] +
+                      jntPos[offset + 3] * jntPos[offset + 3]);
 
     if (norm < 1e-12)
     {
         // If norm is too small, set to identity quaternion
-        jntPos[0] = 1.0;
-        jntPos[1] = 0.0;
-        jntPos[2] = 0.0;
-        jntPos[3] = 0.0;
+        jntPos[offset + 0] = 1.0;  // qw (real part)
+        jntPos[offset + 1] = 0.0;  // qx
+        jntPos[offset + 2] = 0.0;  // qy
+        jntPos[offset + 3] = 0.0;  // qz
     }
     else
     {
         // Normalize
-        jntPos[0] /= norm;
-        jntPos[1] /= norm;
-        jntPos[2] /= norm;
-        jntPos[3] /= norm;
+        jntPos[offset + 0] /= norm;
+        jntPos[offset + 1] /= norm;
+        jntPos[offset + 2] /= norm;
+        jntPos[offset + 3] /= norm;
     }
 
     return true;
