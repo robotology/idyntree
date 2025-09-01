@@ -14,6 +14,7 @@
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
+#include <cmath>
 
 // For modelTransformsers testing
 #include <iDynTree/ModelTransformers.h>
@@ -92,9 +93,9 @@ void getRandomSubsetOfJoints(const Model & model,
     }
 }
 
-void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
+void getRandomJointPositionsForJointsNotInReducedModels(const Model & fullModel,
                                                        const std::vector<std::string>& subsetOfJointsInReducedModel,
-                                                       std::unordered_map<std::string, double>& removedJointPositions,
+                                                       std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                                        FreeFloatingPos& fullModelPos)
 {
     for(JointIndex jntIndex = 0; jntIndex < fullModel.getNrOfJoints(); jntIndex++)
@@ -102,14 +103,37 @@ void getRandomJointPositonsForJointsNotInReducedModels(const Model & fullModel,
         // Check if joint is in reduced model
         std::string jointName = fullModel.getJointName(jntIndex);
 
-        // Only set non-zero position if the DOF size is exactly 1
+        // Set random positions for joints not in the reduced model
         if (!isStringInVector(jointName, subsetOfJointsInReducedModel))
         {
-            if (fullModel.getJoint(jntIndex)->getNrOfDOFs() == 1)
+            // Get the number of position coordinates for this joint
+            size_t nrOfPosCoords = fullModel.getJoint(jntIndex)->getNrOfPosCoords();
+
+            if (nrOfPosCoords > 0)
             {
-                double jointConf = iDynTree::getRandomDouble();
-                removedJointPositions[jointName] = jointConf;
-                fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset()) = jointConf;
+                // Create a vector to store all position coordinates for this joint
+                std::vector<double> jointPosCoords(nrOfPosCoords);
+
+                // Set random values for all position coordinates in the full model
+                for (size_t coordIdx = 0; coordIdx < nrOfPosCoords; coordIdx++)
+                {
+                    double randomValue = iDynTree::getRandomDouble();
+                    fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset() + coordIdx) = randomValue;
+                    jointPosCoords[coordIdx] = randomValue;
+                }
+
+                // Use normalizeJointPosCoords to make the coordinates valid for the joint type
+                // This handles different joint types (RevoluteSO2, Revolute, Prismatic, etc.) appropriately
+                fullModel.getJoint(jntIndex)->normalizeJointPosCoords(fullModelPos.jointPos());
+
+                // After normalization, extract the normalized values for the removedJointPositions map
+                for (size_t coordIdx = 0; coordIdx < nrOfPosCoords; coordIdx++)
+                {
+                    jointPosCoords[coordIdx] = fullModelPos.jointPos()(fullModel.getJoint(jntIndex)->getPosCoordsOffset() + coordIdx);
+                }
+
+                // Store the normalized position coordinates in the map
+                removedJointPositions[jointName] = jointPosCoords;
             }
         }
     }
@@ -172,10 +196,48 @@ void copyFromReducedToFull(const vectorType & reducedVector,
             assert(jntInFullModel->getNrOfDOFs() > 0);
             assert(fullVector.size() == fullModel.getNrOfPosCoords());
             assert(reducedVector.size() == reducedModel.getNrOfPosCoords());
-            assert(jntInFullModel->getPosCoordsOffset() < fullVector.size());
-            assert(jnt->getPosCoordsOffset() < reducedVector.size());
+            assert(jntInFullModel->getPosCoordsOffset() + jntInFullModel->getNrOfPosCoords() <= fullVector.size());
+            assert(jnt->getPosCoordsOffset() + jnt->getNrOfPosCoords() <= reducedVector.size());
 
-            fullVector(jntInFullModel->getPosCoordsOffset()) = reducedVector(jnt->getPosCoordsOffset());
+            // Copy all position coordinates for this joint
+            for (size_t i = 0; i < jnt->getNrOfPosCoords(); i++)
+            {
+                fullVector(jntInFullModel->getPosCoordsOffset() + i) = reducedVector(jnt->getPosCoordsOffset() + i);
+            }
+        }
+    }
+}
+
+/**
+ * Copy a vector of DOFs from the reduced model to the full model.
+ * This function should be used for joint torques, velocities, and accelerations.
+ */
+template<typename vectorType>
+void copyFromReducedToFullDOFs(const vectorType & reducedVector,
+                            vectorType & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            assert(jntInFullModel->getNrOfDOFs() > 0);
+            assert(fullVector.size() == fullModel.getNrOfDOFs());
+            assert(reducedVector.size() == reducedModel.getNrOfDOFs());
+            assert(jntInFullModel->getDOFsOffset() + jntInFullModel->getNrOfDOFs() <= fullVector.size());
+            assert(jnt->getDOFsOffset() + jnt->getNrOfDOFs() <= reducedVector.size());
+
+            // Copy all DOFs for this joint
+            for (size_t i = 0; i < jnt->getNrOfDOFs(); i++)
+            {
+                fullVector(jntInFullModel->getDOFsOffset() + i) = reducedVector(jnt->getDOFsOffset() + i);
+            }
         }
     }
 }
@@ -200,7 +262,39 @@ void copyFromFullToReduced(      vectorType & reducedVector,
         {
             IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
 
-            reducedVector(jnt->getPosCoordsOffset()) = fullVector(jntInFullModel->getPosCoordsOffset());
+            // Copy all position coordinates for this joint
+            for (size_t i = 0; i < jnt->getNrOfPosCoords(); i++)
+            {
+                reducedVector(jnt->getPosCoordsOffset() + i) = fullVector(jntInFullModel->getPosCoordsOffset() + i);
+            }
+        }
+    }
+}
+
+/**
+ * Copy a vector of DOFs from the full model to the reduced model.
+ * This function should be used for joint torques, velocities, and accelerations.
+ */
+template<typename vectorType>
+void copyFromFullToReducedDOFs(      vectorType & reducedVector,
+                      const vectorType & fullVector,
+                      const Model & reducedModel,
+                      const Model & fullModel)
+{
+    for(JointIndex jntReduced = 0; jntReduced < reducedModel.getNrOfJoints(); jntReduced++ )
+    {
+        IJointConstPtr jnt = reducedModel.getJoint(jntReduced);
+        std::string jointName = reducedModel.getJointName(jntReduced);
+
+        if( jnt->getNrOfDOFs() > 0 )
+        {
+            IJointConstPtr jntInFullModel = fullModel.getJoint(fullModel.getJointIndex(jointName));
+
+            // Copy all DOFs for this joint
+            for (size_t i = 0; i < jnt->getNrOfDOFs(); i++)
+            {
+                reducedVector(jnt->getDOFsOffset() + i) = fullVector(jntInFullModel->getDOFsOffset() + i);
+            }
         }
     }
 }
@@ -223,8 +317,8 @@ void checkReducedModel(const Model & model)
         getRandomSubsetOfJoints(model,jnts,jointInReducedModel);
 
         // Get random positions for reduced models
-        std::unordered_map<std::string, double> removedJointPositions;
-        getRandomJointPositonsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
+        std::unordered_map<std::string, std::vector<double>> removedJointPositions;
+        getRandomJointPositionsForJointsNotInReducedModels(model, jointInReducedModel, removedJointPositions, fullPos);
 
         Model reducedModel;
         bool ok = createReducedModel(model, jointInReducedModel, reducedModel, removedJointPositions);
@@ -247,7 +341,7 @@ void checkReducedModel(const Model & model)
         FreeFloatingGeneralizedTorques reducedTrqsCheck(reducedModel);
 
         reducedPos.worldBasePos() = getRandomTransform();
-        getRandomVector(reducedPos.jointPos());
+        getRandomJointPositions(reducedPos.jointPos(), reducedModel);
 
         reducedVel.baseVel() = getRandomTwist();
         getRandomVector(reducedVel.jointVel());
@@ -264,14 +358,14 @@ void checkReducedModel(const Model & model)
         fullAcc.baseAcc()      = reducedAcc.baseAcc();
 
         copyFromReducedToFull(reducedPos.jointPos(),fullPos.jointPos(),reducedModel,model);
-        copyFromReducedToFull(reducedVel.jointVel(),fullVel.jointVel(),reducedModel,model);
-        copyFromReducedToFull(reducedAcc.jointAcc(),fullAcc.jointAcc(),reducedModel,model);
+        copyFromReducedToFullDOFs(reducedVel.jointVel(),fullVel.jointVel(),reducedModel,model);
+        copyFromReducedToFullDOFs(reducedAcc.jointAcc(),fullAcc.jointAcc(),reducedModel,model);
 
         fullRNEA.runRNEA(fullPos,fullVel,fullAcc,fullTrqs);
         reducedRNEA.runRNEA(reducedPos,reducedVel,reducedAcc,reducedTrqs);
 
         reducedTrqsCheck.baseWrench() = fullTrqs.baseWrench();
-        copyFromFullToReduced(reducedTrqsCheck.jointTorques(),fullTrqs.jointTorques(),reducedModel,model);
+        copyFromFullToReducedDOFs(reducedTrqsCheck.jointTorques(),fullTrqs.jointTorques(),reducedModel,model);
 
         ASSERT_EQUAL_VECTOR_TOL(reducedTrqs.baseWrench().asVector(),reducedTrqsCheck.baseWrench().asVector(),1e-8);
         ASSERT_EQUAL_VECTOR_TOL(reducedTrqs.jointTorques(),reducedTrqsCheck.jointTorques(),1e-8);
@@ -448,7 +542,7 @@ void checkRandomModels()
 
     for(int i=2; i <= 100; i += 30 )
     {
-        Model randomModel = getRandomModel(i);
+        Model randomModel = getRandomModel(i,/*nrOfAdditionalFrames =*/10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2);
 
         std::cout << "Checking reduced model for random model of size: " << i << std::endl;
         checkAll(randomModel);

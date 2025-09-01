@@ -8,6 +8,7 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/FixedJoint.h>
 #include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/RevoluteSO2Joint.h>
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/LinkState.h>
@@ -15,10 +16,28 @@
 #include <iDynTree/TestUtils.h>
 
 #include <cassert>
+#include <cmath>
 #include "IJoint.h"
 
 namespace iDynTree
 {
+
+/**
+ * Bitfield enum for selecting joint types in random model generation.
+ */
+enum JointTypes : unsigned int
+{
+    JOINT_FIXED = 1 << 0,        // 0001 - FixedJoint
+    JOINT_REVOLUTE = 1 << 1,     // 0010 - RevoluteJoint
+    JOINT_PRISMATIC = 1 << 2,    // 0100 - PrismaticJoint
+    JOINT_REVOLUTE_SO2 = 1 << 3  // 1000 - RevoluteSO2Joint
+};
+
+// Simple joint types: Fixed, Revolute, and Prismatic
+const unsigned int SIMPLE_JOINT_TYPES = JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC;
+
+// All available joint types: Fixed, Revolute, Prismatic, and RevoluteSO2
+const unsigned int ALL_JOINT_TYPES = JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC | JOINT_REVOLUTE_SO2;
 
 inline Link getRandomLink()
 {
@@ -45,7 +64,7 @@ inline Link getRandomLink()
 /**
  * Add a random link with random model.
  */
-inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false)
+inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES)
 {
     // Add Link
     LinkIndex newLinkIndex = model.addLink(newLinkName,getRandomLink());
@@ -53,14 +72,38 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     // Now add joint
     LinkIndex parentLinkIndex = model.getLinkIndex(parentLink);
 
-    int nrOfJointTypes = 3;
-
-    int jointType = rand() % nrOfJointTypes;
-
-    if (onlyRevoluteJoints)
-    {
-        jointType = 1;
+    // Collect available joint types based on the bitfield
+    std::vector<int> availableJointTypes;
+    if (allowedJointTypes & JOINT_FIXED) {
+        availableJointTypes.push_back(0);
     }
+    if (allowedJointTypes & JOINT_REVOLUTE) {
+        availableJointTypes.push_back(1);
+    }
+    if (allowedJointTypes & JOINT_PRISMATIC) {
+        availableJointTypes.push_back(2);
+    }
+    if (allowedJointTypes & JOINT_REVOLUTE_SO2) {
+        availableJointTypes.push_back(3);
+    }
+
+    // If no joint types are allowed, use default
+    if (availableJointTypes.empty()) {
+        allowedJointTypes = SIMPLE_JOINT_TYPES;
+        if (allowedJointTypes & JOINT_FIXED) {
+            availableJointTypes.push_back(0);
+        }
+        if (allowedJointTypes & JOINT_REVOLUTE) {
+            availableJointTypes.push_back(1);
+        }
+        if (allowedJointTypes & JOINT_PRISMATIC) {
+            availableJointTypes.push_back(2);
+        }
+    }
+
+    // Select a random joint type from available ones
+    int jointTypeIndex = rand() % availableJointTypes.size();
+    int jointType = availableJointTypes[jointTypeIndex];
 
     if( jointType == 0 )
     {
@@ -82,6 +125,14 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
         prismJoint.setRestTransform(getRandomTransform());
         prismJoint.setAxis(getRandomAxis(),newLinkIndex);
         model.addJoint(newLinkName+"joint",&prismJoint);
+    }
+    else if( jointType == 3 )
+    {
+        RevoluteSO2Joint revSO2Joint;
+        revSO2Joint.setAttachedLinks(parentLinkIndex,newLinkIndex);
+        revSO2Joint.setRestTransform(getRandomTransform());
+        revSO2Joint.setAxis(getRandomAxis(),newLinkIndex);
+        model.addJoint(newLinkName+"joint",&revSO2Joint);
     }
     else
     {
@@ -120,7 +171,20 @@ inline std::string int2string(int i)
     return ss.str();
 }
 
-inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false)
+/**
+ * Generate a random model with the specified number of joints and additional frames.
+ *
+ * @param nrOfJoints Number of joints to add to the model
+ * @param nrOfAdditionalFrames Number of additional frames to add (default: 10)
+ * @param allowedJointTypes Bitfield specifying which joint types to include (default: Fixed, Revolute, Prismatic)
+ *
+ * Example usage:
+ * - getRandomModel(5) // Uses default joint types (Fixed, Revolute, Prismatic)
+ * - getRandomModel(5, 10, JOINT_REVOLUTE | JOINT_PRISMATIC) // Only revolute and prismatic joints
+ * - getRandomModel(5, 10, JOINT_REVOLUTE) // Only revolute joints
+ * - getRandomModel(5, 10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2) // All joint types including SO2
+ */
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES)
 {
     Model model;
 
@@ -130,7 +194,7 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = getRandomLinkOfModel(model);
         std::string linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints);
+        addRandomLinkToModel(model,parentLink,linkName,allowedJointTypes);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -143,7 +207,14 @@ inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     return model;
 }
 
-inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, bool onlyRevoluteJoints=false)
+/**
+ * Generate a random chain (sequential links) with the specified number of joints and additional frames.
+ *
+ * @param nrOfJoints Number of joints to add to the chain
+ * @param nrOfAdditionalFrames Number of additional frames to add (default: 10)
+ * @param allowedJointTypes Bitfield specifying which joint types to include (default: Fixed, Revolute, Prismatic)
+ */
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames = 10, unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES)
 {
     Model model;
 
@@ -154,7 +225,7 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     {
         std::string parentLink = linkName;
         linkName = "link" + int2string(i);
-        addRandomLinkToModel(model,parentLink,linkName,onlyRevoluteJoints);
+        addRandomLinkToModel(model,parentLink,linkName,allowedJointTypes);
     }
 
     for(unsigned int i=0; i < nrOfAdditionalFrames; i++)
@@ -165,6 +236,27 @@ inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames
     }
 
     return model;
+}
+
+// Backward compatibility overloads
+IDYNTREE_DEPRECATED_WITH_MSG("Use getRandomModel variant that takes in input the allowedJointTypes as bitset.")
+inline Model getRandomModel(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints)
+{
+    unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES;
+    if (onlyRevoluteJoints) {
+        allowedJointTypes = JOINT_REVOLUTE;
+    }
+    return getRandomModel(nrOfJoints, nrOfAdditionalFrames, allowedJointTypes);
+}
+
+IDYNTREE_DEPRECATED_WITH_MSG("Use getRandomChain variant that takes in input the allowedJointTypes as bitset.")
+inline Model getRandomChain(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints)
+{
+    unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES;
+    if (onlyRevoluteJoints) {
+        allowedJointTypes = JOINT_REVOLUTE;
+    }
+    return getRandomChain(nrOfJoints, nrOfAdditionalFrames, allowedJointTypes);
 }
 
 /**
@@ -183,16 +275,21 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
             {
                 double max = jntPtr->getMaxPosLimit(i);
                 double min = jntPtr->getMinPosLimit(i);
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble(min,max);
+                vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble(min,max);
             }
         }
         else
         {
+            // Set random values for all position coordinates
             for(int i=0; i < jntPtr->getNrOfPosCoords(); i++)
             {
-                vec(jntPtr->getDOFsOffset()+i) = getRandomDouble();
+                vec(jntPtr->getPosCoordsOffset()+i) = getRandomDouble();
             }
         }
+
+        // Use normalizeJointPosCoords to make the code more general
+        // This handles different joint types (RevoluteSO2, Revolute, Prismatic, etc.) appropriately
+        jntPtr->normalizeJointPosCoords(vec);
     }
 
     return;
@@ -201,7 +298,11 @@ inline void getRandomJointPositions(VectorDynSize& vec, const Model& model)
 /**
  * Get random robot positions, velocities and accelerations
  * and external wrenches to be given as an input to InverseDynamics.
+ *
+ * @deprecated This function does not work properly with RevoluteSO2Joint joints.
+ * Use the version that takes a Model parameter instead.
  */
+IDYNTREE_DEPRECATED_WITH_MSG("This function does not work properly with RevoluteSO2Joint joints. Use the version that takes a Model parameter instead.")
 inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
                                            FreeFloatingVel& vel,
                                            FreeFloatingAcc& acc,
@@ -211,11 +312,42 @@ inline bool getRandomInverseDynamicsInputs(FreeFloatingPos& pos,
     vel.baseVel() =  getRandomTwist();
     acc.baseAcc() =  getRandomTwist();
 
-
+    // Simple random generation - does not work properly with RevoluteSO2Joint
     for(unsigned int jnt=0; jnt < pos.getNrOfPosCoords(); jnt++)
     {
         pos.jointPos()(jnt) = getRandomDouble();
     }
+
+    for(unsigned int jnt=0; jnt < vel.getNrOfDOFs(); jnt++)
+    {
+        vel.jointVel()(jnt) = getRandomDouble();
+        acc.jointAcc()(jnt) = getRandomDouble();
+    }
+
+    for(unsigned int link=0; link < extWrenches.getNrOfLinks(); link++ )
+    {
+        extWrenches(link) = getRandomWrench();
+    }
+
+    return true;
+}
+
+/**
+ * Get random robot positions, velocities and accelerations
+ * and external wrenches to be given as an input to InverseDynamics.
+ */
+inline bool getRandomInverseDynamicsInputs(const Model& model,
+                                           FreeFloatingPos& pos,
+                                           FreeFloatingVel& vel,
+                                           FreeFloatingAcc& acc,
+                                           LinkNetExternalWrenches& extWrenches)
+{
+    pos.worldBasePos() = getRandomTransform();
+    vel.baseVel() =  getRandomTwist();
+    acc.baseAcc() =  getRandomTwist();
+
+    // Use model-aware joint position generation for proper handling of all joint types
+    getRandomJointPositions(pos.jointPos(), model);
 
     for(unsigned int jnt=0; jnt < vel.getNrOfDOFs(); jnt++)
     {

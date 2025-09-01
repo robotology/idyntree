@@ -18,6 +18,8 @@
 #include <string>
 #include <vector>
 
+#include <iDynTree/Utils.h>
+
 namespace iDynTree
 {
 class Model;
@@ -76,11 +78,34 @@ bool createReducedModel(const Model& fullModel,
  * to be in "rest" position (i.e. zero for revolute or prismatic joints), or the position
  * specified in the removedJointPositions if a given joint is specified in removedJointPositions
  *
+ * @note This function signature with std::unordered_map<std::string, double>
+ *             only supports joints with 1 position coordinate (revolute, prismatic).
+ *             For joints with higher dimensionality (e.g., RevoluteSO2 with 2 position coordinates),
+ *             use the overload with std::unordered_map<std::string, std::vector<double>>.
  */
 bool createReducedModel(const Model& fullModel,
                         const std::vector<std::string>& jointsInReducedModel,
                         Model& reducedModel,
                         const std::unordered_map<std::string, double>& removedJointPositions);
+
+/**
+ * This function takes in input a iDynTree::Model and
+ * an ordered list of joints and returns a model with
+ * just the joint specified in the list, with that exact order.
+ *
+ * All other joints are be removed by lumping (i.e. fusing together)
+ * the inertia of the links that are connected by that joint, assuming the joint
+ * to be in "rest" position (i.e. zero for revolute or prismatic joints), or the position
+ * specified in the removedJointPositions if a given joint is specified in removedJointPositions
+ *
+ * This version supports joints with multiple position coordinates (e.g., RevoluteSO2).
+ * For joints with n position coordinates, the vector should contain exactly n values.
+ * For example, RevoluteSO2 joints expect 2 values: [cos(θ), sin(θ)].
+ */
+bool createReducedModel(const Model& fullModel,
+                        const std::vector<std::string>& jointsInReducedModel,
+                        Model& reducedModel,
+                        const std::unordered_map<std::string, std::vector<double>>& removedJointPositions);
 
 /**
  * @brief Given a specified base, return a model with a "normalized" joint numbering for that base.
@@ -169,11 +194,11 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
 /**
  * \function Remove all additional frames from the model, except a specified allowlist.
  *
- * This function takes in input a model, and return a model with all the additional 
+ * This function takes in input a model, and return a model with all the additional
  * frame list removed, except for the additional frames whose name is specified in
  * the specified allowlist.
  *
- * @note The main use of this function is for processing models that need to be 
+ * @note The main use of this function is for processing models that need to be
  *       passed to other libraries or physics engines, where the additional frames
  *       may create problems or create performance problem. As long as you are using
  *       iDynTree, the presence of additional frames does not impact the performance

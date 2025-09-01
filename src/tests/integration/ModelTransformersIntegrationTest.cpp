@@ -39,32 +39,22 @@ int real_random_int(int initialValue, int finalValue)
 void setRandomState(iDynTree::KinDynComputations & originalKinDyn, iDynTree::KinDynComputations & transformedKinDyn)
 {
     size_t dofs = originalKinDyn.getNrOfDegreesOfFreedom();
+    size_t posCoords = originalKinDyn.model().getNrOfPosCoords();
     Transform    worldTbase;
     Twist        baseVel;
     Vector3 gravity;
 
-    iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
+    iDynTree::VectorDynSize qj(posCoords), dqj(dofs), ddqj(dofs);
 
-    worldTbase = iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
-            Position(random_double(),random_double(),random_double()));
+    // Use utility functions for generating random state
+    worldTbase = getRandomTransform();
+    baseVel = getRandomTwist();
+    getRandomVector(gravity);
 
-    for(int i=0; i < 3; i++)
-    {
-        gravity(i) = random_double();
-    }
-
-    for(int i=0; i < 6; i++)
-    {
-        baseVel(i) = real_random_double();
-    }
-
-    for(size_t dof=0; dof < dofs; dof++)
-
-    {
-        qj(dof) = random_double();
-        dqj(dof) = random_double();
-        ddqj(dof) = random_double();
-    }
+    // Use model-aware joint position generation for proper handling of all joint types
+    getRandomJointPositions(qj, originalKinDyn.model());
+    getRandomVector(dqj);
+    getRandomVector(ddqj);
 
     ASSERT_IS_TRUE(originalKinDyn.setRobotState(worldTbase,qj,baseVel,dqj,gravity));
     ASSERT_IS_TRUE(transformedKinDyn.setRobotState(worldTbase,qj,baseVel,dqj,gravity));
@@ -82,7 +72,7 @@ void checkThatMoveLinkFramesToBeCompatibleWithURDFWithGivenBaseLinkIsConsistent(
         size_t nrOfJoints = 20;
         size_t nrOFAdditionalFrames = 10;
 
-        iDynTree::Model originalModel = iDynTree::getRandomModel(nrOfJoints, nrOFAdditionalFrames);
+        iDynTree::Model originalModel = iDynTree::getRandomModel(nrOfJoints, nrOFAdditionalFrames, SIMPLE_JOINT_TYPES);
 
         // Get random base link
         iDynTree::LinkIndex originalBaseLinkIndex = static_cast<iDynTree::LinkIndex>(rand() % originalModel.getNrOfLinks());

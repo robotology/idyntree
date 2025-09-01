@@ -134,7 +134,7 @@ namespace iDynTree
                                                     const std::vector< std::string >& consideredJoints,
                                                     const std::string filetype)
     {
-        std::unordered_map<std::string, double> emptyRemovedJointPositions;
+        std::unordered_map<std::string, std::vector<double>> emptyRemovedJointPositions;
         return this->loadReducedModelFromFullModel(fullModel, consideredJoints, emptyRemovedJointPositions, filetype);
     }
 
@@ -143,7 +143,7 @@ namespace iDynTree
                                                  const std::string filetype,
                                                  const std::vector<std::string>& packageDirs /*= {}*/)
     {
-        std::unordered_map<std::string, double> emptyRemovedJointPositions;
+        std::unordered_map<std::string, std::vector<double>> emptyRemovedJointPositions;
         return this->loadReducedModelFromString(modelString, consideredJoints, emptyRemovedJointPositions, filetype, packageDirs);
     }
 
@@ -152,13 +152,13 @@ namespace iDynTree
                                                const std::string filetype,
                                                const std::vector<std::string>& packageDirs /*= {}*/)
     {
-        std::unordered_map<std::string, double> emptyRemovedJointPositions;
+        std::unordered_map<std::string, std::vector<double>> emptyRemovedJointPositions;
         return this->loadReducedModelFromFile(filename, consideredJoints, emptyRemovedJointPositions, filetype, packageDirs);
     }
 
     bool ModelLoader::loadReducedModelFromFullModel(const Model& fullModel,
                                                     const std::vector< std::string >& consideredJoints,
-                                                    const std::unordered_map<std::string, double>& removedJointPositions,
+                                                    const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                                     const std::string /*filetype*/)
     {
         Model _modelReduced;
@@ -175,7 +175,7 @@ namespace iDynTree
 
     bool ModelLoader::loadReducedModelFromString(const std::string modelString,
                                                  const std::vector< std::string >& consideredJoints,
-                                                 const std::unordered_map<std::string, double>& removedJointPositions,
+                                                 const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                                  const std::string filetype,
                                                  const std::vector<std::string>& packageDirs /*= {}*/)
     {
@@ -197,7 +197,7 @@ namespace iDynTree
 
     bool ModelLoader::loadReducedModelFromFile(const std::string filename,
                                                const std::vector< std::string >& consideredJoints,
-                                               const std::unordered_map<std::string, double>& removedJointPositions,
+                                               const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
                                                const std::string filetype,
                                                const std::vector<std::string>& packageDirs /*= {}*/)
     {

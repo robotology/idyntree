@@ -71,7 +71,7 @@ void modelClassDefinition(py::class_<Model>& model) {
         m.computeFullTreeTraversal(*traversal);
         return traversal;
       })
-      .def_property_readonly("visual_solid_shapes", 
+      .def_property_readonly("visual_solid_shapes",
                              py::overload_cast<>(&Model::visualSolidShapes))
       .def_property_readonly("collision_solid_shapes",
                              py::overload_cast<>(&Model::collisionSolidShapes))
@@ -118,13 +118,14 @@ void traversalClassDefinition(py::class_<Traversal>& traversal) {
 }
 
     void utilityFunctionsDefinition(pybind11::module& module) {
+        // Expose the deprecated interface for backward compatibility
         module
             .def("get_random_model",
-                 iDynTree::getRandomModel,
+                 static_cast<Model(*)(unsigned int, size_t, bool)>(&iDynTree::getRandomModel),
                  py::arg("nr_of_joints"), py::arg("nr_of_additional_frames") = 10,
                  py::arg("only_revolute_joints") = false)
             .def("get_random_chain",
-                 iDynTree::getRandomChain,
+                 static_cast<Model(*)(unsigned int, size_t, bool)>(&iDynTree::getRandomChain),
                  py::arg("nr_of_joints"), py::arg("nr_of_additional_frames") = 10,
                  py::arg("only_revolute_joints") = false);
     }

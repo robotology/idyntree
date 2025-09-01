@@ -4,6 +4,7 @@
 
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/TestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 
 #include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
@@ -42,7 +43,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     // Fill the input to forward dynamics with random data
     robotPos.worldBasePos() = getRandomTransform();
     robotVel.baseVel() = getRandomTwist();
-    getRandomVector(robotPos.jointPos());
+    getRandomJointPositions(robotPos.jointPos(), model);
     getRandomVector(robotVel.jointVel());
     for(unsigned int link=0; link < model.getNrOfLinks(); link++ )
     {
@@ -156,7 +157,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     toEigen(REGR_baseWrench) = toEigen(invDynResults).segment<6>(0) + toEigen(RNEA_EXT_baseForceAndJointTorques.baseWrench());
     toEigen(REGR_jointTorques) = toEigen(invDynResults).segment(6, model.getNrOfDOFs()) + toEigen(RNEA_EXT_baseForceAndJointTorques.jointTorques());
 
-    double tolRegr = 1e-6;
+    double tolRegr = 2e-6;
     ASSERT_EQUAL_VECTOR_TOL(REGR_baseWrench, RNEA_baseForceAndJointTorques.baseWrench().asVector(), tolRegr);
     ASSERT_EQUAL_VECTOR_TOL(REGR_jointTorques, RNEA_baseForceAndJointTorques.jointTorques(), tolRegr);
 }

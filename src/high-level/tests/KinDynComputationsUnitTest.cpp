@@ -21,6 +21,8 @@
 #include <iDynTree/SubModel.h>
 #include <iDynTree/ModelTransformers.h>
 
+#include <iDynTree/ModelTestUtils.h>
+
 #include <iDynTree/ModelLoader.h>
 
 
@@ -45,36 +47,26 @@ int real_random_int(int initialValue, int finalValue)
 void setRandomState(iDynTree::KinDynComputations & dynComp)
 {
     size_t dofs = dynComp.getNrOfDegreesOfFreedom();
+    size_t posCoords = dynComp.model().getNrOfPosCoords();
     Transform    worldTbase;
     Twist        baseVel;
     Vector3 gravity;
 
-    iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
+    iDynTree::VectorDynSize qj(posCoords), dqj(dofs), ddqj(dofs);
 
-    worldTbase = iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
-            Position(random_double(),random_double(),random_double()));
+    // Use utility functions for generating random state
+    worldTbase = getRandomTransform();
+    baseVel = getRandomTwist();
+    getRandomVector(gravity);
 
-    for(int i=0; i < 3; i++)
-    {
-        gravity(i) = random_double();
-    }
-
-    for(int i=0; i < 6; i++)
-    {
-        baseVel(i) = real_random_double();
-    }
-
-    for(size_t dof=0; dof < dofs; dof++)
-
-    {
-        qj(dof) = random_double();
-        dqj(dof) = random_double();
-        ddqj(dof) = random_double();
-    }
+    // Use model-aware joint position generation for proper handling of all joint types
+    getRandomJointPositions(qj, dynComp.model());
+    getRandomVector(dqj);
+    getRandomVector(ddqj);
 
     bool ok = dynComp.setRobotState(worldTbase,qj,baseVel,dqj,gravity);
 
-    iDynTree::VectorDynSize qj_read(dofs), dqj_read(dofs);
+    iDynTree::VectorDynSize qj_read(posCoords), dqj_read(dofs);
     Vector3 gravity_read;
     Transform    worldTbase_read;
     Twist        baseVel_read;

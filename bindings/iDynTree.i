@@ -23,6 +23,9 @@
 // Wrap the std::unordered_map<std::string, double>
 %template(StringToDoubleUnorderedMap) std::unordered_map<std::string, double>;
 
+// Wrap the std::unordered_map<std::string, std::vector<double>>
+%template(StringToDoubleVectorUnorderedMap) std::unordered_map<std::string, std::vector<double>>;
+
 // Ignore some methods to avoid warnings
 %include "./ignore.i"
 

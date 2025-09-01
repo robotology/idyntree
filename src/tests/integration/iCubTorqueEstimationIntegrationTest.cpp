@@ -166,7 +166,7 @@ void compareEstimators(const std::string& urdfFileName,
     iDynTree::Vector3 imuAngularVel;
     iDynTree::SensorsMeasurements sensMeas(usedSensors);
 
-    iDynTree::getRandomVector(jointPos);
+    iDynTree::getRandomJointPositions(jointPos, model);
     iDynTree::getRandomVector(jointVel);
     iDynTree::getRandomVector(jointAcc);
 

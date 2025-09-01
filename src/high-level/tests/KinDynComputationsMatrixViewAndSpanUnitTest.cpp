@@ -18,6 +18,8 @@
 #include <iDynTree/JointState.h>
 #include <iDynTree/FreeFloatingState.h>
 
+#include <iDynTree/ModelTestUtils.h>
+
 #include <iDynTree/ModelLoader.h>
 
 
@@ -47,37 +49,38 @@ int real_random_int(int initialValue, int finalValue)
 void setRandomState(iDynTree::KinDynComputations & dynComp)
 {
     size_t dofs = dynComp.getNrOfDegreesOfFreedom();
+    size_t posCoords = dynComp.model().getNrOfPosCoords();
     Transform    worldTbase;
     Eigen::Vector6d baseVel;
     Eigen::Vector3d gravity;
 
-    Eigen::VectorXd qj(dofs), dqj(dofs), ddqj(dofs);
+    Eigen::VectorXd qj(posCoords), dqj(dofs), ddqj(dofs);
 
-    worldTbase = iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
-                                     Position(random_double(),random_double(),random_double()));
+    // Use utility functions for generating random state
+    worldTbase = getRandomTransform();
 
+    // Generate random base velocity using iDynTree utility and convert to Eigen
+    Twist baseTwist = getRandomTwist();
+    baseVel = toEigen(baseTwist);
+
+    // Generate random gravity vector
+    Vector3 gravityVec;
+    getRandomVector(gravityVec);
+    gravity = toEigen(gravityVec);
+
+    // Use model-aware joint position generation for proper handling of all joint types
+    VectorDynSize qj_idyn(posCoords);
+    getRandomJointPositions(qj_idyn, dynComp.model());
+    qj = toEigen(qj_idyn);
+
+    // Generate random joint velocities and accelerations
+    VectorDynSize dqj_idyn(dofs), ddqj_idyn(dofs);
+    getRandomVector(dqj_idyn);
+    getRandomVector(ddqj_idyn);
+    dqj = toEigen(dqj_idyn);
+    ddqj = toEigen(ddqj_idyn);
 
     Eigen::Matrix4d transform = toEigen(worldTbase.asHomogeneousTransform());
-
-    for(int i=0; i < 3; i++)
-    {
-        gravity(i) = random_double();
-    }
-
-    gravity(2) = 0.0;
-
-    for(int i=0; i < 6; i++)
-    {
-        baseVel(i) = real_random_double();
-    }
-
-    for(size_t dof=0; dof < dofs; dof++)
-
-    {
-        qj(dof) = random_double();
-        dqj(dof) = random_double();
-        ddqj(dof) = random_double();
-    }
 
     bool ok = dynComp.setRobotState(transform,
                                     make_span(qj.data(), qj.size()),
@@ -88,7 +91,7 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
 
     ASSERT_IS_TRUE(ok);
 
-    Eigen::VectorXd qj_read(dofs), dqj_read(dofs);
+    Eigen::VectorXd qj_read(posCoords), dqj_read(dofs);
     Eigen::Vector3d gravity_read;
     Eigen::Matrix4d transform_read;
     Eigen::Vector6d baseVel_read;
