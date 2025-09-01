@@ -20,6 +20,7 @@
     <includedby refid="Triplets_8h" local="no">iDynTree/Triplets.h</includedby>
     <includedby refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includedby>
     <includedby refid="ModelSensorsTransformers_8h" local="no">iDynTree/ModelSensorsTransformers.h</includedby>
+    <includedby refid="ModelTransformers_8h" local="no">iDynTree/ModelTransformers.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
@@ -43,6 +44,10 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="3">
+        <label>iDynTree/ModelTransformers.h</label>
+        <link refid="ModelTransformers_8h"/>
+      </node>
       <node id="2">
         <label>iDynTree/ModelSensorsTransformers.h</label>
         <link refid="ModelSensorsTransformers_8h"/>
@@ -51,6 +56,8 @@
         <label>iDynTree/Utils.h</label>
         <link refid="Utils_8h"/>
         <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

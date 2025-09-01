@@ -7,6 +7,7 @@
     <includes refid="Axis_8h" local="no">iDynTree/Axis.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes refid="MovableJointImpl_8h" local="no">iDynTree/MovableJointImpl.h</includes>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <innerclass refid="classiDynTree_1_1RevoluteSO2Joint" prot="public">iDynTree::RevoluteSO2Joint</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

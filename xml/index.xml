@@ -2565,9 +2565,9 @@
     <member refid="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" kind="function"><name>loadReducedModelFromFullModel</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" kind="function"><name>loadReducedModelFromString</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" kind="function"><name>loadReducedModelFromFile</name></member>
-    <member refid="classiDynTree_1_1ModelLoader_1a8b32ce23af25ee6cd0a8f77bb95d752e" kind="function"><name>loadReducedModelFromFullModel</name></member>
-    <member refid="classiDynTree_1_1ModelLoader_1a1ea528a324efa1fc36dd0803148d37ac" kind="function"><name>loadReducedModelFromString</name></member>
-    <member refid="classiDynTree_1_1ModelLoader_1a5a8d8b9ebf6b22f4db8b580897d5b2ce" kind="function"><name>loadReducedModelFromFile</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a66d2beec47e91120963d40a903957508" kind="function"><name>loadReducedModelFromFullModel</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a4ca6e81c365497d725f7b71cccbbcf2a" kind="function"><name>loadReducedModelFromString</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a32704478476b11824662d02e3cebb7b1" kind="function"><name>loadReducedModelFromFile</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" kind="function"><name>sensors</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" kind="function"><name>isValid</name></member>
@@ -4371,6 +4371,11 @@
     <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" kind="enum"><name>JointDynamicsType</name></member>
     <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" kind="enumvalue"><name>NoJointDynamics</name></member>
     <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" kind="enumvalue"><name>URDFJointDynamics</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7" kind="enum"><name>JointTypes</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a3c08d0d44f61d98e21ccb9ec424423d9" kind="enumvalue"><name>JOINT_FIXED</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a89707c27d3a57aa643323ca0666902dc" kind="enumvalue"><name>JOINT_REVOLUTE</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7ab384e38147a05edd9a4064e45bee473e" kind="enumvalue"><name>JOINT_PRISMATIC</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a359e4c290649bb8c74b43d86489a98fc" kind="enumvalue"><name>JOINT_REVOLUTE_SO2</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" kind="enum"><name>SensorType</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" kind="enumvalue"><name>SIX_AXIS_FORCE_TORQUE</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" kind="enumvalue"><name>ACCELEROMETER</name></member>
@@ -4480,6 +4485,8 @@
     <member refid="Indices_8h_1a1a81b3c4ae6873a80debbb71bdc43218" kind="variable"><name>FRAME_INVALID_INDEX</name></member>
     <member refid="Indices_8h_1a6d57d4391d58c8fd9470846d4a72118f" kind="variable"><name>FRAME_INVALID_NAME</name></member>
     <member refid="Indices_8h_1a1ceb2215b00eb2c21af358eb9b7d88f4" kind="variable"><name>TRAVERSAL_INVALID_INDEX</name></member>
+    <member refid="ModelTestUtils_8h_1a58a0753df108d195a8c90ff75805b397" kind="variable"><name>SIMPLE_JOINT_TYPES</name></member>
+    <member refid="ModelTestUtils_8h_1a839997025ffcdd75bf67981792b456aa" kind="variable"><name>ALL_JOINT_TYPES</name></member>
     <member refid="Sensors_8h_1a27f6da1749325b5fabe94ceb7278f0df" kind="variable"><name>NR_OF_SENSOR_TYPES</name></member>
     <member refid="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" kind="variable"><name>output_dimensions_with_magnetometer</name></member>
     <member refid="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" kind="variable"><name>output_dimensions_without_magnetometer</name></member>
@@ -4643,18 +4650,22 @@
     <member refid="group__iDynTreeModel_1gab0b6f0ce3e6e175b1532bdd897fd83c4" kind="function"><name>FreeFloatingJacobianUsingLinkPos</name></member>
     <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
-    <member refid="ModelTestUtils_8h_1aea1ae47d4bec72e35885ee56cf39578b" kind="function"><name>addRandomLinkToModel</name></member>
+    <member refid="ModelTestUtils_8h_1a8c8b8402523935bbb29f27cca71633ac" kind="function"><name>addRandomLinkToModel</name></member>
     <member refid="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" kind="function"><name>addRandomAdditionalFrameToModel</name></member>
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" kind="function"><name>int2string</name></member>
-    <member refid="ModelTestUtils_8h_1a0aa7e6e0780497939a29fe8d6b635834" kind="function"><name>getRandomModel</name></member>
-    <member refid="ModelTestUtils_8h_1aced0d1a54a20c982a5d1ec11f40d8b2f" kind="function"><name>getRandomChain</name></member>
+    <member refid="ModelTestUtils_8h_1a6be6dbbfd7e26ec48860775137fe7fd8" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a20caf6d53482cbe05ce5715ccc1cc1a3" kind="function"><name>getRandomChain</name></member>
+    <member refid="ModelTestUtils_8h_1a5988c0a11fee2013e9ed68cf32147b95" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a3993eed2007bd777ecdc90d9cc10b4b9" kind="function"><name>getRandomChain</name></member>
     <member refid="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" kind="function"><name>getRandomJointPositions</name></member>
     <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
+    <member refid="ModelTestUtils_8h_1a6dfdcf7499dff86e08695945132e8b3a" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
     <member refid="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" kind="function"><name>removeFakeLinks</name></member>
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1ae25f91a29dc9b01ae310d5e1526fa273" kind="function"><name>createReducedModel</name></member>
+    <member refid="ModelTransformers_8h_1ab5223c4c29c1d2d583a363615f77531d" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
     <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>
@@ -5378,16 +5389,26 @@
   <compound refid="Model_2ModelTestUtils_8h" kind="file"><name>ModelTestUtils.h</name>
   </compound>
   <compound refid="ModelTestUtils_8h" kind="file"><name>ModelTestUtils.h</name>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7" kind="enum"><name>JointTypes</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a3c08d0d44f61d98e21ccb9ec424423d9" kind="enumvalue"><name>JOINT_FIXED</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a89707c27d3a57aa643323ca0666902dc" kind="enumvalue"><name>JOINT_REVOLUTE</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7ab384e38147a05edd9a4064e45bee473e" kind="enumvalue"><name>JOINT_PRISMATIC</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a359e4c290649bb8c74b43d86489a98fc" kind="enumvalue"><name>JOINT_REVOLUTE_SO2</name></member>
+    <member refid="ModelTestUtils_8h_1a58a0753df108d195a8c90ff75805b397" kind="variable"><name>SIMPLE_JOINT_TYPES</name></member>
+    <member refid="ModelTestUtils_8h_1a839997025ffcdd75bf67981792b456aa" kind="variable"><name>ALL_JOINT_TYPES</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
-    <member refid="ModelTestUtils_8h_1aea1ae47d4bec72e35885ee56cf39578b" kind="function"><name>addRandomLinkToModel</name></member>
+    <member refid="ModelTestUtils_8h_1a8c8b8402523935bbb29f27cca71633ac" kind="function"><name>addRandomLinkToModel</name></member>
     <member refid="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" kind="function"><name>addRandomAdditionalFrameToModel</name></member>
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" kind="function"><name>int2string</name></member>
-    <member refid="ModelTestUtils_8h_1a0aa7e6e0780497939a29fe8d6b635834" kind="function"><name>getRandomModel</name></member>
-    <member refid="ModelTestUtils_8h_1aced0d1a54a20c982a5d1ec11f40d8b2f" kind="function"><name>getRandomChain</name></member>
+    <member refid="ModelTestUtils_8h_1a6be6dbbfd7e26ec48860775137fe7fd8" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a20caf6d53482cbe05ce5715ccc1cc1a3" kind="function"><name>getRandomChain</name></member>
+    <member refid="ModelTestUtils_8h_1a5988c0a11fee2013e9ed68cf32147b95" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a3993eed2007bd777ecdc90d9cc10b4b9" kind="function"><name>getRandomChain</name></member>
     <member refid="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" kind="function"><name>getRandomJointPositions</name></member>
     <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
+    <member refid="ModelTestUtils_8h_1a6dfdcf7499dff86e08695945132e8b3a" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
   </compound>
   <compound refid="Model_2ModelTransformers_8h" kind="file"><name>ModelTransformers.h</name>
   </compound>
@@ -5395,6 +5416,7 @@
     <member refid="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" kind="function"><name>removeFakeLinks</name></member>
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1ae25f91a29dc9b01ae310d5e1526fa273" kind="function"><name>createReducedModel</name></member>
+    <member refid="ModelTransformers_8h_1ab5223c4c29c1d2d583a363615f77531d" kind="function"><name>createReducedModel</name></member>
     <member refid="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" kind="function"><name>createModelWithNormalizedJointNumbering</name></member>
     <member refid="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" kind="function"><name>extractSubModel</name></member>
     <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>

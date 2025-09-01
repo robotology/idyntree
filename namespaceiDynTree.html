@@ -846,6 +846,13 @@
             </dt>
             <dd><span></span></dd>
             <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="ModelTestUtils_8h.html#a2bcdae04682df042522f84e1d32573a7" class="m-doc">JointTypes</a>: unsigned int { </span><span class="m-doc-wrap"><a href="#a2bcdae04682df042522f84e1d32573a7a3c08d0d44f61d98e21ccb9ec424423d9" class="m-doc">JOINT_FIXED</a> = 1 &lt;&lt; 0,
+              <a href="#a2bcdae04682df042522f84e1d32573a7a89707c27d3a57aa643323ca0666902dc" class="m-doc">JOINT_REVOLUTE</a> = 1 &lt;&lt; 1,
+              <a href="#a2bcdae04682df042522f84e1d32573a7ab384e38147a05edd9a4064e45bee473e" class="m-doc">JOINT_PRISMATIC</a> = 1 &lt;&lt; 2,
+              <a href="#a2bcdae04682df042522f84e1d32573a7a359e4c290649bb8c74b43d86489a98fc" class="m-doc">JOINT_REVOLUTE_SO2</a> = 1 &lt;&lt; 3 }</span>
+            </dt>
+            <dd>Bitfield enum for selecting joint types in random model generation.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">enum <a href="Sensors_8h.html#ad291b88efdf5262d744d33f642daf8b9" class="m-doc">SensorType</a> { </span><span class="m-doc-wrap"><a href="#ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" class="m-doc">SIX_AXIS_FORCE_TORQUE</a> = 0,
               <a href="#ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" class="m-doc">ACCELEROMETER</a> = 1,
               <a href="#ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" class="m-doc">GYROSCOPE</a> = 2,
@@ -2121,10 +2128,10 @@ $B$
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="ModelTestUtils_8h.html#aea1ae47d4bec72e35885ee56cf39578b" class="m-doc">addRandomLinkToModel</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              <span class="m-doc-wrap-bumper">void <a href="ModelTestUtils_8h.html#a8c8b8402523935bbb29f27cca71633ac" class="m-doc">addRandomLinkToModel</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
               std::string parentLink,
               std::string newLinkName,
-              bool onlyRevoluteJoints = false)</span>
+              unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES)</span>
             </dt>
             <dd>Add a random link with random model.</dd>
             <dt>
@@ -2146,15 +2153,27 @@ $B$
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#a0aa7e6e0780497939a29fe8d6b635834" class="m-doc">getRandomModel</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#a6be6dbbfd7e26ec48860775137fe7fd8" class="m-doc">getRandomModel</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
               size_t nrOfAdditionalFrames = 10,
-              bool onlyRevoluteJoints = false) -&gt; <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a></span>
+              unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES) -&gt; <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a></span>
+            </dt>
+            <dd>Generate a random model with the specified number of joints and additional frames.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#a20caf6d53482cbe05ce5715ccc1cc1a3" class="m-doc">getRandomChain</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
+              size_t nrOfAdditionalFrames = 10,
+              unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES) -&gt; <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a></span>
+            </dt>
+            <dd>Generate a random chain (sequential links) with the specified number of joints and additional frames.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#a5988c0a11fee2013e9ed68cf32147b95" class="m-doc">getRandomModel</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
+              size_t nrOfAdditionalFrames,
+              bool onlyRevoluteJoints) -&gt; <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a></span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#aced0d1a54a20c982a5d1ec11f40d8b2f" class="m-doc">getRandomChain</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
-              size_t nrOfAdditionalFrames = 10,
-              bool onlyRevoluteJoints = false) -&gt; <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#a3993eed2007bd777ecdc90d9cc10b4b9" class="m-doc">getRandomChain</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
+              size_t nrOfAdditionalFrames,
+              bool onlyRevoluteJoints) -&gt; <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a></span>
             </dt>
             <dd><span></span></dd>
             <dt>
@@ -2164,6 +2183,14 @@ $B$
             <dd>Get random joint position consistently with the limits of the model.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#a72bed46cd07c0617f3f59ffbbb0823a0" class="m-doc">getRandomInverseDynamicsInputs</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1FreeFloatingPos.html" class="m-doc">FreeFloatingPos</a>&amp; pos,
+              <a href="classiDynTree_1_1FreeFloatingVel.html" class="m-doc">FreeFloatingVel</a>&amp; vel,
+              <a href="classiDynTree_1_1FreeFloatingAcc.html" class="m-doc">FreeFloatingAcc</a>&amp; acc,
+              <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; extWrenches) -&gt; bool <span class="m-label m-danger">deprecated</span></span>
+            </dt>
+            <dd>Get random robot positions, velocities and accelerations and external wrenches to be given as an input to InverseDynamics.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTestUtils_8h.html#a6dfdcf7499dff86e08695945132e8b3a" class="m-doc">getRandomInverseDynamicsInputs</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              <a href="classiDynTree_1_1FreeFloatingPos.html" class="m-doc">FreeFloatingPos</a>&amp; pos,
               <a href="classiDynTree_1_1FreeFloatingVel.html" class="m-doc">FreeFloatingVel</a>&amp; vel,
               <a href="classiDynTree_1_1FreeFloatingAcc.html" class="m-doc">FreeFloatingAcc</a>&amp; acc,
               <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; extWrenches) -&gt; bool</span>
@@ -2185,6 +2212,13 @@ $B$
               const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
               <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; reducedModel,
               const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions) -&gt; bool</span>
+            </dt>
+            <dd>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTransformers_8h.html#ab5223c4c29c1d2d583a363615f77531d" class="m-doc">createReducedModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; reducedModel,
+              const std::unordered_map&lt;std::string, std::vector&lt;double&gt;&gt;&amp; removedJointPositions) -&gt; bool</span>
             </dt>
             <dd>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</dd>
             <dt>
@@ -2514,6 +2548,14 @@ $B$
             <dd><span></span></dd>
             <dt>
               IDYNTREE_MODEL_EXPORT TraversalIndex <a href="Indices_8h.html#a1ceb2215b00eb2c21af358eb9b7d88f4" class="m-doc">TRAVERSAL_INVALID_INDEX</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              const unsigned int <a href="ModelTestUtils_8h.html#a58a0753df108d195a8c90ff75805b397" class="m-doc">SIMPLE_JOINT_TYPES</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              const unsigned int <a href="ModelTestUtils_8h.html#a839997025ffcdd75bf67981792b456aa" class="m-doc">ALL_JOINT_TYPES</a>
             </dt>
             <dd><span></span></dd>
             <dt>

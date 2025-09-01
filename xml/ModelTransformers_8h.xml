@@ -5,6 +5,7 @@
     <includes local="no">unordered_map</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includedby refid="Model_2ModelTransformers_8h" local="no">iDynTree/Model/ModelTransformers.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -62,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="50" column="6" declfile="iDynTree/ModelTransformers.h" declline="50" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="52" column="6" declfile="iDynTree/ModelTransformers.h" declline="52" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -89,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="65" column="6" declfile="iDynTree/ModelTransformers.h" declline="65" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="67" column="6" declfile="iDynTree/ModelTransformers.h" declline="67" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1ae25f91a29dc9b01ae310d5e1526fa273" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -116,11 +117,46 @@
 <para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order. </para>
         </briefdescription>
         <detaileddescription>
-<para>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions </para>
+<para>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions</para>
+<para><simplesect kind="note"><para>This function signature with std::unordered_map&lt;std::string, double&gt; only supports joints with 1 position coordinate (revolute, prismatic). For joints with higher dimensionality (e.g., RevoluteSO2 with 2 position coordinates), use the overload with std::unordered_map&lt;std::string, std::vector&lt;double&gt;&gt;. </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="80" column="6" declfile="iDynTree/ModelTransformers.h" declline="80" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="86" column="6" declfile="iDynTree/ModelTransformers.h" declline="86" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1ab5223c4c29c1d2d583a363615f77531d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::createReducedModel</definition>
+        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;jointsInReducedModel, Model &amp;reducedModel, const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;removedJointPositions)</argsstring>
+        <name>createReducedModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>jointsInReducedModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>reducedModel</declname>
+        </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;</type>
+          <declname>removedJointPositions</declname>
+        </param>
+        <briefdescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions</para>
+<para>This version supports joints with multiple position coordinates (e.g., RevoluteSO2). For joints with n position coordinates, the vector should contain exactly n values. For example, RevoluteSO2 joints expect 2 values: [cos(θ), sin(θ)]. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="105" column="6" declfile="iDynTree/ModelTransformers.h" declline="105" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -154,7 +190,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="104" column="6" declfile="iDynTree/ModelTransformers.h" declline="104" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="129" column="6" declfile="iDynTree/ModelTransformers.h" declline="129" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -186,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="122" column="6" declfile="iDynTree/ModelTransformers.h" declline="122" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="147" column="6" declfile="iDynTree/ModelTransformers.h" declline="147" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -218,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="145" column="6" declfile="iDynTree/ModelTransformers.h" declline="145" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="170" column="6" declfile="iDynTree/ModelTransformers.h" declline="170" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a133a097cc3ef37982c00cdd729829118" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -246,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="166" column="6" declfile="iDynTree/ModelTransformers.h" declline="166" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="191" column="6" declfile="iDynTree/ModelTransformers.h" declline="191" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a9a8fd1db7c7bbfb060362056a4ec65ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -279,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformers.h" line="186" column="6" declfile="iDynTree/ModelTransformers.h" declline="186" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformers.h" line="211" column="6" declfile="iDynTree/ModelTransformers.h" declline="211" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

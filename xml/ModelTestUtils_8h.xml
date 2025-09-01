@@ -5,14 +5,19 @@
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="FixedJoint_8h" local="no">iDynTree/FixedJoint.h</includes>
     <includes refid="RevoluteJoint_8h" local="no">iDynTree/RevoluteJoint.h</includes>
+    <includes refid="RevoluteSO2Joint_8h" local="no">iDynTree/RevoluteSO2Joint.h</includes>
     <includes refid="PrismaticJoint_8h" local="no">iDynTree/PrismaticJoint.h</includes>
     <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes refid="TestUtils_8h" local="no">iDynTree/TestUtils.h</includes>
     <includes local="no">cassert</includes>
+    <includes local="no">cmath</includes>
     <includes refid="IJoint_8h" local="yes">IJoint.h</includes>
     <includedby refid="Model_2ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
     <incdepgraph>
+      <node id="3">
+        <label>cmath</label>
+      </node>
       <node id="2">
         <label>cassert</label>
       </node>
@@ -21,9 +26,87 @@
         <link refid="ModelTestUtils_8h"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
       </node>
     </incdepgraph>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7" prot="public" static="no" strong="no">
+        <type>unsigned int</type>
+        <name>JointTypes</name>
+        <enumvalue id="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a3c08d0d44f61d98e21ccb9ec424423d9" prot="public">
+          <name>JOINT_FIXED</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a89707c27d3a57aa643323ca0666902dc" prot="public">
+          <name>JOINT_REVOLUTE</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7ab384e38147a05edd9a4064e45bee473e" prot="public">
+          <name>JOINT_PRISMATIC</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a359e4c290649bb8c74b43d86489a98fc" prot="public">
+          <name>JOINT_REVOLUTE_SO2</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Bitfield enum for selecting joint types in random model generation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTestUtils.h" line="28" column="1" bodyfile="iDynTree/ModelTestUtils.h" bodystart="29" bodyend="34"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="ModelTestUtils_8h_1a58a0753df108d195a8c90ff75805b397" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::SIMPLE_JOINT_TYPES</definition>
+        <argsstring></argsstring>
+        <name>SIMPLE_JOINT_TYPES</name>
+        <initializer>= JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTestUtils.h" line="37" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ModelTestUtils_8h_1a839997025ffcdd75bf67981792b456aa" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::ALL_JOINT_TYPES</definition>
+        <argsstring></argsstring>
+        <name>ALL_JOINT_TYPES</name>
+        <initializer>= JOINT_FIXED | JOINT_REVOLUTE | JOINT_PRISMATIC | JOINT_REVOLUTE_SO2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTestUtils.h" line="40" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
       <sectiondef kind="func">
       <memberdef kind="function" id="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Link</type>
@@ -36,12 +119,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="23" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="23" bodyend="43"/>
+        <location file="iDynTree/ModelTestUtils.h" line="42" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="42" bodyend="62"/>
       </memberdef>
-      <memberdef kind="function" id="ModelTestUtils_8h_1aea1ae47d4bec72e35885ee56cf39578b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="ModelTestUtils_8h_1a8c8b8402523935bbb29f27cca71633ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void iDynTree::addRandomLinkToModel</definition>
-        <argsstring>(Model &amp;model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false)</argsstring>
+        <argsstring>(Model &amp;model, std::string parentLink, std::string newLinkName, unsigned int allowedJointTypes=SIMPLE_JOINT_TYPES)</argsstring>
         <name>addRandomLinkToModel</name>
         <param>
           <type>Model &amp;</type>
@@ -56,9 +139,9 @@
           <declname>newLinkName</declname>
         </param>
         <param>
-          <type>bool</type>
-          <declname>onlyRevoluteJoints</declname>
-          <defval>false</defval>
+          <type>unsigned int</type>
+          <declname>allowedJointTypes</declname>
+          <defval>SIMPLE_JOINT_TYPES</defval>
         </param>
         <briefdescription>
 <para>Add a random link with random model. </para>
@@ -67,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="48" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="48" bodyend="90"/>
+        <location file="iDynTree/ModelTestUtils.h" line="67" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="67" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -93,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="95" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="95" bodyend="98"/>
+        <location file="iDynTree/ModelTestUtils.h" line="146" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="146" bodyend="149"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>LinkIndex</type>
@@ -110,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="100" column="18" bodyfile="iDynTree/ModelTestUtils.h" bodystart="100" bodyend="105"/>
+        <location file="iDynTree/ModelTestUtils.h" line="151" column="18" bodyfile="iDynTree/ModelTestUtils.h" bodystart="151" bodyend="156"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -127,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="107" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="107" bodyend="112"/>
+        <location file="iDynTree/ModelTestUtils.h" line="158" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="158" bodyend="163"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -144,12 +227,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="114" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="114" bodyend="121"/>
+        <location file="iDynTree/ModelTestUtils.h" line="165" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="165" bodyend="172"/>
       </memberdef>
-      <memberdef kind="function" id="ModelTestUtils_8h_1a0aa7e6e0780497939a29fe8d6b635834" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="ModelTestUtils_8h_1a6be6dbbfd7e26ec48860775137fe7fd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Model</type>
         <definition>Model iDynTree::getRandomModel</definition>
-        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, bool onlyRevoluteJoints=false)</argsstring>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, unsigned int allowedJointTypes=SIMPLE_JOINT_TYPES)</argsstring>
         <name>getRandomModel</name>
         <param>
           <type>unsigned int</type>
@@ -161,22 +244,55 @@
           <defval>10</defval>
         </param>
         <param>
-          <type>bool</type>
-          <declname>onlyRevoluteJoints</declname>
-          <defval>false</defval>
+          <type>unsigned int</type>
+          <declname>allowedJointTypes</declname>
+          <defval>SIMPLE_JOINT_TYPES</defval>
         </param>
         <briefdescription>
+<para>Generate a random model with the specified number of joints and additional frames. </para>
         </briefdescription>
         <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nrOfJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of joints to add to the model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nrOfAdditionalFrames</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of additional frames to add (default: 10) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>allowedJointTypes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bitfield specifying which joint types to include (default: Fixed, Revolute, Prismatic)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+Example usage:<itemizedlist>
+<listitem><para>getRandomModel(5) // Uses default joint types (Fixed, Revolute, Prismatic)</para>
+</listitem><listitem><para>getRandomModel(5, 10, JOINT_REVOLUTE | JOINT_PRISMATIC) // Only revolute and prismatic joints</para>
+</listitem><listitem><para>getRandomModel(5, 10, JOINT_REVOLUTE) // Only revolute joints</para>
+</listitem><listitem><para>getRandomModel(5, 10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2) // All joint types including SO2 </para>
+</listitem></itemizedlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="123" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="123" bodyend="144"/>
+        <location file="iDynTree/ModelTestUtils.h" line="187" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="187" bodyend="208"/>
       </memberdef>
-      <memberdef kind="function" id="ModelTestUtils_8h_1aced0d1a54a20c982a5d1ec11f40d8b2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="ModelTestUtils_8h_1a20caf6d53482cbe05ce5715ccc1cc1a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Model</type>
         <definition>Model iDynTree::getRandomChain</definition>
-        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, bool onlyRevoluteJoints=false)</argsstring>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, unsigned int allowedJointTypes=SIMPLE_JOINT_TYPES)</argsstring>
         <name>getRandomChain</name>
         <param>
           <type>unsigned int</type>
@@ -188,9 +304,61 @@
           <defval>10</defval>
         </param>
         <param>
+          <type>unsigned int</type>
+          <declname>allowedJointTypes</declname>
+          <defval>SIMPLE_JOINT_TYPES</defval>
+        </param>
+        <briefdescription>
+<para>Generate a random chain (sequential links) with the specified number of joints and additional frames. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nrOfJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of joints to add to the chain </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>nrOfAdditionalFrames</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of additional frames to add (default: 10) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>allowedJointTypes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Bitfield specifying which joint types to include (default: Fixed, Revolute, Prismatic) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTestUtils.h" line="217" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="217" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a5988c0a11fee2013e9ed68cf32147b95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Model</type>
+        <definition>Model iDynTree::getRandomModel</definition>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints)</argsstring>
+        <name>getRandomModel</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>nrOfJoints</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>nrOfAdditionalFrames</declname>
+        </param>
+        <param>
           <type>bool</type>
           <declname>onlyRevoluteJoints</declname>
-          <defval>false</defval>
         </param>
         <briefdescription>
         </briefdescription>
@@ -198,7 +366,32 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="146" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="146" bodyend="168"/>
+        <location file="iDynTree/ModelTestUtils.h" line="243" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="243" bodyend="250"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a3993eed2007bd777ecdc90d9cc10b4b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Model</type>
+        <definition>Model iDynTree::getRandomChain</definition>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames, bool onlyRevoluteJoints)</argsstring>
+        <name>getRandomChain</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>nrOfJoints</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>nrOfAdditionalFrames</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>onlyRevoluteJoints</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTestUtils.h" line="253" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="253" bodyend="260"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -221,7 +414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="174" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="174" bodyend="199"/>
+        <location file="iDynTree/ModelTestUtils.h" line="266" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="266" bodyend="296"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -248,10 +441,46 @@
 <para>Get random robot positions, velocities and accelerations and external wrenches to be given as an input to InverseDynamics. </para>
         </briefdescription>
         <detaileddescription>
+<para><xrefsect id="deprecated_1_deprecated000001"><xreftitle>Deprecated</xreftitle><xrefdescription><para>This function does not work properly with <ref refid="classiDynTree_1_1RevoluteSO2Joint" kindref="compound">RevoluteSO2Joint</ref> joints. Use the version that takes a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> parameter instead. </para>
+</xrefdescription></xrefsect></para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="205" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="205" bodyend="227"/>
+        <location file="iDynTree/ModelTestUtils.h" line="306" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="306" bodyend="333"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a6dfdcf7499dff86e08695945132e8b3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::getRandomInverseDynamicsInputs</definition>
+        <argsstring>(const Model &amp;model, FreeFloatingPos &amp;pos, FreeFloatingVel &amp;vel, FreeFloatingAcc &amp;acc, LinkNetExternalWrenches &amp;extWrenches)</argsstring>
+        <name>getRandomInverseDynamicsInputs</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>FreeFloatingPos &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>FreeFloatingVel &amp;</type>
+          <declname>vel</declname>
+        </param>
+        <param>
+          <type>FreeFloatingAcc &amp;</type>
+          <declname>acc</declname>
+        </param>
+        <param>
+          <type>LinkNetExternalWrenches &amp;</type>
+          <declname>extWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Get random robot positions, velocities and accelerations and external wrenches to be given as an input to InverseDynamics. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTestUtils.h" line="339" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="339" bodyend="359"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

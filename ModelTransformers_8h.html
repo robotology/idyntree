@@ -103,6 +103,13 @@
             </dt>
             <dd>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab5223c4c29c1d2d583a363615f77531d" class="m-doc">createReducedModel</a>(</span><span class="m-doc-wrap">const Model&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
+              Model&amp; reducedModel,
+              const std::unordered_map&lt;std::string, std::vector&lt;double&gt;&gt;&amp; removedJointPositions) -&gt; bool</span>
+            </dt>
+            <dd>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#aa6a9c44d5b80ede19b30f721f88d3679" class="m-doc">createModelWithNormalizedJointNumbering</a>(</span><span class="m-doc-wrap">const Model&amp; model,
               const std::string&amp; baseForNormalizedJointNumbering,
               Model&amp; reducedModel) -&gt; bool</span>
@@ -159,7 +166,17 @@
               const std::unordered_map&lt;std::string, double&gt;&amp; removedJointPositions)</span></span>
             </h3>
             <p>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</p>
-<p>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions</p>
+<p>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions</p><aside class="m-note m-info"><h4>Note</h4><p>This function signature with std::unordered_map&lt;std::string, double&gt; only supports joints with 1 position coordinate (revolute, prismatic). For joints with higher dimensionality (e.g., RevoluteSO2 with 2 position coordinates), use the overload with std::unordered_map&lt;std::string, std::vector&lt;double&gt;&gt;.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ab5223c4c29c1d2d583a363615f77531d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab5223c4c29c1d2d583a363615f77531d" class="m-doc-self">createReducedModel</a>(</span><span class="m-doc-wrap">const Model&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
+              Model&amp; reducedModel,
+              const std::unordered_map&lt;std::string, std::vector&lt;double&gt;&gt;&amp; removedJointPositions)</span></span>
+            </h3>
+            <p>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order.</p>
+<p>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints), or the position specified in the removedJointPositions if a given joint is specified in removedJointPositions</p><p>This version supports joints with multiple position coordinates (e.g., RevoluteSO2). For joints with n position coordinates, the vector should contain exactly n values. For example, RevoluteSO2 joints expect 2 values: [cos(θ), sin(θ)].</p>
           </div></section>
           <section class="m-doc-details" id="aa6a9c44d5b80ede19b30f721f88d3679"><div>
             <h3>

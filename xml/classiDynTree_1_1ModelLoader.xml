@@ -389,10 +389,10 @@
         </inbodydescription>
         <location file="iDynTree/ModelLoader.h" line="200" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a8b32ce23af25ee6cd0a8f77bb95d752e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a66d2beec47e91120963d40a903957508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadReducedModelFromFullModel</definition>
-        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, double &gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;)</argsstring>
+        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;)</argsstring>
         <name>loadReducedModelFromFullModel</name>
         <param>
           <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -403,7 +403,7 @@
           <declname>consideredJoints</declname>
         </param>
         <param>
-          <type>const std::unordered_map&lt; std::string, double &gt; &amp;</type>
+          <type>const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;</type>
           <declname>removedJointPositions</declname>
         </param>
         <param>
@@ -461,10 +461,10 @@
         </inbodydescription>
         <location file="iDynTree/ModelLoader.h" line="223" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a1ea528a324efa1fc36dd0803148d37ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a4ca6e81c365497d725f7b71cccbbcf2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadReducedModelFromString</definition>
-        <argsstring>(const std::string modelString, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, double &gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
+        <argsstring>(const std::string modelString, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
         <name>loadReducedModelFromString</name>
         <param>
           <type>const std::string</type>
@@ -475,7 +475,7 @@
           <declname>consideredJoints</declname>
         </param>
         <param>
-          <type>const std::unordered_map&lt; std::string, double &gt; &amp;</type>
+          <type>const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;</type>
           <declname>removedJointPositions</declname>
         </param>
         <param>
@@ -546,10 +546,10 @@
         </inbodydescription>
         <location file="iDynTree/ModelLoader.h" line="250" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a5a8d8b9ebf6b22f4db8b580897d5b2ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a32704478476b11824662d02e3cebb7b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadReducedModelFromFile</definition>
-        <argsstring>(const std::string filename, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, double &gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
+        <argsstring>(const std::string filename, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
         <name>loadReducedModelFromFile</name>
         <param>
           <type>const std::string</type>
@@ -560,7 +560,7 @@
           <declname>consideredJoints</declname>
         </param>
         <param>
-          <type>const std::unordered_map&lt; std::string, double &gt; &amp;</type>
+          <type>const std::unordered_map&lt; std::string, std::vector&lt; double &gt;&gt; &amp;</type>
           <declname>removedJointPositions</declname>
         </param>
         <param>
@@ -704,11 +704,11 @@
       <member refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromFile</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1afefe79c0d50cfbaad54d5b076a90f00d" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromString</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
-      <member refid="classiDynTree_1_1ModelLoader_1a5a8d8b9ebf6b22f4db8b580897d5b2ce" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a32704478476b11824662d02e3cebb7b1" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
-      <member refid="classiDynTree_1_1ModelLoader_1a8b32ce23af25ee6cd0a8f77bb95d752e" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a66d2beec47e91120963d40a903957508" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
-      <member refid="classiDynTree_1_1ModelLoader_1a1ea528a324efa1fc36dd0803148d37ac" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a4ca6e81c365497d725f7b71cccbbcf2a" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a0f029751adcda826ebdde3d40a9a7104" prot="private" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>m_pimpl</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>model</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a17284e5e46f1f2ff2d3d74a32442d362" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>ModelLoader</name></member>
