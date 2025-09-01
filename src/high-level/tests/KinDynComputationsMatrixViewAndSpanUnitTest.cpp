@@ -67,7 +67,6 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
     Vector3 gravityVec;
     getRandomVector(gravityVec);
     gravity = toEigen(gravityVec);
-    gravity(2) = 0.0;  // Keep the original constraint
 
     // Use model-aware joint position generation for proper handling of all joint types
     VectorDynSize qj_idyn(posCoords);

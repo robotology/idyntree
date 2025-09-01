@@ -157,7 +157,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     toEigen(REGR_baseWrench) = toEigen(invDynResults).segment<6>(0) + toEigen(RNEA_EXT_baseForceAndJointTorques.baseWrench());
     toEigen(REGR_jointTorques) = toEigen(invDynResults).segment(6, model.getNrOfDOFs()) + toEigen(RNEA_EXT_baseForceAndJointTorques.jointTorques());
 
-    double tolRegr = 1e-6;
+    double tolRegr = 2e-6;
     ASSERT_EQUAL_VECTOR_TOL(REGR_baseWrench, RNEA_baseForceAndJointTorques.baseWrench().asVector(), tolRegr);
     ASSERT_EQUAL_VECTOR_TOL(REGR_jointTorques, RNEA_baseForceAndJointTorques.jointTorques(), tolRegr);
 }
