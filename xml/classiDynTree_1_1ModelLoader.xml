@@ -461,6 +461,80 @@
         </inbodydescription>
         <location file="iDynTree/ModelLoader.h" line="223" column="10"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a8b32ce23af25ee6cd0a8f77bb95d752e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadReducedModelFromFullModel</definition>
+        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, double &gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;)</argsstring>
+        <name>loadReducedModelFromFullModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+        </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, double &gt; &amp;</type>
+          <declname>removedJointPositions</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load reduced model from another model, specifyng only the desired joints in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</para>
+<para><simplesect kind="note"><para>the order of the degreese of freedom of the newly loaded model will be the one specified by the input joints serialization, i.e. consideredJoints</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the file to load. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">consideredJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>list of joints to consider in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">removedJointPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) explicit definition of the type of the loaded file. Only &quot;urdf&quot; is supported at the moment. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise.</para>
+</simplesect>
+<simplesect kind="warning"><para>This overload will not work with joints with position coordinates dimension &gt; 1. Use the std::vector&lt;double&gt; version for full support of all joint types.</para>
+</simplesect>
+<simplesect kind="note"><para>Until <ulink url="https://github.com/robotology/idyntree/issues/132">https://github.com/robotology/idyntree/issues/132</ulink> is fixed, this method does not accounts for sensors. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelLoader.h" line="250" column="10"/>
+      </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a4ca6e81c365497d725f7b71cccbbcf2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadReducedModelFromString</definition>
@@ -544,7 +618,94 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="250" column="10"/>
+        <location file="iDynTree/ModelLoader.h" line="277" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a1ea528a324efa1fc36dd0803148d37ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadReducedModelFromString</definition>
+        <argsstring>(const std::string modelString, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, double &gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
+        <name>loadReducedModelFromString</name>
+        <param>
+          <type>const std::string</type>
+          <declname>modelString</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+        </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, double &gt; &amp;</type>
+          <declname>removedJointPositions</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Load reduced model from string, specifyng only the desired joints in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">modelString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string containg the model of the robot. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">consideredJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>list of joints to consider in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">removedJointPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">packageDirs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) a vector containing the different directories where to search for model meshes </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise.</para>
+</simplesect>
+<simplesect kind="warning"><para>This overload will not work with joints with position coordinates dimension &gt; 1. Use the std::vector&lt;double&gt; version for full support of all joint types.</para>
+</simplesect>
+<simplesect kind="note"><para>In case no package is specified <ref refid="classiDynTree_1_1ModelLoader" kindref="compound">ModelLoader</ref> will look for the meshes in <computeroutput>GAZEBO_MODEL_PATH</computeroutput>, <computeroutput>ROS_PACKAGE_PATH</computeroutput> and <computeroutput>AMENT_PREFIX_PATH</computeroutput> </para>
+</simplesect>
+<simplesect kind="note"><para>If a given model searches for the meshes in <computeroutput>package://StrangeModel/Nested/mesh.stl</computeroutput>, and the actual mesh is in <computeroutput>/usr/local/share/StrangeModel/Nested/mesh.stl</computeroutput>, <computeroutput>packageDirs</computeroutput> should contain <computeroutput>/usr/local/share</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelLoader.h" line="308" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a32704478476b11824662d02e3cebb7b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -629,7 +790,94 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="277" column="10"/>
+        <location file="iDynTree/ModelLoader.h" line="335" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a5a8d8b9ebf6b22f4db8b580897d5b2ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadReducedModelFromFile</definition>
+        <argsstring>(const std::string filename, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::unordered_map&lt; std::string, double &gt; &amp;removedJointPositions, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
+        <name>loadReducedModelFromFile</name>
+        <param>
+          <type>const std::string</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+        </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, double &gt; &amp;</type>
+          <declname>removedJointPositions</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Load reduced model from file, specifyng only the desired joints in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the file to load. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">consideredJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>list of joints to consider in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">removedJointPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">packageDirs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) a vector containing the different directories where to search for model meshes </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise.</para>
+</simplesect>
+<simplesect kind="warning"><para>This overload will not work with joints with position coordinates dimension &gt; 1. Use the std::vector&lt;double&gt; version for full support of all joint types.</para>
+</simplesect>
+<simplesect kind="note"><para>In case no package is specified <ref refid="classiDynTree_1_1ModelLoader" kindref="compound">ModelLoader</ref> will look for the meshes in <computeroutput>GAZEBO_MODEL_PATH</computeroutput>, <computeroutput>ROS_PACKAGE_PATH</computeroutput> and <computeroutput>AMENT_PREFIX_PATH</computeroutput> </para>
+</simplesect>
+<simplesect kind="note"><para>If a given model searches for the meshes in <computeroutput>package://StrangeModel/Nested/mesh.stl</computeroutput>, and the actual mesh is in <computeroutput>/usr/local/share/StrangeModel/Nested/mesh.stl</computeroutput>, <computeroutput>packageDirs</computeroutput> should contain <computeroutput>/usr/local/share</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelLoader.h" line="365" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -643,7 +891,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="288" column="18"/>
+        <location file="iDynTree/ModelLoader.h" line="376" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -657,7 +905,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="294" column="24"/>
+        <location file="iDynTree/ModelLoader.h" line="382" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -674,7 +922,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="301" column="10"/>
+        <location file="iDynTree/ModelLoader.h" line="389" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -698,17 +946,20 @@
     <detaileddescription>
 <para>Unless the methods for loading a model with an explicit serialization are used, the default joint serialization of the model loaded will be a &quot;normalized&quot; joint serialization based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function for more details. </para>
     </detaileddescription>
-    <location file="iDynTree/ModelLoader.h" line="67" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="68" bodyend="303"/>
+    <location file="iDynTree/ModelLoader.h" line="67" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="68" bodyend="391"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>isValid</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromFile</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1afefe79c0d50cfbaad54d5b076a90f00d" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromString</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a32704478476b11824662d02e3cebb7b1" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a5a8d8b9ebf6b22f4db8b580897d5b2ce" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a66d2beec47e91120963d40a903957508" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a8b32ce23af25ee6cd0a8f77bb95d752e" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a4ca6e81c365497d725f7b71cccbbcf2a" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a1ea528a324efa1fc36dd0803148d37ac" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a0f029751adcda826ebdde3d40a9a7104" prot="private" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>m_pimpl</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>model</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a17284e5e46f1f2ff2d3d74a32442d362" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>ModelLoader</name></member>

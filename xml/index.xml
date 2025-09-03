@@ -2566,8 +2566,11 @@
     <member refid="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" kind="function"><name>loadReducedModelFromString</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" kind="function"><name>loadReducedModelFromFile</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a66d2beec47e91120963d40a903957508" kind="function"><name>loadReducedModelFromFullModel</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a8b32ce23af25ee6cd0a8f77bb95d752e" kind="function"><name>loadReducedModelFromFullModel</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a4ca6e81c365497d725f7b71cccbbcf2a" kind="function"><name>loadReducedModelFromString</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a1ea528a324efa1fc36dd0803148d37ac" kind="function"><name>loadReducedModelFromString</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a32704478476b11824662d02e3cebb7b1" kind="function"><name>loadReducedModelFromFile</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a5a8d8b9ebf6b22f4db8b580897d5b2ce" kind="function"><name>loadReducedModelFromFile</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" kind="function"><name>sensors</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" kind="function"><name>isValid</name></member>
