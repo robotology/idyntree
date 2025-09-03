@@ -173,6 +173,21 @@ namespace iDynTree
         return m_pimpl->setModel(_modelReduced);
     }
 
+    bool ModelLoader::loadReducedModelFromFullModel(const Model& fullModel,
+                                                    const std::vector< std::string >& consideredJoints,
+                                                    const std::unordered_map<std::string, double>& removedJointPositions,
+                                                    const std::string filetype)
+    {
+        // Convert the double-based map to vector-based map for backward compatibility
+        std::unordered_map<std::string, std::vector<double>> removedJointPositionsVector;
+        for (const auto& pair : removedJointPositions)
+        {
+            removedJointPositionsVector[pair.first] = {pair.second};
+        }
+
+        return loadReducedModelFromFullModel(fullModel, consideredJoints, removedJointPositionsVector, filetype);
+    }
+
     bool ModelLoader::loadReducedModelFromString(const std::string modelString,
                                                  const std::vector< std::string >& consideredJoints,
                                                  const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
@@ -195,6 +210,22 @@ namespace iDynTree
         return m_pimpl->setModel(_modelReduced);
     }
 
+    bool ModelLoader::loadReducedModelFromString(const std::string modelString,
+                                                 const std::vector< std::string >& consideredJoints,
+                                                 const std::unordered_map<std::string, double>& removedJointPositions,
+                                                 const std::string filetype,
+                                                 const std::vector<std::string>& packageDirs /*= {}*/)
+    {
+        // Convert the double-based map to vector-based map for backward compatibility
+        std::unordered_map<std::string, std::vector<double>> removedJointPositionsVector;
+        for (const auto& pair : removedJointPositions)
+        {
+            removedJointPositionsVector[pair.first] = {pair.second};
+        }
+
+        return loadReducedModelFromString(modelString, consideredJoints, removedJointPositionsVector, filetype, packageDirs);
+    }
+
     bool ModelLoader::loadReducedModelFromFile(const std::string filename,
                                                const std::vector< std::string >& consideredJoints,
                                                const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
@@ -214,5 +245,21 @@ namespace iDynTree
         }
 
         return m_pimpl->setModel(_modelReduced);
+    }
+
+    bool ModelLoader::loadReducedModelFromFile(const std::string filename,
+                                               const std::vector< std::string >& consideredJoints,
+                                               const std::unordered_map<std::string, double>& removedJointPositions,
+                                               const std::string filetype,
+                                               const std::vector<std::string>& packageDirs /*= {}*/)
+    {
+        // Convert the double-based map to vector-based map for backward compatibility
+        std::unordered_map<std::string, std::vector<double>> removedJointPositionsVector;
+        for (const auto& pair : removedJointPositions)
+        {
+            removedJointPositionsVector[pair.first] = {pair.second};
+        }
+
+        return loadReducedModelFromFile(filename, consideredJoints, removedJointPositionsVector, filetype, packageDirs);
     }
 }
