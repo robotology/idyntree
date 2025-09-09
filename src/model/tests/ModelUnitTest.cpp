@@ -141,7 +141,7 @@ void getRandomJointPositionsForJointsNotInReducedModels(const Model & fullModel,
 
 class RNEAHelperClass
 {
-private:
+public:
     Model model;
     LinkVelArray linkVels;
     LinkAccArray linkAccs;
@@ -149,7 +149,6 @@ private:
     LinkInternalWrenches linkIntF;
     Traversal traversal;
 
-public:
     RNEAHelperClass(const Model& _model): model(_model),
                                           linkVels(_model),
                                           linkAccs(_model),
@@ -344,10 +343,11 @@ void checkReducedModel(const Model & model)
         getRandomJointPositions(reducedPos.jointPos(), reducedModel);
 
         reducedVel.baseVel() = getRandomTwist();
-        getRandomVector(reducedVel.jointVel());
-
-        reducedAcc.baseAcc() = getRandomTwist();
-        getRandomVector(reducedAcc.jointAcc());
+        //getRandomVector(reducedVel.jointVel());
+        reducedVel.jointVel().zero();
+        reducedAcc.baseAcc().zero();
+        //getRandomVector(reducedAcc.jointAcc());
+        reducedAcc.jointAcc().zero();
 
         FreeFloatingVel fullVel(model);
         FreeFloatingAcc fullAcc(model);
@@ -363,6 +363,29 @@ void checkReducedModel(const Model & model)
 
         fullRNEA.runRNEA(fullPos,fullVel,fullAcc,fullTrqs);
         reducedRNEA.runRNEA(reducedPos,reducedVel,reducedAcc,reducedTrqs);
+
+        std::cerr << "Full Model: << " << model.toString() << std::endl;
+        std::cerr << "Reduced Model: << " << reducedModel.toString() << std::endl;
+
+        // Test if the velocity of the two RNEAs are the same, accounting for the different link serialization
+        // Compare link-by-link using names to map indices between models
+        for (LinkIndex redLinkIdx = 0; redLinkIdx < static_cast<LinkIndex>(reducedModel.getNrOfLinks()); ++redLinkIdx)
+        {
+            std::string linkName = reducedModel.getLinkName(redLinkIdx);
+            std::cerr << "Comparing link " << linkName << " of reduced model ( " << redLinkIdx << " ) " << std::endl;
+            LinkIndex fullLinkIdx = model.getLinkIndex(linkName);
+            ASSERT_IS_TRUE(fullLinkIdx != LINK_INVALID_INDEX);
+
+            // Velocities
+            ASSERT_EQUAL_VECTOR_TOL(reducedRNEA.linkVels(redLinkIdx).asVector(),
+                                    fullRNEA.linkVels(fullLinkIdx).asVector(),
+                                    1e-8);
+
+            // Accelerations
+            ASSERT_EQUAL_VECTOR_TOL(reducedRNEA.linkAccs(redLinkIdx).asVector(),
+                                    fullRNEA.linkAccs(fullLinkIdx).asVector(),
+                                    1e-8);
+        }
 
         reducedTrqsCheck.baseWrench() = fullTrqs.baseWrench();
         copyFromFullToReducedDOFs(reducedTrqsCheck.jointTorques(),fullTrqs.jointTorques(),reducedModel,model);

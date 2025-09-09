@@ -154,29 +154,28 @@ void SphericalJoint::updateBuffers(const Vector4& new_q) const
 
 void SphericalJoint::resetAxisBuffers() const
 {
-    // Motion subspace vectors for spherical joint (3 DOFs)
-    // These represent rotation about x, y, z axes in link1 frame
-    // SpatialMotionVector follows [linear; angular] convention in iDynTree
+    // Motion subspace for a spherical joint is pure angular (no linear part)
+    // and, by the IJoint contract, it must be expressed in the CHILD frame.
+    // Since we return S based on which link is the child in getMotionSubspaceVector,
+    // both cached arrays must contain the same three unit angular basis vectors
+    // (x, y, z) with zero linear components. No sign inversion is required when
+    // swapping child/parent; the expression frame changes, not the sign.
 
-    // Create zero linear motion and unit angular motions for each axis
-    LinearMotionVector3 zeroLinear;
-    zeroLinear.zero();
-    AngularMotionVector3 xAngular, yAngular, zAngular;
-    xAngular(0) = 1.0; xAngular(1) = 0.0; xAngular(2) = 0.0;
-    yAngular(0) = 0.0; yAngular(1) = 1.0; yAngular(2) = 0.0;
-    zAngular(0) = 0.0; zAngular(1) = 0.0; zAngular(2) = 1.0;
+    LinearMotionVector3 v_lin; v_lin.zero();
+    AngularMotionVector3 wx, wy, wz;
+    wx(0) = 1.0; wx(1) = 0.0; wx(2) = 0.0;
+    wy(0) = 0.0; wy(1) = 1.0; wy(2) = 0.0;
+    wz(0) = 0.0; wz(1) = 0.0; wz(2) = 1.0;
 
-    // X-axis rotation: SpatialMotionVector(linear, angular)
-    this->S_link1_link2[0] = SpatialMotionVector(zeroLinear, xAngular);
-    this->S_link2_link1[0] = -this->S_link1_link2[0];
+    // Child = link2, Parent = link1
+    this->S_link1_link2[0] = SpatialMotionVector(v_lin, wx);
+    this->S_link1_link2[1] = SpatialMotionVector(v_lin, wy);
+    this->S_link1_link2[2] = SpatialMotionVector(v_lin, wz);
 
-    // Y-axis rotation: SpatialMotionVector(linear, angular)
-    this->S_link1_link2[1] = SpatialMotionVector(zeroLinear, yAngular);
-    this->S_link2_link1[1] = -this->S_link1_link2[1];
-
-    // Z-axis rotation: SpatialMotionVector(linear, angular)
-    this->S_link1_link2[2] = SpatialMotionVector(zeroLinear, zAngular);
-    this->S_link2_link1[2] = -this->S_link1_link2[2];
+    // Child = link1, Parent = link2 (same basis, expressed in that child frame)
+    this->S_link2_link1[0] = SpatialMotionVector(v_lin, wx);
+    this->S_link2_link1[1] = SpatialMotionVector(v_lin, wy);
+    this->S_link2_link1[2] = SpatialMotionVector(v_lin, wz);
 }
 
 Transform SphericalJoint::getRestTransform(const LinkIndex child, const LinkIndex parent) const
@@ -236,10 +235,28 @@ SpatialMotionVector SphericalJoint::getMotionSubspaceVector(int dof_i,
                                                            const LinkIndex child,
                                                            const LinkIndex parent) const
 {
+    // Convention: the joint velocity coordinates ν (size 3) represent
+    // the angular velocity of link2 w.r.t. link1 expressed in link2 frame.
+    // Therefore:
+    // - For child=link2,parent=link1, {}^C s_{P,C} is constant with columns [0; e_x], [0; e_y], [0; e_z].
+    // - For child=link1,parent=link2, we must express v_{1,2} in frame 1 as
+    //   [0; - R^1_2 ω^2], where R^1_2 is the current rotation from frame 2 to 1.
     if( child == this->link1 )
     {
         assert( parent == this->link2 );
-        return this->S_link2_link1[dof_i];
+
+        // Use the cached current transform (updated by the last getTransform call)
+        const Rotation & R12 = this->link1_X_link2.getRotation();
+
+        LinearMotionVector3 v_lin; v_lin.zero();
+        AngularMotionVector3 v_ang;
+
+        // R * e_i is the i-th column of R
+        v_ang(0) = - R12(0, dof_i);
+        v_ang(1) = - R12(1, dof_i);
+        v_ang(2) = - R12(2, dof_i);
+
+        return SpatialMotionVector(v_lin, v_ang);
     }
     else
     {
