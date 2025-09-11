@@ -12,6 +12,10 @@
 #include <iDynTree/GeomVector3.h>
 #include <iDynTree/Span.h>
 #include <iDynTree/MatrixView.h>
+#include <iDynTree/Direction.h>            // added
+#include <iDynTree/MovableJointImpl.h>     // added
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/MatrixFixSize.h>
 
 #include <cassert>
 #include <cmath>
@@ -95,14 +99,11 @@ void SphericalJoint::normalizeQuaternion(Vector4& q) const
     double norm = std::sqrt(q(0)*q(0) + q(1)*q(1) + q(2)*q(2) + q(3)*q(3));
     if (norm > 1e-12)
     {
-        q(0) /= norm;
-        q(1) /= norm;
-        q(2) /= norm;
-        q(3) /= norm;
+        q(0) /= norm; q(1) /= norm; q(2) /= norm; q(3) /= norm;
     }
     else
     {
-        // Fallback to identity quaternion if norm is too small
+        // Fallback to identity if degenerate
         q(0) = 1.0; q(1) = 0.0; q(2) = 0.0; q(3) = 0.0;
     }
 }
@@ -129,17 +130,18 @@ void SphericalJoint::resetBuffers(const Vector4& new_q) const
     // Create transform from quaternion
     Transform quat_transform = quaternionToTransform(new_q);
 
+    // link1_X_link2_at_rest is the transform at rest; current is rest composed with quaternion delta
     this->link1_X_link2 = this->link1_X_link2_at_rest * quat_transform;
     this->link2_X_link1 = this->link1_X_link2.inverse();
 }
 
 void SphericalJoint::updateBuffers(const Vector4& new_q) const
 {
-    // Check if quaternion has changed
+    // Check if quaternion has changed significantly
     bool quaternion_changed = false;
     for (int i = 0; i < 4; i++)
     {
-        if (std::abs(new_q(i) - this->q_previous(i)) > 1e-12)
+        if (std::fabs(new_q(i) - this->q_previous(i)) > 0.0)
         {
             quaternion_changed = true;
             break;
@@ -148,7 +150,13 @@ void SphericalJoint::updateBuffers(const Vector4& new_q) const
 
     if (quaternion_changed)
     {
-        this->resetBuffers(new_q);
+        Vector4 q_norm = new_q;
+        normalizeQuaternion(q_norm);
+        this->q_previous = q_norm;
+
+        Transform quat_transform = quaternionToTransform(q_norm);
+        this->link1_X_link2 = this->link1_X_link2_at_rest * quat_transform;
+        this->link2_X_link1 = this->link1_X_link2.inverse();
     }
 }
 
@@ -182,14 +190,13 @@ Transform SphericalJoint::getRestTransform(const LinkIndex child, const LinkInde
 {
     if( child == this->link1 )
     {
-        assert( parent == this->link2 );
-        return this->link1_X_link2_at_rest.inverse();
+        // Return transform from link1 to link2 if asked (child=link1, parent=link2)
+        return this->link1_X_link2_at_rest;
     }
     else
     {
-        assert( child == this->link2 );
-        assert( parent == this->link1 );
-        return this->link1_X_link2_at_rest;
+        // child=link2, parent=link1 -> inverse
+        return this->link1_X_link2_at_rest.inverse();
     }
 }
 
@@ -208,16 +215,16 @@ const Transform & SphericalJoint::getTransform(const VectorDynSize & jntPos, con
     // Update internal buffers
     this->updateBuffers(q);
 
+    // Return the requested direction
     if( child == this->link1 )
     {
-        assert( parent == this->link2 );
-        return this->link2_X_link1;
+        // Asking for link1 -> link2
+        return this->link1_X_link2;
     }
     else
     {
-        assert( child == this->link2 );
-        assert( parent == this->link1 );
-        return this->link1_X_link2;
+        // Asking for link2 -> link1
+        return this->link2_X_link1;
     }
 }
 
@@ -226,43 +233,98 @@ TransformDerivative SphericalJoint::getTransformDerivative(const VectorDynSize &
                                                           const LinkIndex parent,
                                                           const int posCoord_i) const
 {
-    // For spherical joint, this is complex due to quaternion parameterization
-    // For now, return zero - this would need proper implementation for advanced features
-    return TransformDerivative::Zero();
+    // Central finite difference on position coordinate i, with quaternion renormalization
+    const double h = 1e-8;
+    const size_t off = this->getPosCoordsOffset();
+    const size_t idx = off + static_cast<size_t>(posCoord_i);
+
+    VectorDynSize posPlus = jntPos;
+    VectorDynSize posMinus = jntPos;
+
+    posPlus(idx) += h;
+    posMinus(idx) -= h;
+
+    // Normalize quaternion part [w,x,y,z]
+    auto normalizeQuatInPos = [&](VectorDynSize& v)
+    {
+        double w = v(off + 0);
+        double x = v(off + 1);
+        double y = v(off + 2);
+        double z = v(off + 3);
+        double n = std::sqrt(w*w + x*x + y*y + z*z);
+        if (n > 1e-12) {
+            v(off + 0) = w/n;
+            v(off + 1) = x/n;
+            v(off + 2) = y/n;
+            v(off + 3) = z/n;
+        } else {
+            v(off + 0) = 1.0;
+            v(off + 1) = 0.0;
+            v(off + 2) = 0.0;
+            v(off + 3) = 0.0;
+        }
+    };
+
+    normalizeQuatInPos(posPlus);
+    normalizeQuatInPos(posMinus);
+
+    // Note: getTransform returns a reference to internal buffers, so force copies
+    Transform Hplus  = this->getTransform(posPlus,  child, parent);
+    Transform Hminus = this->getTransform(posMinus, child, parent);
+
+    Matrix4x4 dH;
+    toEigen(dH) = (toEigen(Hplus.asHomogeneousTransform()) - toEigen(Hminus.asHomogeneousTransform())) / (2.0*h);
+
+    TransformDerivative out;
+    out.fromHomogeneousTransformDerivative(dH);
+    return out;
 }
 
 SpatialMotionVector SphericalJoint::getMotionSubspaceVector(int dof_i,
                                                            const LinkIndex child,
                                                            const LinkIndex parent) const
 {
-    // Convention: the joint velocity coordinates ν (size 3) represent
-    // the angular velocity of link2 w.r.t. link1 expressed in link2 frame.
-    // Therefore:
-    // - For child=link2,parent=link1, {}^C s_{P,C} is constant with columns [0; e_x], [0; e_y], [0; e_z].
-    // - For child=link1,parent=link2, we must express v_{1,2} in frame 1 as
-    //   [0; - R^1_2 ω^2], where R^1_2 is the current rotation from frame 2 to 1.
-    if( child == this->link1 )
+    assert(dof_i >= 0 && dof_i < 3);
+
+    // Linear part always zero for spherical joint
+    LinearMotionVector3 v_lin; v_lin.zero();
+
+    // Unit basis in child frame for angular part if child is link2
+    AngularMotionVector3 ex, ey, ez;
+    ex(0) = 1.0; ex(1) = 0.0; ex(2) = 0.0;
+    ey(0) = 0.0; ey(1) = 1.0; ey(2) = 0.0;
+    ez(0) = 0.0; ez(1) = 0.0; ez(2) = 1.0;
+
+    if( child == this->link2 && parent == this->link1 )
     {
-        assert( parent == this->link2 );
+        if (dof_i == 0) return SpatialMotionVector(v_lin, ex);
+        if (dof_i == 1) return SpatialMotionVector(v_lin, ey);
+        return SpatialMotionVector(v_lin, ez);
+    }
+    else if( child == this->link1 && parent == this->link2 )
+    {
+        // {}^1 ω_{2,1} = - {}^1R_2 * ω^{2}
+        const Rotation& R1_2 = this->link1_X_link2.getRotation();
 
-        // Use the cached current transform (updated by the last getTransform call)
-        const Rotation & R12 = this->link1_X_link2.getRotation();
-
-        LinearMotionVector3 v_lin; v_lin.zero();
-        AngularMotionVector3 v_ang;
-
-        // R * e_i is the i-th column of R
-        v_ang(0) = - R12(0, dof_i);
-        v_ang(1) = - R12(1, dof_i);
-        v_ang(2) = - R12(2, dof_i);
-
-        return SpatialMotionVector(v_lin, v_ang);
+        AngularMotionVector3 col;
+        if (dof_i == 0) {
+            Direction e2(1.0, 0.0, 0.0);
+            Direction mapped = R1_2*e2;
+            col(0) = -mapped(0); col(1) = -mapped(1); col(2) = -mapped(2);
+        } else if (dof_i == 1) {
+            Direction e2(0.0, 1.0, 0.0);
+            Direction mapped = R1_2*e2;
+            col(0) = -mapped(0); col(1) = -mapped(1); col(2) = -mapped(2);
+        } else {
+            Direction e2(0.0, 0.0, 1.0);
+            Direction mapped = R1_2*e2;
+            col(0) = -mapped(0); col(1) = -mapped(1); col(2) = -mapped(2);
+        }
+        return SpatialMotionVector(v_lin, col);
     }
     else
     {
-        assert( child == this->link2 );
-        assert( parent == this->link1 );
-        return this->S_link1_link2[dof_i];
+        return SpatialMotionVector::Zero();
     }
 }
 
@@ -398,59 +460,58 @@ bool SphericalJoint::hasPosLimits() const
     return false;
 }
 
-bool SphericalJoint::enablePosLimits(const bool enable)
-{
-    // Position limits are not supported for spherical joints
-    return false;
-}
-
-bool SphericalJoint::getPosLimits(const size_t _index, double & min, double & max) const
+bool SphericalJoint::enablePosLimits(const bool /*enable*/)
 {
     return false;
 }
 
-double SphericalJoint::getMinPosLimit(const size_t _index) const
+bool SphericalJoint::getPosLimits(const size_t /*_index*/, double & /*min*/, double & /*max*/) const
+{
+    return false;
+}
+
+double SphericalJoint::getMinPosLimit(const size_t /*_index*/) const
 {
     return 0.0;
 }
 
-double SphericalJoint::getMaxPosLimit(const size_t _index) const
+double SphericalJoint::getMaxPosLimit(const size_t /*_index*/) const
 {
     return 0.0;
 }
 
-bool SphericalJoint::setPosLimits(const size_t _index, double min, double max)
+bool SphericalJoint::setPosLimits(const size_t /*_index*/, double /*min*/, double /*max*/)
 {
     return false;
 }
 
 JointDynamicsType SphericalJoint::getJointDynamicsType() const
 {
-    return NoJointDynamics;
+    // No damping/friction by default
+    return static_cast<JointDynamicsType>(0);
 }
 
-bool SphericalJoint::setJointDynamicsType(const JointDynamicsType enable)
-{
-    // Joint dynamics are not supported for spherical joints
-    return false;
-}
-
-bool SphericalJoint::setDamping(const size_t _index, double damping)
+bool SphericalJoint::setJointDynamicsType(const JointDynamicsType /*enable*/)
 {
     return false;
 }
 
-bool SphericalJoint::setStaticFriction(const size_t _index, double staticFriction)
+bool SphericalJoint::setDamping(const size_t /*_index*/, double /*damping*/)
 {
     return false;
 }
 
-double SphericalJoint::getDamping(const size_t _index) const
+bool SphericalJoint::setStaticFriction(const size_t /*_index*/, double /*staticFriction*/)
+{
+    return false;
+}
+
+double SphericalJoint::getDamping(const size_t /*_index*/) const
 {
     return 0.0;
 }
 
-double SphericalJoint::getStaticFriction(const size_t _index) const
+double SphericalJoint::getStaticFriction(const size_t /*_index*/) const
 {
     return 0.0;
 }
@@ -458,97 +519,63 @@ double SphericalJoint::getStaticFriction(const size_t _index) const
 bool SphericalJoint::getPositionDerivativeVelocityJacobian(const iDynTree::Span<const double> jntPos,
                                                           iDynTree::MatrixView<double>& jac) const
 {
-    // For a spherical joint, the position derivative velocity Jacobian relates
-    // the time derivative of quaternion coordinates to angular velocity
-    // This is typically used for dynamics computations
-    if (jac.rows() != 4 || jac.cols() != 3)
-    {
+    // Expect 4x3 view
+    if (jac.rows() != 4 || jac.cols() != 3) {
         return false;
     }
 
-    // Extract quaternion from joint positions
-    if (jntPos.size() < this->getPosCoordsOffset() + 4)
-    {
-        return false;
-    }
+    const size_t off = this->getPosCoordsOffset();
+    double w = jntPos[off + 0];
+    double x = jntPos[off + 1];
+    double y = jntPos[off + 2];
+    double z = jntPos[off + 3];
 
-    size_t offset = this->getPosCoordsOffset();
-    Vector4 q;
-    q(0) = jntPos[offset + 0]; // qw (real part)
-    q(1) = jntPos[offset + 1]; // qx
-    q(2) = jntPos[offset + 2]; // qy
-    q(3) = jntPos[offset + 3]; // qz
+    double n = std::sqrt(w*w + x*x + y*y + z*z);
+    if (n > 1e-12) { w/=n; x/=n; y/=n; z/=n; } else { w=1.0; x=y=z=0.0; }
 
-    // The relationship between quaternion derivative and angular velocity is:
-    // dq/dt = 0.5 * Q(q) * omega
-    // where Q(q) is the quaternion matrix and omega is the angular velocity
+    // q̇ = 0.5 * [ -v^T ; w I + [v]_x ] ω
+    jac(0,0) = -0.5 * x;
+    jac(0,1) = -0.5 * y;
+    jac(0,2) = -0.5 * z;
 
-    // Q(q) matrix for right quaternion multiplication
-    jac(0, 0) = -q(1); jac(0, 1) = -q(2); jac(0, 2) = -q(3);
-    jac(1, 0) =  q(0); jac(1, 1) = -q(3); jac(1, 2) =  q(2);
-    jac(2, 0) =  q(3); jac(2, 1) =  q(0); jac(2, 2) = -q(1);
-    jac(3, 0) = -q(2); jac(3, 1) =  q(1); jac(3, 2) =  q(0);
+    jac(1,0) = 0.5 * ( w );
+    jac(1,1) = 0.5 * ( - z );
+    jac(1,2) = 0.5 * ( y );
 
-    // Scale by 0.5
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            jac(i, j) *= 0.5;
-        }
-    }
+    jac(2,0) = 0.5 * ( z );
+    jac(2,1) = 0.5 * ( w );
+    jac(2,2) = 0.5 * ( -x );
+
+    jac(3,0) = 0.5 * ( -y );
+    jac(3,1) = 0.5 * ( x );
+    jac(3,2) = 0.5 * ( w );
 
     return true;
 }
 
 bool SphericalJoint::setJointPosCoordsToRest(iDynTree::Span<double> jntPos) const
 {
-    // Set the quaternion to identity (no rotation)
-    if (jntPos.size() < this->getPosCoordsOffset() + 4)
-    {
-        return false;
-    }
-
-    size_t offset = this->getPosCoordsOffset();
-    jntPos[offset + 0] = 1.0; // qw (real part)
-    jntPos[offset + 1] = 0.0; // qx
-    jntPos[offset + 2] = 0.0; // qy
-    jntPos[offset + 3] = 0.0; // qz
-
+    if (jntPos.size() < this->getPosCoordsOffset()+4) return false;
+    jntPos[this->getPosCoordsOffset()+0] = 1.0;
+    jntPos[this->getPosCoordsOffset()+1] = 0.0;
+    jntPos[this->getPosCoordsOffset()+2] = 0.0;
+    jntPos[this->getPosCoordsOffset()+3] = 0.0;
     return true;
 }
 
 bool SphericalJoint::normalizeJointPosCoords(iDynTree::Span<double> jntPos) const
 {
-    // Normalize the quaternion to unit length
-    if (jntPos.size() < this->getPosCoordsOffset() + 4)
-    {
-        return false;
-    }
-
-    size_t offset = this->getPosCoordsOffset();
-    double norm = sqrt(jntPos[offset + 0] * jntPos[offset + 0] +
-                      jntPos[offset + 1] * jntPos[offset + 1] +
-                      jntPos[offset + 2] * jntPos[offset + 2] +
-                      jntPos[offset + 3] * jntPos[offset + 3]);
-
-    if (norm < 1e-12)
-    {
-        // If norm is too small, set to identity quaternion
-        jntPos[offset + 0] = 1.0;  // qw (real part)
-        jntPos[offset + 1] = 0.0;  // qx
-        jntPos[offset + 2] = 0.0;  // qy
-        jntPos[offset + 3] = 0.0;  // qz
-    }
-    else
-    {
-        // Normalize
-        jntPos[offset + 0] /= norm;
-        jntPos[offset + 1] /= norm;
-        jntPos[offset + 2] /= norm;
-        jntPos[offset + 3] /= norm;
-    }
-
+    if (jntPos.size() < this->getPosCoordsOffset()+4) return false;
+    Vector4 q;
+    q(0) = jntPos[this->getPosCoordsOffset()+0];
+    q(1) = jntPos[this->getPosCoordsOffset()+1];
+    q(2) = jntPos[this->getPosCoordsOffset()+2];
+    q(3) = jntPos[this->getPosCoordsOffset()+3];
+    normalizeQuaternion(q);
+    jntPos[this->getPosCoordsOffset()+0] = q(0);
+    jntPos[this->getPosCoordsOffset()+1] = q(1);
+    jntPos[this->getPosCoordsOffset()+2] = q(2);
+    jntPos[this->getPosCoordsOffset()+3] = q(3);
     return true;
 }
 

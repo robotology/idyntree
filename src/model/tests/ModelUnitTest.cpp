@@ -343,11 +343,10 @@ void checkReducedModel(const Model & model)
         getRandomJointPositions(reducedPos.jointPos(), reducedModel);
 
         reducedVel.baseVel() = getRandomTwist();
-        //getRandomVector(reducedVel.jointVel());
-        reducedVel.jointVel().zero();
-        reducedAcc.baseAcc().zero();
-        //getRandomVector(reducedAcc.jointAcc());
-        reducedAcc.jointAcc().zero();
+        getRandomVector(reducedVel.jointVel());
+
+        reducedAcc.baseAcc() = getRandomTwist();
+        getRandomVector(reducedAcc.jointAcc());
 
         FreeFloatingVel fullVel(model);
         FreeFloatingAcc fullAcc(model);

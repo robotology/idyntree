@@ -280,10 +280,10 @@ void testJoint(bool printProgress = false)
         setRandomJointVelocity(joint, jointVel);
 
         // Test the joint transform derivatives in both directions
-        //validateJointTransformDerivative(joint, jointPos, jointVel,
-        //                               joint.getFirstAttachedLink(), joint.getSecondAttachedLink());
-        //validateJointTransformDerivative(joint, jointPos, jointVel,
-        //                               joint.getSecondAttachedLink(), joint.getFirstAttachedLink());
+        validateJointTransformDerivative(joint, jointPos, jointVel,
+                                      joint.getFirstAttachedLink(), joint.getSecondAttachedLink());
+        validateJointTransformDerivative(joint, jointPos, jointVel,
+                                      joint.getSecondAttachedLink(), joint.getFirstAttachedLink());
 
         // Test the relationship between transform and motion subspace in both directions
         validateJointMotionSubspaceMatrix(joint, jointPos, jointVel,
