@@ -144,6 +144,7 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
         SphericalJoint sphericalJoint;
         sphericalJoint.setAttachedLinks(parentLinkIndex,newLinkIndex);
         sphericalJoint.setRestTransform(getRandomTransform());
+        sphericalJoint.setJointCenter(newLinkIndex,getRandomPosition());
         model.addJoint(newLinkName+"joint",&sphericalJoint);
     }
     else

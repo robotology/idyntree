@@ -39,6 +39,9 @@ namespace iDynTree
         LinkIndex link2;
         Transform link1_X_link2_at_rest;
 
+        // Joint center offset (vector from link1 origin to joint center, expressed in link1 frame)
+        Position m_center_wrt_link1;
+
         // Cache attributes
         mutable Vector4 q_previous;
         mutable Transform link1_X_link2;
@@ -52,7 +55,6 @@ namespace iDynTree
 
         // Helper methods
         void normalizeQuaternion(Vector4& q) const;
-        Transform quaternionToTransform(const Vector4& q) const;
 
     public:
         /**
@@ -204,6 +206,20 @@ namespace iDynTree
 
         // Documentation inherited
         virtual bool normalizeJointPosCoords(iDynTree::Span<double> jntPos) const;
+
+        /**
+         * Set the joint center relative to the given link.
+         * @param link one of getFirstAttachedLink() or getSecondAttachedLink()
+         * @param center vector from the link origin to the joint center, expressed in that link frame
+         */
+        void setJointCenter(const LinkIndex link, const Position& center);
+
+        /**
+         * Get the joint center relative to the given link.
+         * @param link one of getFirstAttachedLink() or getSecondAttachedLink()
+         * @return vector from the link origin to the joint center, expressed in that link frame
+         */
+        Position getJointCenter(const LinkIndex link) const;
     };
 }
 

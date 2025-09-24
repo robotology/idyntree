@@ -469,7 +469,6 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
     // The position for the joint removed from the model is supposed to be 0
     FreeFloatingPos jointPos(fullModel);
 
-    // \todo used an appropriate method here
     for(JointIndex jntIdx=0; jntIdx < fullModel.getNrOfJoints(); jntIdx++)
     {
         // Get nr of position coordinates for joint (e.g., 4 for spherical joint quaternion)
@@ -675,6 +674,19 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
 
             newJointSpherical->setAttachedLinks(newLink1, newLink2);
             newJointSpherical->setRestTransform(newLink1_X_newLink2);
+
+            // Update joint center to account for coordinate frame changes
+            // Transform center in first link (newLink1) coordinate system
+            Position oldCenterInFirstLink = oldJointSpherical->getJointCenter(oldLink1);
+            Position newCenterInFirstLink;
+            newCenterInFirstLink = newLink1_X_oldLink1 * oldCenterInFirstLink;
+            newJointSpherical->setJointCenter(newLink1, newCenterInFirstLink);
+
+            // Transform center in second link (newLink2) coordinate system
+            Position oldCenterInSecondLink = oldJointSpherical->getJointCenter(oldLink2);
+            Position newCenterInSecondLink;
+            newCenterInSecondLink = newLink2_X_oldLink2 * oldCenterInSecondLink;
+            newJointSpherical->setJointCenter(newLink2, newCenterInSecondLink);
 
             newJoint = (IJointPtr)newJointSpherical;
         }

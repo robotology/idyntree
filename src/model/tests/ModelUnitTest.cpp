@@ -363,9 +363,6 @@ void checkReducedModel(const Model & model)
         fullRNEA.runRNEA(fullPos,fullVel,fullAcc,fullTrqs);
         reducedRNEA.runRNEA(reducedPos,reducedVel,reducedAcc,reducedTrqs);
 
-        std::cerr << "Full Model: << " << model.toString() << std::endl;
-        std::cerr << "Reduced Model: << " << reducedModel.toString() << std::endl;
-
         // Test if the velocity of the two RNEAs are the same, accounting for the different link serialization
         // Compare link-by-link using names to map indices between models
         for (LinkIndex redLinkIdx = 0; redLinkIdx < static_cast<LinkIndex>(reducedModel.getNrOfLinks()); ++redLinkIdx)

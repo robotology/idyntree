@@ -252,12 +252,11 @@ template<>
 SphericalJoint getRandomJoint<SphericalJoint>()
 {
     SphericalJoint joint;
-    // Attach links and set a rotation-only rest transform (origins must coincide)
     joint.setAttachedLinks(0, 1);
-    Transform rotOnly(getRandomRotation(), Position::Zero());
-    joint.setRestTransform(rotOnly);
+    joint.setRestTransform(getRandomTransform());
     joint.setPosCoordsOffset(0);
     joint.setDOFsOffset(0);
+    joint.setJointCenter(0, getRandomPosition());
     return joint;
 }
 
