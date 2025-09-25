@@ -16,6 +16,7 @@
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/RevoluteSO2Joint.h>
 #include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/SphericalJoint.h>
 
 #include <iDynTree/EigenHelpers.h>
 
@@ -236,6 +237,28 @@ VectorDynSize setRandomJointVelocity(const JointType& joint, VectorDynSize& join
     return jointPos;
 }
 
+template<typename JointType>
+JointType getRandomJoint()
+{
+    // Create a random joint connecting links 0 and 1
+    JointType joint(0, 1, getRandomTransform(), getRandomAxis());
+    joint.setPosCoordsOffset(0);
+    joint.setDOFsOffset(0);
+    return joint;
+}
+
+// Specialization for SphericalJoint
+template<>
+SphericalJoint getRandomJoint<SphericalJoint>()
+{
+    SphericalJoint joint;
+    joint.setAttachedLinks(0, 1);
+    joint.setRestTransform(getRandomTransform());
+    joint.setPosCoordsOffset(0);
+    joint.setDOFsOffset(0);
+    joint.setJointCenter(0, getRandomPosition());
+    return joint;
+}
 
 /**
  * Test helper function that creates and tests a joint of a specific type
@@ -247,9 +270,7 @@ void testJoint(bool printProgress = false)
     for(unsigned int i=0; i < 10; i++)
     {
         // Create a random joint connecting links 0 and 1
-        JointType joint(0, 1, getRandomTransform(), getRandomAxis());
-        joint.setPosCoordsOffset(0);
-        joint.setDOFsOffset(0);
+        JointType joint = getRandomJoint<JointType>();
 
         VectorDynSize jointPos(joint.getNrOfPosCoords());
         setRandomJointPosition(joint, jointPos);
@@ -259,9 +280,9 @@ void testJoint(bool printProgress = false)
 
         // Test the joint transform derivatives in both directions
         validateJointTransformDerivative(joint, jointPos, jointVel,
-                                       joint.getFirstAttachedLink(), joint.getSecondAttachedLink());
+                                      joint.getFirstAttachedLink(), joint.getSecondAttachedLink());
         validateJointTransformDerivative(joint, jointPos, jointVel,
-                                       joint.getSecondAttachedLink(), joint.getFirstAttachedLink());
+                                      joint.getSecondAttachedLink(), joint.getFirstAttachedLink());
 
         // Test the relationship between transform and motion subspace in both directions
         validateJointMotionSubspaceMatrix(joint, jointPos, jointVel,
@@ -275,19 +296,24 @@ void testJoint(bool printProgress = false)
     }
 }
 
+
 int main()
 {
     // Test RevoluteJoint
     std::cout << "Testing RevoluteJoint..." << std::endl;
     testJoint<RevoluteJoint>();
-    
+
     // Test PrismaticJoint
     std::cout << "Testing PrismaticJoint..." << std::endl;
     testJoint<PrismaticJoint>();
-    
+
     // Test RevoluteSO2Joint
     std::cout << "Testing RevoluteSO2Joint..." << std::endl;
     testJoint<RevoluteSO2Joint>();
+
+    // Test SphericalJoint
+    std::cout << "Testing SphericalJoint..." << std::endl;
+    testJoint<SphericalJoint>();
 
     std::cout << "All joint tests passed!" << std::endl;
     return EXIT_SUCCESS;

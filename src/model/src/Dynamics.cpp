@@ -15,6 +15,8 @@
 #include <iDynTree/SpatialInertia.h>
 #include <iDynTree/SpatialMomentum.h>
 #include <iDynTree/EigenHelpers.h>
+#include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <iDynTree/Dynamics.h>
 
@@ -186,65 +188,68 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
             linkCRBs(parentLinkIndex) = linkCRBs(parentLinkIndex) +
                 (toParentJoint->getTransform(jointPos,parentLinkIndex,visitedLinkIndex))*linkCRBs(visitedLinkIndex);
 
-            // For now we just implement the CRBA for 0 or 1 dofs joints.
-            if (toParentJoint->getNrOfDOFs() > 1)
-            {
-                return false;
-            }
-
             // If the visited link is attached to its parent with a fixed joint,
             // we don't need to do anything else for this link.
             // Otherwise we need to compute the rows and columns of the mass matrix
-            // related to the dof connecting the visited link to its parent
-            if( toParentJoint->getNrOfDOFs() == 1 )
+            // related to the dof(s) connecting the visited link to its parent
+            if( toParentJoint->getNrOfDOFs() >= 1 )
             {
-                // In this loop we follow the algorith as described in
-                // in Featherstone 2008 , Table 6.2 . In particular S_visitedDof (S_i in the book)
-                // is the motion subspace vector connected to the degree of freedom connecting the link to its parent,
-                // while S_ancestorDof (S_j in the book) is the motion subspace vector of its ancestor considered in the
-                // inner loop
-                SpatialMotionVector S_visitedDof = toParentJoint->getMotionSubspaceVector(0,visitedLink->getIndex(),parentLinkIndex);
-                SpatialForceVector  F = linkCRBs(visitedLinkIndex)*S_visitedDof;
+                // Handle multiple DOFs (e.g., spherical joints with 3 DOFs)
+                unsigned int nrOfDOFs = toParentJoint->getNrOfDOFs();
 
-                // We compute the term of the mass matrix on the diagonal
-                // (in the book: H_ii = S_i^\top F
-                size_t dofIndex = toParentJoint->getDOFsOffset();
-                massMatrix(6+dofIndex,6+dofIndex) = S_visitedDof.dot(F);
-
-                // Then we compute all the off-diagonal terms relative to
-                // the ancestors of the currently visited link
-
-                // j = i
-                LinkConstPtr ancestor = visitedLink;
-
-                // while lambda(j) != 0
-                while( traversal.getParentLinkFromLinkIndex(traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex()) )
+                for (unsigned int dofIdx = 0; dofIdx < nrOfDOFs; dofIdx++)
                 {
+                    // In this loop we follow the algorithm as described in
+                    // in Featherstone 2008 , Table 6.2 . In particular S_visitedDof (S_i in the book)
+                    // is the motion subspace vector connected to the degree of freedom connecting the link to its parent,
+                    // while S_ancestorDof (S_j in the book) is the motion subspace vector of its ancestor considered in the
+                    // inner loop
+                    SpatialMotionVector S_visitedDof = toParentJoint->getMotionSubspaceVector(dofIdx,visitedLink->getIndex(),parentLinkIndex);
+                    SpatialForceVector  F = linkCRBs(visitedLinkIndex)*S_visitedDof;
+
+                    // We compute the term of the mass matrix on the diagonal
+                    // (in the book: H_ii = S_i^\top F
+                    size_t dofIndex = toParentJoint->getDOFsOffset() + dofIdx;
+                    massMatrix(6+dofIndex,6+dofIndex) = S_visitedDof.dot(F);
+
+                    // Then we compute all the off-diagonal terms relative to
+                    // the ancestors of the currently visited link
+
+                    // j = i
+                    LinkConstPtr ancestor = visitedLink;
+
+                    // while lambda(j) != 0
+                    while( traversal.getParentLinkFromLinkIndex(traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex()) )
                     {
-                        IJointConstPtr ancestorToParentJoint = traversal.getParentJointFromLinkIndex(ancestor->getIndex());
-                        LinkIndex      ancestorParent =        traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex();
-                        Transform ancestorParent_X_ancestor = ancestorToParentJoint->getTransform(jointPos,ancestorParent,ancestor->getIndex());
-                        F = ancestorParent_X_ancestor*F;
-                    }
+                        {
+                            IJointConstPtr ancestorToParentJoint = traversal.getParentJointFromLinkIndex(ancestor->getIndex());
+                            LinkIndex      ancestorParent =        traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex();
+                            Transform ancestorParent_X_ancestor = ancestorToParentJoint->getTransform(jointPos,ancestorParent,ancestor->getIndex());
+                            F = ancestorParent_X_ancestor*F;
+                        }
 
-                    // j = \lambda(j)
+                        // j = \lambda(j)
 
-                    ancestor = traversal.getParentLinkFromLinkIndex(ancestor->getIndex());
+                        ancestor = traversal.getParentLinkFromLinkIndex(ancestor->getIndex());
 
                     IJointConstPtr ancestorToParentJoint = traversal.getParentJointFromLinkIndex(ancestor->getIndex());
                     LinkIndex      ancestorParentIndex   = traversal.getParentLinkFromLinkIndex(ancestor->getIndex())->getIndex();
 
-                    if( ancestorToParentJoint->getNrOfDOFs() == 1 )
-                    {
-                        SpatialMotionVector S_ancestorDof =
-                            ancestorToParentJoint->getMotionSubspaceVector(0,ancestor->getIndex(),ancestorParentIndex);
-                        size_t ancestorDofIndex = ancestorToParentJoint->getDOFsOffset();
+                        unsigned int ancestorNrOfDOFs = ancestorToParentJoint->getNrOfDOFs();
+                        if( ancestorNrOfDOFs >= 1 )
+                        {
+                            for (unsigned int ancestorDofIdx = 0; ancestorDofIdx < ancestorNrOfDOFs; ancestorDofIdx++)
+                            {
+                                SpatialMotionVector S_ancestorDof =
+                                    ancestorToParentJoint->getMotionSubspaceVector(ancestorDofIdx,ancestor->getIndex(),ancestorParentIndex);
+                                size_t ancestorDofIndex = ancestorToParentJoint->getDOFsOffset() + ancestorDofIdx;
 
-                        // H_ij = F^\top S_j
-                        // H_ji = H_ij^\top
-                        massMatrix(6+dofIndex,6+ancestorDofIndex) = S_ancestorDof.dot(F);
-                        massMatrix(6+ancestorDofIndex,6+dofIndex) = massMatrix(6+dofIndex,6+ancestorDofIndex);
-                    }
+                                // H_ij = F^\top S_j
+                                // H_ji = H_ij^\top
+                                massMatrix(6+dofIndex,6+ancestorDofIndex) = S_ancestorDof.dot(F);
+                                massMatrix(6+ancestorDofIndex,6+dofIndex) = massMatrix(6+dofIndex,6+ancestorDofIndex);
+                            }
+                        }
                 }
 
                 // We need to write F in the base link for the off-diagonal term of the mass matrix
@@ -260,6 +265,7 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
                 Eigen::Matrix<double,6,1> FEigen = toEigen(F);
                 massMatrixEigen.block<6,1>(0,6+dofIndex) = FEigen;
                 massMatrixEigen.block<1,6>(6+dofIndex,0) = FEigen;
+                } // end of DOF loop
             }
 
         }
@@ -341,25 +347,27 @@ bool ArticulatedBodyAlgorithm(const Model& model,
         {
             LinkIndex    parentLinkIndex = parentLink->getIndex();
             // Otherwise we propagate velocity in the usual way
-            if( toParentJoint->getNrOfDOFs() == 0 )
+            // Uniform handling for any number of DOFs (including 0)
+            Twist vj = Twist::Zero();
+            const unsigned int nrOfDOFs = toParentJoint->getNrOfDOFs();
+            for (unsigned int dofIdx = 0; dofIdx < nrOfDOFs; dofIdx++)
             {
-                bufs.linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLink->getIndex())*bufs.linksVel(parentLinkIndex);
-                bufs.linksBiasAcceleration(visitedLinkIndex) = SpatialAcc::Zero();
-            }
-            else
-            {
-                size_t dofIndex = toParentJoint->getDOFsOffset();
-                bufs.S(dofIndex) = toParentJoint->getMotionSubspaceVector(0,visitedLinkIndex,parentLinkIndex);
-                Twist vj;
-                toEigen(vj.getLinearVec3()) = robotVel.jointVel()(dofIndex)*toEigen(bufs.S(dofIndex).getLinearVec3());
-                toEigen(vj.getAngularVec3()) = robotVel.jointVel()(dofIndex)*toEigen(bufs.S(dofIndex).getAngularVec3());
-                bufs.linksVel(visitedLinkIndex) =
-                    toParentJoint->getTransform(robotPos.jointPos(),visitedLinkIndex,parentLinkIndex)*bufs.linksVel(parentLinkIndex)
-                    + vj;
-                bufs.linksBiasAcceleration(visitedLinkIndex) = bufs.linksVel(visitedLinkIndex)*vj;
+                size_t globalDofIndex = toParentJoint->getDOFsOffset() + dofIdx;
+                bufs.S(globalDofIndex) = toParentJoint->getMotionSubspaceVector(dofIdx, visitedLinkIndex, parentLinkIndex);
 
+                // Accumulate joint velocity contribution
+                Twist vj_dof;
+                toEigen(vj_dof.getLinearVec3())  = robotVel.jointVel()(globalDofIndex) * toEigen(bufs.S(globalDofIndex).getLinearVec3());
+                toEigen(vj_dof.getAngularVec3()) = robotVel.jointVel()(globalDofIndex) * toEigen(bufs.S(globalDofIndex).getAngularVec3());
+                vj = vj + vj_dof;
             }
+
+            bufs.linksVel(visitedLinkIndex) =
+                toParentJoint->getTransform(robotPos.jointPos(), visitedLinkIndex, parentLinkIndex) * bufs.linksVel(parentLinkIndex)
+                + vj;
+
+            // Zero when nrOfDOFs == 0
+            bufs.linksBiasAcceleration(visitedLinkIndex) = bufs.linksVel(visitedLinkIndex) * vj;
         }
 
         // Initialize Articulated Body Inertia

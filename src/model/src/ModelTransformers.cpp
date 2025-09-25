@@ -10,6 +10,7 @@
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteSO2Joint.h>
+#include <iDynTree/SphericalJoint.h>
 
 #include <iDynTree/Sensors.h>
 #include <iDynTree/SixAxisForceTorqueSensor.h>
@@ -468,11 +469,11 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
     // The position for the joint removed from the model is supposed to be 0
     FreeFloatingPos jointPos(fullModel);
 
-    // Set joint positions using the new vector-based interface
     for(JointIndex jntIdx=0; jntIdx < fullModel.getNrOfJoints(); jntIdx++)
     {
-        // Get nr of position coordinates for joint
+        // Get nr of position coordinates for joint (e.g., 4 for spherical joint quaternion)
         size_t nrOfPosCoords = fullModel.getJoint(jntIdx)->getNrOfPosCoords();
+        size_t nrOfDofs = fullModel.getJoint(jntIdx)->getNrOfDOFs();
 
         // Nothing to do if the joint is fixed
         if (nrOfPosCoords == 0)
@@ -662,10 +663,37 @@ bool createReducedModelAndChangeLinkFrames(const Model& fullModel,
 
             newJoint = (IJointPtr)newJointRevoluteSO2;
         }
+        else if (dynamic_cast<const SphericalJoint*>(oldJoint))
+        {
+            const SphericalJoint* oldJointSpherical = dynamic_cast<const SphericalJoint*>(oldJoint);
+
+            Transform oldLink1_X_oldLink2 = oldJointSpherical->getRestTransform(oldLink1, oldLink2);
+            Transform newLink1_X_newLink2 = newLink1_X_oldLink1 * oldLink1_X_oldLink2 * newLink2_X_oldLink2.inverse();
+
+            SphericalJoint* newJointSpherical = new SphericalJoint(*oldJointSpherical);
+
+            newJointSpherical->setAttachedLinks(newLink1, newLink2);
+            newJointSpherical->setRestTransform(newLink1_X_newLink2);
+
+            // Update joint center to account for coordinate frame changes
+            // Transform center in first link (newLink1) coordinate system
+            Position oldCenterInFirstLink = oldJointSpherical->getJointCenter(oldLink1);
+            Position newCenterInFirstLink;
+            newCenterInFirstLink = newLink1_X_oldLink1 * oldCenterInFirstLink;
+            newJointSpherical->setJointCenter(newLink1, newCenterInFirstLink);
+
+            // Transform center in second link (newLink2) coordinate system
+            Position oldCenterInSecondLink = oldJointSpherical->getJointCenter(oldLink2);
+            Position newCenterInSecondLink;
+            newCenterInSecondLink = newLink2_X_oldLink2 * oldCenterInSecondLink;
+            newJointSpherical->setJointCenter(newLink2, newCenterInSecondLink);
+
+            newJoint = (IJointPtr)newJointSpherical;
+        }
         else
         {
             std::cerr << "[ERROR] createReducedModel error : "
-                      << " processing joint that is not revolute, prismatic or fixed. "
+                      << " processing joint that is not revolute, prismatic, revolute SO2, spherical or fixed. "
                       << std::endl;
             return false;
         }
