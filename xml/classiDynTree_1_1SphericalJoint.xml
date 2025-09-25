@@ -1,0 +1,1402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SphericalJoint" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SphericalJoint</compoundname>
+    <basecompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; 4, 3 &gt;</basecompoundref>
+    <includes local="no">iDynTree/SphericalJoint.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a0ce75c983a521ef1977e0498fd84fa7a" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::SphericalJoint::link1</definition>
+        <argsstring></argsstring>
+        <name>link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="38" column="19" bodyfile="iDynTree/SphericalJoint.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a5053768175c86ba160071f5c48b3e239" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::SphericalJoint::link2</definition>
+        <argsstring></argsstring>
+        <name>link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="39" column="19" bodyfile="iDynTree/SphericalJoint.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a9acba9ba438107516ab10118be67c401" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::SphericalJoint::link1_X_link2_at_rest</definition>
+        <argsstring></argsstring>
+        <name>link1_X_link2_at_rest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="40" column="19" bodyfile="iDynTree/SphericalJoint.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a7626067f0829e1d9c8ae3af435dff8b8" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::SphericalJoint::m_center_wrt_link1</definition>
+        <argsstring></argsstring>
+        <name>m_center_wrt_link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="43" column="18" bodyfile="iDynTree/SphericalJoint.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a949c4863e2d75d1d309d4a70ce22d6ed" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref></type>
+        <definition>Vector4 iDynTree::SphericalJoint::q_previous</definition>
+        <argsstring></argsstring>
+        <name>q_previous</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="46" column="25" bodyfile="iDynTree/SphericalJoint.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a48261dc22a116aba5dc76b8c20457808" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::SphericalJoint::link1_X_link2</definition>
+        <argsstring></argsstring>
+        <name>link1_X_link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="47" column="27" bodyfile="iDynTree/SphericalJoint.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a1f92e40bcd4922fa69fa9251526c0d92" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::SphericalJoint::link2_X_link1</definition>
+        <argsstring></argsstring>
+        <name>link2_X_link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="48" column="27" bodyfile="iDynTree/SphericalJoint.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1ae58c2b653cc605bc210c213bf4021ea6" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>SpatialMotionVector iDynTree::SphericalJoint::S_link1_link2[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>S_link1_link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="49" column="37" bodyfile="iDynTree/SphericalJoint.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a825400c4ee32a58445eae550ec105435" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>SpatialMotionVector iDynTree::SphericalJoint::S_link2_link1[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>S_link2_link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="50" column="37" bodyfile="iDynTree/SphericalJoint.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a06313e044c5ed4a8e0da1e1c8ebb91ed" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SphericalJoint::updateBuffers</definition>
+        <argsstring>(const Vector4 &amp;new_q) const</argsstring>
+        <name>updateBuffers</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref> &amp;</type>
+          <declname>new_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1adb9adf2f0d3ab5b3e269e209520ea643" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SphericalJoint::resetBuffers</definition>
+        <argsstring>(const Vector4 &amp;new_q) const</argsstring>
+        <name>resetBuffers</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref> &amp;</type>
+          <declname>new_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="53" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ad382febaee7aab75182487e3e7c367e0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SphericalJoint::resetAxisBuffers</definition>
+        <argsstring>() const</argsstring>
+        <name>resetAxisBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="54" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a1f932911587cba3201064eae99787c71" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SphericalJoint::normalizeQuaternion</definition>
+        <argsstring>(Vector4 &amp;q) const</argsstring>
+        <name>normalizeQuaternion</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="57" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ae4840e6a75c08dada7fad9f193068c64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SphericalJoint::SphericalJoint</definition>
+        <argsstring>()</argsstring>
+        <name>SphericalJoint</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="63" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a74517ac3c83476b2fe07c38e775b6ef2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SphericalJoint::SphericalJoint</definition>
+        <argsstring>(const Transform &amp;link1_X_link2)</argsstring>
+        <name>SphericalJoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <briefdescription>
+<para>Constructor in which the LinkIndex to which the joint is attached are not specified. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This constructor is typically used together with the <ref refid="classiDynTree_1_1Model_1aaead8cb8c5367589131a877ea121c573" kindref="member">Model::addJoint</ref> or <ref refid="classiDynTree_1_1Model_1a764763adb198032da5bdfcfc5f6a0748" kindref="member">Model::addJointAndLink</ref> methods, in which the links to which the joint is attached are specified by the other arguments of the method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="71" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a40db5b94cc1e6103fe1d21eb881b7219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SphericalJoint::SphericalJoint</definition>
+        <argsstring>(const SphericalJoint &amp;other)</argsstring>
+        <name>SphericalJoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SphericalJoint" kindref="compound">SphericalJoint</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="76" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a166ed2bc01fabd47daeb8c032f4b9f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::SphericalJoint::~SphericalJoint</definition>
+        <argsstring>()</argsstring>
+        <name>~SphericalJoint</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="81" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ad4223aca4cfa8492b50b24449a45de03" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
+        <definition>virtual IJoint* iDynTree::SphericalJoint::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2">clone</reimplements>
+        <briefdescription>
+<para>Clone the joint object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="84" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ab78cf32b9be287a67b1db72951259f7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::setAttachedLinks</definition>
+        <argsstring>(const LinkIndex link1, const LinkIndex link2)</argsstring>
+        <name>setAttachedLinks</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c">setAttachedLinks</reimplements>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link1</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the two links at which the joint is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the first link </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>link2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the second link </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="87" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1adcbe0e09dd56be8fab15ebcfa5d96888" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::setRestTransform</definition>
+        <argsstring>(const Transform &amp;link1_X_link2)</argsstring>
+        <name>setRestTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84">setRestTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform between the link2 frame and link1 frame at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The link1_T_link2 is transform that transforms a quantity expressed in link2 frame in a quantity expressed in the link1 frame, when the joint is in the 0 position : p_link1 = link1_T_link2*p_link2 . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="90" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a20fff9ddd8df8f243cc3cde64152dc3c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::SphericalJoint::getFirstAttachedLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getFirstAttachedLink</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8">getFirstAttachedLink</reimplements>
+        <briefdescription>
+<para>Get the first link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="93" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a86b866a94a73033fce6f1118526196f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::SphericalJoint::getSecondAttachedLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getSecondAttachedLink</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8">getSecondAttachedLink</reimplements>
+        <briefdescription>
+<para>Get the second link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="96" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ab70d106f4802464e0a39949c3be328a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::SphericalJoint::getRestTransform</definition>
+        <argsstring>(const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>getRestTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0">getRestTransform</reimplements>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the link parent and the link child at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Such that: p_child = child_H_parent*p_parent where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the child frame. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="99" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ad3b89c9e25a876c197053e68fa9e7ada" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <definition>virtual const Transform&amp; iDynTree::SphericalJoint::getTransform</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>getTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767">getTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the parent and the child, such that: p_child = child_H_parent*p_parent, where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the parent frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="104" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a48823c4c84871c42567165600bef710c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
+        <definition>TransformDerivative iDynTree::SphericalJoint::getTransformDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent, const int posCoord_i) const</argsstring>
+        <name>getTransformDerivative</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb">getTransformDerivative</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>posCoord_i</declname>
+        </param>
+        <briefdescription>
+<para>Get the derivative of the transform with respect to a position coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In particular, if the selected position coordinate is <formula id="7">$q$</formula>, return the derivative: <formula id="193">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
+<para>If posCoord_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref>, the returned value is undefined. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="109" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac826a020da936cf288682cb6798026c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>virtual SpatialMotionVector iDynTree::SphericalJoint::getMotionSubspaceVector</definition>
+        <argsstring>(int dof_i, const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX) const</argsstring>
+        <name>getMotionSubspaceVector</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f">getMotionSubspaceVector</reimplements>
+        <param>
+          <type>int</type>
+          <declname>dof_i</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+          <defval>LINK_INVALID_INDEX</defval>
+        </param>
+        <briefdescription>
+<para>Get the motion subspace vector corresponding to the i-th dof of the joint, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the i-th column of the motion subspace matrix. The motion subspace matrix is the matrix that maps the joint velocity to the relative twist between the two links.</para>
+<para>In particular the motion subspace vector of the i-th dof is the S vector such that v_child = S_{child,parent}*dq_i + child_X_parent*v_parent if the velocities associated to all other DOFs of the joint are considered zero, where v_child and v_parent are the left-trivialized (body) velocities of the link child and parent.</para>
+<para>See &quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Silvio Traversaro - Section 3.2 <ulink url="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf</ulink> for more details.</para>
+<para><simplesect kind="return"><para>the motion subspace vector.</para>
+</simplesect>
+If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref>, the returned value is undefined.</para>
+<para><simplesect kind="note"><para>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="115" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a6a2ad355eb68a3ba9c5e3abbfbb9ddf5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::computeChildPosVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkPositions &amp;linkPositions, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildPosVelAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881">computeChildPosVelAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref> &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the position, velocity and acceleration of link child, given the position, velocty and acceleration of link parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The position, velocity and acceleration of link child are directly saved in the linkPositions, linkVels and linkAccs arguments. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="120" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a73a14825d62e9b88df41a1bf7736591a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::computeChildVel</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, LinkVelArray &amp;linkVels, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildVel</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e">computeChildVel</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity of child, given the velocity of parent and the joint position, velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="129" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a5238aa880f1805f981e1de5e343913cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::computeChildVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildVelAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e">computeChildVelAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity and acceleration of child, given the velocity and acceleration of parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="135" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac25d78a707e10e17321c1bf99406911a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::computeChildAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, const VectorDynSize &amp;jntAcc, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1">computeChildAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) acceleration of a child link given the (body-fixed) acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="143" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a130ee52253aa1a415668951eb3c4a757" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::computeChildBiasAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, LinkAccArray &amp;linkBiasAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildBiasAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3">computeChildBiasAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkBiasAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) bias acceleration of a child link given the (body-fixed) bias acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="151" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aa20cf53d939a9d8db30e4419344ec993" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::SphericalJoint::computeJointTorque</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const Wrench &amp;internalWrench, const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied, VectorDynSize &amp;jntTorques) const</argsstring>
+        <name>computeJointTorque</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e">computeJointTorque</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>internalWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkThatAppliesWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkOnWhichWrenchIsApplied</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntTorques</declname>
+        </param>
+        <briefdescription>
+<para>Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint positions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">internalWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkThatAppliesWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link that applies the considered internal wrench. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkOnWhichWrenchIsApplied</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link on which the considered internal wrench is applied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jntTorques</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint torques. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="158" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ae2ca9d6846ed46244a232c1707746099" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::hasPosLimits</definition>
+        <argsstring>() const</argsstring>
+        <name>hasPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e">hasPosLimits</reimplements>
+        <briefdescription>
+<para>Method to check if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the joints has limits </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="165" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac63625c756f5e78063424c0d60dbda8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::enablePosLimits</definition>
+        <argsstring>(const bool enable)</argsstring>
+        <name>enablePosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0">enablePosLimits</reimplements>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Method to set if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if everything went correctly, false otherwise (for example if the joint does not support joint position limits) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="168" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1add97d0d292274cc456afa2671bdcc655" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::getPosLimits</definition>
+        <argsstring>(const size_t _index, double &amp;min, double &amp;max) const</argsstring>
+        <name>getPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b">getPosLimits</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Get min and max position limits of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the limit are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="171" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ae9bda342e5dc9542b21b432437dfe332" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::SphericalJoint::getMinPosLimit</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getMinPosLimit</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65">getMinPosLimit</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the min position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="174" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aca0b0fe6594d72170b0dac1d15dc1a2b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::SphericalJoint::getMaxPosLimit</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getMaxPosLimit</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395">getMaxPosLimit</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the max position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="177" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a396ea876b931d17dc8e03949bce6625a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::setPosLimits</definition>
+        <argsstring>(const size_t _index, double min, double max)</argsstring>
+        <name>setPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1abe8111f1f3c76043300efbb3c7f2a3b5">setPosLimits</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Set the position limits for a dof the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This just sets the internal position limits of the joint. To set them as enabled, you need to call the enablePosLimits(true) method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="180" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a50059b12e9d0d87712991aedb2ae08a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>JointDynamicsType</type>
+        <definition>virtual JointDynamicsType iDynTree::SphericalJoint::getJointDynamicsType</definition>
+        <argsstring>() const</argsstring>
+        <name>getJointDynamicsType</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a88283dce433282d14bbef2923df51991">getJointDynamicsType</reimplements>
+        <briefdescription>
+<para>Method to get the specific joint dynamics type used for the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</para>
+</simplesect>
+<simplesect kind="return"><para>the specific joint dynamics type used for the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="183" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a61576a14d6c6ab81e0762d6e78851ad7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::setJointDynamicsType</definition>
+        <argsstring>(const JointDynamicsType enable)</argsstring>
+        <name>setJointDynamicsType</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59">setJointDynamicsType</reimplements>
+        <param>
+          <type>const JointDynamicsType</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Method to get the specific joint dynamics type used for the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</para>
+</simplesect>
+<simplesect kind="return"><para>true if everything went correctly, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="186" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1abf6c4559224cd3de3b1e6c779a3dafb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::setDamping</definition>
+        <argsstring>(const size_t _index, double damping)</argsstring>
+        <name>setDamping</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aeee6672963b46042d8ea39cfc0d21815">setDamping</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>damping</declname>
+        </param>
+        <briefdescription>
+<para>Set damping parameter of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the dynamic parameters are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="189" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a82f964b4aefa299b60aa4b558160eff4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::setStaticFriction</definition>
+        <argsstring>(const size_t _index, double staticFriction)</argsstring>
+        <name>setStaticFriction</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ab82b3ad35b2de9b0ef8ab96b851213d3">setStaticFriction</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>staticFriction</declname>
+        </param>
+        <briefdescription>
+<para>Set static friction parameter of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The static friction coefficient is expressed in N for a prismatic joint, N∙m for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the dynamic parameters are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="192" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a28c5e9d8f2200f6bedb0de12b2b04606" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::SphericalJoint::getDamping</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getDamping</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d">getDamping</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the damping coefficient of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="195" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ab7a434b4d6a0d05858478de55ad11bb4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::SphericalJoint::getStaticFriction</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getStaticFriction</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c">getStaticFriction</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the static friction coefficient of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The unit is N for a prismatic joint, N∙m for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="198" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a036281e499435c35f6337648800a1a46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::getPositionDerivativeVelocityJacobian</definition>
+        <argsstring>(const iDynTree::Span&lt; const double &gt; jntPos, iDynTree::MatrixView&lt; double &gt; &amp;jac) const</argsstring>
+        <name>getPositionDerivativeVelocityJacobian</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ac712be0a8eb4b09eed3f9d8a42b4e765">getPositionDerivativeVelocityJacobian</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; double &gt; &amp;</type>
+          <declname>positionDerivative_J_velocity</declname>
+        </param>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> × <ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref> matrix that maps the joint velocity to the derivative of the joint position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method computes the Jacobian matrix J such that: d/dt(q_pos) = J * q_vel where:<itemizedlist>
+<listitem><para>q_pos are the position coordinates of the joint (<ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> elements)</para>
+</listitem><listitem><para>q_vel are the velocity coordinates of the joint (<ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref> elements)</para>
+</listitem><listitem><para>J is the <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> × <ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref> Jacobian matrix</para>
+</listitem></itemizedlist>
+</para>
+<para>For simple joints where position and velocity have the same parameterization, this is the identity matrix. For joints with different position and velocity parameterizations (e.g., SO(2) joints using complex numbers for position but angular velocity for DOF), this matrix encodes the relationship.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Joint position coordinates (must have at least <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref> elements) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">positionDerivative_J_velocity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Jacobian matrix (must be properly sized) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the computation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="201" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aa9a555e5f26050cd375a42da96c53e39" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::setJointPosCoordsToRest</definition>
+        <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
+        <name>setJointPosCoordsToRest</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aadfed093b3e13c2da08668958d99167c">setJointPosCoordsToRest</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the position coordinates of the joint to the rest position (i.e zero for simple joints) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full vector of model joint positions, of dimension <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords()</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the operation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="205" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac76b9ec07a437154076270a5101d3570" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::SphericalJoint::normalizeJointPosCoords</definition>
+        <argsstring>(iDynTree::Span&lt; double &gt; jntPos) const</argsstring>
+        <name>normalizeJointPosCoords</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ad0d3771bd046afa8a19d0c3af18f577c">normalizeJointPosCoords</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>jntPos</declname>
+        </param>
+        <briefdescription>
+<para>Normalize the position coordinates of the joint in the specified joint positios vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the joint is using a minimal representation for the position coordinates, this method does not anything, but if the joint uses a constrained representation such as unit complex numbers of unit quaternions, this method normalizes the position coordinates, ensuring that one of the closest valid positiion coordinates is used.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full vector of model joint positions, of dimension <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords()</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the operation was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="208" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aa07ece34d86d5988f9ef060163f0ce5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SphericalJoint::setJointCenter</definition>
+        <argsstring>(const LinkIndex link, const Position &amp;center)</argsstring>
+        <name>setJointCenter</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>center</declname>
+        </param>
+        <briefdescription>
+<para>Set the joint center relative to the given link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>one of <ref refid="classiDynTree_1_1SphericalJoint_1a20fff9ddd8df8f243cc3cde64152dc3c" kindref="member">getFirstAttachedLink()</ref> or <ref refid="classiDynTree_1_1SphericalJoint_1a86b866a94a73033fce6f1118526196f8" kindref="member">getSecondAttachedLink()</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>center</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector from the link origin to the joint center, expressed in that link frame </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="215" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac470edb00c2106bf4f0a7211e871ac22" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::SphericalJoint::getJointCenter</definition>
+        <argsstring>(const LinkIndex link) const</argsstring>
+        <name>getJointCenter</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>Get the joint center relative to the given link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>one of <ref refid="classiDynTree_1_1SphericalJoint_1a20fff9ddd8df8f243cc3cde64152dc3c" kindref="member">getFirstAttachedLink()</ref> or <ref refid="classiDynTree_1_1SphericalJoint_1a86b866a94a73033fce6f1118526196f8" kindref="member">getSecondAttachedLink()</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>vector from the link origin to the joint center, expressed in that link frame </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/SphericalJoint.h" line="222" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a spherical joint, i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>a joint that constrains two links to have the same position but allows any relative orientation (3 rotational degrees of freedom).</para>
+<para>The joint state is parameterized using a unit quaternion q = [qw, qx, qy, qz] (4 position coordinates), and the angular velocity ω expressed in the first link frame (3 velocity coordinates).</para>
+<para>Note: The quaternion follows the real/imaginary (w,x,y,z) convention used by iDynTree, where w is the real part and (x,y,z) is the imaginary part.</para>
+<para>The 6D spatial vectors (velocity, acceleration, forces) follow the linear/angular (linear first, angular second) convention used by iDynTree. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::SphericalJoint</label>
+        <link refid="classiDynTree_1_1SphericalJoint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::MovableJointImpl&lt; 4, 3 &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; 4, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="4">
+        <label>iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::SphericalJoint</label>
+        <link refid="classiDynTree_1_1SphericalJoint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::MovableJointImpl&lt; 4, 3 &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; 4, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="4">
+        <label>iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/SphericalJoint.h" line="34" column="5" bodyfile="iDynTree/SphericalJoint.h" bodystart="35" bodyend="223"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SphericalJoint_1ad4223aca4cfa8492b50b24449a45de03" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ac25d78a707e10e17321c1bf99406911a" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>computeChildAcc</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a130ee52253aa1a415668951eb3c4a757" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>computeChildBiasAcc</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a6a2ad355eb68a3ba9c5e3abbfbb9ddf5" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>computeChildPosVelAcc</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a73a14825d62e9b88df41a1bf7736591a" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>computeChildVel</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a5238aa880f1805f981e1de5e343913cc" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>computeChildVelAcc</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1aa20cf53d939a9d8db30e4419344ec993" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>computeJointTorque</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ac63625c756f5e78063424c0d60dbda8b" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a28c5e9d8f2200f6bedb0de12b2b04606" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getDamping</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a20fff9ddd8df8f243cc3cde64152dc3c" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getFirstAttachedLink</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ac470edb00c2106bf4f0a7211e871ac22" prot="public" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>getJointCenter</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a50059b12e9d0d87712991aedb2ae08a0" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getJointDynamicsType</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1aca0b0fe6594d72170b0dac1d15dc1a2b" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getMaxPosLimit</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ae9bda342e5dc9542b21b432437dfe332" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getMinPosLimit</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ac826a020da936cf288682cb6798026c5" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getMotionSubspaceVector</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a036281e499435c35f6337648800a1a46" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getPositionDerivativeVelocityJacobian</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1add97d0d292274cc456afa2671bdcc655" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getPosLimits</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ab70d106f4802464e0a39949c3be328a6" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getRestTransform</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a86b866a94a73033fce6f1118526196f8" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ab7a434b4d6a0d05858478de55ad11bb4" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getStaticFriction</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ad3b89c9e25a876c197053e68fa9e7ada" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getTransform</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a48823c4c84871c42567165600bef710c" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>getTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ae2ca9d6846ed46244a232c1707746099" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a0ce75c983a521ef1977e0498fd84fa7a" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>link1</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a48261dc22a116aba5dc76b8c20457808" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>link1_X_link2</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a9acba9ba438107516ab10118be67c401" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>link1_X_link2_at_rest</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a5053768175c86ba160071f5c48b3e239" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>link2</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a1f92e40bcd4922fa69fa9251526c0d92" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>link2_X_link1</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a7626067f0829e1d9c8ae3af435dff8b8" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>m_center_wrt_link1</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a425f5ae5cc08edee16740d4b8a793360" prot="protected" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>m_DOFsOffset</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a872555afe6bfd9b14fb6bbea08968003" prot="protected" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>m_index</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>m_posCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ac76b9ec07a437154076270a5101d3570" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>normalizeJointPosCoords</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a1f932911587cba3201064eae99787c71" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>normalizeQuaternion</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a949c4863e2d75d1d309d4a70ce22d6ed" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>q_previous</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ad382febaee7aab75182487e3e7c367e0" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>resetAxisBuffers</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1adb9adf2f0d3ab5b3e269e209520ea643" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>resetBuffers</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ae58c2b653cc605bc210c213bf4021ea6" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>S_link1_link2</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a825400c4ee32a58445eae550ec105435" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>S_link2_link1</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ab78cf32b9be287a67b1db72951259f7d" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1abf6c4559224cd3de3b1e6c779a3dafb8" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setDamping</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1aa07ece34d86d5988f9ef060163f0ce5b" prot="public" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>setJointCenter</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a61576a14d6c6ab81e0762d6e78851ad7" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setJointDynamicsType</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1aa9a555e5f26050cd375a42da96c53e39" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setJointPosCoordsToRest</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a396ea876b931d17dc8e03949bce6625a" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setPosLimits</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1adcbe0e09dd56be8fab15ebcfa5d96888" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a82f964b4aefa299b60aa4b558160eff4" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>setStaticFriction</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1ae4840e6a75c08dada7fad9f193068c64" prot="public" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>SphericalJoint</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a74517ac3c83476b2fe07c38e775b6ef2" prot="public" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>SphericalJoint</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a40db5b94cc1e6103fe1d21eb881b7219" prot="public" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>SphericalJoint</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a06313e044c5ed4a8e0da1e1c8ebb91ed" prot="private" virt="non-virtual"><scope>iDynTree::SphericalJoint</scope><name>updateBuffers</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::SphericalJoint</scope><name>~IJoint</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a723d226cd4e943ac3a2b5b69a3b1c833" prot="public" virt="pure-virtual"><scope>iDynTree::SphericalJoint</scope><name>~MovableJointImpl</name></member>
+      <member refid="classiDynTree_1_1SphericalJoint_1a166ed2bc01fabd47daeb8c032f4b9f44" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>~SphericalJoint</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

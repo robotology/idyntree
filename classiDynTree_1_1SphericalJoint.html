@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>iDynTree::IJoint class | iDynTree master</title>
+  <title>iDynTree::SphericalJoint class | iDynTree master</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
   <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
   <link rel="icon" href="favicon-dark.png" type="image/png" />
@@ -58,43 +58,30 @@
     <div class="m-row">
       <div class="m-col-l-10 m-push-l-1">
         <h1>
-          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>IJoint <span class="m-thin">class</span>
-          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="IJoint_8h.html">&lt;iDynTree/IJoint.h&gt;</a></div>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>SphericalJoint <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="SphericalJoint_8h.html">&lt;iDynTree/SphericalJoint.h&gt;</a></div>
         </h1>
-        <p>Interface (i.e.</p>
+        <p>Class representing a spherical joint, i.e.</p>
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
               Reference
               <ul>
-                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
-                <li><a href="#methods-to-set-joint">Methods to set joint</a></li>
-                <li><a href="#limit-handling-methods">Limit handling methods.</a></li>
-                <li><a href="#joint-dynamics-methods">Joint dynamics methods.</a></li>
-                <li><a href="#methods-to-manipulate-joint-positions">Methods to manipulate joint positions</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>abstract class) exposed by classes that implement a Joint. A Joint is the basic representation of the motion allowed between two links.</p><p>This interface is mean to be used by kinematics and dynamics algorithm to query informations related to a joint and the relations (relative position, relative twist, relative acceleration) that it imposes to the connected links.</p><p>The design of this class is heavily inspired by the Simbody implementation of joints, as described in this article:</p><p>Seth, Ajay, et al. &quot;Minimal formulation of joint motion for biomechanisms.&quot; Nonlinear dynamics 62.1-2 (2010): 291-303.</p><p>Other sources of inspiration are RBDL, DART and Featherstone book.</p><p>With respect to all this implementation we model the joints as undirected quantities, i.e. as object in which information can be queryied in symmetric way with respect to the attached links. This mean there is no parent and child link, but the joint is attached to two link, and the interface is agnostic with respect to which link the code considers as &quot;parent&quot; or &quot;child&quot;.</p>
-        <section id="derived-classes">
-          <h2><a href="#derived-classes">Derived classes</a></h2>
+<p>a joint that constrains two links to have the same position but allows any relative orientation (3 rotational degrees of freedom).</p><p>The joint state is parameterized using a unit quaternion q = [qw, qx, qy, qz] (4 position coordinates), and the angular velocity ω expressed in the first link frame (3 velocity coordinates).</p><p>Note: The quaternion follows the real/imaginary (w,x,y,z) convention used by iDynTree, where w is the real part and (x,y,z) is the imaginary part.</p><p>The 6D spatial vectors (velocity, acceleration, forces) follow the linear/angular (linear first, angular second) convention used by iDynTree.</p>
+        <section id="base-classes">
+          <h2><a href="#base-classes">Base classes</a></h2>
           <dl class="m-doc">
             <dt>
               <div class="m-doc-template">template&lt;unsigned int nrOfPosCoords, unsigned int nrOfDOFs&gt;</div>
-              class <a href="classiDynTree_1_1MovableJointImpl.html" class="m-doc">MovableJointImpl</a>
-            </dt>
-            <dd>Base template for implementation of non-fixed joints.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1FixedJoint.html" class="m-doc">FixedJoint</a>
-            </dt>
-            <dd>Class representing a fixed joint, i.e.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;unsigned int nrOfPosCoords, unsigned int nrOfDOFs&gt;</div>
-              class <a href="classiDynTree_1_1MovableJointImpl.html" class="m-doc">MovableJointImpl</a>
+              class <a href="classiDynTree_1_1MovableJointImpl.html" class="m-doc">MovableJointImpl&lt;4, 3&gt;</a>
             </dt>
             <dd>Base template for implementation of non-fixed joints.</dd>
           </dl>
@@ -102,306 +89,219 @@
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
-            <dt id="ac989ee81d08959eca68666aa6740cb16">
-              <span class="m-doc-wrap-bumper"><a href="#ac989ee81d08959eca68666aa6740cb16" class="m-doc-self">~IJoint</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt id="ae4840e6a75c08dada7fad9f193068c64">
+              <span class="m-doc-wrap-bumper"><a href="#ae4840e6a75c08dada7fad9f193068c64" class="m-doc-self">SphericalJoint</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
-            <dd>Denstructor.</dd>
+            <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a74517ac3c83476b2fe07c38e775b6ef2" class="m-doc">SphericalJoint</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2)</span>
+            </dt>
+            <dd>Constructor in which the LinkIndex to which the joint is attached are not specified.</dd>
+            <dt id="a40db5b94cc1e6103fe1d21eb881b7219">
+              <span class="m-doc-wrap-bumper"><a href="#a40db5b94cc1e6103fe1d21eb881b7219" class="m-doc-self">SphericalJoint</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SphericalJoint.html" class="m-doc">SphericalJoint</a>&amp; other)</span>
+            </dt>
+            <dd>Copy constructor.</dd>
+            <dt id="a166ed2bc01fabd47daeb8c032f4b9f44">
+              <span class="m-doc-wrap-bumper"><a href="#a166ed2bc01fabd47daeb8c032f4b9f44" class="m-doc-self">~SphericalJoint</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
           </dl>
         </section>
         <section id="pub-methods">
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
-            <dt id="a021ac00a8b2e9e519f930baad1bc1fa2">
-              <span class="m-doc-wrap-bumper">auto <a href="#a021ac00a8b2e9e519f930baad1bc1fa2" class="m-doc-self">clone</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1IJoint.html" class="m-doc">IJoint</a>* <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt id="ad4223aca4cfa8492b50b24449a45de03">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad4223aca4cfa8492b50b24449a45de03" class="m-doc-self">clone</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1IJoint.html" class="m-doc">IJoint</a>* <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Clone the joint object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords</a>(</span><span class="m-doc-wrap">) const -&gt; unsigned int <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Get the number of coordinates used to represent the position of the joint.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs</a>(</span><span class="m-doc-wrap">) const -&gt; unsigned int <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Get the number of degrees of freedom of the joint.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac712be0a8eb4b09eed3f9d8a42b4e765" class="m-doc">getPositionDerivativeVelocityJacobian</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jntPos,
-              <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&lt;double&gt;&amp; positionDerivative_J_velocity) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Get the <a href="classiDynTree_1_1IJoint.html#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1IJoint.html#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs()</a> matrix that maps the joint velocity to the derivative of the joint position.</dd>
-          </dl>
-        </section>
-        <section id="methods-to-set-joint">
-          <h2><a href="#methods-to-set-joint">Methods to set joint</a></h2>
-<p>Methods to set joint informations (used when building a model)</p>
-          <dl class="m-doc">
-            <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aafd1101e91ea337a451d62f0160a819c" class="m-doc">setAttachedLinks</a>(</span><span class="m-doc-wrap">const LinkIndex link1,
-              const LinkIndex link2) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#ab78cf32b9be287a67b1db72951259f7d" class="m-doc">setAttachedLinks</a>(</span><span class="m-doc-wrap">const LinkIndex link1,
+              const LinkIndex link2) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the two links at which the joint is attached.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a770aadc1a6e13bce3af213707fcf2d84" class="m-doc">setRestTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2) <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">void <a href="#adcbe0e09dd56be8fab15ebcfa5d96888" class="m-doc">setRestTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the transform between the link2 frame and link1 frame at joint position 0 (or at the identity configuration element for complex joints).</dd>
-            <dt id="abe3efda09a0c3d94c021891de447aaa8">
-              <span class="m-doc-wrap-bumper">auto <a href="#abe3efda09a0c3d94c021891de447aaa8" class="m-doc-self">getFirstAttachedLink</a>(</span><span class="m-doc-wrap">) const -&gt; LinkIndex <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt id="a20fff9ddd8df8f243cc3cde64152dc3c">
+              <span class="m-doc-wrap-bumper">auto <a href="#a20fff9ddd8df8f243cc3cde64152dc3c" class="m-doc-self">getFirstAttachedLink</a>(</span><span class="m-doc-wrap">) const -&gt; LinkIndex <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the first link attached to the joint.</dd>
-            <dt id="a1c55168bcc2dbd7b1fd58737a6bb46d8">
-              <span class="m-doc-wrap-bumper">auto <a href="#a1c55168bcc2dbd7b1fd58737a6bb46d8" class="m-doc-self">getSecondAttachedLink</a>(</span><span class="m-doc-wrap">) const -&gt; LinkIndex <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt id="a86b866a94a73033fce6f1118526196f8">
+              <span class="m-doc-wrap-bumper">auto <a href="#a86b866a94a73033fce6f1118526196f8" class="m-doc-self">getSecondAttachedLink</a>(</span><span class="m-doc-wrap">) const -&gt; LinkIndex <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the second link attached to the joint.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a7b6fb4c82687601810f3696e9605f1e0" class="m-doc">getRestTransform</a>(</span><span class="m-doc-wrap">const LinkIndex child,
-              const LinkIndex parent) const -&gt; <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab70d106f4802464e0a39949c3be328a6" class="m-doc">getRestTransform</a>(</span><span class="m-doc-wrap">const LinkIndex child,
+              const LinkIndex parent) const -&gt; <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the transform between the link parent and the link child at joint position 0 (or at the identity configuration element for complex joints).</dd>
-            <dt id="a2b0c23cad4da4e748ecdaf009805f767">
-              <span class="m-doc-wrap-bumper">auto <a href="#a2b0c23cad4da4e748ecdaf009805f767" class="m-doc-self">getTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+            <dt id="ad3b89c9e25a876c197053e68fa9e7ada">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad3b89c9e25a876c197053e68fa9e7ada" class="m-doc-self">getTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const LinkIndex child,
-              const LinkIndex parent) const -&gt; const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; <span class="m-label m-flat m-warning">pure virtual</span></span>
+              const LinkIndex parent) const -&gt; const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the transform between the parent and the child, such that: p_child = child_H_parent*p_parent, where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the parent frame.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a0dd24dad1882bc1df35a1832275fbfbb" class="m-doc">getTransformDerivative</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+              <span class="m-doc-wrap-bumper">auto <a href="#a48823c4c84871c42567165600bef710c" class="m-doc">getTransformDerivative</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const LinkIndex child,
               const LinkIndex parent,
-              const int posCoord_i) const -&gt; <a href="classiDynTree_1_1TransformDerivative.html" class="m-doc">TransformDerivative</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+              const int posCoord_i) const -&gt; <a href="classiDynTree_1_1TransformDerivative.html" class="m-doc">TransformDerivative</a> <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the derivative of the transform with respect to a position coordinate.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3a89b6fd2358c8435e7f794d3857045f" class="m-doc">getMotionSubspaceVector</a>(</span><span class="m-doc-wrap">int dof_i,
+              <span class="m-doc-wrap-bumper">auto <a href="#ac826a020da936cf288682cb6798026c5" class="m-doc">getMotionSubspaceVector</a>(</span><span class="m-doc-wrap">int dof_i,
               const LinkIndex child,
-              const LinkIndex parent) const -&gt; <a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a> <span class="m-label m-flat m-warning">pure virtual</span></span>
+              const LinkIndex parent = LINK_INVALID_INDEX) const -&gt; <a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a> <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the motion subspace vector corresponding to the i-th dof of the joint, i.e.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aa41dbb76816e2621d6924ca052b07881" class="m-doc">computeChildPosVelAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+              <span class="m-doc-wrap-bumper">void <a href="#a6a2ad355eb68a3ba9c5e3abbfbb9ddf5" class="m-doc">computeChildPosVelAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntVel,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntAcc,
               <a href="classiDynTree_1_1LinkPositions.html" class="m-doc">LinkPositions</a>&amp; linkPositions,
               <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVels,
               <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkAccs,
               const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-flat m-warning">pure virtual</span></span>
+              const LinkIndex parent) const <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Compute the position, velocity and acceleration of link child, given the position, velocty and acceleration of link parent and the joint position, velocity and acceleration.</dd>
-            <dt id="a6d0853757008a1db34d41da9276df81e">
-              <span class="m-doc-wrap-bumper">void <a href="#a6d0853757008a1db34d41da9276df81e" class="m-doc-self">computeChildVelAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+            <dt id="a73a14825d62e9b88df41a1bf7736591a">
+              <span class="m-doc-wrap-bumper">void <a href="#a73a14825d62e9b88df41a1bf7736591a" class="m-doc-self">computeChildVel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntVel,
+              <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVels,
+              const LinkIndex child,
+              const LinkIndex parent) const <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Compute the velocity of child, given the velocity of parent and the joint position, velocity.</dd>
+            <dt id="a5238aa880f1805f981e1de5e343913cc">
+              <span class="m-doc-wrap-bumper">void <a href="#a5238aa880f1805f981e1de5e343913cc" class="m-doc-self">computeChildVelAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntVel,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntAcc,
               <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVels,
               <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkAccs,
               const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-flat m-warning">pure virtual</span></span>
+              const LinkIndex parent) const <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Compute the velocity and acceleration of child, given the velocity and acceleration of parent and the joint position, velocity and acceleration.</dd>
-            <dt id="a70c9055aafb46f65fe767664c873625e">
-              <span class="m-doc-wrap-bumper">void <a href="#a70c9055aafb46f65fe767664c873625e" class="m-doc-self">computeChildVel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
-              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntVel,
-              <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVels,
-              const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Compute the velocity of child, given the velocity of parent and the joint position, velocity.</dd>
-            <dt id="a65509300297221192cb46189b2a473d1">
-              <span class="m-doc-wrap-bumper">void <a href="#a65509300297221192cb46189b2a473d1" class="m-doc-self">computeChildAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+            <dt id="ac25d78a707e10e17321c1bf99406911a">
+              <span class="m-doc-wrap-bumper">void <a href="#ac25d78a707e10e17321c1bf99406911a" class="m-doc-self">computeChildAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntVel,
               const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVels,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntAcc,
               <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkAccs,
               const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-flat m-warning">pure virtual</span></span>
+              const LinkIndex parent) const <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Compute the (body-fixed) acceleration of a child link given the (body-fixed) acceleration of the parent.</dd>
-            <dt id="a3c16a316f95e25ad0af2768cb4c991a3">
-              <span class="m-doc-wrap-bumper">void <a href="#a3c16a316f95e25ad0af2768cb4c991a3" class="m-doc-self">computeChildBiasAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+            <dt id="a130ee52253aa1a415668951eb3c4a757">
+              <span class="m-doc-wrap-bumper">void <a href="#a130ee52253aa1a415668951eb3c4a757" class="m-doc-self">computeChildBiasAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntVel,
               const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVels,
               <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkBiasAccs,
               const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-flat m-warning">pure virtual</span></span>
+              const LinkIndex parent) const <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Compute the (body-fixed) bias acceleration of a child link given the (body-fixed) bias acceleration of the parent.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a495a50c9623710812f49cf6258ecb68e" class="m-doc">computeJointTorque</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+              <span class="m-doc-wrap-bumper">void <a href="#aa20cf53d939a9d8db30e4419344ec993" class="m-doc">computeJointTorque</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const <a href="classiDynTree_1_1Wrench.html" class="m-doc">Wrench</a>&amp; internalWrench,
               const LinkIndex linkThatAppliesWrench,
               const LinkIndex linkOnWhichWrenchIsApplied,
-              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntTorques) const <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntTorques) const <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied.</dd>
-            <dt id="ac0d964dac9538e66a922b1ae50e7b662">
-              <span class="m-doc-wrap-bumper">void <a href="#ac0d964dac9538e66a922b1ae50e7b662" class="m-doc-self">setIndex</a>(</span><span class="m-doc-wrap">JointIndex&amp; _index) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Set the index of the joint in the <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a> Joint serialization.</dd>
-            <dt id="a2accdcd6fbf7e222a3c7c6b99130934e">
-              <span class="m-doc-wrap-bumper">auto <a href="#a2accdcd6fbf7e222a3c7c6b99130934e" class="m-doc-self">getIndex</a>(</span><span class="m-doc-wrap">) const -&gt; JointIndex <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Get the index of the joint in the model Joint serialization.</dd>
-            <dt id="a6c80be1fe40e5a71cc56c4fbe625535f">
-              <span class="m-doc-wrap-bumper">void <a href="#a6c80be1fe40e5a71cc56c4fbe625535f" class="m-doc-self">setPosCoordsOffset</a>(</span><span class="m-doc-wrap">const size_t _index) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Set the offset of the position coordinates of this joint in the position coordiantes serialization of the model.</dd>
-            <dt id="afc71b67f79c9bbdd8f2925ee08ca0323">
-              <span class="m-doc-wrap-bumper">auto <a href="#afc71b67f79c9bbdd8f2925ee08ca0323" class="m-doc-self">getPosCoordsOffset</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Get the offset of the position coordinates of this joint in the position coordiantes serialization of the model.</dd>
-            <dt id="af65fc0f65b8367404848bc41ea87347c">
-              <span class="m-doc-wrap-bumper">void <a href="#af65fc0f65b8367404848bc41ea87347c" class="m-doc-self">setDOFsOffset</a>(</span><span class="m-doc-wrap">const size_t _index) <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Set the offset of the coordinates of this joint in the velocity/acceleration coordiantes serialization of the model.</dd>
-            <dt id="a64aa264a72088da07844f25176a25bee">
-              <span class="m-doc-wrap-bumper">auto <a href="#a64aa264a72088da07844f25176a25bee" class="m-doc-self">getDOFsOffset</a>(</span><span class="m-doc-wrap">) const -&gt; size_t <span class="m-label m-flat m-warning">pure virtual</span></span>
-            </dt>
-            <dd>Get the offset of the position coordinates of joint in the velocity/acceleration coordiantes serialization of the model.</dd>
-          </dl>
-        </section>
-        <section id="limit-handling-methods">
-          <h2><a href="#limit-handling-methods">Limit handling methods.</a></h2>
-<p>Methods for handling physical limits of joints.</p><p>The model used for limits is rather simple: a joint can have limits (being bounded) or not.</p><p>In the current version the limits are supported only for simple joints in which the velocity is the derivative of the position coordinate, and then <a href="classiDynTree_1_1IJoint.html#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords()</a> is equal to <a href="classiDynTree_1_1IJoint.html#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs()</a> . The limits for such joints are specified by two constant vectors of dimension <a href="classiDynTree_1_1IJoint.html#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs()</a>, the vector of minimum positions and the vector of maximum positions.</p>
-          <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af4badbd5891621e847a61d767cffd25e" class="m-doc">hasPosLimits</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae2ca9d6846ed46244a232c1707746099" class="m-doc">hasPosLimits</a>(</span><span class="m-doc-wrap">) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Method to check if the joint has limits.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4f0f02e57295ad4b0ec94fe19fc3e0c0" class="m-doc">enablePosLimits</a>(</span><span class="m-doc-wrap">const bool enable) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac63625c756f5e78063424c0d60dbda8b" class="m-doc">enablePosLimits</a>(</span><span class="m-doc-wrap">const bool enable) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Method to set if the joint has limits.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab734574da90b6d2ae24169ea180a081b" class="m-doc">getPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
+              <span class="m-doc-wrap-bumper">auto <a href="#add97d0d292274cc456afa2671bdcc655" class="m-doc">getPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
               double&amp; min,
-              double&amp; max) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              double&amp; max) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get min and max position limits of the joint, for the _index dof.</dd>
-            <dt id="a46dbe9dec3ef79f6d5662269f6fe8f65">
-              <span class="m-doc-wrap-bumper">auto <a href="#a46dbe9dec3ef79f6d5662269f6fe8f65" class="m-doc-self">getMinPosLimit</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt id="ae9bda342e5dc9542b21b432437dfe332">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae9bda342e5dc9542b21b432437dfe332" class="m-doc-self">getMinPosLimit</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the min position limit of the joint, bindings-friendly version.</dd>
-            <dt id="a047913be4f7bdeb35d785e4ad71d5395">
-              <span class="m-doc-wrap-bumper">auto <a href="#a047913be4f7bdeb35d785e4ad71d5395" class="m-doc-self">getMaxPosLimit</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">pure virtual</span></span>
+            <dt id="aca0b0fe6594d72170b0dac1d15dc1a2b">
+              <span class="m-doc-wrap-bumper">auto <a href="#aca0b0fe6594d72170b0dac1d15dc1a2b" class="m-doc-self">getMaxPosLimit</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the max position limit of the joint, bindings-friendly version.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abe8111f1f3c76043300efbb3c7f2a3b5" class="m-doc">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
+              <span class="m-doc-wrap-bumper">auto <a href="#a396ea876b931d17dc8e03949bce6625a" class="m-doc">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
               double min,
-              double max) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              double max) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the position limits for a dof the joint.</dd>
-          </dl>
-        </section>
-        <section id="joint-dynamics-methods">
-          <h2><a href="#joint-dynamics-methods">Joint dynamics methods.</a></h2>
-<p>Methods for handling representation of joint dynamics.</p><p>The precise definition of &quot;joint dynamics&quot; is not precisely, as depending on the specific application the kind of joint dynamics model can be different, and in some case it may be even just instantaneous models (for example, when only the damping is considered).</p><p>For the type of joint dynamics supported, see the iDynTree::JointDynamicsType enum documentation.</p><p>The joint dynamics model are used in the following contexts:</p><ul><li>In methods to serialize and deserialize URDF files</li></ul><p>The joint dynamics are <strong>not used at all</strong> in classes to compute kinematics and dynamics quantities, such as <a href="classiDynTree_1_1KinDynComputations.html" class="m-doc">iDynTree::<wbr />KinDynComputations</a> .</p>
-          <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a88283dce433282d14bbef2923df51991" class="m-doc">getJointDynamicsType</a>(</span><span class="m-doc-wrap">) const -&gt; JointDynamicsType <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a50059b12e9d0d87712991aedb2ae08a0" class="m-doc">getJointDynamicsType</a>(</span><span class="m-doc-wrap">) const -&gt; JointDynamicsType <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Method to get the specific joint dynamics type used for the joint.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a111e73d874ceb657d1dc12652d2bae59" class="m-doc">setJointDynamicsType</a>(</span><span class="m-doc-wrap">const JointDynamicsType enable) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a61576a14d6c6ab81e0762d6e78851ad7" class="m-doc">setJointDynamicsType</a>(</span><span class="m-doc-wrap">const JointDynamicsType enable) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Method to get the specific joint dynamics type used for the joint.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aeee6672963b46042d8ea39cfc0d21815" class="m-doc">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double damping) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#abf6c4559224cd3de3b1e6c779a3dafb8" class="m-doc">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double damping) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set damping parameter of the joint, for the _index dof.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab82b3ad35b2de9b0ef8ab96b851213d3" class="m-doc">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double staticFriction) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a82f964b4aefa299b60aa4b558160eff4" class="m-doc">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double staticFriction) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set static friction parameter of the joint, for the _index dof.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac77c3cc0888a52342049ff5436ff532d" class="m-doc">getDamping</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a28c5e9d8f2200f6bedb0de12b2b04606" class="m-doc">getDamping</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the damping coefficient of the joint.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aa51240f3f2f74d9b9115ac679b013d6c" class="m-doc">getStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab7a434b4d6a0d05858478de55ad11bb4" class="m-doc">getStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Get the static friction coefficient of the joint.</dd>
-          </dl>
-        </section>
-        <section id="methods-to-manipulate-joint-positions">
-          <h2><a href="#methods-to-manipulate-joint-positions">Methods to manipulate joint positions</a></h2>
-<p>Methods to manipulate joint positions</p>
-          <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aadfed093b3e13c2da08668958d99167c" class="m-doc">setJointPosCoordsToRest</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a036281e499435c35f6337648800a1a46" class="m-doc">getPositionDerivativeVelocityJacobian</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jntPos,
+              <a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;double&gt;&amp; positionDerivative_J_velocity) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Get the <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> matrix that maps the joint velocity to the derivative of the joint position.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa9a555e5f26050cd375a42da96c53e39" class="m-doc">setJointPosCoordsToRest</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the position coordinates of the joint to the rest position (i.e zero for simple joints)</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ad0d3771bd046afa8a19d0c3af18f577c" class="m-doc">normalizeJointPosCoords</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac76b9ec07a437154076270a5101d3570" class="m-doc">normalizeJointPosCoords</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Normalize the position coordinates of the joint in the specified joint positios vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa07ece34d86d5988f9ef060163f0ce5b" class="m-doc">setJointCenter</a>(</span><span class="m-doc-wrap">const LinkIndex link,
+              const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp; center)</span>
+            </dt>
+            <dd>Set the joint center relative to the given link.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ac470edb00c2106bf4f0a7211e871ac22" class="m-doc">getJointCenter</a>(</span><span class="m-doc-wrap">const LinkIndex link) const -&gt; <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a></span>
+            </dt>
+            <dd>Get the joint center relative to the given link.</dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a149ddcf05f6328fdd3ecbe38a0fca4a0"><div>
+          <section class="m-doc-details" id="a74517ac3c83476b2fe07c38e775b6ef2"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">unsigned int iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc-self">getNrOfPosCoords</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a74517ac3c83476b2fe07c38e775b6ef2" class="m-doc-self">SphericalJoint</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2)</span></span>
             </h3>
-            <p>Get the number of coordinates used to represent the position of the joint.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the number of position coordinates.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>For joints whose configuration is in R^n, the number of position coordinates should match the number of degrees of freedom of the joint.</p>
+            <p>Constructor in which the LinkIndex to which the joint is attached are not specified.</p>
+<p>This constructor is typically used together with the <a href="classiDynTree_1_1Model.html#aaead8cb8c5367589131a877ea121c573" class="m-doc">Model::<wbr />addJoint</a> or <a href="classiDynTree_1_1Model.html#a764763adb198032da5bdfcfc5f6a0748" class="m-doc">Model::<wbr />addJointAndLink</a> methods, in which the links to which the joint is attached are specified by the other arguments of the method.</p>
           </div></section>
-          <section class="m-doc-details" id="a83027b41a495e097b8cf534059516440"><div>
+          <section class="m-doc-details" id="ab78cf32b9be287a67b1db72951259f7d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">unsigned int iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a83027b41a495e097b8cf534059516440" class="m-doc-self">getNrOfDOFs</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Get the number of degrees of freedom of the joint.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <tfoot>
-                <tr>
-                  <th style="width: 1%">Returns</th>
-                  <td>the number of degrees of freedom of the joint.</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>This should be a number between 0 (fixed joint) and 6 (free joint).</p>
-          </div></section>
-          <section class="m-doc-details" id="ac712be0a8eb4b09eed3f9d8a42b4e765"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac712be0a8eb4b09eed3f9d8a42b4e765" class="m-doc-self">getPositionDerivativeVelocityJacobian</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jntPos,
-              <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&lt;double&gt;&amp; positionDerivative_J_velocity) const <span class="m-label m-warning">pure virtual</span></span></span>
-            </h3>
-            <p>Get the <a href="classiDynTree_1_1IJoint.html#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1IJoint.html#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs()</a> matrix that maps the joint velocity to the derivative of the joint position.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">jntPos&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>Joint position coordinates (must have at least <a href="classiDynTree_1_1IJoint.html#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords()</a> elements)</td>
-                </tr>
-                <tr>
-                  <td>positionDerivative_J_velocity&nbsp;<span class="m-label m-flat m-warning">out</span></td>
-                  <td>The Jacobian matrix (must be properly sized)</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if the computation was successful, false otherwise</td>
-                </tr>
-              </tfoot>
-            </table>
-<p>This method computes the Jacobian matrix J such that: d/dt(q_pos) = J * q_vel where:</p><ul><li>q_pos are the position coordinates of the joint (<a href="classiDynTree_1_1IJoint.html#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords()</a> elements)</li><li>q_vel are the velocity coordinates of the joint (<a href="classiDynTree_1_1IJoint.html#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs()</a> elements)</li><li>J is the <a href="classiDynTree_1_1IJoint.html#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1IJoint.html#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs()</a> Jacobian matrix</li></ul><p>For simple joints where position and velocity have the same parameterization, this is the identity matrix. For joints with different position and velocity parameterizations (e.g., SO(2) joints using complex numbers for position but angular velocity for DOF), this matrix encodes the relationship.</p>
-          </div></section>
-          <section class="m-doc-details" id="aafd1101e91ea337a451d62f0160a819c"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aafd1101e91ea337a451d62f0160a819c" class="m-doc-self">setAttachedLinks</a>(</span><span class="m-doc-wrap">const LinkIndex link1,
-              const LinkIndex link2) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab78cf32b9be287a67b1db72951259f7d" class="m-doc-self">setAttachedLinks</a>(</span><span class="m-doc-wrap">const LinkIndex link1,
+              const LinkIndex link2) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set the two links at which the joint is attached.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -420,27 +320,27 @@
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a770aadc1a6e13bce3af213707fcf2d84"><div>
+          <section class="m-doc-details" id="adcbe0e09dd56be8fab15ebcfa5d96888"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a770aadc1a6e13bce3af213707fcf2d84" class="m-doc-self">setRestTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adcbe0e09dd56be8fab15ebcfa5d96888" class="m-doc-self">setRestTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set the transform between the link2 frame and link1 frame at joint position 0 (or at the identity configuration element for complex joints).</p>
 <p>The link1_T_link2 is transform that transforms a quantity expressed in link2 frame in a quantity expressed in the link1 frame, when the joint is in the 0 position : p_link1 = link1_T_link2*p_link2 .</p>
           </div></section>
-          <section class="m-doc-details" id="a7b6fb4c82687601810f3696e9605f1e0"><div>
+          <section class="m-doc-details" id="ab70d106f4802464e0a39949c3be328a6"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7b6fb4c82687601810f3696e9605f1e0" class="m-doc-self">getRestTransform</a>(</span><span class="m-doc-wrap">const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab70d106f4802464e0a39949c3be328a6" class="m-doc-self">getRestTransform</a>(</span><span class="m-doc-wrap">const LinkIndex child,
+              const LinkIndex parent) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Get the transform between the link parent and the link child at joint position 0 (or at the identity configuration element for complex joints).</p>
 <p>Such that: p_child = child_H_parent*p_parent where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the child frame.</p>
           </div></section>
-          <section class="m-doc-details" id="a0dd24dad1882bc1df35a1832275fbfbb"><div>
+          <section class="m-doc-details" id="a48823c4c84871c42567165600bef710c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1TransformDerivative.html" class="m-doc">TransformDerivative</a> iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0dd24dad1882bc1df35a1832275fbfbb" class="m-doc-self">getTransformDerivative</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1TransformDerivative.html" class="m-doc">TransformDerivative</a> iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a48823c4c84871c42567165600bef710c" class="m-doc-self">getTransformDerivative</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const LinkIndex child,
               const LinkIndex parent,
-              const int posCoord_i) const <span class="m-label m-warning">pure virtual</span></span></span>
+              const int posCoord_i) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Get the derivative of the transform with respect to a position coordinate.</p>
 <p>In particular, if the selected position coordinate is <svg class="m-math" style="width: 0.585em; height: 0.778em; vertical-align: -0.243em;" viewBox="0 -5.147373 5.61916 7.47198">
@@ -491,13 +391,13 @@ $q$
 <use x='188.046991' y='-2.324596' xlink:href='#eq2-g1-64'/>
 <use x='194.876859' y='-2.324596' xlink:href='#eq2-g1-113'/>
 </g>
-</svg></div><p>If posCoord_i is not &gt;= 0 and &lt; <a href="classiDynTree_1_1IJoint.html#a149ddcf05f6328fdd3ecbe38a0fca4a0" class="m-doc">getNrOfPosCoords()</a>, the returned value is undefined.</p>
+</svg></div><p>If posCoord_i is not &gt;= 0 and &lt; <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a>, the returned value is undefined.</p>
           </div></section>
-          <section class="m-doc-details" id="a3a89b6fd2358c8435e7f794d3857045f"><div>
+          <section class="m-doc-details" id="ac826a020da936cf288682cb6798026c5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a> iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3a89b6fd2358c8435e7f794d3857045f" class="m-doc-self">getMotionSubspaceVector</a>(</span><span class="m-doc-wrap">int dof_i,
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a> iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac826a020da936cf288682cb6798026c5" class="m-doc-self">getMotionSubspaceVector</a>(</span><span class="m-doc-wrap">int dof_i,
               const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-warning">pure virtual</span></span></span>
+              const LinkIndex parent = LINK_INVALID_INDEX) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Get the motion subspace vector corresponding to the i-th dof of the joint, i.e.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -508,29 +408,29 @@ $q$
                 </tr>
               </tfoot>
             </table>
-<p>the i-th column of the motion subspace matrix. The motion subspace matrix is the matrix that maps the joint velocity to the relative twist between the two links.</p><p>In particular the motion subspace vector of the i-th dof is the S vector such that v_child = S_{child,parent}*dq_i + child_X_parent*v_parent if the velocities associated to all other DOFs of the joint are considered zero, where v_child and v_parent are the left-trivialized (body) velocities of the link child and parent.</p><p>See &quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Silvio Traversaro - Section 3.2 <a href="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https:/<wbr />/<wbr />traversaro.github.io/<wbr />preprints/<wbr />traversaro-phd-thesis.pdf</a> for more details.</p><p>If dof_i is not &gt;= 0 and &lt; <a href="classiDynTree_1_1IJoint.html#a83027b41a495e097b8cf534059516440" class="m-doc">getNrOfDOFs()</a>, the returned value is undefined.</p><aside class="m-note m-info"><h4>Note</h4><p>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix.</p></aside>
+<p>the i-th column of the motion subspace matrix. The motion subspace matrix is the matrix that maps the joint velocity to the relative twist between the two links.</p><p>In particular the motion subspace vector of the i-th dof is the S vector such that v_child = S_{child,parent}*dq_i + child_X_parent*v_parent if the velocities associated to all other DOFs of the joint are considered zero, where v_child and v_parent are the left-trivialized (body) velocities of the link child and parent.</p><p>See &quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Silvio Traversaro - Section 3.2 <a href="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https:/<wbr />/<wbr />traversaro.github.io/<wbr />preprints/<wbr />traversaro-phd-thesis.pdf</a> for more details.</p><p>If dof_i is not &gt;= 0 and &lt; <a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a>, the returned value is undefined.</p><aside class="m-note m-info"><h4>Note</h4><p>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="aa41dbb76816e2621d6924ca052b07881"><div>
+          <section class="m-doc-details" id="a6a2ad355eb68a3ba9c5e3abbfbb9ddf5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa41dbb76816e2621d6924ca052b07881" class="m-doc-self">computeChildPosVelAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6a2ad355eb68a3ba9c5e3abbfbb9ddf5" class="m-doc-self">computeChildPosVelAcc</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntVel,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntAcc,
               <a href="classiDynTree_1_1LinkPositions.html" class="m-doc">LinkPositions</a>&amp; linkPositions,
               <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVels,
               <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkAccs,
               const LinkIndex child,
-              const LinkIndex parent) const <span class="m-label m-warning">pure virtual</span></span></span>
+              const LinkIndex parent) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Compute the position, velocity and acceleration of link child, given the position, velocty and acceleration of link parent and the joint position, velocity and acceleration.</p>
 <p>The position, velocity and acceleration of link child are directly saved in the linkPositions, linkVels and linkAccs arguments.</p>
           </div></section>
-          <section class="m-doc-details" id="a495a50c9623710812f49cf6258ecb68e"><div>
+          <section class="m-doc-details" id="aa20cf53d939a9d8db30e4419344ec993"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a495a50c9623710812f49cf6258ecb68e" class="m-doc-self">computeJointTorque</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa20cf53d939a9d8db30e4419344ec993" class="m-doc-self">computeJointTorque</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntPos,
               const <a href="classiDynTree_1_1Wrench.html" class="m-doc">Wrench</a>&amp; internalWrench,
               const LinkIndex linkThatAppliesWrench,
               const LinkIndex linkOnWhichWrenchIsApplied,
-              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntTorques) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; jntTorques) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -561,9 +461,9 @@ $q$
               </tbody>
             </table>
           </div></section>
-          <section class="m-doc-details" id="af4badbd5891621e847a61d767cffd25e"><div>
+          <section class="m-doc-details" id="ae2ca9d6846ed46244a232c1707746099"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af4badbd5891621e847a61d767cffd25e" class="m-doc-self">hasPosLimits</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae2ca9d6846ed46244a232c1707746099" class="m-doc-self">hasPosLimits</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Method to check if the joint has limits.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -575,9 +475,9 @@ $q$
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a4f0f02e57295ad4b0ec94fe19fc3e0c0"><div>
+          <section class="m-doc-details" id="ac63625c756f5e78063424c0d60dbda8b"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4f0f02e57295ad4b0ec94fe19fc3e0c0" class="m-doc-self">enablePosLimits</a>(</span><span class="m-doc-wrap">const bool enable) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac63625c756f5e78063424c0d60dbda8b" class="m-doc-self">enablePosLimits</a>(</span><span class="m-doc-wrap">const bool enable) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Method to set if the joint has limits.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -589,11 +489,11 @@ $q$
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ab734574da90b6d2ae24169ea180a081b"><div>
+          <section class="m-doc-details" id="add97d0d292274cc456afa2671bdcc655"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab734574da90b6d2ae24169ea180a081b" class="m-doc-self">getPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#add97d0d292274cc456afa2671bdcc655" class="m-doc-self">getPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
               double&amp; min,
-              double&amp; max) const <span class="m-label m-warning">pure virtual</span></span></span>
+              double&amp; max) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Get min and max position limits of the joint, for the _index dof.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -622,18 +522,18 @@ $q$
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="abe8111f1f3c76043300efbb3c7f2a3b5"><div>
+          <section class="m-doc-details" id="a396ea876b931d17dc8e03949bce6625a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abe8111f1f3c76043300efbb3c7f2a3b5" class="m-doc-self">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a396ea876b931d17dc8e03949bce6625a" class="m-doc-self">setPosLimits</a>(</span><span class="m-doc-wrap">const size_t _index,
               double min,
-              double max) <span class="m-label m-warning">pure virtual</span></span></span>
+              double max) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set the position limits for a dof the joint.</p>
 <aside class="m-note m-info"><h4>Note</h4><p>This just sets the internal position limits of the joint. To set them as enabled, you need to call the enablePosLimits(true) method.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a88283dce433282d14bbef2923df51991"><div>
+          <section class="m-doc-details" id="a50059b12e9d0d87712991aedb2ae08a0"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">JointDynamicsType iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a88283dce433282d14bbef2923df51991" class="m-doc-self">getJointDynamicsType</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">JointDynamicsType iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a50059b12e9d0d87712991aedb2ae08a0" class="m-doc-self">getJointDynamicsType</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Method to get the specific joint dynamics type used for the joint.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -646,9 +546,9 @@ $q$
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a111e73d874ceb657d1dc12652d2bae59"><div>
+          <section class="m-doc-details" id="a61576a14d6c6ab81e0762d6e78851ad7"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a111e73d874ceb657d1dc12652d2bae59" class="m-doc-self">setJointDynamicsType</a>(</span><span class="m-doc-wrap">const JointDynamicsType enable) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a61576a14d6c6ab81e0762d6e78851ad7" class="m-doc-self">setJointDynamicsType</a>(</span><span class="m-doc-wrap">const JointDynamicsType enable) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Method to get the specific joint dynamics type used for the joint.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -661,10 +561,10 @@ $q$
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="aeee6672963b46042d8ea39cfc0d21815"><div>
+          <section class="m-doc-details" id="abf6c4559224cd3de3b1e6c779a3dafb8"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeee6672963b46042d8ea39cfc0d21815" class="m-doc-self">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double damping) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abf6c4559224cd3de3b1e6c779a3dafb8" class="m-doc-self">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double damping) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set damping parameter of the joint, for the _index dof.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -690,10 +590,10 @@ $q$
             </table>
 <p>The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
           </div></section>
-          <section class="m-doc-details" id="ab82b3ad35b2de9b0ef8ab96b851213d3"><div>
+          <section class="m-doc-details" id="a82f964b4aefa299b60aa4b558160eff4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab82b3ad35b2de9b0ef8ab96b851213d3" class="m-doc-self">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
-              double staticFriction) <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a82f964b4aefa299b60aa4b558160eff4" class="m-doc-self">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double staticFriction) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set static friction parameter of the joint, for the _index dof.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -719,23 +619,52 @@ $q$
             </table>
 <p>The static friction coefficient is expressed in N for a prismatic joint, N∙m for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
           </div></section>
-          <section class="m-doc-details" id="ac77c3cc0888a52342049ff5436ff532d"><div>
+          <section class="m-doc-details" id="a28c5e9d8f2200f6bedb0de12b2b04606"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">double iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac77c3cc0888a52342049ff5436ff532d" class="m-doc-self">getDamping</a>(</span><span class="m-doc-wrap">const size_t _index) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">double iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a28c5e9d8f2200f6bedb0de12b2b04606" class="m-doc-self">getDamping</a>(</span><span class="m-doc-wrap">const size_t _index) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Get the damping coefficient of the joint.</p>
 <p>The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
           </div></section>
-          <section class="m-doc-details" id="aa51240f3f2f74d9b9115ac679b013d6c"><div>
+          <section class="m-doc-details" id="ab7a434b4d6a0d05858478de55ad11bb4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">double iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa51240f3f2f74d9b9115ac679b013d6c" class="m-doc-self">getStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">double iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab7a434b4d6a0d05858478de55ad11bb4" class="m-doc-self">getStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Get the static friction coefficient of the joint.</p>
 <p>The unit is N for a prismatic joint, N∙m for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
           </div></section>
-          <section class="m-doc-details" id="aadfed093b3e13c2da08668958d99167c"><div>
+          <section class="m-doc-details" id="a036281e499435c35f6337648800a1a46"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aadfed093b3e13c2da08668958d99167c" class="m-doc-self">setJointPosCoordsToRest</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a036281e499435c35f6337648800a1a46" class="m-doc-self">getPositionDerivativeVelocityJacobian</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; jntPos,
+              <a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;double&gt;&amp; positionDerivative_J_velocity) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Get the <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> matrix that maps the joint velocity to the derivative of the joint position.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">jntPos&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Joint position coordinates (must have at least <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> elements)</td>
+                </tr>
+                <tr>
+                  <td>positionDerivative_J_velocity&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>The Jacobian matrix (must be properly sized)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the computation was successful, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This method computes the Jacobian matrix J such that: d/dt(q_pos) = J * q_vel where:</p><ul><li>q_pos are the position coordinates of the joint (<a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> elements)</li><li>q_vel are the velocity coordinates of the joint (<a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> elements)</li><li>J is the <a href="classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a" class="m-doc">getNrOfPosCoords()</a> × <a href="classiDynTree_1_1MovableJointImpl.html#af9d78ba6c319f68f16f9ff9ef58fd124" class="m-doc">getNrOfDOFs()</a> Jacobian matrix</li></ul><p>For simple joints where position and velocity have the same parameterization, this is the identity matrix. For joints with different position and velocity parameterizations (e.g., SO(2) joints using complex numbers for position but angular velocity for DOF), this matrix encodes the relationship.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa9a555e5f26050cd375a42da96c53e39"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa9a555e5f26050cd375a42da96c53e39" class="m-doc-self">setJointPosCoordsToRest</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Set the position coordinates of the joint to the rest position (i.e zero for simple joints)</p>
             <table class="m-table m-fullwidth m-flat">
@@ -756,9 +685,9 @@ $q$
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="ad0d3771bd046afa8a19d0c3af18f577c"><div>
+          <section class="m-doc-details" id="ac76b9ec07a437154076270a5101d3570"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />IJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0d3771bd046afa8a19d0c3af18f577c" class="m-doc-self">normalizeJointPosCoords</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const <span class="m-label m-warning">pure virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac76b9ec07a437154076270a5101d3570" class="m-doc-self">normalizeJointPosCoords</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; jntPos) const <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Normalize the position coordinates of the joint in the specified joint positios vector.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -779,6 +708,51 @@ $q$
               </tfoot>
             </table>
 <p>If the joint is using a minimal representation for the position coordinates, this method does not anything, but if the joint uses a constrained representation such as unit complex numbers of unit quaternions, this method normalizes the position coordinates, ensuring that one of the closest valid positiion coordinates is used.</p>
+          </div></section>
+          <section class="m-doc-details" id="aa07ece34d86d5988f9ef060163f0ce5b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa07ece34d86d5988f9ef060163f0ce5b" class="m-doc-self">setJointCenter</a>(</span><span class="m-doc-wrap">const LinkIndex link,
+              const <a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&amp; center)</span></span>
+            </h3>
+            <p>Set the joint center relative to the given link.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">link</td>
+                  <td>one of <a href="classiDynTree_1_1SphericalJoint.html#a20fff9ddd8df8f243cc3cde64152dc3c" class="m-doc">getFirstAttachedLink()</a> or <a href="classiDynTree_1_1SphericalJoint.html#a86b866a94a73033fce6f1118526196f8" class="m-doc">getSecondAttachedLink()</a></td>
+                </tr>
+                <tr>
+                  <td>center</td>
+                  <td>vector from the link origin to the joint center, expressed in that link frame</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ac470edb00c2106bf4f0a7211e871ac22"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1Position.html" class="m-doc">Position</a> iDynTree::<wbr />SphericalJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac470edb00c2106bf4f0a7211e871ac22" class="m-doc-self">getJointCenter</a>(</span><span class="m-doc-wrap">const LinkIndex link) const</span></span>
+            </h3>
+            <p>Get the joint center relative to the given link.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">link</td>
+                  <td>one of <a href="classiDynTree_1_1SphericalJoint.html#a20fff9ddd8df8f243cc3cde64152dc3c" class="m-doc">getFirstAttachedLink()</a> or <a href="classiDynTree_1_1SphericalJoint.html#a86b866a94a73033fce6f1118526196f8" class="m-doc">getSecondAttachedLink()</a></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>vector from the link origin to the joint center, expressed in that link frame</td>
+                </tr>
+              </tfoot>
+            </table>
           </div></section>
         </section>
       </div>

@@ -31,6 +31,7 @@
     <includedby refid="RevoluteSO2Joint_8h" local="no">iDynTree/RevoluteSO2Joint.h</includedby>
     <includedby refid="Sensors_8h" local="no">iDynTree/Sensors.h</includedby>
     <includedby refid="SolidShapes_8h" local="no">iDynTree/SolidShapes.h</includedby>
+    <includedby refid="SphericalJoint_8h" local="no">iDynTree/SphericalJoint.h</includedby>
     <includedby refid="YARPConversionsImplementation_8h" local="no">iDynTree/YARPConversionsImplementation.h</includedby>
     <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/SimpleLeggedOdometry.h</includedby>
     <incdepgraph>

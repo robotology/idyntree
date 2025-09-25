@@ -3770,6 +3770,57 @@
     <member refid="classiDynTree_1_1Sphere_1a93470b75fe93a3066be33307aaf7d918" kind="function"><name>getRadius</name></member>
     <member refid="classiDynTree_1_1Sphere_1a9b7ad07891cd9b85fb3648b05b97e63b" kind="function"><name>setRadius</name></member>
   </compound>
+  <compound refid="classiDynTree_1_1SphericalJoint" kind="class"><name>iDynTree::SphericalJoint</name>
+    <member refid="classiDynTree_1_1SphericalJoint_1a0ce75c983a521ef1977e0498fd84fa7a" kind="variable"><name>link1</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a5053768175c86ba160071f5c48b3e239" kind="variable"><name>link2</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a9acba9ba438107516ab10118be67c401" kind="variable"><name>link1_X_link2_at_rest</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a7626067f0829e1d9c8ae3af435dff8b8" kind="variable"><name>m_center_wrt_link1</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a949c4863e2d75d1d309d4a70ce22d6ed" kind="variable"><name>q_previous</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a48261dc22a116aba5dc76b8c20457808" kind="variable"><name>link1_X_link2</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a1f92e40bcd4922fa69fa9251526c0d92" kind="variable"><name>link2_X_link1</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ae58c2b653cc605bc210c213bf4021ea6" kind="variable"><name>S_link1_link2</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a825400c4ee32a58445eae550ec105435" kind="variable"><name>S_link2_link1</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a06313e044c5ed4a8e0da1e1c8ebb91ed" kind="function"><name>updateBuffers</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1adb9adf2f0d3ab5b3e269e209520ea643" kind="function"><name>resetBuffers</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ad382febaee7aab75182487e3e7c367e0" kind="function"><name>resetAxisBuffers</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a1f932911587cba3201064eae99787c71" kind="function"><name>normalizeQuaternion</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ae4840e6a75c08dada7fad9f193068c64" kind="function"><name>SphericalJoint</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a74517ac3c83476b2fe07c38e775b6ef2" kind="function"><name>SphericalJoint</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a40db5b94cc1e6103fe1d21eb881b7219" kind="function"><name>SphericalJoint</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a166ed2bc01fabd47daeb8c032f4b9f44" kind="function"><name>~SphericalJoint</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ad4223aca4cfa8492b50b24449a45de03" kind="function"><name>clone</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ab78cf32b9be287a67b1db72951259f7d" kind="function"><name>setAttachedLinks</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1adcbe0e09dd56be8fab15ebcfa5d96888" kind="function"><name>setRestTransform</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a20fff9ddd8df8f243cc3cde64152dc3c" kind="function"><name>getFirstAttachedLink</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a86b866a94a73033fce6f1118526196f8" kind="function"><name>getSecondAttachedLink</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ab70d106f4802464e0a39949c3be328a6" kind="function"><name>getRestTransform</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ad3b89c9e25a876c197053e68fa9e7ada" kind="function"><name>getTransform</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a48823c4c84871c42567165600bef710c" kind="function"><name>getTransformDerivative</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ac826a020da936cf288682cb6798026c5" kind="function"><name>getMotionSubspaceVector</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a6a2ad355eb68a3ba9c5e3abbfbb9ddf5" kind="function"><name>computeChildPosVelAcc</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a73a14825d62e9b88df41a1bf7736591a" kind="function"><name>computeChildVel</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a5238aa880f1805f981e1de5e343913cc" kind="function"><name>computeChildVelAcc</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ac25d78a707e10e17321c1bf99406911a" kind="function"><name>computeChildAcc</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a130ee52253aa1a415668951eb3c4a757" kind="function"><name>computeChildBiasAcc</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1aa20cf53d939a9d8db30e4419344ec993" kind="function"><name>computeJointTorque</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ae2ca9d6846ed46244a232c1707746099" kind="function"><name>hasPosLimits</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ac63625c756f5e78063424c0d60dbda8b" kind="function"><name>enablePosLimits</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1add97d0d292274cc456afa2671bdcc655" kind="function"><name>getPosLimits</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ae9bda342e5dc9542b21b432437dfe332" kind="function"><name>getMinPosLimit</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1aca0b0fe6594d72170b0dac1d15dc1a2b" kind="function"><name>getMaxPosLimit</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a396ea876b931d17dc8e03949bce6625a" kind="function"><name>setPosLimits</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a50059b12e9d0d87712991aedb2ae08a0" kind="function"><name>getJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a61576a14d6c6ab81e0762d6e78851ad7" kind="function"><name>setJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1abf6c4559224cd3de3b1e6c779a3dafb8" kind="function"><name>setDamping</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a82f964b4aefa299b60aa4b558160eff4" kind="function"><name>setStaticFriction</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a28c5e9d8f2200f6bedb0de12b2b04606" kind="function"><name>getDamping</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ab7a434b4d6a0d05858478de55ad11bb4" kind="function"><name>getStaticFriction</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1a036281e499435c35f6337648800a1a46" kind="function"><name>getPositionDerivativeVelocityJacobian</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1aa9a555e5f26050cd375a42da96c53e39" kind="function"><name>setJointPosCoordsToRest</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ac76b9ec07a437154076270a5101d3570" kind="function"><name>normalizeJointPosCoords</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1aa07ece34d86d5988f9ef060163f0ce5b" kind="function"><name>setJointCenter</name></member>
+    <member refid="classiDynTree_1_1SphericalJoint_1ac470edb00c2106bf4f0a7211e871ac22" kind="function"><name>getJointCenter</name></member>
+  </compound>
   <compound refid="structstate" kind="struct"><name>state</name>
   </compound>
   <compound refid="classiDynTree_1_1Span_1_1storage__type" kind="class"><name>iDynTree::Span::storage_type</name>
@@ -4379,6 +4430,7 @@
     <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a89707c27d3a57aa643323ca0666902dc" kind="enumvalue"><name>JOINT_REVOLUTE</name></member>
     <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7ab384e38147a05edd9a4064e45bee473e" kind="enumvalue"><name>JOINT_PRISMATIC</name></member>
     <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a359e4c290649bb8c74b43d86489a98fc" kind="enumvalue"><name>JOINT_REVOLUTE_SO2</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a9ebdbd2c8b1e85a49b05781cc821f088" kind="enumvalue"><name>JOINT_SPHERICAL</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" kind="enum"><name>SensorType</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" kind="enumvalue"><name>SIX_AXIS_FORCE_TORQUE</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" kind="enumvalue"><name>ACCELEROMETER</name></member>
@@ -5397,6 +5449,7 @@
     <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a89707c27d3a57aa643323ca0666902dc" kind="enumvalue"><name>JOINT_REVOLUTE</name></member>
     <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7ab384e38147a05edd9a4064e45bee473e" kind="enumvalue"><name>JOINT_PRISMATIC</name></member>
     <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a359e4c290649bb8c74b43d86489a98fc" kind="enumvalue"><name>JOINT_REVOLUTE_SO2</name></member>
+    <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a9ebdbd2c8b1e85a49b05781cc821f088" kind="enumvalue"><name>JOINT_SPHERICAL</name></member>
     <member refid="ModelTestUtils_8h_1a58a0753df108d195a8c90ff75805b397" kind="variable"><name>SIMPLE_JOINT_TYPES</name></member>
     <member refid="ModelTestUtils_8h_1a839997025ffcdd75bf67981792b456aa" kind="variable"><name>ALL_JOINT_TYPES</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
@@ -5499,6 +5552,8 @@
   <compound refid="Sensors_2ThreeAxisForceTorqueContactSensor_8h" kind="file"><name>ThreeAxisForceTorqueContactSensor.h</name>
   </compound>
   <compound refid="ThreeAxisForceTorqueContactSensor_8h" kind="file"><name>ThreeAxisForceTorqueContactSensor.h</name>
+  </compound>
+  <compound refid="SphericalJoint_8h" kind="file"><name>SphericalJoint.h</name>
   </compound>
   <compound refid="ModelCalibrationHelper_8h" kind="file"><name>ModelCalibrationHelper.h</name>
   </compound>

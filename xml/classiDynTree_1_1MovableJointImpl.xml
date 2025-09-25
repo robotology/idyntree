@@ -238,10 +238,23 @@
 <para>For more information on the assumption of the joint model, check the <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> interface. </para>
     </detaileddescription>
     <inheritancegraph>
+      <node id="7">
+        <label>iDynTree::SphericalJoint</label>
+        <link refid="classiDynTree_1_1SphericalJoint"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
       <node id="5">
         <label>iDynTree::RevoluteSO2Joint&lt; 2, 1 &gt;</label>
         <link refid="classiDynTree_1_1RevoluteSO2Joint"/>
         <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::MovableJointImpl&lt; 4, 3 &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="1" relation="template-instance">
+          <edgelabel>&lt; 4, 3 &gt;</edgelabel>
         </childnode>
       </node>
       <node id="4">
