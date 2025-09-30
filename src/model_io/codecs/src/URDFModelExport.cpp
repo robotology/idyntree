@@ -14,6 +14,9 @@
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/Traversal.h>
+#include <iDynTree/Axis.h>
+#include <iDynTree/SphericalJoint.h>
+#include <iDynTree/ModelTransformers.h>
 
 #include "URDFParsingUtils.h"
 
@@ -28,6 +31,7 @@
 
 namespace iDynTree
 {
+
 
 /*
  * This file uses extensivly the libxml2's tree API, see
@@ -365,7 +369,7 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
             std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint "
                       <<   model.getJointName(joint->getIndex()) << " to a URDF joint without moving the link frame of link "
                       << model.getLinkName(childLink->getIndex()) << " , because the axis origin is "
-                      << axis.getOrigin().toString() << " the axis direction is " << axis.getDirection().toString() 
+                      << axis.getOrigin().toString() << " the axis direction is " << axis.getDirection().toString()
                       << " and the distance between the axis and (0,0,0) is " << distanceBetweenAxisAndOrigin << std::endl;
             return false;
         }
@@ -515,8 +519,21 @@ bool URDFStringFromModel(const iDynTree::Model & model,
                          std::string & urdf_string,
                          const ModelExporterOptions options)
 {
-    bool ok = true;
+    Model processedModel;
+    // Convert spherical joints if option is enabled
+    if (options.exportSphericalJointsAsThreeRevoluteJoints) {
+        std::cerr<<"[INFO] URDFStringFromModel: Converting spherical joints to three revolute joints for URDF export" << std::endl;
+        if (!convertSphericalJointsToThreeRevoluteJoints(model, processedModel,
+                                                         options.sphericalJointFakeLinkPrefix,
+                                                         options.sphericalJointRevoluteJointPrefix)) {
+            std::cerr << "[ERROR] URDFStringFromModel: Failed to convert spherical joints for URDF export" << std::endl;
+            return false;
+        }
+    } else {
+        processedModel = model;
+    }
 
+    bool ok = true;
     xmlDocPtr urdf_xml = xmlNewDoc(BAD_CAST "1.0");
     xmlNodePtr robot = xmlNewNode(NULL, BAD_CAST "robot");
     // TODO(traversaro) properly export this :)
@@ -531,10 +548,10 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     std::string baseLink = options.baseLink;
     if (baseLink.empty())
     {
-        baseLink = model.getLinkName(model.getDefaultBaseLink());
+        baseLink = processedModel.getLinkName(processedModel.getDefaultBaseLink());
     }
 
-    LinkIndex baseLinkIndex = model.getLinkIndex(baseLink);
+    LinkIndex baseLinkIndex = processedModel.getLinkIndex(baseLink);
     if (baseLinkIndex == LINK_INVALID_INDEX)
     {
         std::cerr << "[ERROR] URDFStringFromModel : specified baseLink " << baseLink << " is not part of the model" << std::endl;
@@ -554,9 +571,9 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     ok = model.getLinkAdditionalFrames(baseLinkIndex, frameIndices);
     if (ok && frameIndices.size() >= 1 && options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase) {
         baseFakeLinkFrameIndex = frameIndices[0];
-        ok = ok && exportAdditionalFrame(model.getFrameName(baseFakeLinkFrameIndex),
-                                         model.getFrameTransform(baseFakeLinkFrameIndex),
-                                         model.getLinkName(model.getFrameLink(baseFakeLinkFrameIndex)),
+        ok = ok && exportAdditionalFrame(processedModel.getFrameName(baseFakeLinkFrameIndex),
+                                         processedModel.getFrameTransform(baseFakeLinkFrameIndex),
+                                         processedModel.getLinkName(processedModel.getFrameLink(baseFakeLinkFrameIndex)),
                                          FAKE_LINK_IS_PARENT,
                                          robot);
     }
@@ -564,43 +581,42 @@ bool URDFStringFromModel(const iDynTree::Model & model,
 
     // Create a Traversal
     Traversal exportTraversal;
-    if (!model.computeFullTreeTraversal(exportTraversal, baseLinkIndex))
+    if (!processedModel.computeFullTreeTraversal(exportTraversal, baseLinkIndex))
     {
         std::cerr << "[ERROR] URDFStringFromModel : error in computeFullTreeTraversal" << std::endl;
         xmlFreeDoc(urdf_xml);
         return false;
     }
 
-
     // Export links and joints following the traversal
     for (TraversalIndex trvIdx=0; trvIdx < static_cast<TraversalIndex>(exportTraversal.getNrOfVisitedLinks()); trvIdx++)
     {
         LinkConstPtr visitedLink = exportTraversal.getLink(trvIdx);
-        std::string visitedLinkName = model.getLinkName(visitedLink->getIndex());
+        std::string visitedLinkName = processedModel.getLinkName(visitedLink->getIndex());
 
         // Export parent joint, if this is not the base
         if (trvIdx != 0)
         {
             LinkConstPtr parentLink = exportTraversal.getParentLink(trvIdx);
             IJointConstPtr parentJoint = exportTraversal.getParentJoint(trvIdx);
-            ok = ok && exportJoint(parentJoint, parentLink, visitedLink,  model, robot);
+            ok = ok && exportJoint(parentJoint, parentLink, visitedLink,  processedModel, robot);
         }
 
         // Export link
-        ok = ok && exportLink(*visitedLink, visitedLinkName, model, robot);
+        ok = ok && exportLink(*visitedLink, visitedLinkName, processedModel, robot);
     }
 
     // Export all the additional frames.
-    for (FrameIndex frameIndex=model.getNrOfLinks(); frameIndex < static_cast<FrameIndex>(model.getNrOfFrames()); frameIndex++)
+    for (FrameIndex frameIndex=processedModel.getNrOfLinks(); frameIndex < static_cast<FrameIndex>(processedModel.getNrOfFrames()); frameIndex++)
     {
         // Check that the frame is not parent of the base link and that the
         // frame link is present in the traversal.
         if (frameIndex != baseFakeLinkFrameIndex
-            && exportTraversal.getTraversalIndexFromLinkIndex(model.getFrameLink(frameIndex)) != TRAVERSAL_INVALID_INDEX) {
+            && exportTraversal.getTraversalIndexFromLinkIndex(processedModel.getFrameLink(frameIndex)) != TRAVERSAL_INVALID_INDEX) {
 
-            ok = ok && exportAdditionalFrame(model.getFrameName(frameIndex),
-                                             model.getFrameTransform(frameIndex),
-                                             model.getLinkName(model.getFrameLink(frameIndex)),
+            ok = ok && exportAdditionalFrame(processedModel.getFrameName(frameIndex),
+                                             processedModel.getFrameTransform(frameIndex),
+                                             processedModel.getLinkName(processedModel.getFrameLink(frameIndex)),
                                              FAKE_LINK_IS_CHILD,
                                              robot);
         }
@@ -637,6 +653,7 @@ bool URDFFromModel(const iDynTree::Model & model,
     std::string xml_string;
     if (!URDFStringFromModel(model, xml_string, options))
     {
+        std::cerr << "[ERROR] URDFFromModel: Failed to generate URDF string from processed model" << std::endl;
         return false;
     }
 
@@ -646,6 +663,5 @@ bool URDFFromModel(const iDynTree::Model & model,
 
     return true;
 }
-
 
 }

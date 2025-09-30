@@ -6,8 +6,11 @@
 
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/SphericalJoint.h>
+#include <iDynTree/FixedJoint.h>
 #include <iDynTree/ModelTransformers.h>
 #include <iDynTree/SixAxisForceTorqueSensor.h>
+#include <iDynTree/Traversal.h>
 
 #include <algorithm>
 #include <unordered_set>
@@ -26,12 +29,12 @@ namespace iDynTree {
                                            const std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>>& visuals,
                                            const std::unordered_map<std::string, MaterialElement::MaterialInfo>& materialDatabase,
                                            ModelSolidShapes &modelGeometries);
-    
+
     URDFDocument::URDFDocument(XMLParserState& parserState, const iDynTree::ModelParserOptions& options)
     : XMLDocument(parserState), m_options(options) {}
 
     iDynTree::ModelParserOptions& URDFDocument::options() { return m_options; }
-    
+
     const iDynTree::Model& URDFDocument::model() const
     {
         return m_model;
@@ -41,7 +44,7 @@ namespace iDynTree {
     {
         return m_model.sensors();
     }
-    
+
     URDFDocument::~URDFDocument() {}
     std::shared_ptr<XMLElement> URDFDocument::rootElementForName(const std::string& name,
                                                                  const std::vector<std::string>& packageDirs)
@@ -55,7 +58,7 @@ namespace iDynTree {
             m_buffers.fixedJoints.clear();
             m_buffers.materials.clear();
 
-            return std::make_shared<RobotElement>(getParserState(), 
+            return std::make_shared<RobotElement>(getParserState(),
                                                   m_model,
                                                   m_buffers.sensorHelpers,
                                                   m_buffers.joints,
@@ -76,6 +79,7 @@ namespace iDynTree {
         std::unordered_set<std::string> childLinks = processJoints(m_model,
                                                                    m_buffers.joints,
                                                                    m_buffers.fixedJoints);
+
         // Get root
         std::vector<std::string> rootCandidates;
         for(unsigned link = 0; link < m_model.getNrOfLinks(); ++link)
@@ -155,6 +159,21 @@ namespace iDynTree {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to add collision elements to model");
         }
 
+        // Convert three consecutive revolute joints to spherical joints if requested
+        if (m_options.convertThreeRevoluteJointsToSphericalJoint) {
+            Model convertedModel;
+            std::cerr << "[INFO] Converting three consecutive revolute joints to spherical joints..." << std::endl;
+            if (!convertThreeRevoluteJointsToSphericalJoint(m_model, convertedModel,
+                                                            m_options.sphericalJointZeroMassTolerance,
+                                                            m_options.sphericalJointOrthogonalityTolerance,
+                                                            m_options.sphericalJointIntersectionTolerance)) {
+                reportError("URDFDocument", "documentHasBeenParsed", "Failed to convert three revolute joints to spherical joints");
+                m_model = Model();
+                return false;
+            }
+            m_model = convertedModel;
+        }
+
         return true;
     }
 
@@ -165,6 +184,7 @@ namespace iDynTree {
                                                   std::unordered_map<std::string, JointElement::JointInfo>& joints,
                                                   std::unordered_map<std::string, JointElement::JointInfo>& fixed_joints) {
         std::unordered_set<std::string> childLinks;
+
         for (auto &pair : joints) {
             std::string jointName = pair.first;
             std::shared_ptr<IJoint> joint = pair.second.joint;
@@ -320,14 +340,14 @@ namespace iDynTree {
                 else
                 {
                     FrameIndex urdfLinkFrameIndex = model.getFrameIndex(linkVisual.first);
-                    
+
                     if (urdfLinkFrameIndex == FRAME_INVALID_INDEX)
                     {
                         std::string message = std::string("Expecting ") + linkVisual.first + " to be a frame, but it was not found in the frame list";
                         reportError("URDFDocument", "addVisualPropertiesToModel", message.c_str());
                         return false;
                     }
-                    
+
                     link_H_geometry = model.getFrameTransform(urdfLinkFrameIndex) * visual.m_origin;
                     linkName = model.getLinkName(model.getFrameLink(urdfLinkFrameIndex));
                 }
@@ -365,5 +385,4 @@ namespace iDynTree {
         }
         return true;
     }
-    
-}
+} // namespace iDynTree
