@@ -63,6 +63,25 @@ struct ModelExporterOptions
     std::vector<std::string> xmlBlobs;
 
     /**
+     * If true, spherical joints are exported as a series of three revolute joints
+     * with fake intermediate links having zero mass/inertia.
+     * Default: true
+     */
+    bool exportSphericalJointsAsThreeRevoluteJoints;
+
+    /**
+     * Prefix used for fake links created when exporting spherical joints.
+     * Default: "spherical_fake_"
+     */
+    std::string sphericalJointFakeLinkPrefix;
+
+    /**
+     * Prefix used for revolute joints created when exporting spherical joints.
+     * Default: "spherical_rev_"
+     */
+    std::string sphericalJointRevoluteJointPrefix;
+
+    /**
      * Constructor.
      */
     ModelExporterOptions();

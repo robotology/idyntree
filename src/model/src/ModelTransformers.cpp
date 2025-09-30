@@ -20,10 +20,537 @@
 #include <unordered_map>
 #include <set>
 #include <vector>
+#include <iDynTree/Axis.h>
+#include <iDynTree/Direction.h>
 
 
 namespace iDynTree
 {
+
+struct SphericalJointConversion {
+    std::string originalJointName;
+    std::string parentLinkName;
+    std::string childLinkName;
+    Transform originalJointTransform;
+
+    // Generated components
+    std::string fakeLinkName1;
+    std::string fakeLinkName2;
+    std::string revJointName1; // X-axis rotation
+    std::string revJointName2; // Y-axis rotation
+    std::string revJointName3; // Z-axis rotation
+};
+
+struct ThreeRevoluteJointPattern {
+    std::string parentLinkName;
+    std::string intermediateLinkName1;
+    std::string intermediateLinkName2;
+    std::string childLinkName;
+
+    std::string revJointName1; // X-axis rotation
+    std::string revJointName2; // Y-axis rotation
+    std::string revJointName3; // Z-axis rotation
+
+    Transform parentLink_H_childLink;
+    Position jointCenter; // In parent link frame
+};
+
+// Helper function to check if three vectors are orthogonal
+bool areVectorsOrthogonal(const Direction& v1, const Direction& v2, const Direction& v3, double tolerance) {
+    return v1.isPerpendicular(v2, tolerance) &&
+           v1.isPerpendicular(v3, tolerance) &&
+           v2.isPerpendicular(v3, tolerance);
+}
+
+// Helper function to find intersection point of three lines
+bool findAxisIntersectionPoint(const Axis& axis1, const Axis& axis2, const Axis& axis3,
+                              Position& intersectionPoint, double tolerance) {
+    // For simplicity, we'll check if all axes pass through the same point
+    // by checking if the distance from each axis to a common point is within tolerance
+
+    // Use axis1's origin as reference point
+    Position refPoint = axis1.getOrigin();
+
+    double dist2 = axis2.getDistanceBetweenAxisAndPoint(refPoint);
+    double dist3 = axis3.getDistanceBetweenAxisAndPoint(refPoint);
+
+    if (dist2 < tolerance && dist3 < tolerance) {
+        intersectionPoint = refPoint;
+        return true;
+    }
+
+    return false;
+}
+
+bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
+                                                 Model& outputModel,
+                                                 bool exportSphericalJointsAsThreeRevoluteJoints,
+                                                 const std::string& sphericalJointFakeLinkPrefix,
+                                                 const std::string& sphericalJointRevoluteJointPrefix) {
+
+    if (!exportSphericalJointsAsThreeRevoluteJoints) {
+        outputModel = inputModel;
+        return true; // No conversion needed
+    }
+
+    std::vector<SphericalJointConversion> conversions;
+
+    // Find all spherical joints
+    for (JointIndex jointIdx = 0; jointIdx < inputModel.getNrOfJoints(); jointIdx++) {
+        const IJoint* joint = inputModel.getJoint(jointIdx);
+
+        // Check if this is a spherical joint using dynamic_cast
+        if (dynamic_cast<const SphericalJoint*>(joint)) {
+            SphericalJointConversion conversion;
+            conversion.originalJointName = inputModel.getJointName(jointIdx);
+
+            // Get parent and child links using the correct methods
+            LinkIndex parentLinkIdx = joint->getFirstAttachedLink();
+            LinkIndex childLinkIdx = joint->getSecondAttachedLink();
+
+            if (parentLinkIdx == LINK_INVALID_INDEX || childLinkIdx == LINK_INVALID_INDEX) {
+                std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Invalid parent or child link index for spherical joint "
+                          << conversion.originalJointName << std::endl;
+                return false;
+            }
+
+            conversion.parentLinkName = inputModel.getLinkName(parentLinkIdx);
+            conversion.childLinkName = inputModel.getLinkName(childLinkIdx);
+            conversion.originalJointTransform = joint->getRestTransform(parentLinkIdx, childLinkIdx);
+
+            // Generate names for fake components
+            conversion.fakeLinkName1 = sphericalJointFakeLinkPrefix + conversion.originalJointName + "_link1";
+            conversion.fakeLinkName2 = sphericalJointFakeLinkPrefix + conversion.originalJointName + "_link2";
+            conversion.revJointName1 = sphericalJointRevoluteJointPrefix + conversion.originalJointName + "_x";
+            conversion.revJointName2 = sphericalJointRevoluteJointPrefix + conversion.originalJointName + "_y";
+            conversion.revJointName3 = sphericalJointRevoluteJointPrefix + conversion.originalJointName + "_z";
+
+            // Check for name conflicts
+            if (inputModel.isLinkNameUsed(conversion.fakeLinkName1) ||
+                inputModel.isLinkNameUsed(conversion.fakeLinkName2)) {
+                std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Generated fake link names conflict with existing links for spherical joint "
+                          << conversion.originalJointName << std::endl;
+                return false;
+            }
+
+            if (inputModel.isJointNameUsed(conversion.revJointName1) ||
+                inputModel.isJointNameUsed(conversion.revJointName2) ||
+                inputModel.isJointNameUsed(conversion.revJointName3)) {
+                std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Generated revolute joint names conflict with existing joints for spherical joint "
+                          << conversion.originalJointName << std::endl;
+                return false;
+            }
+
+            conversions.push_back(conversion);
+        }
+    }
+
+    // If no spherical joints found, return original model
+    if (conversions.empty()) {
+        outputModel = inputModel;
+        return true;
+    }
+
+    // Create an intermediate model with the spherical joints converted
+    outputModel = Model();
+
+    // Copy all links from original model
+    for (LinkIndex linkIdx = 0; linkIdx < inputModel.getNrOfLinks(); linkIdx++) {
+        std::string linkName = inputModel.getLinkName(linkIdx);
+        outputModel.addLink(linkName, *inputModel.getLink(linkIdx));
+    }
+
+    // Add fake links for spherical joint conversions
+    for (const auto& conversion : conversions) {
+        // Create zero-mass fake links
+        SpatialInertia zeroInertia;
+        zeroInertia.zero();
+
+        Link fakeLinkData1;
+        fakeLinkData1.setInertia(zeroInertia);
+
+        Link fakeLinkData2;
+        fakeLinkData2.setInertia(zeroInertia);
+
+        if (outputModel.addLink(conversion.fakeLinkName1, fakeLinkData1) == LINK_INVALID_INDEX) {
+            std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Failed to add fake link "
+                      << conversion.fakeLinkName1 << " for spherical joint "
+                      << conversion.originalJointName << std::endl;
+            return false;
+        }
+
+        if (outputModel.addLink(conversion.fakeLinkName2, fakeLinkData2) == LINK_INVALID_INDEX) {
+            std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Failed to add fake link "
+                      << conversion.fakeLinkName2 << " for spherical joint "
+                      << conversion.originalJointName << std::endl;
+            return false;
+        }
+    }
+
+    // Copy all non-spherical joints
+    for (JointIndex jointIdx = 0; jointIdx < inputModel.getNrOfJoints(); jointIdx++) {
+        const IJoint* joint = inputModel.getJoint(jointIdx);
+
+        // Check if this is NOT a spherical joint using dynamic_cast
+        if (!dynamic_cast<const SphericalJoint*>(joint)) {
+            std::string jointName = inputModel.getJointName(jointIdx);
+            LinkIndex parentLinkIdx = joint->getFirstAttachedLink();
+            LinkIndex childLinkIdx = joint->getSecondAttachedLink();
+
+            std::string parentLinkName = inputModel.getLinkName(parentLinkIdx);
+            std::string childLinkName = inputModel.getLinkName(childLinkIdx);
+
+            if (outputModel.addJoint(parentLinkName, childLinkName, jointName, joint) == JOINT_INVALID_INDEX) {
+                std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Failed to add joint "
+                          << jointName << " to intermediate model" << std::endl;
+                return false;
+            }
+        }
+    }
+
+    // Add the three revolute joints for each spherical joint
+    for (const auto& conversion : conversions) {
+        Transform identity = Transform::Identity();
+
+        // Get the spherical joint to access its center
+        JointIndex originalJointIdx = inputModel.getJointIndex(conversion.originalJointName);
+        const IJoint* originalJoint = inputModel.getJoint(originalJointIdx);
+        const SphericalJoint* sphericalJoint = dynamic_cast<const SphericalJoint*>(originalJoint);
+
+        if (!sphericalJoint) {
+            std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Failed to cast joint "
+                      << conversion.originalJointName << " to SphericalJoint" << std::endl;
+            return false;
+        }
+
+        // Get the joint center - this is where all revolute joint axes should intersect
+        Position jointCenter = sphericalJoint->getJointCenter(sphericalJoint->getFirstAttachedLink());
+
+        // X-axis rotation joint (parent -> fake_link1)
+        Axis xAxis(Direction(1.0, 0.0, 0.0), jointCenter);
+        RevoluteJoint xRevJoint(conversion.originalJointTransform, xAxis);
+
+        if (outputModel.addJoint(conversion.parentLinkName,
+                                conversion.fakeLinkName1,
+                                conversion.revJointName1,
+                                &xRevJoint) == JOINT_INVALID_INDEX) {
+            std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Failed to add X-axis revolute joint "
+                      << conversion.revJointName1 << " for spherical joint "
+                      << conversion.originalJointName << std::endl;
+            return false;
+        }
+
+        // Y-axis rotation joint (fake_link1 -> fake_link2)
+        Axis yAxis(Direction(0.0, 1.0, 0.0), jointCenter);
+        RevoluteJoint yRevJoint(identity, yAxis);
+
+        if (outputModel.addJoint(conversion.fakeLinkName1,
+                                conversion.fakeLinkName2,
+                                conversion.revJointName2,
+                                &yRevJoint) == JOINT_INVALID_INDEX) {
+            std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Failed to add Y-axis revolute joint "
+                      << conversion.revJointName2 << " for spherical joint "
+                      << conversion.originalJointName << std::endl;
+            return false;
+        }
+
+        // Z-axis rotation joint (fake_link2 -> child)
+        Axis zAxis(Direction(0.0, 0.0, 1.0), jointCenter);
+        RevoluteJoint zRevJoint(identity, zAxis);
+
+        if (outputModel.addJoint(conversion.fakeLinkName2,
+                                conversion.childLinkName,
+                                conversion.revJointName3,
+                                &zRevJoint) == JOINT_INVALID_INDEX) {
+            std::cerr << "[ERROR] convertSphericalJointsToThreeRevoluteJoints: Failed to add Z-axis revolute joint "
+                      << conversion.revJointName3 << " for spherical joint "
+                      << conversion.originalJointName << std::endl;
+            return false;
+        }
+    }
+
+    // Copy additional frames from original model
+    for (FrameIndex frameIdx = inputModel.getNrOfLinks();
+         frameIdx < static_cast<FrameIndex>(inputModel.getNrOfFrames());
+         frameIdx++) {
+
+        std::string frameName = inputModel.getFrameName(frameIdx);
+        LinkIndex frameLinkIdx = inputModel.getFrameLink(frameIdx);
+        std::string frameLinkName = inputModel.getLinkName(frameLinkIdx);
+        Transform frameTransform = inputModel.getFrameTransform(frameIdx);
+
+        outputModel.addAdditionalFrameToLink(frameLinkName, frameName, frameTransform);
+    }
+
+    // Copy sensors from original model
+    outputModel.sensors() = inputModel.sensors();
+
+    // Copy package directories and other model metadata
+    outputModel.setPackageDirs(inputModel.getPackageDirs());
+
+    // Copy visual and collision shapes
+    for (LinkIndex linkIdx = 0; linkIdx < inputModel.getNrOfLinks(); linkIdx++) {
+        LinkIndex newLinkIdx = outputModel.getLinkIndex(inputModel.getLinkName(linkIdx));
+
+        // Copy visual shapes
+        auto& originalVisualShapes = inputModel.visualSolidShapes().getLinkSolidShapes();
+        auto& newVisualShapes = outputModel.visualSolidShapes().getLinkSolidShapes();
+
+        for (const auto* shape : originalVisualShapes[linkIdx]) {
+            newVisualShapes[newLinkIdx].push_back(shape->clone());
+        }
+
+        // Copy collision shapes
+        auto& originalCollisionShapes = inputModel.collisionSolidShapes().getLinkSolidShapes();
+        auto& newCollisionShapes = outputModel.collisionSolidShapes().getLinkSolidShapes();
+
+        for (const auto* shape : originalCollisionShapes[linkIdx]) {
+            newCollisionShapes[newLinkIdx].push_back(shape->clone());
+        }
+    }
+
+    // Set the default base link to maintain model consistency
+    if (inputModel.getDefaultBaseLink() != LINK_INVALID_INDEX) {
+        std::string baseLinkName = inputModel.getLinkName(inputModel.getDefaultBaseLink());
+        LinkIndex newBaseLinkIdx = outputModel.getLinkIndex(baseLinkName);
+        if (newBaseLinkIdx != LINK_INVALID_INDEX) {
+            outputModel.setDefaultBaseLink(newBaseLinkIdx);
+        }
+    }
+
+    return true;
+}
+
+bool convertThreeRevoluteJointsToSphericalJoint(const Model& inputModel,
+                                                Model& outputModel,
+                                                bool convertThreeRevoluteJointsToSphericalJoint,
+                                                double sphericalJointZeroMassTolerance,
+                                                double sphericalJointOrthogonalityTolerance,
+                                                double sphericalJointIntersectionTolerance) {
+
+    if (!convertThreeRevoluteJointsToSphericalJoint) {
+        outputModel = inputModel; // No conversion needed
+        return true;
+    }
+
+    std::vector<ThreeRevoluteJointPattern> detectedPatterns;
+    std::set<std::string> jointsToRemove;
+    std::set<std::string> linksToRemove;
+
+    // Compute traversal for systematic link exploration
+    Traversal traversal;
+    if (!inputModel.computeFullTreeTraversal(traversal)) {
+        outputModel = inputModel;
+        return false;
+    }
+
+    // Look for patterns by examining consecutive links in traversal
+    for (TraversalIndex trvIdx = 0; trvIdx < traversal.getNrOfVisitedLinks() - 3; trvIdx++) {
+        // Get four consecutive links from traversal
+        LinkConstPtr link0 = traversal.getLink(trvIdx);     // parent
+        LinkConstPtr link1 = traversal.getLink(trvIdx + 1); // intermediate1
+        LinkConstPtr link2 = traversal.getLink(trvIdx + 2); // intermediate2
+        LinkConstPtr link3 = traversal.getLink(trvIdx + 3); // child
+
+        // Get the three joints connecting them
+        IJointConstPtr joint01 = traversal.getParentJoint(trvIdx + 1);
+        IJointConstPtr joint12 = traversal.getParentJoint(trvIdx + 2);
+        IJointConstPtr joint23 = traversal.getParentJoint(trvIdx + 3);
+
+        // Skip if any joint is null (shouldn't happen in valid traversal)
+        if (!joint01 || !joint12 || !joint23) {
+            continue;
+        }
+
+        // Check intermediate links have zero mass
+        double mass1 = link1->getInertia().getMass();
+        double mass2 = link2->getInertia().getMass();
+
+        if (mass1 > sphericalJointZeroMassTolerance ||
+            mass2 > sphericalJointZeroMassTolerance) {
+            continue;
+        }
+
+        // Check all joints are revolute
+        const RevoluteJoint* revJoint01 = dynamic_cast<const RevoluteJoint*>(joint01);
+        const RevoluteJoint* revJoint12 = dynamic_cast<const RevoluteJoint*>(joint12);
+        const RevoluteJoint* revJoint23 = dynamic_cast<const RevoluteJoint*>(joint23);
+
+        if (!revJoint01 || !revJoint12 || !revJoint23) {
+            continue;
+        }
+
+        // Get joint axes
+        Axis axis01 = revJoint01->getAxis(link1->getIndex());
+        Axis axis12 = revJoint12->getAxis(link2->getIndex());
+        Axis axis23 = revJoint23->getAxis(link3->getIndex());
+
+        // Check orthogonality
+        if (!areVectorsOrthogonal(axis01.getDirection(), axis12.getDirection(), axis23.getDirection(),
+                                 sphericalJointOrthogonalityTolerance)) {
+            continue;
+        }
+
+        // Check axes intersection
+        Position intersectionPoint;
+        if (!findAxisIntersectionPoint(axis01, axis12, axis23, intersectionPoint,
+                                      sphericalJointIntersectionTolerance)) {
+            continue;
+        }
+
+        // Found valid pattern!
+        ThreeRevoluteJointPattern pattern;
+        pattern.parentLinkName = inputModel.getLinkName(link0->getIndex());
+        pattern.intermediateLinkName1 = inputModel.getLinkName(link1->getIndex());
+        pattern.intermediateLinkName2 = inputModel.getLinkName(link2->getIndex());
+        pattern.childLinkName = inputModel.getLinkName(link3->getIndex());
+        pattern.revJointName1 = inputModel.getJointName(joint01->getIndex());
+        pattern.revJointName2 = inputModel.getJointName(joint12->getIndex());
+        pattern.revJointName3 = inputModel.getJointName(joint23->getIndex());
+
+        // Compute combined transform
+        Transform transform01 = revJoint01->getRestTransform(link0->getIndex(), link1->getIndex());
+        Transform transform12 = revJoint12->getRestTransform(link1->getIndex(), link2->getIndex());
+        Transform transform23 = revJoint23->getRestTransform(link2->getIndex(), link3->getIndex());
+
+        pattern.parentLink_H_childLink = transform01 * transform12 * transform23;
+        pattern.jointCenter = intersectionPoint;
+
+        detectedPatterns.push_back(pattern);
+
+        // Mark for removal
+        jointsToRemove.insert(pattern.revJointName1);
+        jointsToRemove.insert(pattern.revJointName2);
+        jointsToRemove.insert(pattern.revJointName3);
+        linksToRemove.insert(pattern.intermediateLinkName1);
+        linksToRemove.insert(pattern.intermediateLinkName2);
+    }
+
+    if (detectedPatterns.empty()) {
+        outputModel = inputModel; // No patterns found
+        return true;
+    }
+
+    // Create output model by copying input model structure
+    outputModel = Model();
+    outputModel.setPackageDirs(inputModel.getPackageDirs());
+
+    // Copy all links except the intermediate ones to be removed
+    for (LinkIndex linkIdx = 0; linkIdx < inputModel.getNrOfLinks(); linkIdx++) {
+        std::string linkName = inputModel.getLinkName(linkIdx);
+        if (linksToRemove.find(linkName) == linksToRemove.end()) {
+            outputModel.addLink(linkName, *inputModel.getLink(linkIdx));
+        }
+    }
+
+    // Copy all joints except those being replaced by spherical joints
+    for (JointIndex jointIdx = 0; jointIdx < inputModel.getNrOfJoints(); jointIdx++) {
+        std::string jointName = inputModel.getJointName(jointIdx);
+        if (jointsToRemove.find(jointName) == jointsToRemove.end()) {
+            const IJoint* joint = inputModel.getJoint(jointIdx);
+            LinkIndex parentLinkIdx = joint->getFirstAttachedLink();
+            LinkIndex childLinkIdx = joint->getSecondAttachedLink();
+
+            std::string parentLinkName = inputModel.getLinkName(parentLinkIdx);
+            std::string childLinkName = inputModel.getLinkName(childLinkIdx);
+
+            // Skip if child link is one of the intermediate links being removed
+            if (linksToRemove.find(childLinkName) != linksToRemove.end()) {
+                continue;
+            }
+
+            outputModel.addJoint(parentLinkName, childLinkName, jointName, joint);
+        }
+    }
+
+    // Add spherical joints for each detected pattern
+    for (const auto& pattern : detectedPatterns) {
+        // Generate spherical joint name
+        std::string sphericalJointName = pattern.revJointName1;
+        if (sphericalJointName.find("_x") != std::string::npos) {
+            sphericalJointName = sphericalJointName.substr(0, sphericalJointName.find("_x"));
+        } else if (sphericalJointName.find("_rev_") != std::string::npos) {
+            sphericalJointName = sphericalJointName.substr(0, sphericalJointName.find("_rev_"));
+        }
+
+        // Create spherical joint
+        SphericalJoint sphericalJoint(pattern.parentLink_H_childLink);
+
+        // Set joint center
+        LinkIndex parentLinkIdx = outputModel.getLinkIndex(pattern.parentLinkName);
+        sphericalJoint.setJointCenter(parentLinkIdx, pattern.jointCenter);
+
+        // Add joint to output model
+        outputModel.addJoint(pattern.parentLinkName, pattern.childLinkName, sphericalJointName, &sphericalJoint);
+
+        std::cerr << "[INFO] Converted three revolute joints ("
+                  << pattern.revJointName1 << ", " << pattern.revJointName2 << ", " << pattern.revJointName3
+                  << ") to spherical joint " << sphericalJointName << std::endl;
+    }
+
+    // Copy additional frames, sensors, and visual/collision shapes
+    for (FrameIndex frameIdx = inputModel.getNrOfLinks();
+         frameIdx < static_cast<FrameIndex>(inputModel.getNrOfFrames());
+         frameIdx++) {
+
+        std::string frameName = inputModel.getFrameName(frameIdx);
+        LinkIndex frameLinkIdx = inputModel.getFrameLink(frameIdx);
+        std::string frameLinkName = inputModel.getLinkName(frameLinkIdx);
+
+        // Skip frames attached to removed links
+        if (linksToRemove.find(frameLinkName) != linksToRemove.end()) {
+            continue;
+        }
+
+        Transform frameTransform = inputModel.getFrameTransform(frameIdx);
+        outputModel.addAdditionalFrameToLink(frameLinkName, frameName, frameTransform);
+    }
+
+    // Copy sensors
+    outputModel.sensors() = inputModel.sensors();
+
+    // Copy visual and collision shapes for retained links
+    for (LinkIndex linkIdx = 0; linkIdx < inputModel.getNrOfLinks(); linkIdx++) {
+        std::string linkName = inputModel.getLinkName(linkIdx);
+        if (linksToRemove.find(linkName) != linksToRemove.end()) {
+            continue; // Skip removed links
+        }
+
+        LinkIndex newLinkIdx = outputModel.getLinkIndex(linkName);
+        if (newLinkIdx == LINK_INVALID_INDEX) {
+            continue;
+        }
+
+        // Copy visual shapes
+        auto& originalVisualShapes = inputModel.visualSolidShapes().getLinkSolidShapes();
+        auto& newVisualShapes = outputModel.visualSolidShapes().getLinkSolidShapes();
+
+        for (const auto* shape : originalVisualShapes[linkIdx]) {
+            newVisualShapes[newLinkIdx].push_back(shape->clone());
+        }
+
+        // Copy collision shapes
+        auto& originalCollisionShapes = inputModel.collisionSolidShapes().getLinkSolidShapes();
+        auto& newCollisionShapes = outputModel.collisionSolidShapes().getLinkSolidShapes();
+
+        for (const auto* shape : originalCollisionShapes[linkIdx]) {
+            newCollisionShapes[newLinkIdx].push_back(shape->clone());
+        }
+    }
+
+    // Set default base link
+    if (inputModel.getDefaultBaseLink() != LINK_INVALID_INDEX) {
+        std::string baseLinkName = inputModel.getLinkName(inputModel.getDefaultBaseLink());
+        if (linksToRemove.find(baseLinkName) == linksToRemove.end()) {
+            LinkIndex newBaseLinkIdx = outputModel.getLinkIndex(baseLinkName);
+            if (newBaseLinkIdx != LINK_INVALID_INDEX) {
+                outputModel.setDefaultBaseLink(newBaseLinkIdx);
+            }
+        }
+    }
+
+    return true;
+}
 
 /**
  * The condition for a link to be classified as "fake link" are:
