@@ -602,11 +602,7 @@ class MeshcatVisualizer:
             ok = model_loader.loadModelFromFile(path_str)
 
         else:
-            considered_joints_idyn = idyn.StringVector()
-            for joint in considered_joints:
-                considered_joints_idyn.push_back(joint)
-
-            ok = model_loader.loadReducedModelFromFile(path_str, considered_joints_idyn)
+            ok = model_loader.loadReducedModelFromFile(path_str, considered_joints)
 
         if not ok:
             msg = (
