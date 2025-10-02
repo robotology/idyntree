@@ -17,7 +17,7 @@ namespace iDynTree
     ModelParserOptions::ModelParserOptions()
     : addSensorFramesAsAdditionalFrames(true)
     , originalFilename("")
-    , convertThreeRevoluteJointsToSphericalJoint(false)
+    , convertThreeRevoluteJointsToSphericalJoint(true)
     , sphericalJointZeroMassTolerance(1e-6)
     , sphericalJointOrthogonalityTolerance(1e-6)
     , sphericalJointIntersectionTolerance(1e-6) {}

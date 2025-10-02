@@ -84,14 +84,8 @@ bool findAxisIntersectionPoint(const Axis& axis1, const Axis& axis2, const Axis&
 
 bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
                                                  Model& outputModel,
-                                                 bool exportSphericalJointsAsThreeRevoluteJoints,
                                                  const std::string& sphericalJointFakeLinkPrefix,
                                                  const std::string& sphericalJointRevoluteJointPrefix) {
-
-    if (!exportSphericalJointsAsThreeRevoluteJoints) {
-        outputModel = inputModel;
-        return true; // No conversion needed
-    }
 
     std::vector<SphericalJointConversion> conversions;
 
@@ -323,15 +317,9 @@ bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
 
 bool convertThreeRevoluteJointsToSphericalJoint(const Model& inputModel,
                                                 Model& outputModel,
-                                                bool convertThreeRevoluteJointsToSphericalJoint,
                                                 double sphericalJointZeroMassTolerance,
                                                 double sphericalJointOrthogonalityTolerance,
                                                 double sphericalJointIntersectionTolerance) {
-
-    if (!convertThreeRevoluteJointsToSphericalJoint) {
-        outputModel = inputModel; // No conversion needed
-        return true;
-    }
 
     std::vector<ThreeRevoluteJointPattern> detectedPatterns;
     std::set<std::string> jointsToRemove;

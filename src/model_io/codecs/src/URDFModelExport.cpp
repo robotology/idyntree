@@ -520,12 +520,17 @@ bool URDFStringFromModel(const iDynTree::Model & model,
                          const ModelExporterOptions options)
 {
     Model processedModel;
-    if (!convertSphericalJointsToThreeRevoluteJoints(model, processedModel,
-                                                     options.exportSphericalJointsAsThreeRevoluteJoints,
-                                                     options.sphericalJointFakeLinkPrefix,
-                                                     options.sphericalJointRevoluteJointPrefix)) {
-        std::cerr << "[ERROR] URDFStringFromModel: Failed to convert spherical joints for URDF export" << std::endl;
-        return false;
+
+    // Convert spherical joints if option is enabled
+    if (options.exportSphericalJointsAsThreeRevoluteJoints) {
+        if (!convertSphericalJointsToThreeRevoluteJoints(model, processedModel,
+                                                         options.sphericalJointFakeLinkPrefix,
+                                                         options.sphericalJointRevoluteJointPrefix)) {
+            std::cerr << "[ERROR] URDFStringFromModel: Failed to convert spherical joints for URDF export" << std::endl;
+            return false;
+        }
+    } else {
+        processedModel = model;
     }
 
     bool ok = true;
@@ -637,15 +642,6 @@ bool URDFFromModel(const iDynTree::Model & model,
                    const std::string & urdf_filename,
                    const ModelExporterOptions options)
 {
-    Model processedModel;
-    if (!convertSphericalJointsToThreeRevoluteJoints(model, processedModel,
-                                                     options.exportSphericalJointsAsThreeRevoluteJoints,
-                                                     options.sphericalJointFakeLinkPrefix,
-                                                     options.sphericalJointRevoluteJointPrefix)) {
-        std::cerr << "[ERROR] URDFFromModel: Failed to convert spherical joints for URDF export" << std::endl;
-        return false;
-    }
-
     std::ofstream ofs(urdf_filename.c_str());
 
     if( !ofs.is_open() )
@@ -656,7 +652,7 @@ bool URDFFromModel(const iDynTree::Model & model,
     }
 
     std::string xml_string;
-    if (!URDFStringFromModel(processedModel, xml_string, options))
+    if (!URDFStringFromModel(model, xml_string, options))
     {
         std::cerr << "[ERROR] URDFFromModel: Failed to generate URDF string from processed model" << std::endl;
         return false;

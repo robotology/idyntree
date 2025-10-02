@@ -222,7 +222,6 @@ bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
  *
  * @param inputModel The model with spherical joints
  * @param outputModel The model with spherical joints converted to three revolute joints
- * @param exportSphericalJointsAsThreeRevoluteJoints If false, no conversion is performed
  * @param sphericalJointFakeLinkPrefix Prefix for generated intermediate link names
  * @param sphericalJointRevoluteJointPrefix Prefix for generated revolute joint names
  *
@@ -230,7 +229,6 @@ bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
  */
 bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
                                                  Model& outputModel,
-                                                 bool exportSphericalJointsAsThreeRevoluteJoints = true,
                                                  const std::string& sphericalJointFakeLinkPrefix = "spherical_fake_",
                                                  const std::string& sphericalJointRevoluteJointPrefix = "spherical_rev_");
 
@@ -243,7 +241,6 @@ bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
  *
  * @param inputModel The model potentially containing three-revolute-joint patterns
  * @param outputModel The model with detected patterns converted to spherical joints
- * @param convertThreeRevoluteJointsToSphericalJoint If false, no conversion is performed
  * @param sphericalJointZeroMassTolerance Tolerance for considering intermediate links as zero-mass
  * @param sphericalJointOrthogonalityTolerance Tolerance for checking axis orthogonality
  * @param sphericalJointIntersectionTolerance Tolerance for checking axis intersection
@@ -252,7 +249,6 @@ bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
  */
 bool convertThreeRevoluteJointsToSphericalJoint(const Model& inputModel,
                                                 Model& outputModel,
-                                                bool convertThreeRevoluteJointsToSphericalJoint = true,
                                                 double sphericalJointZeroMassTolerance = 1e-6,
                                                 double sphericalJointOrthogonalityTolerance = 1e-6,
                                                 double sphericalJointIntersectionTolerance = 1e-6);

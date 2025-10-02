@@ -47,7 +47,7 @@ public:
     /**
      * If true, three consecutive revolute joints with zero-mass intermediate links
      * and orthogonal axes intersecting at a point are converted to a single spherical joint.
-     * Default: false
+     * Default: true
      */
     bool convertThreeRevoluteJointsToSphericalJoint;
 

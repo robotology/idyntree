@@ -15,7 +15,6 @@
 #include <algorithm>
 #include <unordered_set>
 #include <vector>
-#include <set>
 
 namespace iDynTree {
 
@@ -161,17 +160,18 @@ namespace iDynTree {
         }
 
         // Convert three consecutive revolute joints to spherical joints if requested
-        Model convertedModel;
-        if (!convertThreeRevoluteJointsToSphericalJoint(m_model, convertedModel,
-                                                        m_options.convertThreeRevoluteJointsToSphericalJoint,
-                                                        m_options.sphericalJointZeroMassTolerance,
-                                                        m_options.sphericalJointOrthogonalityTolerance,
-                                                        m_options.sphericalJointIntersectionTolerance)) {
-            reportError("URDFDocument", "documentHasBeenParsed", "Failed to convert three revolute joints to spherical joints");
-            m_model = Model();
-            return false;
+        if (m_options.convertThreeRevoluteJointsToSphericalJoint) {
+            Model convertedModel;
+            if (!convertThreeRevoluteJointsToSphericalJoint(m_model, convertedModel,
+                                                            m_options.sphericalJointZeroMassTolerance,
+                                                            m_options.sphericalJointOrthogonalityTolerance,
+                                                            m_options.sphericalJointIntersectionTolerance)) {
+                reportError("URDFDocument", "documentHasBeenParsed", "Failed to convert three revolute joints to spherical joints");
+                m_model = Model();
+                return false;
+            }
+            m_model = convertedModel;
         }
-        m_model = convertedModel;
 
         return true;
     }

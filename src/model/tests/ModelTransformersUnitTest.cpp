@@ -103,7 +103,7 @@ void testConvertSphericalJointsToThreeRevoluteJoints()
 
     // Convert spherical joint to three revolute joints
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, convertedModel, true,
+    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, convertedModel,
                                                                "fake_", "rev_"));
 
     // Check that the converted model has the correct structure
@@ -195,7 +195,7 @@ void testConvertThreeRevoluteJointsToSphericalJoint()
 
     // Convert three revolute joints to spherical joint
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel, true,
+    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel,
                                                               1e-6, 1e-6, 1e-6));
 
     // Check that the converted model has the correct structure
@@ -255,12 +255,12 @@ void testRoundTripSphericalJointConversion()
 
     // Convert to three revolute joints
     iDynTree::Model threeRevoluteModel;
-    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, threeRevoluteModel, true,
+    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, threeRevoluteModel,
                                                                "fake_", "rev_"));
 
     // Convert back to spherical joint
     iDynTree::Model backToSphericalModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(threeRevoluteModel, backToSphericalModel, true,
+    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(threeRevoluteModel, backToSphericalModel,
                                                               1e-6, 1e-6, 1e-6));
 
     // Verify we're back to the original structure
@@ -279,7 +279,7 @@ void testRoundTripSphericalJointConversion()
 
 void testSphericalJointConversionWithDisabledOptions()
 {
-    // Test that conversion functions do nothing when options are disabled
+    // Test that conversion functions work correctly when called/not called based on options
     iDynTree::Model originalModel;
 
     // Create a simple model with a spherical joint
@@ -301,22 +301,14 @@ void testSphericalJointConversionWithDisabledOptions()
     originalModel.addJoint("parent", "child", "spherical_joint", &sphericalJoint);
     originalModel.setDefaultBaseLink(parentLinkIdx);
 
-    // Test with conversion disabled
+    // Test conversion function always converts when called
     iDynTree::Model outputModel;
-    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, outputModel, false));
+    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, outputModel));
 
-    // Should be identical to original
-    ASSERT_IS_TRUE(outputModel.getNrOfLinks() == originalModel.getNrOfLinks());
-    ASSERT_IS_TRUE(outputModel.getNrOfJoints() == originalModel.getNrOfJoints());
-    ASSERT_IS_TRUE(outputModel.isJointNameUsed("spherical_joint"));
-
-    // Test three revolute to spherical with conversion disabled
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, outputModel, false));
-
-    // Should still be identical to original
-    ASSERT_IS_TRUE(outputModel.getNrOfLinks() == originalModel.getNrOfLinks());
-    ASSERT_IS_TRUE(outputModel.getNrOfJoints() == originalModel.getNrOfJoints());
-    ASSERT_IS_TRUE(outputModel.isJointNameUsed("spherical_joint"));
+    // Should be converted (different from original)
+    ASSERT_IS_TRUE(outputModel.getNrOfLinks() == 4); // 2 original + 2 fake
+    ASSERT_IS_TRUE(outputModel.getNrOfJoints() == 3); // 3 revolute joints
+    ASSERT_IS_TRUE(!outputModel.isJointNameUsed("spherical_joint"));
 
     std::cerr << "[TEST] testSphericalJointConversionWithDisabledOptions passed" << std::endl;
 }
@@ -365,7 +357,7 @@ void testSphericalJointConversionWithNonOrthogonalAxes()
 
     // Attempt conversion - should not detect pattern due to non-orthogonal axes
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel, true,
+    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel,
                                                               1e-6, 1e-6, 1e-6));
 
     // Should be unchanged (no conversion happened)
@@ -419,7 +411,7 @@ void testSphericalJointConversionWithNonZeroMassIntermediateLinks()
 
     // Attempt conversion - should not detect pattern due to non-zero mass intermediate links
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel, true,
+    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel,
                                                               1e-6, 1e-6, 1e-6));
 
     // Should be unchanged (no conversion happened)
