@@ -57,9 +57,9 @@ macro(idyntree_handle_dependency package)
   endif ()
 endmacro ()
 
-# Eigen is compulsory (minimum version 3.2.92)
+# Eigen is required
 if(NOT TARGET Eigen3::Eigen)
-  find_package(Eigen3 3.2.92 REQUIRED CONFIG)
+  find_package(Eigen3 REQUIRED CONFIG)
 endif()
 
 if(NOT TARGET LibXml2::LibXml2)
