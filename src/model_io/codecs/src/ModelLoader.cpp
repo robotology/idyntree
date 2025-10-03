@@ -16,7 +16,11 @@ namespace iDynTree
 
     ModelParserOptions::ModelParserOptions()
     : addSensorFramesAsAdditionalFrames(true)
-    , originalFilename("") {}
+    , originalFilename("")
+    , convertThreeRevoluteJointsToSphericalJoint(true)
+    , sphericalJointZeroMassTolerance(1e-6)
+    , sphericalJointOrthogonalityTolerance(1e-6)
+    , sphericalJointIntersectionTolerance(1e-6) {}
 
 
     class ModelLoader::ModelLoaderPimpl {

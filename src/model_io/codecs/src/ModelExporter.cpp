@@ -15,7 +15,10 @@ ModelExporterOptions::ModelExporterOptions()
 : baseLink(""),
     exportFirstBaseLinkAdditionalFrameAsFakeURDFBase(true),
     robotExportedName("iDynTreeURDFModelExportModelName"),
-    xmlBlobs{} {}
+    xmlBlobs{},
+    exportSphericalJointsAsThreeRevoluteJoints(true),
+    sphericalJointFakeLinkPrefix("spherical_fake_"),
+    sphericalJointRevoluteJointPrefix("spherical_rev_") {}
 
 
 class ModelExporter::Pimpl {

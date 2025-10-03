@@ -44,6 +44,34 @@ public:
      */
     std::string originalFilename;
 
+    /**
+     * If true, three consecutive revolute joints with zero-mass intermediate links
+     * and orthogonal axes intersecting at a point are converted to a single spherical joint.
+     * Default: true
+     */
+    bool convertThreeRevoluteJointsToSphericalJoint;
+
+    /**
+     * Tolerance for checking if intermediate links have zero mass when converting
+     * three revolute joints to spherical joints.
+     * Default: 1e-6
+     */
+    double sphericalJointZeroMassTolerance;
+
+    /**
+     * Tolerance for checking if revolute joint axes are orthogonal when converting
+     * three revolute joints to spherical joints.
+     * Default: 1e-6
+     */
+    double sphericalJointOrthogonalityTolerance;
+
+    /**
+     * Tolerance for checking if revolute joint axes intersect at a point when converting
+     * three revolute joints to spherical joints.
+     * Default: 1e-6
+     */
+    double sphericalJointIntersectionTolerance;
+
     /** Default options
      *
      * - addSensorFramesAsAdditionalFrames = True
