@@ -8,7 +8,7 @@ dependencies:
   - ninja
   - pkg-config 
   - eigen
-  - libxml2
+  - libxml2-devel
   - assimp
   - ipopt
   - irrlicht

@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "idyntree"
 description = "iDynTree"
 authors = ["Silvio Traversaro <silvio@traversaro.it>"]
@@ -46,6 +46,7 @@ c-compiler = "*"
 cxx-compiler = "*"
 ninja = "*"
 pkg-config = "*"
+libxml2-devel = "*"
 eigen = "*"
 assimp = "*"
 ipopt = "*"
@@ -59,3 +60,7 @@ yarp = "*"
 osqp-eigen = "*"
 # Find a way to add this only for supported envs
 # icub-main = "*"
+
+[target.unix.dependencies]
+# Useful for old python versions
+libxcrypt = "*"
