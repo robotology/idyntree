@@ -64,20 +64,24 @@ struct ModelExporterOptions
 
     /**
      * If true, spherical joints are exported as a series of three revolute joints
-     * with fake intermediate links having zero mass/inertia.
+     * with fake intermediate links having zero mass/inertia. If false,
+     * the spherical joint exported as a single joint (which is not supported in URDF).
      * Default: true
+     * Supported formats: urdf.
      */
     bool exportSphericalJointsAsThreeRevoluteJoints;
 
     /**
      * Prefix used for fake links created when exporting spherical joints.
      * Default: "spherical_fake_"
+     * Supported formats: urdf.
      */
     std::string sphericalJointFakeLinkPrefix;
 
     /**
      * Prefix used for revolute joints created when exporting spherical joints.
      * Default: "spherical_rev_"
+     * Supported formats: urdf.
      */
     std::string sphericalJointRevoluteJointPrefix;
 

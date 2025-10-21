@@ -162,7 +162,6 @@ namespace iDynTree {
         // Convert three consecutive revolute joints to spherical joints if requested
         if (m_options.convertThreeRevoluteJointsToSphericalJoint) {
             Model convertedModel;
-            std::cerr << "[INFO] Converting three consecutive revolute joints to spherical joints..." << std::endl;
             if (!convertThreeRevoluteJointsToSphericalJoint(m_model, convertedModel,
                                                             m_options.sphericalJointZeroMassTolerance,
                                                             m_options.sphericalJointOrthogonalityTolerance,

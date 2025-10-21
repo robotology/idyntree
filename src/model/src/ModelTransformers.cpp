@@ -1304,13 +1304,10 @@ bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
     // Find all spherical joints
     for (JointIndex jointIdx = 0; jointIdx < inputModel.getNrOfJoints(); jointIdx++) {
         const IJoint* joint = inputModel.getJoint(jointIdx);
-        std::cerr<<"[DEBUG] convertSphericalJointsToThreeRevoluteJoints: Examining joint "
-                 << inputModel.getJointName(jointIdx) << std::endl;
 
         // Check if this is a spherical joint using dynamic_cast
         if (dynamic_cast<const SphericalJoint*>(joint)) {
-            std::cerr<<"[INFO] convertSphericalJointsToThreeRevoluteJoints: Found spherical joint "
-                     << inputModel.getJointName(jointIdx) << std::endl;
+
             SphericalJointConversion conversion;
             conversion.originalJointName = inputModel.getJointName(jointIdx);
 
@@ -1327,7 +1324,6 @@ bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
             conversion.parentLinkName = inputModel.getLinkName(parentLinkIdx);
             conversion.childLinkName = inputModel.getLinkName(childLinkIdx);
             conversion.originalJointTransform = joint->getRestTransform(parentLinkIdx, childLinkIdx);
-            std::cerr<< sphericalJointFakeLinkPrefix << std::endl;
 
             // Generate names for fake components
             conversion.fakeLinkName1 = sphericalJointFakeLinkPrefix + conversion.originalJointName + "_link1";
@@ -1559,8 +1555,6 @@ bool convertThreeRevoluteJointsToSphericalJoint(const Model& inputModel,
 
     // Look for patterns by examining consecutive links in traversal
     // Make sure we don't go out of bounds - we need 4 consecutive links (indices 0,1,2,3)
-
-    std::cerr << "Traversal: " << traversal.toString(inputModel) << std::endl;
 
     for (TraversalIndex trvIdx = 0; trvIdx < traversal.getNrOfVisitedLinks(); trvIdx++) {
         // Get four consecutive links from traversal

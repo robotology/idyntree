@@ -329,6 +329,12 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
     {
         xmlNewProp(joint_xml, BAD_CAST "type", BAD_CAST "prismatic");
     }
+    else if (dynamic_cast<const SphericalJoint*>(joint))
+    {
+        std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint of type SphericalJoint to a URDF joint (spherical joints are not supported in URDF)."
+                  << " For exporting joint of type SphericalJoint, ensure that the  ModelExporterOptions::SphericalJointsAsThreeRevoluteJoints parameter is set to true." << std::endl;
+        return false;
+    }
     else
     {
         std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint of type "
@@ -522,7 +528,6 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     Model processedModel;
     // Convert spherical joints if option is enabled
     if (options.exportSphericalJointsAsThreeRevoluteJoints) {
-        std::cerr<<"[INFO] URDFStringFromModel: Converting spherical joints to three revolute joints for URDF export" << std::endl;
         if (!convertSphericalJointsToThreeRevoluteJoints(model, processedModel,
                                                          options.sphericalJointFakeLinkPrefix,
                                                          options.sphericalJointRevoluteJointPrefix)) {
