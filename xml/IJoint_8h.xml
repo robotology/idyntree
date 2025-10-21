@@ -5,12 +5,12 @@
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includes>
     <includes refid="Span_8h" local="no">iDynTree/Span.h</includes>
-    <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
     <includedby refid="FixedJoint_8h" local="no">iDynTree/FixedJoint.h</includedby>
     <includedby refid="Model_2IJoint_8h" local="no">iDynTree/Model/IJoint.h</includedby>
     <includedby refid="Model_8h" local="no">iDynTree/Model.h</includedby>
     <includedby refid="ModelTestUtils_8h" local="yes">iDynTree/ModelTestUtils.h</includedby>
     <includedby refid="MovableJointImpl_8h" local="no">iDynTree/MovableJointImpl.h</includedby>
+    <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
     <innerclass refid="classiDynTree_1_1IJoint" prot="public">iDynTree::IJoint</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="enum">

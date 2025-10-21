@@ -75,7 +75,7 @@
 <para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="194">\[ {}^l H_s \]</formula>).</para>
+<para><formula id="21">\[ {}^l H_s \]</formula>).</para>
 <para><simplesect kind="return"><para>the link_H_sensor transform </para>
 </simplesect>
 </para>

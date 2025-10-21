@@ -4,6 +4,8 @@
     <compoundname>Utils.h</compoundname>
     <includes local="no">cstddef</includes>
     <includes local="yes">CoreExport.h</includes>
+    <includedby refid="ModelSensorsTransformers_8h" local="no">iDynTree/ModelSensorsTransformers.h</includedby>
+    <includedby refid="ModelTransformers_8h" local="no">iDynTree/ModelTransformers.h</includedby>
     <includedby refid="L2NormCost_8h" local="no">iDynTree/L2NormCost.h</includedby>
     <includedby refid="OptimalControlProblem_8h" local="no">iDynTree/OptimalControlProblem.h</includedby>
     <includedby refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includedby>
@@ -19,8 +21,6 @@
     <includedby refid="TestUtils_8h" local="no">iDynTree/TestUtils.h</includedby>
     <includedby refid="Triplets_8h" local="no">iDynTree/Triplets.h</includedby>
     <includedby refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includedby>
-    <includedby refid="ModelSensorsTransformers_8h" local="no">iDynTree/ModelSensorsTransformers.h</includedby>
-    <includedby refid="ModelTransformers_8h" local="no">iDynTree/ModelTransformers.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/BerdySparseMAPSolver.h</includedby>
