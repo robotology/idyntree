@@ -6,8 +6,23 @@ In this document we will discuss the particular aspects of each file format supp
 ## URDF models 
 The main format used by iDynTree to load multibody models is the [URDF format](http://wiki.ros.org/urdf), originally developed in the ROS project.
 
-iDynTree follows the [URDF specification](http://wiki.ros.org/urdf/XML/model) as much as possible. 
-Unfortunatly the URDF format semantics is not fully defined, so we try to match the semantics used by most widespared URDF parser. 
+iDynTree follows the [URDF specification](http://wiki.ros.org/urdf/XML/model) as much as possible.
+
+Unfortunatly the URDF format semantics is not fully defined, so we try to match the semantics used by most used URDF parsers.
+
+Furthermore, we also use some extension to the URDF specs, as defined in the following sections:
+
+* [Spherical Joints](#spherical-joints)
+* [Sensors Extensions](#sensors-extensions)
+
+### Spherical Joints
+
+The `URDF` specification do not support Spherical Joints, that instead iDynTree support. To allow to easily load and export URDF models that contain spherical joints, by default iDynTree URDF parser detect if the model contains three consecutive `revolute` or `continuous` joints with this conditions:
+* The three joint axis intersect at a single point
+* The three joint axis are each one orthogonal to each other
+* The two internal links have zero mass
+
+If all these conditions are respected, the three revolute joints in the URDF model are substituted with a single iDynTree's SphericalJoint. Similarly, when a `iDynTree::Model` is exported, any `iDynTree::SphericalJoint` contained in it is exported as a three revolute joints that respect the aforementioned conditions.
 
 ### Sensor extensions 
 For loading sensor information, we support a non-standard extensions to the URDF format, documented in this section. Each sensor is encoded as a `<sensor>` xml element, that appears in the URDF file as a child of the root `<robot>` element. 
@@ -73,6 +88,8 @@ Example XML:
         <origin xyz="0 -0.01 +0.01" rpy="0 -0 0"/>
 </sensor>
 ~~~
+
+
 
 
 
