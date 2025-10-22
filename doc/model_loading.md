@@ -12,10 +12,10 @@ Unfortunatly the URDF format semantics is not fully defined, so we try to match 
 
 Furthermore, we also use some extension to the URDF specs, as defined in the following sections:
 
-* [Spherical Joints](#spherical-joints)
-* [Sensors Extensions](#sensors-extensions)
+* [Spherical joints](#spherical-joints)
+* [Sensors extensions](#sensor-extensions)
 
-### Spherical Joints
+### Spherical joints
 
 The `URDF` specification do not support Spherical Joints, that instead iDynTree support. To allow to easily load and export URDF models that contain spherical joints, by default iDynTree URDF parser detect if the model contains three consecutive `revolute` or `continuous` joints with this conditions:
 * The three joint axis intersect at a single point
@@ -23,6 +23,10 @@ The `URDF` specification do not support Spherical Joints, that instead iDynTree 
 * The two internal links have zero mass
 
 If all these conditions are respected, the three revolute joints in the URDF model are substituted with a single iDynTree's SphericalJoint. Similarly, when a `iDynTree::Model` is exported, any `iDynTree::SphericalJoint` contained in it is exported as a three revolute joints that respect the aforementioned conditions.
+
+To disable this behaviour that by default is enabled you can set the `ModelParserOptions::convertThreeRevoluteJointsToSphericalJoint` and `ModelExporterOptions::exportSphericalJointsAsThreeRevoluteJoints` options to `false`.
+
+Note that this way of supporting spherical joints in URDF is compatible with the [`onshape-to-robot`'s `ball_to_euler` processor](https://onshape-to-robot.readthedocs.io/en/latest/processor_ball_to_euler.html).
 
 ### Sensor extensions 
 For loading sensor information, we support a non-standard extensions to the URDF format, documented in this section. Each sensor is encoded as a `<sensor>` xml element, that appears in the URDF file as a child of the root `<robot>` element. 
