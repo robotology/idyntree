@@ -317,6 +317,157 @@
         </inbodydescription>
         <location file="iDynTree/ModelTransformers.h" line="211" column="6" declfile="iDynTree/ModelTransformers.h" declline="211" declcolumn="6"/>
       </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a4cc1aad44a17007ba45c17442ad6a978" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::convertSphericalJointsToThreeRevoluteJoints</definition>
+        <argsstring>(const Model &amp;inputModel, Model &amp;outputModel, const std::string &amp;sphericalJointFakeLinkPrefix=&quot;spherical_fake_&quot;, const std::string &amp;sphericalJointRevoluteJointPrefix=&quot;spherical_rev_&quot;)</argsstring>
+        <name>convertSphericalJointsToThreeRevoluteJoints</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>inputModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sphericalJointFakeLinkPrefix</declname>
+          <defval>&quot;spherical_fake_&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sphericalJointRevoluteJointPrefix</declname>
+          <defval>&quot;spherical_rev_&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Convert spherical joints to three consecutive revolute joints for URDF export. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes an <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> containing spherical joints and converts each spherical joint into three consecutive revolute joints (X, Y, Z rotations) with intermediate zero-mass links. This is necessary for URDF export since URDF does not natively support spherical joints.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputModel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model with spherical joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>outputModel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model with spherical joints converted to three revolute joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sphericalJointFakeLinkPrefix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prefix for generated intermediate link names </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sphericalJointRevoluteJointPrefix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Prefix for generated revolute joint names</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion succeeded, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="230" column="6" declfile="iDynTree/ModelTransformers.h" declline="230" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a48383d5042c7b1a249db0440165131c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::convertThreeRevoluteJointsToSphericalJoint</definition>
+        <argsstring>(const Model &amp;inputModel, Model &amp;outputModel, double sphericalJointZeroMassTolerance=1e-6, double sphericalJointOrthogonalityTolerance=1e-6, double sphericalJointIntersectionTolerance=1e-6)</argsstring>
+        <name>convertThreeRevoluteJointsToSphericalJoint</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>inputModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>sphericalJointZeroMassTolerance</declname>
+          <defval>1e-6</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>sphericalJointOrthogonalityTolerance</declname>
+          <defval>1e-6</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>sphericalJointIntersectionTolerance</declname>
+          <defval>1e-6</defval>
+        </param>
+        <briefdescription>
+<para>Convert three consecutive revolute joints with zero-mass intermediate links to spherical joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function detects patterns of three consecutive revolute joints with orthogonal axes intersecting at a point and zero-mass intermediate links, and converts them to single spherical joints. This is the inverse operation of convertSphericalJointsToThreeRevoluteJoints.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputModel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model potentially containing three-revolute-joint patterns </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>outputModel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model with detected patterns converted to spherical joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sphericalJointZeroMassTolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance for considering intermediate links as zero-mass </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sphericalJointOrthogonalityTolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance for checking axis orthogonality </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sphericalJointIntersectionTolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Tolerance for checking axis intersection</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion succeeded, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformers.h" line="250" column="6" declfile="iDynTree/ModelTransformers.h" declline="250" declcolumn="6"/>
+      </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Collection of function to modify model in various ways. </para>

@@ -67,6 +67,51 @@
         </inbodydescription>
         <location file="iDynTree/ModelExporter.h" line="63" column="17" bodyfile="iDynTree/ModelExporter.h" bodystart="63" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelExporterOptions_1a17ae66ab30d56160af3d62f6ddf5afb3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelExporterOptions::exportSphericalJointsAsThreeRevoluteJoints</definition>
+        <argsstring></argsstring>
+        <name>exportSphericalJointsAsThreeRevoluteJoints</name>
+        <briefdescription>
+<para>If true, spherical joints are exported as a series of three revolute joints with fake intermediate links having zero mass/inertia. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If false, the spherical joint exported as a single joint (which is not supported in URDF). Default: true Supported formats: urdf. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelExporter.h" line="72" column="10" bodyfile="iDynTree/ModelExporter.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelExporterOptions_1afeb5cf1d630be72c4890171893b8e2a1" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ModelExporterOptions::sphericalJointFakeLinkPrefix</definition>
+        <argsstring></argsstring>
+        <name>sphericalJointFakeLinkPrefix</name>
+        <briefdescription>
+<para>Prefix used for fake links created when exporting spherical joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default: &quot;spherical_fake_&quot; Supported formats: urdf. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelExporter.h" line="79" column="17" bodyfile="iDynTree/ModelExporter.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelExporterOptions_1a6db5196cb4e5cdaa6a33b51bd837a195" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ModelExporterOptions::sphericalJointRevoluteJointPrefix</definition>
+        <argsstring></argsstring>
+        <name>sphericalJointRevoluteJointPrefix</name>
+        <briefdescription>
+<para>Prefix used for revolute joints created when exporting spherical joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default: &quot;spherical_rev_&quot; Supported formats: urdf. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelExporter.h" line="86" column="17" bodyfile="iDynTree/ModelExporter.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="structiDynTree_1_1ModelExporterOptions_1a5c7580ca273c3bc9c1311e9e4e5aff3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -81,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelExporter.h" line="68" column="5"/>
+        <location file="iDynTree/ModelExporter.h" line="91" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -117,6 +162,8 @@
         <childnode refid="2" relation="usage">
           <edgelabel>baseLink</edgelabel>
           <edgelabel>robotExportedName</edgelabel>
+          <edgelabel>sphericalJointFakeLinkPrefix</edgelabel>
+          <edgelabel>sphericalJointRevoluteJointPrefix</edgelabel>
         </childnode>
         <childnode refid="4" relation="usage">
           <edgelabel>xmlBlobs</edgelabel>
@@ -128,12 +175,15 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/ModelExporter.h" line="22" column="1" bodyfile="iDynTree/ModelExporter.h" bodystart="23" bodyend="70"/>
+    <location file="iDynTree/ModelExporter.h" line="22" column="1" bodyfile="iDynTree/ModelExporter.h" bodystart="23" bodyend="93"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1ModelExporterOptions_1af9ebe6e5ba3d83f9f8bf82a793161e07" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>baseLink</name></member>
       <member refid="structiDynTree_1_1ModelExporterOptions_1a776c8f98ae5c58e038e3a1962f9fd318" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</name></member>
+      <member refid="structiDynTree_1_1ModelExporterOptions_1a17ae66ab30d56160af3d62f6ddf5afb3" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>exportSphericalJointsAsThreeRevoluteJoints</name></member>
       <member refid="structiDynTree_1_1ModelExporterOptions_1a5c7580ca273c3bc9c1311e9e4e5aff3c" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>ModelExporterOptions</name></member>
       <member refid="structiDynTree_1_1ModelExporterOptions_1acc4e1f0ecb310fca1c6c632ff52cbf8a" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>robotExportedName</name></member>
+      <member refid="structiDynTree_1_1ModelExporterOptions_1afeb5cf1d630be72c4890171893b8e2a1" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>sphericalJointFakeLinkPrefix</name></member>
+      <member refid="structiDynTree_1_1ModelExporterOptions_1a6db5196cb4e5cdaa6a33b51bd837a195" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>sphericalJointRevoluteJointPrefix</name></member>
       <member refid="structiDynTree_1_1ModelExporterOptions_1a3f29164afc0150a7e4bb867bb4cd87ec" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>xmlBlobs</name></member>
     </listofallmembers>
   </compounddef>

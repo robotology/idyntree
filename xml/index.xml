@@ -2553,6 +2553,9 @@
     <member refid="structiDynTree_1_1ModelExporterOptions_1a776c8f98ae5c58e038e3a1962f9fd318" kind="variable"><name>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</name></member>
     <member refid="structiDynTree_1_1ModelExporterOptions_1acc4e1f0ecb310fca1c6c632ff52cbf8a" kind="variable"><name>robotExportedName</name></member>
     <member refid="structiDynTree_1_1ModelExporterOptions_1a3f29164afc0150a7e4bb867bb4cd87ec" kind="variable"><name>xmlBlobs</name></member>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1a17ae66ab30d56160af3d62f6ddf5afb3" kind="variable"><name>exportSphericalJointsAsThreeRevoluteJoints</name></member>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1afeb5cf1d630be72c4890171893b8e2a1" kind="variable"><name>sphericalJointFakeLinkPrefix</name></member>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1a6db5196cb4e5cdaa6a33b51bd837a195" kind="variable"><name>sphericalJointRevoluteJointPrefix</name></member>
     <member refid="structiDynTree_1_1ModelExporterOptions_1a5c7580ca273c3bc9c1311e9e4e5aff3c" kind="function"><name>ModelExporterOptions</name></member>
   </compound>
   <compound refid="classiDynTree_1_1ModelLoader" kind="class"><name>iDynTree::ModelLoader</name>
@@ -2579,6 +2582,10 @@
   <compound refid="structiDynTree_1_1ModelParserOptions" kind="struct"><name>iDynTree::ModelParserOptions</name>
     <member refid="structiDynTree_1_1ModelParserOptions_1acca6da96631f8577cc259f939872d156" kind="variable"><name>addSensorFramesAsAdditionalFrames</name></member>
     <member refid="structiDynTree_1_1ModelParserOptions_1a7bbd5bfdb0a83af64bcc10e955714bc4" kind="variable"><name>originalFilename</name></member>
+    <member refid="structiDynTree_1_1ModelParserOptions_1a2eaa5dc58dec6de63a8f118373805748" kind="variable"><name>convertThreeRevoluteJointsToSphericalJoint</name></member>
+    <member refid="structiDynTree_1_1ModelParserOptions_1a569936f1b79a9ddbb3d12054ac1cc6db" kind="variable"><name>sphericalJointZeroMassTolerance</name></member>
+    <member refid="structiDynTree_1_1ModelParserOptions_1a6e20df8e81e171e33fd5e8c6f8c128fe" kind="variable"><name>sphericalJointOrthogonalityTolerance</name></member>
+    <member refid="structiDynTree_1_1ModelParserOptions_1ac00ba8d90c5854aba0e1af25cf830584" kind="variable"><name>sphericalJointIntersectionTolerance</name></member>
     <member refid="structiDynTree_1_1ModelParserOptions_1aace65fc753b0bc44d5a88f8de61a0276" kind="function"><name>ModelParserOptions</name></member>
   </compound>
   <compound refid="classiDynTree_1_1ModelSolidShapes" kind="class"><name>iDynTree::ModelSolidShapes</name>
@@ -4592,6 +4599,8 @@
     <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>
     <member refid="ModelTransformers_8h_1a133a097cc3ef37982c00cdd729829118" kind="function"><name>moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink</name></member>
     <member refid="ModelTransformers_8h_1a9a8fd1db7c7bbfb060362056a4ec65ee" kind="function"><name>removeAdditionalFramesFromModel</name></member>
+    <member refid="ModelTransformers_8h_1a4cc1aad44a17007ba45c17442ad6a978" kind="function"><name>convertSphericalJointsToThreeRevoluteJoints</name></member>
+    <member refid="ModelTransformers_8h_1a48383d5042c7b1a249db0440165131c3" kind="function"><name>convertThreeRevoluteJointsToSphericalJoint</name></member>
     <member refid="group__iDynTreeSensors_1ga26f5afdf5245848ed0cf946cab8510d6" kind="function"><name>predictSensorsMeasurements</name></member>
     <member refid="group__iDynTreeSensors_1ga85a09204a0c57c96bb77548d2a633677" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
     <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
@@ -5478,6 +5487,8 @@
     <member refid="ModelTransformers_8h_1a43a3d5de5f629b00c5c7a607278a4f20" kind="function"><name>addValidNamesToAllSolidShapes</name></member>
     <member refid="ModelTransformers_8h_1a133a097cc3ef37982c00cdd729829118" kind="function"><name>moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink</name></member>
     <member refid="ModelTransformers_8h_1a9a8fd1db7c7bbfb060362056a4ec65ee" kind="function"><name>removeAdditionalFramesFromModel</name></member>
+    <member refid="ModelTransformers_8h_1a4cc1aad44a17007ba45c17442ad6a978" kind="function"><name>convertSphericalJointsToThreeRevoluteJoints</name></member>
+    <member refid="ModelTransformers_8h_1a48383d5042c7b1a249db0440165131c3" kind="function"><name>convertThreeRevoluteJointsToSphericalJoint</name></member>
   </compound>
   <compound refid="Model_2MovableJointImpl_8h" kind="file"><name>MovableJointImpl.h</name>
   </compound>

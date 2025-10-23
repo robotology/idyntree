@@ -102,6 +102,18 @@
               std::vector&lt;std::string&gt; <a href="#a3f29164afc0150a7e4bb867bb4cd87ec" class="m-doc">xmlBlobs</a>
             </dt>
             <dd>Specify the xml blobs to be exported at the end of the urdf as child of the robot tag.</dd>
+            <dt>
+              bool <a href="#a17ae66ab30d56160af3d62f6ddf5afb3" class="m-doc">exportSphericalJointsAsThreeRevoluteJoints</a>
+            </dt>
+            <dd>If true, spherical joints are exported as a series of three revolute joints with fake intermediate links having zero mass/inertia.</dd>
+            <dt>
+              std::string <a href="#afeb5cf1d630be72c4890171893b8e2a1" class="m-doc">sphericalJointFakeLinkPrefix</a>
+            </dt>
+            <dd>Prefix used for fake links created when exporting spherical joints.</dd>
+            <dt>
+              std::string <a href="#a6db5196cb4e5cdaa6a33b51bd837a195" class="m-doc">sphericalJointRevoluteJointPrefix</a>
+            </dt>
+            <dd>Prefix used for revolute joints created when exporting spherical joints.</dd>
           </dl>
         </section>
         <section>
@@ -133,6 +145,27 @@
             </h3>
             <p>Specify the xml blobs to be exported at the end of the urdf as child of the robot tag.</p>
 <p>Default: {}. Supported formats: urdf.</p>
+          </div></section>
+          <section class="m-doc-details" id="a17ae66ab30d56160af3d62f6ddf5afb3"><div>
+            <h3>
+              bool iDynTree::<wbr />ModelExporterOptions::<wbr /><a href="#a17ae66ab30d56160af3d62f6ddf5afb3" class="m-doc-self">exportSphericalJointsAsThreeRevoluteJoints</a>
+            </h3>
+            <p>If true, spherical joints are exported as a series of three revolute joints with fake intermediate links having zero mass/inertia.</p>
+<p>If false, the spherical joint exported as a single joint (which is not supported in URDF). Default: true Supported formats: urdf.</p>
+          </div></section>
+          <section class="m-doc-details" id="afeb5cf1d630be72c4890171893b8e2a1"><div>
+            <h3>
+              std::string iDynTree::<wbr />ModelExporterOptions::<wbr /><a href="#afeb5cf1d630be72c4890171893b8e2a1" class="m-doc-self">sphericalJointFakeLinkPrefix</a>
+            </h3>
+            <p>Prefix used for fake links created when exporting spherical joints.</p>
+<p>Default: &quot;spherical_fake_&quot; Supported formats: urdf.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6db5196cb4e5cdaa6a33b51bd837a195"><div>
+            <h3>
+              std::string iDynTree::<wbr />ModelExporterOptions::<wbr /><a href="#a6db5196cb4e5cdaa6a33b51bd837a195" class="m-doc-self">sphericalJointRevoluteJointPrefix</a>
+            </h3>
+            <p>Prefix used for revolute joints created when exporting spherical joints.</p>
+<p>Default: &quot;spherical_rev_&quot; Supported formats: urdf.</p>
           </div></section>
         </section>
       </div>

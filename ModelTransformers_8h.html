@@ -137,6 +137,21 @@
               const std::vector&lt;std::string&gt; allowedAdditionalFrames = std::vector&lt;std::string&gt;()) -&gt; bool</span>
             </dt>
             <dd>\function Remove all additional frames from the model, except a specified allowlist.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4cc1aad44a17007ba45c17442ad6a978" class="m-doc">convertSphericalJointsToThreeRevoluteJoints</a>(</span><span class="m-doc-wrap">const Model&amp; inputModel,
+              Model&amp; outputModel,
+              const std::string&amp; sphericalJointFakeLinkPrefix = &quot;spherical_fake_&quot;,
+              const std::string&amp; sphericalJointRevoluteJointPrefix = &quot;spherical_rev_&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Convert spherical joints to three consecutive revolute joints for URDF export.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a48383d5042c7b1a249db0440165131c3" class="m-doc">convertThreeRevoluteJointsToSphericalJoint</a>(</span><span class="m-doc-wrap">const Model&amp; inputModel,
+              Model&amp; outputModel,
+              double sphericalJointZeroMassTolerance = 1e-6,
+              double sphericalJointOrthogonalityTolerance = 1e-6,
+              double sphericalJointIntersectionTolerance = 1e-6) -&gt; bool</span>
+            </dt>
+            <dd>Convert three consecutive revolute joints with zero-mass intermediate links to spherical joints.</dd>
           </dl>
         </section>
         <section>
@@ -260,6 +275,89 @@
               </tfoot>
             </table>
 <p>This function takes in input a model, and return a model with all the additional frame list removed, except for the additional frames whose name is specified in the specified allowlist.</p><aside class="m-note m-info"><h4>Note</h4><p>The main use of this function is for processing models that need to be passed to other libraries or physics engines, where the additional frames may create problems or create performance problem. As long as you are using iDynTree, the presence of additional frames does not impact the performance of kinematics or dynamics algorithms, so there is no need to call this function to remove the additional frames.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a4cc1aad44a17007ba45c17442ad6a978"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4cc1aad44a17007ba45c17442ad6a978" class="m-doc-self">convertSphericalJointsToThreeRevoluteJoints</a>(</span><span class="m-doc-wrap">const Model&amp; inputModel,
+              Model&amp; outputModel,
+              const std::string&amp; sphericalJointFakeLinkPrefix = &quot;spherical_fake_&quot;,
+              const std::string&amp; sphericalJointRevoluteJointPrefix = &quot;spherical_rev_&quot;)</span></span>
+            </h3>
+            <p>Convert spherical joints to three consecutive revolute joints for URDF export.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">inputModel</td>
+                  <td>The model with spherical joints</td>
+                </tr>
+                <tr>
+                  <td>outputModel</td>
+                  <td>The model with spherical joints converted to three revolute joints</td>
+                </tr>
+                <tr>
+                  <td>sphericalJointFakeLinkPrefix</td>
+                  <td>Prefix for generated intermediate link names</td>
+                </tr>
+                <tr>
+                  <td>sphericalJointRevoluteJointPrefix</td>
+                  <td>Prefix for generated revolute joint names</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if conversion succeeded, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This function takes an <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> containing spherical joints and converts each spherical joint into three consecutive revolute joints (X, Y, Z rotations) with intermediate zero-mass links. This is necessary for URDF export since URDF does not natively support spherical joints.</p>
+          </div></section>
+          <section class="m-doc-details" id="a48383d5042c7b1a249db0440165131c3"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a48383d5042c7b1a249db0440165131c3" class="m-doc-self">convertThreeRevoluteJointsToSphericalJoint</a>(</span><span class="m-doc-wrap">const Model&amp; inputModel,
+              Model&amp; outputModel,
+              double sphericalJointZeroMassTolerance = 1e-6,
+              double sphericalJointOrthogonalityTolerance = 1e-6,
+              double sphericalJointIntersectionTolerance = 1e-6)</span></span>
+            </h3>
+            <p>Convert three consecutive revolute joints with zero-mass intermediate links to spherical joints.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">inputModel</td>
+                  <td>The model potentially containing three-revolute-joint patterns</td>
+                </tr>
+                <tr>
+                  <td>outputModel</td>
+                  <td>The model with detected patterns converted to spherical joints</td>
+                </tr>
+                <tr>
+                  <td>sphericalJointZeroMassTolerance</td>
+                  <td>Tolerance for considering intermediate links as zero-mass</td>
+                </tr>
+                <tr>
+                  <td>sphericalJointOrthogonalityTolerance</td>
+                  <td>Tolerance for checking axis orthogonality</td>
+                </tr>
+                <tr>
+                  <td>sphericalJointIntersectionTolerance</td>
+                  <td>Tolerance for checking axis intersection</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if conversion succeeded, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This function detects patterns of three consecutive revolute joints with orthogonal axes intersecting at a point and zero-mass intermediate links, and converts them to single spherical joints. This is the inverse operation of convertSphericalJointsToThreeRevoluteJoints.</p>
           </div></section>
         </section>
       </div>

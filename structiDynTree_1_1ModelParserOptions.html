@@ -94,6 +94,22 @@
               std::string <a href="#a7bbd5bfdb0a83af64bcc10e955714bc4" class="m-doc">originalFilename</a>
             </dt>
             <dd>Original filename of the URDF sensor parsed.</dd>
+            <dt>
+              bool <a href="#a2eaa5dc58dec6de63a8f118373805748" class="m-doc">convertThreeRevoluteJointsToSphericalJoint</a>
+            </dt>
+            <dd>If true, three consecutive revolute joints with zero-mass intermediate links and orthogonal axes intersecting at a point are converted to a single spherical joint.</dd>
+            <dt>
+              double <a href="#a569936f1b79a9ddbb3d12054ac1cc6db" class="m-doc">sphericalJointZeroMassTolerance</a>
+            </dt>
+            <dd>Tolerance for checking if intermediate links have zero mass when converting three revolute joints to spherical joints.</dd>
+            <dt>
+              double <a href="#a6e20df8e81e171e33fd5e8c6f8c128fe" class="m-doc">sphericalJointOrthogonalityTolerance</a>
+            </dt>
+            <dd>Tolerance for checking if revolute joint axes are orthogonal when converting three revolute joints to spherical joints.</dd>
+            <dt>
+              double <a href="#ac00ba8d90c5854aba0e1af25cf830584" class="m-doc">sphericalJointIntersectionTolerance</a>
+            </dt>
+            <dd>Tolerance for checking if revolute joint axes intersect at a point when converting three revolute joints to spherical joints.</dd>
           </dl>
         </section>
         <section>
@@ -121,6 +137,34 @@
             </h3>
             <p>Original filename of the URDF sensor parsed.</p>
 <p>This attribute is the original filename of the URDF sensor parsed. It is useful when loading a model from a string, if that URDF string has &lt;geometry&gt; tags that point to external meshes. To find the location of this external meshes, we need also the original filename of the URDF file.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2eaa5dc58dec6de63a8f118373805748"><div>
+            <h3>
+              bool iDynTree::<wbr />ModelParserOptions::<wbr /><a href="#a2eaa5dc58dec6de63a8f118373805748" class="m-doc-self">convertThreeRevoluteJointsToSphericalJoint</a>
+            </h3>
+            <p>If true, three consecutive revolute joints with zero-mass intermediate links and orthogonal axes intersecting at a point are converted to a single spherical joint.</p>
+<p>Default: true</p>
+          </div></section>
+          <section class="m-doc-details" id="a569936f1b79a9ddbb3d12054ac1cc6db"><div>
+            <h3>
+              double iDynTree::<wbr />ModelParserOptions::<wbr /><a href="#a569936f1b79a9ddbb3d12054ac1cc6db" class="m-doc-self">sphericalJointZeroMassTolerance</a>
+            </h3>
+            <p>Tolerance for checking if intermediate links have zero mass when converting three revolute joints to spherical joints.</p>
+<p>Default: 1e-6</p>
+          </div></section>
+          <section class="m-doc-details" id="a6e20df8e81e171e33fd5e8c6f8c128fe"><div>
+            <h3>
+              double iDynTree::<wbr />ModelParserOptions::<wbr /><a href="#a6e20df8e81e171e33fd5e8c6f8c128fe" class="m-doc-self">sphericalJointOrthogonalityTolerance</a>
+            </h3>
+            <p>Tolerance for checking if revolute joint axes are orthogonal when converting three revolute joints to spherical joints.</p>
+<p>Default: 1e-6</p>
+          </div></section>
+          <section class="m-doc-details" id="ac00ba8d90c5854aba0e1af25cf830584"><div>
+            <h3>
+              double iDynTree::<wbr />ModelParserOptions::<wbr /><a href="#ac00ba8d90c5854aba0e1af25cf830584" class="m-doc-self">sphericalJointIntersectionTolerance</a>
+            </h3>
+            <p>Tolerance for checking if revolute joint axes intersect at a point when converting three revolute joints to spherical joints.</p>
+<p>Default: 1e-6</p>
           </div></section>
         </section>
       </div>

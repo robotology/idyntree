@@ -34,6 +34,66 @@
         </inbodydescription>
         <location file="iDynTree/ModelLoader.h" line="45" column="17" bodyfile="iDynTree/ModelLoader.h" bodystart="45" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1a2eaa5dc58dec6de63a8f118373805748" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelParserOptions::convertThreeRevoluteJointsToSphericalJoint</definition>
+        <argsstring></argsstring>
+        <name>convertThreeRevoluteJointsToSphericalJoint</name>
+        <briefdescription>
+<para>If true, three consecutive revolute joints with zero-mass intermediate links and orthogonal axes intersecting at a point are converted to a single spherical joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default: true </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelLoader.h" line="52" column="10" bodyfile="iDynTree/ModelLoader.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1a569936f1b79a9ddbb3d12054ac1cc6db" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::ModelParserOptions::sphericalJointZeroMassTolerance</definition>
+        <argsstring></argsstring>
+        <name>sphericalJointZeroMassTolerance</name>
+        <briefdescription>
+<para>Tolerance for checking if intermediate links have zero mass when converting three revolute joints to spherical joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default: 1e-6 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelLoader.h" line="59" column="12" bodyfile="iDynTree/ModelLoader.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1a6e20df8e81e171e33fd5e8c6f8c128fe" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::ModelParserOptions::sphericalJointOrthogonalityTolerance</definition>
+        <argsstring></argsstring>
+        <name>sphericalJointOrthogonalityTolerance</name>
+        <briefdescription>
+<para>Tolerance for checking if revolute joint axes are orthogonal when converting three revolute joints to spherical joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default: 1e-6 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelLoader.h" line="66" column="12" bodyfile="iDynTree/ModelLoader.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1ac00ba8d90c5854aba0e1af25cf830584" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::ModelParserOptions::sphericalJointIntersectionTolerance</definition>
+        <argsstring></argsstring>
+        <name>sphericalJointIntersectionTolerance</name>
+        <briefdescription>
+<para>Tolerance for checking if revolute joint axes intersect at a point when converting three revolute joints to spherical joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default: 1e-6 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelLoader.h" line="73" column="12" bodyfile="iDynTree/ModelLoader.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
       <memberdef kind="function" id="structiDynTree_1_1ModelParserOptions_1aace65fc753b0bc44d5a88f8de61a0276" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -53,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelLoader.h" line="52" column="5"/>
+        <location file="iDynTree/ModelLoader.h" line="80" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -78,11 +138,15 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/ModelLoader.h" line="23" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="24" bodyend="54"/>
+    <location file="iDynTree/ModelLoader.h" line="23" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="24" bodyend="82"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1ModelParserOptions_1acca6da96631f8577cc259f939872d156" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>addSensorFramesAsAdditionalFrames</name></member>
+      <member refid="structiDynTree_1_1ModelParserOptions_1a2eaa5dc58dec6de63a8f118373805748" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>convertThreeRevoluteJointsToSphericalJoint</name></member>
       <member refid="structiDynTree_1_1ModelParserOptions_1aace65fc753b0bc44d5a88f8de61a0276" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>ModelParserOptions</name></member>
       <member refid="structiDynTree_1_1ModelParserOptions_1a7bbd5bfdb0a83af64bcc10e955714bc4" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>originalFilename</name></member>
+      <member refid="structiDynTree_1_1ModelParserOptions_1ac00ba8d90c5854aba0e1af25cf830584" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>sphericalJointIntersectionTolerance</name></member>
+      <member refid="structiDynTree_1_1ModelParserOptions_1a6e20df8e81e171e33fd5e8c6f8c128fe" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>sphericalJointOrthogonalityTolerance</name></member>
+      <member refid="structiDynTree_1_1ModelParserOptions_1a569936f1b79a9ddbb3d12054ac1cc6db" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>sphericalJointZeroMassTolerance</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

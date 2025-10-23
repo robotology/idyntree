@@ -1511,6 +1511,21 @@ $B$
             </dt>
             <dd>\function Remove all additional frames from the model, except a specified allowlist.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTransformers_8h.html#a4cc1aad44a17007ba45c17442ad6a978" class="m-doc">convertSphericalJointsToThreeRevoluteJoints</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; inputModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; outputModel,
+              const std::string&amp; sphericalJointFakeLinkPrefix = &quot;spherical_fake_&quot;,
+              const std::string&amp; sphericalJointRevoluteJointPrefix = &quot;spherical_rev_&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Convert spherical joints to three consecutive revolute joints for URDF export.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTransformers_8h.html#a48383d5042c7b1a249db0440165131c3" class="m-doc">convertThreeRevoluteJointsToSphericalJoint</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; inputModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; outputModel,
+              double sphericalJointZeroMassTolerance = 1e-6,
+              double sphericalJointOrthogonalityTolerance = 1e-6,
+              double sphericalJointIntersectionTolerance = 1e-6) -&gt; bool</span>
+            </dt>
+            <dd>Convert three consecutive revolute joints with zero-mass intermediate links to spherical joints.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeSensors.html#ga26f5afdf5245848ed0cf946cab8510d6" class="m-doc">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
               const <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a>&amp; traversal,
               const <a href="classiDynTree_1_1FreeFloatingPos.html" class="m-doc">FreeFloatingPos</a>&amp; robotPos,
