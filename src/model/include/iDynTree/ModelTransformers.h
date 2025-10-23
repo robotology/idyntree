@@ -212,6 +212,46 @@ bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
                                            Model& modelWithOnlyAllowedAdditionalFrames,
                                            const std::vector<std::string> allowedAdditionalFrames = std::vector<std::string>());
 
+/**
+ * Convert spherical joints to three consecutive revolute joints for URDF export.
+ *
+ * This function takes an iDynTree::Model containing spherical joints and converts
+ * each spherical joint into three consecutive revolute joints (X, Y, Z rotations)
+ * with intermediate zero-mass links. This is necessary for URDF export since
+ * URDF does not natively support spherical joints.
+ *
+ * @param inputModel The model with spherical joints
+ * @param outputModel The model with spherical joints converted to three revolute joints
+ * @param sphericalJointFakeLinkPrefix Prefix for generated intermediate link names
+ * @param sphericalJointRevoluteJointPrefix Prefix for generated revolute joint names
+ *
+ * @return true if conversion succeeded, false otherwise
+ */
+bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
+                                                 Model& outputModel,
+                                                 const std::string& sphericalJointFakeLinkPrefix = "spherical_fake_",
+                                                 const std::string& sphericalJointRevoluteJointPrefix = "spherical_rev_");
+
+/**
+ * Convert three consecutive revolute joints with zero-mass intermediate links to spherical joints.
+ *
+ * This function detects patterns of three consecutive revolute joints with orthogonal axes
+ * intersecting at a point and zero-mass intermediate links, and converts them to single
+ * spherical joints. This is the inverse operation of convertSphericalJointsToThreeRevoluteJoints.
+ *
+ * @param inputModel The model potentially containing three-revolute-joint patterns
+ * @param outputModel The model with detected patterns converted to spherical joints
+ * @param sphericalJointZeroMassTolerance Tolerance for considering intermediate links as zero-mass
+ * @param sphericalJointOrthogonalityTolerance Tolerance for checking axis orthogonality
+ * @param sphericalJointIntersectionTolerance Tolerance for checking axis intersection
+ *
+ * @return true if conversion succeeded, false otherwise
+ */
+bool convertThreeRevoluteJointsToSphericalJoint(const Model& inputModel,
+                                                Model& outputModel,
+                                                double sphericalJointZeroMassTolerance = 1e-6,
+                                                double sphericalJointOrthogonalityTolerance = 1e-6,
+                                                double sphericalJointIntersectionTolerance = 1e-6);
 }
 
 

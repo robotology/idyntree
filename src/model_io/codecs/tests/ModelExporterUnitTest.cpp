@@ -8,8 +8,10 @@
 
 #include <iDynTree/Model.h>
 #include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/ModelLoader.h>
 #include <iDynTree/ModelExporter.h>
+#include <iDynTree/ModelTransformers.h>
 
 
 #include <cassert>
@@ -100,7 +102,6 @@ void checkImportExportURDF(std::string fileName)
     std::cerr << "Model serialized back to xml " << std::endl << urdfString << std::endl;
 
     ModelLoader mdlLoaderReloaded;
-
     ok = mdlLoaderReloaded.loadModelFromString(urdfString);
     ASSERT_IS_TRUE(ok);
     Model modelReloaded = mdlLoaderReloaded.model();
@@ -312,7 +313,222 @@ void testJointAxisWithNonZeroOriginButPassingThroughChildLinkFrameOrigin() {
     ASSERT_IS_FALSE(ok);
 }
 
+void testSphericalJointExportToURDF()
+{
+    // Create a model with spherical joints and verify URDF export converts them to three revolute joints
+    Model originalModel;
 
+    // Create links with proper inertia
+    auto baseLinkInertia = getRandomInertia();
+    auto link1Inertia = getRandomInertia();
+    auto link2Inertia = getRandomInertia();
+    auto endEffectorLinkInertia = getRandomInertia();
+
+    Link baseLink, link1, link2, endEffectorLink;
+    baseLink.setInertia(baseLinkInertia);
+    link1.setInertia(link1Inertia);
+    link2.setInertia(link2Inertia);
+    endEffectorLink.setInertia(endEffectorLinkInertia);
+
+    // Add links to model
+    auto baseLinkIndex = originalModel.addLink("base", baseLink);
+    originalModel.setDefaultBaseLink(baseLinkIndex);
+    auto link1Index = originalModel.addLink("link1", link1);
+    auto link2Index = originalModel.addLink("link2", link2);
+    auto endEffectorLinkIndex = originalModel.addLink("end_effector", endEffectorLink);
+
+    // Create first spherical joint (base -> link1)
+    Transform baseToLink1 = getRandomTransform();
+    SphericalJoint sphericalJoint1;
+    sphericalJoint1.setAttachedLinks(baseLinkIndex, link1Index);
+    sphericalJoint1.setRestTransform(baseToLink1);
+    Position jointCenter1(baseToLink1.getPosition()); // Joint center at the origin of link1 frame
+    sphericalJoint1.setJointCenter(baseLinkIndex, jointCenter1);
+
+    originalModel.addJoint("spherical_joint_1", &sphericalJoint1);
+
+    // Add a revolute joint between link1 and link2 to test mixed joint types
+    Transform link1ToLink2 = getRandomTransform();
+    Axis revoluteAxis(getRandomRotation()*Direction(1,0,0), link1ToLink2.getPosition());
+    RevoluteJoint revoluteJoint;
+    revoluteJoint.setAttachedLinks(link1Index, link2Index);
+    revoluteJoint.setRestTransform(link1ToLink2);
+    revoluteJoint.setAxis(revoluteAxis);
+
+    originalModel.addJoint("revolute_joint", &revoluteJoint);
+
+    // Create second spherical joint (link2 -> end_effector)
+    Transform link2ToEndEffector = getRandomTransform();
+    SphericalJoint sphericalJoint2;
+    sphericalJoint2.setAttachedLinks(link2Index, endEffectorLinkIndex);
+    sphericalJoint2.setRestTransform(link2ToEndEffector);
+    Position jointCenter2(link2ToEndEffector.getPosition()); // Joint center at the origin of end_effector frame
+    sphericalJoint2.setJointCenter(link2Index, jointCenter2);
+
+    originalModel.addJoint("spherical_joint_2", &sphericalJoint2);
+
+    // Export to URDF with spherical joint conversion enabled (default)
+    ModelExporter exporter;
+    bool ok = exporter.init(originalModel, SensorsList());
+    ModelExporterOptions options;
+    options.exportSphericalJointsAsThreeRevoluteJoints = true;
+    options.sphericalJointFakeLinkPrefix = "fake_";
+    options.sphericalJointRevoluteJointPrefix = "rev_";
+    exporter.setExportingOptions(options);
+
+
+    ASSERT_IS_TRUE(ok);
+    std::cerr << "Original model:" << std::endl;
+    std::cerr << originalModel.toString() << std::endl;
+
+    std::string urdfString;
+    ok = exporter.exportModelToString(urdfString);
+    ASSERT_IS_TRUE(ok);
+
+    std::cerr << "URDF with converted spherical joints:" << std::endl << urdfString << std::endl;
+
+    // Load the exported URDF back
+    ModelLoader loader;
+    ModelParserOptions parserOptions;
+    parserOptions.convertThreeRevoluteJointsToSphericalJoint = false; // Disable conversion back to spherical joints
+    loader.setParsingOptions(parserOptions);
+    ok = loader.loadModelFromString(urdfString);
+    ASSERT_IS_TRUE(ok);
+
+    Model exportedModel = loader.model();
+
+    // Verify the exported model structure
+    // Original: 4 links, 3 joints (2 spherical + 1 revolute)
+    // Expected after conversion: 8 links (4 original + 4 fake), 7 joints (6 revolute from spherical conversion + 1 original revolute)
+    ASSERT_EQUAL_DOUBLE(exportedModel.getNrOfLinks(), 8);
+    ASSERT_EQUAL_DOUBLE(exportedModel.getNrOfJoints(), 7);
+    ASSERT_EQUAL_DOUBLE(exportedModel.getNrOfDOFs(), 7); // 6 DOFs from 2 spherical joints + 1 DOF from revolute joint
+
+    // Check that original links still exist
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("base"));
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("link1"));
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("link2"));
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("end_effector"));
+
+    std::cerr << "Exported model:" << std::endl;
+    std::cerr << exportedModel.toString() << std::endl;
+
+    // Check that fake links were created for each spherical joint
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("fake_spherical_joint_1_link1"));
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("fake_spherical_joint_1_link2"));
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("fake_spherical_joint_2_link1"));
+    ASSERT_IS_TRUE(exportedModel.isLinkNameUsed("fake_spherical_joint_2_link2"));
+
+    // Verify fake links have zero mass
+    LinkIndex fakeLinkIdx = exportedModel.getLinkIndex("fake_spherical_joint_1_link1");
+    ASSERT_IS_TRUE(exportedModel.getLink(fakeLinkIdx)->getInertia().getMass() < 1e-10);
+
+    fakeLinkIdx = exportedModel.getLinkIndex("fake_spherical_joint_1_link2");
+    ASSERT_IS_TRUE(exportedModel.getLink(fakeLinkIdx)->getInertia().getMass() < 1e-10);
+
+    fakeLinkIdx = exportedModel.getLinkIndex("fake_spherical_joint_2_link1");
+    ASSERT_IS_TRUE(exportedModel.getLink(fakeLinkIdx)->getInertia().getMass() < 1e-10);
+
+    fakeLinkIdx = exportedModel.getLinkIndex("fake_spherical_joint_2_link2");
+    ASSERT_IS_TRUE(exportedModel.getLink(fakeLinkIdx)->getInertia().getMass() < 1e-10);
+
+    // Check that revolute joints were created for each spherical joint (3 per spherical joint)
+    // First spherical joint conversion
+    ASSERT_IS_TRUE(exportedModel.isJointNameUsed("rev_spherical_joint_1_x"));
+    ASSERT_IS_TRUE(exportedModel.isJointNameUsed("rev_spherical_joint_1_y"));
+    ASSERT_IS_TRUE(exportedModel.isJointNameUsed("rev_spherical_joint_1_z"));
+
+    // Second spherical joint conversion
+    ASSERT_IS_TRUE(exportedModel.isJointNameUsed("rev_spherical_joint_2_x"));
+    ASSERT_IS_TRUE(exportedModel.isJointNameUsed("rev_spherical_joint_2_y"));
+    ASSERT_IS_TRUE(exportedModel.isJointNameUsed("rev_spherical_joint_2_z"));
+
+    // Original revolute joint should still exist
+    ASSERT_IS_TRUE(exportedModel.isJointNameUsed("revolute_joint"));
+
+    // Verify that all joints are revolute (URDF doesn't support spherical joints)
+    for (JointIndex jointIdx = 0; jointIdx < exportedModel.getNrOfJoints(); jointIdx++) {
+        const IJoint* joint = exportedModel.getJoint(jointIdx);
+        ASSERT_IS_TRUE(dynamic_cast<const RevoluteJoint*>(joint) != nullptr);
+    }
+
+    // Check original spherical joints no longer exist
+    ASSERT_IS_TRUE(!exportedModel.isJointNameUsed("spherical_joint_1"));
+    ASSERT_IS_TRUE(!exportedModel.isJointNameUsed("spherical_joint_2"));
+
+    // Verify joint connectivity for first spherical joint conversion
+    // Chain should be: base -> fake_spherical_joint_1_link1 -> fake_spherical_joint_1_link2 -> link1
+    JointIndex xJoint1Idx = exportedModel.getJointIndex("rev_spherical_joint_1_x");
+    JointIndex yJoint1Idx = exportedModel.getJointIndex("rev_spherical_joint_1_y");
+    JointIndex zJoint1Idx = exportedModel.getJointIndex("rev_spherical_joint_1_z");
+
+    const IJoint* xJoint1 = exportedModel.getJoint(xJoint1Idx);
+    const IJoint* yJoint1 = exportedModel.getJoint(yJoint1Idx);
+    const IJoint* zJoint1 = exportedModel.getJoint(zJoint1Idx);
+
+    ASSERT_IS_TRUE(xJoint1->getFirstAttachedLink() == exportedModel.getLinkIndex("base"));
+    ASSERT_IS_TRUE(xJoint1->getSecondAttachedLink() == exportedModel.getLinkIndex("fake_spherical_joint_1_link1"));
+
+    ASSERT_IS_TRUE(yJoint1->getFirstAttachedLink() == exportedModel.getLinkIndex("fake_spherical_joint_1_link1"));
+    ASSERT_IS_TRUE(yJoint1->getSecondAttachedLink() == exportedModel.getLinkIndex("fake_spherical_joint_1_link2"));
+
+    ASSERT_IS_TRUE(zJoint1->getFirstAttachedLink() == exportedModel.getLinkIndex("fake_spherical_joint_1_link2"));
+    ASSERT_IS_TRUE(zJoint1->getSecondAttachedLink() == exportedModel.getLinkIndex("link1"));
+
+    std::cerr << "[TEST] testSphericalJointExportToURDF passed" << std::endl;
+}
+
+void testSphericalJointExportDisabled()
+{
+    // Test that spherical joint export can be disabled
+    Model originalModel;
+
+    // Create a simple model with one spherical joint
+    SpatialInertia linkInertia;
+
+    auto baseLinkInertia = getRandomInertia();
+    auto childLinkInertia = getRandomInertia();
+
+    Link baseLink, childLink;
+    baseLink.setInertia(baseLinkInertia);
+    childLink.setInertia(childLinkInertia);
+
+    originalModel.addLink("base", baseLink);
+    originalModel.addLink("child", childLink);
+
+    Transform baseToChild = getRandomTransform();
+    SphericalJoint sphericalJoint(baseToChild);
+    Position jointCenter = getRandomPosition();
+    LinkIndex baseLinkIdx = originalModel.getLinkIndex("base");
+    sphericalJoint.setJointCenter(baseLinkIdx, jointCenter);
+
+    originalModel.addJoint("base", "child", "spherical_joint", &sphericalJoint);
+    originalModel.setDefaultBaseLink(baseLinkIdx);
+
+    // Export with spherical joint conversion disabled
+
+    ModelExporter exporter;
+    bool ok = exporter.init(originalModel, SensorsList());
+    ModelExporterOptions options;
+    options.exportSphericalJointsAsThreeRevoluteJoints = false;
+    exporter.setExportingOptions(options);
+
+    ASSERT_IS_TRUE(ok);
+
+    std::cerr << "Original model with spherical joint:" << std::endl;
+    std::cerr << originalModel.toString() << std::endl;
+
+    std::string urdfString;
+    ok = exporter.exportModelToString(urdfString);
+
+    // Export should fail because URDF doesn't natively support spherical joints
+    // and conversion is disabled
+    ASSERT_IS_FALSE(ok);
+
+    std::cerr << "[TEST] testSphericalJointExportDisabled passed" << std::endl;
+}
+
+// Update the main function to include the new tests:
 int main()
 {
     for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
@@ -331,6 +547,9 @@ int main()
     testFramesNotInTraversal();
     testJointAxisWithNonZeroOriginButPassingThroughChildLinkFrameOrigin();
 
+    // Add the new spherical joint export tests
+    testSphericalJointExportToURDF();
+    testSphericalJointExportDisabled();
 
     return EXIT_SUCCESS;
 }
