@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(iDynTree VERSION 13.4.2
+project(iDynTree VERSION 14.0.0
                  LANGUAGES C CXX)
 
 # Disable in source build, unless Eclipse is used
