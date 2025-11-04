@@ -160,7 +160,7 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
  * (when onlyRevoluteJoints=false) or only revolute (when onlyRevoluteJoints=true). Please migrate to
  * use addRandomLinkToModel in which the fourth argument is an unsigned int
  */
-[[deprecated("Use addRandomLinkToModel that takes a unsigned int to select joint types")]] 
+IDYNTREE_DEPRECATED_WITH_MSG("Use addRandomLinkToModel variant that takes in input the allowedJointTypes as bitset.")
 inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints)
 {
     unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES;
