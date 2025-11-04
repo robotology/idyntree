@@ -154,6 +154,24 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
 }
 
 /**
+ * Add a random link with random model.
+ *
+ * This version is deprecated as it can only permit to either add revolute, prismatic and fixed joints 
+ * (when onlyRevoluteJoints=false) or only revolute (when onlyRevoluteJoints=true). Please migrate to
+ * use addRandomLinkToModel in which the fourth argument is an unsigned int
+ */
+[[deprecated("Use addRandomLinkToModel that takes a unsigned int to select joint types")]] 
+inline void addRandomLinkToModel(Model & model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints)
+{
+    unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES;
+    if (onlyRevoluteJoints) 
+    {
+        allowedJointTypes = JOINT_REVOLUTE;
+    }
+    return addRandomLinkToModel(model, parentLink, newLinkName, allowedJointTypes);
+}
+
+/**
  * Add a random additional frame to a model model.
  */
 inline void addRandomAdditionalFrameToModel(Model & model, std::string parentLink, std::string newFrameName)
