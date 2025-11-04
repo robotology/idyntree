@@ -4579,6 +4579,7 @@
     <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
     <member refid="ModelTestUtils_8h_1a8c8b8402523935bbb29f27cca71633ac" kind="function"><name>addRandomLinkToModel</name></member>
+    <member refid="ModelTestUtils_8h_1a4a517abc29acdad21e0893e8dc662524" kind="function"><name>addRandomLinkToModel</name></member>
     <member refid="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" kind="function"><name>addRandomAdditionalFrameToModel</name></member>
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>
@@ -5463,6 +5464,7 @@
     <member refid="ModelTestUtils_8h_1a839997025ffcdd75bf67981792b456aa" kind="variable"><name>ALL_JOINT_TYPES</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
     <member refid="ModelTestUtils_8h_1a8c8b8402523935bbb29f27cca71633ac" kind="function"><name>addRandomLinkToModel</name></member>
+    <member refid="ModelTestUtils_8h_1a4a517abc29acdad21e0893e8dc662524" kind="function"><name>addRandomLinkToModel</name></member>
     <member refid="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" kind="function"><name>addRandomAdditionalFrameToModel</name></member>
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>

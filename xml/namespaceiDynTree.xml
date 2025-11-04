@@ -3136,6 +3136,37 @@
         </inbodydescription>
         <location file="iDynTree/ModelTestUtils.h" line="69" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="69" bodyend="154"/>
       </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a4a517abc29acdad21e0893e8dc662524" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::addRandomLinkToModel</definition>
+        <argsstring>(Model &amp;model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints)</argsstring>
+        <name>addRandomLinkToModel</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>parentLink</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>newLinkName</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>onlyRevoluteJoints</declname>
+        </param>
+        <briefdescription>
+<para>Add a random link with random model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This version is deprecated as it can only permit to either add revolute, prismatic and fixed joints (when onlyRevoluteJoints=false) or only revolute (when onlyRevoluteJoints=true). Please migrate to use addRandomLinkToModel in which the fourth argument is an unsigned int </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTestUtils.h" line="164" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="164" bodyend="172"/>
+      </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void iDynTree::addRandomAdditionalFrameToModel</definition>
@@ -3160,7 +3191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="159" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="159" bodyend="162"/>
+        <location file="iDynTree/ModelTestUtils.h" line="177" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="177" bodyend="180"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>LinkIndex</type>
@@ -3177,7 +3208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="164" column="18" bodyfile="iDynTree/ModelTestUtils.h" bodystart="164" bodyend="169"/>
+        <location file="iDynTree/ModelTestUtils.h" line="182" column="18" bodyfile="iDynTree/ModelTestUtils.h" bodystart="182" bodyend="187"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -3194,7 +3225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="171" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="171" bodyend="176"/>
+        <location file="iDynTree/ModelTestUtils.h" line="189" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="189" bodyend="194"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -3211,7 +3242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="178" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="178" bodyend="185"/>
+        <location file="iDynTree/ModelTestUtils.h" line="196" column="20" bodyfile="iDynTree/ModelTestUtils.h" bodystart="196" bodyend="203"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a6be6dbbfd7e26ec48860775137fe7fd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
@@ -3272,7 +3303,7 @@ Example usage:<itemizedlist>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="201" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="201" bodyend="222"/>
+        <location file="iDynTree/ModelTestUtils.h" line="219" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="219" bodyend="240"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a20caf6d53482cbe05ce5715ccc1cc1a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
@@ -3326,7 +3357,7 @@ Example usage:<itemizedlist>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="231" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="231" bodyend="253"/>
+        <location file="iDynTree/ModelTestUtils.h" line="249" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="249" bodyend="271"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a5988c0a11fee2013e9ed68cf32147b95" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
@@ -3351,7 +3382,7 @@ Example usage:<itemizedlist>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="257" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="257" bodyend="264"/>
+        <location file="iDynTree/ModelTestUtils.h" line="275" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="275" bodyend="282"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a3993eed2007bd777ecdc90d9cc10b4b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
@@ -3376,7 +3407,7 @@ Example usage:<itemizedlist>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="267" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="267" bodyend="274"/>
+        <location file="iDynTree/ModelTestUtils.h" line="285" column="14" bodyfile="iDynTree/ModelTestUtils.h" bodystart="285" bodyend="292"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -3399,7 +3430,7 @@ Example usage:<itemizedlist>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="280" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="280" bodyend="310"/>
+        <location file="iDynTree/ModelTestUtils.h" line="298" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="298" bodyend="328"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -3431,7 +3462,7 @@ Example usage:<itemizedlist>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="320" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="320" bodyend="347"/>
+        <location file="iDynTree/ModelTestUtils.h" line="338" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="338" bodyend="365"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a6dfdcf7499dff86e08695945132e8b3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -3465,7 +3496,7 @@ Example usage:<itemizedlist>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTestUtils.h" line="353" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="353" bodyend="373"/>
+        <location file="iDynTree/ModelTestUtils.h" line="371" column="13" bodyfile="iDynTree/ModelTestUtils.h" bodystart="371" bodyend="391"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>

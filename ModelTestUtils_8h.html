@@ -109,6 +109,13 @@
               unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES)</span>
             </dt>
             <dd>Add a random link with random model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4a517abc29acdad21e0893e8dc662524" class="m-doc">addRandomLinkToModel</a>(</span><span class="m-doc-wrap">Model&amp; model,
+              std::string parentLink,
+              std::string newLinkName,
+              bool onlyRevoluteJoints)</span>
+            </dt>
+            <dd>Add a random link with random model.</dd>
             <dt id="abbc9efd0eed3caf7826a0f67056972f8">
               <span class="m-doc-wrap-bumper">void <a href="#abbc9efd0eed3caf7826a0f67056972f8" class="m-doc-self">addRandomAdditionalFrameToModel</a>(</span><span class="m-doc-wrap">Model&amp; model,
               std::string parentLink,
@@ -188,6 +195,16 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a4a517abc29acdad21e0893e8dc662524"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4a517abc29acdad21e0893e8dc662524" class="m-doc-self">addRandomLinkToModel</a>(</span><span class="m-doc-wrap">Model&amp; model,
+              std::string parentLink,
+              std::string newLinkName,
+              bool onlyRevoluteJoints)</span></span>
+            </h3>
+            <p>Add a random link with random model.</p>
+<p>This version is deprecated as it can only permit to either add revolute, prismatic and fixed joints (when onlyRevoluteJoints=false) or only revolute (when onlyRevoluteJoints=true). Please migrate to use addRandomLinkToModel in which the fourth argument is an unsigned int</p>
+          </div></section>
           <section class="m-doc-details" id="a6be6dbbfd7e26ec48860775137fe7fd8"><div>
             <h3>
               <span class="m-doc-wrap-bumper">Model </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6be6dbbfd7e26ec48860775137fe7fd8" class="m-doc-self">getRandomModel</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
