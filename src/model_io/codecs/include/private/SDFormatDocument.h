@@ -21,10 +21,11 @@ class iDynTree::SDFormatDocument {
   iDynTree::Model m_model;
 
   iDynTree::ModelParserOptions m_options;
-  
+
 #ifdef IDYNTREE_USES_SDFORMAT
   // Store the parsed SDF model for conversion
-  std::shared_ptr<const void> m_sdfModel; // Using void* to avoid exposing sdf types in header
+  std::shared_ptr<const void>
+      m_sdfModel; // Using void* to avoid exposing sdf types in header
 #endif
 
 public:
