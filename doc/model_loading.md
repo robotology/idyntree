@@ -93,8 +93,56 @@ Example XML:
 </sensor>
 ~~~
 
+## SDFormat models
 
+iDynTree also supports loading robot models from the [SDFormat (Simulation Description Format)](http://sdformat.org/) specification, commonly used by Gazebo simulator. This support requires the `sdformat` library (version 16.x or later) and must be enabled at build time with the `IDYNTREE_USES_SDFORMAT` CMake option.
 
+### Usage
+
+The `ModelLoader` class automatically detects SDFormat files based on file extension (`.sdf` or `.world`):
+
+```cpp
+iDynTree::ModelLoader loader;
+bool ok = loader.loadModelFromFile("robot.sdf");  // Auto-detected as SDFormat
+```
+
+You can also explicitly specify the format:
+
+```cpp
+bool ok = loader.loadModelFromFile("robot.sdf", "sdf");
+```
+
+### Supported Features
+
+The SDFormat parser supports:
+- **Links**: Full inertial properties (mass, center of mass, inertia tensor)
+- **Joints**: Revolute, prismatic, and fixed joint types with limits
+- **Multiple models**: Automatically extracts the first model from world files
+- **Automatic base link detection**: Selects the root link (no parent joint) as the model base
+
+### Current Limitations
+
+The following SDFormat features are not yet supported:
+- Sensor definitions (IMU, force-torque, cameras)
+- Visual and collision geometry
+- Additional joint types (ball, universal, screw)
+- Nested model hierarchies
+
+### Building with SDFormat Support
+
+To enable SDFormat support:
+
+```bash
+# Install sdformat (version 16.x recommended)
+conda install sdformat -c conda-forge
+
+# Configure iDynTree
+cmake -DIDYNTREE_USES_SDFORMAT=ON ..
+
+# Build and test
+cmake --build .
+ctest -R SDFormat
+```
 
 
 
