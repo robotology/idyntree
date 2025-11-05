@@ -30,94 +30,94 @@ namespace iDynTree {
 namespace {
 
 // Helper function to convert gz::math::Pose3d to iDynTree::Transform
-iDynTree::Transform poseToTransform(const gz::math::Pose3d& pose) {
+iDynTree::Transform poseToTransform(const gz::math::Pose3d &pose) {
   iDynTree::Transform transform;
-  
+
   // Convert rotation from quaternion to rotation matrix
-  const gz::math::Quaterniond& quat = pose.Rot();
+  const gz::math::Quaterniond &quat = pose.Rot();
   iDynTree::Rotation rotation;
-  
+
   double w = quat.W(), x = quat.X(), y = quat.Y(), z = quat.Z();
-  
+
   rotation(0, 0) = 1 - 2 * (y * y + z * z);
   rotation(0, 1) = 2 * (x * y - w * z);
   rotation(0, 2) = 2 * (x * z + w * y);
-  
+
   rotation(1, 0) = 2 * (x * y + w * z);
   rotation(1, 1) = 1 - 2 * (x * x + z * z);
   rotation(1, 2) = 2 * (y * z - w * x);
-  
+
   rotation(2, 0) = 2 * (x * z - w * y);
   rotation(2, 1) = 2 * (y * z + w * x);
   rotation(2, 2) = 1 - 2 * (x * x + y * y);
-  
+
   // Set translation
   iDynTree::Position position(pose.Pos().X(), pose.Pos().Y(), pose.Pos().Z());
-  
+
   transform.setRotation(rotation);
   transform.setPosition(position);
-  
+
   return transform;
 }
 
 // Helper function to convert SDF geometry to iDynTree SolidShape
-iDynTree::SolidShape* convertGeometry(const sdf::Geometry* geom) {
+iDynTree::SolidShape *convertGeometry(const sdf::Geometry *geom) {
   if (!geom) {
     return nullptr;
   }
-  
+
   switch (geom->Type()) {
-    case sdf::GeometryType::BOX: {
-      const sdf::Box* box = geom->BoxShape();
-      if (box) {
-        iDynTree::Box* idynBox = new iDynTree::Box();
-        gz::math::Vector3d size = box->Size();
-        idynBox->setX(size.X());
-        idynBox->setY(size.Y());
-        idynBox->setZ(size.Z());
-        return idynBox;
-      }
-      break;
+  case sdf::GeometryType::BOX: {
+    const sdf::Box *box = geom->BoxShape();
+    if (box) {
+      iDynTree::Box *idynBox = new iDynTree::Box();
+      gz::math::Vector3d size = box->Size();
+      idynBox->setX(size.X());
+      idynBox->setY(size.Y());
+      idynBox->setZ(size.Z());
+      return idynBox;
     }
-    case sdf::GeometryType::SPHERE: {
-      const sdf::Sphere* sphere = geom->SphereShape();
-      if (sphere) {
-        iDynTree::Sphere* idynSphere = new iDynTree::Sphere();
-        idynSphere->setRadius(sphere->Radius());
-        return idynSphere;
-      }
-      break;
-    }
-    case sdf::GeometryType::CYLINDER: {
-      const sdf::Cylinder* cylinder = geom->CylinderShape();
-      if (cylinder) {
-        iDynTree::Cylinder* idynCylinder = new iDynTree::Cylinder();
-        idynCylinder->setRadius(cylinder->Radius());
-        idynCylinder->setLength(cylinder->Length());
-        return idynCylinder;
-      }
-      break;
-    }
-    case sdf::GeometryType::MESH: {
-      const sdf::Mesh* mesh = geom->MeshShape();
-      if (mesh) {
-        iDynTree::ExternalMesh* idynMesh = new iDynTree::ExternalMesh();
-        idynMesh->setFilename(mesh->Uri());
-        gz::math::Vector3d scale = mesh->Scale();
-        iDynTree::Vector3 idynScale;
-        idynScale(0) = scale.X();
-        idynScale(1) = scale.Y();
-        idynScale(2) = scale.Z();
-        idynMesh->setScale(idynScale);
-        return idynMesh;
-      }
-      break;
-    }
-    default:
-      // Unsupported geometry type
-      break;
+    break;
   }
-  
+  case sdf::GeometryType::SPHERE: {
+    const sdf::Sphere *sphere = geom->SphereShape();
+    if (sphere) {
+      iDynTree::Sphere *idynSphere = new iDynTree::Sphere();
+      idynSphere->setRadius(sphere->Radius());
+      return idynSphere;
+    }
+    break;
+  }
+  case sdf::GeometryType::CYLINDER: {
+    const sdf::Cylinder *cylinder = geom->CylinderShape();
+    if (cylinder) {
+      iDynTree::Cylinder *idynCylinder = new iDynTree::Cylinder();
+      idynCylinder->setRadius(cylinder->Radius());
+      idynCylinder->setLength(cylinder->Length());
+      return idynCylinder;
+    }
+    break;
+  }
+  case sdf::GeometryType::MESH: {
+    const sdf::Mesh *mesh = geom->MeshShape();
+    if (mesh) {
+      iDynTree::ExternalMesh *idynMesh = new iDynTree::ExternalMesh();
+      idynMesh->setFilename(mesh->Uri());
+      gz::math::Vector3d scale = mesh->Scale();
+      iDynTree::Vector3 idynScale;
+      idynScale(0) = scale.X();
+      idynScale(1) = scale.Y();
+      idynScale(2) = scale.Z();
+      idynMesh->setScale(idynScale);
+      return idynMesh;
+    }
+    break;
+  }
+  default:
+    // Unsupported geometry type
+    break;
+  }
+
   return nullptr;
 }
 
@@ -252,7 +252,7 @@ bool SDFormatDocument::convertSDFormatToModel(
   // Initialize solid shapes containers
   m_model.visualSolidShapes().resize(sdfModel->LinkCount());
   m_model.collisionSolidShapes().resize(sdfModel->LinkCount());
-  
+
   // Initialize sensors list
   m_model.sensors() = iDynTree::SensorsList();
 
@@ -296,33 +296,36 @@ bool SDFormatDocument::convertSDFormatToModel(
 
     // Add link to model (link name is part of addLink, not setName)
     m_model.addLink(sdfLink->Name(), idynLink);
-    
+
     LinkIndex addedLinkIndex = m_model.getLinkIndex(sdfLink->Name());
-    
+
     // Parse sensors attached to this link
-    for (uint64_t sensorIdx = 0; sensorIdx < sdfLink->SensorCount(); ++sensorIdx) {
-      const sdf::Sensor* sdfSensor = sdfLink->SensorByIndex(sensorIdx);
+    for (uint64_t sensorIdx = 0; sensorIdx < sdfLink->SensorCount();
+         ++sensorIdx) {
+      const sdf::Sensor *sdfSensor = sdfLink->SensorByIndex(sensorIdx);
       if (!sdfSensor) {
         continue;
       }
-      
+
       sdf::SensorType sensorType = sdfSensor->Type();
-      
+
       // Convert sensor pose to transform
-      iDynTree::Transform sensorTransform = poseToTransform(sdfSensor->RawPose());
-      
+      iDynTree::Transform sensorTransform =
+          poseToTransform(sdfSensor->RawPose());
+
       if (sensorType == sdf::SensorType::IMU) {
         // IMU sensors provide both acceleration and angular velocity
         // We'll create both an accelerometer and gyroscope sensor
-        iDynTree::AccelerometerSensor* accSensor = new iDynTree::AccelerometerSensor();
+        iDynTree::AccelerometerSensor *accSensor =
+            new iDynTree::AccelerometerSensor();
         accSensor->setName(sdfSensor->Name() + "_acc");
         accSensor->setParentLink(sdfLink->Name());
         accSensor->setParentLinkIndex(addedLinkIndex);
         accSensor->setLinkSensorTransform(sensorTransform);
         m_model.sensors().addSensor(*accSensor);
         delete accSensor;
-        
-        iDynTree::GyroscopeSensor* gyroSensor = new iDynTree::GyroscopeSensor();
+
+        iDynTree::GyroscopeSensor *gyroSensor = new iDynTree::GyroscopeSensor();
         gyroSensor->setName(sdfSensor->Name() + "_gyro");
         gyroSensor->setParentLink(sdfLink->Name());
         gyroSensor->setParentLinkIndex(addedLinkIndex);
@@ -330,38 +333,43 @@ bool SDFormatDocument::convertSDFormatToModel(
         m_model.sensors().addSensor(*gyroSensor);
         delete gyroSensor;
       }
-      // Note: Force-torque sensors in SDF are typically attached to joints, not links
-      // They would need to be handled separately in the joint parsing section
+      // Note: Force-torque sensors in SDF are typically attached to joints, not
+      // links They would need to be handled separately in the joint parsing
+      // section
     }
-    
+
     // Parse visual geometries
-    for (uint64_t visualIdx = 0; visualIdx < sdfLink->VisualCount(); ++visualIdx) {
-      const sdf::Visual* visual = sdfLink->VisualByIndex(visualIdx);
+    for (uint64_t visualIdx = 0; visualIdx < sdfLink->VisualCount();
+         ++visualIdx) {
+      const sdf::Visual *visual = sdfLink->VisualByIndex(visualIdx);
       if (!visual || !visual->Geom()) {
         continue;
       }
-      
-      iDynTree::SolidShape* shape = convertGeometry(visual->Geom());
+
+      iDynTree::SolidShape *shape = convertGeometry(visual->Geom());
       if (shape) {
         shape->setName(visual->Name());
         shape->setLink_H_geometry(poseToTransform(visual->RawPose()));
-        m_model.visualSolidShapes().addSingleLinkSolidShape(addedLinkIndex, *shape);
+        m_model.visualSolidShapes().addSingleLinkSolidShape(addedLinkIndex,
+                                                            *shape);
         delete shape;
       }
     }
-    
+
     // Parse collision geometries
-    for (uint64_t collisionIdx = 0; collisionIdx < sdfLink->CollisionCount(); ++collisionIdx) {
-      const sdf::Collision* collision = sdfLink->CollisionByIndex(collisionIdx);
+    for (uint64_t collisionIdx = 0; collisionIdx < sdfLink->CollisionCount();
+         ++collisionIdx) {
+      const sdf::Collision *collision = sdfLink->CollisionByIndex(collisionIdx);
       if (!collision || !collision->Geom()) {
         continue;
       }
-      
-      iDynTree::SolidShape* shape = convertGeometry(collision->Geom());
+
+      iDynTree::SolidShape *shape = convertGeometry(collision->Geom());
       if (shape) {
         shape->setName(collision->Name());
         shape->setLink_H_geometry(poseToTransform(collision->RawPose()));
-        m_model.collisionSolidShapes().addSingleLinkSolidShape(addedLinkIndex, *shape);
+        m_model.collisionSolidShapes().addSingleLinkSolidShape(addedLinkIndex,
+                                                               *shape);
         delete shape;
       }
     }
@@ -391,7 +399,8 @@ bool SDFormatDocument::convertSDFormatToModel(
 
     // Get joint pose relative to child link frame
     // In SDFormat, joint pose is specified relative to the child link
-    iDynTree::Transform jointTransform = poseToTransform(sdfJoint->SemanticPose().RawPose());
+    iDynTree::Transform jointTransform =
+        poseToTransform(sdfJoint->SemanticPose().RawPose());
 
     // Create joint based on type
     sdf::JointType jointType = sdfJoint->Type();

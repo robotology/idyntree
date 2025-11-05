@@ -15,7 +15,7 @@
           <iyz>0</iyz>
         </inertia>
       </inertial>
-      
+
       <visual name="base_visual">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
@@ -24,7 +24,7 @@
           </box>
         </geometry>
       </visual>
-      
+
       <collision name="base_collision">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
@@ -33,13 +33,13 @@
           </sphere>
         </geometry>
       </collision>
-      
+
       <sensor name="imu_sensor" type="imu">
         <pose>0 0 0.1 0 0 0</pose>
         <imu/>
       </sensor>
     </link>
-    
+
     <link name="link1">
       <pose>0 0 0.3 0 0 0</pose>
       <inertial>
@@ -54,7 +54,7 @@
           <iyz>0</iyz>
         </inertia>
       </inertial>
-      
+
       <visual name="link1_visual">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
@@ -64,7 +64,7 @@
           </cylinder>
         </geometry>
       </visual>
-      
+
       <collision name="link1_collision">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
@@ -75,7 +75,7 @@
         </geometry>
       </collision>
     </link>
-    
+
     <joint name="joint1" type="revolute">
       <parent>base_link</parent>
       <child>link1</child>

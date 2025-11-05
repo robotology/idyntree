@@ -1,22 +1,23 @@
 # Build iDynTree from source
 
-iDynTree is a fairly classical C++ project build with CMake, so it should be quite easy to build if you are already familiar with how you build C++ projects with CMake. 
+iDynTree is a fairly classical C++ project build with CMake, so it should be quite easy to build if you are already familiar with how you build C++ projects with CMake.
 If you are not familiar with the use of CMake, you can check some documentation on https://cmake.org/runningcmake/ or https://cgold.readthedocs.io .
 
 ## C++ Dependencies
 
-Before building iDynTree, you need to install the dependencies of iDynTree. Not all dependenies are strictly required, some of them can be enabled or disabled. 
+Before building iDynTree, you need to install the dependencies of iDynTree. Not all dependenies are strictly required, some of them can be enabled or disabled.
 In case they are disabled, tipically some functionality of iDynTree is not provided or disabled.
 
-| Name | Strictly required? | Option to enable/disable | Enabled in conda-forge builds?  |  Enabled in robotology-superbuild builds?  | 
+| Name | Strictly required? | Option to enable/disable | Enabled in conda-forge builds?  |  Enabled in robotology-superbuild builds?  |
 |:-----:|:-----------------:|:------------------------:|:-------------------------------:|:------------------------------------------:|
 | [Eigen](http://eigen.tuxfamily.org) | **Yes** |  n.a. | ✔️ | ✔️ |
 | [Libxml2](http://xmlsoft.org/) | **Yes** |  n.a.      | ✔️ | ✔️ |
-| [Assimp](http://www.assimp.org/) | No|  `IDYNTREE_USES_ASSIMP` | ✔️ |  ✔️ | 
+| [Assimp](http://www.assimp.org/) | No|  `IDYNTREE_USES_ASSIMP` | ✔️ |  ✔️ |
 | [IPOPT](https://projects.coin-or.org/Ipopt) | No |  `IDYNTREE_USES_IPOPT` | ✔️ | ✔️ |
 | [irrlicht](http://irrlicht.sourceforge.net/) | No | `IDYNTREE_USES_IRRLICHT` | ✔️ | ✔️ |
 | [glfw](https://www.glfw.org/) | No | `IDYNTREE_USES_IRRLICHT` | ✔️ | ✔️ |
 | [osqp-eigen](https://github.com/robotology/osqp-eigen) | No | `IDYNTREE_USES_OSQPEIGEN` | ✔️ | ✔️ |
+| [sdformat](http://sdformat.org/) | No | `IDYNTREE_USES_SDFORMAT` | ✔️ | ❌ |
 | [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) | No | `IDYNTREE_USES_MESHCATCPP` | ❌ | ❌ |
 
 
@@ -24,7 +25,7 @@ In case they are disabled, tipically some functionality of iDynTree is not provi
 
 If you are using conda, the dependencies of iDynTree can be installed with:
 ~~~
-conda install -c conda-forge cmake compilers  make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen swig python glfw
+conda install -c conda-forge cmake compilers  make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen swig python glfw sdformat
 ~~~
 
 ### Install dependencies with apt
