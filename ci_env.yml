@@ -2,11 +2,11 @@ name: idyntreedev
 channels:
   - conda-forge
 dependencies:
-  - cmake 
+  - cmake
   - cxx-compiler
-  - make 
+  - make
   - ninja
-  - pkg-config 
+  - pkg-config
   - eigen
   - libxml2-devel
   - assimp
@@ -16,7 +16,8 @@ dependencies:
   - swig
   - pybind11
   - python
-  - numpy 
+  - numpy
   - yarp
-  - icub-main 
+  - icub-main
   - osqp-eigen
+  - sdformat
