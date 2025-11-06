@@ -17,14 +17,16 @@ Furthermore, we also use some extension to the URDF specs, as defined in the fol
 
 ### Spherical joints
 
-The `URDF` specification do not support Spherical Joints, that instead iDynTree support. To allow to easily load and export URDF models that contain spherical joints, by default iDynTree URDF parser detect if the model contains three consecutive `revolute` or `continuous` joints with this conditions:
+The `URDF` specification do not support Spherical Joints, that instead iDynTree support. To allow to easily load and export URDF models that contain spherical joints, iDynTree URDF parser exposes an option `ModelParserOptions::convertThreeRevoluteJointsToSphericalJoint` that is off by default, but if enable can detect if the model contains three consecutive `revolute` or `continuous` joints with this conditions:
 * The three joint axis intersect at a single point
 * The three joint axis are each one orthogonal to each other
 * The two internal links have zero mass
 
 If all these conditions are respected, the three revolute joints in the URDF model are substituted with a single iDynTree's SphericalJoint. Similarly, when a `iDynTree::Model` is exported, any `iDynTree::SphericalJoint` contained in it is exported as a three revolute joints that respect the aforementioned conditions.
 
-To disable this behaviour that by default is enabled you can set the `ModelParserOptions::convertThreeRevoluteJointsToSphericalJoint` and `ModelExporterOptions::exportSphericalJointsAsThreeRevoluteJoints` options to `false`.
+To enable this behaviour that by default is disable you can set the `ModelParserOptions::convertThreeRevoluteJointsToSphericalJoint` to true.
+
+The equivalent option for the URDF export, i.e. `ModelExporterOptions::exportSphericalJointsAsThreeRevoluteJoints` is by default `true`, and can be set to `false` to ensure that trying to export a `SphericalJoint` to a URDF results in a clear error.
 
 Note that this way of supporting spherical joints in URDF is compatible with the [`onshape-to-robot`'s `ball_to_euler` processor](https://onshape-to-robot.readthedocs.io/en/latest/processor_ball_to_euler.html).
 
