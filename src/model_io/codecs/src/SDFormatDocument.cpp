@@ -350,22 +350,19 @@ namespace iDynTree
                 {
                     // IMU sensors provide both acceleration and angular velocity
                     // We'll create both an accelerometer and gyroscope sensor
-                    iDynTree::AccelerometerSensor *accSensor =
-                        new iDynTree::AccelerometerSensor();
-                    accSensor->setName(sdfSensor->Name() + "_acc");
-                    accSensor->setParentLink(sdfLink->Name());
-                    accSensor->setParentLinkIndex(addedLinkIndex);
-                    accSensor->setLinkSensorTransform(sensorTransform);
-                    m_model.sensors().addSensor(*accSensor);
-                    delete accSensor;
+                    iDynTree::AccelerometerSensor accSensor;
+                    accSensor.setName(sdfSensor->Name() + "_acc");
+                    accSensor.setParentLink(sdfLink->Name());
+                    accSensor.setParentLinkIndex(addedLinkIndex);
+                    accSensor.setLinkSensorTransform(sensorTransform);
+                    m_model.sensors().addSensor(accSensor);
 
-                    iDynTree::GyroscopeSensor *gyroSensor = new iDynTree::GyroscopeSensor();
-                    gyroSensor->setName(sdfSensor->Name() + "_gyro");
-                    gyroSensor->setParentLink(sdfLink->Name());
-                    gyroSensor->setParentLinkIndex(addedLinkIndex);
-                    gyroSensor->setLinkSensorTransform(sensorTransform);
-                    m_model.sensors().addSensor(*gyroSensor);
-                    delete gyroSensor;
+                    iDynTree::GyroscopeSensor gyroSensor;
+                    gyroSensor.setName(sdfSensor->Name() + "_gyro");
+                    gyroSensor.setParentLink(sdfLink->Name());
+                    gyroSensor.setParentLinkIndex(addedLinkIndex);
+                    gyroSensor.setLinkSensorTransform(sensorTransform);
+                    m_model.sensors().addSensor(gyroSensor);
                 }
                 // Note: Force-torque sensors in SDF are typically attached to joints, not
                 // links They would need to be handled separately in the joint parsing
