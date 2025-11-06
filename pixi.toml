@@ -59,7 +59,7 @@ python = "*"
 numpy = "*"
 yarp = "*"
 osqp-eigen = "*"
-libsdformat = "*"
+libsdformat = ">=16.0"
 # Find a way to add this only for supported envs
 # icub-main = "*"
 

@@ -20,4 +20,4 @@ dependencies:
   - yarp
   - icub-main
   - osqp-eigen
-  - libsdformat
+  - libsdformat >= 16.0
