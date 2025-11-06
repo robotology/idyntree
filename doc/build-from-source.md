@@ -25,7 +25,7 @@ In case they are disabled, tipically some functionality of iDynTree is not provi
 
 If you are using conda, the dependencies of iDynTree can be installed with:
 ~~~
-conda install -c conda-forge cmake compilers  make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen swig python glfw sdformat
+conda install -c conda-forge cmake compilers  make ninja pkg-config eigen libxml2-devel assimp ipopt irrlicht osqp-eigen swig python glfw libsdformat
 ~~~
 
 ### Install dependencies with apt
