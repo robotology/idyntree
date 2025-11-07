@@ -50,4 +50,18 @@ if(IDYNTREE_USES_SDFORMAT)
     if(IDYNTREE_RUN_VALGRIND_TESTS)
         add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
     endif()
+
+    # Add URDF to SDF roundtrip test
+    set(testsrc URDFToSDFormatRoundtripTest.cpp)
+    set(testbinary URDFToSDFormatRoundtripTest)
+    set(testname UnitTestURDFToSDFormatRoundtrip)
+    add_executable(${testbinary} ${testsrc})
+    target_link_libraries(${testbinary} PRIVATE idyntree-modelio idyntree-testmodels idyntree-high-level Eigen3::Eigen ${sdformat_LIBRARIES})
+    target_compile_definitions(${testbinary} PRIVATE IDYNTREE_USES_SDFORMAT)
+    target_include_directories(${testbinary} PRIVATE ${sdformat_INCLUDE_DIRS})
+    add_test(NAME ${testname} COMMAND ${testbinary})
+
+    if(IDYNTREE_RUN_VALGRIND_TESTS)
+        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
+    endif()
 endif()
