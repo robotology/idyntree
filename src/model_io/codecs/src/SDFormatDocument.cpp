@@ -286,7 +286,9 @@ namespace iDynTree
             const sdf::Link *sdfLink = sdfModel->LinkByIndex(linkIdx);
             if (!sdfLink)
             {
-                continue;
+                reportError("SDFormatDocument", "convertSDFormatToModel",
+                            "Failed to get link from model");
+                return false;
             }
 
             // Create iDynTree link
@@ -333,7 +335,9 @@ namespace iDynTree
                 const sdf::Sensor *sdfSensor = sdfLink->SensorByIndex(sensorIdx);
                 if (!sdfSensor)
                 {
-                    continue;
+                    std::string errMsg = "Failed to get sensor from link " + sdfLink->Name();
+                    reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                    return false;
                 }
 
                 sdf::SensorType sensorType = sdfSensor->Type();
@@ -370,9 +374,19 @@ namespace iDynTree
                  ++visualIdx)
             {
                 const sdf::Visual *visual = sdfLink->VisualByIndex(visualIdx);
-                if (!visual || !visual->Geom())
+                if (!visual)
                 {
-                    continue;
+                    std::string errMsg = "Failed to get visual from link " + sdfLink->Name();
+                    reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                    return false;
+                }
+
+                if (!visual->Geom())
+                {
+                    std::string errMsg = "Visual " + visual->Name() + " in link " +
+                                         sdfLink->Name() + " has no geometry";
+                    reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                    return false;
                 }
 
                 iDynTree::SolidShape *shape = convertGeometry(visual->Geom());
@@ -391,9 +405,19 @@ namespace iDynTree
                  ++collisionIdx)
             {
                 const sdf::Collision *collision = sdfLink->CollisionByIndex(collisionIdx);
-                if (!collision || !collision->Geom())
+                if (!collision)
                 {
-                    continue;
+                    std::string errMsg = "Failed to get collision from link " + sdfLink->Name();
+                    reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                    return false;
+                }
+
+                if (!collision->Geom())
+                {
+                    std::string errMsg = "Collision " + collision->Name() + " in link " +
+                                         sdfLink->Name() + " has no geometry";
+                    reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                    return false;
                 }
 
                 iDynTree::SolidShape *shape = convertGeometry(collision->Geom());
@@ -414,7 +438,9 @@ namespace iDynTree
             const sdf::Joint *sdfJoint = sdfModel->JointByIndex(jointIdx);
             if (!sdfJoint)
             {
-                continue;
+                reportError("SDFormatDocument", "convertSDFormatToModel",
+                            "Failed to get joint from model");
+                return false;
             }
 
             // Get parent and child links
@@ -430,7 +456,7 @@ namespace iDynTree
                 std::string errMsg =
                     "Joint " + sdfJoint->Name() + " references invalid links";
                 reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
-                continue;
+                return false;
             }
 
             // Get joint pose relative to child link frame
