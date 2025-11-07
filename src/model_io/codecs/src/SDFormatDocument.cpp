@@ -305,18 +305,20 @@ namespace iDynTree
             iDynTree::Position com(inertiaPose.Pos().X(), inertiaPose.Pos().Y(),
                                    inertiaPose.Pos().Z());
 
-            // Get inertia tensor (at COM, in link-aligned frame)
-            const gz::math::Matrix3d &I = inertial.Moi();
-            iDynTree::RotationalInertia rotInertiaWrtCom;
-            rotInertiaWrtCom(0, 0) = I(0, 0);
-            rotInertiaWrtCom(0, 1) = I(0, 1);
-            rotInertiaWrtCom(0, 2) = I(0, 2);
-            rotInertiaWrtCom(1, 0) = I(1, 0);
-            rotInertiaWrtCom(1, 1) = I(1, 1);
-            rotInertiaWrtCom(1, 2) = I(1, 2);
-            rotInertiaWrtCom(2, 0) = I(2, 0);
-            rotInertiaWrtCom(2, 1) = I(2, 1);
-            rotInertiaWrtCom(2, 2) = I(2, 2);
+            // Get inertia tensor
+            // SDFormat's URDF->SDF conversion already transforms the inertia to the link frame.
+            const gz::math::Matrix3d &I_linkFrame = inertial.Moi();
+
+            iDynTree::RotationalInertia rotInertiaWrtCom_linkFrame;
+            rotInertiaWrtCom_linkFrame(0, 0) = I_linkFrame(0, 0);
+            rotInertiaWrtCom_linkFrame(0, 1) = I_linkFrame(0, 1);
+            rotInertiaWrtCom_linkFrame(0, 2) = I_linkFrame(0, 2);
+            rotInertiaWrtCom_linkFrame(1, 0) = I_linkFrame(1, 0);
+            rotInertiaWrtCom_linkFrame(1, 1) = I_linkFrame(1, 1);
+            rotInertiaWrtCom_linkFrame(1, 2) = I_linkFrame(1, 2);
+            rotInertiaWrtCom_linkFrame(2, 0) = I_linkFrame(2, 0);
+            rotInertiaWrtCom_linkFrame(2, 1) = I_linkFrame(2, 1);
+            rotInertiaWrtCom_linkFrame(2, 2) = I_linkFrame(2, 2);
 
             // Create spatial inertia using the helper that handles inertia at COM
             iDynTree::SpatialInertia spatialInertia;
@@ -472,17 +474,135 @@ namespace iDynTree
                 // Revolute joint
                 iDynTree::RevoluteJoint *revJoint = new iDynTree::RevoluteJoint();
 
-                // Get axis
-                const gz::math::Vector3d &axis = sdfJoint->Axis(0)->Xyz();
-                iDynTree::Axis idynAxis(iDynTree::Direction(axis.X(), axis.Y(), axis.Z()),
-                                        iDynTree::Position(0, 0, 0));
+                const sdf::JointAxis *jointAxis = sdfJoint->Axis(0);
+                const gz::math::Vector3d &axisXyz = jointAxis->Xyz();
+                const std::string &expressedIn = jointAxis->XyzExpressedIn();
+
+                iDynTree::Direction axisDir_childFrame;
+                iDynTree::Position axisOrigin_childFrame;
+
+                // Resolve the axis to the child link frame
+                // The axis is a line in space with a direction and passing through a point.
+                // In SDFormat, the axis direction is given by <xyz> in the frame specified by expressed_in.
+                // The axis passes through the origin of the expressed_in frame.
+                if (expressedIn.empty() || expressedIn == sdfJoint->Name())
+                {
+                    // Default case: axis is in joint frame
+                    // The joint frame origin is at (0,0,0) in the child link frame
+                    axisDir_childFrame = iDynTree::Direction(axisXyz.X(), axisXyz.Y(), axisXyz.Z());
+                    axisOrigin_childFrame = iDynTree::Position(0.0, 0.0, 0.0);
+                }
+                else if (expressedIn == "__model__")
+                {
+                    // Axis is in model frame, so we need to transform to child link frame
+                    // Get child link's pose in model frame
+                    const sdf::Link *childLink = sdfModel->LinkByName(childLinkName);
+                    if (!childLink)
+                    {
+                        std::string errMsg = "Failed to find child link '" + childLinkName + "' for joint '" + sdfJoint->Name() + "'";
+                        reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                        return false;
+                    }
+
+                    gz::math::Pose3d childLink_H_model;
+                    sdf::Errors errors = childLink->SemanticPose().Resolve(childLink_H_model, "__model__");
+                    if (!errors.empty())
+                    {
+                        std::string errMsg = "Failed to resolve child link pose for joint '" + sdfJoint->Name() + "'";
+                        reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                        return false;
+                    }
+
+                    // Transform axis direction from model frame to child link frame
+                    gz::math::Vector3d axisInChildFrame = childLink_H_model.Rot().Inverse() * axisXyz;
+                    axisDir_childFrame = iDynTree::Direction(axisInChildFrame.X(), axisInChildFrame.Y(), axisInChildFrame.Z());
+
+                    // Transform axis origin: the axis passes through model frame origin (0,0,0)
+                    // Position of model origin in child link frame is -childLink_H_model.Pos()
+                    gz::math::Vector3d modelOriginInChildFrame = -(childLink_H_model.Rot().Inverse() * childLink_H_model.Pos());
+                    axisOrigin_childFrame = iDynTree::Position(modelOriginInChildFrame.X(), modelOriginInChildFrame.Y(), modelOriginInChildFrame.Z());
+                }
+                else
+                {
+                    // Axis is expressed in a named frame (could be a link or explicit frame)
+                    // First try to find it as a link
+                    const sdf::Link *expressedInLink = sdfModel->LinkByName(expressedIn);
+                    const sdf::Link *childLink = sdfModel->LinkByName(childLinkName);
+
+                    if (!childLink)
+                    {
+                        std::string errMsg = "Failed to find child link '" + childLinkName + "' for joint '" + sdfJoint->Name() + "'";
+                        reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                        return false;
+                    }
+
+                    gz::math::Pose3d childLink_H_expressedIn;
+
+                    if (expressedInLink)
+                    {
+                        // Resolve expressed_in link pose relative to model
+                        gz::math::Pose3d expressedInLink_H_model;
+                        sdf::Errors errors = expressedInLink->SemanticPose().Resolve(expressedInLink_H_model, "__model__");
+                        if (!errors.empty())
+                        {
+                            std::string errMsg = "Failed to resolve expressed_in link pose for joint '" + sdfJoint->Name() + "'";
+                            reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                            return false;
+                        }
+
+                        gz::math::Pose3d childLink_H_model;
+                        errors = childLink->SemanticPose().Resolve(childLink_H_model, "__model__");
+                        if (!errors.empty())
+                        {
+                            std::string errMsg = "Failed to resolve child link pose for joint '" + sdfJoint->Name() + "'";
+                            reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                            return false;
+                        }
+
+                        childLink_H_expressedIn = childLink_H_model * expressedInLink_H_model.Inverse();
+                    }
+                    else
+                    {
+                        // Try to find it as an explicit frame
+                        const sdf::Frame *expressedInFrame = sdfModel->FrameByName(expressedIn);
+                        if (expressedInFrame)
+                        {
+                            // Resolve frame pose relative to child link
+                            sdf::Errors errors = childLink->SemanticPose().Resolve(childLink_H_expressedIn, expressedIn);
+                            if (!errors.empty())
+                            {
+                                std::string errMsg = "Failed to resolve frame '" + expressedIn + "' relative to child link for joint '" + sdfJoint->Name() + "'";
+                                reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                                return false;
+                            }
+                            // Need to invert because we want expressedIn -> childLink
+                            childLink_H_expressedIn = childLink_H_expressedIn.Inverse();
+                        }
+                        else
+                        {
+                            std::string errMsg = "Axis expressed_in frame '" + expressedIn + "' not found as link or frame for joint '" + sdfJoint->Name() + "'";
+                            reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                            return false;
+                        }
+                    }
+
+                    // Transform axis direction from expressed_in frame to child link frame
+                    gz::math::Vector3d axisInChildFrame = childLink_H_expressedIn.Rot() * axisXyz;
+                    axisDir_childFrame = iDynTree::Direction(axisInChildFrame.X(), axisInChildFrame.Y(), axisInChildFrame.Z());
+
+                    // Transform axis origin: the axis passes through expressed_in frame origin (0,0,0)
+                    // Position of expressed_in origin in child link frame
+                    gz::math::Vector3d expressedInOriginInChildFrame = childLink_H_expressedIn.Pos();
+                    axisOrigin_childFrame = iDynTree::Position(expressedInOriginInChildFrame.X(), expressedInOriginInChildFrame.Y(), expressedInOriginInChildFrame.Z());
+                }
+
+                iDynTree::Axis idynAxis(axisDir_childFrame, axisOrigin_childFrame);
 
                 revJoint->setAttachedLinks(parentLinkIndex, childLinkIndex);
                 revJoint->setRestTransform(jointTransform);
                 revJoint->setAxis(idynAxis, childLinkIndex, parentLinkIndex);
 
                 // Set joint limits if available
-                const sdf::JointAxis *jointAxis = sdfJoint->Axis(0);
                 if (jointAxis)
                 {
                     revJoint->enablePosLimits(true);
@@ -496,17 +616,132 @@ namespace iDynTree
                 // Prismatic joint
                 iDynTree::PrismaticJoint *prismJoint = new iDynTree::PrismaticJoint();
 
-                // Get axis
-                const gz::math::Vector3d &axis = sdfJoint->Axis(0)->Xyz();
-                iDynTree::Axis idynAxis(iDynTree::Direction(axis.X(), axis.Y(), axis.Z()),
-                                        iDynTree::Position(0, 0, 0));
+                const sdf::JointAxis *jointAxis = sdfJoint->Axis(0);
+                const gz::math::Vector3d &axisXyz = jointAxis->Xyz();
+                const std::string &expressedIn = jointAxis->XyzExpressedIn();
+
+                iDynTree::Direction axisDir_childFrame;
+                iDynTree::Position axisOrigin_childFrame;
+
+                // Resolve the axis to the child link frame
+                // The axis is a line in space with a direction and passing through a point.
+                // In SDFormat, the axis direction is given by <xyz> in the frame specified by expressed_in.
+                // The axis passes through the origin of the expressed_in frame.
+                if (expressedIn.empty() || expressedIn == sdfJoint->Name())
+                {
+                    // Default case: axis is in joint frame
+                    // The joint frame origin is at (0,0,0) in the child link frame
+                    axisDir_childFrame = iDynTree::Direction(axisXyz.X(), axisXyz.Y(), axisXyz.Z());
+                    axisOrigin_childFrame = iDynTree::Position(0.0, 0.0, 0.0);
+                }
+                else if (expressedIn == "__model__")
+                {
+                    // Axis is in model frame - need to transform to child link frame
+                    const sdf::Link *childLink = sdfModel->LinkByName(childLinkName);
+                    if (!childLink)
+                    {
+                        std::string errMsg = "Failed to find child link '" + childLinkName + "' for joint '" + sdfJoint->Name() + "'";
+                        reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                        return false;
+                    }
+
+                    gz::math::Pose3d childLink_H_model;
+                    sdf::Errors errors = childLink->SemanticPose().Resolve(childLink_H_model, "__model__");
+                    if (!errors.empty())
+                    {
+                        std::string errMsg = "Failed to resolve child link pose for joint '" + sdfJoint->Name() + "'";
+                        reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                        return false;
+                    }
+
+                    // Transform axis direction from model frame to child link frame
+                    gz::math::Vector3d axisInChildFrame = childLink_H_model.Rot().Inverse() * axisXyz;
+                    axisDir_childFrame = iDynTree::Direction(axisInChildFrame.X(), axisInChildFrame.Y(), axisInChildFrame.Z());
+
+                    // Transform axis origin: the axis passes through model frame origin (0,0,0)
+                    // Position of model origin in child link frame is -childLink_H_model.Pos()
+                    gz::math::Vector3d modelOriginInChildFrame = -(childLink_H_model.Rot().Inverse() * childLink_H_model.Pos());
+                    axisOrigin_childFrame = iDynTree::Position(modelOriginInChildFrame.X(), modelOriginInChildFrame.Y(), modelOriginInChildFrame.Z());
+                }
+                else
+                {
+                    // Axis is expressed in a named frame (could be a link or explicit frame)
+                    const sdf::Link *expressedInLink = sdfModel->LinkByName(expressedIn);
+                    const sdf::Link *childLink = sdfModel->LinkByName(childLinkName);
+
+                    if (!childLink)
+                    {
+                        std::string errMsg = "Failed to find child link '" + childLinkName + "' for joint '" + sdfJoint->Name() + "'";
+                        reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                        return false;
+                    }
+
+                    gz::math::Pose3d childLink_H_expressedIn;
+
+                    if (expressedInLink)
+                    {
+                        // It's a link - resolve relative transform
+                        gz::math::Pose3d expressedInLink_H_model;
+                        sdf::Errors errors = expressedInLink->SemanticPose().Resolve(expressedInLink_H_model, "__model__");
+                        if (!errors.empty())
+                        {
+                            std::string errMsg = "Failed to resolve expressed_in link pose for joint '" + sdfJoint->Name() + "'";
+                            reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                            return false;
+                        }
+
+                        gz::math::Pose3d childLink_H_model;
+                        errors = childLink->SemanticPose().Resolve(childLink_H_model, "__model__");
+                        if (!errors.empty())
+                        {
+                            std::string errMsg = "Failed to resolve child link pose for joint '" + sdfJoint->Name() + "'";
+                            reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                            return false;
+                        }
+
+                        childLink_H_expressedIn = childLink_H_model * expressedInLink_H_model.Inverse();
+                    }
+                    else
+                    {
+                        // Try to find it as an explicit frame
+                        const sdf::Frame *expressedInFrame = sdfModel->FrameByName(expressedIn);
+                        if (expressedInFrame)
+                        {
+                            // Resolve frame pose relative to child link
+                            sdf::Errors errors = childLink->SemanticPose().Resolve(childLink_H_expressedIn, expressedIn);
+                            if (!errors.empty())
+                            {
+                                std::string errMsg = "Failed to resolve frame '" + expressedIn + "' relative to child link for joint '" + sdfJoint->Name() + "'";
+                                reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                                return false;
+                            }
+                            childLink_H_expressedIn = childLink_H_expressedIn.Inverse();
+                        }
+                        else
+                        {
+                            std::string errMsg = "Axis expressed_in frame '" + expressedIn + "' not found as link or frame for joint '" + sdfJoint->Name() + "'";
+                            reportError("SDFormatDocument", "convertSDFormatToModel", errMsg.c_str());
+                            return false;
+                        }
+                    }
+
+                    // Transform axis direction from expressed_in frame to child link frame
+                    gz::math::Vector3d axisInChildFrame = childLink_H_expressedIn.Rot() * axisXyz;
+                    axisDir_childFrame = iDynTree::Direction(axisInChildFrame.X(), axisInChildFrame.Y(), axisInChildFrame.Z());
+
+                    // Transform axis origin: the axis passes through expressed_in frame origin (0,0,0)
+                    // Position of expressed_in origin in child link frame
+                    gz::math::Vector3d expressedInOriginInChildFrame = childLink_H_expressedIn.Pos();
+                    axisOrigin_childFrame = iDynTree::Position(expressedInOriginInChildFrame.X(), expressedInOriginInChildFrame.Y(), expressedInOriginInChildFrame.Z());
+                }
+
+                iDynTree::Axis idynAxis(axisDir_childFrame, axisOrigin_childFrame);
 
                 prismJoint->setAttachedLinks(parentLinkIndex, childLinkIndex);
                 prismJoint->setRestTransform(jointTransform);
                 prismJoint->setAxis(idynAxis, childLinkIndex, parentLinkIndex);
 
                 // Set joint limits if available
-                const sdf::JointAxis *jointAxis = sdfJoint->Axis(0);
                 if (jointAxis)
                 {
                     prismJoint->enablePosLimits(true);
