@@ -13,6 +13,7 @@
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/SolidShapes.h>
 #include <iDynTree/Utils.h>
+#include <iDynTree/VectorFixSize.h>
 
 #ifdef IDYNTREE_USES_SDFORMAT
 #include <gz/math/Inertial.hh>
@@ -38,21 +39,15 @@ namespace iDynTree
 
             // Convert rotation from quaternion to rotation matrix
             const gz::math::Quaterniond &quat = pose.Rot();
-            iDynTree::Rotation rotation;
 
-            double w = quat.W(), x = quat.X(), y = quat.Y(), z = quat.Z();
+            // iDynTree quaternion format is (w, x, y, z)
+            iDynTree::Vector4 quatVec;
+            quatVec(0) = quat.W();
+            quatVec(1) = quat.X();
+            quatVec(2) = quat.Y();
+            quatVec(3) = quat.Z();
 
-            rotation(0, 0) = 1 - 2 * (y * y + z * z);
-            rotation(0, 1) = 2 * (x * y - w * z);
-            rotation(0, 2) = 2 * (x * z + w * y);
-
-            rotation(1, 0) = 2 * (x * y + w * z);
-            rotation(1, 1) = 1 - 2 * (x * x + z * z);
-            rotation(1, 2) = 2 * (y * z - w * x);
-
-            rotation(2, 0) = 2 * (x * z - w * y);
-            rotation(2, 1) = 2 * (y * z + w * x);
-            rotation(2, 2) = 1 - 2 * (x * x + y * y);
+            iDynTree::Rotation rotation = iDynTree::Rotation::RotationFromQuaternion(quatVec);
 
             // Set translation
             iDynTree::Position position(pose.Pos().X(), pose.Pos().Y(), pose.Pos().Z());
