@@ -17,6 +17,7 @@
  */
 
 #include <iDynTree/TestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
@@ -131,35 +132,30 @@ void testURDFToSDFormatRoundtrip(const std::string &urdfFilePath)
             return;
         }
 
-        // Set same random state
-        size_t dofs = urdfModel.getNrOfDOFs();
-        Transform worldTbase = Transform::Identity();
-        Twist baseVel = Twist::Zero();
+        // Set same random state using model-aware utilities
+        size_t dofs = urdfKinDyn.getNrOfDegreesOfFreedom();
+        size_t posCoords = urdfKinDyn.model().getNrOfPosCoords();
+
+        Transform worldTbase = getRandomTransform();
+        Twist baseVel = getRandomTwist();
 
         Vector3 gravity;
-        gravity.zero();
-        gravity(2) = -9.81;
+        getRandomVector(gravity);
 
-        VectorDynSize qj(dofs);
+        VectorDynSize qj(posCoords);
         VectorDynSize dqj(dofs);
 
-        for (size_t i = 0; i < dofs; i++)
-        {
-            qj(i) = (rand() % 1000) / 1000.0 - 0.5;
-            dqj(i) = (rand() % 1000) / 1000.0 - 0.5;
-        }
+        // Use model-aware joint position generation for proper handling of all joint types
+        getRandomJointPositions(qj, urdfKinDyn.model());
+        getRandomVector(dqj);
 
         ASSERT_IS_TRUE(urdfKinDyn.setRobotState(worldTbase, qj, baseVel, dqj, gravity));
         ASSERT_IS_TRUE(sdfKinDyn.setRobotState(worldTbase, qj, baseVel, dqj, gravity));
 
-        std::cout << "Set random robot state for kinematics check" << std::endl;
-
         // Check center of mass
         Position urdfCOM = urdfKinDyn.getCenterOfMassPosition();
         Position sdfCOM = sdfKinDyn.getCenterOfMassPosition();
-        ASSERT_EQUAL_VECTOR_TOL(urdfCOM, sdfCOM, 1e-5);
-
-        std::cout << "Center of mass matches" << std::endl;
+        ASSERT_EQUAL_VECTOR(urdfCOM, sdfCOM);
     }
 }
 
