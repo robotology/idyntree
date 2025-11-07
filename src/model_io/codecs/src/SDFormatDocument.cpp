@@ -305,19 +305,20 @@ namespace iDynTree
 
             // Get inertia tensor (at COM, in link-aligned frame)
             const gz::math::Matrix3d &I = inertial.Moi();
-            iDynTree::RotationalInertia rotInertia;
-            rotInertia(0, 0) = I(0, 0);
-            rotInertia(0, 1) = I(0, 1);
-            rotInertia(0, 2) = I(0, 2);
-            rotInertia(1, 0) = I(1, 0);
-            rotInertia(1, 1) = I(1, 1);
-            rotInertia(1, 2) = I(1, 2);
-            rotInertia(2, 0) = I(2, 0);
-            rotInertia(2, 1) = I(2, 1);
-            rotInertia(2, 2) = I(2, 2);
+            iDynTree::RotationalInertia rotInertiaWrtCom;
+            rotInertiaWrtCom(0, 0) = I(0, 0);
+            rotInertiaWrtCom(0, 1) = I(0, 1);
+            rotInertiaWrtCom(0, 2) = I(0, 2);
+            rotInertiaWrtCom(1, 0) = I(1, 0);
+            rotInertiaWrtCom(1, 1) = I(1, 1);
+            rotInertiaWrtCom(1, 2) = I(1, 2);
+            rotInertiaWrtCom(2, 0) = I(2, 0);
+            rotInertiaWrtCom(2, 1) = I(2, 1);
+            rotInertiaWrtCom(2, 2) = I(2, 2);
 
-            // Create spatial inertia
-            iDynTree::SpatialInertia spatialInertia(mass, com, rotInertia);
+            // Create spatial inertia using the helper that handles inertia at COM
+            iDynTree::SpatialInertia spatialInertia;
+            spatialInertia.fromRotationalInertiaWrtCenterOfMass(mass, com, rotInertiaWrtCom);
             idynLink.setInertia(spatialInertia);
 
             // Add link to model (link name is part of addLink, not setName)
