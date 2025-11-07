@@ -300,29 +300,45 @@ namespace iDynTree
             // Get mass
             double mass = inertial.MassMatrix().Mass();
 
-            // Get center of mass position relative to link frame
+            // Get inertial pose relative to link frame
+            // This includes both the COM position and the orientation of the inertia tensor principal axes
             const gz::math::Pose3d &inertiaPose = inertial.Pose();
             iDynTree::Position com(inertiaPose.Pos().X(), inertiaPose.Pos().Y(),
                                    inertiaPose.Pos().Z());
 
-            // Get inertia tensor
-            // SDFormat's URDF->SDF conversion already transforms the inertia to the link frame.
-            const gz::math::Matrix3d &I_linkFrame = inertial.Moi();
+            // Get inertia tensor (expressed in the inertial frame, which may be rotated w.r.t. link frame)
+            const gz::math::Matrix3d &I_inertialFrame = inertial.Moi();
 
-            iDynTree::RotationalInertia rotInertiaWrtCom_linkFrame;
-            rotInertiaWrtCom_linkFrame(0, 0) = I_linkFrame(0, 0);
-            rotInertiaWrtCom_linkFrame(0, 1) = I_linkFrame(0, 1);
-            rotInertiaWrtCom_linkFrame(0, 2) = I_linkFrame(0, 2);
-            rotInertiaWrtCom_linkFrame(1, 0) = I_linkFrame(1, 0);
-            rotInertiaWrtCom_linkFrame(1, 1) = I_linkFrame(1, 1);
-            rotInertiaWrtCom_linkFrame(1, 2) = I_linkFrame(1, 2);
-            rotInertiaWrtCom_linkFrame(2, 0) = I_linkFrame(2, 0);
-            rotInertiaWrtCom_linkFrame(2, 1) = I_linkFrame(2, 1);
-            rotInertiaWrtCom_linkFrame(2, 2) = I_linkFrame(2, 2);
+            // Convert the inertial pose rotation to iDynTree rotation
+            const gz::math::Quaterniond &inertialQuat = inertiaPose.Rot();
+            iDynTree::Vector4 quatVec;
+            quatVec(0) = inertialQuat.W();
+            quatVec(1) = inertialQuat.X();
+            quatVec(2) = inertialQuat.Y();
+            quatVec(3) = inertialQuat.Z();
+            iDynTree::Rotation link_R_inertialFrame = iDynTree::Rotation::RotationFromQuaternion(quatVec);
+
+            // The inertia tensor in SDF is expressed in the inertial frame
+            // We need to rotate it to the link frame
+            iDynTree::RotationalInertia rotInertiaWrtCom_inertialFrame;
+            rotInertiaWrtCom_inertialFrame(0, 0) = I_inertialFrame(0, 0);
+            rotInertiaWrtCom_inertialFrame(0, 1) = I_inertialFrame(0, 1);
+            rotInertiaWrtCom_inertialFrame(0, 2) = I_inertialFrame(0, 2);
+            rotInertiaWrtCom_inertialFrame(1, 0) = I_inertialFrame(1, 0);
+            rotInertiaWrtCom_inertialFrame(1, 1) = I_inertialFrame(1, 1);
+            rotInertiaWrtCom_inertialFrame(1, 2) = I_inertialFrame(1, 2);
+            rotInertiaWrtCom_inertialFrame(2, 0) = I_inertialFrame(2, 0);
+            rotInertiaWrtCom_inertialFrame(2, 1) = I_inertialFrame(2, 1);
+            rotInertiaWrtCom_inertialFrame(2, 2) = I_inertialFrame(2, 2);
+
+            // Rotate the inertia tensor to the link frame: I_link = R * I_inertial * R^T
+            // The operator* is defined as R * I which computes R * I * R^T (change of coordinate frame)
+            iDynTree::RotationalInertia rotInertiaWrtCom_linkFrame =
+                link_R_inertialFrame * rotInertiaWrtCom_inertialFrame;
 
             // Create spatial inertia using the helper that handles inertia at COM
             iDynTree::SpatialInertia spatialInertia;
-            spatialInertia.fromRotationalInertiaWrtCenterOfMass(mass, com, rotInertiaWrtCom);
+            spatialInertia.fromRotationalInertiaWrtCenterOfMass(mass, com, rotInertiaWrtCom_linkFrame);
             idynLink.setInertia(spatialInertia);
 
             // Add link to model (link name is part of addLink, not setName)
@@ -469,7 +485,50 @@ namespace iDynTree
             // Create joint based on type
             sdf::JointType jointType = sdfJoint->Type();
 
+            // Check if this is a revolute/prismatic joint with zero limits (effectively fixed)
+            // SDFormat sometimes converts URDF fixed joints to revolute with [0,0] limits
+            bool isEffectivelyFixed = false;
             if (jointType == sdf::JointType::REVOLUTE)
+            {
+                if (sdfJoint->Axis(0))
+                {
+                    const sdf::JointAxis *jointAxis = sdfJoint->Axis(0);
+                    double range = std::abs(jointAxis->Upper() - jointAxis->Lower());
+                    if (range < 1e-10)
+                    {
+                        isEffectivelyFixed = true;
+                        std::string msg = "Joint '" + sdfJoint->Name() + "' is revolute/prismatic with zero range [" +
+                                          std::to_string(jointAxis->Lower()) + ", " + std::to_string(jointAxis->Upper()) +
+                                          "] (range=" + std::to_string(range) + "). Treating as fixed joint.";
+                        reportWarning("SDFormatDocument", "convertSDFormatToModel", msg.c_str());
+                    }
+                }
+            }
+            else if (jointType == sdf::JointType::PRISMATIC && sdfJoint->Axis(0))
+            {
+                const sdf::JointAxis *jointAxis = sdfJoint->Axis(0);
+                double range = std::abs(jointAxis->Upper() - jointAxis->Lower());
+                if (range < 1e-10)
+                {
+                    isEffectivelyFixed = true;
+                    std::string msg = "Joint '" + sdfJoint->Name() + "' is revolute/prismatic with zero range [" +
+                                      std::to_string(jointAxis->Lower()) + ", " + std::to_string(jointAxis->Upper()) +
+                                      "] (range=" + std::to_string(range) + "). Treating as fixed joint.";
+                    reportWarning("SDFormatDocument", "convertSDFormatToModel", msg.c_str());
+                }
+            }
+
+            if (isEffectivelyFixed || jointType == sdf::JointType::FIXED)
+            {
+                // Fixed joint (or effectively fixed due to zero limits)
+                iDynTree::FixedJoint *fixedJoint = new iDynTree::FixedJoint();
+
+                fixedJoint->setAttachedLinks(parentLinkIndex, childLinkIndex);
+                fixedJoint->setRestTransform(jointTransform);
+
+                m_model.addJoint(sdfJoint->Name(), fixedJoint);
+            }
+            else if (jointType == sdf::JointType::REVOLUTE)
             {
                 // Revolute joint
                 iDynTree::RevoluteJoint *revJoint = new iDynTree::RevoluteJoint();
@@ -749,16 +808,6 @@ namespace iDynTree
                 }
 
                 m_model.addJoint(sdfJoint->Name(), prismJoint);
-            }
-            else if (jointType == sdf::JointType::FIXED)
-            {
-                // Fixed joint
-                iDynTree::FixedJoint *fixedJoint = new iDynTree::FixedJoint();
-
-                fixedJoint->setAttachedLinks(parentLinkIndex, childLinkIndex);
-                fixedJoint->setRestTransform(jointTransform);
-
-                m_model.addJoint(sdfJoint->Name(), fixedJoint);
             }
             else
             {
