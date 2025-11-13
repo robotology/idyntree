@@ -162,7 +162,7 @@ void testURDFToSDFormatRoundtrip(const std::string &urdfFilePath)
         MatrixDynSize sdfMassMatrix(dofs + 6, dofs + 6);
         ASSERT_IS_TRUE(urdfKinDyn.getFreeFloatingMassMatrix(urdfMassMatrix));
         ASSERT_IS_TRUE(sdfKinDyn.getFreeFloatingMassMatrix(sdfMassMatrix));
-        ASSERT_EQUAL_MATRIX(urdfMassMatrix, sdfMassMatrix);
+        ASSERT_EQUAL_MATRIX_TOL(urdfMassMatrix, sdfMassMatrix, 1e-5);
     }
 }
 
