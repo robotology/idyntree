@@ -4,11 +4,12 @@
     <compoundname>ModelLoader.h</compoundname>
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
-    <includes local="no">unordered_map</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
+    <includes local="no">unordered_map</includes>
     <includes local="no">vector</includes>
     <includedby refid="ModelIO_2ModelLoader_8h" local="no">iDynTree/ModelIO/ModelLoader.h</includedby>
+    <includedby refid="SDFormatDocument_8h" local="no">private/SDFormatDocument.h</includedby>
     <includedby refid="URDFDocument_8h" local="yes">private/URDFDocument.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -23,16 +24,16 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="3">
         <label>string</label>
       </node>
       <node id="5">
         <label>vector</label>
       </node>
-      <node id="2">
+      <node id="4">
         <label>unordered_map</label>
       </node>
-      <node id="3">
+      <node id="2">
         <label>memory</label>
       </node>
     </incdepgraph>

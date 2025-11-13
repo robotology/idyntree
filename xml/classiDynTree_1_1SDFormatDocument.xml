@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SDFormatDocument" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SDFormatDocument</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SDFormatDocument_1a04559f512549395a170647de49bdb0f7" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref></type>
+        <definition>iDynTree::Model iDynTree::SDFormatDocument::m_model</definition>
+        <argsstring></argsstring>
+        <name>m_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="21" column="19" bodyfile="private/SDFormatDocument.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SDFormatDocument_1ae9cec30dc1e59075b808ba87edc3fdb3" prot="private" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1ModelParserOptions" kindref="compound">iDynTree::ModelParserOptions</ref></type>
+        <definition>iDynTree::ModelParserOptions iDynTree::SDFormatDocument::m_options</definition>
+        <argsstring></argsstring>
+        <name>m_options</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="23" column="32" bodyfile="private/SDFormatDocument.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1ab43f8dd3e5044a9b37a266cb4c856f7d" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SDFormatDocument::SDFormatDocument</definition>
+        <argsstring>(const iDynTree::ModelParserOptions &amp;parserOptions)</argsstring>
+        <name>SDFormatDocument</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1ModelParserOptions" kindref="compound">iDynTree::ModelParserOptions</ref> &amp;</type>
+          <declname>parserOptions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="32" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1a07d11dd5627589fb4183ba4c186547e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::SDFormatDocument::~SDFormatDocument</definition>
+        <argsstring>()</argsstring>
+        <name>~SDFormatDocument</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="33" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1a032f6a5c12c6fd96dbe4f4d2ba76b8ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1ModelParserOptions" kindref="compound">iDynTree::ModelParserOptions</ref> &amp;</type>
+        <definition>iDynTree::ModelParserOptions&amp; iDynTree::SDFormatDocument::options</definition>
+        <argsstring>()</argsstring>
+        <name>options</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="35" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1a54c6a940d111c864bddc47d727a70d01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+        <definition>const iDynTree::Model&amp; iDynTree::SDFormatDocument::model</definition>
+        <argsstring>() const</argsstring>
+        <name>model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="37" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1a77e2bb959e3e40f7ac5dec32598bc2cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">iDynTree::SensorsList</ref> &amp;</type>
+        <definition>const iDynTree::SensorsList&amp; iDynTree::SDFormatDocument::sensors</definition>
+        <argsstring>() const</argsstring>
+        <name>sensors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="38" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1a17abc8d9d0ddfe70bcdd8bc6469cea33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SDFormatDocument::loadFromFile</definition>
+        <argsstring>(const std::string &amp;filename, const std::vector&lt; std::string &gt; &amp;packageDirs)</argsstring>
+        <name>loadFromFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="41" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1aa52724bfedd93ae383b422330dc3c3fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SDFormatDocument::loadFromString</definition>
+        <argsstring>(const std::string &amp;sdfString, const std::vector&lt; std::string &gt; &amp;packageDirs)</argsstring>
+        <name>loadFromString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>sdfString</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="43" column="8"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1SDFormatDocument_1afa5fd613b9e501fb9d4e970cb6902ee9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SDFormatDocument::convertSDFormatToModel</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;packageDirs)</argsstring>
+        <name>convertSDFormatToModel</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SDFormatDocument.h" line="47" column="8"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/SDFormatDocument.h" line="19" column="1" bodyfile="private/SDFormatDocument.h" bodystart="19" bodyend="48"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SDFormatDocument_1afa5fd613b9e501fb9d4e970cb6902ee9" prot="private" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>convertSDFormatToModel</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1a17abc8d9d0ddfe70bcdd8bc6469cea33" prot="public" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>loadFromFile</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1aa52724bfedd93ae383b422330dc3c3fb" prot="public" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>loadFromString</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1a04559f512549395a170647de49bdb0f7" prot="private" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>m_model</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1ae9cec30dc1e59075b808ba87edc3fdb3" prot="private" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>m_options</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1a54c6a940d111c864bddc47d727a70d01" prot="public" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1a032f6a5c12c6fd96dbe4f4d2ba76b8ca" prot="public" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>options</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1ab43f8dd3e5044a9b37a266cb4c856f7d" prot="public" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>SDFormatDocument</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1a77e2bb959e3e40f7ac5dec32598bc2cc" prot="public" virt="non-virtual"><scope>iDynTree::SDFormatDocument</scope><name>sensors</name></member>
+      <member refid="classiDynTree_1_1SDFormatDocument_1a07d11dd5627589fb4183ba4c186547e8" prot="public" virt="virtual"><scope>iDynTree::SDFormatDocument</scope><name>~SDFormatDocument</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

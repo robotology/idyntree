@@ -10,6 +10,7 @@
     <innerfile refid="MaterialElement_8h">MaterialElement.h</innerfile>
     <innerfile refid="OriginElement_8h">OriginElement.h</innerfile>
     <innerfile refid="RobotElement_8h">RobotElement.h</innerfile>
+    <innerfile refid="SDFormatDocument_8h">SDFormatDocument.h</innerfile>
     <innerfile refid="SensorElement_8h">SensorElement.h</innerfile>
     <innerfile refid="URDFDocument_8h">URDFDocument.h</innerfile>
     <innerfile refid="URDFModelExport_8h">URDFModelExport.h</innerfile>
