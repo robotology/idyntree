@@ -156,6 +156,13 @@ void testURDFToSDFormatRoundtrip(const std::string &urdfFilePath)
         Position urdfCOM = urdfKinDyn.getCenterOfMassPosition();
         Position sdfCOM = sdfKinDyn.getCenterOfMassPosition();
         ASSERT_EQUAL_VECTOR(urdfCOM, sdfCOM);
+
+        // Check mass matrix
+        MatrixDynSize urdfMassMatrix(dofs + 6, dofs + 6);
+        MatrixDynSize sdfMassMatrix(dofs + 6, dofs + 6);
+        ASSERT_IS_TRUE(urdfKinDyn.getFreeFloatingMassMatrix(urdfMassMatrix));
+        ASSERT_IS_TRUE(sdfKinDyn.getFreeFloatingMassMatrix(sdfMassMatrix));
+        ASSERT_EQUAL_MATRIX(urdfMassMatrix, sdfMassMatrix);
     }
 }
 
