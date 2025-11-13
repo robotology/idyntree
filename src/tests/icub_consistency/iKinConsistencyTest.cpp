@@ -7,8 +7,8 @@
 
 #include <iDynTree/KinDynComputations.h>
 
-#include <iDynTree/Model.h>
 #include <iDynTree/JointState.h>
+#include <iDynTree/Model.h>
 
 #include <iDynTree/YARPConversions.h>
 
@@ -22,14 +22,13 @@
 
 using namespace iDynTree;
 
-void check_iKinImportFromChain(iCub::iKin::iKinChain & chain)
+void check_iKinImportFromChain(iCub::iKin::iKinChain& chain)
 {
     // First unblock all DOF of the chain
-    for (int i=0; i < chain.getN(); i++)
+    for (int i = 0; i < chain.getN(); i++)
     {
         chain.releaseLink(i);
     }
-
 
     Model model;
     bool ok = modelFromiKinChain(chain, model);
@@ -53,7 +52,7 @@ void check_iKinImportFromChain(iCub::iKin::iKinChain & chain)
     yarp::sig::Vector dqj_yarp(model.getNrOfDOFs());
 
     // Check for some various positions
-    for (int i=0; i < 10; i++ )
+    for (int i = 0; i < 10; i++)
     {
         getRandomVector(qj, -3.14, 3.14);
         toYarp(qj, qj_yarp);
@@ -67,18 +66,17 @@ void check_iKinImportFromChain(iCub::iKin::iKinChain & chain)
 
         // Get b_H_ee for both iKin and iDynTree
         LinkIndex baseIndex = model.getFrameIndex("baseFrame");
-        LinkIndex eeIndex   = model.getFrameIndex("distalFrame");
+        LinkIndex eeIndex = model.getFrameIndex("distalFrame");
         Transform b_H_ee = dynComp.getRelativeTransform(baseIndex, eeIndex);
         yarp::sig::Matrix b_H_ee_ikin_yarp = chain.getH();
         Transform b_H_ee_ikin;
         toiDynTree(b_H_ee_ikin_yarp, b_H_ee_ikin);
 
-
         ASSERT_EQUAL_TRANSFORM(b_H_ee, b_H_ee_ikin);
     }
 }
 
-void check_iKinImportFromChain(DHChain & chain)
+void check_iKinImportFromChain(DHChain& chain)
 {
     iCub::iKin::iKinLimb ikinLimb;
     iKinLimbFromDHChain(chain, ikinLimb);
@@ -96,7 +94,8 @@ void check_iKinImport()
     dh1dof.setNrOfDOFs(1);
     dh1dof.setDOFName(0, "joint0");
     dh1dof(0).A = dh1dof(0).D = dh1dof(0).Alpha = dh1dof(0).Offset = 0.0;
-    dh1dof.setHN(iDynTree::Transform(iDynTree::Rotation::Identity(), iDynTree::Position(0.0, 0.0, 1.0)));
+    dh1dof.setHN(
+        iDynTree::Transform(iDynTree::Rotation::Identity(), iDynTree::Position(0.0, 0.0, 1.0)));
     check_iKinImportFromChain(dh1dof);
 
     dh1dof(0).A = 1.0;
@@ -119,7 +118,6 @@ void check_iKinImport()
     check_iKinImportFromChain(dh1dof);
     dh1dof(0).A = dh1dof(0).D = dh1dof(0).Alpha = dh1dof(0).Offset = 0.0;
 
-
     // Simple 2 dofs
     std::cerr << "Testing iKin import of 2 dofs chains" << std::endl;
     DHChain dh2dof;
@@ -140,15 +138,15 @@ void check_iKinImport()
 
     dh2dof(0).D = dh2dof(1).D = 1.0;
     check_iKinImportFromChain(dh2dof);
-    dh2dof(0).D = dh2dof(1).D  = 0.0;
+    dh2dof(0).D = dh2dof(1).D = 0.0;
 
-    dh2dof(0).Alpha = dh2dof(1).Alpha  = 1.0;
+    dh2dof(0).Alpha = dh2dof(1).Alpha = 1.0;
     check_iKinImportFromChain(dh2dof);
-    dh2dof(0).Alpha = dh2dof(1).Alpha  = 0.0;
+    dh2dof(0).Alpha = dh2dof(1).Alpha = 0.0;
 
-    dh2dof(0).Offset = dh2dof(1).Offset  = 1.0;
+    dh2dof(0).Offset = dh2dof(1).Offset = 1.0;
     check_iKinImportFromChain(dh2dof);
-    dh2dof(0).Offset = dh2dof(1).Offset  = 0.0;
+    dh2dof(0).Offset = dh2dof(1).Offset = 0.0;
 
     dh2dof(0).A = dh2dof(0).D = dh2dof(0).Alpha = dh2dof(0).Offset = 1.0;
     dh2dof(1).A = dh2dof(1).D = dh2dof(1).Alpha = dh2dof(1).Offset = 1.0;
@@ -164,7 +162,6 @@ void check_iKinImport()
     iCub::iKin::iCubArm arm;
     check_iKinImportFromChain(arm);
 }
-
 
 int main()
 {

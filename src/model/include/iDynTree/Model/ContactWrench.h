@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_CONTACT_WRENCH_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/ContactWrench.h> is deprecated. Please use <iDynTree/ContactWrench.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Model/ContactWrench.h> is deprecated. Please use <iDynTree/ContactWrench.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ContactWrench.h>

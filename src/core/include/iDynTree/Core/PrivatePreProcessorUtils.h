@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_PRIVATE_PREPROCESSOR_UTILS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/PrivatePreProcessorUtils.h> is deprecated. Please use <iDynTree/PrivatePreProcessorUtils.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Core/PrivatePreProcessorUtils.h> is deprecated. Please use <iDynTree/PrivatePreProcessorUtils.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/PrivatePreProcessorUtils.h>

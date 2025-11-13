@@ -1,44 +1,42 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #include "URDFModelExport.h"
 
+#include <iDynTree/Axis.h>
 #include <iDynTree/EigenHelpers.h>
-#include <iDynTree/SpatialInertia.h>
-#include <iDynTree/Transform.h>
-#include <iDynTree/VectorFixSize.h>
 #include <iDynTree/FixedJoint.h>
 #include <iDynTree/Indices.h>
 #include <iDynTree/Model.h>
+#include <iDynTree/ModelTransformers.h>
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteJoint.h>
-#include <iDynTree/Traversal.h>
-#include <iDynTree/Axis.h>
+#include <iDynTree/SpatialInertia.h>
 #include <iDynTree/SphericalJoint.h>
-#include <iDynTree/ModelTransformers.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/VectorFixSize.h>
 
 #include "URDFParsingUtils.h"
 
-
-#include <iomanip>
 #include <fstream>
+#include <iomanip>
 #include <string>
 
-#include <libxml/tree.h>
 #include <libxml/parser.h>
+#include <libxml/tree.h>
 #include <libxml/xmlstring.h>
 
 namespace iDynTree
 {
-
 
 /*
  * This file uses extensivly the libxml2's tree API, see
  * http://www.xmlsoft.org/examples/index.html#Tree for more info.
  * Usage of the C-based libxml2 API in C++ means that is necessary to
  * use the BAD_CAST macro for handling const-correctness.
- * See https://stackoverflow.com/questions/45058878/why-libxml2-uses-bad-cast-everywhere-in-a-c-c-code
+ * See
+ * https://stackoverflow.com/questions/45058878/why-libxml2-uses-bad-cast-everywhere-in-a-c-c-code
  * and http://www.xmlsoft.org/html/libxml-xmlstring.html#BAD_CAST for details on this.
  */
 
@@ -52,7 +50,7 @@ namespace iDynTree
  * </parent_element>
  * where the actual values of the xyz and rpy attributes depend on the input trans argument.
  */
-bool exportTransform(const Transform &trans, xmlNodePtr parent_element)
+bool exportTransform(const Transform& trans, xmlNodePtr parent_element)
 {
     bool ok = true;
     xmlNodePtr origin = xmlNewChild(parent_element, NULL, BAD_CAST "origin", NULL);
@@ -69,28 +67,27 @@ bool exportTransform(const Transform &trans, xmlNodePtr parent_element)
 /*
  * Add a <inertial> URDF element to the specified parent element with the specified 6D inertia.
  *
- * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
- * <parent_element>
- *   <inertial>
- *     <origin xyz="0 0 0.5" rpy="0 0 0"/>
+ * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function
+ * modifies it to be something like: <parent_element> <inertial> <origin xyz="0 0 0.5" rpy="0 0 0"/>
  *     <mass value="1"/>
  *     <inertia ixx="100"  ixy="0"  ixz="0" iyy="100" iyz="0" izz="100" />
  *   </inertial>
  * </parent_element>
- * where the actual values of the origin, mass and inertia element's attributes depend on the input inertia argument.
+ * where the actual values of the origin, mass and inertia element's attributes depend on the input
+ * inertia argument.
  */
-bool exportInertial(const SpatialInertia &inertia, xmlNodePtr parent_element)
+bool exportInertial(const SpatialInertia& inertia, xmlNodePtr parent_element)
 {
-    bool ok=true;
+    bool ok = true;
     std::string bufStr;
     xmlNodePtr inertial = xmlNewChild(parent_element, NULL, BAD_CAST "inertial", NULL);
-
 
     xmlNodePtr mass_xml = xmlNewChild(inertial, NULL, BAD_CAST "mass", NULL);
     ok = ok && doubleToStringWithClassicLocale(inertia.getMass(), bufStr);
     xmlNewProp(mass_xml, BAD_CAST "value", BAD_CAST bufStr.c_str());
 
-    ok = ok && exportTransform(Transform(Rotation::Identity(), inertia.getCenterOfMass()), inertial);
+    ok = ok
+         && exportTransform(Transform(Rotation::Identity(), inertia.getCenterOfMass()), inertial);
 
     xmlNodePtr inertia_xml = xmlNewChild(inertial, NULL, BAD_CAST "inertia", NULL);
     RotationalInertia rotInertia = inertia.getRotationalInertiaWrtCenterOfMass();
@@ -110,17 +107,14 @@ bool exportInertial(const SpatialInertia &inertia, xmlNodePtr parent_element)
     return ok;
 }
 
-
-
 /*
- * Add a <visual> or <collision> URDF element to the specified parent element for the specified solid shapes.
+ * Add a <visual> or <collision> URDF element to the specified parent element for the specified
+ * solid shapes.
  *
  * URDF support <box>, <cylinder>, <sphere> and <mesh> elements as shapes.
  *
- * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
- * <parent_element>
- *   <visual>
- *     <origin xyz="0 0 0" rpy="0 0 0" />
+ * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function
+ * modifies it to be something like: <parent_element> <visual> <origin xyz="0 0 0" rpy="0 0 0" />
  *     <geometry>
  *       <box size="1 1 1" />
  *     </geometry>
@@ -131,24 +125,31 @@ bool exportInertial(const SpatialInertia &inertia, xmlNodePtr parent_element)
  * <parent_element/>
  * where the actual values of the added element and attributes depend on the input solidShape.
  */
-enum exportSolidShapePropertyType {
+enum exportSolidShapePropertyType
+{
     VISUAL,
     COLLISION
 };
-bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType type, xmlNodePtr parent_element)
+bool exportSolidShape(const SolidShape* solidShape,
+                      exportSolidShapePropertyType type,
+                      xmlNodePtr parent_element)
 {
-    bool ok=true;
+    bool ok = true;
     std::string element_name;
-    if (type == VISUAL) {
+    if (type == VISUAL)
+    {
         element_name = "visual";
-    } else {
+    } else
+    {
         // assert(type == COLLISION)
         element_name = "collision";
     }
 
-    xmlNodePtr root_shape_xml = xmlNewChild(parent_element, NULL, BAD_CAST element_name.c_str(), NULL);
+    xmlNodePtr root_shape_xml
+        = xmlNewChild(parent_element, NULL, BAD_CAST element_name.c_str(), NULL);
     // Omit the name (that is an optional attribute) if the shape has no name
-    if (solidShape->isNameValid()) {
+    if (solidShape->isNameValid())
+    {
         std::string shapeName = solidShape->getName();
         xmlNewProp(root_shape_xml, BAD_CAST "name", BAD_CAST shapeName.c_str());
     }
@@ -159,7 +160,8 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
     // Export geometry
     xmlNodePtr geometry_xml = xmlNewChild(root_shape_xml, NULL, BAD_CAST "geometry", NULL);
 
-    if (solidShape->isBox()) {
+    if (solidShape->isBox())
+    {
         const Box* box = solidShape->asBox();
 
         // Export box element
@@ -168,10 +170,11 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         // Export size attribute
         double size_data[3] = {box->getX(), box->getY(), box->getZ()};
         std::string size_str;
-        ok = ok && vectorToString(Vector3(size_data, 3) , size_str);
+        ok = ok && vectorToString(Vector3(size_data, 3), size_str);
         xmlNewProp(box_xml, BAD_CAST "size", BAD_CAST size_str.c_str());
 
-    } else if (solidShape->isCylinder()) {
+    } else if (solidShape->isCylinder())
+    {
         const Cylinder* cylinder = solidShape->asCylinder();
 
         // Export cylinder element
@@ -187,7 +190,8 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         ok = ok && doubleToStringWithClassicLocale(cylinder->getLength(), length_str);
         xmlNewProp(cylinder_xml, BAD_CAST "length", BAD_CAST length_str.c_str());
 
-    } else if (solidShape->isSphere()) {
+    } else if (solidShape->isSphere())
+    {
         const Sphere* sphere = solidShape->asSphere();
 
         // Export sphere  element
@@ -198,7 +202,8 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         ok = ok && doubleToStringWithClassicLocale(sphere->getRadius(), radius_str);
         xmlNewProp(sphere_xml, BAD_CAST "radius", BAD_CAST radius_str.c_str());
 
-    } else if (solidShape->isExternalMesh()) {
+    } else if (solidShape->isExternalMesh())
+    {
         const ExternalMesh* mesh = solidShape->asExternalMesh();
 
         // Export mesh element
@@ -212,25 +217,29 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         ok = ok && vectorToString(mesh->getScale(), scale_str);
         xmlNewProp(mesh_xml, BAD_CAST "scale", BAD_CAST scale_str.c_str());
 
-    } else {
+    } else
+    {
         std::cerr << "[ERROR] URDFModelExport: Impossible to convert geometry of type "
-                  <<  typeid(solidShape).name() << " to a URDF geometry." << std::endl;
+                  << typeid(solidShape).name() << " to a URDF geometry." << std::endl;
         return false;
     }
 
     // Export material if set.
-    if (solidShape->isMaterialSet()) {
+    if (solidShape->isMaterialSet())
+    {
         auto material = solidShape->getMaterial();
         xmlNodePtr material_xml = xmlNewChild(root_shape_xml, NULL, BAD_CAST "material", NULL);
         xmlNewProp(material_xml, BAD_CAST "name", BAD_CAST material.name().c_str());
 
-        if (material.hasColor()) {
+        if (material.hasColor())
+        {
             xmlNodePtr color_xml = xmlNewChild(material_xml, NULL, BAD_CAST "color", NULL);
             std::string material_str;
             ok = ok && vectorToString(material.color(), material_str);
             xmlNewProp(color_xml, BAD_CAST "rgba", BAD_CAST material_str.c_str());
         }
-        if (material.hasTexture()) {
+        if (material.hasTexture())
+        {
             xmlNodePtr texture_xml = xmlNewChild(material_xml, NULL, BAD_CAST "texture", NULL);
             xmlNewProp(texture_xml, BAD_CAST "filename", BAD_CAST material.texture().c_str());
         }
@@ -243,7 +252,8 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
  * Add a <link> URDF element to the specified parent element with the specified link info.
  *
  *
- * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
+ * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function
+ * modifies it to be something like:
  *
  * <parent_element>
  *   <link name="my_link">
@@ -254,9 +264,13 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
  *  </link>
  * <parent_element/>
  *
- * where the actual values of the added element and attributes depend on the input link and linkName arguments.
+ * where the actual values of the added element and attributes depend on the input link and linkName
+ * arguments.
  */
-bool exportLink(const Link &link, const std::string linkName, const Model& model, xmlNodePtr parent_element)
+bool exportLink(const Link& link,
+                const std::string linkName,
+                const Model& model,
+                xmlNodePtr parent_element)
 {
     bool ok = true;
     xmlNodePtr link_xml = xmlNewChild(parent_element, NULL, BAD_CAST "link", NULL);
@@ -267,29 +281,37 @@ bool exportLink(const Link &link, const std::string linkName, const Model& model
     LinkIndex linkIndex = model.getLinkIndex(linkName);
 
     // Export visual shapes
-    for(unsigned int shapeIdx=0; shapeIdx < model.visualSolidShapes().getLinkSolidShapes()[linkIndex].size(); shapeIdx++) {
-        SolidShape * exportedShape = model.visualSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
+    for (unsigned int shapeIdx = 0;
+         shapeIdx < model.visualSolidShapes().getLinkSolidShapes()[linkIndex].size();
+         shapeIdx++)
+    {
+        SolidShape* exportedShape
+            = model.visualSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
         exportSolidShape(exportedShape, VISUAL, link_xml);
     }
 
     // Export collision shapes
-    for(unsigned int shapeIdx=0; shapeIdx < model.collisionSolidShapes().getLinkSolidShapes()[linkIndex].size(); shapeIdx++) {
+    for (unsigned int shapeIdx = 0;
+         shapeIdx < model.collisionSolidShapes().getLinkSolidShapes()[linkIndex].size();
+         shapeIdx++)
+    {
         // Clone the shape
-        SolidShape * exportedShape = model.collisionSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
+        SolidShape* exportedShape
+            = model.collisionSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
         exportSolidShape(exportedShape, COLLISION, link_xml);
     }
 
     return ok;
 }
 
-
 /**
  * Add a <joint> URDF element to the specified parent element with the specified joint info.
  *
- * At the moment, only the URDF joint of types revolute, continuous, prismatic and fixed are supported, as they are the only one supported
- * in the iDynTree::Model class.
+ * At the moment, only the URDF joint of types revolute, continuous, prismatic and fixed are
+ * supported, as they are the only one supported in the iDynTree::Model class.
  *
- * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
+ * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function
+ * modifies it to be something like:
  *
  * <parent_element>
  *   <joint name="my_joint" type="floating">
@@ -302,48 +324,53 @@ bool exportLink(const Link &link, const std::string linkName, const Model& model
  *   </joint>
  * <parent_element/>
  *
- * where the actual values of the added element and attributes depend on the input joint, parentLink and childLink arguments.
+ * where the actual values of the added element and attributes depend on the input joint, parentLink
+ * and childLink arguments.
  */
-bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr childLink, const Model& model, xmlNodePtr parent_element)
+bool exportJoint(IJointConstPtr joint,
+                 LinkConstPtr parentLink,
+                 LinkConstPtr childLink,
+                 const Model& model,
+                 xmlNodePtr parent_element)
 {
-    bool ok=true;
+    bool ok = true;
     xmlNodePtr joint_xml = xmlNewChild(parent_element, NULL, BAD_CAST "joint", NULL);
     xmlNewProp(joint_xml, BAD_CAST "name", BAD_CAST model.getJointName(joint->getIndex()).c_str());
 
     if (dynamic_cast<const FixedJoint*>(joint))
     {
         xmlNewProp(joint_xml, BAD_CAST "type", BAD_CAST "fixed");
-    }
-    else if (dynamic_cast<const RevoluteJoint*>(joint))
+    } else if (dynamic_cast<const RevoluteJoint*>(joint))
     {
-        if(joint->hasPosLimits())
+        if (joint->hasPosLimits())
         {
             xmlNewProp(joint_xml, BAD_CAST "type", BAD_CAST "revolute");
-        }
-        else
+        } else
         {
             xmlNewProp(joint_xml, BAD_CAST "type", BAD_CAST "continuous");
         }
-    }
-    else if (dynamic_cast<const PrismaticJoint*>(joint))
+    } else if (dynamic_cast<const PrismaticJoint*>(joint))
     {
         xmlNewProp(joint_xml, BAD_CAST "type", BAD_CAST "prismatic");
-    }
-    else if (dynamic_cast<const SphericalJoint*>(joint))
+    } else if (dynamic_cast<const SphericalJoint*>(joint))
     {
-        std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint of type SphericalJoint to a URDF joint (spherical joints are not supported in URDF)."
-                  << " For exporting joint of type SphericalJoint, ensure that the  ModelExporterOptions::SphericalJointsAsThreeRevoluteJoints parameter is set to true." << std::endl;
+        std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint of type SphericalJoint "
+                     "to a URDF joint (spherical joints are not supported in URDF)."
+                  << " For exporting joint of type SphericalJoint, ensure that the  "
+                     "ModelExporterOptions::SphericalJointsAsThreeRevoluteJoints parameter is set "
+                     "to true."
+                  << std::endl;
         return false;
-    }
-    else
+    } else
     {
         std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint of type "
-                  <<  typeid(joint).name() << " to a URDF joint " << std::endl;
+                  << typeid(joint).name() << " to a URDF joint " << std::endl;
         return false;
     }
 
     // origin
-    exportTransform(joint->getRestTransform(parentLink->getIndex(), childLink->getIndex()), joint_xml);
+    exportTransform(joint->getRestTransform(parentLink->getIndex(), childLink->getIndex()),
+                    joint_xml);
 
     if (joint->getNrOfDOFs() != 0)
     {
@@ -354,29 +381,31 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
         {
             const RevoluteJoint* revJoint = dynamic_cast<const RevoluteJoint*>(joint);
             axis = revJoint->getAxis(childLink->getIndex());
-        }
-        else if (dynamic_cast<const PrismaticJoint*>(joint))
+        } else if (dynamic_cast<const PrismaticJoint*>(joint))
         {
             const PrismaticJoint* prismJoint = dynamic_cast<const PrismaticJoint*>(joint);
             axis = prismJoint->getAxis(childLink->getIndex());
-        }
-        else
+        } else
         {
             std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint of type "
-                      <<  typeid(joint).name() << " to a URDF joint " << std::endl;
+                      << typeid(joint).name() << " to a URDF joint " << std::endl;
             return false;
         }
 
         // Check that the axis is URDF-compatible, i.e. that the distance between the
         // axis and the child link origin is zero
-        double distanceBetweenAxisAndOrigin = axis.getDistanceBetweenAxisAndPoint(iDynTree::Position::Zero());
+        double distanceBetweenAxisAndOrigin
+            = axis.getDistanceBetweenAxisAndPoint(iDynTree::Position::Zero());
         if (distanceBetweenAxisAndOrigin > 1e-7)
         {
             std::cerr << "[ERROR] URDFModelExport: Impossible to convert joint "
-                      <<   model.getJointName(joint->getIndex()) << " to a URDF joint without moving the link frame of link "
-                      << model.getLinkName(childLink->getIndex()) << " , because the axis origin is "
-                      << axis.getOrigin().toString() << " the axis direction is " << axis.getDirection().toString()
-                      << " and the distance between the axis and (0,0,0) is " << distanceBetweenAxisAndOrigin << std::endl;
+                      << model.getJointName(joint->getIndex())
+                      << " to a URDF joint without moving the link frame of link "
+                      << model.getLinkName(childLink->getIndex())
+                      << " , because the axis origin is " << axis.getOrigin().toString()
+                      << " the axis direction is " << axis.getDirection().toString()
+                      << " and the distance between the axis and (0,0,0) is "
+                      << distanceBetweenAxisAndOrigin << std::endl;
             return false;
         }
 
@@ -389,23 +418,29 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
 
     // parent
     xmlNodePtr parent_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "parent", NULL);
-    xmlNewProp(parent_xml, BAD_CAST "link", BAD_CAST model.getLinkName(parentLink->getIndex()).c_str());
+    xmlNewProp(parent_xml,
+               BAD_CAST "link",
+               BAD_CAST model.getLinkName(parentLink->getIndex()).c_str());
 
     // child
     xmlNodePtr child_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "child", NULL);
-    xmlNewProp(child_xml, BAD_CAST "link", BAD_CAST model.getLinkName(childLink->getIndex()).c_str());
+    xmlNewProp(child_xml,
+               BAD_CAST "link",
+               BAD_CAST model.getLinkName(childLink->getIndex()).c_str());
 
     // Position limits
-    // Limits are required for prismatic joints even if no limits are enabled, see URDF spec for reference
+    // Limits are required for prismatic joints even if no limits are enabled, see URDF spec for
+    // reference
     bool isJointPrismatic = dynamic_cast<const PrismaticJoint*>(joint);
-    if ( (joint->hasPosLimits() && joint->getNrOfDOFs() == 1) || isJointPrismatic)
+    if ((joint->hasPosLimits() && joint->getNrOfDOFs() == 1) || isJointPrismatic)
     {
         xmlNodePtr limit_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "limit", NULL);
         std::string bufStr;
         double min, max;
         double reallyHighLimit = 1e9;
 
-        // If joint is prismatic and has no limits, we just put really high values as limits are required
+        // If joint is prismatic and has no limits, we just put really high values as limits are
+        // required
         if (isJointPrismatic && !joint->hasPosLimits())
         {
             min = -reallyHighLimit;
@@ -444,12 +479,15 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
 }
 
 /*
- * Add a <link> and <joint> URDF elements to the specified parent element for the specified additional frame.
+ * Add a <link> and <joint> URDF elements to the specified parent element for the specified
+ * additional frame.
  *
- * URDF does not have the concept of frame (see https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56),
- * so for each additional frame we need to add a URDF "fake" mass-less link.
+ * URDF does not have the concept of frame (see
+ * https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56), so for each additional frame we
+ * need to add a URDF "fake" mass-less link.
  *
- * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
+ * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function
+ * modifies it to be something like:
  *
  * <parent_element>
  *   <link name="<frame_name>"/>
@@ -460,28 +498,35 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
  *   </joint>
  * <parent_element/>
  *
- * where the actual values of the added element and attributes depend on the input frame_name, link_H_frame, parent_link_name and direction_options arguments.
+ * where the actual values of the added element and attributes depend on the input frame_name,
+ * link_H_frame, parent_link_name and direction_options arguments.
  */
-enum exportAdditionalFrameDirectionOption {
+enum exportAdditionalFrameDirectionOption
+{
     FAKE_LINK_IS_CHILD,
     FAKE_LINK_IS_PARENT
 };
-bool exportXMLBlob(std::string xmlBlob, xmlNodePtr parent_element) {
-     xmlNodePtr new_node = nullptr;
-     // Let's remove non printable characters
-     xmlBlob.erase(std::remove_if(xmlBlob.begin(), xmlBlob.end(),
-         [](unsigned char c) {
-             return !std::isprint(c);
-         }),
-         xmlBlob.end());
+bool exportXMLBlob(std::string xmlBlob, xmlNodePtr parent_element)
+{
+    xmlNodePtr new_node = nullptr;
+    // Let's remove non printable characters
+    xmlBlob.erase(std::remove_if(xmlBlob.begin(),
+                                 xmlBlob.end(),
+                                 [](unsigned char c) { return !std::isprint(c); }),
+                  xmlBlob.end());
     // we assume that 'parent_element' node is already defined
     xmlParseInNodeContext(parent_element, xmlBlob.c_str(), strlen(xmlBlob.c_str()), 0, &new_node);
-    if (new_node) xmlAddChild(parent_element, new_node);
+    if (new_node)
+        xmlAddChild(parent_element, new_node);
     return true;
 }
-bool exportAdditionalFrame(const std::string frame_name, Transform link_H_frame, const std::string link_name, exportAdditionalFrameDirectionOption direction_option, xmlNodePtr parent_element)
+bool exportAdditionalFrame(const std::string frame_name,
+                           Transform link_H_frame,
+                           const std::string link_name,
+                           exportAdditionalFrameDirectionOption direction_option,
+                           xmlNodePtr parent_element)
 {
-    bool ok=true;
+    bool ok = true;
 
     // Export fake link
     xmlNodePtr link_xml = xmlNewChild(parent_element, NULL, BAD_CAST "link", NULL);
@@ -498,10 +543,12 @@ bool exportAdditionalFrame(const std::string frame_name, Transform link_H_frame,
 
     std::string parent_of_fake_joint, child_of_fake_joint;
 
-    if (direction_option == FAKE_LINK_IS_CHILD) {
+    if (direction_option == FAKE_LINK_IS_CHILD)
+    {
         parent_of_fake_joint = link_name;
         child_of_fake_joint = frame_name;
-    } else {
+    } else
+    {
         // direction_option == FAKE_LINK_IS_PARENT
         parent_of_fake_joint = frame_name;
         child_of_fake_joint = link_name;
@@ -518,23 +565,26 @@ bool exportAdditionalFrame(const std::string frame_name, Transform link_H_frame,
     return ok;
 }
 
-
-
-
-bool URDFStringFromModel(const iDynTree::Model & model,
-                         std::string & urdf_string,
+bool URDFStringFromModel(const iDynTree::Model& model,
+                         std::string& urdf_string,
                          const ModelExporterOptions options)
 {
     Model processedModel;
     // Convert spherical joints if option is enabled
-    if (options.exportSphericalJointsAsThreeRevoluteJoints) {
-        if (!convertSphericalJointsToThreeRevoluteJoints(model, processedModel,
+    if (options.exportSphericalJointsAsThreeRevoluteJoints)
+    {
+        if (!convertSphericalJointsToThreeRevoluteJoints(model,
+                                                         processedModel,
                                                          options.sphericalJointFakeLinkPrefix,
-                                                         options.sphericalJointRevoluteJointPrefix)) {
-            std::cerr << "[ERROR] URDFStringFromModel: Failed to convert spherical joints for URDF export" << std::endl;
+                                                         options.sphericalJointRevoluteJointPrefix))
+        {
+            std::cerr << "[ERROR] URDFStringFromModel: Failed to convert spherical joints for URDF "
+                         "export"
+                      << std::endl;
             return false;
         }
-    } else {
+    } else
+    {
         processedModel = model;
     }
 
@@ -548,8 +598,8 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     // TODO(traversaro) : We are assuming that the model has no loops,
     //                    we should add a check for this
 
-    // URDF assumes a directed tree of the multibody model structure, so we need to assume that a given link is
-    // the base
+    // URDF assumes a directed tree of the multibody model structure, so we need to assume that a
+    // given link is the base
     std::string baseLink = options.baseLink;
     if (baseLink.empty())
     {
@@ -559,7 +609,8 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     LinkIndex baseLinkIndex = processedModel.getLinkIndex(baseLink);
     if (baseLinkIndex == LINK_INVALID_INDEX)
     {
-        std::cerr << "[ERROR] URDFStringFromModel : specified baseLink " << baseLink << " is not part of the model" << std::endl;
+        std::cerr << "[ERROR] URDFStringFromModel : specified baseLink " << baseLink
+                  << " is not part of the model" << std::endl;
         xmlFreeDoc(urdf_xml);
         return false;
     }
@@ -574,15 +625,17 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     FrameIndex baseFakeLinkFrameIndex = FRAME_INVALID_INDEX;
     std::vector<FrameIndex> frameIndices;
     ok = model.getLinkAdditionalFrames(baseLinkIndex, frameIndices);
-    if (ok && frameIndices.size() >= 1 && options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase) {
+    if (ok && frameIndices.size() >= 1 && options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase)
+    {
         baseFakeLinkFrameIndex = frameIndices[0];
-        ok = ok && exportAdditionalFrame(processedModel.getFrameName(baseFakeLinkFrameIndex),
-                                         processedModel.getFrameTransform(baseFakeLinkFrameIndex),
-                                         processedModel.getLinkName(processedModel.getFrameLink(baseFakeLinkFrameIndex)),
-                                         FAKE_LINK_IS_PARENT,
-                                         robot);
+        ok = ok
+             && exportAdditionalFrame(processedModel.getFrameName(baseFakeLinkFrameIndex),
+                                      processedModel.getFrameTransform(baseFakeLinkFrameIndex),
+                                      processedModel.getLinkName(
+                                          processedModel.getFrameLink(baseFakeLinkFrameIndex)),
+                                      FAKE_LINK_IS_PARENT,
+                                      robot);
     }
-
 
     // Create a Traversal
     Traversal exportTraversal;
@@ -594,7 +647,9 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     }
 
     // Export links and joints following the traversal
-    for (TraversalIndex trvIdx=0; trvIdx < static_cast<TraversalIndex>(exportTraversal.getNrOfVisitedLinks()); trvIdx++)
+    for (TraversalIndex trvIdx = 0;
+         trvIdx < static_cast<TraversalIndex>(exportTraversal.getNrOfVisitedLinks());
+         trvIdx++)
     {
         LinkConstPtr visitedLink = exportTraversal.getLink(trvIdx);
         std::string visitedLinkName = processedModel.getLinkName(visitedLink->getIndex());
@@ -604,7 +659,7 @@ bool URDFStringFromModel(const iDynTree::Model & model,
         {
             LinkConstPtr parentLink = exportTraversal.getParentLink(trvIdx);
             IJointConstPtr parentJoint = exportTraversal.getParentJoint(trvIdx);
-            ok = ok && exportJoint(parentJoint, parentLink, visitedLink,  processedModel, robot);
+            ok = ok && exportJoint(parentJoint, parentLink, visitedLink, processedModel, robot);
         }
 
         // Export link
@@ -612,25 +667,33 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     }
 
     // Export all the additional frames.
-    for (FrameIndex frameIndex=processedModel.getNrOfLinks(); frameIndex < static_cast<FrameIndex>(processedModel.getNrOfFrames()); frameIndex++)
+    for (FrameIndex frameIndex = processedModel.getNrOfLinks();
+         frameIndex < static_cast<FrameIndex>(processedModel.getNrOfFrames());
+         frameIndex++)
     {
         // Check that the frame is not parent of the base link and that the
         // frame link is present in the traversal.
         if (frameIndex != baseFakeLinkFrameIndex
-            && exportTraversal.getTraversalIndexFromLinkIndex(processedModel.getFrameLink(frameIndex)) != TRAVERSAL_INVALID_INDEX) {
+            && exportTraversal.getTraversalIndexFromLinkIndex(
+                   processedModel.getFrameLink(frameIndex))
+                   != TRAVERSAL_INVALID_INDEX)
+        {
 
-            ok = ok && exportAdditionalFrame(processedModel.getFrameName(frameIndex),
-                                             processedModel.getFrameTransform(frameIndex),
-                                             processedModel.getLinkName(processedModel.getFrameLink(frameIndex)),
-                                             FAKE_LINK_IS_CHILD,
-                                             robot);
+            ok = ok
+                 && exportAdditionalFrame(processedModel.getFrameName(frameIndex),
+                                          processedModel.getFrameTransform(frameIndex),
+                                          processedModel.getLinkName(
+                                              processedModel.getFrameLink(frameIndex)),
+                                          FAKE_LINK_IS_CHILD,
+                                          robot);
         }
     }
-    for (auto& xmlBlob : options.xmlBlobs) {
+    for (auto& xmlBlob : options.xmlBlobs)
+    {
         ok = ok && exportXMLBlob(xmlBlob, robot);
     }
-    xmlChar *xmlbuff=0;
-    int buffersize=0;
+    xmlChar* xmlbuff = 0;
+    int buffersize = 0;
     xmlDocDumpFormatMemory(urdf_xml, &xmlbuff, &buffersize, 1);
     urdf_string.resize(buffersize);
     std::memcpy((void*)urdf_string.data(), (void*)xmlbuff, buffersize);
@@ -641,24 +704,24 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     return ok;
 }
 
-
-bool URDFFromModel(const iDynTree::Model & model,
-                   const std::string & urdf_filename,
+bool URDFFromModel(const iDynTree::Model& model,
+                   const std::string& urdf_filename,
                    const ModelExporterOptions options)
 {
     std::ofstream ofs(urdf_filename.c_str());
 
-    if( !ofs.is_open() )
+    if (!ofs.is_open())
     {
-        std::cerr << "[ERROR] iDynTree::URDFFromModel : error opening file "
-                  << urdf_filename << std::endl;
+        std::cerr << "[ERROR] iDynTree::URDFFromModel : error opening file " << urdf_filename
+                  << std::endl;
         return false;
     }
 
     std::string xml_string;
     if (!URDFStringFromModel(model, xml_string, options))
     {
-        std::cerr << "[ERROR] URDFFromModel: Failed to generate URDF string from processed model" << std::endl;
+        std::cerr << "[ERROR] URDFFromModel: Failed to generate URDF string from processed model"
+                  << std::endl;
         return false;
     }
 
@@ -669,4 +732,4 @@ bool URDFFromModel(const iDynTree::Model & model,
     return true;
 }
 
-}
+} // namespace iDynTree

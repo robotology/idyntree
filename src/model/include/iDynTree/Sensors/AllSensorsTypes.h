@@ -5,7 +5,7 @@
 #define IDYNTREE_SENSORS_ALL_SENSORS_TYPES_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Sensors/AllSensorsTypes.h> is deprecated. Please use <iDynTree/AllSensorsTypes.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Sensors/AllSensorsTypes.h> is deprecated. Please use <iDynTree/AllSensorsTypes.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/AllSensorsTypes.h>

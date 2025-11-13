@@ -13,96 +13,103 @@
 
 #include <iDynTree/Constraint.h>
 #include <iDynTree/MatrixDynSize.h>
-#include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/SparsityStructure.h>
-#include <string>
+#include <iDynTree/TimeVaryingObject.h>
 #include <memory>
+#include <string>
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-        /*@
-         * Models a linear constraints on the state and/or control, i.e.
-         * \f[
-         *      lb \leq A \begin{bmatrix} x\\u\end{bmatrix} \leq ub
-         * \f]
-         */
+/*@
+ * Models a linear constraints on the state and/or control, i.e.
+ * \f[
+ *      lb \leq A \begin{bmatrix} x\\u\end{bmatrix} \leq ub
+ * \f]
+ */
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        class LinearConstraint
-        : public Constraint {
-        public:
+class LinearConstraint : public Constraint
+{
+public:
+    LinearConstraint(size_t size, const std::string name);
 
-            LinearConstraint(size_t size, const std::string name);
+    LinearConstraint(size_t size,
+                     const std::string name,
+                     const SparsityStructure& stateSparsity,
+                     const SparsityStructure& controlSparsity);
 
-            LinearConstraint(size_t size, const std::string name,
-                             const SparsityStructure& stateSparsity,
-                             const SparsityStructure& controlSparsity);
+    virtual ~LinearConstraint() override;
 
-            virtual ~LinearConstraint() override;
+    bool setStateConstraintMatrix(const MatrixDynSize& constraintMatrix);
 
-            bool setStateConstraintMatrix(const MatrixDynSize& constraintMatrix);
+    bool setControlConstraintMatrix(const MatrixDynSize& constraintMatrix);
 
-            bool setControlConstraintMatrix(const MatrixDynSize& constraintMatrix);
+    bool setStateConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
 
-            bool setStateConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
+    bool setControlConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
 
-            bool setControlConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
+    virtual bool evaluateConstraint(double time,
+                                    const VectorDynSize& state,
+                                    const VectorDynSize& control,
+                                    VectorDynSize& constraint) final; // lu <= [Ax, Au][x;u] <= lU
 
-            virtual bool evaluateConstraint(double time,
+    virtual bool constraintJacobianWRTState(double time,
                                             const VectorDynSize& state,
                                             const VectorDynSize& control,
-                                            VectorDynSize& constraint) final;// lu <= [Ax, Au][x;u] <= lU
+                                            MatrixDynSize& jacobian) final;
 
-            virtual bool constraintJacobianWRTState(double time,
-                                                    const VectorDynSize& state,
-                                                    const VectorDynSize& control,
-                                                    MatrixDynSize& jacobian) final;
+    virtual bool constraintJacobianWRTControl(double time,
+                                              const VectorDynSize& state,
+                                              const VectorDynSize& control,
+                                              MatrixDynSize& jacobian) final;
 
-            virtual bool constraintJacobianWRTControl(double time,
-                                                      const VectorDynSize& state,
-                                                      const VectorDynSize& control,
-                                                      MatrixDynSize& jacobian) final;
+    virtual bool constraintJacobianWRTStateSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
 
-            virtual bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+    virtual bool constraintJacobianWRTControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
-            virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
+    virtual bool constraintSecondPartialDerivativeWRTState(double time,
+                                                           const VectorDynSize& state,
+                                                           const VectorDynSize& control,
+                                                           const VectorDynSize& lambda,
+                                                           MatrixDynSize& hessian) final;
 
-            virtual bool constraintSecondPartialDerivativeWRTState(double time,
-                                                                   const VectorDynSize& state,
-                                                                   const VectorDynSize& control,
-                                                                   const VectorDynSize& lambda,
-                                                                   MatrixDynSize& hessian) final;
+    virtual bool constraintSecondPartialDerivativeWRTControl(double time,
+                                                             const VectorDynSize& state,
+                                                             const VectorDynSize& control,
+                                                             const VectorDynSize& lambda,
+                                                             MatrixDynSize& hessian) final;
 
-            virtual bool constraintSecondPartialDerivativeWRTControl(double time,
-                                                                     const VectorDynSize& state,
-                                                                     const VectorDynSize& control,
-                                                                     const VectorDynSize& lambda,
-                                                                     MatrixDynSize& hessian) final;
+    virtual bool constraintSecondPartialDerivativeWRTStateControl(double time,
+                                                                  const VectorDynSize& state,
+                                                                  const VectorDynSize& control,
+                                                                  const VectorDynSize& lambda,
+                                                                  MatrixDynSize& hessian) final;
 
+    virtual bool constraintSecondPartialDerivativeWRTStateSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
 
-            virtual bool constraintSecondPartialDerivativeWRTStateControl(double time,
-                                                                          const VectorDynSize& state,
-                                                                          const VectorDynSize& control,
-                                                                          const VectorDynSize& lambda,
-                                                                          MatrixDynSize& hessian) final;
+    virtual bool constraintSecondPartialDerivativeWRTStateControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
 
-            virtual bool constraintSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+    virtual bool constraintSecondPartialDerivativeWRTControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
-            virtual bool constraintSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
+private:
+    class LinearConstraintImplementation;
+    LinearConstraintImplementation* m_pimpl;
+};
 
-            virtual bool constraintSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
-
-        private:
-            class LinearConstraintImplementation;
-            LinearConstraintImplementation* m_pimpl;
-        };
-
-    }
-}
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_LINEARCONSTRAINT_H */

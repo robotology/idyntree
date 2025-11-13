@@ -14,7 +14,7 @@
 
 using namespace iDynTree;
 
-unsigned int getNrOfVisuals(const iDynTree::Model &model)
+unsigned int getNrOfVisuals(const iDynTree::Model& model)
 {
     unsigned int nrOfVisuals = 0;
     for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index)
@@ -24,18 +24,18 @@ unsigned int getNrOfVisuals(const iDynTree::Model &model)
     return nrOfVisuals;
 }
 
-unsigned int getNrOfCollisions(const iDynTree::Model &model)
+unsigned int getNrOfCollisions(const iDynTree::Model& model)
 {
     unsigned int nrOfCollisions = 0;
     for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index)
     {
-        nrOfCollisions +=
-            model.collisionSolidShapes().getLinkSolidShapes()[index].size();
+        nrOfCollisions += model.collisionSolidShapes().getLinkSolidShapes()[index].size();
     }
     return nrOfCollisions;
 }
 
-void checkSDFormat(std::string fileName, unsigned int expectedNrOfLinks,
+void checkSDFormat(std::string fileName,
+                   unsigned int expectedNrOfLinks,
                    unsigned int expectedNrOfJoints,
                    unsigned int expectedNrOfDOFs,
                    std::string expectedDefaultBase)
@@ -59,20 +59,19 @@ void checkSDFormat(std::string fileName, unsigned int expectedNrOfLinks,
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(), expectedNrOfLinks);
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(), expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(), expectedNrOfDOFs);
-    ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()),
-                        expectedDefaultBase);
+    ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()), expectedDefaultBase);
 
     // Verify that links have valid inertial properties
     for (LinkIndex linkIdx = 0; linkIdx < model.getNrOfLinks(); ++linkIdx)
     {
-        const Link *link = model.getLink(linkIdx);
-        const SpatialInertia &inertia = link->getInertia();
+        const Link* link = model.getLink(linkIdx);
+        const SpatialInertia& inertia = link->getInertia();
 
         // Check that mass is positive
         ASSERT_IS_TRUE(inertia.getMass() > 0.0);
 
-        std::cerr << "Link " << model.getLinkName(linkIdx)
-                  << " mass: " << inertia.getMass() << " kg" << std::endl;
+        std::cerr << "Link " << model.getLinkName(linkIdx) << " mass: " << inertia.getMass()
+                  << " kg" << std::endl;
     }
 
     // Verify joints have correct parent-child relationships
@@ -86,9 +85,9 @@ void checkSDFormat(std::string fileName, unsigned int expectedNrOfLinks,
         ASSERT_IS_TRUE(link1 >= 0 && link1 < (LinkIndex)model.getNrOfLinks());
         ASSERT_IS_TRUE(link2 >= 0 && link2 < (LinkIndex)model.getNrOfLinks());
 
-        std::cerr << "Joint " << model.getJointName(jointIdx) << ": "
-                  << model.getLinkName(link1) << " -> " << model.getLinkName(link2)
-                  << " (DOFs: " << joint->getNrOfDOFs() << ")" << std::endl;
+        std::cerr << "Joint " << model.getJointName(jointIdx) << ": " << model.getLinkName(link1)
+                  << " -> " << model.getLinkName(link2) << " (DOFs: " << joint->getNrOfDOFs() << ")"
+                  << std::endl;
     }
 }
 
@@ -104,8 +103,7 @@ void checkSDFormatWithAutoDetect(std::string fileName,
 
     if (!ok)
     {
-        std::cerr << "Failed to auto-detect and load SDF file: " << fileName
-                  << std::endl;
+        std::cerr << "Failed to auto-detect and load SDF file: " << fileName << std::endl;
         ASSERT_IS_TRUE(false);
         return;
     }
@@ -117,8 +115,7 @@ void checkSDFormatWithAutoDetect(std::string fileName,
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(), expectedNrOfLinks);
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(), expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(), expectedNrOfDOFs);
-    ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()),
-                        expectedDefaultBase);
+    ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()), expectedDefaultBase);
 }
 
 int main()
@@ -133,15 +130,12 @@ int main()
                   "base_link");
 
     // Test auto-detection with .sdf extension
-    std::cout << "\nTesting auto-detection with .sdf extension"
-              << std::endl;
-    checkSDFormatWithAutoDetect(getAbsModelPath("simple_model.sdf"), 2, 1, 1,
-                                "base_link");
+    std::cout << "\nTesting auto-detection with .sdf extension" << std::endl;
+    checkSDFormatWithAutoDetect(getAbsModelPath("simple_model.sdf"), 2, 1, 1, "base_link");
 
 #else
     std::cout << "SDFormat support not enabled, skipping tests" << std::endl;
-    std::cout << "Rebuild with IDYNTREE_USES_SDFORMAT=ON to enable SDFormat tests"
-              << std::endl;
+    std::cout << "Rebuild with IDYNTREE_USES_SDFORMAT=ON to enable SDFormat tests" << std::endl;
 #endif
 
     return EXIT_SUCCESS;

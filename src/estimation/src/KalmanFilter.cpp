@@ -5,19 +5,19 @@
 
 iDynTree::DiscreteKalmanFilterHelper::DiscreteKalmanFilterHelper()
 {
-
 }
 
 bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree::MatrixDynSize& A,
-                                                         const iDynTree::MatrixDynSize& B,
-                                                         const iDynTree::MatrixDynSize& C)
+                                                                 const iDynTree::MatrixDynSize& B,
+                                                                 const iDynTree::MatrixDynSize& C)
 {
     m_use_feed_through = false;
     iDynTree::MatrixDynSize D;
     return constructKalmanFilter(A, B, C, D);
 }
 
-bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree::MatrixDynSize& A, const iDynTree::MatrixDynSize& C)
+bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree::MatrixDynSize& A,
+                                                                 const iDynTree::MatrixDynSize& C)
 {
     m_use_control_input = false;
     m_use_feed_through = false;
@@ -25,11 +25,17 @@ bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree:
     return constructKalmanFilter(A, B, C, D);
 }
 
-bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree::MatrixDynSize& A, const iDynTree::MatrixDynSize& B, const iDynTree::MatrixDynSize& C, const iDynTree::MatrixDynSize& D)
+bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree::MatrixDynSize& A,
+                                                                 const iDynTree::MatrixDynSize& B,
+                                                                 const iDynTree::MatrixDynSize& C,
+                                                                 const iDynTree::MatrixDynSize& D)
 {
     if (A.rows() != A.cols())
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "constructKalmanFilter", "Could not construct KF - ill-formed state transition matrix A, exiting.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "constructKalmanFilter",
+                              "Could not construct KF - ill-formed state transition matrix A, "
+                              "exiting.");
         return false;
     }
     m_dim_X = A.rows();
@@ -40,16 +46,17 @@ bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree:
     m_Q.resize(m_dim_X, m_dim_X);
     m_Q.zero();
 
-    if (B.capacity() ==  0)
+    if (B.capacity() == 0)
     {
         m_use_control_input = false;
-    }
-    else if (B.rows() != A.rows())
+    } else if (B.rows() != A.rows())
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "constructKalmanFilter", "Could not construct KF -  control input matrix B dimension mismatch, exiting.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "constructKalmanFilter",
+                              "Could not construct KF -  control input matrix B dimension "
+                              "mismatch, exiting.");
         return false;
-    }
-    else
+    } else
     {
         m_use_control_input = true;
         m_B = B;
@@ -61,7 +68,10 @@ bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree:
 
     if (C.capacity() == 0 || (C.cols() != A.rows()))
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "constructKalmanFilter", "Could not construct KF -  output matrix C dimension mismatch, exiting.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "constructKalmanFilter",
+                              "Could not construct KF -  output matrix C dimension mismatch, "
+                              "exiting.");
         return false;
     }
     m_dim_Y = C.rows();
@@ -71,16 +81,17 @@ bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter(const iDynTree:
     m_R.resize(m_dim_Y, m_dim_Y);
     m_R.zero();
 
-    if (D.capacity() ==  0)
+    if (D.capacity() == 0)
     {
         m_use_feed_through = false;
-    }
-    else if ((D.rows() != C.rows()) || (D.cols() != B.rows()))
+    } else if ((D.rows() != C.rows()) || (D.cols() != B.rows()))
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "constructKalmanFilter", "Could not construct KF -  control feedthrough matrix D dimension mismatch, exiting.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "constructKalmanFilter",
+                              "Could not construct KF -  control feedthrough matrix D dimension "
+                              "mismatch, exiting.");
         return false;
-    }
-    else
+    } else
     {
         m_use_feed_through = true;
         m_D = D;
@@ -94,7 +105,9 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfSetInitialState(const iDynTree::Vec
 {
     if (x0.size() != m_dim_X)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfSetInitialState", "Could not set KF initial state - dimension mismatch");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfSetInitialState",
+                              "Could not set KF initial state - dimension mismatch");
         return false;
     }
 
@@ -105,9 +118,11 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfSetInitialState(const iDynTree::Vec
 
 bool iDynTree::DiscreteKalmanFilterHelper::kfSetStateCovariance(const iDynTree::MatrixDynSize& P)
 {
-    if ( (P.rows() != m_dim_X) || (P.cols() != m_dim_X))
+    if ((P.rows() != m_dim_X) || (P.cols() != m_dim_X))
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfSetStateCovariance", "Could not set KF initial state covariance - dimension mismatch");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfSetStateCovariance",
+                              "Could not set KF initial state covariance - dimension mismatch");
         return false;
     }
 
@@ -116,11 +131,14 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfSetStateCovariance(const iDynTree::
     return true;
 }
 
-bool iDynTree::DiscreteKalmanFilterHelper::kfSetSystemNoiseCovariance(const iDynTree::MatrixDynSize& Q)
+bool iDynTree::DiscreteKalmanFilterHelper::kfSetSystemNoiseCovariance(
+    const iDynTree::MatrixDynSize& Q)
 {
-    if ( (Q.rows() != m_dim_X) || (Q.cols() != m_dim_X))
+    if ((Q.rows() != m_dim_X) || (Q.cols() != m_dim_X))
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfSetSystemNoiseCovariance", "Could not set KF system noise covariance - dimension mismatch");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfSetSystemNoiseCovariance",
+                              "Could not set KF system noise covariance - dimension mismatch");
         return false;
     }
 
@@ -129,11 +147,14 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfSetSystemNoiseCovariance(const iDyn
     return true;
 }
 
-bool iDynTree::DiscreteKalmanFilterHelper::kfSetMeasurementNoiseCovariance(const iDynTree::MatrixDynSize& R)
+bool iDynTree::DiscreteKalmanFilterHelper::kfSetMeasurementNoiseCovariance(
+    const iDynTree::MatrixDynSize& R)
 {
-    if ( (R.rows() != m_dim_Y) || (R.cols() != m_dim_Y))
+    if ((R.rows() != m_dim_Y) || (R.cols() != m_dim_Y))
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfSetMeasurementNoiseCovariance", "Could not set KF measurement noise covariance - dimension mismatch");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfSetMeasurementNoiseCovariance",
+                              "Could not set KF measurement noise covariance - dimension mismatch");
         return false;
     }
 
@@ -146,19 +167,25 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfInit()
 {
     if (!m_filter_constructed)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfInit", "Please construct the filter first.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfInit",
+                              "Please construct the filter first.");
         return false;
     }
 
     if (!m_measurement_noise_covariance_matrix_set || !m_system_noise_covariance_matrix_set)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfInit", "Please set the noise covariance matrices Q and R.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfInit",
+                              "Please set the noise covariance matrices Q and R.");
         return false;
     }
 
     if (!m_initial_state_set || !m_initial_state_covariance_set)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfInit", "Please set the initial state and the state covariance matrix.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfInit",
+                              "Please set the initial state and the state covariance matrix.");
         return false;
     }
 
@@ -170,13 +197,17 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfSetInputVector(const iDynTree::Vect
 {
     if (!m_use_control_input)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfSetInput", "B matrix was not constructed properly");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfSetInput",
+                              "B matrix was not constructed properly");
         return false;
     }
 
     if (u.size() != m_dim_U)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfSetInput", "Could not set inputs - dimensions mismatch");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfSetInput",
+                              "Could not set inputs - dimensions mismatch");
         return false;
     }
 
@@ -197,7 +228,9 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfPredict()
     {
         if (!m_input_updated)
         {
-            iDynTree::reportWarning("DiscreteKalmanFilterHelper", "kfPredict", "input not updated. using old input");
+            iDynTree::reportWarning("DiscreteKalmanFilterHelper",
+                                    "kfPredict",
+                                    "input not updated. using old input");
         }
     }
 
@@ -211,15 +244,14 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfPredict()
     {
         auto B(toEigen(m_B));
         auto u(toEigen(m_u));
-        x = (A*x) + (B*u);
-    }
-    else
+        x = (A * x) + (B * u);
+    } else
     {
-        x = A*x;
+        x = A * x;
     }
 
     // propagate covariance
-    P = A*P*(A.transpose()) + Q;
+    P = A * P * (A.transpose()) + Q;
     m_input_updated = false;
     return true;
 }
@@ -228,7 +260,9 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfSetMeasurementVector(const iDynTree
 {
     if (y.size() != m_dim_Y)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfSetInitialState", "Could not set measurement - dimension mismatch");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfSetInitialState",
+                              "Could not set measurement - dimension mismatch");
         return false;
     }
 
@@ -247,7 +281,9 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfUpdate()
 
     if (!m_measurement_updated)
     {
-        iDynTree::reportError("DiscreteKalmanFilterHelper", "kfUpdate", "measurements not updated.");
+        iDynTree::reportError("DiscreteKalmanFilterHelper",
+                              "kfUpdate",
+                              "measurements not updated.");
         return false;
     }
 
@@ -265,19 +301,18 @@ bool iDynTree::DiscreteKalmanFilterHelper::kfUpdate()
     {
         auto D(toEigen(m_D));
         auto u(toEigen(m_u));
-        z = (C*x) + (D*u);
-    }
-    else
+        z = (C * x) + (D * u);
+    } else
     {
-        z = C*x;
+        z = C * x;
     }
 
     auto innovation = y - z;
-    auto I =Eigen::MatrixXd::Identity(m_dim_X, m_dim_X);
-    auto S = C*P*(C.transpose()) + R;
-    auto K = P*(C.transpose())*(S.inverse());
-    x = x + (K*innovation);
-    P = (I - (K*C))*P;
+    auto I = Eigen::MatrixXd::Identity(m_dim_X, m_dim_X);
+    auto S = C * P * (C.transpose()) + R;
+    auto K = P * (C.transpose()) * (S.inverse());
+    x = x + (K * innovation);
+    P = (I - (K * C)) * P;
     m_measurement_updated = false;
     return true;
 }

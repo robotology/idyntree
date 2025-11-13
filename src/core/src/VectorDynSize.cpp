@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Utils.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <sstream>
 
@@ -12,18 +12,21 @@
 namespace iDynTree
 {
 
-VectorDynSize::VectorDynSize(): m_data(0), m_size(0), m_capacity(0)
+VectorDynSize::VectorDynSize()
+    : m_data(0)
+    , m_size(0)
+    , m_capacity(0)
 {
-
 }
 
-VectorDynSize::VectorDynSize(std::size_t _size): m_size(_size), m_capacity(_size)
+VectorDynSize::VectorDynSize(std::size_t _size)
+    : m_size(_size)
+    , m_capacity(_size)
 {
-    if( this->m_size == 0 )
+    if (this->m_size == 0)
     {
         this->m_data = 0;
-    }
-    else
+    } else
     {
         this->m_data = new double[this->m_size];
     }
@@ -31,37 +34,37 @@ VectorDynSize::VectorDynSize(std::size_t _size): m_size(_size), m_capacity(_size
     zero();
 }
 
-
-VectorDynSize::VectorDynSize(const double* in_data,
-                             const std::size_t in_size): m_size(in_size), m_capacity(in_size)
+VectorDynSize::VectorDynSize(const double* in_data, const std::size_t in_size)
+    : m_size(in_size)
+    , m_capacity(in_size)
 {
-    if( this->m_size == 0 )
+    if (this->m_size == 0)
     {
         this->m_data = 0;
-    }
-    else
+    } else
     {
         this->m_data = new double[this->m_size];
-        std::memcpy(this->m_data,in_data,in_size*sizeof(double));
+        std::memcpy(this->m_data, in_data, in_size * sizeof(double));
     }
 }
 
-VectorDynSize::VectorDynSize(const VectorDynSize& vec): m_size(vec.size()), m_capacity(vec.capacity())
+VectorDynSize::VectorDynSize(const VectorDynSize& vec)
+    : m_size(vec.size())
+    , m_capacity(vec.capacity())
 {
-    if( this->m_size == 0 )
+    if (this->m_size == 0)
     {
         this->m_data = 0;
-    }
-    else
+    } else
     {
         this->m_data = new double[this->m_capacity];
-        std::memcpy(this->m_data,vec.data(),this->m_capacity*sizeof(double));
+        std::memcpy(this->m_data, vec.data(), this->m_capacity * sizeof(double));
     }
 }
 
 VectorDynSize::~VectorDynSize()
 {
-    if( this->m_capacity > 0 )
+    if (this->m_capacity > 0)
     {
         delete[] this->m_data;
         this->m_data = 0;
@@ -70,13 +73,14 @@ VectorDynSize::~VectorDynSize()
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
 VectorDynSize::VectorDynSize(Span<const double> vec)
     : VectorDynSize(vec.data(), vec.size())
-{}
+{
+}
 #endif
 
 VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
 {
     // if the size don't match, reallocate the data
-    if( this->m_size != vec.size() )
+    if (this->m_size != vec.size())
     {
         resize(vec.size());
     }
@@ -85,19 +89,19 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
     assert(this->m_size == vec.size());
 
     // Copy data if the size is not 0
-    if( this->m_size > 0 )
+    if (this->m_size > 0)
     {
-        std::memcpy(this->m_data,vec.data(),this->m_size*sizeof(double));
+        std::memcpy(this->m_data, vec.data(), this->m_size * sizeof(double));
     }
 
     return *this;
 }
 
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
-VectorDynSize &VectorDynSize::operator=(Span<const double> vec)
+VectorDynSize& VectorDynSize::operator=(Span<const double> vec)
 {
     // if the size don't match, reallocate the data
-    if( this->m_size != vec.size() )
+    if (this->m_size != vec.size())
     {
         resize(static_cast<std::size_t>(vec.size()));
     }
@@ -106,9 +110,9 @@ VectorDynSize &VectorDynSize::operator=(Span<const double> vec)
     assert(this->m_size == vec.size());
 
     // Copy data if the size is not 0
-    if( this->m_size > 0 )
+    if (this->m_size > 0)
     {
-        std::memcpy(this->m_data, vec.data(), this->m_size*sizeof(double));
+        std::memcpy(this->m_data, vec.data(), this->m_size * sizeof(double));
     }
 
     return *this;
@@ -117,18 +121,16 @@ VectorDynSize &VectorDynSize::operator=(Span<const double> vec)
 
 void VectorDynSize::zero()
 {
-    for(std::size_t i=0; i < this->size(); i++ )
+    for (std::size_t i = 0; i < this->size(); i++)
     {
         this->m_data[i] = 0.0;
     }
 }
 
-
 std::size_t VectorDynSize::size() const
 {
     return this->m_size;
 }
-
 
 double* VectorDynSize::data()
 {
@@ -165,9 +167,9 @@ double VectorDynSize::operator[](std::size_t index) const
 
 double VectorDynSize::getVal(const std::size_t index) const
 {
-    if( index >= this->size() )
+    if (index >= this->size())
     {
-        reportError("VectorDynSize","getVal","index out of bounds");
+        reportError("VectorDynSize", "getVal", "index out of bounds");
         return 0.0;
     }
 
@@ -176,9 +178,9 @@ double VectorDynSize::getVal(const std::size_t index) const
 
 bool VectorDynSize::setVal(const std::size_t index, const double new_el)
 {
-    if( index >= this->size() )
+    if (index >= this->size())
     {
-        reportError("VectorDynSize","getVal","index out of bounds");
+        reportError("VectorDynSize", "getVal", "index out of bounds");
         return false;
     }
 
@@ -219,22 +221,25 @@ double* VectorDynSize::end() noexcept
 
 void VectorDynSize::changeCapacityAndCopyData(const std::size_t _newCapacity)
 {
-    //Corner case: zero capacity
-    if (_newCapacity == 0) {
-        delete [] this->m_data;
+    // Corner case: zero capacity
+    if (_newCapacity == 0)
+    {
+        delete[] this->m_data;
         m_data = 0;
         this->m_size = 0;
         this->m_capacity = 0;
         return;
     }
 
-    double *localBuf = new double[_newCapacity];
+    double* localBuf = new double[_newCapacity];
 
-    if (this->m_data && this->m_size <= _newCapacity) {
+    if (this->m_data && this->m_size <= _newCapacity)
+    {
         memcpy(localBuf, this->m_data, this->m_size * sizeof(double));
     }
-    if (this->m_data) {
-        delete [] this->m_data;
+    if (this->m_data)
+    {
+        delete[] this->m_data;
         this->m_data = 0;
     }
 
@@ -246,7 +251,7 @@ void VectorDynSize::reserve(const std::size_t _newCapacity)
 {
     assert(this->m_size <= this->m_capacity);
 
-    if( _newCapacity <= this->m_capacity )
+    if (_newCapacity <= this->m_capacity)
     {
         return;
     }
@@ -256,11 +261,11 @@ void VectorDynSize::reserve(const std::size_t _newCapacity)
 
 void VectorDynSize::resize(const std::size_t _newSize)
 {
-    //Possible cases:
-    // 1) Reduce size -> don't touch capacity. Lose elements > _newSize
-    // 2) Increase size
-    //    a) capacity already at least _newSize
-    //    b) capacity < _newSize
+    // Possible cases:
+    //  1) Reduce size -> don't touch capacity. Lose elements > _newSize
+    //  2) Increase size
+    //     a) capacity already at least _newSize
+    //     b) capacity < _newSize
     reserve(_newSize);
     this->m_size = _newSize;
 }
@@ -272,7 +277,7 @@ size_t VectorDynSize::capacity() const
 
 void VectorDynSize::shrink_to_fit()
 {
-    if( this->m_size == this->m_capacity )
+    if (this->m_size == this->m_capacity)
     {
         return;
     }
@@ -280,22 +285,19 @@ void VectorDynSize::shrink_to_fit()
     this->changeCapacityAndCopyData(this->m_size);
 }
 
-
-
 void VectorDynSize::fillBuffer(double* buf) const
 {
-    for(std::size_t i=0; i < this->size(); i++ )
+    for (std::size_t i = 0; i < this->size(); i++)
     {
         buf[i] = this->m_data[i];
     }
 }
 
-
 std::string VectorDynSize::toString() const
 {
     std::stringstream ss;
 
-    for(std::size_t i=0; i < this->size(); i++ )
+    for (std::size_t i = 0; i < this->size(); i++)
     {
         ss << this->m_data[i] << " ";
     }
@@ -308,4 +310,4 @@ std::string VectorDynSize::reservedToString() const
     return this->toString();
 }
 
-}
+} // namespace iDynTree

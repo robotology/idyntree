@@ -6,9 +6,9 @@
 namespace iDynTree
 {
 
-Link::Link(): m_index(LINK_INVALID_INDEX)
+Link::Link()
+    : m_index(LINK_INVALID_INDEX)
 {
-
 }
 
 SpatialInertia& Link::inertia()
@@ -20,8 +20,6 @@ const SpatialInertia& Link::inertia() const
 {
     return m_inertia;
 }
-
-
 
 void Link::setInertia(SpatialInertia& _inertia)
 {
@@ -43,6 +41,4 @@ LinkIndex Link::getIndex() const
     return this->m_index;
 }
 
-
-
-}
+} // namespace iDynTree

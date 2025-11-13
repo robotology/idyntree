@@ -1,12 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
-#include <iDynTree/Utils.h>
-#include <iDynTree/TestUtils.h>
-#include <iDynTree/SO3Utils.h>
-#include <iDynTree/EigenHelpers.h>
 #include <Eigen/Dense>
+#include <iDynTree/EigenHelpers.h>
+#include <iDynTree/SO3Utils.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/Utils.h>
 
 #include <cmath>
 #include <numeric>
@@ -25,7 +24,7 @@ void checkGeodesicDistance()
     iDynTree::Rotation r1 = iDynTree::getRandomRotation();
     iDynTree::Rotation r2 = iDynTree::getRandomRotation();
 
-    iDynTree::Rotation error = r1.inverse()*r2;
+    iDynTree::Rotation error = r1.inverse() * r2;
 
     Eigen::AngleAxisd aa(iDynTree::toEigen(error));
 
@@ -39,7 +38,6 @@ void checkGeodesicDistance()
     distance = iDynTree::geodesicL2Distance(r1, r2);
 
     ASSERT_EQUAL_DOUBLE(0.5, distance);
-
 }
 
 void checkWeightedMeanRotation()
@@ -56,9 +54,16 @@ void checkWeightedMeanRotation()
 
     for (size_t i = 1; i < numberOfRotations; ++i)
     {
-        rotations.push_back(iDynTree::Rotation::RPY(originalRoll + iDynTree::getRandomDouble(-0.5 * perturbation, 0.5 * perturbation),
-                                                    originalPitch + iDynTree::getRandomDouble(-0.5 * perturbation, 0.5 * perturbation),
-                                                    originalYaw + iDynTree::getRandomDouble(-0.5 * perturbation, 0.5 * perturbation)));
+        rotations.push_back(
+            iDynTree::Rotation::RPY(originalRoll
+                                        + iDynTree::getRandomDouble(-0.5 * perturbation,
+                                                                    0.5 * perturbation),
+                                    originalPitch
+                                        + iDynTree::getRandomDouble(-0.5 * perturbation,
+                                                                    0.5 * perturbation),
+                                    originalYaw
+                                        + iDynTree::getRandomDouble(-0.5 * perturbation,
+                                                                    0.5 * perturbation)));
         weights.push_back(iDynTree::getRandomDouble());
     }
     double totalWeight = std::accumulate(weights.begin(), weights.end(), 0.0);
@@ -82,12 +87,11 @@ void checkWeightedMeanRotation()
     {
         const iDynTree::Rotation& R_i = rotations[idx];
         double w_i = weights[idx];
-        r =  r + w_i * toEigen((weightedMean.inverse() * R_i).log());
+        r = r + w_i * toEigen((weightedMean.inverse() * R_i).log());
     }
     r = r * (1.0 / totalWeight);
 
     ASSERT_IS_TRUE(r.norm() < options.tolerance);
-
 }
 
 void checkMeanRotation()
@@ -102,9 +106,16 @@ void checkMeanRotation()
 
     for (size_t i = 1; i < numberOfRotations; ++i)
     {
-        rotations.push_back(iDynTree::Rotation::RPY(originalRoll + iDynTree::getRandomDouble(-0.5 * perturbation, 0.5 * perturbation),
-                                                    originalPitch + iDynTree::getRandomDouble(-0.5 * perturbation, 0.5 * perturbation),
-                                                    originalYaw + iDynTree::getRandomDouble(-0.5 * perturbation, 0.5 * perturbation)));
+        rotations.push_back(
+            iDynTree::Rotation::RPY(originalRoll
+                                        + iDynTree::getRandomDouble(-0.5 * perturbation,
+                                                                    0.5 * perturbation),
+                                    originalPitch
+                                        + iDynTree::getRandomDouble(-0.5 * perturbation,
+                                                                    0.5 * perturbation),
+                                    originalYaw
+                                        + iDynTree::getRandomDouble(-0.5 * perturbation,
+                                                                    0.5 * perturbation)));
     }
 
     iDynTree::Rotation weightedMean;
@@ -117,19 +128,17 @@ void checkMeanRotation()
     ASSERT_IS_TRUE(ok);
     ASSERT_IS_TRUE(iDynTree::isValidRotationMatrix(weightedMean));
 
-
     Eigen::Vector3d r;
     r.setZero();
 
     for (size_t idx = 0; idx < numberOfRotations; ++idx)
     {
         const iDynTree::Rotation& R_i = rotations[idx];
-        r =  r + toEigen((weightedMean.inverse() * R_i).log());
+        r = r + toEigen((weightedMean.inverse() * R_i).log());
     }
     r = r * (1.0 / numberOfRotations);
 
     ASSERT_IS_TRUE(r.norm() < options.tolerance);
-
 }
 
 int main()

@@ -5,11 +5,9 @@
 #define IDYNTREE_SPATIAL_INERTIA_RAW_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/SpatialInertiaRaw.h> is deprecated. Please use <iDynTree/SpatialInertia.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/SpatialInertiaRaw.h> is deprecated. Please use <iDynTree/SpatialInertia.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SpatialInertia.h>
 
-
 #endif
-

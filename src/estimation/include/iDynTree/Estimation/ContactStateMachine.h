@@ -5,7 +5,7 @@
 #define IDYNTREE_ESTIMATION_CONTACTSTATEMACHINE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/ContactStateMachine.h> is deprecated. Please use <iDynTree/ContactStateMachine.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Estimation/ContactStateMachine.h> is deprecated. Please use <iDynTree/ContactStateMachine.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ContactStateMachine.h>

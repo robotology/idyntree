@@ -10,38 +10,41 @@
 
 #include <iDynTree/Link.h>
 
-namespace iDynTree {
-    class LinkElement;
-    class XMLAttribute;
-    
-    class Model;
-    class XMLParserState;
-}
+namespace iDynTree
+{
+class LinkElement;
+class XMLAttribute;
 
-class iDynTree::LinkElement : public iDynTree::XMLElement {
+class Model;
+class XMLParserState;
+} // namespace iDynTree
+
+class iDynTree::LinkElement : public iDynTree::XMLElement
+{
     iDynTree::Model& m_model;
 
     iDynTree::Link m_link;
     std::string m_linkName;
     std::vector<VisualElement::VisualInfo> m_visuals;
     std::vector<VisualElement::VisualInfo> m_collisions;
-    
+
 public:
-    explicit LinkElement(XMLParserState& parserState, iDynTree::Model &model);
+    explicit LinkElement(XMLParserState& parserState, iDynTree::Model& model);
 
     // Exposing useful properties
     const std::string& linkName() const;
     const std::vector<VisualElement::VisualInfo>& visuals() const;
     const std::vector<VisualElement::VisualInfo>& collisions() const;
-    
+
     void exitElementScope() override;
-    
-    bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) override;
+
+    bool
+    setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>&
+                      attributes) override;
 
     void childHasBeenParsed(std::shared_ptr<iDynTree::XMLElement> child) override;
-    
+
     std::shared_ptr<iDynTree::XMLElement> childElementForName(const std::string& name) override;
-    
 };
 
 #endif /* end of include guard: IDYNTREE_MODELIO_URDF_LINKELEMENT_H */

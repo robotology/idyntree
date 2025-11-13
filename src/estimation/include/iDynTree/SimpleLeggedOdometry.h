@@ -4,12 +4,12 @@
 #ifndef IDYNTREE_SIMPLE_LEGGED_ODOMETRY2_
 #define IDYNTREE_SIMPLE_LEGGED_ODOMETRY2_
 
-#include <iDynTree/Transform.h>
 #include <iDynTree/Indices.h>
-#include <iDynTree/Model.h>
-#include <iDynTree/Traversal.h>
 #include <iDynTree/JointState.h>
 #include <iDynTree/LinkState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Traversal.h>
 
 namespace iDynTree
 {
@@ -27,19 +27,25 @@ namespace iDynTree
  *
  * -# During initialization  the user of the class specifies (through init()):
  *       * a frame that is rigidly attached to a link that is not moving (`initialFixedFrame`)
- *       * an optional transform between the desired location of the world and the fixed frame (`world_H_initialFixedFrame`)
- *    At the beginning, the `world_H_fixed` is the one specified (default is the identity)
+ *       * an optional transform between the desired location of the world and the fixed frame
+ * (`world_H_initialFixedFrame`) At the beginning, the `world_H_fixed` is the one specified (default
+ * is the identity)
  *
- * -# At this point, the `getWorldFrameTransform(iDynTree::FrameIndex frame_id)` will return the `world_H_frame`
- *      ( \f${}^{world} H_{frame}\f$ ) transform simply by computing the forward kinematics from the fixed frame
- *     to the frame specified by `frame_id` : `world_H_frame = world_H_fixed * fixed_H_frame(qj)`, i.e.
- *                                          \f${}^{world} H_{frame} = {}^{world} H_{fixed} \cdot {}^{fixed} H_{frame}(q_j)\f$
+ * -# At this point, the `getWorldFrameTransform(iDynTree::FrameIndex frame_id)` will return the
+ * `world_H_frame` ( \f${}^{world} H_{frame}\f$ ) transform simply by computing the forward
+ * kinematics from the fixed frame to the frame specified by `frame_id` : `world_H_frame =
+ * world_H_fixed * fixed_H_frame(qj)`, i.e.
+ *                                          \f${}^{world} H_{frame} = {}^{world} H_{fixed} \cdot
+ * {}^{fixed} H_{frame}(q_j)\f$
  *
- * -# If the fixed frame changes, we can simply change the frame used as "fixed" (changeFixedLink()), and consistently update the
- *      `world_H_fixed` transform to be equal to `world_H_new_fixed =  world_H_old_fixed * old_fixed_H_new_fixed(qj)`, i.e.
- *      \f${}^{world} H_{new\_fixed} = {}^{world} H_{old\_fixed} \cdot {}^{old\_fixed} H_{new\_fixed}(q_j)\f$
+ * -# If the fixed frame changes, we can simply change the frame used as "fixed"
+ * (changeFixedLink()), and consistently update the `world_H_fixed` transform to be equal to
+ * `world_H_new_fixed =  world_H_old_fixed * old_fixed_H_new_fixed(qj)`, i.e.
+ *      \f${}^{world} H_{new\_fixed} = {}^{world} H_{old\_fixed} \cdot {}^{old\_fixed}
+ * H_{new\_fixed}(q_j)\f$
  *
- * -# After the update, the `getWorldFrameTransform(iDynTree::FrameIndex frame_id)` can be obtained as in point 1b .
+ * -# After the update, the `getWorldFrameTransform(iDynTree::FrameIndex frame_id)` can be obtained
+ * as in point 1b .
  *
  * To reset the location of the world, init can simply be called again.
  *
@@ -61,7 +67,7 @@ class SimpleLeggedOdometry
      */
     bool m_isModelValid;
 
-      /**
+    /**
      * False initially, true after updateKinematics was successfully called.
      */
     bool m_kinematicsUpdated;
@@ -109,14 +115,14 @@ public:
      * @param[in] _model the kinematic and dynamic model used for the estimation.
      * @return true if all went well (model is well formed), false otherwise.
      */
-    bool setModel(const Model & _model);
+    bool setModel(const Model& _model);
 
     /**
      * Get used model.
      *
      * @return the kinematic and dynamic model used for estimation.
      */
-    const Model & model() const;
+    const Model& model() const;
 
     /**
      * Set the measured joint positions.
@@ -124,29 +130,33 @@ public:
      * This is used to update the joints positions used by the odometry.
      *
      */
-    bool updateKinematics(JointPosDoubleArray & jointPos);
+    bool updateKinematics(JointPosDoubleArray& jointPos);
 
     /**
      * Initialize the odometry.
      * This method initializes the world location w.r.t. to a frame
      * that is not the frame that is initially assumed fixed.
-     * For this reason it is necessary to call updateKinematics at least once before calling this method.
+     * For this reason it is necessary to call updateKinematics at least once before calling this
+     * method.
      *
      * @param[in] initialFixedFrame Frame initially assumed to be fixed.
-     * @param[in] initialFixedFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
+     * @param[in] initialFixedFrame_H_world Pose of the world w.r.t. the initial fixed frame
+     * (default: identity, i.e. the initialFixedFrame is the world).
      * @return true if all went well, false otherwise.
      */
-    bool init(const std::string & initialFixedFrame,
+    bool init(const std::string& initialFixedFrame,
               const Transform initialFixedFrame_H_world = Transform::Identity());
 
-     /**
+    /**
      * Initialize the odometry.
      * This method initializes the world location w.r.t. to a frame
      * that is not the frame that is initially assumed fixed.
-     * For this reason it is necessary to call updateKinematics at least once before calling this method.
+     * For this reason it is necessary to call updateKinematics at least once before calling this
+     * method.
      *
      * @param[in] initialFixedFrameIndex Frame initially assumed to be fixed.
-     * @param[in] initialFixedFrame_H_world Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world).
+     * @param[in] initialFixedFrame_H_world Pose of the world w.r.t. the initial fixed frame
+     * (default: identity, i.e. the initialFixedFrame is the world).
      * @return true if all went well, false otherwise.
      */
     bool init(const FrameIndex initialFixedFrameIndex,
@@ -156,26 +166,30 @@ public:
      * Initialize the odometry, specifying separately initial fixed frame and world.
      * This method initializes the world location w.r.t. to a frame
      * that is not the frame that is initially assumed fixed,
-     * for this reason it is necessary to call updateKinematics at least once before calling this method.
+     * for this reason it is necessary to call updateKinematics at least once before calling this
+     * method.
      *
      * @param[in] initialFixedFrame Frame initially assumed to be fixed.
      * @param[in] initialReferenceFrameForWorld Frame in which the initial world is expressed.
-     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial reference frame (default: identity, i.e. the initialReferenceFrameForWorld is the world).
+     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial reference frame
+     * (default: identity, i.e. the initialReferenceFrameForWorld is the world).
      * @return true if all went well, false otherwise.
      */
-    bool init(const std::string & initialFixedFrame,
-              const std::string & initialReferenceFrameForWorld,
+    bool init(const std::string& initialFixedFrame,
+              const std::string& initialReferenceFrameForWorld,
               const Transform initialReferenceFrame_H_world = Transform::Identity());
 
     /**
      * Initialize the odometry, specifying separately initial fixed frame and world.
      * This method initializes the world location w.r.t. to a frame
      * that is not the frame that is initially assumed fixed,
-     * for this reason it is necessary to call updateKinematics at least once before calling this method.
+     * for this reason it is necessary to call updateKinematics at least once before calling this
+     * method.
      *
      * @param[in] initialFixedFrameIndex Frame initially assumed to be fixed.
      * @param[in] initialReferenceFrameIndexForWorld Frame in which the initial world is expressed.
-     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial reference frame (default: identity, i.e. the initialReferenceFrameForWorld is the world).
+     * @param[in] initialReferenceFrame_H_world Pose of the world w.r.t. the initial reference frame
+     * (default: identity, i.e. the initialReferenceFrameForWorld is the world).
      * @return true if all went well, false otherwise.
      */
     bool init(const FrameIndex initialFixedFrameIndex,
@@ -186,7 +200,7 @@ public:
      * Change the link that the odometry assumes to be fixed with
      * respect to the inertial/world frame.
      */
-    bool changeFixedFrame(const std::string & newFixedFrame);
+    bool changeFixedFrame(const std::string& newFixedFrame);
 
     /**
      * Change the link that the odometry assumes to be fixed
@@ -200,8 +214,7 @@ public:
      *
      * \note The position of the external frame is set by the user
      */
-    bool changeFixedFrame(const std::string & newFixedFrame,
-                          const Transform & world_H_newFixedFrame);
+    bool changeFixedFrame(const std::string& newFixedFrame, const Transform& world_H_newFixedFrame);
 
     /**
      * Change the link that the odometry assumes to be fixed
@@ -209,8 +222,7 @@ public:
      *
      * \note The position of the external frame is set by the user
      */
-    bool changeFixedFrame(const FrameIndex newFixedFrame,
-                          const Transform & world_H_newFixedFrame);
+    bool changeFixedFrame(const FrameIndex newFixedFrame, const Transform& world_H_newFixedFrame);
 
     /**
      * Get the link currently considered fixed with respect to the inertial frame.
@@ -236,7 +248,6 @@ public:
      */
     iDynTree::Transform getWorldFrameTransform(const FrameIndex frame_index);
 };
-
 
 } // End namespace iDynTree
 

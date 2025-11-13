@@ -14,39 +14,43 @@
 #include <iDynTree/QuadraticLikeCost.h>
 #include <iDynTree/TimeVaryingObject.h>
 
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-namespace iDynTree {
-    namespace optimalcontrol {
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+class LinearCost : public QuadraticLikeCost
+{
 
-        class LinearCost : public QuadraticLikeCost {
+public:
+    LinearCost(const std::string& costName);
 
-        public:
-            LinearCost(const std::string& costName);
+    ~LinearCost();
 
-            ~LinearCost();
+    bool setStateCost(const iDynTree::VectorDynSize& stateGradient);
 
-            bool setStateCost(const iDynTree::VectorDynSize& stateGradient);
+    bool setStateCost(
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingStateGradient);
 
-            bool setStateCost(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingStateGradient);
+    bool setControlCost(const iDynTree::VectorDynSize& controlGradient);
 
-            bool setControlCost(const iDynTree::VectorDynSize& controlGradient);
+    bool setControlCost(
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingControlGradient);
 
-            bool setControlCost(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingControlGradient);
+    bool setCostBias(double stateCostBias, double controlCostBias);
 
-            bool setCostBias(double stateCostBias, double controlCostBias);
+    bool setCostBias(
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingStateCostBias,
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingControlCostBias);
+};
 
-            bool setCostBias(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingStateCostBias,
-                             std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingControlCostBias);
-
-        };
-
-
-    }
-}
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif // IDYNTREE_OPTIMALCONTROL_LINEARCOST_H

@@ -20,7 +20,9 @@ private:
     irr::video::SColor m_gridColor;
 
 public:
-    CFloorGridSceneNode(irr::scene::ISceneNode* parent, irr::scene::ISceneManager* mgr, irr::s32 id=-1);
+    CFloorGridSceneNode(irr::scene::ISceneNode* parent,
+                        irr::scene::ISceneManager* mgr,
+                        irr::s32 id = -1);
     virtual void OnRegisterSceneNode();
     virtual void render();
     virtual const irr::core::aabbox3d<irr::f32>& getBoundingBox() const;
@@ -29,6 +31,6 @@ public:
     void setGridColor(const irr::video::SColor& gridColor);
 };
 
-}
+} // namespace iDynTree
 
 #endif

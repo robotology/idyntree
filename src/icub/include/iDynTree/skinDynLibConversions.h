@@ -7,8 +7,8 @@
 #include <map>
 #include <string>
 
-#include <iDynTree/Indices.h>
 #include <iDynTree/ExternalWrenchesEstimation.h>
+#include <iDynTree/Indices.h>
 
 #include <iCub/skinDynLib/dynContactList.h>
 #include <iCub/skinDynLib/skinContactList.h>
@@ -31,15 +31,13 @@ public:
 
     bool operator<(const skinDynLibLinkID& k) const
     {
-        if(this->body_part < k.body_part)
+        if (this->body_part < k.body_part)
         {
-           return true;
-        }
-        else if(this->body_part > k.body_part)
+            return true;
+        } else if (this->body_part > k.body_part)
         {
-           return false;
-        }
-        else
+            return false;
+        } else
         {
             return this->local_link_index < k.local_link_index;
         }
@@ -47,8 +45,7 @@ public:
 
     bool operator==(const skinDynLibLinkID& k) const
     {
-        return (this->body_part == k.body_part &&
-                this->local_link_index == k.local_link_index);
+        return (this->body_part == k.body_part && this->local_link_index == k.local_link_index);
     }
 };
 
@@ -59,11 +56,10 @@ public:
  */
 class iDynTreeLinkAndFrame
 {
-     public:
-          LinkIndex  link_index;
-          FrameIndex frame_index;
+public:
+    LinkIndex link_index;
+    FrameIndex frame_index;
 };
-
 
 /**
  * \brief Helper for conversion between iDynTree data structures and skinDynLib data structures.
@@ -82,7 +78,7 @@ class iDynTreeLinkAndFrame
 class skinDynLibConversionsHelper
 {
 private:
-    std::map<skinDynLibLinkID,iDynTreeLinkAndFrame> skinDynLibLinkMap;
+    std::map<skinDynLibLinkID, iDynTreeLinkAndFrame> skinDynLibLinkMap;
 
 public:
     /**
@@ -104,38 +100,42 @@ public:
      *
      */
     bool addSkinDynLibAlias(const Model& model,
-                            const std::string iDynTree_link_name, const std::string iDynTree_frame_name,
-                            const int skinDynLib_body_part, const int skinDynLib_link_index);
-
-    /**
-     * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
-     */
-    bool getSkinDynLibAlias(const Model & model,
                             const std::string iDynTree_link_name,
-                                  std::string & iDynTree_frame_name,
-                                  int & skinDynLib_body_part,
-                                  int & skinDynLib_link_index) const;
+                            const std::string iDynTree_frame_name,
+                            const int skinDynLib_body_part,
+                            const int skinDynLib_link_index);
 
     /**
-     * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method.
+     * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias
+     * method.
      */
-    bool getSkinDynLibAlias(const Model & model,
+    bool getSkinDynLibAlias(const Model& model,
+                            const std::string iDynTree_link_name,
+                            std::string& iDynTree_frame_name,
+                            int& skinDynLib_body_part,
+                            int& skinDynLib_link_index) const;
+
+    /**
+     * Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias
+     * method.
+     */
+    bool getSkinDynLibAlias(const Model& model,
                             const LinkIndex iDynTree_link_index,
-                                  FrameIndex & iDynTree_frame_index,
-                             int & skinDynLib_body_part,
-                             int & skinDynLib_link_index) const;
+                            FrameIndex& iDynTree_frame_index,
+                            int& skinDynLib_body_part,
+                            int& skinDynLib_link_index) const;
 
     /**
      * Convert a skinDynLib identifier to a iDynTree link/frame identifier.
      */
     bool skinDynLib2iDynTree(const int skinDynLib_body_part,
                              const int skinDynLib_link_index,
-                             LinkIndex & iDynTree_link_index,
-                             FrameIndex & iDynTree_frame_index) const;
+                             LinkIndex& iDynTree_link_index,
+                             FrameIndex& iDynTree_frame_index) const;
     /**
      * Remove a alias in the form (body_part, link_index) for a link
      */
-    bool removeSkinDynLibAlias(const Model & model, const std::string linkName);
+    bool removeSkinDynLibAlias(const Model& model, const std::string linkName);
 
     /**
      * Convert a dynContactList to a LinkUnknownWrenchContacts.
@@ -144,8 +144,8 @@ public:
      * in the appropriate attribute in the LinkUnknownWrenchContacts class.
      */
     bool fromSkinDynLibToiDynTree(const Model& model,
-                                  const iCub::skinDynLib::dynContactList & dynList,
-                                        LinkUnknownWrenchContacts & unknowns);
+                                  const iCub::skinDynLib::dynContactList& dynList,
+                                  LinkUnknownWrenchContacts& unknowns);
 
     /**
      * Convert a skinContactList to a LinkUnknownWrenchContacts.
@@ -154,8 +154,8 @@ public:
      * in the appropriate attribute in the LinkUnknownWrenchContacts class.
      */
     bool fromSkinDynLibToiDynTree(const Model& model,
-                                  const iCub::skinDynLib::skinContactList & skinList,
-                                        LinkUnknownWrenchContacts & unknowns);
+                                  const iCub::skinDynLib::skinContactList& skinList,
+                                  LinkUnknownWrenchContacts& unknowns);
 
     /**
      * Convert a LinkContactWrenches to a iCub::skinDynLib::dynContactList.
@@ -164,8 +164,8 @@ public:
      *
      */
     bool fromiDynTreeToSkinDynLib(const Model& model,
-                                  const LinkContactWrenches & contactWrenches,
-                                        iCub::skinDynLib::dynContactList & dynList);
+                                  const LinkContactWrenches& contactWrenches,
+                                  iCub::skinDynLib::dynContactList& dynList);
 
     /**
      * Update an existing skinContactList in which some forces and torque are
@@ -174,12 +174,13 @@ public:
      * the LinkContactWrenches contacts is done through the contactId, that then
      * should be consistent between the two functions.
      */
-    bool updateSkinContactListFromLinkContactWrenches(const Model& model,
-                                                      const LinkContactWrenches & contactWrenches,
-                                                            iCub::skinDynLib::skinContactList & skinContactListToUpdate);
+    bool updateSkinContactListFromLinkContactWrenches(
+        const Model& model,
+        const LinkContactWrenches& contactWrenches,
+        iCub::skinDynLib::skinContactList& skinContactListToUpdate);
 };
 
-}
+} // namespace iDynTree
 
 #include "skinDynLibConversionsImplementation.h"
 

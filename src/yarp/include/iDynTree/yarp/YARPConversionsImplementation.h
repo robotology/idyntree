@@ -5,7 +5,7 @@
 #define IDYNTREE_YARP_YARP_CONVERSIONS_IMPLEMENTATION_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/yarp/YARPConversionsImplementation.h> is deprecated. Please use <iDynTree/YARPConversionsImplementation.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/yarp/YARPConversionsImplementation.h> is deprecated. Please use <iDynTree/YARPConversionsImplementation.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/YARPConversionsImplementation.h>

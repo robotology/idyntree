@@ -11,56 +11,59 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_OPTIMIZER_H
 #define IDYNTREE_OPTIMALCONTROL_OPTIMIZER_H
 
-#include <memory>
 #include <iDynTree/OptimizationProblem.h>
+#include <memory>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
-    class VectorDynSize;
+class VectorDynSize;
 
-    namespace optimization {
+namespace optimization
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        class Optimizer {
-        protected:
+class Optimizer
+{
+protected:
+    std::shared_ptr<OptimizationProblem> m_problem;
 
-            std::shared_ptr<OptimizationProblem> m_problem;
+public:
+    Optimizer();
 
-        public:
+    virtual ~Optimizer();
 
-            Optimizer();
+    virtual bool isAvailable() const = 0; // is the desired interface implemented?
 
-            virtual ~Optimizer();
+    virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem);
 
-            virtual bool isAvailable() const = 0; //is the desired interface implemented?
+    virtual const std::weak_ptr<OptimizationProblem> problem() const;
 
-            virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem);
+    virtual bool solve() = 0; // warm start capabilities should be implemented in the solver
+                              // specific interface
 
-            virtual const std::weak_ptr<OptimizationProblem> problem() const;
+    virtual bool getPrimalVariables(VectorDynSize& primalVariables);
 
-            virtual bool solve() = 0; //warm start capabilities should be implemented in the solver specific interface
+    virtual bool getDualVariables(VectorDynSize& constraintsMultipliers,
+                                  VectorDynSize& lowerBoundsMultipliers,
+                                  VectorDynSize& upperBoundsMultipliers);
 
-            virtual bool getPrimalVariables(VectorDynSize &primalVariables);
+    virtual bool getOptimalCost(double& optimalCost);
 
-            virtual bool getDualVariables(VectorDynSize &constraintsMultipliers,
-                                          VectorDynSize &lowerBoundsMultipliers,
-                                          VectorDynSize &upperBoundsMultipliers);
+    virtual bool getOptimalConstraintsValues(VectorDynSize& constraintsValues);
 
-            virtual bool getOptimalCost(double &optimalCost);
+    virtual double minusInfinity();
 
-            virtual bool getOptimalConstraintsValues(VectorDynSize &constraintsValues);
+    virtual double plusInfinity();
+};
 
-            virtual double minusInfinity();
+} // namespace optimization
 
-            virtual double plusInfinity();
-        };
-
-    }
-
-}
+} // namespace iDynTree
 
 #endif // IDYNTREE_OPTIMALCONTROL_OPTIMIZER_H

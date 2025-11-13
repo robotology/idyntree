@@ -3,124 +3,130 @@
 
 #ifndef IDYNTREE_CONTACTSTATEMACHINE_H
 #define IDYNTREE_CONTACTSTATEMACHINE_H
+#include "SchmittTrigger.h"
 #include <iostream>
 #include <memory>
-#include "SchmittTrigger.h"
 
 namespace iDynTree
 {
-    /**
-     * struct to hold schmitt trigger device parameters
-     */
-    struct SchmittParams
-    {
-        double stableTimeContactMake;
-        double stableTimeContactBreak;
-        double contactMakeForceThreshold;
-        double contactBreakForceThreshold;
-    };
-    
-   /**
-    * Contact State Machine class for binary contact state detection
-    * Contains a Schmitt Trigger device for updating the contact states
-    * using the contact normal force acting on the contact link and
-    * Determines contact transitions using simple binary switching logic
-    * 
-    * Can be used to determine stable contacts, contact breaking and contact making.
-    * The parameters to the Schmitt Trigger are passed as a struct and is the Schmitt 
-    * Trigger is instantiated in the class constructor. 
-    * 
-    * NOTE: There are no default parameters to the Schmitt Trigger. These parameters are set through 
-    * the constructor during instantiation.
-    * 
-    * This class does not exactly abstract the Schmitt Trigger class. Schmitt Trigger methods are still accessible through 
-    * the m_contactSchmitt object. This class uses a generic Schmitt Trigger object and augments its functionality
-    * specific to physical contacts based scenarios.
-    */
-    class ContactStateMachine
-    {
-    public:
-        /**
-         * Enumeration of contact transitions
-         */
-        enum contactTransition
-        {
-            /**
-             * previous state: off contact, current state: off contact
-             */
-            STABLE_OFFCONTACT, // 0
-            
-            /**
-             * previous state: on contact, current state: on contact
-             */
-            STABLE_ONCONTACT,  // 1
-            
-            /**
-             * previous state: on contact, current state: off contact
-             */
-            CONTACT_BREAK,     // 2
-            
-            /**
-             * previous state: off contact, current state: on contact
-             */
-            CONTACT_MAKE,       // 3
+/**
+ * struct to hold schmitt trigger device parameters
+ */
+struct SchmittParams
+{
+    double stableTimeContactMake;
+    double stableTimeContactBreak;
+    double contactMakeForceThreshold;
+    double contactBreakForceThreshold;
+};
 
- 	    /**
-	     * Unknown transition
-             */
-            UNKNOWN_TRANSITION = -1
-        };
-        
+/**
+ * Contact State Machine class for binary contact state detection
+ * Contains a Schmitt Trigger device for updating the contact states
+ * using the contact normal force acting on the contact link and
+ * Determines contact transitions using simple binary switching logic
+ *
+ * Can be used to determine stable contacts, contact breaking and contact making.
+ * The parameters to the Schmitt Trigger are passed as a struct and is the Schmitt
+ * Trigger is instantiated in the class constructor.
+ *
+ * NOTE: There are no default parameters to the Schmitt Trigger. These parameters are set through
+ * the constructor during instantiation.
+ *
+ * This class does not exactly abstract the Schmitt Trigger class. Schmitt Trigger methods are still
+ * accessible through the m_contactSchmitt object. This class uses a generic Schmitt Trigger object
+ * and augments its functionality specific to physical contacts based scenarios.
+ */
+class ContactStateMachine
+{
+public:
+    /**
+     * Enumeration of contact transitions
+     */
+    enum contactTransition
+    {
         /**
-         * Constructor
-         * @param s const reference to a struct containing schmitt trigger device parameters
+         * previous state: off contact, current state: off contact
          */
-        ContactStateMachine(const SchmittParams& s);
-                
+        STABLE_OFFCONTACT, // 0
+
         /**
-         * Calls schmitt trigger device update 
-         * @param currentTime time
-         * @param contactNormalForce normal force acting on the contact link in consideration
+         * previous state: on contact, current state: on contact
          */
-        void contactMeasurementUpdate(double currentTime, double contactNormalForce);
-        
+        STABLE_ONCONTACT, // 1
+
         /**
-         * Calls schmitt trigger device reset 
+         * previous state: on contact, current state: off contact
          */
-        void resetDevice() { m_contactSchmitt.get()->resetDevice(); }
-        
+        CONTACT_BREAK, // 2
+
         /**
-         * Get current contact state
-         * @return true, if in contact, false otherwise
+         * previous state: off contact, current state: on contact
          */
-        bool contactState() { return m_currentState; }
-        
+        CONTACT_MAKE, // 3
+
         /**
-         * Determines contact transitions using simple binary switching logic
-         * @return contactTransition enumerated value
+         * Unknown transition
          */
-        contactTransition contactTransitionMode();
-        
-        /**
-         * Get time of last contact state update
-         * @return time
-         */
-        double lastUpdateTime();
-        
-        /**
-         * unique pointer to the schmitt trigger device
-         */
-        std::unique_ptr<SchmittTrigger> m_contactSchmitt;
-    private:
-        // previous contact state
-        bool m_previousState;
-        
-        // current contact state
-        bool m_currentState;
-        
-        // transtion mode based on previous and current contact states
-        int m_tranisitionMode;
-        
+        UNKNOWN_TRANSITION = -1
     };
-}
+
+    /**
+     * Constructor
+     * @param s const reference to a struct containing schmitt trigger device parameters
+     */
+    ContactStateMachine(const SchmittParams& s);
+
+    /**
+     * Calls schmitt trigger device update
+     * @param currentTime time
+     * @param contactNormalForce normal force acting on the contact link in consideration
+     */
+    void contactMeasurementUpdate(double currentTime, double contactNormalForce);
+
+    /**
+     * Calls schmitt trigger device reset
+     */
+    void resetDevice()
+    {
+        m_contactSchmitt.get()->resetDevice();
+    }
+
+    /**
+     * Get current contact state
+     * @return true, if in contact, false otherwise
+     */
+    bool contactState()
+    {
+        return m_currentState;
+    }
+
+    /**
+     * Determines contact transitions using simple binary switching logic
+     * @return contactTransition enumerated value
+     */
+    contactTransition contactTransitionMode();
+
+    /**
+     * Get time of last contact state update
+     * @return time
+     */
+    double lastUpdateTime();
+
+    /**
+     * unique pointer to the schmitt trigger device
+     */
+    std::unique_ptr<SchmittTrigger> m_contactSchmitt;
+
+private:
+    // previous contact state
+    bool m_previousState;
+
+    // current contact state
+    bool m_currentState;
+
+    // transtion mode based on previous and current contact states
+    int m_tranisitionMode;
+};
+} // namespace iDynTree
 #endif

@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/AttitudeQuaternionEKF.h>
 #include <iDynTree/AttitudeMahonyFilter.h>
-#include <iDynTree/TestUtils.h>
-#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/AttitudeQuaternionEKF.h>
 #include <iDynTree/SpatialForceVector.h>
+#include <iDynTree/SpatialMotionVector.h>
+#include <iDynTree/TestUtils.h>
 #include <iostream>
 #include <memory>
 
@@ -48,7 +48,9 @@ int main()
     bool ok = qEKF->initializeFilter();
     ASSERT_IS_TRUE(ok);
     std::cout << "Propagate states will internally run EKF predict step" << std::endl;
-    std::cout << "calling propagateStates before setting internal state will throw initial state not set error...." << std::endl;
+    std::cout << "calling propagateStates before setting internal state will throw initial state "
+                 "not set error...."
+              << std::endl;
     ok = qEKF->propagateStates();
     ASSERT_IS_FALSE(ok);
     std::cout << "Print.... OK" << std::endl;
@@ -66,15 +68,21 @@ int main()
     ok = qEKF->setInternalState(x0_span);
     ASSERT_IS_TRUE(ok);
 
-    std::cout << "Calling use magnetometer method resets filter flags and re-initialized filter with current state as intial state" << std::endl;
+    std::cout << "Calling use magnetometer method resets filter flags and re-initialized filter "
+                 "with current state as intial state"
+              << std::endl;
     qEKF->useMagnetometerMeasurements(true);
-    std::cout << "Since initial state is already set, calling propagate states will be succesful" << std::endl;
+    std::cout << "Since initial state is already set, calling propagate states will be succesful"
+              << std::endl;
     ok = qEKF->propagateStates();
     ASSERT_IS_TRUE(ok);
 
-    iDynTree::LinAcceleration linAcc; linAcc.zero();
-    iDynTree::GyroscopeMeasurements gyro; gyro.zero();
-    iDynTree::MagnetometerMeasurements mag; mag.zero();
+    iDynTree::LinAcceleration linAcc;
+    linAcc.zero();
+    iDynTree::GyroscopeMeasurements gyro;
+    gyro.zero();
+    iDynTree::MagnetometerMeasurements mag;
+    mag.zero();
     ok = qEKF->updateFilterWithMeasurements(linAcc, gyro, mag);
     ASSERT_IS_FALSE(ok);
     linAcc(2) = -9.8;
@@ -97,7 +105,7 @@ int main()
     ok = qEKF->setInternalState(x1_span);
 
     iDynTree::IAttitudeEstimator* qekf_(qEKF.get());
-    for (int i = 0; i <10 ; i++ )
+    for (int i = 0; i < 10; i++)
     {
         run(qekf_, linAcc, gyro, mag);
     }
@@ -106,7 +114,7 @@ int main()
     linAcc(2) = -9.8;
     gyro(1) = 0.0;
 
-    for (int i = 0; i <10 ; i++ )
+    for (int i = 0; i < 10; i++)
     {
         run(qekf_, linAcc, gyro, mag);
     }
@@ -128,7 +136,7 @@ int main()
     mahony_filt->setInternalState(x1_span);
 
     iDynTree::IAttitudeEstimator* mahony_(mahony_filt.get());
-    for (int i = 0; i <10 ; i++ )
+    for (int i = 0; i < 10; i++)
     {
         run(mahony_, linAcc, gyro, mag);
     }

@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_URDF_DOFS_IMPORT_H
 #define IDYNTREE_URDF_DOFS_IMPORT_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace iDynTree
 
@@ -19,8 +19,7 @@ namespace iDynTree
  * @return true if all went ok, false otherwise.
  *
  */
-bool dofsListFromURDF(const std::string & urdf_filename,
-                      std::vector<std::string>& dofs);
+bool dofsListFromURDF(const std::string& urdf_filename, std::vector<std::string>& dofs);
 
 /**
  * \ingroup iDynTreeModelIO
@@ -29,9 +28,8 @@ bool dofsListFromURDF(const std::string & urdf_filename,
  *
  * @return true if all went ok, false otherwise.
  */
-bool dofsListFromURDFString(const std::string & urdf_string,
-                            std::vector<std::string>& dofs);
+bool dofsListFromURDFString(const std::string& urdf_string, std::vector<std::string>& dofs);
 
-}
+} // namespace iDynTree
 
 #endif

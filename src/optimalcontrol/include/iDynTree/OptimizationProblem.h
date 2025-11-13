@@ -11,121 +11,143 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_OPTIMIZATIONPROBLEM_H
 #define IDYNTREE_OPTIMALCONTROL_OPTIMIZATIONPROBLEM_H
 
-#include <vector>
-#include <memory>
 #include <cstddef>
+#include <memory>
+#include <vector>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
-    class VectorDynSize;
+class VectorDynSize;
 
-    class MatrixDynSize;
+class MatrixDynSize;
 
-    namespace optimization {
+namespace optimization
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        class OptimizationProblemInfoData {
-        protected:
-            friend class OptimizationProblem;
-            OptimizationProblemInfoData();
-        public:
-            bool hasLinearConstraints;
+class OptimizationProblemInfoData
+{
+protected:
+    friend class OptimizationProblem;
+    OptimizationProblemInfoData();
 
-            bool hasNonLinearConstraints;
+public:
+    bool hasLinearConstraints;
 
-            bool costIsLinear;
+    bool hasNonLinearConstraints;
 
-            bool costIsQuadratic;
+    bool costIsLinear;
 
-            bool costIsNonLinear;
+    bool costIsQuadratic;
 
-            bool hasSparseConstraintJacobian;
+    bool costIsNonLinear;
 
-            bool hasSparseHessian;
+    bool hasSparseConstraintJacobian;
 
-            bool hessianIsProvided;
-        };
+    bool hasSparseHessian;
 
-        class OptimizationProblemInfo {
-        private:
-            std::shared_ptr<OptimizationProblemInfoData> m_data;
-        public:
-            OptimizationProblemInfo(std::shared_ptr<OptimizationProblemInfoData> data);
+    bool hessianIsProvided;
+};
 
-            OptimizationProblemInfo() = delete;
+class OptimizationProblemInfo
+{
+private:
+    std::shared_ptr<OptimizationProblemInfoData> m_data;
 
-            OptimizationProblemInfo(const OptimizationProblemInfo &other) = delete;
+public:
+    OptimizationProblemInfo(std::shared_ptr<OptimizationProblemInfoData> data);
 
-            bool hasLinearConstraints() const;
+    OptimizationProblemInfo() = delete;
 
-            bool hasNonLinearConstraints() const;
+    OptimizationProblemInfo(const OptimizationProblemInfo& other) = delete;
 
-            bool costIsLinear() const;
+    bool hasLinearConstraints() const;
 
-            bool costIsQuadratic() const;
+    bool hasNonLinearConstraints() const;
 
-            bool costIsNonLinear() const;
+    bool costIsLinear() const;
 
-            bool hasSparseConstraintJacobian() const;
+    bool costIsQuadratic() const;
 
-            bool hasSparseHessian() const;
+    bool costIsNonLinear() const;
 
-            bool hessianIsProvided() const;
-        };
+    bool hasSparseConstraintJacobian() const;
 
-        class OptimizationProblem {
+    bool hasSparseHessian() const;
 
-        public:
+    bool hessianIsProvided() const;
+};
 
-            OptimizationProblem();
+class OptimizationProblem
+{
 
-            virtual ~OptimizationProblem();
+public:
+    OptimizationProblem();
 
-            virtual bool prepare();
+    virtual ~OptimizationProblem();
 
-            virtual void reset();
+    virtual bool prepare();
 
-            virtual unsigned int numberOfVariables() = 0;
+    virtual void reset();
 
-            virtual unsigned int numberOfConstraints() = 0;
+    virtual unsigned int numberOfVariables() = 0;
 
-            virtual bool getConstraintsBounds(VectorDynSize& constraintsLowerBounds, VectorDynSize& constraintsUpperBounds);
+    virtual unsigned int numberOfConstraints() = 0;
 
-            virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound); //return false if not upper bounded
+    virtual bool getConstraintsBounds(VectorDynSize& constraintsLowerBounds,
+                                      VectorDynSize& constraintsUpperBounds);
 
-            virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound); //return false if not lower bounded
+    virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound); // return false if not
+                                                                             // upper bounded
 
-            virtual bool getConstraintsJacobianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns);
+    virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound); // return false if not
+                                                                             // lower bounded
 
-            virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns); //costs and constraints together
+    virtual bool getConstraintsJacobianInfo(std::vector<size_t>& nonZeroElementRows,
+                                            std::vector<size_t>& nonZeroElementColumns);
 
-            virtual bool getGuess(VectorDynSize &guess);
+    virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows,
+                                std::vector<size_t>& nonZeroElementColumns); // costs and
+                                                                             // constraints together
 
-            virtual bool setVariables(const VectorDynSize& variables);
+    virtual bool getGuess(VectorDynSize& guess);
 
-            virtual bool evaluateCostFunction(double& costValue);
+    virtual bool setVariables(const VectorDynSize& variables);
 
-            virtual bool evaluateCostGradient(VectorDynSize& gradient); //for quadratic costs this corresponds to Hx + g !
+    virtual bool evaluateCostFunction(double& costValue);
 
-            virtual bool evaluateCostHessian(MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained. Initialize hessian to zero in case of dense solvers
+    virtual bool evaluateCostGradient(VectorDynSize& gradient); // for quadratic costs this
+                                                                // corresponds to Hx + g !
 
-            virtual bool evaluateConstraints(VectorDynSize& constraints);
+    virtual bool evaluateCostHessian(MatrixDynSize& hessian); // using dense matrices, but the
+                                                              // sparsity pattern is still obtained.
+                                                              // Initialize hessian to zero in case
+                                                              // of dense solvers
 
-            virtual bool evaluateConstraintsJacobian(MatrixDynSize& jacobian); //using dense matrices, but the sparsity pattern is still obtained
+    virtual bool evaluateConstraints(VectorDynSize& constraints);
 
-            virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained
+    virtual bool evaluateConstraintsJacobian(MatrixDynSize& jacobian); // using dense matrices, but
+                                                                       // the sparsity pattern is
+                                                                       // still obtained
 
-            const OptimizationProblemInfo& info() const;
+    virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers,
+                                            MatrixDynSize& hessian); // using dense matrices, but
+                                                                     // the sparsity pattern is
+                                                                     // still obtained
 
-        protected:
-            std::shared_ptr<OptimizationProblemInfoData> m_infoData;
-            OptimizationProblemInfo m_info;
-        };
-    }
-}
+    const OptimizationProblemInfo& info() const;
+
+protected:
+    std::shared_ptr<OptimizationProblemInfoData> m_infoData;
+    OptimizationProblemInfo m_info;
+};
+} // namespace optimization
+} // namespace iDynTree
 
 #endif // IDYNTREE_OPTIMALCONTROL_OPTIMIZATIONPROBLEM_H

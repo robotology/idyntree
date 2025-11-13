@@ -4,20 +4,20 @@
 #ifndef IDYNTREE_SPARSE_MATRIX_H
 #define IDYNTREE_SPARSE_MATRIX_H
 
-#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Triplets.h>
 #include <iDynTree/Utils.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <vector>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
-    template <MatrixStorageOrdering ordering>
-    class SparseMatrix;
+template <MatrixStorageOrdering ordering> class SparseMatrix;
 
-    class Triplet;
-    class Triplets;
-}
+class Triplet;
+class Triplets;
+} // namespace iDynTree
 
 // MARK: - SparseMatrix class
 
@@ -25,14 +25,13 @@ namespace iDynTree {
  * \brief Sparse Matrix class
  *
  * This class uses the Compressed Column (Row) Storage scheme
- * (see https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29)
+ * (see
+ * https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29)
  * which is compatible with the format used in the Eigen library (by using Map).
  */
-template <iDynTree::MatrixStorageOrdering ordering>
-class iDynTree::SparseMatrix
+template <iDynTree::MatrixStorageOrdering ordering> class iDynTree::SparseMatrix
 {
 private:
-
     iDynTree::VectorDynSize m_values; /**< Contains all the non zero (NZ) elements */
 
     std::vector<int> m_innerIndices; /**< column index of the NZ elements  */
@@ -40,8 +39,8 @@ private:
                                      *   previous two arrays
                                      */
 
-
-    std::size_t m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndices */
+    std::size_t m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndices
+                                  */
 
     std::size_t m_rows;
     std::size_t m_columns;
@@ -71,10 +70,11 @@ private:
      * @param[out] index if found contains the index, if not the index of the next element
      * @return true if the value has been found
      */
-    bool valueIndexForOuterAndInnerIndices(std::size_t outerIndex, std::size_t innerIndex, std::size_t& valueIndex) const;
+    bool valueIndexForOuterAndInnerIndices(std::size_t outerIndex,
+                                           std::size_t innerIndex,
+                                           std::size_t& valueIndex) const;
 
 public:
-
     /**
      * Creates an empty sparse matrix.
      */
@@ -86,8 +86,8 @@ public:
      */
     SparseMatrix(std::size_t rows, std::size_t cols);
 
-
-    SparseMatrix(std::size_t rows, std::size_t cols,
+    SparseMatrix(std::size_t rows,
+                 std::size_t cols,
                  const iDynTree::VectorDynSize& memoryReserveDescription);
 
     template <iDynTree::MatrixStorageOrdering otherOrdering>
@@ -95,7 +95,6 @@ public:
 
     template <iDynTree::MatrixStorageOrdering otherOrdering>
     SparseMatrix& operator=(const SparseMatrix<otherOrdering>&);
-
 
     /**
      * Default destructor
@@ -126,12 +125,14 @@ public:
      * \warning this function may perform memory allocation
      * @param rows the new number of rows of this matrix
      * @param columns the new number of columns of this matrix
-     * @param innerIndicesInformation information on the NNZ for each column (row), used to reserve memory in advance. It depends on the storage ordering
+     * @param innerIndicesInformation information on the NNZ for each column (row), used to reserve
+     * memory in advance. It depends on the storage ordering
      */
-    void resize(std::size_t rows, std::size_t columns, const iDynTree::VectorDynSize &innerIndicesInformation);
+    void resize(std::size_t rows,
+                std::size_t columns,
+                const iDynTree::VectorDynSize& innerIndicesInformation);
 
     void reserve(std::size_t nonZeroElements);
-
 
     /**
      * Set the sparse matrix to be zero
@@ -140,7 +141,6 @@ public:
      * depending on the standard library implementation.
      */
     void zero();
-
 
     /**
      * Sets the content of this sparse matrix to the content of triplets
@@ -183,11 +183,11 @@ public:
                                                  std::size_t cols,
                                                  const iDynTree::Triplets& nonZeroElements);
 
-
     /**
      * Access operation to the element of the matrix identified by row-col
      *
-     * \note this method is slow as it has to look for the proper index (it performs a linear search)
+     * \note this method is slow as it has to look for the proper index (it performs a linear
+     * search)
      * @param row row index
      * @param col column index
      * @return the value at the specified row and column
@@ -197,7 +197,8 @@ public:
     /**
      * Access operation to the element of the matrix identified by row-col
      *
-     * \note this method is slow as it has to look for the proper index (it performs a linear search)
+     * \note this method is slow as it has to look for the proper index (it performs a linear
+     * search)
      * \warning if no elements are found, this method insert a zero value at the specified position
      * @param row row index
      * @param col column index
@@ -212,10 +213,9 @@ public:
 
     inline void setValue(std::size_t row, std::size_t col, double newValue)
     {
-        double &value = this->operator()(row, col);
+        double& value = this->operator()(row, col);
         value = newValue;
     }
-
 
     /**
      * Returns the number of rows of the matrix
@@ -229,26 +229,26 @@ public:
      */
     std::size_t columns() const;
 
-    //Raw buffers access
-    double * valuesBuffer();
+    // Raw buffers access
+    double* valuesBuffer();
 
-    double const * valuesBuffer() const;
+    double const* valuesBuffer() const;
 
-    int * innerIndicesBuffer();
+    int* innerIndicesBuffer();
 
-    int const * innerIndicesBuffer() const;
+    int const* innerIndicesBuffer() const;
 
-    int * outerIndicesBuffer();
+    int* outerIndicesBuffer();
 
-    int const * outerIndicesBuffer() const;
-
+    int const* outerIndicesBuffer() const;
 
     /**
      * Returns a textual description of the matrix.
      *
      * If true is passed, the whole matrix (with also zero elements) is printed
      * Default to false
-     * @param fullMatrix true to return the full matrix, false for only the non zero elements. Default to false
+     * @param fullMatrix true to return the full matrix, false for only the non zero elements.
+     * Default to false
      * @return a textual representation of the matrix
      */
     std::string description(bool fullMatrix = false) const;
@@ -263,40 +263,49 @@ public:
     typedef Iterator iterator;
     typedef ConstIterator const_iterator;
 
-    //Why the compiler is not able to choose the const version
-    //if we have both? @traversaro
+    // Why the compiler is not able to choose the const version
+    // if we have both? @traversaro
     iterator begin();
     const_iterator begin() const;
 
     iterator end();
     const_iterator end() const;
-
 };
 
 // MARK: - Iterator classes
 
 #ifndef SWIG
 
-template <iDynTree::MatrixStorageOrdering ordering>
-class iDynTree::SparseMatrix<ordering>::Iterator
+template <iDynTree::MatrixStorageOrdering ordering> class iDynTree::SparseMatrix<ordering>::Iterator
 {
 public:
-    class TripletRef {
+    class TripletRef
+    {
     private:
         int m_row;
         int m_column;
-        double *m_value;
+        double* m_value;
 
-        TripletRef(std::size_t row, std::size_t column, double *value);
+        TripletRef(std::size_t row, std::size_t column, double* value);
         friend class iDynTree::SparseMatrix<ordering>::Iterator;
 
     public:
-
-        inline int row() const { return m_row; }
-        inline int column() const { return m_column; }
-        inline double& value() { return *m_value; }
-        inline double value() const { return *m_value; }
-
+        inline int row() const
+        {
+            return m_row;
+        }
+        inline int column() const
+        {
+            return m_column;
+        }
+        inline double& value()
+        {
+            return *m_value;
+        }
+        inline double value() const
+        {
+            return *m_value;
+        }
     };
 
 private:
@@ -306,10 +315,10 @@ private:
      * @param matrix the sparse matrix to iterate
      * @param valid false if the created iterator is invalid. True by default
      */
-    Iterator(iDynTree::SparseMatrix<ordering> &matrix, bool valid = true);
+    Iterator(iDynTree::SparseMatrix<ordering>& matrix, bool valid = true);
     friend class iDynTree::SparseMatrix<ordering>;
 
-    iDynTree::SparseMatrix<ordering> &m_matrix;
+    iDynTree::SparseMatrix<ordering>& m_matrix;
 
     int m_index;
     TripletRef m_currentTriplet;
@@ -318,7 +327,6 @@ private:
     void updateTriplet();
 
 public:
-
     typedef std::ptrdiff_t difference_type;
     typedef typename iDynTree::SparseMatrix<ordering>::Iterator::TripletRef value_type;
     typedef value_type& reference;
@@ -332,8 +340,14 @@ public:
     // Required by the input iterator
     bool operator==(const Iterator&) const;
     bool operator==(const ConstIterator&) const;
-    inline bool operator!=(const Iterator& s) const { return !this->operator==(s); }
-    inline bool operator!=(const ConstIterator& s) const { return !this->operator==(s); }
+    inline bool operator!=(const Iterator& s) const
+    {
+        return !this->operator==(s);
+    }
+    inline bool operator!=(const ConstIterator& s) const
+    {
+        return !this->operator==(s);
+    }
 
     // Required by the input iterator
     // Also Output iterator if the reference modifies the container
@@ -354,10 +368,10 @@ private:
      * @param matrix the sparse matrix to iterate
      * @param valid false if the created iterator is invalid. True by default
      */
-    ConstIterator(const iDynTree::SparseMatrix<ordering> &matrix, bool valid = true);
+    ConstIterator(const iDynTree::SparseMatrix<ordering>& matrix, bool valid = true);
     friend class iDynTree::SparseMatrix<ordering>;
 
-    const iDynTree::SparseMatrix<ordering> &m_matrix;
+    const iDynTree::SparseMatrix<ordering>& m_matrix;
 
     int m_index;
     iDynTree::Triplet m_currentTriplet;
@@ -366,14 +380,13 @@ private:
     void updateTriplet();
 
 public:
-
     typedef std::ptrdiff_t difference_type;
     typedef iDynTree::Triplet value_type;
     typedef const value_type& reference;
     typedef const value_type* pointer;
     typedef std::output_iterator_tag iterator_category;
 
-    //Copy from non const version
+    // Copy from non const version
     ConstIterator(const Iterator& iterator);
 
     // Required by the iterator type
@@ -383,8 +396,14 @@ public:
     // Required by the input iterator
     bool operator==(const ConstIterator&) const;
     bool operator==(const Iterator&) const;
-    inline bool operator!=(const ConstIterator& s) const { return !this->operator==(s); }
-    inline bool operator!=(const Iterator& s) const { return !this->operator==(s); }
+    inline bool operator!=(const ConstIterator& s) const
+    {
+        return !this->operator==(s);
+    }
+    inline bool operator!=(const Iterator& s) const
+    {
+        return !this->operator==(s);
+    }
 
     // Required by the input iterator
     // Also Output iterator if the reference modifies the container

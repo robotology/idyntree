@@ -6,32 +6,31 @@
 #include <iDynTree/TestUtils.h>
 
 #include <iDynTree/Model.h>
-#include <iDynTree/URDFDofsImport.h>
 #include <iDynTree/ModelLoader.h>
+#include <iDynTree/URDFDofsImport.h>
 
+#include <algorithm>
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
-#include <algorithm>
 #include <random>
 
 using namespace iDynTree;
 
-
-void checkParsingOfDofsFromURDF(std::string fileName,
-                                size_t expectedNrOfDOFs)
+void checkParsingOfDofsFromURDF(std::string fileName, size_t expectedNrOfDOFs)
 {
     std::vector<std::string> dofsNameList;
-    bool ok = dofsListFromURDF(fileName,dofsNameList);
+    bool ok = dofsListFromURDF(fileName, dofsNameList);
     ASSERT_IS_TRUE(ok);
 
-    ASSERT_EQUAL_DOUBLE(dofsNameList.size(),expectedNrOfDOFs);
+    ASSERT_EQUAL_DOUBLE(dofsNameList.size(), expectedNrOfDOFs);
 }
 
 unsigned int getNrOfVisuals(const iDynTree::Model& model)
 {
     unsigned int nrOfVisuals = 0;
-    for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
+    for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index)
+    {
         nrOfVisuals += model.visualSolidShapes().getLinkSolidShapes()[index].size();
     }
     return nrOfVisuals;
@@ -40,20 +39,21 @@ unsigned int getNrOfVisuals(const iDynTree::Model& model)
 unsigned int getNrOfCollisions(const iDynTree::Model& model)
 {
     unsigned int nrOfCollisions = 0;
-    for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
+    for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index)
+    {
         nrOfCollisions += model.collisionSolidShapes().getLinkSolidShapes()[index].size();
     }
     return nrOfCollisions;
 }
 
 void checkURDF(std::string fileName,
-                  unsigned int expectedNrOfLinks,
-                  unsigned int expectedNrOfJoints,
-                  unsigned int expectedNrOfDOFs,
-                  unsigned int expectedNrOfFrames,
-                  unsigned int expectedNrOfVisuals,
-                  unsigned int expectedNrOfCollisions,
-                  std::string expectedDefaultBase)
+               unsigned int expectedNrOfLinks,
+               unsigned int expectedNrOfJoints,
+               unsigned int expectedNrOfDOFs,
+               unsigned int expectedNrOfFrames,
+               unsigned int expectedNrOfVisuals,
+               unsigned int expectedNrOfCollisions,
+               std::string expectedDefaultBase)
 {
     ModelLoader loader;
     bool ok = loader.loadModelFromFile(fileName);
@@ -63,15 +63,15 @@ void checkURDF(std::string fileName,
     std::cerr << "Model loaded from " << fileName << std::endl;
     std::cerr << model.toString() << std::endl;
 
-    ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),expectedNrOfLinks);
-    ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),expectedNrOfJoints);
-    ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(),expectedNrOfDOFs);
-    ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(), expectedNrOfLinks);
+    ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(), expectedNrOfJoints);
+    ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(), expectedNrOfDOFs);
+    ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(), expectedNrOfFrames);
     ASSERT_EQUAL_DOUBLE(getNrOfVisuals(model), expectedNrOfVisuals);
     ASSERT_EQUAL_DOUBLE(getNrOfCollisions(model), expectedNrOfCollisions);
-    ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()),expectedDefaultBase);
+    ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()), expectedDefaultBase);
 
-    checkParsingOfDofsFromURDF(fileName,expectedNrOfDOFs);
+    checkParsingOfDofsFromURDF(fileName, expectedNrOfDOFs);
 
     // Check that the copy constructor works fine
     Model modelCopyConstruced = model;
@@ -79,13 +79,14 @@ void checkURDF(std::string fileName,
     std::cerr << "Model copy constructed from " << fileName << std::endl;
     std::cerr << modelCopyConstruced.toString() << std::endl;
 
-    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfLinks(),expectedNrOfLinks);
-    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfJoints(),expectedNrOfJoints);
-    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfDOFs(),expectedNrOfDOFs);
-    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfLinks(), expectedNrOfLinks);
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfJoints(), expectedNrOfJoints);
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfDOFs(), expectedNrOfDOFs);
+    ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfFrames(), expectedNrOfFrames);
     ASSERT_EQUAL_DOUBLE(getNrOfVisuals(modelCopyConstruced), expectedNrOfVisuals);
     ASSERT_EQUAL_DOUBLE(getNrOfCollisions(modelCopyConstruced), expectedNrOfCollisions);
-    ASSERT_EQUAL_STRING(modelCopyConstruced.getLinkName(modelCopyConstruced.getDefaultBaseLink()),expectedDefaultBase);
+    ASSERT_EQUAL_STRING(modelCopyConstruced.getLinkName(modelCopyConstruced.getDefaultBaseLink()),
+                        expectedDefaultBase);
 
     // Check that the copy assignent works fine
     Model modelCopyAssigned;
@@ -95,14 +96,14 @@ void checkURDF(std::string fileName,
     std::cerr << "Model copy assigned from " << fileName << std::endl;
     std::cerr << modelCopyAssigned.toString() << std::endl;
 
-
-    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfLinks(),expectedNrOfLinks);
-    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfJoints(),expectedNrOfJoints);
-    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfDOFs(),expectedNrOfDOFs);
-    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfLinks(), expectedNrOfLinks);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfJoints(), expectedNrOfJoints);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfDOFs(), expectedNrOfDOFs);
+    ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfFrames(), expectedNrOfFrames);
     ASSERT_EQUAL_DOUBLE(getNrOfVisuals(modelCopyAssigned), expectedNrOfVisuals);
     ASSERT_EQUAL_DOUBLE(getNrOfCollisions(modelCopyAssigned), expectedNrOfCollisions);
-    ASSERT_EQUAL_STRING(modelCopyAssigned.getLinkName(modelCopyAssigned.getDefaultBaseLink()),expectedDefaultBase);
+    ASSERT_EQUAL_STRING(modelCopyAssigned.getLinkName(modelCopyAssigned.getDefaultBaseLink()),
+                        expectedDefaultBase);
 }
 
 void checkModelLoderForURDFFile(std::string urdfFile)
@@ -116,30 +117,31 @@ void checkModelLoaderFromURDFString(std::string urdfString, bool shouldBeCorrect
 {
     ModelLoader loader;
     bool result = loader.loadModelFromString(urdfString);
-    if (shouldBeCorrect) {
+    if (shouldBeCorrect)
+    {
         ASSERT_IS_TRUE(result && loader.isValid());
-    } else {
+    } else
+    {
         ASSERT_IS_TRUE(!result && !loader.isValid());
     }
-
 }
 
-void checkLimitsForJointsAreDefined(Model & model)
+void checkLimitsForJointsAreDefined(Model& model)
 {
 
-    for(JointIndex jnt=0; jnt < model.getNrOfJoints(); jnt++)
+    for (JointIndex jnt = 0; jnt < model.getNrOfJoints(); jnt++)
     {
         IJointPtr jntPtr = model.getJoint(jnt);
-        
+
         ASSERT_IS_TRUE(jntPtr != 0);
-        
-        if( jntPtr->getNrOfDOFs() == 1 )
+
+        if (jntPtr->getNrOfDOFs() == 1)
         {
             ASSERT_IS_TRUE(jntPtr->hasPosLimits());
-            
+
             double max = jntPtr->getMaxPosLimit(0);
             double min = jntPtr->getMinPosLimit(0);
-            
+
             ASSERT_IS_TRUE(min <= max);
             ASSERT_IS_TRUE(min > -10e7);
             ASSERT_IS_TRUE(max < 10e7);
@@ -154,29 +156,29 @@ void checkLimitsForJointsAreDefinedFromFileName(std::string urdfFileName)
     Model model = loader.model();
 
     ASSERT_IS_TRUE(ok);
-    
+
     checkLimitsForJointsAreDefined(model);
-    
+
     Model copyConstructedModel = model;
-    
+
     checkLimitsForJointsAreDefined(copyConstructedModel);
-    
+
     Model assignedModel;
     assignedModel = model;
-    
+
     checkLimitsForJointsAreDefined(assignedModel);
-    
-    // Check the reduced model loader 
+
+    // Check the reduced model loader
     std::vector<std::string> dofsOfModel;
-    ok = dofsListFromURDF(urdfFileName,dofsOfModel);
+    ok = dofsListFromURDF(urdfFileName, dofsOfModel);
     ASSERT_IS_TRUE(ok);
 
     ok = loader.loadReducedModelFromFile(urdfFileName, dofsOfModel);
-    
+
     ASSERT_IS_TRUE(ok);
-    
+
     Model reducedModel = loader.model();
-    
+
     checkLimitsForJointsAreDefined(reducedModel);
 }
 
@@ -186,15 +188,17 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
     ASSERT_IS_TRUE(loader.loadModelFromFile(urdfFileName) && loader.isValid());
 
     Model loadedModel = loader.model();
-    //get all joints in order
+    // get all joints in order
     std::vector<std::string> dofsName;
     dofsName.resize(loadedModel.getNrOfDOFs());
 
-    for (JointIndex index = 0; index < loadedModel.getNrOfJoints(); ++index) {
+    for (JointIndex index = 0; index < loadedModel.getNrOfJoints(); ++index)
+    {
         IJointPtr joint = loadedModel.getJoint(index);
         std::string jointName = loadedModel.getJointName(index);
 
-        for (unsigned dof = 0; dof < joint->getNrOfDOFs(); ++dof) {
+        for (unsigned dof = 0; dof < joint->getNrOfDOFs(); ++dof)
+        {
             dofsName[joint->getDOFsOffset() + dof] = jointName;
         }
     }
@@ -202,20 +206,23 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
     std::mt19937 random_gen(0);
     std::shuffle(dofsName.begin(), dofsName.end(), random_gen);
 
-    //now load the new model and check they are the same
+    // now load the new model and check they are the same
     ASSERT_IS_TRUE(loader.loadReducedModelFromFullModel(loadedModel, dofsName) && loader.isValid());
 
     Model shuffledModel = loader.model();
-    for (JointIndex index = 0; index < shuffledModel.getNrOfJoints(); ++index) {
+    for (JointIndex index = 0; index < shuffledModel.getNrOfJoints(); ++index)
+    {
         IJointPtr joint = shuffledModel.getJoint(index);
         std::string jointName = shuffledModel.getJointName(index);
-        for (unsigned dof = 0; dof < joint->getNrOfDOFs(); ++dof) {
+        for (unsigned dof = 0; dof < joint->getNrOfDOFs(); ++dof)
+        {
             ASSERT_IS_TRUE(dofsName[joint->getDOFsOffset() + dof] == jointName);
         }
     }
 }
 
-void checkDuplicateJointsReturnsError() {
+void checkDuplicateJointsReturnsError()
+{
     std::string urdf = R"(
 <robot name="robot">
   <link name="link_1">
@@ -252,10 +259,10 @@ void checkDuplicateJointsReturnsError() {
 
     ModelLoader loader;
     ASSERT_IS_FALSE(loader.loadModelFromString(urdf));
-
 }
 
-void checkaddSensorFramesAsAdditionalFramesOption() {
+void checkaddSensorFramesAsAdditionalFramesOption()
+{
     std::string urdf = R"(
   <robot name="robot">
   <link name="link_1">
@@ -305,17 +312,16 @@ void checkaddSensorFramesAsAdditionalFramesOption() {
         ASSERT_IS_TRUE(mdlLoader.loadModelFromString(urdf));
         ASSERT_IS_TRUE(mdlLoader.model().isFrameNameUsed("l_leg_ft"));
     }
-
 }
 
 int main()
 {
-    checkURDF(getAbsModelPath("/simple_model.urdf"),1,0,0,1, 1, 0, "link1");
-    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,1,1,"link1");
-    checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,6,0,0,"link1");
-    checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62, 28, 28,"root_link");
-    checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111, 33, 33, "root_link");
-    checkURDF(getAbsModelPath("icalibrate.urdf"), 6, 5, 3, 7, 6, 6,"base");
+    checkURDF(getAbsModelPath("/simple_model.urdf"), 1, 0, 0, 1, 1, 0, "link1");
+    checkURDF(getAbsModelPath("/oneLink.urdf"), 1, 0, 0, 7, 1, 1, "link1");
+    checkURDF(getAbsModelPath("twoLinks.urdf"), 2, 1, 1, 6, 0, 0, "link1");
+    checkURDF(getAbsModelPath("icub_skin_frames.urdf"), 39, 38, 32, 62, 28, 28, "root_link");
+    checkURDF(getAbsModelPath("iCubGenova02.urdf"), 33, 32, 26, 111, 33, 33, "root_link");
+    checkURDF(getAbsModelPath("icalibrate.urdf"), 6, 5, 3, 7, 6, 6, "base");
 
     checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
     checkModelLoaderFromURDFString("this is not an xml", false);

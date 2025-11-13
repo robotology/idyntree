@@ -32,7 +32,6 @@ int main()
     B(5, 1) = 1;
     tableCart.setConstantControlMatrix(B);
 
-
     OptimalControlProblem controlProblem;
     controlProblem.setDynamicalSystemConstraint(tableCart);
 
@@ -44,12 +43,6 @@ int main()
     zmp(0, 2) = -z / g;
     zmp(1, 3) = 1;
     zmp(1, 5) = -z / g;
-
-    
-
-
-
-
 
     return 0;
 }

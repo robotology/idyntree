@@ -7,12 +7,14 @@
 namespace iDynTree
 {
 
-CFloorGridSceneNode::CFloorGridSceneNode(irr::scene::ISceneNode* parent, irr::scene::ISceneManager* mgr, irr::s32 id):
-                                         irr::scene::ISceneNode(parent, mgr, id)
+CFloorGridSceneNode::CFloorGridSceneNode(irr::scene::ISceneNode* parent,
+                                         irr::scene::ISceneManager* mgr,
+                                         irr::s32 id)
+    : irr::scene::ISceneNode(parent, mgr, id)
 {
     m_size = 10;
-    m_box = irr::core::aabbox3d<irr::f32>(-m_size,-m_size,-1,m_size,m_size,1);
-    m_gridColor = irr::video::SColor(100,0,0,255);
+    m_box = irr::core::aabbox3d<irr::f32>(-m_size, -m_size, -1, m_size, m_size, 1);
+    m_gridColor = irr::video::SColor(100, 0, 0, 255);
 }
 
 void CFloorGridSceneNode::OnRegisterSceneNode()
@@ -29,18 +31,18 @@ void CFloorGridSceneNode::render()
 
     driver->setTransform(irr::video::ETS_WORLD, AbsoluteTransformation);
 
-    for(int i=-m_size; i <= m_size; i++ )
+    for (int i = -m_size; i <= m_size; i++)
     {
         irr::video::SMaterial material;
-        material.Lighting = false; //When set to true it does not seem to use the correct color.
+        material.Lighting = false; // When set to true it does not seem to use the correct color.
         material.Thickness = 1.0;
         driver->setMaterial(material);
 
-        driver->draw3DLine(irr::core::vector3df(-m_size,i,0),
-                           irr::core::vector3df(m_size,i,0),
+        driver->draw3DLine(irr::core::vector3df(-m_size, i, 0),
+                           irr::core::vector3df(m_size, i, 0),
                            m_gridColor);
-        driver->draw3DLine(irr::core::vector3df(i,-m_size,0),
-                           irr::core::vector3df(i,m_size,0),
+        driver->draw3DLine(irr::core::vector3df(i, -m_size, 0),
+                           irr::core::vector3df(i, m_size, 0),
                            m_gridColor);
     }
 }
@@ -60,9 +62,9 @@ irr::video::SMaterial& CFloorGridSceneNode::getMaterial(irr::u32)
     return m_dummyMaterial;
 }
 
-void CFloorGridSceneNode::setGridColor(const irr::video::SColor &gridColor)
+void CFloorGridSceneNode::setGridColor(const irr::video::SColor& gridColor)
 {
     m_gridColor = gridColor;
 }
 
-}
+} // namespace iDynTree

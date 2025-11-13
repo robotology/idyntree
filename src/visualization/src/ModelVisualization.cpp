@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include "ModelVisualization.h"
-#include "JetsVisualization.h"
 #include "IrrlichtUtils.h"
+#include "JetsVisualization.h"
 #include "Label.h"
 
 #include <iDynTree/ForwardKinematics.h>
@@ -37,29 +37,31 @@ struct ModelVisualization::ModelVisualizationPimpl
      */
     LinkPositions m_fwdKinBuffer;
 
-    irr::scene::ISceneNode * modelNode;
+    irr::scene::ISceneNode* modelNode;
 
     /**
      * Empty SceneNode representing the link frames.
      */
-    std::vector<irr::scene::ISceneNode *> linkNodes;
+    std::vector<irr::scene::ISceneNode*> linkNodes;
 
     /**
      * Empty SceneNodes representing the frames, both the principal link frames and the added ones.
      */
-    std::vector<irr::scene::ISceneNode *> frameNodes;
+    std::vector<irr::scene::ISceneNode*> frameNodes;
 
-    std::vector<irr::scene::ISceneNode *> linkFramesNodes;
-    std::vector< std::vector<irr::scene::ISceneNode *> > geomNodes;
+    std::vector<irr::scene::ISceneNode*> linkFramesNodes;
+    std::vector<std::vector<irr::scene::ISceneNode*>> geomNodes;
 
     /**
      * Cache of the original material of of the scene node
      */
-    std::vector< std::vector< std::vector< irr::video::SMaterial > > > geomNodesNotTransparentMaterialCache;
-    irr::scene::ISceneManager * m_irrSmgr;
+    std::vector<std::vector<std::vector<irr::video::SMaterial>>>
+        geomNodesNotTransparentMaterialCache;
+    irr::scene::ISceneManager* m_irrSmgr;
 
-    void addModelGeometriesToSceneManager(const iDynTree::Model & model, const iDynTree::ModelSolidShapes & modelGeom);
-    void updateLinkPositions(const iDynTree::LinkPositions & world_H_link);
+    void addModelGeometriesToSceneManager(const iDynTree::Model& model,
+                                          const iDynTree::ModelSolidShapes& modelGeom);
+    void updateLinkPositions(const iDynTree::LinkPositions& world_H_link);
 
     /**
      * JetsVisualization helper class
@@ -71,7 +73,6 @@ struct ModelVisualization::ModelVisualizationPimpl
      */
     Label m_label;
 
-
     ModelVisualizationPimpl()
     {
         m_isValid = false;
@@ -82,12 +83,12 @@ struct ModelVisualization::ModelVisualizationPimpl
 /**
  * Add  iDynTree::ModelGeometries to an irr::scene::ISceneManager*
  * We create a SceneGraph for the URDF model of this type: the root object
- * is the model, its child are the links, and the child of the links are the actual geometric objects
- * Note that in this case all the links are child of the model, and the scene graph does not mirror
- *  the kinematic graph of iDynTree Model
+ * is the model, its child are the links, and the child of the links are the actual geometric
+ * objects Note that in this case all the links are child of the model, and the scene graph does not
+ * mirror the kinematic graph of iDynTree Model
  */
-void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManager(const iDynTree::Model & model,
-                                                                                   const iDynTree::ModelSolidShapes & modelGeom)
+void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManager(
+    const iDynTree::Model& model, const iDynTree::ModelSolidShapes& modelGeom)
 {
     this->modelNode = this->m_irrSmgr->addEmptySceneNode();
     this->linkNodes.resize(model.getNrOfLinks());
@@ -96,65 +97,76 @@ void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManag
     this->geomNodes.resize(model.getNrOfLinks());
     this->geomNodesNotTransparentMaterialCache.resize(model.getNrOfLinks());
 
-    for(size_t linkIdx=0; linkIdx < model.getNrOfLinks(); linkIdx++)
+    for (size_t linkIdx = 0; linkIdx < model.getNrOfLinks(); linkIdx++)
     {
         this->linkNodes[linkIdx] = this->m_irrSmgr->addEmptySceneNode(this->modelNode);
         this->frameNodes[linkIdx] = this->linkNodes[linkIdx];
 
         this->geomNodes[linkIdx].resize(modelGeom.getLinkSolidShapes()[linkIdx].size());
-        this->geomNodesNotTransparentMaterialCache[linkIdx].resize(modelGeom.getLinkSolidShapes()[linkIdx].size());
+        this->geomNodesNotTransparentMaterialCache[linkIdx].resize(
+            modelGeom.getLinkSolidShapes()[linkIdx].size());
 
-        for(size_t geom=0; geom < modelGeom.getLinkSolidShapes()[linkIdx].size(); geom++)
+        for (size_t geom = 0; geom < modelGeom.getLinkSolidShapes()[linkIdx].size(); geom++)
         {
-            this->geomNodes[linkIdx][geom] = addGeometryToSceneManager(modelGeom.getLinkSolidShapes()[linkIdx][geom],this->linkNodes[linkIdx],this->m_irrSmgr);
+            this->geomNodes[linkIdx][geom]
+                = addGeometryToSceneManager(modelGeom.getLinkSolidShapes()[linkIdx][geom],
+                                            this->linkNodes[linkIdx],
+                                            this->m_irrSmgr);
 
-            if( this->geomNodes[linkIdx][geom] )
+            if (this->geomNodes[linkIdx][geom])
             {
-                 this->geomNodesNotTransparentMaterialCache[linkIdx][geom].resize(this->geomNodes[linkIdx][geom]->getMaterialCount());
+                this->geomNodesNotTransparentMaterialCache[linkIdx][geom].resize(
+                    this->geomNodes[linkIdx][geom]->getMaterialCount());
 
-                 for( size_t mat = 0; mat < this->geomNodesNotTransparentMaterialCache[linkIdx][geom].size(); mat++)
-                 {
-                     this->geomNodesNotTransparentMaterialCache[linkIdx][geom][mat] = this->geomNodes[linkIdx][geom]->getMaterial(mat);
-                 }
+                for (size_t mat = 0;
+                     mat < this->geomNodesNotTransparentMaterialCache[linkIdx][geom].size();
+                     mat++)
+                {
+                    this->geomNodesNotTransparentMaterialCache[linkIdx][geom][mat]
+                        = this->geomNodes[linkIdx][geom]->getMaterial(mat);
+                }
             }
         }
     }
 
     // Add also all the additional frames of each link
-    for(size_t frameIdx=model.getNrOfLinks(); frameIdx < model.getNrOfFrames(); frameIdx++ )
+    for (size_t frameIdx = model.getNrOfLinks(); frameIdx < model.getNrOfFrames(); frameIdx++)
     {
         LinkIndex parentLinkIdx = model.getFrameLink(frameIdx);
-        this->frameNodes[frameIdx] = this->m_irrSmgr->addEmptySceneNode(this->linkNodes[parentLinkIdx]);
+        this->frameNodes[frameIdx]
+            = this->m_irrSmgr->addEmptySceneNode(this->linkNodes[parentLinkIdx]);
 
         // Set the position of the added frame w.r.t. to the parent link, that will remain constant
-        this->frameNodes[frameIdx]->setPosition(idyntree2irr_pos(model.getFrameTransform(frameIdx).getPosition()));
-        this->frameNodes[frameIdx]->setRotation(idyntree2irr_rot(model.getFrameTransform(frameIdx).getRotation()));
+        this->frameNodes[frameIdx]->setPosition(
+            idyntree2irr_pos(model.getFrameTransform(frameIdx).getPosition()));
+        this->frameNodes[frameIdx]->setRotation(
+            idyntree2irr_rot(model.getFrameTransform(frameIdx).getRotation()));
     }
 }
 
-void ModelVisualization::ModelVisualizationPimpl::updateLinkPositions(const iDynTree::LinkPositions & world_H_link)
+void ModelVisualization::ModelVisualizationPimpl::updateLinkPositions(
+    const iDynTree::LinkPositions& world_H_link)
 {
-    for(size_t linkIdx=0; linkIdx < world_H_link.getNrOfLinks(); linkIdx++)
+    for (size_t linkIdx = 0; linkIdx < world_H_link.getNrOfLinks(); linkIdx++)
     {
-        setWorldHNode(this->linkNodes[linkIdx],world_H_link(linkIdx));
+        setWorldHNode(this->linkNodes[linkIdx], world_H_link(linkIdx));
     }
 }
 
-ModelVisualization::ModelVisualization():
-    pimpl(new ModelVisualizationPimpl())
+ModelVisualization::ModelVisualization()
+    : pimpl(new ModelVisualizationPimpl())
 {
 }
 
 ModelVisualization::~ModelVisualization()
 {
     this->close();
-    if( pimpl )
+    if (pimpl)
     {
         delete pimpl;
         pimpl = 0;
     }
 }
-
 
 ModelVisualization::ModelVisualization(const ModelVisualization& /*other*/)
 {
@@ -167,15 +179,17 @@ ModelVisualization& ModelVisualization::operator=(const ModelVisualization& /*ot
     return *this;
 }
 
-bool ModelVisualization::changeVisualsColor(const LinkIndex& linkIndex, const ColorViz& color, const std::string& name)
+bool ModelVisualization::changeVisualsColor(const LinkIndex& linkIndex,
+                                            const ColorViz& color,
+                                            const std::string& name)
 {
     irr::video::SColor col = idyntree2irrlicht(color).toSColor();
     bool changed = false;
 
     for (size_t geom = 0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
     {
-        if (pimpl->geomNodes[linkIndex][geom] && (name.empty() ||
-            std::string(pimpl->geomNodes[linkIndex][geom]->getName()) == name))
+        if (pimpl->geomNodes[linkIndex][geom]
+            && (name.empty() || std::string(pimpl->geomNodes[linkIndex][geom]->getName()) == name))
         {
             irr::scene::ISceneNode* geomNode = pimpl->geomNodes[linkIndex][geom];
 
@@ -209,12 +223,10 @@ bool ModelVisualization::changeVisualsColor(const LinkIndex& linkIndex, const Co
                 if (color.a < 1.0)
                 {
                     geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
-                }
-                else
+                } else
                 {
                     geomMat.MaterialType = irr::video::EMT_SOLID;
                 }
-
 
                 geomNode->getMaterial(mat) = geomMat;
             }
@@ -231,12 +243,15 @@ bool ModelVisualization::changeVisualsColor(const LinkIndex& linkIndex, const Co
 
 bool ModelVisualization::init(const Model& model,
                               const std::string instanceName,
-                              irr::scene::ISceneManager * sceneManager)
+                              irr::scene::ISceneManager* sceneManager)
 {
     // Check if the visual of the models are consisten with the rest of the model
-    if( !model.visualSolidShapes().isConsistent(model) )
+    if (!model.visualSolidShapes().isConsistent(model))
     {
-        reportError("ModelVisualization","init","Impossible to use load model, as the visual solid shapes of the model are not consistent with the model itself.");
+        reportError("ModelVisualization",
+                    "init",
+                    "Impossible to use load model, as the visual solid shapes of the model are not "
+                    "consistent with the model itself.");
         return false;
     }
     this->pimpl->m_instanceName = instanceName;
@@ -251,17 +266,17 @@ bool ModelVisualization::init(const Model& model,
     this->pimpl->m_fwdKinBuffer.resize(this->pimpl->m_model);
 
     // Create model in the scene, using visual solidShapes
-    pimpl->addModelGeometriesToSceneManager(model,model.visualSolidShapes());
+    pimpl->addModelGeometriesToSceneManager(model, model.visualSolidShapes());
 
     // Set the initial position of the model
     Transform world_H_base = Transform::Identity();
     JointPosDoubleArray jointPos(model);
     jointPos.zero();
 
-    this->setPositions(world_H_base,jointPos);
+    this->setPositions(world_H_base, jointPos);
 
     // Initialize the jets visualizer
-    this->pimpl->m_jets.init(this->pimpl->m_irrSmgr,this,&(this->pimpl->frameNodes));
+    this->pimpl->m_jets.init(this->pimpl->m_irrSmgr, this, &(this->pimpl->frameNodes));
 
     irr::scene::ISceneNode* labelParent = this->pimpl->modelNode;
     if (this->pimpl->linkNodes.size() > 0)
@@ -284,12 +299,15 @@ Transform ModelVisualization::getWorldLinkTransform(const LinkIndex& linkIndex)
 {
     if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
     {
-        reportError("ModelVisualization","getWorldToLinkTransorm", "invalid link index. returning identity transform");
+        reportError("ModelVisualization",
+                    "getWorldToLinkTransorm",
+                    "invalid link index. returning identity transform");
         return Transform::Identity();
     }
 
     Transform w_H_link;
-    irr::core::matrix4 relativeLinkTransform(this->pimpl->linkNodes[linkIndex]->getRelativeTransformation());
+    irr::core::matrix4 relativeLinkTransform(
+        this->pimpl->linkNodes[linkIndex]->getRelativeTransformation());
     w_H_link = irr2idyntree_trans(relativeLinkTransform);
     return w_H_link;
 }
@@ -298,7 +316,9 @@ Transform ModelVisualization::getWorldFrameTransform(const FrameIndex& frameInde
 {
     if (!pimpl->m_model.isValidFrameIndex(frameIndex))
     {
-        reportError("ModelVisualization","getWorldFrameTransform", "invalid frame index. returning identity transform");
+        reportError("ModelVisualization",
+                    "getWorldFrameTransform",
+                    "invalid frame index. returning identity transform");
         return Transform::Identity();
     }
 
@@ -315,7 +335,9 @@ Transform ModelVisualization::getWorldLinkTransform(const std::string& linkName)
     LinkIndex linkIndex = pimpl->m_model.getLinkIndex(linkName);
     if (linkIndex == LINK_INVALID_INDEX)
     {
-        reportError("ModelVisualization","getWorldLinkTransform", "invalid link name. returning identity transform");
+        reportError("ModelVisualization",
+                    "getWorldLinkTransform",
+                    "invalid link name. returning identity transform");
         return Transform::Identity();
     }
 
@@ -327,41 +349,44 @@ Transform ModelVisualization::getWorldFrameTransform(const std::string& frameNam
     FrameIndex frameIndex = pimpl->m_model.getFrameIndex(frameName);
     if (frameIndex == LINK_INVALID_INDEX)
     {
-        reportError("ModelVisualization","getWorldFrameTransform", "invalid frame name. returning identity transform");
+        reportError("ModelVisualization",
+                    "getWorldFrameTransform",
+                    "invalid frame name. returning identity transform");
         return Transform::Identity();
     }
 
     return getWorldFrameTransform(frameIndex);
 }
 
-ILabel &ModelVisualization::label()
+ILabel& ModelVisualization::label()
 {
     return pimpl->m_label;
 }
 
-
 bool ModelVisualization::setPositions(const Transform& world_H_base, const VectorDynSize& jointPos)
 {
-    if( (jointPos.size() != model().getNrOfPosCoords()) )
+    if ((jointPos.size() != model().getNrOfPosCoords()))
     {
         std::stringstream ss;
-        ss << "Input size mismatch: model internal position coords " << model().getNrOfPosCoords() << " provided vector " << jointPos.size();
-        reportError("ModelVisualization","setPositions",ss.str().c_str());
+        ss << "Input size mismatch: model internal position coords " << model().getNrOfPosCoords()
+           << " provided vector " << jointPos.size();
+        reportError("ModelVisualization", "setPositions", ss.str().c_str());
         return false;
     }
 
     // Compute fwd kinematics
-    bool ok = ForwardPositionKinematics(model(), this->pimpl->m_traversal,
-                                        world_H_base, jointPos,
+    bool ok = ForwardPositionKinematics(model(),
+                                        this->pimpl->m_traversal,
+                                        world_H_base,
+                                        jointPos,
                                         this->pimpl->m_fwdKinBuffer);
 
-    if( ok )
+    if (ok)
     {
         this->pimpl->updateLinkPositions(this->pimpl->m_fwdKinBuffer);
-    }
-    else
+    } else
     {
-        reportError("ModelVisualization","setPositions","Forward kinematics error.");
+        reportError("ModelVisualization", "setPositions", "Forward kinematics error.");
     }
 
     return ok;
@@ -369,9 +394,9 @@ bool ModelVisualization::setPositions(const Transform& world_H_base, const Vecto
 
 bool ModelVisualization::setLinkPositions(const LinkPositions& linkPos)
 {
-    if( !linkPos.isConsistent(model()) )
+    if (!linkPos.isConsistent(model()))
     {
-        reportError("ModelVisualization","setLinkPositions","Input size mismatch.");
+        reportError("ModelVisualization", "setLinkPositions", "Input size mismatch.");
         return false;
     }
 
@@ -386,7 +411,7 @@ std::string ModelVisualization::getInstanceName()
 
 void ModelVisualization::setModelVisibility(const bool isVisible)
 {
-    if( pimpl->modelNode )
+    if (pimpl->modelNode)
     {
         pimpl->modelNode->setVisible(isVisible);
     }
@@ -396,7 +421,7 @@ bool ModelVisualization::setLinkColor(const LinkIndex& linkIndex, const ColorViz
 {
     if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
     {
-        reportError("ModelVisualization","setLinkColor", "invalid link index");
+        reportError("ModelVisualization", "setLinkColor", "invalid link index");
         return false;
     }
 
@@ -404,7 +429,9 @@ bool ModelVisualization::setLinkColor(const LinkIndex& linkIndex, const ColorViz
     return true;
 }
 
-bool ModelVisualization::setVisualColor(const LinkIndex& linkIndex, const std::string& visualName, const ColorViz& visualColor)
+bool ModelVisualization::setVisualColor(const LinkIndex& linkIndex,
+                                        const std::string& visualName,
+                                        const ColorViz& visualColor)
 {
     if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
     {
@@ -424,18 +451,19 @@ bool ModelVisualization::resetLinkColor(const LinkIndex& linkIndex)
 {
     if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
     {
-        reportError("ModelVisualization","resetLinkColor", "invalid link index");
+        reportError("ModelVisualization", "resetLinkColor", "invalid link index");
         return false;
     }
 
-    for(size_t geom=0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
+    for (size_t geom = 0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
     {
-        if( pimpl->geomNodes[linkIndex][geom] )
+        if (pimpl->geomNodes[linkIndex][geom])
         {
-            irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIndex][geom];
-            std::vector< irr::video::SMaterial > & materialCache = pimpl->geomNodesNotTransparentMaterialCache[linkIndex][geom];
+            irr::scene::ISceneNode* geomNode = pimpl->geomNodes[linkIndex][geom];
+            std::vector<irr::video::SMaterial>& materialCache
+                = pimpl->geomNodesNotTransparentMaterialCache[linkIndex][geom];
 
-            for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+            for (size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
             {
                 irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
 
@@ -467,13 +495,12 @@ bool ModelVisualization::resetLinkColor(const LinkIndex& linkIndex)
             geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, false);
         }
     }
-   return true;
+    return true;
 }
-
 
 void ModelVisualization::setModelColor(const ColorViz& modelColor)
 {
-    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    for (size_t linkIdx = 0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
     {
         this->setLinkColor(linkIdx, modelColor);
     }
@@ -481,17 +508,17 @@ void ModelVisualization::setModelColor(const ColorViz& modelColor)
 
 void ModelVisualization::resetModelColor()
 {
-    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    for (size_t linkIdx = 0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
     {
         this->resetLinkColor(linkIdx);
     }
 }
 
-std::vector< std::string > ModelVisualization::getLinkNames()
+std::vector<std::string> ModelVisualization::getLinkNames()
 {
-    std::vector< std::string > ret;
+    std::vector<std::string> ret;
 
-    for( size_t i=0; i < model().getNrOfLinks(); i++)
+    for (size_t i = 0; i < model().getNrOfLinks(); i++)
     {
         ret.push_back(model().getLinkName(i));
     }
@@ -503,15 +530,15 @@ bool ModelVisualization::setLinkVisibility(const std::string& linkName, bool isV
 {
     LinkIndex linkIdx = model().getLinkIndex(linkName);
 
-    if( linkIdx == LINK_INVALID_INDEX )
+    if (linkIdx == LINK_INVALID_INDEX)
     {
         std::stringstream ss;
         ss << "Unknown link " << linkName;
-        reportError("ModelVisualization","setLinkVisibility",ss.str().c_str());
+        reportError("ModelVisualization", "setLinkVisibility", ss.str().c_str());
         return false;
     }
 
-    if( pimpl->linkNodes[linkIdx] )
+    if (pimpl->linkNodes[linkIdx])
     {
         pimpl->linkNodes[linkIdx]->setVisible(isVisible);
         return true;
@@ -522,7 +549,6 @@ bool ModelVisualization::setLinkVisibility(const std::string& linkName, bool isV
 
 void ModelVisualization::close()
 {
-
 }
 
 irr::scene::ISceneNode* ModelVisualization::getFrameSceneNode(const std::string& frameName)
@@ -531,7 +557,7 @@ irr::scene::ISceneNode* ModelVisualization::getFrameSceneNode(const std::string&
     if (frameIndex == FRAME_INVALID_INDEX)
     {
         std::string errorMsg = "Frame " + frameName + " not found";
-        reportError("ModelVisualization","getFrameSceneNode", errorMsg.c_str());
+        reportError("ModelVisualization", "getFrameSceneNode", errorMsg.c_str());
         return nullptr;
     }
     return pimpl->frameNodes[frameIndex];
@@ -563,7 +589,6 @@ bool ModelVisualization::setLinkTransparency(const LinkIndex& linkIndex, const d
     }
     irr::u32 alphaValue = static_cast<irr::u32>(255.0 * transparency);
 
-
     for (size_t geom = 0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
     {
         if (pimpl->geomNodes[linkIndex][geom])
@@ -582,19 +607,20 @@ bool ModelVisualization::setLinkTransparency(const LinkIndex& linkIndex, const d
                 if (transparency < 1.0)
                 {
                     geomMat.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
-                }
-                else
+                } else
                 {
                     geomMat.MaterialType = irr::video::EMT_SOLID;
                 }
-
 
                 geomNode->getMaterial(mat) = geomMat;
             }
             geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
             geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
-            geomNode->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, false); //Do not use vertex color
-            geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, true); //Blend colors to have the transparency effect
+            geomNode->setMaterialFlag(irr::video::EMF_COLOR_MATERIAL, false); // Do not use vertex
+                                                                              // color
+            geomNode->setMaterialFlag(irr::video::EMF_BLEND_OPERATION, true); // Blend colors to
+                                                                              // have the
+                                                                              // transparency effect
         }
     }
 
@@ -604,13 +630,13 @@ bool ModelVisualization::setLinkTransparency(const LinkIndex& linkIndex, const d
 bool ModelVisualization::setFeatureVisibility(const std::string& elementKey, bool isVisible)
 {
     bool retValue = false;
-    if( elementKey == "wireframe"  )
+    if (elementKey == "wireframe")
     {
         this->setWireframeVisibility(isVisible);
         retValue = true;
     }
 
-    if( elementKey == "transparent"  )
+    if (elementKey == "transparent")
     {
         this->setTransparent(isVisible);
         retValue = true;
@@ -621,17 +647,17 @@ bool ModelVisualization::setFeatureVisibility(const std::string& elementKey, boo
 
 void ModelVisualization::setWireframeVisibility(bool isVisible)
 {
-    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    for (size_t linkIdx = 0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
     {
-        for(size_t geom=0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
+        for (size_t geom = 0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
         {
-            if( pimpl->geomNodes[linkIdx][geom] )
+            if (pimpl->geomNodes[linkIdx][geom])
             {
-                irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIdx][geom];
+                irr::scene::ISceneNode* geomNode = pimpl->geomNodes[linkIdx][geom];
 
-                for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+                for (size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
                 {
-                    geomNode->getMaterial(mat).setFlag(irr::video::EMF_WIREFRAME,isVisible);
+                    geomNode->getMaterial(mat).setFlag(irr::video::EMF_WIREFRAME, isVisible);
                 }
             }
         }
@@ -641,30 +667,34 @@ void ModelVisualization::setWireframeVisibility(bool isVisible)
 void ModelVisualization::setTransparent(bool isTransparent)
 {
     irr::u32 alphaValue = 0;
-    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    for (size_t linkIdx = 0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
     {
-        for(size_t geom=0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
+        for (size_t geom = 0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
         {
-            if( pimpl->geomNodes[linkIdx][geom] )
+            if (pimpl->geomNodes[linkIdx][geom])
             {
-                irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIdx][geom];
-                std::vector< irr::video::SMaterial > & materialCache = pimpl->geomNodesNotTransparentMaterialCache[linkIdx][geom];
+                irr::scene::ISceneNode* geomNode = pimpl->geomNodes[linkIdx][geom];
+                std::vector<irr::video::SMaterial>& materialCache
+                    = pimpl->geomNodesNotTransparentMaterialCache[linkIdx][geom];
 
-                for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+                for (size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
                 {
-                    // If we need to set the model to being transparent, we modify the material to have an alpha of at least
-                    // 0.5 on all light components
-                    if( isTransparent )
+                    // If we need to set the model to being transparent, we modify the material to
+                    // have an alpha of at least 0.5 on all light components
+                    if (isTransparent)
                     {
                         irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
                         geomMat.MaterialType = irr::video::EMT_TRANSPARENT_ADD_COLOR;
-                        geomMat.AmbientColor.setAlpha(std::min(alphaValue,geomMat.AmbientColor.getAlpha()));
-                        geomMat.DiffuseColor.setAlpha(std::min(alphaValue,geomMat.DiffuseColor.getAlpha()));
-                        geomMat.SpecularColor.setAlpha(std::min(alphaValue,geomMat.SpecularColor.getAlpha()));
-                        geomMat.EmissiveColor.setAlpha(std::min(alphaValue,geomMat.EmissiveColor.getAlpha()));
+                        geomMat.AmbientColor.setAlpha(
+                            std::min(alphaValue, geomMat.AmbientColor.getAlpha()));
+                        geomMat.DiffuseColor.setAlpha(
+                            std::min(alphaValue, geomMat.DiffuseColor.getAlpha()));
+                        geomMat.SpecularColor.setAlpha(
+                            std::min(alphaValue, geomMat.SpecularColor.getAlpha()));
+                        geomMat.EmissiveColor.setAlpha(
+                            std::min(alphaValue, geomMat.EmissiveColor.getAlpha()));
                         geomNode->getMaterial(mat) = geomMat;
-                    }
-                    else
+                    } else
                     {
                         // otherwise we just restore the cached value of alpha
                         irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
@@ -675,16 +705,15 @@ void ModelVisualization::setTransparent(bool isTransparent)
                         geomMat.EmissiveColor.setAlpha(materialCache[mat].EmissiveColor.getAlpha());
                         geomNode->getMaterial(mat) = geomMat;
                     }
-
                 }
             }
         }
     }
 }
 
-IJetsVisualization & ModelVisualization::jets()
+IJetsVisualization& ModelVisualization::jets()
 {
     return this->pimpl->m_jets;
 }
 
-}
+} // namespace iDynTree

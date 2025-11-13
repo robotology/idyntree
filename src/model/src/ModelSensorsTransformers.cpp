@@ -4,15 +4,13 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelTransformers.h>
 
-#include <iDynTree/Sensors.h>
 #include <iDynTree/ModelSensorsTransformers.h>
+#include <iDynTree/Sensors.h>
 
 #include <iDynTree/SixAxisForceTorqueSensor.h>
 
-
 #include <cassert>
 #include <set>
-
 
 namespace iDynTree
 {
@@ -20,13 +18,14 @@ namespace iDynTree
 bool createReducedModelAndSensors(const Model& fullModel,
                                   const SensorsList& fullSensors,
                                   const std::vector<std::string>& jointsInReducedModel,
-                                        Model& reducedModel,
-                                        SensorsList& reducedSensors)
+                                  Model& reducedModel,
+                                  SensorsList& reducedSensors)
 {
     Model fullModelCopy = fullModel;
     fullModelCopy.sensors() = fullSensors;
 
-    if (!createReducedModel(fullModelCopy, jointsInReducedModel, reducedModel)) {
+    if (!createReducedModel(fullModelCopy, jointsInReducedModel, reducedModel))
+    {
         return false;
     }
 
@@ -35,5 +34,4 @@ bool createReducedModelAndSensors(const Model& fullModel,
     return true;
 }
 
-
-}
+} // namespace iDynTree

@@ -13,27 +13,27 @@
 
 #include <iDynTree/DynamicalSystem.h>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
-    class Model;
+class Model;
 
-    namespace optimalcontrol {
+namespace optimalcontrol
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        class MultiBodySystem 
-        : public iDynTree::optimalcontrol::DynamicalSystem {
+class MultiBodySystem : public iDynTree::optimalcontrol::DynamicalSystem
+{
 
-        public:
-
-            MultiBodySystem(const iDynTree::Model& );
-
-        };
-    }
-}
-
+public:
+    MultiBodySystem(const iDynTree::Model&);
+};
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_MULTIBODYSYSTEM_H */

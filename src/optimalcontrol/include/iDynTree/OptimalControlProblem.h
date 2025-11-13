@@ -12,266 +12,328 @@
 #define IDYNTREE_OPTIMALCONTROL_OPTIMALCONTROLPROBLEM_H
 
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
 
-#include <iDynTree/Utils.h>
 #include <iDynTree/SparsityStructure.h>
 #include <iDynTree/TimeVaryingObject.h>
+#include <iDynTree/Utils.h>
 
+namespace iDynTree
+{
 
-namespace iDynTree {
+class VectorDynSize;
+class MatrixDynSize;
 
-    class VectorDynSize;
-    class MatrixDynSize;
+namespace optimalcontrol
+{
 
-    namespace optimalcontrol {
+class DynamicalSystem;
+class LinearSystem;
+class Constraint;
+class LinearConstraint;
+class ConstraintsGroup;
+class Cost;
+class QuadraticCost;
+class L2NormCost;
+class LinearCost;
+class TimeRange;
 
-        class DynamicalSystem;
-        class LinearSystem;
-        class Constraint;
-        class LinearConstraint;
-        class ConstraintsGroup;
-        class Cost;
-        class QuadraticCost;
-        class L2NormCost;
-        class LinearCost;
-        class TimeRange;
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+class OptimalControlProblem
+{
+public:
+    OptimalControlProblem();
 
-        class OptimalControlProblem {
-        public:
+    ~OptimalControlProblem();
 
-            OptimalControlProblem();
+    OptimalControlProblem(const OptimalControlProblem& other) = delete;
 
-            ~OptimalControlProblem();
+    bool setTimeHorizon(double startingTime, double finalTime);
 
-            OptimalControlProblem(const OptimalControlProblem& other) = delete;
+    double initialTime() const;
 
-            bool setTimeHorizon(double startingTime, double finalTime);
+    double finalTime() const;
 
-            double initialTime() const;
+    bool setDynamicalSystemConstraint(std::shared_ptr<DynamicalSystem> dynamicalSystem);
 
-            double finalTime() const;
+    bool setDynamicalSystemConstraint(std::shared_ptr<LinearSystem> linearSystem);
 
-            bool setDynamicalSystemConstraint(std::shared_ptr<DynamicalSystem> dynamicalSystem);
+    const std::weak_ptr<DynamicalSystem> dynamicalSystem() const;
 
-            bool setDynamicalSystemConstraint(std::shared_ptr<LinearSystem> linearSystem);
+    bool systemIsLinear() const;
 
-            const std::weak_ptr<DynamicalSystem> dynamicalSystem() const;
+    bool addGroupOfConstraints(std::shared_ptr<ConstraintsGroup> groupOfConstraints); // to be used
+                                                                                      // when the
+                                                                                      // constraints
+                                                                                      // applies
+                                                                                      // only for a
+                                                                                      // time
+                                                                                      // interval
 
-            bool systemIsLinear() const;
+    bool removeGroupOfConstraints(const std::string& name);
 
-            bool addGroupOfConstraints(std::shared_ptr<ConstraintsGroup> groupOfConstraints); //to be used when the constraints applies only for a time interval
+    bool addConstraint(std::shared_ptr<Constraint> newConstraint); // this apply for the full
+                                                                   // horizon. It creates a group
+                                                                   // named with the same name and
+                                                                   // containing only newConstraint
 
-            bool removeGroupOfConstraints(const std::string& name);
+    bool addConstraint(std::shared_ptr<LinearConstraint> newConstraint);
 
-            bool addConstraint(std::shared_ptr<Constraint> newConstraint); // this apply for the full horizon. It creates a group named with the same name and containing only newConstraint
+    bool removeConstraint(const std::string& name); // this removes only the constraints added with
+                                                    // the above method
 
-            bool addConstraint(std::shared_ptr<LinearConstraint> newConstraint);
+    unsigned int countConstraints() const;
 
-            bool removeConstraint(const std::string& name); //this removes only the constraints added with the above method
+    unsigned int countLinearConstraints() const;
 
-            unsigned int countConstraints() const;
+    unsigned int getConstraintsDimension() const;
 
-            unsigned int countLinearConstraints() const;
+    const std::vector<std::string> listConstraints() const;
 
-            unsigned int getConstraintsDimension() const;
+    const std::vector<std::string> listGroups() const; // the i-th entry of the list contains the
+                                                       // i-th constraint displayed with
+                                                       // listConstraints()
 
-            const std::vector<std::string> listConstraints() const;
+    std::vector<TimeRange>& getConstraintsTimeRanges() const;
 
-            const std::vector<std::string> listGroups() const; //the i-th entry of the list contains the i-th constraint displayed with listConstraints()
+    std::vector<size_t>& getLinearConstraintsIndeces() const;
 
-            std::vector<TimeRange>& getConstraintsTimeRanges() const;
+    // Cost can be:
+    // Mayer term
+    // Lagrange term
+    bool addMayerTerm(double weight, std::shared_ptr<Cost> cost); // final cost
 
-            std::vector<size_t>& getLinearConstraintsIndeces() const;
+    bool addMayerTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost); // final cost
 
-            // Cost can be:
-            // Mayer term
-            // Lagrange term
-            bool addMayerTerm(double weight, std::shared_ptr<Cost> cost); // final cost
+    bool addMayerTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost); // final cost
 
-            bool addMayerTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost); // final cost
+    bool addMayerTerm(double weight, std::shared_ptr<LinearCost> linearCost); // final cost
 
-            bool addMayerTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost); // final cost
+    bool addLagrangeTerm(double weight, std::shared_ptr<Cost> cost); // integral cost
 
-            bool addMayerTerm(double weight, std::shared_ptr<LinearCost> linearCost); // final cost
+    bool addLagrangeTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost); // integral
+                                                                                       // cost
 
-            bool addLagrangeTerm(double weight, std::shared_ptr<Cost> cost); // integral cost
+    bool addLagrangeTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost); // integral cost
 
-            bool addLagrangeTerm(double weight, std::shared_ptr<QuadraticCost> quadraticCost); // integral cost
+    bool addLagrangeTerm(double weight, std::shared_ptr<LinearCost> linearCost); // integral cost
 
-            bool addLagrangeTerm(double weight, std::shared_ptr<L2NormCost> quadraticCost); // integral cost
+    bool addLagrangeTerm(double weight,
+                         double startingTime,
+                         double finalTime,
+                         std::shared_ptr<Cost> cost); // integral cost with explicit integration
+                                                      // limits
 
-            bool addLagrangeTerm(double weight, std::shared_ptr<LinearCost> linearCost); // integral cost
+    bool addLagrangeTerm(double weight,
+                         double startingTime,
+                         double finalTime,
+                         std::shared_ptr<QuadraticCost> quadraticCost); // integral cost with
+                                                                        // explicit integration
+                                                                        // limits
 
-            bool addLagrangeTerm(double weight,
-                                 double startingTime,
-                                 double finalTime,
-                                 std::shared_ptr<Cost> cost); // integral cost with explicit integration limits
+    bool addLagrangeTerm(double weight,
+                         double startingTime,
+                         double finalTime,
+                         std::shared_ptr<L2NormCost> quadraticCost); // integral cost with explicit
+                                                                     // integration limits
 
-            bool addLagrangeTerm(double weight,
-                                 double startingTime,
-                                 double finalTime,
-                                 std::shared_ptr<QuadraticCost> quadraticCost); // integral cost with explicit integration limits
+    bool addLagrangeTerm(double weight,
+                         double startingTime,
+                         double finalTime,
+                         std::shared_ptr<LinearCost> linearCost); // integral cost with explicit
+                                                                  // integration limits
 
-            bool addLagrangeTerm(double weight,
-                                 double startingTime,
-                                 double finalTime,
-                                 std::shared_ptr<L2NormCost> quadraticCost); // integral cost with explicit integration limits
+    bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<Cost> cost);
 
-            bool addLagrangeTerm(double weight,
-                                 double startingTime,
-                                 double finalTime,
-                                 std::shared_ptr<LinearCost> linearCost); // integral cost with explicit integration limits
+    bool addLagrangeTerm(double weight,
+                         const TimeRange& timeRange,
+                         std::shared_ptr<QuadraticCost> quadraticCost);
 
-            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<Cost> cost);
+    bool addLagrangeTerm(double weight,
+                         const TimeRange& timeRange,
+                         std::shared_ptr<L2NormCost> quadraticCost);
 
-            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<QuadraticCost> quadraticCost);
+    bool addLagrangeTerm(double weight,
+                         const TimeRange& timeRange,
+                         std::shared_ptr<LinearCost> linearCost);
 
-            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<L2NormCost> quadraticCost);
+    bool updateCostTimeRange(const std::string& name, double newStartingTime, double newEndTime);
 
-            bool addLagrangeTerm(double weight, const TimeRange& timeRange, std::shared_ptr<LinearCost> linearCost);
+    bool updateCostTimeRange(const std::string& name, const TimeRange& newTimeRange);
 
-            bool updateCostTimeRange(const std::string& name, double newStartingTime, double newEndTime);
+    bool removeCost(const std::string& name);
 
-            bool updateCostTimeRange(const std::string& name, const TimeRange& newTimeRange);
+    std::vector<TimeRange>& getCostsTimeRanges() const;
 
-            bool removeCost(const std::string& name);
+    bool hasOnlyLinearCosts() const;
 
-            std::vector<TimeRange>& getCostsTimeRanges() const;
+    bool hasOnlyQuadraticCosts() const;
 
-            bool hasOnlyLinearCosts() const;
+    bool setStateLowerBound(const VectorDynSize& minState);
 
-            bool hasOnlyQuadraticCosts() const;
+    bool setStateLowerBound(std::shared_ptr<TimeVaryingVector> minState);
 
-            bool setStateLowerBound(const VectorDynSize& minState);
+    bool setStateUpperBound(const VectorDynSize& maxState);
 
-            bool setStateLowerBound(std::shared_ptr<TimeVaryingVector> minState);
+    bool setStateUpperBound(std::shared_ptr<TimeVaryingVector> maxState);
 
-            bool setStateUpperBound(const VectorDynSize& maxState);
+    bool setControlLowerBound(const VectorDynSize& minControl);
 
-            bool setStateUpperBound(std::shared_ptr<TimeVaryingVector> maxState);
+    bool setControlLowerBound(std::shared_ptr<TimeVaryingVector> minControl);
 
-            bool setControlLowerBound(const VectorDynSize& minControl);
+    bool setControlUpperBound(const VectorDynSize& maxControl);
 
-            bool setControlLowerBound(std::shared_ptr<TimeVaryingVector> minControl);
+    bool setControlUpperBound(std::shared_ptr<TimeVaryingVector> maxControl);
 
-            bool setControlUpperBound(const VectorDynSize& maxControl);
+    bool setStateBoxConstraints(const VectorDynSize& minState, const VectorDynSize& maxState);
 
-            bool setControlUpperBound(std::shared_ptr<TimeVaryingVector> maxControl);
+    bool setStateBoxConstraints(std::shared_ptr<TimeVaryingVector> minState,
+                                std::shared_ptr<TimeVaryingVector> maxState);
 
-            bool setStateBoxConstraints(const VectorDynSize& minState,
-                                        const VectorDynSize& maxState);            
+    bool setControlBoxConstraints(const VectorDynSize& minControl, const VectorDynSize& maxControl);
 
-            bool setStateBoxConstraints(std::shared_ptr<TimeVaryingVector> minState,
-                                        std::shared_ptr<TimeVaryingVector> maxState);
+    bool setControlBoxConstraints(std::shared_ptr<TimeVaryingVector> minControl,
+                                  std::shared_ptr<TimeVaryingVector> maxControl);
 
-            bool setControlBoxConstraints(const VectorDynSize& minControl,
-                                          const VectorDynSize& maxControl);
+    bool getStateLowerBound(double time, VectorDynSize& minState); // return false if the
+                                                                   // corresponding bound is not set
 
-            bool setControlBoxConstraints(std::shared_ptr<TimeVaryingVector> minControl,
-                                          std::shared_ptr<TimeVaryingVector> maxControl);
+    bool getStateUpperBound(double time, VectorDynSize& maxState); // return false if the
+                                                                   // corresponding bound is not set
 
-            bool getStateLowerBound(double time, VectorDynSize& minState);  //return false if the corresponding bound is not set
+    bool getControlLowerBound(double time, VectorDynSize& minControl); // return false if the
+                                                                       // corresponding bound is not
+                                                                       // set
 
-            bool getStateUpperBound(double time, VectorDynSize& maxState);  //return false if the corresponding bound is not set
+    bool getControlUpperBound(double time, VectorDynSize& maxControl); // return false if the
+                                                                       // corresponding bound is not
+                                                                       // set
 
-            bool getControlLowerBound(double time, VectorDynSize& minControl);  //return false if the corresponding bound is not set
+    bool costsEvaluation(double time,
+                         const VectorDynSize& state,
+                         const VectorDynSize& control,
+                         double& costValue);
 
-            bool getControlUpperBound(double time, VectorDynSize& maxControl);  //return false if the corresponding bound is not set
-
-            bool costsEvaluation(double time, const VectorDynSize& state, const VectorDynSize& control, double& costValue);
-
-            bool costsFirstPartialDerivativeWRTState(double time,
-                                                     const VectorDynSize& state,
-                                                     const VectorDynSize& control,
-                                                     VectorDynSize& partialDerivative);
-
-            bool costsFirstPartialDerivativeWRTControl(double time,
-                                                       const VectorDynSize& state,
-                                                       const VectorDynSize& control,
-                                                       VectorDynSize& partialDerivative);
-
-            bool costsSecondPartialDerivativeWRTState(double time,
-                                                      const VectorDynSize& state,
-                                                      const VectorDynSize& control,
-                                                      MatrixDynSize& partialDerivative);
-
-            bool costsSecondPartialDerivativeWRTControl(double time,
-                                                        const VectorDynSize& state,
-                                                        const VectorDynSize& control,
-                                                        MatrixDynSize& partialDerivative);
-
-
-            bool costsSecondPartialDerivativeWRTStateControl(double time,
-                                                             const VectorDynSize& state,
-                                                             const VectorDynSize& control,
-                                                             MatrixDynSize& partialDerivative);
-
-            bool costsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity); //returns false if something goes wrong
-
-            bool costsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity); //returns false if something goes wrong
-
-            bool costsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity); //returns false if something goes wrong
-
-            bool constraintsEvaluation(double time, const VectorDynSize& state, const VectorDynSize& control, VectorDynSize& constraintsValue);
-
-            bool getConstraintsUpperBound(double time, double infinity, VectorDynSize& upperBound); //returns false if something goes wrong
-
-            bool getConstraintsLowerBound(double time, double infinity, VectorDynSize& lowerBound); //returns false if something goes wrong
-
-            bool isFeasiblePoint(double time, const VectorDynSize& state, const VectorDynSize& control);
-
-            bool constraintsJacobianWRTState(double time,
+    bool costsFirstPartialDerivativeWRTState(double time,
                                              const VectorDynSize& state,
                                              const VectorDynSize& control,
-                                             MatrixDynSize& jacobian);
+                                             VectorDynSize& partialDerivative);
 
-            bool constraintsJacobianWRTControl(double time,
+    bool costsFirstPartialDerivativeWRTControl(double time,
                                                const VectorDynSize& state,
                                                const VectorDynSize& control,
-                                               MatrixDynSize& jacobian);
+                                               VectorDynSize& partialDerivative);
 
-            bool constraintsJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity); //returns false if something goes wrong
+    bool costsSecondPartialDerivativeWRTState(double time,
+                                              const VectorDynSize& state,
+                                              const VectorDynSize& control,
+                                              MatrixDynSize& partialDerivative);
 
-            bool constraintsJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity); //returns false if something goes wrong
+    bool costsSecondPartialDerivativeWRTControl(double time,
+                                                const VectorDynSize& state,
+                                                const VectorDynSize& control,
+                                                MatrixDynSize& partialDerivative);
 
-            bool constraintsSecondPartialDerivativeWRTState(double time,
+    bool costsSecondPartialDerivativeWRTStateControl(double time,
+                                                     const VectorDynSize& state,
+                                                     const VectorDynSize& control,
+                                                     MatrixDynSize& partialDerivative);
+
+    bool costsSecondPartialDerivativeWRTStateSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateSparsity); // returns false if something
+                                                                     // goes wrong
+
+    bool costsSecondPartialDerivativeWRTControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& controlSparsity); // returns false if something
+                                                                       // goes wrong
+
+    bool costsSecondPartialDerivativeWRTStateControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity); // returns false if
+                                                                            // something goes wrong
+
+    bool constraintsEvaluation(double time,
+                               const VectorDynSize& state,
+                               const VectorDynSize& control,
+                               VectorDynSize& constraintsValue);
+
+    bool
+    getConstraintsUpperBound(double time, double infinity, VectorDynSize& upperBound); // returns
+                                                                                       // false
+                                                                                       // if
+                                                                                       // something
+                                                                                       // goes
+                                                                                       // wrong
+
+    bool
+    getConstraintsLowerBound(double time, double infinity, VectorDynSize& lowerBound); // returns
+                                                                                       // false
+                                                                                       // if
+                                                                                       // something
+                                                                                       // goes
+                                                                                       // wrong
+
+    bool isFeasiblePoint(double time, const VectorDynSize& state, const VectorDynSize& control);
+
+    bool constraintsJacobianWRTState(double time,
+                                     const VectorDynSize& state,
+                                     const VectorDynSize& control,
+                                     MatrixDynSize& jacobian);
+
+    bool constraintsJacobianWRTControl(double time,
+                                       const VectorDynSize& state,
+                                       const VectorDynSize& control,
+                                       MatrixDynSize& jacobian);
+
+    bool constraintsJacobianWRTStateSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateSparsity); // returns false if something
+                                                                     // goes wrong
+
+    bool constraintsJacobianWRTControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& controlSparsity); // returns false if something
+                                                                       // goes wrong
+
+    bool constraintsSecondPartialDerivativeWRTState(double time,
+                                                    const VectorDynSize& state,
+                                                    const VectorDynSize& control,
+                                                    const VectorDynSize& lambda,
+                                                    MatrixDynSize& hessian);
+
+    bool constraintsSecondPartialDerivativeWRTControl(double time,
+                                                      const VectorDynSize& state,
+                                                      const VectorDynSize& control,
+                                                      const VectorDynSize& lambda,
+                                                      MatrixDynSize& hessian);
+
+    bool constraintsSecondPartialDerivativeWRTStateControl(double time,
                                                            const VectorDynSize& state,
                                                            const VectorDynSize& control,
                                                            const VectorDynSize& lambda,
                                                            MatrixDynSize& hessian);
 
-            bool constraintsSecondPartialDerivativeWRTControl(double time,
-                                                             const VectorDynSize& state,
-                                                             const VectorDynSize& control,
-                                                             const VectorDynSize& lambda,
-                                                             MatrixDynSize& hessian);
+    bool constraintsSecondPartialDerivativeWRTStateSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateSparsity); // returns false if something
+                                                                     // goes wrong
 
-            bool constraintsSecondPartialDerivativeWRTStateControl(double time,
-                                                                  const VectorDynSize& state,
-                                                                  const VectorDynSize& control,
-                                                                  const VectorDynSize& lambda,
-                                                                  MatrixDynSize& hessian);
+    bool constraintsSecondPartialDerivativeWRTControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& controlSparsity); // returns false if something
+                                                                       // goes wrong
 
-            bool constraintsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity); //returns false if something goes wrong
+    bool constraintsSecondPartialDerivativeWRTStateControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity); // returns false if
+                                                                            // something goes wrong
 
-            bool constraintsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity); //returns false if something goes wrong
+private:
+    class OptimalControlProblemPimpl;
+    OptimalControlProblemPimpl* m_pimpl;
+};
 
-            bool constraintsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity); //returns false if something goes wrong
-
-        private:
-            class OptimalControlProblemPimpl;
-            OptimalControlProblemPimpl* m_pimpl;
-            
-        };
-
-    }
-}
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_OPTIMALCONTROLPROBLEM_H */

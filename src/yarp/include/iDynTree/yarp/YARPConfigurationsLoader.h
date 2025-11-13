@@ -5,7 +5,7 @@
 #define IDYNTREE_YARP_YARP_CONFIGURATIONS_LOADER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/yarp/YARPConfigurationsLoader.h> is deprecated. Please use <iDynTree/YARPConfigurationsLoader.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/yarp/YARPConfigurationsLoader.h> is deprecated. Please use <iDynTree/YARPConfigurationsLoader.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/YARPConfigurationsLoader.h>

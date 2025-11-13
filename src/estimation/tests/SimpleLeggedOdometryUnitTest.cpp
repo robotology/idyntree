@@ -5,9 +5,8 @@
 
 #include "testModels.h"
 
-#include <iDynTree/TestUtils.h>
 #include <iDynTree/ModelLoader.h>
-
+#include <iDynTree/TestUtils.h>
 
 using namespace iDynTree;
 
@@ -45,19 +44,18 @@ std::vector<std::string> getCanonical_iCubJoints()
     return consideredJoints;
 }
 
-void setDOFsSubSetPositionsInDegrees(const iDynTree::Model & model,
-                                     const std::vector<std::string> & dofNames,
-                                     const std::vector<double> & dofPositionsInDegrees,
-                                     JointPosDoubleArray & qj)
+void setDOFsSubSetPositionsInDegrees(const iDynTree::Model& model,
+                                     const std::vector<std::string>& dofNames,
+                                     const std::vector<double>& dofPositionsInDegrees,
+                                     JointPosDoubleArray& qj)
 {
-    for(int i=0; i < dofNames.size(); i++)
+    for (int i = 0; i < dofNames.size(); i++)
     {
         iDynTree::JointIndex jntIdx = model.getJointIndex(dofNames[i]);
         size_t dofOffset = model.getJoint(jntIdx)->getDOFsOffset();
         qj(dofOffset) = deg2rad(dofPositionsInDegrees[i]);
     }
 }
-
 
 int main()
 {
@@ -66,8 +64,9 @@ int main()
     std::vector<std::string> consideredJoints = getCanonical_iCubJoints();
 
     iDynTree::ModelLoader mdlLoader;
-    bool ok = mdlLoader.loadReducedModelFromFile(getAbsModelPath("iCubDarmstadt01.urdf"),consideredJoints);
-    ok =  ok && simpleOdometry.setModel(mdlLoader.model());
+    bool ok = mdlLoader.loadReducedModelFromFile(getAbsModelPath("iCubDarmstadt01.urdf"),
+                                                 consideredJoints);
+    ok = ok && simpleOdometry.setModel(mdlLoader.model());
 
     ASSERT_IS_TRUE(ok);
 
@@ -78,29 +77,31 @@ int main()
     // Initialize the odometry
     Transform l_sole_H_world = iDynTree::getRandomTransform();
 
-    ok = simpleOdometry.init("l_sole",l_sole_H_world);
+    ok = simpleOdometry.init("l_sole", l_sole_H_world);
 
     ok = simpleOdometry.updateKinematics(qj);
 
     ASSERT_IS_TRUE(ok);
 
-    Transform world_H_rootLink1 = simpleOdometry.getWorldLinkTransform(simpleOdometry.model().getLinkIndex("root_link"));
+    Transform world_H_rootLink1
+        = simpleOdometry.getWorldLinkTransform(simpleOdometry.model().getLinkIndex("root_link"));
 
     ASSERT_IS_TRUE(simpleOdometry.changeFixedFrame("r_sole"));
 
-    Transform world_H_rootLink2 = simpleOdometry.getWorldLinkTransform(simpleOdometry.model().getLinkIndex("root_link"));
+    Transform world_H_rootLink2
+        = simpleOdometry.getWorldLinkTransform(simpleOdometry.model().getLinkIndex("root_link"));
 
     ASSERT_IS_TRUE(simpleOdometry.changeFixedFrame("head"));
 
-    Transform world_H_rootLink3 = simpleOdometry.getWorldLinkTransform(simpleOdometry.model().getLinkIndex("root_link"));
+    Transform world_H_rootLink3
+        = simpleOdometry.getWorldLinkTransform(simpleOdometry.model().getLinkIndex("root_link"));
 
-    ASSERT_EQUAL_TRANSFORM(world_H_rootLink1,world_H_rootLink2);
-    ASSERT_EQUAL_TRANSFORM(world_H_rootLink1,world_H_rootLink3);
+    ASSERT_EQUAL_TRANSFORM(world_H_rootLink1, world_H_rootLink2);
+    ASSERT_EQUAL_TRANSFORM(world_H_rootLink1, world_H_rootLink3);
 
     // Set a desired configuration
     std::vector<std::string> dofNames;
     std::vector<double> dofPositionsInDegrees;
-
 
     return EXIT_SUCCESS;
 }

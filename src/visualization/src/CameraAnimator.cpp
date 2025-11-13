@@ -1,35 +1,44 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <irrlicht.h>
 #include "CameraAnimator.h"
 #include "IrrlichtUtils.h"
+#include <irrlicht.h>
 
 namespace iDynTree
 {
 
 //! constructor
-CameraAnimator::CameraAnimator(irr::scene::ISceneNode *cameraAxis, unsigned int windowWidth, unsigned int windowHeight,
-    double rotateSpeed, double zoomSpeed, double translateSpeed)
-    : m_mousePos(0.5f, 0.5f), m_initialMousePosition(m_mousePos),
-    m_zoomSpeed(zoomSpeed), m_rotateSpeed(rotateSpeed), m_translateSpeed(translateSpeed),
-    m_zooming(false), m_rotating(false), m_movingUp(false), m_translating(false), m_isEnabled(false),
-    m_width(windowWidth), m_height(windowHeight)
+CameraAnimator::CameraAnimator(irr::scene::ISceneNode* cameraAxis,
+                               unsigned int windowWidth,
+                               unsigned int windowHeight,
+                               double rotateSpeed,
+                               double zoomSpeed,
+                               double translateSpeed)
+    : m_mousePos(0.5f, 0.5f)
+    , m_initialMousePosition(m_mousePos)
+    , m_zoomSpeed(zoomSpeed)
+    , m_rotateSpeed(rotateSpeed)
+    , m_translateSpeed(translateSpeed)
+    , m_zooming(false)
+    , m_rotating(false)
+    , m_movingUp(false)
+    , m_translating(false)
+    , m_isEnabled(false)
+    , m_width(windowWidth)
+    , m_height(windowHeight)
 {
-    #ifdef _DEBUG
+#ifdef _DEBUG
     setDebugName("iDynTreeCameraAnimator");
-    #endif
+#endif
 
     allKeysUp();
     m_cameraAxis = cameraAxis;
-
 }
-
 
 //! destructor
 CameraAnimator::~CameraAnimator()
 {
-
 }
 
 void CameraAnimator::setWindowDimensions(unsigned int width, unsigned int height)
@@ -37,7 +46,6 @@ void CameraAnimator::setWindowDimensions(unsigned int width, unsigned int height
     m_width = width;
     m_height = height;
 }
-
 
 //! It is possible to send mouse and key events to the camera. Most cameras
 //! may ignore this input, but camera scene nodes which are created for
@@ -49,7 +57,7 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
     if (event.EventType != irr::EET_MOUSE_INPUT_EVENT)
         return false;
 
-    switch(event.MouseInput.Event)
+    switch (event.MouseInput.Event)
     {
     case irr::EMIE_LMOUSE_PRESSED_DOWN:
         m_mouseKeys[0] = true;
@@ -72,7 +80,8 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
         m_mouseKeys[1] = false;
         break;
     case irr::EMIE_MOUSE_MOVED:
-        m_mousePos.set(static_cast<float>(event.MouseInput.X) / m_width, static_cast<float>(event.MouseInput.Y) / m_height);
+        m_mousePos.set(static_cast<float>(event.MouseInput.X) / m_width,
+                       static_cast<float>(event.MouseInput.Y) / m_height);
         break;
     case irr::EMIE_MOUSE_WHEEL:
         m_wheelMoving = true;
@@ -91,9 +100,8 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
     return true;
 }
 
-
 //! OnAnimate() is called just before rendering the whole scene.
-void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs*/)
+void CameraAnimator::animateNode(irr::scene::ISceneNode* node, irr::u32 /*timeMs*/)
 {
     if (!node || node->getType() != irr::scene::ESNT_CAMERA)
         return;
@@ -104,7 +112,7 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
     if (!camera->isInputReceiverEnabled())
         return;
 
-    irr::scene::ISceneManager * smgr = camera->getSceneManager();
+    irr::scene::ISceneManager* smgr = camera->getSceneManager();
     if (smgr && smgr->getActiveCamera() != camera)
         return;
 
@@ -134,7 +142,7 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
         m_initialMousePosition = m_mousePos;
     }
 
-    if (!m_zooming && !m_translating && !m_rotating && !m_movingUp) //Doing nothing
+    if (!m_zooming && !m_translating && !m_rotating && !m_movingUp) // Doing nothing
     {
         m_cameraAxis->setVisible(false);
         return;
@@ -162,27 +170,30 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
     yAxis = zAxis.crossProduct(xAxis);
     yAxis.normalize();
 
-    // Getting the rotation directly from camera results in undesired rotations when getting close to the singularity
-    // due to the fact that irrlicht stores rotations using RPY. As a consequence, we reconstruct the camera frame by
-    // having the z-axis parallel to the line connecting the camera position to the target position. The x-axis is
-    // reconstructed from the view frustrum. The view frustrum is the region of space that appears in the camera. It
-    // is basically a truncated rectangular pyramid. It is delimited by 8 points. We use the bottom left and top
-    // left points in the "far" plane to define the up direction, the x-axis. The y-axis is obtained by cross-product
-    // between the other two axes, obtaining a right-handed frame. Since irrlicht uses left-handed frames, the obtained
-    // frame is converted into a left-handed frame by taking its transpose (a left hand rotation corresponds to the
-    // inverse of a right hand rotation since the axis is the same, but the angle is on the opposite direction).
+    // Getting the rotation directly from camera results in undesired rotations when getting close
+    // to the singularity due to the fact that irrlicht stores rotations using RPY. As a
+    // consequence, we reconstruct the camera frame by having the z-axis parallel to the line
+    // connecting the camera position to the target position. The x-axis is reconstructed from the
+    // view frustrum. The view frustrum is the region of space that appears in the camera. It is
+    // basically a truncated rectangular pyramid. It is delimited by 8 points. We use the bottom
+    // left and top left points in the "far" plane to define the up direction, the x-axis. The
+    // y-axis is obtained by cross-product between the other two axes, obtaining a right-handed
+    // frame. Since irrlicht uses left-handed frames, the obtained frame is converted into a
+    // left-handed frame by taking its transpose (a left hand rotation corresponds to the inverse of
+    // a right hand rotation since the axis is the same, but the angle is on the opposite
+    // direction).
 
-    initialTransformation(0,0) = xAxis.X;
-    initialTransformation(0,1) = xAxis.Y;
-    initialTransformation(0,2) = xAxis.Z;
+    initialTransformation(0, 0) = xAxis.X;
+    initialTransformation(0, 1) = xAxis.Y;
+    initialTransformation(0, 2) = xAxis.Z;
 
-    initialTransformation(1,0) = yAxis.X;
-    initialTransformation(1,1) = yAxis.Y;
-    initialTransformation(1,2) = yAxis.Z;
+    initialTransformation(1, 0) = yAxis.X;
+    initialTransformation(1, 1) = yAxis.Y;
+    initialTransformation(1, 2) = yAxis.Z;
 
-    initialTransformation(2,0) = zAxis.X;
-    initialTransformation(2,1) = zAxis.Y;
-    initialTransformation(2,2) = zAxis.Z;
+    initialTransformation(2, 0) = zAxis.X;
+    initialTransformation(2, 1) = zAxis.Y;
+    initialTransformation(2, 2) = zAxis.Z;
 
     m_cameraAxis->setPosition(initialTarget);
     m_cameraAxis->setRotation(initialTransformation.getRotationDegrees());
@@ -201,7 +212,8 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
             distanceFromInitialPosition = distanceFromTarget - minimumDistanceFromTarget;
         }
 
-        irr::f32 interpolationValue = distanceFromInitialPosition / newPosition.getDistanceFrom(newTarget);
+        irr::f32 interpolationValue
+            = distanceFromInitialPosition / newPosition.getDistanceFrom(newTarget);
 
         newPosition += interpolationValue * (newTarget - newPosition);
     }
@@ -209,17 +221,19 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
     if (m_translating)
     {
         m_translating = false;
-        irr::core::vector3df deltaInCameraCoordinates(m_translateSpeed * mouseDelta.Y, -m_translateSpeed * mouseDelta.X, 0.0);
+        irr::core::vector3df deltaInCameraCoordinates(m_translateSpeed * mouseDelta.Y,
+                                                      -m_translateSpeed * mouseDelta.X,
+                                                      0.0);
         irr::core::vector3df deltaInWorld;
         initialTransformation.rotateVect(deltaInWorld, deltaInCameraCoordinates);
-        irr::f32 translation = deltaInWorld.getLength(); //Save the translation amount
+        irr::f32 translation = deltaInWorld.getLength(); // Save the translation amount
 
         if (translation > 0.01)
         {
-            //Remove up movements
+            // Remove up movements
             deltaInWorld = deltaInWorld - deltaInWorld.dotProduct(upVector) * upVector;
 
-            //Restore translation amount
+            // Restore translation amount
             deltaInWorld.setLength(translation);
             newPosition += deltaInWorld;
             newTarget += deltaInWorld;
@@ -230,13 +244,15 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
     {
         m_rotating = false;
         irr::f32 initialDistance = newPosition.getDistanceFrom(newTarget);
-        irr::core::vector3df deltaInCameraCoordinates(m_rotateSpeed * mouseDelta.Y, -m_rotateSpeed * mouseDelta.X, 0.0);
+        irr::core::vector3df deltaInCameraCoordinates(m_rotateSpeed * mouseDelta.Y,
+                                                      -m_rotateSpeed * mouseDelta.X,
+                                                      0.0);
         irr::core::vector3df deltaInWorld;
         initialTransformation.rotateVect(deltaInWorld, deltaInCameraCoordinates);
         irr::core::vector3df desiredPosition = newPosition + deltaInWorld;
 
-        irr::core::vector3df  differenceFromTarget = desiredPosition - newTarget;
-        differenceFromTarget.setLength(initialDistance); //Reset distance from target
+        irr::core::vector3df differenceFromTarget = desiredPosition - newTarget;
+        differenceFromTarget.setLength(initialDistance); // Reset distance from target
 
         newPosition = newTarget + differenceFromTarget;
     }
@@ -251,25 +267,21 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
 
     camera->setPosition(newPosition);
     camera->setTarget(newTarget);
-
 }
-
 
 bool CameraAnimator::isMouseKeyDown(irr::s32 key) const
 {
     return m_mouseKeys[key];
 }
 
-
 void CameraAnimator::allKeysUp()
 {
-    for (irr::s32 i=0; i<3; ++i)
+    for (irr::s32 i = 0; i < 3; ++i)
         m_mouseKeys[i] = false;
 
     m_wheelMoving = false;
     m_wheelDirection = 0;
 }
-
 
 //! Sets the rotation speed
 void CameraAnimator::setRotateSpeed(double speed)
@@ -277,13 +289,11 @@ void CameraAnimator::setRotateSpeed(double speed)
     m_rotateSpeed = speed;
 }
 
-
 //! Sets the movement speed
 void CameraAnimator::setMoveSpeed(double speed)
 {
     m_translateSpeed = speed;
 }
-
 
 //! Sets the zoom speed
 void CameraAnimator::setZoomSpeed(double speed)
@@ -296,13 +306,11 @@ bool CameraAnimator::isEventReceiverEnabled() const
     return m_isEnabled;
 }
 
-
 //! Gets the rotation speed
 double CameraAnimator::getRotateSpeed() const
 {
     return m_rotateSpeed;
 }
-
 
 // Gets the movement speed
 double CameraAnimator::getMoveSpeed() const
@@ -310,18 +318,22 @@ double CameraAnimator::getMoveSpeed() const
     return m_translateSpeed;
 }
 
-
 //! Gets the zoom speed
 double CameraAnimator::getZoomSpeed() const
 {
     return m_zoomSpeed;
 }
 
-
-irr::scene::ISceneNodeAnimator* CameraAnimator::createClone(irr::scene::ISceneNode* /*node*/, irr::scene::ISceneManager* /*newManager*/)
+irr::scene::ISceneNodeAnimator*
+CameraAnimator::createClone(irr::scene::ISceneNode* /*node*/,
+                            irr::scene::ISceneManager* /*newManager*/)
 {
-    CameraAnimator * newAnimator =
-        new CameraAnimator(m_cameraAxis->clone(), m_width, m_height, m_rotateSpeed, m_zoomSpeed, m_translateSpeed);
+    CameraAnimator* newAnimator = new CameraAnimator(m_cameraAxis->clone(),
+                                                     m_width,
+                                                     m_height,
+                                                     m_rotateSpeed,
+                                                     m_zoomSpeed,
+                                                     m_translateSpeed);
     return newAnimator;
 }
 
@@ -330,5 +342,4 @@ void CameraAnimator::enableMouseControl(bool enable)
     m_isEnabled = enable;
 }
 
-} // end namespace
-
+} // namespace iDynTree

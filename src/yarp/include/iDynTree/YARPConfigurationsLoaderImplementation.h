@@ -6,14 +6,16 @@
 
 #include <yarp/os/Value.h>
 
-inline bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation)
+inline bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf,
+                                          const std::string& key,
+                                          iDynTree::Rotation& rotation)
 {
     yarp::os::Value ini = rf.find(key);
     if (ini.isNull() || !ini.isList())
     {
         return false;
     }
-    yarp::os::Bottle *outerList = ini.asList();
+    yarp::os::Bottle* outerList = ini.asList();
     if (!outerList || outerList->size() != 3)
     {
         return false;
@@ -25,7 +27,7 @@ inline bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const 
         {
             return false;
         }
-        yarp::os::Bottle *innerList = innerValue.asList();
+        yarp::os::Bottle* innerList = innerValue.asList();
         if (!innerList || innerList->size() != 3)
         {
             return false;

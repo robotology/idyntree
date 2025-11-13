@@ -4,7 +4,7 @@
 #define IDYNTREE_ESTIMATION_BIPED_FOOT_CONTACT_CLASSIFIER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/BipedFootContactClassifier.h> is deprecated. Please use <iDynTree/BipedFootContactClassifier.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Estimation/BipedFootContactClassifier.h> is deprecated. Please use <iDynTree/BipedFootContactClassifier.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/BipedFootContactClassifier.h>

@@ -8,84 +8,101 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-
 #ifndef IDYNTREE_OPTIMALCONTROL_IMPLICITTRAPEZOIDAL_H
 #define IDYNTREE_OPTIMALCONTROL_IMPLICITTRAPEZOIDAL_H
 
 #include <iDynTree/Integrators/FixedStepIntegrator.h>
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-        class DynamicalSystem;
+class DynamicalSystem;
 
-        namespace integrators {
+namespace integrators
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-            class ImplicitTrapezoidal : public FixedStepIntegrator{
+class ImplicitTrapezoidal : public FixedStepIntegrator
+{
 
-                VectorDynSize m_computationBuffer, m_computationBuffer2;
-                MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
-                MatrixDynSize m_zeroNxNxBuffer, m_zeroNuNuBuffer, m_zeroNxNuBuffer;
-                MatrixDynSize m_stateHessianBuffer, m_controlHessianBuffer, m_mixedHessianBuffer;
-                VectorDynSize m_lambda;
-                bool m_hasStateJacobianSparsity = false;
-                bool m_hasControlJacobianSparsity = false;
-                std::vector<SparsityStructure> m_stateJacobianSparsity;
-                std::vector<SparsityStructure> m_controlJacobianSparsity;
-                bool m_hasStateHessianSparsity = false;
-                bool m_hasStateControlHessianSparsity = false;
-                bool m_hasControlHessianSparsity = false;
-                CollocationHessianSparsityMap m_stateHessianSparsity;
-                CollocationHessianSparsityMap m_stateControlHessianSparsity;
-                CollocationHessianSparsityMap m_controlHessianSparsity;
+    VectorDynSize m_computationBuffer, m_computationBuffer2;
+    MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
+    MatrixDynSize m_zeroNxNxBuffer, m_zeroNuNuBuffer, m_zeroNxNuBuffer;
+    MatrixDynSize m_stateHessianBuffer, m_controlHessianBuffer, m_mixedHessianBuffer;
+    VectorDynSize m_lambda;
+    bool m_hasStateJacobianSparsity = false;
+    bool m_hasControlJacobianSparsity = false;
+    std::vector<SparsityStructure> m_stateJacobianSparsity;
+    std::vector<SparsityStructure> m_controlJacobianSparsity;
+    bool m_hasStateHessianSparsity = false;
+    bool m_hasStateControlHessianSparsity = false;
+    bool m_hasControlHessianSparsity = false;
+    CollocationHessianSparsityMap m_stateHessianSparsity;
+    CollocationHessianSparsityMap m_stateControlHessianSparsity;
+    CollocationHessianSparsityMap m_controlHessianSparsity;
 
-                virtual bool allocateBuffers() override;
+    virtual bool allocateBuffers() override;
 
-                virtual bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
+    virtual bool
+    oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
 
-            public:
+public:
+    ImplicitTrapezoidal();
 
-                ImplicitTrapezoidal();
+    ImplicitTrapezoidal(
+        const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                ImplicitTrapezoidal(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
+    virtual ~ImplicitTrapezoidal() override;
 
-                virtual ~ImplicitTrapezoidal() override;
+    virtual bool evaluateCollocationConstraint(double time,
+                                               const std::vector<VectorDynSize>& collocationPoints,
+                                               const std::vector<VectorDynSize>& controlInputs,
+                                               double dT,
+                                               VectorDynSize& constraintValue) override;
 
-                virtual bool evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
-                                                           const std::vector<VectorDynSize> &controlInputs, double dT,
-                                                           VectorDynSize &constraintValue) override;
+    virtual bool evaluateCollocationConstraintJacobian(
+        double time,
+        const std::vector<VectorDynSize>& collocationPoints,
+        const std::vector<VectorDynSize>& controlInputs,
+        double dT,
+        std::vector<MatrixDynSize>& stateJacobianValues,
+        std::vector<MatrixDynSize>& controlJacobianValues) override;
 
-                virtual bool evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
-                                                                   const std::vector<VectorDynSize> &controlInputs, double dT,
-                                                                   std::vector<MatrixDynSize> &stateJacobianValues,
-                                                                   std::vector<MatrixDynSize> &controlJacobianValues) override;
+    virtual bool getCollocationConstraintJacobianStateSparsity(
+        std::vector<SparsityStructure>& stateJacobianSparsity) override;
 
-                virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure>& stateJacobianSparsity) override;
+    virtual bool getCollocationConstraintJacobianControlSparsity(
+        std::vector<SparsityStructure>& controlJacobianSparsity) override;
 
-                virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure>& controlJacobianSparsity) override;
+    virtual bool evaluateCollocationConstraintSecondDerivatives(
+        double time,
+        const std::vector<VectorDynSize>& collocationPoints,
+        const std::vector<VectorDynSize>& controlInputs,
+        double dT,
+        const VectorDynSize& lambda,
+        CollocationHessianMap& stateSecondDerivative,
+        CollocationHessianMap& controlSecondDerivative,
+        CollocationHessianMap& stateControlSecondDerivative) override;
 
-                virtual bool evaluateCollocationConstraintSecondDerivatives(double time, const std::vector<VectorDynSize>& collocationPoints,
-                                                                            const std::vector<VectorDynSize>& controlInputs, double dT,
-                                                                            const VectorDynSize& lambda,
-                                                                            CollocationHessianMap& stateSecondDerivative,
-                                                                            CollocationHessianMap& controlSecondDerivative,
-                                                                            CollocationHessianMap& stateControlSecondDerivative) override;
+    virtual bool getCollocationConstraintSecondDerivativeWRTStateSparsity(
+        CollocationHessianSparsityMap& stateDerivativeSparsity) override;
 
-                virtual bool getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap& stateDerivativeSparsity) override;
+    virtual bool getCollocationConstraintSecondDerivativeWRTControlSparsity(
+        CollocationHessianSparsityMap& controlDerivativeSparsity) override;
 
-                virtual bool getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap& controlDerivativeSparsity) override;
+    virtual bool getCollocationConstraintSecondDerivativeWRTStateControlSparsity(
+        CollocationHessianSparsityMap& stateControlDerivativeSparsity) override;
+};
 
-                virtual bool getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap& stateControlDerivativeSparsity) override;
-
-            };
-
-        }
-    }
-}
+} // namespace integrators
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif // IMPLICITTRAPEZOIDAL_H

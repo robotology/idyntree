@@ -8,14 +8,13 @@
  *
  *  In this file a series of functions for transforming Model
  *   objects are provided
-*/
-
+ */
 
 #ifndef IDYNTREE_MODEL_TRANSFORMERS_H
 #define IDYNTREE_MODEL_TRANSFORMERS_H
 
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include <iDynTree/Utils.h>
@@ -49,8 +48,7 @@ class Traversal;
  *       the case in which two fake links are attached to one another.
  *
  */
-bool removeFakeLinks(const Model& modelWithFakeLinks,
-                     Model& modelWithoutFakeLinks);
+bool removeFakeLinks(const Model& modelWithFakeLinks, Model& modelWithoutFakeLinks);
 
 /**
  * This function takes in input a iDynTree::Model and
@@ -80,8 +78,8 @@ bool createReducedModel(const Model& fullModel,
  *
  * @note This function signature with std::unordered_map<std::string, double>
  *             only supports joints with 1 position coordinate (revolute, prismatic).
- *             For joints with higher dimensionality (e.g., RevoluteSO2 with 2 position coordinates),
- *             use the overload with std::unordered_map<std::string, std::vector<double>>.
+ *             For joints with higher dimensionality (e.g., RevoluteSO2 with 2 position
+ * coordinates), use the overload with std::unordered_map<std::string, std::vector<double>>.
  */
 bool createReducedModel(const Model& fullModel,
                         const std::vector<std::string>& jointsInReducedModel,
@@ -102,10 +100,11 @@ bool createReducedModel(const Model& fullModel,
  * For joints with n position coordinates, the vector should contain exactly n values.
  * For example, RevoluteSO2 joints expect 2 values: [cos(θ), sin(θ)].
  */
-bool createReducedModel(const Model& fullModel,
-                        const std::vector<std::string>& jointsInReducedModel,
-                        Model& reducedModel,
-                        const std::unordered_map<std::string, std::vector<double>>& removedJointPositions);
+bool createReducedModel(
+    const Model& fullModel,
+    const std::vector<std::string>& jointsInReducedModel,
+    Model& reducedModel,
+    const std::unordered_map<std::string, std::vector<double>>& removedJointPositions);
 
 /**
  * @brief Given a specified base, return a model with a "normalized" joint numbering for that base.
@@ -130,21 +129,21 @@ bool createModelWithNormalizedJointNumbering(const Model& model,
                                              const std::string& baseForNormalizedJointNumbering,
                                              Model& reducedModel);
 
-
 /**
  * Extract sub model from sub model traversal.
  *
- * This function creates a new iDynTree::Model containing links and joints composing the subModelTraversal.
- * The function takes in input a iDynTree::Model and a iDynTree::Traversal. The new model will contain joints
- * and links composing the subModelTraversal, with the same order.
- * The FT sensor frames are added as additional frames.
+ * This function creates a new iDynTree::Model containing links and joints composing the
+ * subModelTraversal. The function takes in input a iDynTree::Model and a iDynTree::Traversal. The
+ * new model will contain joints and links composing the subModelTraversal, with the same order. The
+ * FT sensor frames are added as additional frames.
  *
  * @warning This function does not handle SensorsList contained inside the input model.
  *
  *
  * @return true if all went well, false if there was an error in creating the sub model.
  */
-bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal& subModelTraversal,
+bool extractSubModel(const iDynTree::Model& fullModel,
+                     const iDynTree::Traversal& subModelTraversal,
                      iDynTree::Model& outputSubModel);
 
 /**
@@ -167,21 +166,20 @@ bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal
  *
  * @return true if all went well, false if there was an error in creating the sub model.
  */
-bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel,
-                                   iDynTree::Model& outputModel);
+bool addValidNamesToAllSolidShapes(const iDynTree::Model& inputModel, iDynTree::Model& outputModel);
 
 /**
  * Transform the input model in model that can be exported as URDF with the given base link.
  *
  * In iDynTree, the link frame can be placed without constraint w.r.t. to the joints to which
- * the link is connected. On the other hand, in the URDF format, the origin of the frame of the child link
- * connected to its parent with a non-fixed joint **must** lay on the axis of the joint.
+ * the link is connected. On the other hand, in the URDF format, the origin of the frame of the
+ * child link connected to its parent with a non-fixed joint **must** lay on the axis of the joint.
  *
- * That means that if you want to export a model with an arbitrary base link, some link frame will need
- * to be moved to respect the constraint given by the URDF format. This function perform exactly this
- * transformation, ensuring that inertia, visual and collision information is probably accounted for,
- * and leaving the original link frames in the model as "additional frames" with the naming scheme
- * <linkName>_original_frame .
+ * That means that if you want to export a model with an arbitrary base link, some link frame will
+ * need to be moved to respect the constraint given by the URDF format. This function perform
+ * exactly this transformation, ensuring that inertia, visual and collision information is probably
+ * accounted for, and leaving the original link frames in the model as "additional frames" with the
+ * naming scheme <linkName>_original_frame .
  *
  * Note that the operation done depends on the base link used, if you want to use a different
  * base link, change the default base link of the model via inputModel.setDefaultBaseLink method.
@@ -209,8 +207,9 @@ bool moveLinkFramesToBeCompatibleWithURDFWithGivenBaseLink(const iDynTree::Model
  *
  */
 bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
-                                           Model& modelWithOnlyAllowedAdditionalFrames,
-                                           const std::vector<std::string> allowedAdditionalFrames = std::vector<std::string>());
+                                     Model& modelWithOnlyAllowedAdditionalFrames,
+                                     const std::vector<std::string> allowedAdditionalFrames
+                                     = std::vector<std::string>());
 
 /**
  * Convert spherical joints to three consecutive revolute joints for URDF export.
@@ -227,10 +226,11 @@ bool removeAdditionalFramesFromModel(const Model& modelWithAllAdditionalFrames,
  *
  * @return true if conversion succeeded, false otherwise
  */
-bool convertSphericalJointsToThreeRevoluteJoints(const Model& inputModel,
-                                                 Model& outputModel,
-                                                 const std::string& sphericalJointFakeLinkPrefix = "spherical_fake_",
-                                                 const std::string& sphericalJointRevoluteJointPrefix = "spherical_rev_");
+bool convertSphericalJointsToThreeRevoluteJoints(
+    const Model& inputModel,
+    Model& outputModel,
+    const std::string& sphericalJointFakeLinkPrefix = "spherical_fake_",
+    const std::string& sphericalJointRevoluteJointPrefix = "spherical_rev_");
 
 /**
  * Convert three consecutive revolute joints with zero-mass intermediate links to spherical joints.
@@ -252,7 +252,6 @@ bool convertThreeRevoluteJointsToSphericalJoint(const Model& inputModel,
                                                 double sphericalJointZeroMassTolerance = 1e-6,
                                                 double sphericalJointOrthogonalityTolerance = 1e-6,
                                                 double sphericalJointIntersectionTolerance = 1e-6);
-}
-
+} // namespace iDynTree
 
 #endif

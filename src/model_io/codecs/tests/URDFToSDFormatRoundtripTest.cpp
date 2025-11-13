@@ -16,12 +16,12 @@
  * or DOFs compared to the original URDF. This is expected SDFormat behavior.
  */
 
-#include <iDynTree/TestUtils.h>
-#include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/KinDynComputations.h>
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelLoader.h>
-#include <iDynTree/KinDynComputations.h>
-#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <testModels.h>
 
@@ -30,8 +30,8 @@
 #include <sstream>
 
 #ifdef IDYNTREE_USES_SDFORMAT
-#include <sdf/sdf.hh>
 #include <gz/math/Pose3.hh>
+#include <sdf/sdf.hh>
 #endif
 
 using namespace iDynTree;
@@ -39,7 +39,7 @@ using namespace iDynTree;
 #ifdef IDYNTREE_USES_SDFORMAT
 
 // Helper function to convert URDF file to SDF string using sdformat library
-bool convertURDFToSDFString(const std::string &urdfFilePath, std::string &sdfString)
+bool convertURDFToSDFString(const std::string& urdfFilePath, std::string& sdfString)
 {
     // Configure parser to preserve fixed joints (prevents lumping)
     sdf::ParserConfig parserConfig;
@@ -52,7 +52,7 @@ bool convertURDFToSDFString(const std::string &urdfFilePath, std::string &sdfStr
     if (!errors.empty())
     {
         std::cerr << "Error loading URDF with sdformat: " << urdfFilePath << std::endl;
-        for (const auto &error : errors)
+        for (const auto& error : errors)
         {
             std::cerr << "  " << error.Message() << std::endl;
         }
@@ -75,7 +75,7 @@ bool convertURDFToSDFString(const std::string &urdfFilePath, std::string &sdfStr
     return true;
 }
 
-void testURDFToSDFormatRoundtrip(const std::string &urdfFilePath)
+void testURDFToSDFormatRoundtrip(const std::string& urdfFilePath)
 {
     std::cout << "\nTesting URDF to SDF roundtrip for: " << urdfFilePath << std::endl;
 
@@ -85,8 +85,8 @@ void testURDFToSDFormatRoundtrip(const std::string &urdfFilePath)
     Model urdfModel = urdfLoader.model();
 
     std::cout << "Original URDF model: " << urdfModel.getNrOfLinks() << " links, "
-              << urdfModel.getNrOfJoints() << " joints, "
-              << urdfModel.getNrOfDOFs() << " DOFs" << std::endl;
+              << urdfModel.getNrOfJoints() << " joints, " << urdfModel.getNrOfDOFs() << " DOFs"
+              << std::endl;
 
     // Convert URDF to SDF using sdformat
     std::string sdfString;
@@ -100,8 +100,8 @@ void testURDFToSDFormatRoundtrip(const std::string &urdfFilePath)
     Model sdfModel = sdfLoader.model();
 
     std::cout << "SDF model loaded: " << sdfModel.getNrOfLinks() << " links, "
-              << sdfModel.getNrOfJoints() << " joints, "
-              << sdfModel.getNrOfDOFs() << " DOFs" << std::endl;
+              << sdfModel.getNrOfJoints() << " joints, " << sdfModel.getNrOfDOFs() << " DOFs"
+              << std::endl;
 
     // Verify kinematics using KinDynComputations if both models have DOFs
     if (urdfModel.getNrOfDOFs() > 0 && sdfModel.getNrOfDOFs() > 0)
@@ -126,9 +126,13 @@ void testURDFToSDFormatRoundtrip(const std::string &urdfFilePath)
         if (urdfModel.getNrOfDOFs() != sdfModel.getNrOfDOFs())
         {
             std::cout << "DOFs don't match (URDF: " << urdfModel.getNrOfDOFs()
-                      << ", SDF: " << sdfModel.getNrOfDOFs() << "), skipping detailed checks" << std::endl;
-            std::cout << "Note: SDFormat may convert fixed joints to revolute joints with zero limits," << std::endl;
-            std::cout << "      which iDynTree counts as DOFs. This is expected SDFormat behavior." << std::endl;
+                      << ", SDF: " << sdfModel.getNrOfDOFs() << "), skipping detailed checks"
+                      << std::endl;
+            std::cout << "Note: SDFormat may convert fixed joints to revolute joints with zero "
+                         "limits,"
+                      << std::endl;
+            std::cout << "      which iDynTree counts as DOFs. This is expected SDFormat behavior."
+                      << std::endl;
             return;
         }
 

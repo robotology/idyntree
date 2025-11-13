@@ -24,14 +24,14 @@ class Model;
  * @warning This function does not support exporting sensor or solid shapes at the moment.
  *
  * @param[in] urdf_filename Path to the URDF file that will be created.
- *                          It can be either a relative filename with respect to the current working directory,
- *                          or an absolute filename.
+ *                          It can be either a relative filename with respect to the current working
+ * directory, or an absolute filename.
  * @param[in] options the iDynTree::ModelExporterOptions struct of options passed to the parser.
  * @return true if all went ok, false otherwise.
  */
-bool URDFFromModel(const iDynTree::Model & model,
-                   const std::string & urdf_filename,
-                   const ModelExporterOptions options=ModelExporterOptions());
+bool URDFFromModel(const iDynTree::Model& model,
+                   const std::string& urdf_filename,
+                   const ModelExporterOptions options = ModelExporterOptions());
 
 /**
  * \ingroup iDynTreeModelIO
@@ -45,11 +45,10 @@ bool URDFFromModel(const iDynTree::Model & model,
  * @param[in] options the iDynTree::ModelExporterOptions struct of options passed to the parser.
  * @return true if all went ok, false otherwise.
  */
-bool URDFStringFromModel(const iDynTree::Model & output,
-                         std::string & urdf_string,
-                         const ModelExporterOptions options=ModelExporterOptions());
+bool URDFStringFromModel(const iDynTree::Model& output,
+                         std::string& urdf_string,
+                         const ModelExporterOptions options = ModelExporterOptions());
 
-
-}
+} // namespace iDynTree
 
 #endif

@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_IKIN_CONVERSIONS_IMPLEMENTATION_H
 #define IDYNTREE_IKIN_CONVERSIONS_IMPLEMENTATION_H
 
-#include <iDynTree/iKinConversions.h>
 #include <iDynTree/DenavitHartenberg.h>
+#include <iDynTree/iKinConversions.h>
 
 #include <iDynTree/YARPConversions.h>
 
@@ -16,7 +16,7 @@
 namespace iDynTree
 {
 
-inline DHLink iKinLink2DHLink(const iCub::iKin::iKinLink & ikinlink)
+inline DHLink iKinLink2DHLink(const iCub::iKin::iKinLink& ikinlink)
 {
     DHLink ret;
 
@@ -30,25 +30,27 @@ inline DHLink iKinLink2DHLink(const iCub::iKin::iKinLink & ikinlink)
     return ret;
 }
 
-inline iCub::iKin::iKinLink DHLink2iKinLink(const DHLink & dhLink)
+inline iCub::iKin::iKinLink DHLink2iKinLink(const DHLink& dhLink)
 {
-    return iCub::iKin::iKinLink(dhLink.A,dhLink.D,
-                                dhLink.Alpha,dhLink.Offset,
-                                dhLink.Min,dhLink.Max);
+    return iCub::iKin::iKinLink(dhLink.A,
+                                dhLink.D,
+                                dhLink.Alpha,
+                                dhLink.Offset,
+                                dhLink.Min,
+                                dhLink.Max);
 }
 
-inline bool DHChainFromiKinChain(iCub::iKin::iKinChain& ikinChain,
-                                DHChain& dhChain)
+inline bool DHChainFromiKinChain(iCub::iKin::iKinChain& ikinChain, DHChain& dhChain)
 {
     assert(ikinChain.getN() == ikinChain.getDOF());
 
     iDynTree::Transform H0, HN;
     dhChain.setNrOfDOFs(ikinChain.getN());
 
-    toiDynTree(ikinChain.getH0(),H0);
+    toiDynTree(ikinChain.getH0(), H0);
     dhChain.setH0(H0);
 
-    for(size_t i=0; i < dhChain.getNrOfDOFs(); i++)
+    for (size_t i = 0; i < dhChain.getNrOfDOFs(); i++)
     {
         dhChain(i) = iKinLink2DHLink(ikinChain(i));
         std::stringstream ss;
@@ -56,7 +58,7 @@ inline bool DHChainFromiKinChain(iCub::iKin::iKinChain& ikinChain,
         dhChain.setDOFName(i, "iKinDOF" + ss.str());
     }
 
-    toiDynTree(ikinChain.getHN(),HN);
+    toiDynTree(ikinChain.getHN(), HN);
     dhChain.setHN(HN);
 
     return true;
@@ -67,24 +69,26 @@ inline bool modelFromiKinChain(iCub::iKin::iKinChain& ikinChain, Model& output)
     DHChain chain;
     bool ok = DHChainFromiKinChain(ikinChain, chain);
 
-    if( !ok )
+    if (!ok)
     {
         return false;
     }
 
-    ok = CreateModelFromDHChain(chain,output);
+    ok = CreateModelFromDHChain(chain, output);
 
     return ok;
 }
 
-inline iKinLimbImported::iKinLimbImported(): iCub::iKin::iKinLimb()
+inline iKinLimbImported::iKinLimbImported()
+    : iCub::iKin::iKinLimb()
 {
 }
 
 inline iKinLimbImported::~iKinLimbImported()
-{}
+{
+}
 
-inline bool iKinLimbImported::fromDHChain(const DHChain &dhChain)
+inline bool iKinLimbImported::fromDHChain(const DHChain& dhChain)
 {
     // Cleanup existing data
     dispose();
@@ -93,7 +97,7 @@ inline bool iKinLimbImported::fromDHChain(const DHChain &dhChain)
     toYarp(dhChain.getH0().asHomogeneousTransform(), yarpMatBuf);
     this->setH0(yarpMatBuf);
 
-    for(size_t i=0; i < dhChain.getNrOfDOFs(); i++)
+    for (size_t i = 0; i < dhChain.getNrOfDOFs(); i++)
     {
         // The ownership of the pointer is transferred to the iKinLimb object,
         // and it will be freed by the denstructor (or a call to dispose)
@@ -106,9 +110,9 @@ inline bool iKinLimbImported::fromDHChain(const DHChain &dhChain)
     return true;
 }
 
-inline bool iKinLimbImported::fromModel(const Model &model,
-                                 const std::string &baseFrame,
-                                 const std::string &distalFrame)
+inline bool iKinLimbImported::fromModel(const Model& model,
+                                        const std::string& baseFrame,
+                                        const std::string& distalFrame)
 {
     DHChain chain;
     bool conversionSuccessful = ExtractDHChainFromModel(model, baseFrame, distalFrame, chain);
@@ -116,8 +120,7 @@ inline bool iKinLimbImported::fromModel(const Model &model,
     return conversionSuccessful;
 }
 
-inline bool iKinLimbFromDHChain(const DHChain & dhChain,
-                         iCub::iKin::iKinLimb& ikinLimb)
+inline bool iKinLimbFromDHChain(const DHChain& dhChain, iCub::iKin::iKinLimb& ikinLimb)
 {
     iKinLimbImported ikinLimbImported;
 
@@ -128,10 +131,10 @@ inline bool iKinLimbFromDHChain(const DHChain & dhChain,
     return ok;
 }
 
-inline bool iKinLimbFromModel(const Model & model,
-                       const std::string& baseFrame,
-                       const std::string& distalFrame,
-                       iCub::iKin::iKinLimb & ikinLimb)
+inline bool iKinLimbFromModel(const Model& model,
+                              const std::string& baseFrame,
+                              const std::string& distalFrame,
+                              iCub::iKin::iKinLimb& ikinLimb)
 {
     DHChain chain;
     bool conversionSuccessful = ExtractDHChainFromModel(model, baseFrame, distalFrame, chain);
@@ -139,6 +142,6 @@ inline bool iKinLimbFromModel(const Model & model,
     return conversionSuccessful;
 }
 
-}
+} // namespace iDynTree
 
 #endif

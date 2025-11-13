@@ -16,7 +16,9 @@
  * @param[in] a vector3
  * @return bool true/false
  */
-bool checkValidMeasurement(const iDynTree::Vector3& in, const std::string& measurement_type, bool check_also_zero_vector);
+bool checkValidMeasurement(const iDynTree::Vector3& in,
+                           const std::string& measurement_type,
+                           bool check_also_zero_vector);
 
 /**
  *
@@ -54,7 +56,8 @@ bool isZeroVector(const iDynTree::Vector3& vec);
 iDynTree::Vector3 crossVector(const iDynTree::Vector3& a, const iDynTree::Vector3& b);
 
 /**
- * @brief computes \f$ 3 \times 3 \f$ skew-symmetric matrix (\f$ \mathbb{so}(3) \f$ space) for a given 3d vector (\f$ \mathbb{R}^3 \f$ space)
+ * @brief computes \f$ 3 \times 3 \f$ skew-symmetric matrix (\f$ \mathbb{so}(3) \f$ space) for a
+ * given 3d vector (\f$ \mathbb{R}^3 \f$ space)
  *
  * @param[in] omega 3d vector (usually angular velocity)
  * @return iDynTree::Matrix3x3
@@ -70,7 +73,8 @@ iDynTree::Matrix3x3 mapR3Toso3(const iDynTree::Vector3& omega);
 bool checkSkewSymmetricity(const iDynTree::Matrix3x3& S);
 
 /**
- * @brief computes 3D vector (\f$ \mathbb{R}^3 \f$ space) from a skew symmetric matrix (\f$ \mathbb{so}(3) \$ space)
+ * @brief computes 3D vector (\f$ \mathbb{R}^3 \f$ space) from a skew symmetric matrix (\f$
+ * \mathbb{so}(3) \$ space)
  *
  * @param[in] S \f$ 3 \times 3 \f$ matrix
  * @return iDynTree::Vector3
@@ -80,7 +84,8 @@ iDynTree::Vector3 mapso3ToR3(const iDynTree::Matrix3x3& S);
 /**
  * @brief computes scalar dot product of two 3-d vectors
  *        Maps  (\f$ \mathbb{R}^n \f$ space) to (\f$ \mathbb{R} \f$ space) through its dual vector
- * @param[in] a 3D vector (not passed as reference, but as a copy to avoid changes in source due to in-place manipulation)
+ * @param[in] a 3D vector (not passed as reference, but as a copy to avoid changes in source due to
+ * in-place manipulation)
  * @param[in] b 3D vector
  * @return double
  */
@@ -110,7 +115,8 @@ iDynTree::Vector3 imaginaryPartOfQuaternion(const iDynTree::UnitQuaternion& q);
  * @param[in] q2 4d vector or quaternion
  * @return iDynTree::UnitQuaternion
  */
-iDynTree::UnitQuaternion composeQuaternion(const iDynTree::UnitQuaternion& q1, const iDynTree::UnitQuaternion& q2);
+iDynTree::UnitQuaternion
+composeQuaternion(const iDynTree::UnitQuaternion& q1, const iDynTree::UnitQuaternion& q2);
 
 /**
  * @brief computes the matrix map of quaternion left multiplication \f$ q1 \circ q2 = q1q2 \f$
@@ -118,8 +124,7 @@ iDynTree::UnitQuaternion composeQuaternion(const iDynTree::UnitQuaternion& q1, c
  * @param[in] x 4d vector or quaternion q1
  * @return iDynTree::Matrix4x4
  */
-iDynTree::Matrix4x4 mapofYQuaternionToXYQuaternion(const iDynTree::UnitQuaternion &x);
-
+iDynTree::Matrix4x4 mapofYQuaternionToXYQuaternion(const iDynTree::UnitQuaternion& x);
 
 /**
  * @brief composition operator - quaternion multiplication
@@ -128,8 +133,8 @@ iDynTree::Matrix4x4 mapofYQuaternionToXYQuaternion(const iDynTree::UnitQuaternio
  * @param[in] q2 4d vector or quaternion
  * @return iDynTree::UnitQuaternion
  */
-iDynTree::UnitQuaternion composeQuaternion2(const iDynTree::UnitQuaternion &q1, const iDynTree::UnitQuaternion &q2);
-
+iDynTree::UnitQuaternion
+composeQuaternion2(const iDynTree::UnitQuaternion& q1, const iDynTree::UnitQuaternion& q2);
 
 /**
  * @brief computes pure quaternion given a 3d vector (uually angular velocity)
@@ -137,13 +142,14 @@ iDynTree::UnitQuaternion composeQuaternion2(const iDynTree::UnitQuaternion &q1, 
  * @param[in] bodyFixedFrameVelocityInInertialFrame 3d vector
  * @return iDynTree::UnitQuaternion
  */
-iDynTree::UnitQuaternion pureQuaternion(const iDynTree::Vector3& bodyFixedFrameVelocityInInertialFrame);
-
+iDynTree::UnitQuaternion
+pureQuaternion(const iDynTree::Vector3& bodyFixedFrameVelocityInInertialFrame);
 
 /**
  * @brief exponential map for quaternion - maps angular velocities to quaternion
  *
- * \f$ \text{exp}(\omega) = \begin{bmatrix} \text{cos}(\frac{||\omega||}{2}) \\ \text{sin}(\frac{||\omega||}{2})\frac{\omega}{||\omega||}  \end{bmatrix} \f$
+ * \f$ \text{exp}(\omega) = \begin{bmatrix} \text{cos}(\frac{||\omega||}{2})
+ * \\ \text{sin}(\frac{||\omega||}{2})\frac{\omega}{||\omega||}  \end{bmatrix} \f$
  *
  * @param[in] omega angular velocity
  * @return iDynTree::UnitQuaternion
@@ -161,21 +167,22 @@ inline iDynTree::UnitQuaternion expQuaternion(iDynTree::Vector3 omega)
         return q;
     }
 
-    double c = std::cos(norm/2);
-    double s = std::sin(norm/2)/norm;
+    double c = std::cos(norm / 2);
+    double s = std::sin(norm / 2) / norm;
 
     q(0) = c;
-    q(1) = omega(0)*s;
-    q(2) = omega(1)*s;
-    q(3) = omega(2)*s;
+    q(1) = omega(0) * s;
+    q(2) = omega(1) * s;
+    q(3) = omega(2) * s;
 
     return q;
 }
 
-template<class T>
+template <class T>
 inline bool check_are_almost_equal(const T& x, const T& y, int units_in_last_place)
 {
-    if (!( std::abs(x- y) <= std::numeric_limits<T>::epsilon()*std::max(std::abs(x), std::abs(y))*units_in_last_place))
+    if (!(std::abs(x - y) <= std::numeric_limits<T>::epsilon() * std::max(std::abs(x), std::abs(y))
+                                 * units_in_last_place))
     {
         return false;
     }
@@ -184,4 +191,3 @@ inline bool check_are_almost_equal(const T& x, const T& y, int units_in_last_pla
 }
 
 #endif
-

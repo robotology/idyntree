@@ -4,35 +4,39 @@
 #ifndef IDYNTREE_MODELIO_URDF_FORCETORQUESENSORELEMENT_H
 #define IDYNTREE_MODELIO_URDF_FORCETORQUESENSORELEMENT_H
 
-#include <iDynTree/XMLElement.h>
 #include "SensorElement.h"
+#include <iDynTree/XMLElement.h>
 
-namespace iDynTree {
-    class ForceTorqueSensorElement;
-    class ForceTorqueSensorHelper;
+namespace iDynTree
+{
+class ForceTorqueSensorElement;
+class ForceTorqueSensorHelper;
 
-    class XMLAttribute;
-    class XMLParserState;
-}
+class XMLAttribute;
+class XMLParserState;
+} // namespace iDynTree
 
-class iDynTree::ForceTorqueSensorElement: public iDynTree::XMLElement {
+class iDynTree::ForceTorqueSensorElement : public iDynTree::XMLElement
+{
 private:
     std::shared_ptr<iDynTree::ForceTorqueSensorHelper> m_helper;
+
 public:
-    explicit ForceTorqueSensorElement(
-        XMLParserState& parserState, 
-        std::shared_ptr<const SensorElement::SensorInfo> sensorInfo);
+    explicit ForceTorqueSensorElement(XMLParserState& parserState,
+                                      std::shared_ptr<const SensorElement::SensorInfo> sensorInfo);
 
     std::shared_ptr<XMLElement> childElementForName(const std::string& name) override;
 
     const std::shared_ptr<iDynTree::SensorHelper> helper() const;
 };
 
-class iDynTree::ForceTorqueSensorHelper final: public iDynTree::SensorHelper {
+class iDynTree::ForceTorqueSensorHelper final : public iDynTree::SensorHelper
+{
     friend class ForceTorqueSensorElement;
 
     std::string m_measuredFrame;
     std::string m_measureDirection;
+
 public:
     ForceTorqueSensorHelper(std::shared_ptr<const SensorElement::SensorInfo> sensorInfo);
     Sensor* generateSensor(const Model& model) const override;

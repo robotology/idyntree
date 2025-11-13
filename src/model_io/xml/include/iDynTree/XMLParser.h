@@ -7,19 +7,20 @@
 #include <functional>
 #include <memory>
 #include <mutex>
-#include <vector>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
-namespace iDynTree {
-    
-    class XMLParser;
-    class XMLElement;
-    class XMLDocument;
-    class XMLParserState;
-}
+namespace iDynTree
+{
 
-//TODO: handle errors
+class XMLParser;
+class XMLElement;
+class XMLDocument;
+class XMLParserState;
+} // namespace iDynTree
+
+// TODO: handle errors
 
 /** XML Parser class
  *
@@ -62,13 +63,13 @@ namespace iDynTree {
  * - Validation for in memory parsing
  * - Use libxml in memory tree (that can be modified and dumped to file) instead of custom tree
  */
-class iDynTree::XMLParser {
-    
+class iDynTree::XMLParser
+{
+
     class XMLParserPimpl;
     std::unique_ptr<XMLParserPimpl> m_pimpl;
-    
-public:
 
+public:
     /**
      * Default constructor
      */
@@ -92,7 +93,6 @@ public:
      * @param keepTreeInMemory true if the tree should be kept in memory.
      */
     void setKeepTreeInMemory(bool keepTreeInMemory);
-
 
     void setPackageDirs(const std::vector<std::string>& packageDirs);
     const std::vector<std::string>& packageDirs() const;
@@ -133,7 +133,7 @@ public:
      * @param validate true if the XML should be validated against a XSD.
      */
     void setValidateXML(bool validate);
-    
+
     /**
      * Returns the current schema location used for validation.
      *
@@ -148,7 +148,8 @@ public:
     /**
      * Sets the XSD schema location.
      *
-     * @note to perform the validation, the option should be explicitly set, together with the schema location.
+     * @note to perform the validation, the option should be explicitly set, together with the
+     * schema location.
      *
      * @see validateXML
      * @see setValidateXML(bool)
@@ -161,8 +162,8 @@ public:
     /**
      * Parse the specified XML file.
      *
-     * If the validation option is enabled, the XML file will be also validated against the specified
-     * XSD schema.
+     * If the validation option is enabled, the XML file will be also validated against the
+     * specified XSD schema.
      *
      * @see setValidateXML(bool)
      * @see setSchemaLocation(std::string)
@@ -185,19 +186,21 @@ public:
      * @return true if the XML document is valid and successfully parsed.
      */
     bool parseXMLString(std::string xmlString);
-    
+
     /**
      * Set the factory function responsible of creating a new XMLDocument element.
      *
      * By specifying a new factory function, it is possible to change how the XML document will be
      * represented in memory.
-     * The signature of the function is `(XMLParserState&) -> std::shared_ptr<XMLDocument>`, i.e. a function
-     * accepting a reference to the parser state and returning a `std::shared_ptr` to an `XMLDocument` object.
+     * The signature of the function is `(XMLParserState&) -> std::shared_ptr<XMLDocument>`, i.e. a
+     function
+     * accepting a reference to the parser state and returning a `std::shared_ptr` to an
+     `XMLDocument` object.
      *
      @param factory the function that will be called for instantiating a new XMLDocument object.
      */
     void setDocumentFactory(std::function<std::shared_ptr<XMLDocument>(XMLParserState&)> factory);
-    
+
     // TODO: check if we want to return a copy, a const or something
 
     /**
@@ -206,23 +209,20 @@ public:
      * @return the parsed document.
      */
     std::shared_ptr<const XMLDocument> document() const;
-    
 };
 
-
-class iDynTree::XMLParserState {
+class iDynTree::XMLParserState
+{
 public:
     void setParsingError();
-  
+
 private:
     friend XMLParser;
-    void resetState();  // Acquires m_mutex.
-    bool getParsingErrorState();  // Acquires m_mutex.
+    void resetState(); // Acquires m_mutex.
+    bool getParsingErrorState(); // Acquires m_mutex.
 
     mutable std::mutex m_mutex;
-    bool m_parsing_error;  // Protected by m_mutex.
+    bool m_parsing_error; // Protected by m_mutex.
 };
-
-
 
 #endif /* end of include guard: IDYNTREE_MODELIO_XML_XMLPARSER_H */

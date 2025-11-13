@@ -5,12 +5,13 @@
 
 #include <iDynTree/Model.h>
 
-
-iDynTree::ShapeVisualization::Shape::Shape(const SolidShape& input_shape, irr::scene::ISceneManager* sceneManager)
+iDynTree::ShapeVisualization::Shape::Shape(const SolidShape& input_shape,
+                                           irr::scene::ISceneManager* sceneManager)
 {
     shape.reset(input_shape.clone());
     node = addGeometryToSceneManager(shape.get(), nullptr, sceneManager);
-    node->grab(); //Increment the reference count, otherwise it can be deleted when setting the parent
+    node->grab(); // Increment the reference count, otherwise it can be deleted when setting the
+                  // parent
     label.init(sceneManager, node);
 }
 
@@ -24,7 +25,7 @@ iDynTree::ShapeVisualization::Shape& iDynTree::ShapeVisualization::Shape::operat
     if (node)
     {
         node->remove();
-        node->drop(); //Decrement the reference count
+        node->drop(); // Decrement the reference count
     }
     node = other.node;
     other.node = nullptr;
@@ -40,16 +41,17 @@ iDynTree::ShapeVisualization::Shape::~Shape()
     if (node)
     {
         node->remove();
-        node->drop(); //Decrement the reference count
+        node->drop(); // Decrement the reference count
         node = nullptr;
     }
 }
 
-void iDynTree::ShapeVisualization::init(irr::scene::ISceneManager* smgr, std::shared_ptr<std::vector<ModelVisualization*>> models)
+void iDynTree::ShapeVisualization::init(irr::scene::ISceneManager* smgr,
+                                        std::shared_ptr<std::vector<ModelVisualization*>> models)
 {
     assert(smgr);
     m_smgr = smgr;
-    m_smgr->grab(); //Increment the reference count
+    m_smgr->grab(); // Increment the reference count
     m_models = models;
 }
 
@@ -59,7 +61,7 @@ void iDynTree::ShapeVisualization::close()
     m_models = nullptr;
     if (m_smgr)
     {
-        m_smgr->drop(); //Decrement the reference count
+        m_smgr->drop(); // Decrement the reference count
         m_smgr = nullptr;
     }
 }
@@ -69,7 +71,9 @@ iDynTree::ShapeVisualization::~ShapeVisualization()
     close();
 }
 
-size_t iDynTree::ShapeVisualization::addShape(const iDynTree::SolidShape& shape,const std::string& modelName, const std::string& frameName)
+size_t iDynTree::ShapeVisualization::addShape(const iDynTree::SolidShape& shape,
+                                              const std::string& modelName,
+                                              const std::string& frameName)
 {
     m_shapes.emplace_back(shape, m_smgr);
     setShapeParent(m_shapes.size() - 1, modelName, frameName);
@@ -93,7 +97,8 @@ size_t iDynTree::ShapeVisualization::getNrOfShapes() const
     return m_shapes.size();
 }
 
-bool iDynTree::ShapeVisualization::getShapeTransform(size_t shapeIndex, Transform& currentTransform) const
+bool iDynTree::ShapeVisualization::getShapeTransform(size_t shapeIndex,
+                                                     Transform& currentTransform) const
 {
     if (shapeIndex >= m_shapes.size())
     {
@@ -104,7 +109,8 @@ bool iDynTree::ShapeVisualization::getShapeTransform(size_t shapeIndex, Transfor
     return true;
 }
 
-bool iDynTree::ShapeVisualization::setShapeTransform(size_t shapeIndex, const Transform& transformation)
+bool iDynTree::ShapeVisualization::setShapeTransform(size_t shapeIndex,
+                                                     const Transform& transformation)
 {
     if (shapeIndex >= m_shapes.size())
     {
@@ -134,8 +140,7 @@ bool iDynTree::ShapeVisualization::setShapeColor(size_t shapeIndex, const ColorV
         if (shapeColor.a < 1.0)
         {
             material.MaterialType = irr::video::EMT_TRANSPARENT_VERTEX_ALPHA;
-        }
-        else
+        } else
         {
             material.MaterialType = irr::video::EMT_SOLID;
         }
@@ -147,7 +152,8 @@ bool iDynTree::ShapeVisualization::setShapeColor(size_t shapeIndex, const ColorV
     return true;
 }
 
-bool iDynTree::ShapeVisualization::changeShape(size_t shapeIndex, const iDynTree::SolidShape& newShape)
+bool iDynTree::ShapeVisualization::changeShape(size_t shapeIndex,
+                                               const iDynTree::SolidShape& newShape)
 {
     if (shapeIndex >= m_shapes.size())
     {
@@ -159,7 +165,8 @@ bool iDynTree::ShapeVisualization::changeShape(size_t shapeIndex, const iDynTree
     return true;
 }
 
-std::pair<std::string, std::string> iDynTree::ShapeVisualization::getShapeParent(size_t shapeIndex) const
+std::pair<std::string, std::string>
+iDynTree::ShapeVisualization::getShapeParent(size_t shapeIndex) const
 {
     if (shapeIndex >= m_shapes.size())
     {
@@ -169,7 +176,9 @@ std::pair<std::string, std::string> iDynTree::ShapeVisualization::getShapeParent
     return std::make_pair(m_shapes[shapeIndex].modelName, m_shapes[shapeIndex].frameName);
 }
 
-bool iDynTree::ShapeVisualization::setShapeParent(size_t shapeIndex, const std::string& modelName, const std::string& frameName)
+bool iDynTree::ShapeVisualization::setShapeParent(size_t shapeIndex,
+                                                  const std::string& modelName,
+                                                  const std::string& frameName)
 {
     if (shapeIndex >= m_shapes.size())
     {
@@ -193,8 +202,7 @@ bool iDynTree::ShapeVisualization::setShapeParent(size_t shapeIndex, const std::
                     iDynTree::LinkIndex root_link_index = model->model().getDefaultBaseLink();
                     actualFrameName = model->model().getLinkName(root_link_index);
                     parent = model->getFrameSceneNode(actualFrameName);
-                }
-                else
+                } else
                 {
                     actualFrameName = frameName;
                     parent = model->getFrameSceneNode(frameName);
@@ -208,8 +216,7 @@ bool iDynTree::ShapeVisualization::setShapeParent(size_t shapeIndex, const std::
             if (!found)
             {
                 error = "Model " + modelName + " not found";
-            }
-            else
+            } else
             {
                 error = "Frame " + frameName + " not found in model " + modelName;
             }

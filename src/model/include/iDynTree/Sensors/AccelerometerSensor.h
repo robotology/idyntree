@@ -5,7 +5,7 @@
 #define IDYNTREE_SENSORS_ACCELEROMETER_SENSOR_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Sensors/AccelerometerSensor.h> is deprecated. Please use <iDynTree/AccelerometerSensor.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Sensors/AccelerometerSensor.h> is deprecated. Please use <iDynTree/AccelerometerSensor.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/AccelerometerSensor.h>

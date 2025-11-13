@@ -11,49 +11,56 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_QUADRATICCOST_H
 #define IDYNTREE_OPTIMALCONTROL_QUADRATICCOST_H
 
+#include <iDynTree/MatrixDynSize.h>
 #include <iDynTree/QuadraticLikeCost.h>
 #include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/VectorDynSize.h>
-#include <iDynTree/MatrixDynSize.h>
 #include <memory>
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-       /**
-        * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-        * \ingroup iDynTreeExperimental
-        */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-       class QuadraticCost
-       : public QuadraticLikeCost {
+class QuadraticCost : public QuadraticLikeCost
+{
 
-       public:
-           QuadraticCost(const std::string& costName);
+public:
+    QuadraticCost(const std::string& costName);
 
-           ~QuadraticCost();
+    ~QuadraticCost();
 
-           bool setStateCost(const iDynTree::MatrixDynSize& stateHessian, const iDynTree::VectorDynSize& stateGradient);
+    bool setStateCost(const iDynTree::MatrixDynSize& stateHessian,
+                      const iDynTree::VectorDynSize& stateGradient);
 
-           bool setStateCost(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> timeVaryingStateHessian,
-                             std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingStateGradient);
+    bool setStateCost(
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> timeVaryingStateHessian,
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingStateGradient);
 
-           bool setControlCost(const iDynTree::MatrixDynSize& controlHessian, const iDynTree::VectorDynSize& controlGradient);
+    bool setControlCost(const iDynTree::MatrixDynSize& controlHessian,
+                        const iDynTree::VectorDynSize& controlGradient);
 
-           bool setControlCost(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> timeVaryingControlHessian,
-                               std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingControlGradient);
+    bool setControlCost(
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> timeVaryingControlHessian,
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> timeVaryingControlGradient);
 
-           bool setCostBias(double stateCostBias, double controlCostBias);
+    bool setCostBias(double stateCostBias, double controlCostBias);
 
-           bool setCostBias(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingStateCostBias,
-                            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingControlCostBias);
+    bool setCostBias(
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingStateCostBias,
+        std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingControlCostBias);
 
-           bool setStateHessianSparsity(const SparsityStructure& stateSparsity);
+    bool setStateHessianSparsity(const SparsityStructure& stateSparsity);
 
-           bool setControlHessianSparsity(const SparsityStructure& controlSparsity);
-
-       };
-    }
-}
+    bool setControlHessianSparsity(const SparsityStructure& controlSparsity);
+};
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_QUADRATICCOST_H */

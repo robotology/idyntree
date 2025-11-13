@@ -14,26 +14,25 @@
 
 #include "cmdline.h"
 
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
 
 /**
  * Add the option supported by the idyntree-model-simplify-shapes utility
  */
-void addOptions(cmdline::parser &cmd)
+void addOptions(cmdline::parser& cmd)
 {
-    cmd.add<std::string>("model", 'm',
-                         "Input model to load and simplify.",
-                         true);
+    cmd.add<std::string>("model", 'm', "Input model to load and simplify.", true);
 
-    cmd.add<std::string>("output-model", 'o',
-                         "Output simplified model.",
-                         true);
+    cmd.add<std::string>("output-model", 'o', "Output simplified model.", true);
 
     // Specify which shapes need to be approximated
-    cmd.add<std::string>("shapes-approximation", 's',
-                         "Specify which shapes need to be approximated. Supported values are: visual, collision, both.",
-                         false, "both");
+    cmd.add<std::string>("shapes-approximation",
+                         's',
+                         "Specify which shapes need to be approximated. Supported values are: "
+                         "visual, collision, both.",
+                         false,
+                         "both");
 }
 
 int main(int argc, char** argv)
@@ -48,9 +47,11 @@ int main(int argc, char** argv)
     const std::string& shapesApproximation = cmd.get<std::string>("shapes-approximation");
 
     // check if the shapes approximation is valid
-    if (shapesApproximation != "visual" && shapesApproximation != "collision" && shapesApproximation != "both")
+    if (shapesApproximation != "visual" && shapesApproximation != "collision"
+        && shapesApproximation != "both")
     {
-        std::cerr << "Invalid shapes approximation value: " << shapesApproximation << " . Supported values are: visual, collision, both." << std::endl;
+        std::cerr << "Invalid shapes approximation value: " << shapesApproximation
+                  << " . Supported values are: visual, collision, both." << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -64,20 +65,22 @@ int main(int argc, char** argv)
     }
 
     // Simplify the model
-    iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions options = 
-        iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions();
-    options.conversionType = iDynTree::ApproximateSolidShapesWithPrimitiveShapeConversionType::ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
+    iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions options
+        = iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions();
+    options.conversionType = iDynTree::ApproximateSolidShapesWithPrimitiveShapeConversionType::
+        ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
     if (shapesApproximation == "visual")
     {
-        options.shapesToApproximate = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::VisualShapes;
-    }
-    else if (shapesApproximation == "collision")
+        options.shapesToApproximate
+            = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::VisualShapes;
+    } else if (shapesApproximation == "collision")
     {
-        options.shapesToApproximate = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::CollisionShapes;
-    }
-    else if (shapesApproximation == "both")
+        options.shapesToApproximate
+            = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::CollisionShapes;
+    } else if (shapesApproximation == "both")
     {
-        options.shapesToApproximate = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes;
+        options.shapesToApproximate
+            = iDynTree::ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes;
     }
 
     iDynTree::Model simplifiedModel;
@@ -89,7 +92,6 @@ int main(int argc, char** argv)
         return EXIT_FAILURE;
     }
 
-
     // Export the model to file
     iDynTree::ModelExporter mdlExporter;
     iDynTree::ModelExporterOptions exportOptions = iDynTree::ModelExporterOptions();
@@ -98,10 +100,10 @@ int main(int argc, char** argv)
 
     if (!ok)
     {
-        std::cerr << "Impossible to export simplified model at file " << outputModelPath << std::endl;
+        std::cerr << "Impossible to export simplified model at file " << outputModelPath
+                  << std::endl;
         return EXIT_FAILURE;
     }
-
 
     return EXIT_SUCCESS;
 }

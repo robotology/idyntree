@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_TRIPLETS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/Triplets.h> is deprecated. Please use <iDynTree/Triplets.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Core/Triplets.h> is deprecated. Please use <iDynTree/Triplets.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Triplets.h>

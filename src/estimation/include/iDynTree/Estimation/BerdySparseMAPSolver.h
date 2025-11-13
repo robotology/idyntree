@@ -5,10 +5,9 @@
 #define IDYNTREE_ESTIMATION_BERDY_SPARSEMAPSOLVER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/BerdySparseMAPSolver.h> is deprecated. Please use <iDynTree/BerdySparseMAPSolver.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Estimation/BerdySparseMAPSolver.h> is deprecated. Please use <iDynTree/BerdySparseMAPSolver.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/BerdySparseMAPSolver.h>
-
 
 #endif /* end of include guard: IDYNTREE_BERDY_SPARSEMAPSOLVER_H */

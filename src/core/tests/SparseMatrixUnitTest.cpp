@@ -2,16 +2,14 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/SparseMatrix.h>
-#include <iDynTree/Triplets.h>
 #include <iDynTree/TestUtils.h>
+#include <iDynTree/Triplets.h>
 #include <iostream>
-
 
 using namespace iDynTree;
 using namespace std;
 
-template <iDynTree::MatrixStorageOrdering ordering>
-void testCreateMatrixFromAccessorOperator()
+template <iDynTree::MatrixStorageOrdering ordering> void testCreateMatrixFromAccessorOperator()
 {
 
     std::cout << "------------------------------------" << std::endl;
@@ -28,23 +26,23 @@ void testCreateMatrixFromAccessorOperator()
     triplets.pushTriplet(iDynTree::Triplet(4, 4, 8));
 
     SparseMatrix<ordering> matrix(5, 5);
-    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
+    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it)
+    {
         matrix(it->row, it->column) = it->value;
     }
 
     std::cout << "Matrix:\n" << matrix.description(true) << std::endl;
     std::cout << "------------------------------------" << std::endl;
 
-    //expect elements at the correct position
-    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
+    // expect elements at the correct position
+    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it)
+    {
         ASSERT_EQUAL_DOUBLE(matrix(it->row, it->column), it->value);
         matrix(it->row, it->column) = it->value;
     }
-
 }
 
-template <iDynTree::MatrixStorageOrdering ordering>
-void testCreateMatrixFromTriplets()
+template <iDynTree::MatrixStorageOrdering ordering> void testCreateMatrixFromTriplets()
 {
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testCreateMatrixFromTriplets" << std::endl;
@@ -66,15 +64,15 @@ void testCreateMatrixFromTriplets()
     std::cout << "Matrix:\n" << matrix.description(true) << "\n";
     std::cout << "------------------------------------" << std::endl;
 
-    //expect elements at the correct position
-    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it) {
+    // expect elements at the correct position
+    for (Triplets::const_iterator it(triplets.begin()); it != triplets.end(); ++it)
+    {
         ASSERT_EQUAL_DOUBLE(matrix(it->row, it->column), it->value);
         matrix(it->row, it->column) = it->value;
     }
 }
 
-template <iDynTree::MatrixStorageOrdering ordering>
-void testCreateMatrixFromDuplicateTriplets()
+template <iDynTree::MatrixStorageOrdering ordering> void testCreateMatrixFromDuplicateTriplets()
 {
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testCreateMatrixFromDuplicateTriplets" << std::endl;
@@ -98,8 +96,8 @@ void testCreateMatrixFromDuplicateTriplets()
     std::cout << "Matrix:\n" << matrix.description(true) << "\n";
     std::cout << "------------------------------------" << std::endl;
 
-    //I still have to implement a sort of "Merge" triplets.
-    //Until that, manually write the asserts
+    // I still have to implement a sort of "Merge" triplets.
+    // Until that, manually write the asserts
 
     ASSERT_EQUAL_DOUBLE(matrix(0, 0), -1);
     ASSERT_EQUAL_DOUBLE(matrix(2, 0), 7);
@@ -110,7 +108,6 @@ void testCreateMatrixFromDuplicateTriplets()
     ASSERT_EQUAL_DOUBLE(matrix(2, 3), 1);
     ASSERT_EQUAL_DOUBLE(matrix(4, 2), 14);
     ASSERT_EQUAL_DOUBLE(matrix(4, 4), 8);
-
 }
 
 template <iDynTree::MatrixStorageOrdering ordering>
@@ -119,19 +116,24 @@ void testMatrixIterator(SparseMatrix<ordering> matrix)
     SparseMatrix<ordering> originalMatrix(matrix);
     std::cout << "------------------------------------" << std::endl;
     std::cout << "testMatrixIterator" << std::endl;
-    //iterator can modify values
-    for (typename SparseMatrix<ordering>::iterator it(matrix.begin()); it != matrix.end(); ++it) {
+    // iterator can modify values
+    for (typename SparseMatrix<ordering>::iterator it(matrix.begin()); it != matrix.end(); ++it)
+    {
         it->value()++;
     }
 
-    //const iterator cannot
-    for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
+    // const iterator cannot
+    for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin()); it != matrix.end();
+         ++it)
+    {
         std::cout << it->value << "(" << it->row << "," << it->column << ")\n";
     }
 
-    //Assertion:
-    //All the elements in matrix = originalMatrix + 1
-    for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin()); it!= matrix.end() ; ++it) {
+    // Assertion:
+    // All the elements in matrix = originalMatrix + 1
+    for (typename SparseMatrix<ordering>::const_iterator it(matrix.begin()); it != matrix.end();
+         ++it)
+    {
         ASSERT_EQUAL_DOUBLE(matrix(it->row, it->column), 1 + originalMatrix(it->row, it->column));
     }
 
@@ -149,7 +151,6 @@ void testZeroingMatrix(SparseMatrix<ordering> matrix)
 
     ASSERT_IS_TRUE(matrix.numberOfNonZeros() == 0);
     ASSERT_IS_FALSE(matrix.begin().isValid());
-
 }
 
 void testClassesTraits()
@@ -176,18 +177,22 @@ void testRowColumnMajorConversion(SparseMatrix<iDynTree::RowMajor> matrix)
     SparseMatrix<iDynTree::ColumnMajor> columnMajorMatrix;
     columnMajorMatrix = matrix;
 
-    for (unsigned row = 0; row < matrix.rows(); row++) {
-        for (unsigned col = 0; col < matrix.columns(); col++) {
+    for (unsigned row = 0; row < matrix.rows(); row++)
+    {
+        for (unsigned col = 0; col < matrix.columns(); col++)
+        {
             ASSERT_EQUAL_DOUBLE(matrix(row, col), columnMajorMatrix(row, col));
         }
     }
 
     SparseMatrix<iDynTree::RowMajor> rowMajorMatrixConverted(columnMajorMatrix);
 
-    //Now I should assert matrix == rowMatrix
-    //Do the long computation: all all the values!
-    for (unsigned row = 0; row < matrix.rows(); row++) {
-        for (unsigned col = 0; col < matrix.columns(); col++) {
+    // Now I should assert matrix == rowMatrix
+    // Do the long computation: all all the values!
+    for (unsigned row = 0; row < matrix.rows(); row++)
+    {
+        for (unsigned col = 0; col < matrix.columns(); col++)
+        {
             ASSERT_EQUAL_DOUBLE(matrix(row, col), rowMajorMatrixConverted(row, col));
         }
     }
@@ -221,11 +226,10 @@ int main()
     testClassesTraits();
 
     std::cerr << "Testing ColumnMajor ordering" << std::endl;
-    //Column major
+    // Column major
     testCreateMatrixFromAccessorOperator<iDynTree::ColumnMajor>();
     testCreateMatrixFromTriplets<iDynTree::ColumnMajor>();
     testCreateMatrixFromDuplicateTriplets<iDynTree::ColumnMajor>();
-
 
     std::cerr << "Testing RowMajor-ColumnMajor conversions" << std::endl;
     // Testing conversion
@@ -239,8 +243,4 @@ int main()
 
     std::cerr << "\n\n";
     testRowColumnMajorConversion(matrix2);
-
-
-
-
 }

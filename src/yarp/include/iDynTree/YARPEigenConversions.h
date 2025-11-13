@@ -17,19 +17,24 @@ namespace iDynTree
  * @param yarpVector yarp::sig::Vector input
  * @return a Eigen::Map vector that points to the data contained in the yarp vector
  */
-inline Eigen::Map<Eigen::VectorXd> toEigen(yarp::sig::Vector & yarpVector)
+inline Eigen::Map<Eigen::VectorXd> toEigen(yarp::sig::Vector& yarpVector)
 {
-    return Eigen::Map<Eigen::VectorXd>(yarpVector.data(),yarpVector.size());
+    return Eigen::Map<Eigen::VectorXd>(yarpVector.data(), yarpVector.size());
 }
 
 /**
- * Convert a yarp::sig::Matrix to a Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > object
+ * Convert a yarp::sig::Matrix to a Eigen::Map<
+ * Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > object
  * @param yarpVector yarp::sig::Matrix input
  * @return a Eigen::Map vector that points to the data contained in the yarp matrix
  */
-inline Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(yarp::sig::Matrix & yarpMatrix)
+inline Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>
+toEigen(yarp::sig::Matrix& yarpMatrix)
 {
-    return Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(yarpMatrix.data(),yarpMatrix.rows(),yarpMatrix.cols());
+    return Eigen::Map<
+        Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(yarpMatrix.data(),
+                                                                                yarpMatrix.rows(),
+                                                                                yarpMatrix.cols());
 }
 
 /**
@@ -37,21 +42,24 @@ inline Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::Row
  * @param yarpVector yarp::sig::Vector input
  * @return a Eigen::Map vector that points to the data contained in the yarp vector
  */
-inline Eigen::Map<const Eigen::VectorXd> toEigen(const yarp::sig::Vector & yarpVector)
+inline Eigen::Map<const Eigen::VectorXd> toEigen(const yarp::sig::Vector& yarpVector)
 {
-    return Eigen::Map<const Eigen::VectorXd>(yarpVector.data(),yarpVector.size());
+    return Eigen::Map<const Eigen::VectorXd>(yarpVector.data(), yarpVector.size());
 }
 
 /**
- * Convert a const yarp::sig::Matrix to a Eigen::Map< const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > object
+ * Convert a const yarp::sig::Matrix to a Eigen::Map< const
+ * Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > object
  * @param yarpVector yarp::sig::Matrix input
  * @return a Eigen::Map vector that points to the data contained in the yarp matrix
  */
-inline Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(const yarp::sig::Matrix & yarpMatrix)
+inline Eigen::Map<const Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>
+toEigen(const yarp::sig::Matrix& yarpMatrix)
 {
-    return Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(yarpMatrix.data(),yarpMatrix.rows(),yarpMatrix.cols());
+    return Eigen::Map<const Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>>(
+        yarpMatrix.data(), yarpMatrix.rows(), yarpMatrix.cols());
 }
 
-}
+} // namespace iDynTree
 
 #endif

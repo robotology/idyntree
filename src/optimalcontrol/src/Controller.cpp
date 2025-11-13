@@ -10,23 +10,29 @@
 
 #include <iDynTree/Controller.h>
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-    Controller::Controller(size_t controlSpaceSize)
-    :m_controllerSize(controlSpaceSize)
-    {}
-
-    Controller::~Controller()
-    {}
-
-    bool Controller::setStateFeedback(double time, const VectorDynSize &stateFeedback){
-        return false;
-    }
-
-    size_t Controller::controlSpaceSize(){
-        return m_controllerSize;
-    }
-
-    }
+Controller::Controller(size_t controlSpaceSize)
+    : m_controllerSize(controlSpaceSize)
+{
 }
+
+Controller::~Controller()
+{
+}
+
+bool Controller::setStateFeedback(double time, const VectorDynSize& stateFeedback)
+{
+    return false;
+}
+
+size_t Controller::controlSpaceSize()
+{
+    return m_controllerSize;
+}
+
+} // namespace optimalcontrol
+} // namespace iDynTree

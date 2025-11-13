@@ -12,91 +12,98 @@
 #define IDYNTREE_OPTIMALCONTROL_LINEARSYSTEM_H
 
 #include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/SparsityStructure.h>
+#include <iDynTree/TimeVaryingObject.h>
 #include <memory>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
-    class MatrixDynSize;
+class MatrixDynSize;
 
-    namespace optimalcontrol {
+namespace optimalcontrol
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        class LinearSystem 
-        : public iDynTree::optimalcontrol::DynamicalSystem {
+class LinearSystem : public iDynTree::optimalcontrol::DynamicalSystem
+{
 
-        public:
+public:
+    LinearSystem(size_t stateSize, size_t controlSize);
 
-            LinearSystem(size_t stateSize, size_t controlSize);
+    LinearSystem(size_t stateSize,
+                 size_t controlSize,
+                 const iDynTree::optimalcontrol::SparsityStructure& stateSparsity,
+                 const iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
-            LinearSystem(size_t stateSize, size_t controlSize,
-                         const iDynTree::optimalcontrol::SparsityStructure& stateSparsity,
-                         const iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
+    LinearSystem(const LinearSystem& other) = delete;
 
-            LinearSystem(const LinearSystem& other) = delete;
+    ~LinearSystem() override;
 
-            ~LinearSystem() override;
+    // time invariant system: single matrix
+    bool setStateMatrix(const iDynTree::MatrixDynSize& stateMatrix);
 
-            // time invariant system: single matrix
-            bool setStateMatrix(const iDynTree::MatrixDynSize& stateMatrix);
+    bool setControlMatrix(const iDynTree::MatrixDynSize& controlMatrix);
 
-            bool setControlMatrix(const iDynTree::MatrixDynSize& controlMatrix);
+    // time variant case
+    bool setStateMatrix(std::shared_ptr<TimeVaryingMatrix> stateMatrix);
 
-            //time variant case
-            bool setStateMatrix(std::shared_ptr<TimeVaryingMatrix> stateMatrix);
+    bool setControlMatrix(std::shared_ptr<TimeVaryingMatrix> controlMatrix);
 
-            bool setControlMatrix(std::shared_ptr<TimeVaryingMatrix> controlMatrix);
+    virtual bool
+    dynamics(const VectorDynSize& state, double time, VectorDynSize& stateDynamics) final;
 
-            virtual bool dynamics(const VectorDynSize& state,
-                                  double time,
-                                  VectorDynSize& stateDynamics) final;
+    virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
+                                              double time,
+                                              MatrixDynSize& dynamicsDerivative) final;
 
-            virtual bool dynamicsStateFirstDerivative(const VectorDynSize& state,
-                                                      double time,
-                                                      MatrixDynSize& dynamicsDerivative) final;
+    virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
+                                                double time,
+                                                MatrixDynSize& dynamicsDerivative) final;
 
-            virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
-                                                        double time,
-                                                        MatrixDynSize& dynamicsDerivative) final;
+    virtual bool dynamicsStateFirstDerivativeSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
 
-            virtual bool dynamicsStateFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+    virtual bool dynamicsControlFirstDerivativeSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
-            virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
+    virtual bool
+    dynamicsSecondPartialDerivativeWRTState(double time,
+                                            const iDynTree::VectorDynSize& state,
+                                            const iDynTree::VectorDynSize& lambda,
+                                            iDynTree::MatrixDynSize& partialDerivative) final;
 
-            virtual bool dynamicsSecondPartialDerivativeWRTState(double time,
-                                                                 const iDynTree::VectorDynSize& state,
-                                                                 const iDynTree::VectorDynSize& lambda,
-                                                                 iDynTree::MatrixDynSize& partialDerivative) final;
+    virtual bool
+    dynamicsSecondPartialDerivativeWRTControl(double time,
+                                              const iDynTree::VectorDynSize& state,
+                                              const iDynTree::VectorDynSize& lambda,
+                                              iDynTree::MatrixDynSize& partialDerivative) final;
 
-            virtual bool dynamicsSecondPartialDerivativeWRTControl(double time,
-                                                                   const iDynTree::VectorDynSize& state,
-                                                                   const iDynTree::VectorDynSize& lambda,
-                                                                   iDynTree::MatrixDynSize& partialDerivative) final;
+    virtual bool
+    dynamicsSecondPartialDerivativeWRTStateControl(double time,
+                                                   const iDynTree::VectorDynSize& state,
+                                                   const iDynTree::VectorDynSize& lambda,
+                                                   iDynTree::MatrixDynSize& partialDerivative) final;
 
-            virtual bool dynamicsSecondPartialDerivativeWRTStateControl(double time,
-                                                                        const iDynTree::VectorDynSize& state,
-                                                                        const iDynTree::VectorDynSize& lambda,
-                                                                        iDynTree::MatrixDynSize& partialDerivative) final;
+    virtual bool dynamicsSecondPartialDerivativeWRTStateSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
 
-            virtual bool dynamicsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+    virtual bool dynamicsSecondPartialDerivativeWRTStateControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
 
-            virtual bool dynamicsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
+    virtual bool dynamicsSecondPartialDerivativeWRTControlSparsity(
+        iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
-            virtual bool dynamicsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
-
-
-        private:
-            class LinearSystemPimpl;
-            LinearSystemPimpl* m_pimpl;
-
-        };
-    }
-}
-
+private:
+    class LinearSystemPimpl;
+    LinearSystemPimpl* m_pimpl;
+};
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_LINEARSYSTEM_H */

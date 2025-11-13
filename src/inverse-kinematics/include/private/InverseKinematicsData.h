@@ -9,41 +9,45 @@
 #include <iDynTree/InverseKinematics.h>
 
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/Model.h>
-#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/Transform.h>
 #include <iDynTree/Twist.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <IpIpoptApplication.hpp>
 
-
-#include <vector>
 #include <map>
 #include <unordered_map>
+#include <vector>
 
-namespace internal {
-namespace kinematics{
+namespace internal
+{
+namespace kinematics
+{
 
-    class InverseKinematicsData;
-    class TransformConstraint;
-    typedef std::map<int, internal::kinematics::TransformConstraint> TransformMap; //ordered map. Order is important
+class InverseKinematicsData;
+class TransformConstraint;
+typedef std::map<int, internal::kinematics::TransformConstraint> TransformMap; // ordered map. Order
+                                                                               // is important
 
-    class InverseKinematicsNLP;
-}
-}
+class InverseKinematicsNLP;
+} // namespace kinematics
+} // namespace internal
 
-class internal::kinematics::InverseKinematicsData {
-    //Declare as friend the IKNLP class so as it can access the private data
+class internal::kinematics::InverseKinematicsData
+{
+    // Declare as friend the IKNLP class so as it can access the private data
     friend class InverseKinematicsNLP;
     // and also inverseKineamtics
     friend class iDynTree::InverseKinematics;
 
-    //forbid copy
+    // forbid copy
     InverseKinematicsData(const InverseKinematicsData&);
     InverseKinematicsData& operator=(const InverseKinematicsData&);
 
-    struct {
+    struct
+    {
         bool isActive;
         iDynTree::Position desiredPosition;
         double weight;
@@ -51,12 +55,13 @@ class internal::kinematics::InverseKinematicsData {
         double constraintTolerance;
     } m_comTarget;
 
-    // The variables are divided among the optimized one (buffers inside the Solver, except results and I/O variables here),
-    // the "model" variables and the parameters of the optimization.
+    // The variables are divided among the optimized one (buffers inside the Solver, except results
+    // and I/O variables here), the "model" variables and the parameters of the optimization.
 
     iDynTree::InverseKinematicsTreatTargetAsConstraint m_defaultTargetResolutionMode;
 
-    enum InverseKinematicsInitialConditionType {
+    enum InverseKinematicsInitialConditionType
+    {
         InverseKinematicsInitialConditionNotSet,
         InverseKinematicsInitialConditionPartial,
         InverseKinematicsInitialConditionFull
@@ -68,24 +73,34 @@ public:
     ///@{
     iDynTree::KinDynComputations m_dynamics; /*!< object for kinematics and dynamics computation */
 
-    std::vector<std::pair<double, double> > m_jointLimits; /*!< Limits for joints. The pair is ordered as min and max */
+    std::vector<std::pair<double, double>> m_jointLimits; /*!< Limits for joints. The pair is
+                                                             ordered as min and max */
 
     /*!
      * Variables needed to identify the state of the robot
      * i.e. position and velocity
      */
-    struct {
-        iDynTree::VectorDynSize jointsConfiguration; /*!< joint configuration \f$ q_j \in \mathbb{R}^n \f$ */
+    struct
+    {
+        iDynTree::VectorDynSize jointsConfiguration; /*!< joint configuration \f$ q_j \in
+                                                        \mathbb{R}^n \f$ */
         iDynTree::Transform basePose; /*!< base position \f$ {}^w H_{base} \in SE(3) \f$ */
-        iDynTree::VectorDynSize jointsVelocity; /*!< joint velotiy \f$ \dot{q}_j \in \mathbb{R}^n \f$ */
+        iDynTree::VectorDynSize jointsVelocity; /*!< joint velotiy \f$ \dot{q}_j \in \mathbb{R}^n
+                                                   \f$ */
         iDynTree::Twist baseTwist; /*!< base velocity \f$ [\dot{p}, {}^I \omega] \in se(3) \f$ */
-        iDynTree::Vector3 worldGravity; /*!< gravity acceleration in inertial frame, i.e. -9.81 along z */
+        iDynTree::Vector3 worldGravity; /*!< gravity acceleration in inertial frame, i.e. -9.81
+                                           along z */
     } m_state;
 
     size_t m_dofs; /*!< internal DoFs of the model, i.e. size of joint vectors */
-    struct {
-        std::vector<bool> fixedVariables; /* for each variable it says if it is fixed or optimisation variable */
-        std::unordered_map<int, int> modelJointsToOptimisedJoints; // that is key = index in the reduced set of variables, value = index in the full model
+    struct
+    {
+        std::vector<bool> fixedVariables; /* for each variable it says if it is fixed or
+                                             optimisation variable */
+        std::unordered_map<int, int> modelJointsToOptimisedJoints; // that is key = index in the
+                                                                   // reduced set of variables,
+                                                                   // value = index in the full
+                                                                   // model
         iDynTree::Model reducedModel;
     } m_reducedVariablesInfo;
 
@@ -95,13 +110,20 @@ public:
      */
     ///@{
 
-    enum iDynTree::InverseKinematicsRotationParametrization m_rotationParametrization; /*!< type of parametrization of the orientation */
+    enum iDynTree::InverseKinematicsRotationParametrization
+        m_rotationParametrization; /*!< type of
+                                      parametrization
+                                      of the
+                                      orientation
+                                    */
 
     TransformMap m_constraints; /*!< list of hard constraints */
     TransformMap m_targets; /*!< list of targets */
 
-    // Attributes relative to the COM Projection constraint (TODO(traversaro): move most of them in a constraint-specific class)
-    iDynTree::ConvexHullProjectionConstraint m_comHullConstraint; /*!< Helper to implement COM constraint */
+    // Attributes relative to the COM Projection constraint (TODO(traversaro): move most of them in
+    // a constraint-specific class)
+    iDynTree::ConvexHullProjectionConstraint m_comHullConstraint; /*!< Helper to implement COM
+                                                                     constraint */
     iDynTree::Vector3 m_comHullConstraint_projDirection;
     std::vector<iDynTree::FrameIndex> m_comHullConstraint_supportFramesIndeces;
     std::vector<iDynTree::Polygon> m_comHullConstraint_supportPolygons;
@@ -109,20 +131,25 @@ public:
     iDynTree::Direction m_comHullConstraint_yAxisOfPlaneInWorld;
     iDynTree::Position m_comHullConstraint_originOfPlaneInWorld;
 
-    //Preferred joints configuration for the optimization
-    //Size: getNrOfDOFs of the considered model
+    // Preferred joints configuration for the optimization
+    // Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
     iDynTree::VectorDynSize m_preferredJointsWeight;
 
-    bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
+    bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are
+                                           provided by the user */
 
-    InverseKinematicsInitialConditionType m_areJointsInitialConditionsSet; /*!< specify if the initial condition for the joints are provided by the user */
+    InverseKinematicsInitialConditionType m_areJointsInitialConditionsSet; /*!< specify if the
+                                                                              initial condition for
+                                                                              the joints are
+                                                                              provided by the user
+                                                                            */
 
-    //These variables containts the initial condition
+    // These variables containts the initial condition
     iDynTree::Transform m_baseInitialCondition;
     iDynTree::VectorDynSize m_jointInitialConditions;
 
-    //Result of optimization
+    // Result of optimization
     iDynTree::Transform m_baseResults;
     iDynTree::VectorDynSize m_jointsResults;
     iDynTree::VectorDynSize m_constraintMultipliers;
@@ -171,7 +198,6 @@ public:
 
     ///@}
 
-
     /*!
      * Default constructor
      */
@@ -182,7 +208,8 @@ public:
      * @param model the model to be used
      * @return true if successfull, false otherwise
      */
-    bool setModel(const iDynTree::Model& model, const std::vector<std::string> &consideredJoints = std::vector<std::string>());
+    bool setModel(const iDynTree::Model& model,
+                  const std::vector<std::string>& consideredJoints = std::vector<std::string>());
 
     /*!
      * Set new joint limits
@@ -190,7 +217,7 @@ public:
      * @param jointLimits vector of new joint limits to be imposed
      * @return true if successfull, false otherwise
      */
-    bool setJointLimits(std::vector<std::pair<double, double> >& jointLimits);
+    bool setJointLimits(std::vector<std::pair<double, double>>& jointLimits);
 
     /*!
      * Set new joint limits (iDynTree.Span variant)
@@ -198,8 +225,8 @@ public:
      * @param jointLimitsMax vector of new joint minimum limits to be imposed
      * @return true if successfull, false otherwise
      */
-     bool setJointLimits(iDynTree::Span<const double> jointLimitsMin, iDynTree::Span<const double> jointLimitsMax);
-
+    bool setJointLimits(iDynTree::Span<const double> jointLimitsMin,
+                        iDynTree::Span<const double> jointLimitsMax);
 
     /*!
      * Get current joint limits
@@ -207,7 +234,7 @@ public:
      * @param jointLimits vector of current joint limits
      * @return true if successfull, false otherwise
      */
-    bool getJointLimits(std::vector<std::pair<double, double> >& jointLimits);
+    bool getJointLimits(std::vector<std::pair<double, double>>& jointLimits);
 
     /*!
      * Get current joint limits (iDynTree.Span variant)
@@ -215,7 +242,8 @@ public:
      * @param jointLimitsMax vector of current max joint limits
      * @return true if successfull, false otherwise
      */
-     bool getJointLimits(iDynTree::Span<double> jointLimitsMin, iDynTree::Span< double> jointLimitsMax);
+    bool
+    getJointLimits(iDynTree::Span<double> jointLimitsMin, iDynTree::Span<double> jointLimitsMax);
 
     /*!
      * Reset variables to defaults
@@ -232,7 +260,8 @@ public:
      * @param frameTransform the frame to be considered as a constraint
      * @return true if successfull, false otherwise
      */
-    bool addFrameConstraint(const internal::kinematics::TransformConstraint& frameTransformConstraint);
+    bool
+    addFrameConstraint(const internal::kinematics::TransformConstraint& frameTransformConstraint);
 
     /*!
      * Add a target for the specified frame
@@ -254,14 +283,17 @@ public:
      * Update the position reference for a target
      *
      */
-    void updatePositionTarget(TransformMap::iterator target, iDynTree::Position newPos, double newPosWeight);
+    void updatePositionTarget(TransformMap::iterator target,
+                              iDynTree::Position newPos,
+                              double newPosWeight);
 
     /*!
      * Update the position reference for a target
      *
      */
-    void updateRotationTarget(TransformMap::iterator target, iDynTree::Rotation newRot, double newRotWeight);
-
+    void updateRotationTarget(TransformMap::iterator target,
+                              iDynTree::Rotation newRot,
+                              double newRotWeight);
 
     /*!
      * Set the current robot configuration
@@ -276,7 +308,8 @@ public:
      * @param jointConfiguration joints configuration
      * @return true if successfull, false otherwise
      */
-    bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration, const iDynTree::VectorDynSize& jointConfiguration);
+    bool setRobotConfiguration(const iDynTree::Transform& baseConfiguration,
+                               const iDynTree::VectorDynSize& jointConfiguration);
 
     /*!
      * Set the initial robot joint configuration for a specified joint
@@ -292,7 +325,8 @@ public:
      * Currently RPY and Quaternion are supported
      * @param parametrization type of parametrization
      */
-    void setRotationParametrization(enum iDynTree::InverseKinematicsRotationParametrization parametrization);
+    void setRotationParametrization(
+        enum iDynTree::InverseKinematicsRotationParametrization parametrization);
 
     /*! Return the current rotation parametrization used by the solver
      * @return the current rotation parametrization
@@ -305,7 +339,8 @@ public:
      *
      * @param mode how to treat the targets
      */
-    void setDefaultTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+    void
+    setDefaultTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
 
     enum iDynTree::InverseKinematicsTreatTargetAsConstraint defaultTargetResolutionMode();
 
@@ -315,12 +350,14 @@ public:
      *
      * @param mode how to treat the target
      */
-    void setTargetResolutionMode(TransformMap::iterator target, enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
+    void setTargetResolutionMode(TransformMap::iterator target,
+                                 enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
 
     /*! Return the resolution mode adopted for the specified target
      * @return the resolution mode
      */
-    enum iDynTree::InverseKinematicsTreatTargetAsConstraint targetResolutionMode(TransformMap::iterator target) const;
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint
+    targetResolutionMode(TransformMap::iterator target) const;
 
     /*! Solve the NLP problem
      *
@@ -346,7 +383,6 @@ public:
     bool isCoMTargetActive();
 
     void setCoMTargetInactive();
-
 };
 
 #endif /* end of include guard: IDYNTREE_INTERNAL_INVERSEKINEMATICSDATA_H */

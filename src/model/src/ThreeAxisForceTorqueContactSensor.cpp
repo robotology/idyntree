@@ -12,7 +12,8 @@
 
 #include <iDynTree/Model.h>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
 struct ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensorPrivateAttributes
 {
@@ -24,7 +25,6 @@ struct ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensorPriva
     std::vector<Position> m_loadCellLocations;
 };
 
-
 ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensor()
 {
     this->pimpl = new ThreeAxisForceTorqueContactSensorPrivateAttributes;
@@ -33,24 +33,23 @@ ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensor()
     this->pimpl->link_H_sensor = Transform::Identity();
     this->pimpl->parent_link_index = -1;
     this->pimpl->parent_link_name = "";
-
 }
 
-ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensor(const ThreeAxisForceTorqueContactSensor& other):
-    pimpl(new ThreeAxisForceTorqueContactSensorPrivateAttributes(*(other.pimpl)))
+ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensor(
+    const ThreeAxisForceTorqueContactSensor& other)
+    : pimpl(new ThreeAxisForceTorqueContactSensorPrivateAttributes(*(other.pimpl)))
 {
-
 }
 
-ThreeAxisForceTorqueContactSensor& ThreeAxisForceTorqueContactSensor::operator=(const ThreeAxisForceTorqueContactSensor& other)
+ThreeAxisForceTorqueContactSensor&
+ThreeAxisForceTorqueContactSensor::operator=(const ThreeAxisForceTorqueContactSensor& other)
 {
-    if(this != &other)
+    if (this != &other)
     {
         *pimpl = *(other.pimpl);
     }
     return *this;
 }
-
 
 ThreeAxisForceTorqueContactSensor::~ThreeAxisForceTorqueContactSensor()
 {
@@ -63,13 +62,12 @@ bool ThreeAxisForceTorqueContactSensor::setName(const std::string& _name)
     return true;
 }
 
-
-bool ThreeAxisForceTorqueContactSensor::setLinkSensorTransform(const iDynTree::Transform& link_H_sensor)
+bool ThreeAxisForceTorqueContactSensor::setLinkSensorTransform(
+    const iDynTree::Transform& link_H_sensor)
 {
-      this->pimpl->link_H_sensor = link_H_sensor;
-      return true;
+    this->pimpl->link_H_sensor = link_H_sensor;
+    return true;
 }
-
 
 bool ThreeAxisForceTorqueContactSensor::setParentLink(const std::string& parent)
 {
@@ -77,31 +75,30 @@ bool ThreeAxisForceTorqueContactSensor::setParentLink(const std::string& parent)
     return true;
 }
 
-bool ThreeAxisForceTorqueContactSensor::setParentLinkIndex(const LinkIndex &parent_index)
+bool ThreeAxisForceTorqueContactSensor::setParentLinkIndex(const LinkIndex& parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;
-
 }
 
 std::string ThreeAxisForceTorqueContactSensor::getParentLink() const
 {
-    return(this->pimpl->parent_link_name);
+    return (this->pimpl->parent_link_name);
 }
 
 LinkIndex ThreeAxisForceTorqueContactSensor::getParentLinkIndex() const
 {
-    return(this->pimpl->parent_link_index);
+    return (this->pimpl->parent_link_index);
 }
 
 bool ThreeAxisForceTorqueContactSensor::isValid() const
 {
-    if( this->getName() == "" )
+    if (this->getName() == "")
     {
         return false;
     }
 
-    if( this->pimpl->parent_link_index < 0 )
+    if (this->pimpl->parent_link_index < 0)
     {
         // Return false because the links is not appropriately setted
         return false;
@@ -112,14 +109,14 @@ bool ThreeAxisForceTorqueContactSensor::isValid() const
 
 Sensor* ThreeAxisForceTorqueContactSensor::clone() const
 {
-    return (Sensor *)new ThreeAxisForceTorqueContactSensor(*this);
+    return (Sensor*)new ThreeAxisForceTorqueContactSensor(*this);
 }
 
 bool ThreeAxisForceTorqueContactSensor::updateIndices(const Model& model)
 {
     iDynTree::LinkIndex linkNewIndex = model.getLinkIndex(this->pimpl->parent_link_name);
 
-    if( linkNewIndex == iDynTree::LINK_INVALID_INDEX )
+    if (linkNewIndex == iDynTree::LINK_INVALID_INDEX)
     {
         return false;
     }
@@ -141,37 +138,44 @@ SensorType ThreeAxisForceTorqueContactSensor::getSensorType() const
 
 Transform ThreeAxisForceTorqueContactSensor::getLinkSensorTransform() const
 {
-    return(this->pimpl->link_H_sensor);
+    return (this->pimpl->link_H_sensor);
 }
 
-void ThreeAxisForceTorqueContactSensor::setLoadCellLocations(std::vector<Position> &loadCellLocations)
+void ThreeAxisForceTorqueContactSensor::setLoadCellLocations(
+    std::vector<Position>& loadCellLocations)
 {
     pimpl->m_loadCellLocations = loadCellLocations;
 }
 
-std::vector<Position>  ThreeAxisForceTorqueContactSensor::getLoadCellLocations() const
+std::vector<Position> ThreeAxisForceTorqueContactSensor::getLoadCellLocations() const
 {
     return pimpl->m_loadCellLocations;
 }
 
-Vector3  ThreeAxisForceTorqueContactSensor::computeThreeAxisForceTorqueFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements) const
+Vector3 ThreeAxisForceTorqueContactSensor::computeThreeAxisForceTorqueFromLoadCellMeasurements(
+    VectorDynSize& loadCellMeasurements) const
 {
     if (loadCellMeasurements.size() != pimpl->m_loadCellLocations.size())
     {
-        reportError("ThreeAxisForceTorqueContactSensor","computeThreeAxisForceTorqueFromLoadCellMeasurements", "loadCellMeasurements has the wrong size");
-        Vector3 zero; zero.zero();
+        reportError("ThreeAxisForceTorqueContactSensor",
+                    "computeThreeAxisForceTorqueFromLoadCellMeasurements",
+                    "loadCellMeasurements has the wrong size");
+        Vector3 zero;
+        zero.zero();
         return zero;
     }
 
     Wrench totalWrench;
     totalWrench.zero();
 
-    for (size_t i=0; i < loadCellMeasurements.size(); i++)
+    for (size_t i = 0; i < loadCellMeasurements.size(); i++)
     {
-        // We assume that the total forcetorque is given by the sum of pure forces on the z axis measured by the load cells
-        Wrench loadCellWrench = Wrench(LinearForceVector3(0.0, 0.0, loadCellMeasurements(i)*1.0), AngularForceVector3(0.0, 0.0, 0.0));
+        // We assume that the total forcetorque is given by the sum of pure forces on the z axis
+        // measured by the load cells
+        Wrench loadCellWrench = Wrench(LinearForceVector3(0.0, 0.0, loadCellMeasurements(i) * 1.0),
+                                       AngularForceVector3(0.0, 0.0, 0.0));
         Transform sensor_H_loadCell(Rotation::Identity(), pimpl->m_loadCellLocations[i]);
-        totalWrench = totalWrench + sensor_H_loadCell*loadCellWrench;
+        totalWrench = totalWrench + sensor_H_loadCell * loadCellWrench;
     }
 
     // Project the force torque
@@ -183,35 +187,44 @@ Vector3  ThreeAxisForceTorqueContactSensor::computeThreeAxisForceTorqueFromLoadC
     return ret;
 }
 
-Position ThreeAxisForceTorqueContactSensor::computeCenterOfPressureFromLoadCellMeasurements(VectorDynSize& loadCellMeasurements) const
+Position ThreeAxisForceTorqueContactSensor::computeCenterOfPressureFromLoadCellMeasurements(
+    VectorDynSize& loadCellMeasurements) const
 {
     if (loadCellMeasurements.size() != pimpl->m_loadCellLocations.size())
     {
-        reportError("ThreeAxisForceTorqueContactSensor","computeThreeAxisForceTorqueFromLoadCellMeasurements", "loadCellMeasurements has the wrong size");
-        Position zeroVec; zeroVec.zero();
+        reportError("ThreeAxisForceTorqueContactSensor",
+                    "computeThreeAxisForceTorqueFromLoadCellMeasurements",
+                    "loadCellMeasurements has the wrong size");
+        Position zeroVec;
+        zeroVec.zero();
         return zeroVec;
     }
 
-    // We assume that the location of the load cells is on the XY plane. In this case, the cop is just the average of the locations weighted on the measurements
-    double sumOfMeasurementsInN=0.0;
-    Vector3 weightedSumOfLocations; weightedSumOfLocations.zero();
-    for (size_t i=0; i < loadCellMeasurements.size(); i++)
+    // We assume that the location of the load cells is on the XY plane. In this case, the cop is
+    // just the average of the locations weighted on the measurements
+    double sumOfMeasurementsInN = 0.0;
+    Vector3 weightedSumOfLocations;
+    weightedSumOfLocations.zero();
+    for (size_t i = 0; i < loadCellMeasurements.size(); i++)
     {
         sumOfMeasurementsInN += loadCellMeasurements(i);
-        toEigen(weightedSumOfLocations) += loadCellMeasurements(i)*toEigen(pimpl->m_loadCellLocations[i]);
+        toEigen(weightedSumOfLocations)
+            += loadCellMeasurements(i) * toEigen(pimpl->m_loadCellLocations[i]);
     }
 
     if (sumOfMeasurementsInN < 1e-9)
     {
-        reportError("ThreeAxisForceTorqueContactSensor","computeThreeAxisForceTorqueFromLoadCellMeasurements", "loadCellMeasurements sum is less than 1e-9");
-        Position zeroVec; zeroVec.zero();
+        reportError("ThreeAxisForceTorqueContactSensor",
+                    "computeThreeAxisForceTorqueFromLoadCellMeasurements",
+                    "loadCellMeasurements sum is less than 1e-9");
+        Position zeroVec;
+        zeroVec.zero();
         return zeroVec;
     }
 
     Position ret;
-    toEigen(ret) = toEigen(weightedSumOfLocations)/sumOfMeasurementsInN;
+    toEigen(ret) = toEigen(weightedSumOfLocations) / sumOfMeasurementsInN;
     return ret;
 }
 
-
-}
+} // namespace iDynTree

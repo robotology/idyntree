@@ -1,9 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
-#include <iDynTree/Model.h>
 #include <iDynTree/ContactWrench.h>
+#include <iDynTree/Model.h>
 
 namespace iDynTree
 {
@@ -23,7 +22,6 @@ Wrench& ContactWrench::contactWrench()
     return m_contactWrench;
 }
 
-
 const Wrench& ContactWrench::contactWrench() const
 {
     return m_contactWrench;
@@ -34,18 +32,15 @@ std::size_t& ContactWrench::contactId()
     return m_contactId;
 }
 
-
 const std::size_t& ContactWrench::contactId() const
 {
     return m_contactId;
 }
 
-
 LinkContactWrenches::LinkContactWrenches(std::size_t nrOfLinks)
 {
     this->resize(nrOfLinks);
 }
-
 
 LinkContactWrenches::LinkContactWrenches(const iDynTree::Model& model)
 {
@@ -63,19 +58,21 @@ void LinkContactWrenches::resize(std::size_t nrOfLinks)
     // we make sure that the vector have at least spaces for 3 contacts
     const size_t reservedSlots = 3;
     m_linkContactWrenches.resize(nrOfLinks);
-    for(size_t l=0; l < nrOfLinks; l++)
+    for (size_t l = 0; l < nrOfLinks; l++)
     {
         m_linkContactWrenches[l].resize(0);
         m_linkContactWrenches[l].reserve(reservedSlots);
     }
 }
 
-const ContactWrench& LinkContactWrenches::contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const
+const ContactWrench&
+LinkContactWrenches::contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const
 {
     return m_linkContactWrenches[linkIndex][contactIndex];
 }
 
-ContactWrench& LinkContactWrenches::contactWrench(const LinkIndex linkIndex, const size_t contactIndex)
+ContactWrench&
+LinkContactWrenches::contactWrench(const LinkIndex linkIndex, const size_t contactIndex)
 {
     return m_linkContactWrenches[linkIndex][contactIndex];
 }
@@ -90,7 +87,8 @@ size_t LinkContactWrenches::getNrOfContactsForLink(const LinkIndex linkIndex) co
     return m_linkContactWrenches[linkIndex].size();
 }
 
-void LinkContactWrenches::setNrOfContactsForLink(const LinkIndex linkIndex, const size_t nrOfContacts)
+void LinkContactWrenches::setNrOfContactsForLink(const LinkIndex linkIndex,
+                                                 const size_t nrOfContacts)
 {
     m_linkContactWrenches[linkIndex].resize(nrOfContacts);
     return;
@@ -99,28 +97,28 @@ void LinkContactWrenches::setNrOfContactsForLink(const LinkIndex linkIndex, cons
 bool LinkContactWrenches::computeNetWrenches(LinkNetExternalWrenches& netWrenches) const
 {
     // Resize the output if necessary
-    size_t nrOfLinks =  netWrenches.getNrOfLinks();
-    if( netWrenches.getNrOfLinks() != m_linkContactWrenches.size() )
+    size_t nrOfLinks = netWrenches.getNrOfLinks();
+    if (netWrenches.getNrOfLinks() != m_linkContactWrenches.size())
     {
         netWrenches.resize(m_linkContactWrenches.size());
     }
 
-    for(LinkIndex l=0; l < static_cast<LinkIndex>(nrOfLinks); l++)
+    for (LinkIndex l = 0; l < static_cast<LinkIndex>(nrOfLinks); l++)
     {
         netWrenches(l).zero();
 
         // sum all the contact wrenches
         size_t nrOfContacts = this->getNrOfContactsForLink(l);
-        for(size_t c=0; c < nrOfContacts; c++)
+        for (size_t c = 0; c < nrOfContacts; c++)
         {
             // Each contact wrench is expressed with respect to the contact point
             // and with the orientation of the link frame, so we need to translate it
             // to the link frame
-            const ContactWrench & contact = this->contactWrench(l,c);
+            const ContactWrench& contact = this->contactWrench(l, c);
 
-            Transform link_H_contact(Rotation::Identity(),contact.contactPoint());
+            Transform link_H_contact(Rotation::Identity(), contact.contactPoint());
 
-            Wrench link_wrench_due_to_contact = link_H_contact*contact.contactWrench();
+            Wrench link_wrench_due_to_contact = link_H_contact * contact.contactWrench();
 
             netWrenches(l) = netWrenches(l) + link_wrench_due_to_contact;
         }
@@ -129,20 +127,22 @@ bool LinkContactWrenches::computeNetWrenches(LinkNetExternalWrenches& netWrenche
     return true;
 }
 
-void LinkContactWrenches::addNewContactForLink(const LinkIndex linkIndex, const ContactWrench& newContact)
+void LinkContactWrenches::addNewContactForLink(const LinkIndex linkIndex,
+                                               const ContactWrench& newContact)
 {
     m_linkContactWrenches[linkIndex].push_back(newContact);
 }
 
-bool LinkContactWrenches::addNewContactInFrame(const Model & model,
+bool LinkContactWrenches::addNewContactInFrame(const Model& model,
                                                const FrameIndex frameIndex,
                                                const ContactWrench& ContactInFrame)
 {
-    if( !model.isValidFrameIndex(frameIndex) )
+    if (!model.isValidFrameIndex(frameIndex))
     {
         std::stringstream err;
-        err << "Unknown frame index " << frameIndex << " in model that has " << model.getNrOfFrames() << " frames.";
-        reportError("LinkContactWrenches","addNewContactInFrame",err.str().c_str());
+        err << "Unknown frame index " << frameIndex << " in model that has "
+            << model.getNrOfFrames() << " frames.";
+        reportError("LinkContactWrenches", "addNewContactInFrame", err.str().c_str());
         return false;
     }
 
@@ -152,20 +152,21 @@ bool LinkContactWrenches::addNewContactInFrame(const Model & model,
     // Get the link of the frame
     LinkIndex linkIndex = model.getFrameLink(frameIndex);
 
-    if( !model.isValidLinkIndex(linkIndex) )
+    if (!model.isValidLinkIndex(linkIndex))
     {
         std::stringstream err;
-        err << "Unknown link index " << linkIndex << " in model that has " << model.getNrOfLinks() << " links.";
-        reportError("LinkContactWrenches","addNewContactInFrame",err.str().c_str());
+        err << "Unknown link index " << linkIndex << " in model that has " << model.getNrOfLinks()
+            << " links.";
+        reportError("LinkContactWrenches", "addNewContactInFrame", err.str().c_str());
         return false;
     }
 
     ContactWrench ContactInLink;
 
-    ContactInLink.contactPoint() = link_H_frame*ContactInFrame.contactPoint();
-    ContactInLink.contactWrench() = link_H_frame.getRotation()*ContactInFrame.contactWrench();
+    ContactInLink.contactPoint() = link_H_frame * ContactInFrame.contactPoint();
+    ContactInLink.contactWrench() = link_H_frame.getRotation() * ContactInFrame.contactWrench();
 
-    addNewContactForLink(linkIndex,ContactInLink);
+    addNewContactForLink(linkIndex, ContactInLink);
 
     return true;
 }
@@ -175,27 +176,24 @@ std::string LinkContactWrenches::toString(const Model& model) const
     std::stringstream ss;
 
     size_t nrOfLinks = m_linkContactWrenches.size();
-    for(size_t l=0; l < nrOfLinks; l++)
+    for (size_t l = 0; l < nrOfLinks; l++)
     {
         size_t nrOfContacts = this->getNrOfContactsForLink(l);
 
-        if( nrOfContacts > 0 )
+        if (nrOfContacts > 0)
         {
             ss << "Contact wrenches on link " << model.getLinkName(l) << ":" << std::endl;
-            for(size_t c=0; c < nrOfContacts; c++ )
+            for (size_t c = 0; c < nrOfContacts; c++)
             {
-                ss << "Wrench contact with pos: " << this->contactWrench(l,c).contactPoint().toString() << ","
-                                          "wrench: " << this->contactWrench(l,c).contactWrench().toString() << std::endl;
+                ss << "Wrench contact with pos: "
+                   << this->contactWrench(l, c).contactPoint().toString()
+                   << ","
+                      "wrench: "
+                   << this->contactWrench(l, c).contactWrench().toString() << std::endl;
             }
         }
     }
     return ss.str();
 }
 
-}
-
-
-
-
-
-
+} // namespace iDynTree

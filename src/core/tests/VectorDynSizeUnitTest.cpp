@@ -1,10 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
+#include <iDynTree/TestUtils.h>
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/VectorFixSize.h>
-#include <iDynTree/TestUtils.h>
-
 
 using namespace iDynTree;
 
@@ -12,34 +11,33 @@ int main()
 {
     VectorDynSize vec;
 
-    ASSERT_EQUAL_DOUBLE(vec.size(),0);
-    ASSERT_EQUAL_DOUBLE(vec.capacity(),0);
+    ASSERT_EQUAL_DOUBLE(vec.size(), 0);
+    ASSERT_EQUAL_DOUBLE(vec.capacity(), 0);
 
     vec.resize(10);
 
-    ASSERT_EQUAL_DOUBLE(vec.size(),10);
-    ASSERT_EQUAL_DOUBLE(vec.capacity(),10);
+    ASSERT_EQUAL_DOUBLE(vec.size(), 10);
+    ASSERT_EQUAL_DOUBLE(vec.capacity(), 10);
 
     vec.reserve(20);
 
-    ASSERT_EQUAL_DOUBLE(vec.size(),10);
-    ASSERT_EQUAL_DOUBLE(vec.capacity(),20);
+    ASSERT_EQUAL_DOUBLE(vec.size(), 10);
+    ASSERT_EQUAL_DOUBLE(vec.capacity(), 20);
 
     vec.reserve(30);
 
-    ASSERT_EQUAL_DOUBLE(vec.size(),10);
-    ASSERT_EQUAL_DOUBLE(vec.capacity(),30);
+    ASSERT_EQUAL_DOUBLE(vec.size(), 10);
+    ASSERT_EQUAL_DOUBLE(vec.capacity(), 30);
 
     vec.resize(15);
 
-    ASSERT_EQUAL_DOUBLE(vec.size(),15);
-    ASSERT_EQUAL_DOUBLE(vec.capacity(),30);
+    ASSERT_EQUAL_DOUBLE(vec.size(), 15);
+    ASSERT_EQUAL_DOUBLE(vec.capacity(), 30);
 
     vec.shrink_to_fit();
 
-    ASSERT_EQUAL_DOUBLE(vec.size(),15);
-    ASSERT_EQUAL_DOUBLE(vec.capacity(),15);
-
+    ASSERT_EQUAL_DOUBLE(vec.size(), 15);
+    ASSERT_EQUAL_DOUBLE(vec.capacity(), 15);
 
     VectorDynSize test1, testToSpan;
     testToSpan.resize(15);

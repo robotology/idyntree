@@ -7,35 +7,33 @@
 
 #include <iDynTree/Model.h>
 
-#include <cstdlib>
 #include <cmath>
-#include <iostream>
+#include <cstdlib>
 #include <fstream>
+#include <iostream>
 #include <set>
 
 namespace iDynTree
 {
 
-bool dofsListFromURDF(const std::string & urdf_filename,
-                      std::vector<std::string>& dofs)
+bool dofsListFromURDF(const std::string& urdf_filename, std::vector<std::string>& dofs)
 {
     std::ifstream ifs(urdf_filename.c_str());
 
-    if( !ifs.is_open() )
+    if (!ifs.is_open())
     {
-        std::cerr << "[ERROR] iDynTree::dofsFromURDF : error opening file "
-                  << urdf_filename << std::endl;
+        std::cerr << "[ERROR] iDynTree::dofsFromURDF : error opening file " << urdf_filename
+                  << std::endl;
         return false;
     }
 
-    std::string xml_string( (std::istreambuf_iterator<char>(ifs) ),
-                            (std::istreambuf_iterator<char>()    ) );
+    std::string xml_string((std::istreambuf_iterator<char>(ifs)),
+                           (std::istreambuf_iterator<char>()));
 
-    return dofsListFromURDFString(xml_string,dofs);
+    return dofsListFromURDFString(xml_string, dofs);
 }
 
-bool dofsListFromURDFString(const std::string & urdf_string,
-                            std::vector<std::string>& dofs)
+bool dofsListFromURDFString(const std::string& urdf_string, std::vector<std::string>& dofs)
 {
     // clear the vector
     dofs.resize(0);
@@ -46,9 +44,9 @@ bool dofsListFromURDFString(const std::string & urdf_string,
     bool ok = loader.loadModelFromString(urdf_string);
     iDynTree::Model model = loader.model();
 
-    for(size_t jnt = 0; jnt < model.getNrOfJoints(); jnt++)
+    for (size_t jnt = 0; jnt < model.getNrOfJoints(); jnt++)
     {
-        if( model.getJoint(jnt)->getNrOfDOFs() > 0 )
+        if (model.getJoint(jnt)->getNrOfDOFs() > 0)
         {
             dofs.push_back(model.getJointName(jnt));
         }
@@ -57,5 +55,4 @@ bool dofsListFromURDFString(const std::string & urdf_string,
     return ok;
 }
 
-}
-
+} // namespace iDynTree

@@ -1,18 +1,16 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #ifndef IDYNTREE_SIX_AXIS_FORCE_TORQUE_H
 #define IDYNTREE_SIX_AXIS_FORCE_TORQUE_H
 
 namespace iDynTree
 {
-    class Transform;
-    class Wrench;
-    class Traversal;
-    class Model;
-}
-
+class Transform;
+class Wrench;
+class Traversal;
+class Model;
+} // namespace iDynTree
 
 #include <iDynTree/Sensors.h>
 
@@ -20,242 +18,245 @@ namespace iDynTree
 
 #include <vector>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
+/**
+ * A six axis force torque sensor class implementation of the Sensor.
+ *
+ * \ingroup iDynTreeSensors
+ */
+class SixAxisForceTorqueSensor : public JointSensor
+{
+private:
+    struct SixAxisForceTorqueSensorPrivateAttributes;
+    SixAxisForceTorqueSensorPrivateAttributes* pimpl;
+
+public:
+    /**
+     * Constructor.
+     */
+    SixAxisForceTorqueSensor();
 
     /**
-     * A six axis force torque sensor class implementation of the Sensor.
-     *
-     * \ingroup iDynTreeSensors
+     * Copy constructor
      */
-    class SixAxisForceTorqueSensor: public JointSensor {
-    private:
-        struct SixAxisForceTorqueSensorPrivateAttributes;
-        SixAxisForceTorqueSensorPrivateAttributes * pimpl;
+    SixAxisForceTorqueSensor(const SixAxisForceTorqueSensor& other);
 
-    public:
-        /**
-         * Constructor.
-         */
-        SixAxisForceTorqueSensor();
+    /**
+     * Copy operator
+     */
+    SixAxisForceTorqueSensor& operator=(const SixAxisForceTorqueSensor& other);
 
-        /**
-         * Copy constructor
-         */
-        SixAxisForceTorqueSensor(const SixAxisForceTorqueSensor& other);
+    /**
+     * Destructor.
+     */
+    virtual ~SixAxisForceTorqueSensor();
 
-        /**
-         * Copy operator
-         */
-        SixAxisForceTorqueSensor& operator=(const SixAxisForceTorqueSensor &other);
+    /**
+     * Set the name (id) of the sensor
+     *
+     */
+    bool setName(const std::string& _name);
 
-        /**
-         * Destructor.
-         */
-        virtual ~SixAxisForceTorqueSensor();
+    /**
+     * Set the transform from the sensor to a first link attached to the sensor.
+     *
+     * @return true if link_index is one of the two links attached to the FT sensor, false
+     * otherwise.
+     */
+    bool setFirstLinkSensorTransform(const LinkIndex link_index,
+                                     const iDynTree::Transform& link_H_sensor) const;
 
-        /**
-         * Set the name (id) of the sensor
-         *
-         */
-        bool setName(const std::string &_name);
+    /**
+     * Set the transform from the sensor to a the second link attached to the sensor.
+     *
+     * @return true if link_index is one of the two links attached to the FT sensor, false
+     * otherwise.
+     */
+    bool setSecondLinkSensorTransform(const LinkIndex link_index,
+                                      const iDynTree::Transform& link_H_sensor) const;
 
-        /**
-         * Set the transform from the sensor to a first link attached to the sensor.
-         *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
-         */
-        bool setFirstLinkSensorTransform(const LinkIndex link_index, const iDynTree::Transform & link_H_sensor) const;
+    /**
+     * Get the index of the first link attached to the sensor.
+     *
+     * @return the index of the first link attached to the sensor.
+     */
+    LinkIndex getFirstLinkIndex() const;
 
-        /**
-         * Set the transform from the sensor to a the second link attached to the sensor.
-         *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
-         */
-        bool setSecondLinkSensorTransform(const LinkIndex link_index, const iDynTree::Transform & link_H_sensor) const;
+    /**
+     * Get the index of the first link attached to the sensor.
+     *
+     * @return the index of the first link attached to the sensor.
+     */
+    LinkIndex getSecondLinkIndex() const;
 
-        /**
-         * Get the index of the first link attached to the sensor.
-         *
-         * @return the index of the first link attached to the sensor.
-         */
-        LinkIndex getFirstLinkIndex() const;
+    /**
+     * Set the name of the first link at which the FT sensor is attached.
+     */
+    bool setFirstLinkName(const std::string& name);
 
-        /**
-         * Get the index of the first link attached to the sensor.
-         *
-         * @return the index of the first link attached to the sensor.
-         */
-        LinkIndex getSecondLinkIndex() const;
+    /**
+     * Set the name of the first link at which the FT sensor is attached.
+     */
+    bool setSecondLinkName(const std::string& name);
 
-        /**
-         * Set the name of the first link at which the FT sensor is attached.
-         */
-        bool setFirstLinkName(const std::string & name);
+    /**
+     * Get the name of the first link at which the FT sensor is attached.
+     */
+    std::string getFirstLinkName() const;
 
-        /**
-         * Set the name of the first link at which the FT sensor is attached.
-         */
-        bool setSecondLinkName(const std::string & name);
+    /**
+     * Get the name of the second link at which the FT sensor is attached.
+     */
+    std::string getSecondLinkName() const;
 
-        /**
-         * Get the name of the first link at which the FT sensor is attached.
-         */
-        std::string getFirstLinkName() const;
+    // Documented in JointSensor
+    bool setParentJoint(const std::string& parent);
 
-        /**
-         * Get the name of the second link at which the FT sensor is attached.
-         */
-        std::string getSecondLinkName() const;
+    // Documented in JointSensor
+    bool setParentJointIndex(const JointIndex& parent_index);
 
-        // Documented in JointSensor
-        bool setParentJoint(const std::string &parent);
+    /**
+     * The Six Axis Force Torque sensor measure the Force Torque (wrench)
+     * applied by a link on another link. This method sets the link
+     * on which the measured force is applied.
+     * @return the index of the link on which the measure force is applied.
+     */
+    bool setAppliedWrenchLink(const LinkIndex applied_wrench_index);
 
-        // Documented in JointSensor
-        bool setParentJointIndex(const JointIndex &parent_index);
+    /**
+     * Documented in the sensor
+     *
+     */
+    std::string getName() const;
 
-        /**
-         * The Six Axis Force Torque sensor measure the Force Torque (wrench)
-         * applied by a link on another link. This method sets the link
-         * on which the measured force is applied.
-         * @return the index of the link on which the measure force is applied.
-         */
-        bool setAppliedWrenchLink(const LinkIndex applied_wrench_index);
+    /**
+     * Documented in Sensor
+     */
+    SensorType getSensorType() const;
 
-        /**
-         * Documented in the sensor
-         *
-         */
-        std::string getName() const;
+    // Documented in JontSensor
+    std::string getParentJoint() const;
 
-        /**
-         * Documented in Sensor
-         */
-        SensorType getSensorType() const;
+    // Documented in JointSensor
+    JointIndex getParentJointIndex() const;
 
-        // Documented in JontSensor
-        std::string getParentJoint() const;
+    /*
+     * Documented in Sensor
+     */
+    bool isValid() const;
 
-        // Documented in JointSensor
-        JointIndex getParentJointIndex() const;
+    /*
+     * Documented in Sensor
+     */
+    Sensor* clone() const;
 
-        /*
-         * Documented in Sensor
-         */
-        bool isValid() const;
+    /*
+     * Documented in Sensor
+     */
+    bool updateIndices(const Model& model);
 
-        /*
-         * Documented in Sensor
-         */
-        Sensor * clone() const;
+    /**
+     * The Six Axis Force Torque sensor measure the Force Torque (wrench)
+     * applied by a link on another link. This method returns the link
+     * on which the measured force is applied.
+     * @return the index of the link on which the measure force is applied.
+     */
+    LinkIndex getAppliedWrenchLink() const;
 
-        /*
-         * Documented in Sensor
-         */
-        bool updateIndices(const Model & model);
+    /**
+     * Check if a given link is attached to this FT sensor.
+     * @return true if link_index is attached to the ft sensor, false otherwise
+     */
+    bool isLinkAttachedToSensor(const LinkIndex link_index) const;
 
-        /**
-         * The Six Axis Force Torque sensor measure the Force Torque (wrench)
-         * applied by a link on another link. This method returns the link
-         * on which the measured force is applied.
-         * @return the index of the link on which the measure force is applied.
-         */
-        LinkIndex getAppliedWrenchLink() const;
+    /**
+     * Get the transform from the sensor to the specified link.
+     *
+     * @return true if link_index is one of the two links attached to the FT sensor, false
+     * otherwise.
+     */
+    bool
+    getLinkSensorTransform(const LinkIndex link_index, iDynTree::Transform& link_H_sensor) const;
 
-        /**
-         * Check if a given link is attached to this FT sensor.
-         * @return true if link_index is attached to the ft sensor, false otherwise
-         */
-        bool isLinkAttachedToSensor(const LinkIndex link_index) const;
+    /**
+     * Get wrench applied on the specified link expressed in the specified link frame.
+     *
+     * If the F/T sensors is not connected to link_index, the function will return false
+     * and the wrench_applied_on_link will be zeroed.
+     *
+     * @return true if link_index is one of the two links attached to the FT sensor, false
+     * otherwise.
+     */
+    bool getWrenchAppliedOnLink(const LinkIndex link_index,
+                                const iDynTree::Wrench& measured_wrench,
+                                iDynTree::Wrench& wrench_applied_on_link) const;
 
+    /**
+     * Get the 6x6 matrix that multiplied by the wrench returned by the F/T sensors
+     * returnes the wrench applied on the specified link expressed in the specified link frame.
+     *
+     * If the F/T sensors is not connected to link_index, the function will return false
+     * and the matrix will be zeroed.
+     *
+     * \note This will return and adjoint transformation matrix, possibly with the sign
+     *       changed depending on the "direction" of the F/T sensor (i.e. if it is measures
+     *       the wrench applied by a link to another, of viceversa).
+     *
+     * \note The following condition should always hold :
+     * ~~~
+     * getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);
+     * getWrenchAppliedOnLinkMatrix(link,wrench_applied_on_link_matrix);
+     * wrench_applied_on_link_matrix*measured_wrench.toVector() == wrench_on_link
+     * ~~~
+     *
+     * @return true if link_index is one of the two links attached to the FT sensor, false
+     * otherwise.
+     */
+    bool getWrenchAppliedOnLinkMatrix(const LinkIndex link_index,
+                                      Matrix6x6& wrench_applied_on_link_matrix) const;
 
-        /**
-         * Get the transform from the sensor to the specified link.
-         *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
-         */
-        bool getLinkSensorTransform(const LinkIndex link_index, iDynTree::Transform & link_H_sensor) const;
+    /**
+     * Get the 6x6 matrix that multiplied by the wrench applied on the specified link expressed in
+     * the specified link frame returns the wrench measured by the F/T sensors.
+     *
+     * If the F/T sensors is not connected to link_index, the function will return false
+     * and the matrix will be zeroed.
+     *
+     * \note This will return an adjoint transformation matrix, possibly with the sign
+     *       changed depending on the "direction" of the F/T sensor (i.e. if it is measures
+     *       the wrench applied by a link to another, of viceversa).
+     *
+     * \note The following condition should always hold :
+     * ~~~
+     * getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);
+     * getWrenchAppliedOnLinkInverseMatrix(link,wrench_applied_on_link_inverse_matrix);
+     * measured_wrench.toVector() == wrench_applied_on_link_inverse_matrix*wrench_on_link
+     * ~~~
+     *
+     * @return true if link_index is one of the two links attached to the FT sensor, false
+     * otherwise.
+     */
+    bool
+    getWrenchAppliedOnLinkInverseMatrix(const LinkIndex link_index,
+                                        Matrix6x6& wrench_applied_on_link_inverse_matrix) const;
 
+    /**
+     * Predict sensor measurement when given a vector of internal wrenches
+     * computed with a given traversal.
+     *
+     * @return the predicted Measurement
+     */
+    iDynTree::Wrench
+    predictMeasurement(const Traversal& traversal, const LinkInternalWrenches& intWrenches);
 
-        /**
-         * Get wrench applied on the specified link expressed in the specified link frame.
-         *
-         * If the F/T sensors is not connected to link_index, the function will return false
-         * and the wrench_applied_on_link will be zeroed.
-         *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
-         */
-        bool getWrenchAppliedOnLink(const LinkIndex link_index,
-                                    const iDynTree::Wrench & measured_wrench,
-                                    iDynTree::Wrench & wrench_applied_on_link ) const;
+    /**
+     *
+     */
+    std::string toString(const Model& model) const;
+};
 
-        /**
-         * Get the 6x6 matrix that multiplied by the wrench returned by the F/T sensors
-         * returnes the wrench applied on the specified link expressed in the specified link frame.
-         *
-         * If the F/T sensors is not connected to link_index, the function will return false
-         * and the matrix will be zeroed.
-         *
-         * \note This will return and adjoint transformation matrix, possibly with the sign
-         *       changed depending on the "direction" of the F/T sensor (i.e. if it is measures
-         *       the wrench applied by a link to another, of viceversa).
-         *
-         * \note The following condition should always hold :
-         * ~~~
-         * getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);
-         * getWrenchAppliedOnLinkMatrix(link,wrench_applied_on_link_matrix);
-         * wrench_applied_on_link_matrix*measured_wrench.toVector() == wrench_on_link
-         * ~~~
-         *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
-         */
-        bool getWrenchAppliedOnLinkMatrix(const LinkIndex link_index,
-                                                Matrix6x6 & wrench_applied_on_link_matrix ) const;
-
-        /**
-         * Get the 6x6 matrix that multiplied by the wrench applied on the specified link expressed in the specified link frame
-         * returns the wrench measured by the F/T sensors.
-         *
-         * If the F/T sensors is not connected to link_index, the function will return false
-         * and the matrix will be zeroed.
-         *
-         * \note This will return an adjoint transformation matrix, possibly with the sign
-         *       changed depending on the "direction" of the F/T sensor (i.e. if it is measures
-         *       the wrench applied by a link to another, of viceversa).
-         *
-         * \note The following condition should always hold :
-         * ~~~
-         * getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);
-         * getWrenchAppliedOnLinkInverseMatrix(link,wrench_applied_on_link_inverse_matrix);
-         * measured_wrench.toVector() == wrench_applied_on_link_inverse_matrix*wrench_on_link
-         * ~~~
-         *
-         * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
-         */
-        bool getWrenchAppliedOnLinkInverseMatrix(const LinkIndex link_index,
-                                                 Matrix6x6 & wrench_applied_on_link_inverse_matrix ) const;
-
-        /**
-         * Predict sensor measurement when given a vector of internal wrenches
-         * computed with a given traversal.
-         *
-         * @return the predicted Measurement
-         */
-        iDynTree::Wrench predictMeasurement(const Traversal& traversal, const LinkInternalWrenches & intWrenches);
-
-        /**
-         *
-         */
-        std::string toString(const Model & model) const;
-
-    };
-
-
-
-
-
-}
-
-
+} // namespace iDynTree
 
 #endif

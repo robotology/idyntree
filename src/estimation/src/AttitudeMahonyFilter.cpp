@@ -1,21 +1,26 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/AttitudeMahonyFilter.h>
-#include <iDynTree/AttitudeEstimatorUtils.h>
 #include <ctime>
+#include <iDynTree/AttitudeEstimatorUtils.h>
+#include <iDynTree/AttitudeMahonyFilter.h>
 
-iDynTree::Matrix3x3 getMatrixFromVectorVectorMultiplication(iDynTree::Vector3 a, iDynTree::Vector3 b)
+iDynTree::Matrix3x3
+getMatrixFromVectorVectorMultiplication(iDynTree::Vector3 a, iDynTree::Vector3 b)
 {
     using iDynTree::toEigen;
     iDynTree::Matrix3x3 out;
 
-    toEigen(out) = toEigen(a)*toEigen(b).transpose(); // to be read as out = a*(b.transpose())
+    toEigen(out) = toEigen(a) * toEigen(b).transpose(); // to be read as out = a*(b.transpose())
 
     return out;
 }
 
-iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vector3 meas, const iDynTree::Direction& vectorDir, double confidenceMeas, const iDynTree::Rotation& R)
+iDynTree::Matrix3x3
+getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vector3 meas,
+                                             const iDynTree::Direction& vectorDir,
+                                             double confidenceMeas,
+                                             const iDynTree::Rotation& R)
 {
     using iDynTree::toEigen;
 
@@ -34,33 +39,52 @@ iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vecto
     auto A(toEigen(Adyn));
     auto S(toEigen(Sdyn));
 
-    S = (A - A.transpose())*(confidenceMeas*0.5);
+    S = (A - A.transpose()) * (confidenceMeas * 0.5);
 
     return Sdyn;
 }
 
-bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas)
+bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(
+    const iDynTree::LinearAccelerometerMeasurements& linAccMeas,
+    const iDynTree::GyroscopeMeasurements& gyroMeas)
 {
     using iDynTree::toEigen;
 
-    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true)) { return false; }
-    if (!checkValidMeasurement(gyroMeas, "gyroscope", false)) { return false; }
+    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true))
+    {
+        return false;
+    }
+    if (!checkValidMeasurement(gyroMeas, "gyroscope", false))
+    {
+        return false;
+    }
 
     iDynTree::Vector3 linAccMeasUnitVector;
     if (!getUnitVector(linAccMeas, linAccMeasUnitVector))
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
+        iDynTree::reportError("AttitudeMahonyFilter",
+                              "updateFilterWithMeasurements",
+                              "Cannot retrieve unit vector from linear acceleration measuremnts.");
         return false;
     }
 
-    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeasUnitVector, m_gravity_direction, 1-m_params_mahony.confidence_magnetometer_measurements, m_orientationInSO3);
+    iDynTree::Matrix3x3 S_acc
+        = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeasUnitVector,
+                                                       m_gravity_direction,
+                                                       1
+                                                           - m_params_mahony
+                                                                 .confidence_magnetometer_measurements,
+                                                       m_orientationInSO3);
     toEigen(m_omega_mes) = -toEigen(mapso3ToR3(S_acc));
     m_Omega_y = gyroMeas;
 
     return true;
 }
 
-bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas, const iDynTree::MagnetometerMeasurements& magMeas)
+bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(
+    const iDynTree::LinearAccelerometerMeasurements& linAccMeas,
+    const iDynTree::GyroscopeMeasurements& gyroMeas,
+    const iDynTree::MagnetometerMeasurements& magMeas)
 {
     using iDynTree::toEigen;
 
@@ -69,26 +93,50 @@ bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree
         return updateFilterWithMeasurements(linAccMeas, gyroMeas);
     }
 
-    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true)) { return false; }
-    if (!checkValidMeasurement(gyroMeas, "gyroscope", false)) { return false; }
-    if (!checkValidMeasurement(magMeas, "magnetometer", true)) { return false; }
+    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true))
+    {
+        return false;
+    }
+    if (!checkValidMeasurement(gyroMeas, "gyroscope", false))
+    {
+        return false;
+    }
+    if (!checkValidMeasurement(magMeas, "magnetometer", true))
+    {
+        return false;
+    }
 
     iDynTree::Vector3 linAccMeasUnitVector;
     if (!getUnitVector(linAccMeas, linAccMeasUnitVector))
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
+        iDynTree::reportError("AttitudeMahonyFilter",
+                              "updateFilterWithMeasurements",
+                              "Cannot retrieve unit vector from linear acceleration measuremnts.");
         return false;
     }
 
     iDynTree::Vector3 magMeasUnitVector;
     if (!getUnitVector(magMeas, magMeasUnitVector))
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from magnetometer measuremnts.");
+        iDynTree::reportError("AttitudeMahonyFilter",
+                              "updateFilterWithMeasurements",
+                              "Cannot retrieve unit vector from magnetometer measuremnts.");
         return false;
     }
 
-    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeasUnitVector, m_gravity_direction, 1-m_params_mahony.confidence_magnetometer_measurements, m_orientationInSO3);
-    iDynTree::Matrix3x3 S_mag = getAngVelSkewSymmetricMatrixFromMeasurements(magMeasUnitVector, m_earth_magnetic_field_direction, m_params_mahony.confidence_magnetometer_measurements, m_orientationInSO3);
+    iDynTree::Matrix3x3 S_acc
+        = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeasUnitVector,
+                                                       m_gravity_direction,
+                                                       1
+                                                           - m_params_mahony
+                                                                 .confidence_magnetometer_measurements,
+                                                       m_orientationInSO3);
+    iDynTree::Matrix3x3 S_mag
+        = getAngVelSkewSymmetricMatrixFromMeasurements(magMeasUnitVector,
+                                                       m_earth_magnetic_field_direction,
+                                                       m_params_mahony
+                                                           .confidence_magnetometer_measurements,
+                                                       m_orientationInSO3);
     iDynTree::Matrix3x3 S_meas;
 
     toEigen(S_meas) = toEigen(S_acc) + toEigen(S_mag);
@@ -109,7 +157,8 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
     auto omega_mes(toEigen(m_omega_mes));
 
     // compute the correction from the measurements
-    gyroUpdate = (Omega_y - b + (omega_mes*m_params_mahony.kp))*m_params_mahony.time_step_in_seconds*0.5;
+    gyroUpdate = (Omega_y - b + (omega_mes * m_params_mahony.kp))
+                 * m_params_mahony.time_step_in_seconds * 0.5;
     iDynTree::UnitQuaternion correction = expQuaternion(gyro_update_dyn);
 
     // system dynamics equations
@@ -129,10 +178,11 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
         q.normalize();
     }
     Omega = Omega_y - b;
-    b = b - (omega_mes*m_params_mahony.ki)*(m_params_mahony.time_step_in_seconds);
+    b = b - (omega_mes * m_params_mahony.ki) * (m_params_mahony.time_step_in_seconds);
 
     m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state_mahony.m_orientation);
-    m_orientationInRPY = iDynTree::Rotation::RotationFromQuaternion(m_state_mahony.m_orientation).asRPY();
+    m_orientationInRPY
+        = iDynTree::Rotation::RotationFromQuaternion(m_state_mahony.m_orientation).asRPY();
 
     return true;
 }
@@ -159,12 +209,12 @@ iDynTree::AttitudeMahonyFilter::AttitudeMahonyFilter()
     m_earth_magnetic_field_direction(2) = 1.0;
 
     m_orientationInSO3.fromQuaternion(m_state_mahony.m_orientation);
-    m_orientationInRPY = iDynTree::Rotation::RotationFromQuaternion(m_state_mahony.m_orientation).asRPY();
+    m_orientationInRPY
+        = iDynTree::Rotation::RotationFromQuaternion(m_state_mahony.m_orientation).asRPY();
 
     m_omega_mes.zero();
     m_Omega_y.zero();
 }
-
 
 void iDynTree::AttitudeMahonyFilter::setTimeStepInSeconds(double timestepInSeconds)
 {
@@ -175,7 +225,9 @@ void iDynTree::AttitudeMahonyFilter::setConfidenceForMagnetometerMeasurements(do
 {
     if (m_params_mahony.use_magnetometer_measurements == false)
     {
-        iDynTree::reportWarning("AttitudeMahonyFilter", "setConfidenceForMagnetometerMeasurements", "not using magnetometer measurements, setting confidence to zero.");
+        iDynTree::reportWarning("AttitudeMahonyFilter",
+                                "setConfidenceForMagnetometerMeasurements",
+                                "not using magnetometer measurements, setting confidence to zero.");
         m_params_mahony.confidence_magnetometer_measurements = 0.0;
     }
     m_params_mahony.confidence_magnetometer_measurements = confidence;
@@ -196,7 +248,9 @@ void iDynTree::AttitudeMahonyFilter::useMagnetoMeterMeasurements(bool flag)
     m_params_mahony.use_magnetometer_measurements = flag;
     if (flag == false)
     {
-        iDynTree::reportWarning("AttitudeMahonyFilter", "useMagnetoMeterMeasurements", "setting confidence on magnetometer measurements to zero.");
+        iDynTree::reportWarning("AttitudeMahonyFilter",
+                                "useMagnetoMeterMeasurements",
+                                "setting confidence on magnetometer measurements to zero.");
         m_params_mahony.confidence_magnetometer_measurements = 0.0;
     }
 }
@@ -206,8 +260,8 @@ void iDynTree::AttitudeMahonyFilter::setGravityDirection(const iDynTree::Directi
     m_gravity_direction = gravity_dir;
 }
 
-
-bool iDynTree::AttitudeMahonyFilter::getDefaultInternalInitialState(const iDynTree::Span< double >& stateBuffer) const
+bool iDynTree::AttitudeMahonyFilter::getDefaultInternalInitialState(
+    const iDynTree::Span<double>& stateBuffer) const
 {
     stateBuffer(0) = m_initial_state_mahony.m_orientation(0);
     stateBuffer(1) = m_initial_state_mahony.m_orientation(1);
@@ -222,7 +276,8 @@ bool iDynTree::AttitudeMahonyFilter::getDefaultInternalInitialState(const iDynTr
     return true;
 }
 
-bool iDynTree::AttitudeMahonyFilter::getInternalState(const iDynTree::Span< double >& stateBuffer) const
+bool iDynTree::AttitudeMahonyFilter::getInternalState(
+    const iDynTree::Span<double>& stateBuffer) const
 {
     stateBuffer(0) = m_state_mahony.m_orientation(0);
     stateBuffer(1) = m_state_mahony.m_orientation(1);
@@ -264,11 +319,13 @@ bool iDynTree::AttitudeMahonyFilter::getOrientationEstimateAsRPY(iDynTree::RPY& 
     return true;
 }
 
-bool iDynTree::AttitudeMahonyFilter::setInternalState(const iDynTree::Span< double >& stateBuffer)
+bool iDynTree::AttitudeMahonyFilter::setInternalState(const iDynTree::Span<double>& stateBuffer)
 {
     if ((size_t)stateBuffer.size() != getInternalStateSize())
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "setInternalState", "state size mismatch, using default state");
+        iDynTree::reportError("AttitudeMahonyFilter",
+                              "setInternalState",
+                              "state size mismatch, using default state");
         return false;
     }
     m_state_mahony.m_orientation(0) = stateBuffer(0);
@@ -284,11 +341,14 @@ bool iDynTree::AttitudeMahonyFilter::setInternalState(const iDynTree::Span< doub
     return true;
 }
 
-bool iDynTree::AttitudeMahonyFilter::setInternalStateInitialOrientation(const iDynTree::Span< double >& orientationBuffer)
+bool iDynTree::AttitudeMahonyFilter::setInternalStateInitialOrientation(
+    const iDynTree::Span<double>& orientationBuffer)
 {
     if ((size_t)orientationBuffer.size() != m_state_mahony.m_orientation.size())
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "setInternalStateInitialOrientation", "orientation size mismatch, using default state");
+        iDynTree::reportError("AttitudeMahonyFilter",
+                              "setInternalStateInitialOrientation",
+                              "orientation size mismatch, using default state");
         return false;
     }
     m_state_mahony.m_orientation(0) = orientationBuffer(0);

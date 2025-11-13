@@ -3,17 +3,17 @@
 
 #include <iDynTree/ModelTransformers.h>
 
-#include <iDynTree/Model.h>
-#include <iDynTree/Link.h>
-#include <iDynTree/RevoluteJoint.h>
-#include <iDynTree/SphericalJoint.h>
-#include <iDynTree/FixedJoint.h>
 #include <iDynTree/Axis.h>
 #include <iDynTree/Direction.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/Link.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/SpatialInertia.h>
+#include <iDynTree/SphericalJoint.h>
 
-#include <iDynTree/TestUtils.h>
 #include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <algorithm>
 #include <cassert>
@@ -34,10 +34,12 @@ void checkThatOneSphereGetsAName()
     iDynTree::Sphere oneSphere;
     oneSphere.setLink_H_geometry(Transform::Identity());
     oneSphere.setRadius(1.0);
-    oneSphereModel.collisionSolidShapes().getLinkSolidShapes()[0][0] = new iDynTree::Sphere(oneSphere);
+    oneSphereModel.collisionSolidShapes().getLinkSolidShapes()[0][0]
+        = new iDynTree::Sphere(oneSphere);
 
     // Compute the model does not have a valid name
-    ASSERT_IS_TRUE(!oneSphereModel.collisionSolidShapes().getLinkSolidShapes()[0][0]->isNameValid());
+    ASSERT_IS_TRUE(
+        !oneSphereModel.collisionSolidShapes().getLinkSolidShapes()[0][0]->isNameValid());
 
     // Create name with valid names
     iDynTree::Model oneSphereModelWithValidName;
@@ -46,33 +48,49 @@ void checkThatOneSphereGetsAName()
     ASSERT_IS_TRUE(addValidNamesToAllSolidShapes(oneSphereModel, oneSphereModelWithValidName));
 
     // Check if the resulting name is valid
-    ASSERT_IS_TRUE(oneSphereModelWithValidName.collisionSolidShapes().getLinkSolidShapes()[0][0]->isNameValid());
-    ASSERT_IS_TRUE(oneSphereModelWithValidName.collisionSolidShapes().getLinkSolidShapes()[0][0]->getName() == "link0_collision");
+    ASSERT_IS_TRUE(oneSphereModelWithValidName.collisionSolidShapes()
+                       .getLinkSolidShapes()[0][0]
+                       ->isNameValid());
+    ASSERT_IS_TRUE(
+        oneSphereModelWithValidName.collisionSolidShapes().getLinkSolidShapes()[0][0]->getName()
+        == "link0_collision");
 }
 
 void checkRemoveAdditionalFramesFromModel()
 {
     // Create random model with 10 links and 10 additional frames
-    iDynTree::Model modelWithAllAdditionalFrames = getRandomModel(10, 10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2 | JOINT_SPHERICAL);
+    iDynTree::Model modelWithAllAdditionalFrames
+        = getRandomModel(10, 10, SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2 | JOINT_SPHERICAL);
 
     // Create an allow list of three additional frames
     std::vector<std::string> allowedAdditionalFrames;
-    allowedAdditionalFrames.push_back(modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 7));
-    allowedAdditionalFrames.push_back(modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 1));
-    allowedAdditionalFrames.push_back(modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 3));
+    allowedAdditionalFrames.push_back(
+        modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 7));
+    allowedAdditionalFrames.push_back(
+        modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 1));
+    allowedAdditionalFrames.push_back(
+        modelWithAllAdditionalFrames.getFrameName(modelWithAllAdditionalFrames.getNrOfLinks() + 3));
 
     // Create a model with only the allowed additional frames
     iDynTree::Model modelWithOnlyAllowedAdditionalFrames;
-    ASSERT_IS_TRUE(removeAdditionalFramesFromModel(modelWithAllAdditionalFrames, modelWithOnlyAllowedAdditionalFrames, allowedAdditionalFrames));
+    ASSERT_IS_TRUE(removeAdditionalFramesFromModel(modelWithAllAdditionalFrames,
+                                                   modelWithOnlyAllowedAdditionalFrames,
+                                                   allowedAdditionalFrames));
 
-    // Check that the model with only the allowed additional frames has the correct number of links and additional frames
-    ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.getNrOfLinks() == modelWithAllAdditionalFrames.getNrOfLinks());
-    ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.getNrOfFrames() == modelWithOnlyAllowedAdditionalFrames.getNrOfLinks() + allowedAdditionalFrames.size());
+    // Check that the model with only the allowed additional frames has the correct number of links
+    // and additional frames
+    ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.getNrOfLinks()
+                   == modelWithAllAdditionalFrames.getNrOfLinks());
+    ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.getNrOfFrames()
+                   == modelWithOnlyAllowedAdditionalFrames.getNrOfLinks()
+                          + allowedAdditionalFrames.size());
 
-    // Check that the additional frames contained in the modelWithOnlyAllowedAdditionalFrames are the one specified in modelWithOnlyAllowedAdditionalFrames
+    // Check that the additional frames contained in the modelWithOnlyAllowedAdditionalFrames are
+    // the one specified in modelWithOnlyAllowedAdditionalFrames
     for (size_t i = 0; i < allowedAdditionalFrames.size(); i++)
     {
-        ASSERT_IS_TRUE(modelWithOnlyAllowedAdditionalFrames.isFrameNameUsed(allowedAdditionalFrames[i]));
+        ASSERT_IS_TRUE(
+            modelWithOnlyAllowedAdditionalFrames.isFrameNameUsed(allowedAdditionalFrames[i]));
     }
 }
 
@@ -103,8 +121,8 @@ void testConvertSphericalJointsToThreeRevoluteJoints()
 
     // Convert spherical joint to three revolute joints
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, convertedModel,
-                                                               "fake_", "rev_"));
+    ASSERT_IS_TRUE(
+        convertSphericalJointsToThreeRevoluteJoints(originalModel, convertedModel, "fake_", "rev_"));
 
     // Check that the converted model has the correct structure
     ASSERT_IS_TRUE(convertedModel.getNrOfLinks() == 4); // original 2 + 2 fake links
@@ -196,8 +214,8 @@ void testConvertThreeRevoluteJointsToSphericalJoint()
 
     // Convert three revolute joints to spherical joint
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel,
-                                                              1e-6, 1e-6, 1e-6));
+    ASSERT_IS_TRUE(
+        convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel, 1e-6, 1e-6, 1e-6));
 
     // Check that the converted model has the correct structure
     ASSERT_IS_TRUE(convertedModel.getNrOfLinks() == 2); // only parent and child remain
@@ -255,19 +273,25 @@ void testRoundTripSphericalJointConversion()
 
     originalModel.addJoint("spherical_joint", &sphericalJoint);
 
-
-    auto originalParentChildRestTransform = originalModel.getJoint(originalModel.getJointIndex("spherical_joint"))->getRestTransform(
-        originalModel.getLinkIndex("child"), originalModel.getLinkIndex("parent"));
+    auto originalParentChildRestTransform
+        = originalModel.getJoint(originalModel.getJointIndex("spherical_joint"))
+              ->getRestTransform(originalModel.getLinkIndex("child"),
+                                 originalModel.getLinkIndex("parent"));
 
     // Convert to three revolute joints
     iDynTree::Model threeRevoluteModel;
-    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel, threeRevoluteModel,
-                                                               "fake_", "rev_"));
+    ASSERT_IS_TRUE(convertSphericalJointsToThreeRevoluteJoints(originalModel,
+                                                               threeRevoluteModel,
+                                                               "fake_",
+                                                               "rev_"));
 
     // Convert back to spherical joint
     iDynTree::Model backToSphericalModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(threeRevoluteModel, backToSphericalModel,
-                                                              1e-6, 1e-6, 1e-6));
+    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(threeRevoluteModel,
+                                                              backToSphericalModel,
+                                                              1e-6,
+                                                              1e-6,
+                                                              1e-6));
 
     // Verify we're back to the original structure
     ASSERT_IS_TRUE(backToSphericalModel.getNrOfLinks() == 2);
@@ -276,14 +300,18 @@ void testRoundTripSphericalJointConversion()
     ASSERT_IS_TRUE(backToSphericalModel.isLinkNameUsed("child"));
     ASSERT_IS_TRUE(backToSphericalModel.isJointNameUsed("rev_spherical_joint"));
 
-    auto backParentChildRestTransform = backToSphericalModel.getJoint(backToSphericalModel.getJointIndex("rev_spherical_joint"))->getRestTransform(
-        backToSphericalModel.getLinkIndex("child"), backToSphericalModel.getLinkIndex("parent"));
-
+    auto backParentChildRestTransform
+        = backToSphericalModel.getJoint(backToSphericalModel.getJointIndex("rev_spherical_joint"))
+              ->getRestTransform(backToSphericalModel.getLinkIndex("child"),
+                                 backToSphericalModel.getLinkIndex("parent"));
 
     // Check that the rest transform is preserved
     ASSERT_EQUAL_TRANSFORM(originalParentChildRestTransform, backParentChildRestTransform);
     // Check that we have a spherical joint
-    JointIndex jointIdx = backToSphericalModel.getJointIndex("rev_spherical_joint"); // Name derived from first revolute joint
+    JointIndex jointIdx = backToSphericalModel.getJointIndex("rev_spherical_joint"); // Name derived
+                                                                                     // from first
+                                                                                     // revolute
+                                                                                     // joint
     const IJoint* joint = backToSphericalModel.getJoint(jointIdx);
     ASSERT_IS_TRUE(dynamic_cast<const SphericalJoint*>(joint) != nullptr);
 
@@ -369,8 +397,8 @@ void testSphericalJointConversionWithNonOrthogonalAxes()
 
     // Attempt conversion - should not detect pattern due to non-orthogonal axes
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel,
-                                                              1e-6, 1e-6, 1e-6));
+    ASSERT_IS_TRUE(
+        convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel, 1e-6, 1e-6, 1e-6));
 
     // Should be unchanged (no conversion happened)
     ASSERT_IS_TRUE(convertedModel.getNrOfLinks() == 4);
@@ -423,8 +451,8 @@ void testSphericalJointConversionWithNonZeroMassIntermediateLinks()
 
     // Attempt conversion - should not detect pattern due to non-zero mass intermediate links
     iDynTree::Model convertedModel;
-    ASSERT_IS_TRUE(convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel,
-                                                              1e-6, 1e-6, 1e-6));
+    ASSERT_IS_TRUE(
+        convertThreeRevoluteJointsToSphericalJoint(originalModel, convertedModel, 1e-6, 1e-6, 1e-6));
 
     // Should be unchanged (no conversion happened)
     ASSERT_IS_TRUE(convertedModel.getNrOfLinks() == 4);
@@ -433,9 +461,9 @@ void testSphericalJointConversionWithNonZeroMassIntermediateLinks()
     ASSERT_IS_TRUE(convertedModel.isJointNameUsed("joint_y"));
     ASSERT_IS_TRUE(convertedModel.isJointNameUsed("joint_z"));
 
-    std::cerr << "[TEST] testSphericalJointConversionWithNonZeroMassIntermediateLinks passed" << std::endl;
+    std::cerr << "[TEST] testSphericalJointConversionWithNonZeroMassIntermediateLinks passed"
+              << std::endl;
 }
-
 
 int main()
 {

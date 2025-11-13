@@ -8,22 +8,31 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 #include <iDynTree/Constraint.h>
-#include <iDynTree/LinearConstraint.h>
 #include <iDynTree/ConstraintsGroup.h>
+#include <iDynTree/LinearConstraint.h>
+#include <iDynTree/TestUtils.h>
 #include <iDynTree/TimeRange.h>
 #include <iDynTree/VectorDynSize.h>
-#include <iDynTree/TestUtils.h>
 #include <memory>
 
 using namespace iDynTree;
 using namespace iDynTree::optimalcontrol;
 
-class DummyConstraint1 : public Constraint{
+class DummyConstraint1 : public Constraint
+{
 public:
-    DummyConstraint1(const std::string& name) : Constraint(1,name){}
+    DummyConstraint1(const std::string& name)
+        : Constraint(1, name)
+    {
+    }
 
-    bool evaluateConstraint(double time, const VectorDynSize &state, const VectorDynSize &control, VectorDynSize &constraint){
-        if (state.size() != 1){
+    bool evaluateConstraint(double time,
+                            const VectorDynSize& state,
+                            const VectorDynSize& control,
+                            VectorDynSize& constraint)
+    {
+        if (state.size() != 1)
+        {
             return false;
         }
         constraint.resize(1);
@@ -32,12 +41,13 @@ public:
     }
 };
 
-bool groupTest(){
+bool groupTest()
+{
     std::shared_ptr<DummyConstraint1> constraint1 = std::make_shared<DummyConstraint1>("Dummy1");
     std::shared_ptr<DummyConstraint1> constraint2 = std::make_shared<DummyConstraint1>("Dummy2");
     std::shared_ptr<iDynTree::optimalcontrol::LinearConstraint> constraint3;
     constraint3 = std::make_shared<iDynTree::optimalcontrol::LinearConstraint>(1, "LinConstraint");
-    iDynTree::MatrixDynSize constraintMatrix(1,1);
+    iDynTree::MatrixDynSize constraintMatrix(1, 1);
     constraintMatrix(0, 0) = 1;
     ASSERT_IS_TRUE(constraint3->setStateConstraintMatrix(constraintMatrix));
 
@@ -47,7 +57,6 @@ bool groupTest(){
     ASSERT_IS_TRUE(constraint1->setUpperBound(upperbound));
     ASSERT_IS_TRUE(constraint2->setUpperBound(upperbound));
     ASSERT_IS_TRUE(constraint3->setUpperBound(upperbound));
-
 
     ConstraintsGroup newGroup("dummyGroup", 2);
     ConstraintsGroup linearGroup("linGroup", 2);
@@ -90,8 +99,8 @@ bool groupTest(){
     return true;
 }
 
-
-int main(){
+int main()
+{
     ASSERT_IS_TRUE(groupTest());
     return 0;
 }

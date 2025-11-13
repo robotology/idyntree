@@ -8,19 +8,18 @@
 
 namespace iDynTree
 {
-    class Model;
-    class Traversal;
-    class Transform;
-    class FreeFloatingPos;
-    class FreeFloatingVel;
-    class FreeFloatingAcc;
-    class LinkPositions;
-    class LinkVelArray;
-    class LinkAccArray;
-    class JointPosDoubleArray;
-    class MatrixDynSize;
+class Model;
+class Traversal;
+class Transform;
+class FreeFloatingPos;
+class FreeFloatingVel;
+class FreeFloatingAcc;
+class LinkPositions;
+class LinkVelArray;
+class LinkAccArray;
+class JointPosDoubleArray;
+class MatrixDynSize;
 
-
-}
+} // namespace iDynTree
 
 #endif

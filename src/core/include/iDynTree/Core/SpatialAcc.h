@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_SPATIAL_ACC_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/SpatialAcc.h> is deprecated. Please use <iDynTree/SpatialAcc.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Core/SpatialAcc.h> is deprecated. Please use <iDynTree/SpatialAcc.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SpatialAcc.h>

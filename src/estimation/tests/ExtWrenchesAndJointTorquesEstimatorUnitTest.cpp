@@ -1,14 +1,13 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/ForwardKinematics.h>
 #include <iDynTree/ExtWrenchesAndJointTorquesEstimator.h>
+#include <iDynTree/ForwardKinematics.h>
 
 #include "testModels.h"
 
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/TestUtils.h>
-
 
 using namespace iDynTree;
 
@@ -46,19 +45,18 @@ std::vector<std::string> getCanonical_iCubJoints()
     return consideredJoints;
 }
 
-void setDOFsSubSetPositionsInDegrees(const iDynTree::Model & model,
-                                     const std::vector<std::string> & dofNames,
-                                     const std::vector<double> & dofPositionsInDegrees,
-                                     JointPosDoubleArray & qj)
+void setDOFsSubSetPositionsInDegrees(const iDynTree::Model& model,
+                                     const std::vector<std::string>& dofNames,
+                                     const std::vector<double>& dofPositionsInDegrees,
+                                     JointPosDoubleArray& qj)
 {
-    for(int i=0; i < dofNames.size(); i++)
+    for (int i = 0; i < dofNames.size(); i++)
     {
         iDynTree::JointIndex jntIdx = model.getJointIndex(dofNames[i]);
         size_t dofOffset = model.getJoint(jntIdx)->getDOFsOffset();
         qj(dofOffset) = deg2rad(dofPositionsInDegrees[i]);
     }
 }
-
 
 int main()
 {
@@ -71,10 +69,12 @@ int main()
 
     std::vector<std::string> consideredJoints = getCanonical_iCubJoints();
 
-    estimatorIMU.loadModelAndSensorsFromFileWithSpecifiedDOFs(getAbsModelPath("iCubDarmstadt01.urdf"),consideredJoints);
-    estimatorFixedBase.setModelAndSensors(estimatorIMU.model(),estimatorIMU.sensors());
+    estimatorIMU.loadModelAndSensorsFromFileWithSpecifiedDOFs(getAbsModelPath("iCubDarmstadt01."
+                                                                              "urdf"),
+                                                              consideredJoints);
+    estimatorFixedBase.setModelAndSensors(estimatorIMU.model(), estimatorIMU.sensors());
 
-    ASSERT_EQUAL_DOUBLE(estimatorIMU.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE),6);
+    ASSERT_EQUAL_DOUBLE(estimatorIMU.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE), 6);
 
     JointPosDoubleArray qj(estimatorIMU.model());
     JointDOFsDoubleArray dqj(estimatorIMU.model()), ddqj(estimatorIMU.model());
@@ -105,9 +105,7 @@ int main()
     dofNames.push_back("r_elbow");
     dofPositionsInDegrees.push_back(90.0);
 
-
-    setDOFsSubSetPositionsInDegrees(estimatorIMU.model(),dofNames,dofPositionsInDegrees,qj);
-
+    setDOFsSubSetPositionsInDegrees(estimatorIMU.model(), dofNames, dofPositionsInDegrees, qj);
 
     double accelerationOfGravity = 9.81;
     Vector3 gravityOnRootLink;
@@ -125,8 +123,18 @@ int main()
     FrameIndex imu_frame_index = estimatorIMU.model().getFrameIndex("imu_frame");
 
     // Set kinematics
-    estimatorFixedBase.updateKinematicsFromFixedBase(qj,dqj,ddqj,root_link_index,gravityOnRootLink);
-    estimatorIMU.updateKinematicsFromFloatingBase(qj,dqj,ddqj,imu_frame_index,properAccelerationInIMU,zero,zero);
+    estimatorFixedBase.updateKinematicsFromFixedBase(qj,
+                                                     dqj,
+                                                     ddqj,
+                                                     root_link_index,
+                                                     gravityOnRootLink);
+    estimatorIMU.updateKinematicsFromFloatingBase(qj,
+                                                  dqj,
+                                                  ddqj,
+                                                  imu_frame_index,
+                                                  properAccelerationInIMU,
+                                                  zero,
+                                                  zero);
 
     // Compute ft sensor offset
     UnknownWrenchContact unknown;
@@ -135,7 +143,7 @@ int main()
 
     LinkUnknownWrenchContacts fullBodyUnknowns(estimatorIMU.model());
 
-    fullBodyUnknowns.addNewContactInFrame(estimatorIMU.model(),root_link_index,unknown);
+    fullBodyUnknowns.addNewContactInFrame(estimatorIMU.model(), root_link_index, unknown);
 
     SensorsMeasurements sensOffsetIMU(estimatorIMU.sensors());
     SensorsMeasurements sensOffsetFixedBase(estimatorFixedBase.sensors());
@@ -146,21 +154,29 @@ int main()
     JointDOFsDoubleArray estimatedJointTorquesIMU(estimatorIMU.model());
     JointDOFsDoubleArray estimatedJointTorquesFixedBase(estimatorFixedBase.model());
 
-    estimatorIMU.computeExpectedFTSensorsMeasurements(fullBodyUnknowns,sensOffsetIMU,estimatedContactWrenchesIMU,estimatedJointTorquesIMU);
-    estimatorFixedBase.computeExpectedFTSensorsMeasurements(fullBodyUnknowns,sensOffsetFixedBase,estimatedContactWrenchesFixedBase,estimatedJointTorquesFixedBase);
+    estimatorIMU.computeExpectedFTSensorsMeasurements(fullBodyUnknowns,
+                                                      sensOffsetIMU,
+                                                      estimatedContactWrenchesIMU,
+                                                      estimatedJointTorquesIMU);
+    estimatorFixedBase.computeExpectedFTSensorsMeasurements(fullBodyUnknowns,
+                                                            sensOffsetFixedBase,
+                                                            estimatedContactWrenchesFixedBase,
+                                                            estimatedJointTorquesFixedBase);
 
-    for(unsigned int ft=0; ft < sensOffsetIMU.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ft++)
+    for (unsigned int ft = 0; ft < sensOffsetIMU.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+         ft++)
     {
         iDynTree::Wrench ftIMU, ftFixedBase;
 
+        sensOffsetIMU.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE, ft, ftIMU);
+        sensOffsetFixedBase.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE, ft, ftFixedBase);
 
-        sensOffsetIMU.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft,ftIMU);
-        sensOffsetFixedBase.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft,ftFixedBase);
+        std::cerr << "Wrench for sensor "
+                  << estimatorIMU.sensors().getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, ft)->getName()
+                  << " are " << ftIMU.toString() << " (IMU) " << ftFixedBase.toString()
+                  << " (fixed base)" << std::endl;
 
-        std::cerr << "Wrench for sensor " << estimatorIMU.sensors().getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE,ft)->getName()
-                  << " are " << ftIMU.toString() << " (IMU) " << ftFixedBase.toString() << " (fixed base)" << std::endl;
-
-        ASSERT_EQUAL_SPATIAL_FORCE_TOL(ftIMU,ftFixedBase,1e-9);
+        ASSERT_EQUAL_SPATIAL_FORCE_TOL(ftIMU, ftFixedBase, 1e-9);
     }
 
     // Add a test on net external wrenches
@@ -174,7 +190,6 @@ int main()
     ok = estimatedContactWrenchesFixedBase.computeNetWrenches(externalWrenches);
     ASSERT_IS_TRUE(ok);
 
-
     LinkPositions base_H_link(estimatorIMU.model());
     // Compute the transform from each link to the base
     Traversal defaultTraversal;
@@ -182,33 +197,35 @@ int main()
     ok = iDynTree::ForwardPositionKinematics(estimatorIMU.model(),
                                              defaultTraversal,
                                              Transform::Identity(),
-                                             qj,base_H_link);
+                                             qj,
+                                             base_H_link);
 
     iDynTree::Wrench momentumDerivative;
     momentumDerivative.zero();
     iDynTree::Wrench externalForces;
     externalForces.zero();
 
-    for(LinkIndex idx = 0; idx < estimatorIMU.model().getNrOfLinks(); idx++)
+    for (LinkIndex idx = 0; idx < estimatorIMU.model().getNrOfLinks(); idx++)
     {
-        momentumDerivative = momentumDerivative + base_H_link(idx)*netWrenchesWithoutGravity(idx);
-        externalForces     = externalForces + base_H_link(idx)*externalWrenches(idx);
+        momentumDerivative = momentumDerivative + base_H_link(idx) * netWrenchesWithoutGravity(idx);
+        externalForces = externalForces + base_H_link(idx) * externalWrenches(idx);
     }
 
-    // The sum of the netWrenchesWithoutGravity of all the links should be equal to the sum of the external wrenches
-    ASSERT_EQUAL_SPATIAL_FORCE_TOL(momentumDerivative,externalForces, 1e-8);
+    // The sum of the netWrenchesWithoutGravity of all the links should be equal to the sum of the
+    // external wrenches
+    ASSERT_EQUAL_SPATIAL_FORCE_TOL(momentumDerivative, externalForces, 1e-8);
 
     // Test computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics method
     // First of all, we build the 6*nrOfFTsensors vector composed by the known FT sensors measures
     size_t nrOfFTSensors = estimatorIMU.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
-    Eigen::VectorXd w(6*nrOfFTSensors);
+    Eigen::VectorXd w(6 * nrOfFTSensors);
     w.setZero();
 
-    for(size_t ft=0; ft < nrOfFTSensors; ft++)
+    for (size_t ft = 0; ft < nrOfFTSensors; ft++)
     {
         iDynTree::Wrench ftMeas;
-        sensOffsetIMU.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft,ftMeas);
-        w.segment<6>(6*ft) = iDynTree::toEigen(ftMeas);
+        sensOffsetIMU.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE, ft, ftMeas);
+        w.segment<6>(6 * ft) = iDynTree::toEigen(ftMeas);
     }
 
     // Then, we compute the A and b matrices
@@ -216,20 +233,26 @@ int main()
     std::vector<iDynTree::VectorDynSize> b;
     std::vector<std::ptrdiff_t> subModelIDs;
     std::vector<iDynTree::LinkIndex> baseLinkIndeces;
-    ok = estimatorIMU.computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics(fullBodyUnknowns,A,b,subModelIDs,baseLinkIndeces);
+    ok = estimatorIMU.computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics(fullBodyUnknowns,
+                                                                                  A,
+                                                                                  b,
+                                                                                  subModelIDs,
+                                                                                  baseLinkIndeces);
     ASSERT_IS_TRUE(ok);
 
     ASSERT_IS_TRUE(A.size() == b.size());
     ASSERT_IS_TRUE(A.size() == subModelIDs.size());
     ASSERT_IS_TRUE(A.size() == baseLinkIndeces.size());
 
-    std::cerr << "Testing computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics method" << std::endl;
-    for(size_t l=0; l < A.size(); l++)
+    std::cerr << "Testing computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics method"
+              << std::endl;
+    for (size_t l = 0; l < A.size(); l++)
     {
-        std::cerr << "Testing submodel with base " << estimatorIMU.model().getLinkName(baseLinkIndeces[l])  << std::endl;
+        std::cerr << "Testing submodel with base "
+                  << estimatorIMU.model().getLinkName(baseLinkIndeces[l]) << std::endl;
 
         iDynTree::VectorDynSize bCheck(b[l].size());
-        toEigen(bCheck) = toEigen(A[l])*w;
+        toEigen(bCheck) = toEigen(A[l]) * w;
         /*
         std::cerr << "A: " << toEigen(A[l]) << std::endl;
         std::cerr << "w: " << w << std::endl;
@@ -237,8 +260,6 @@ int main()
         std::cerr << "bCheck: " << toEigen(bCheck) << std::endl;*/
         ASSERT_EQUAL_VECTOR_TOL(b[l], bCheck, 1e-7);
     }
-
-
 
     return EXIT_SUCCESS;
 }

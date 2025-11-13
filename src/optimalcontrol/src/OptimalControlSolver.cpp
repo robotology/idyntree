@@ -16,13 +16,19 @@
 
 #include <cassert>
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-        OptimalControlSolver::OptimalControlSolver(const std::shared_ptr<OptimalControlProblem> ocProblem) {}
-        OptimalControlSolver::~OptimalControlSolver() {}
-        
-        // MARK: Private implementation
+OptimalControlSolver::OptimalControlSolver(const std::shared_ptr<OptimalControlProblem> ocProblem)
+{
+}
+OptimalControlSolver::~OptimalControlSolver()
+{
+}
+
+// MARK: Private implementation
 //        class OptimalControlSolver::OptimalControlSolverPimpl
 //        {
 //        public:
@@ -63,6 +69,5 @@ namespace iDynTree {
 //            m_pimpl->numberOfMeshPoints = numberOfMeshPoints;
 //        }
 
-
-    }
-}
+} // namespace optimalcontrol
+} // namespace iDynTree

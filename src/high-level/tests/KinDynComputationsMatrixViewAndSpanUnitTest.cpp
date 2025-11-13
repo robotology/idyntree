@@ -4,40 +4,39 @@
 #include "testModels.h"
 #include <iDynTree/TestUtils.h>
 
-#include <iDynTree/Transform.h>
 #include <iDynTree/Position.h>
-#include <iDynTree/Twist.h>
 #include <iDynTree/SpatialAcc.h>
 #include <iDynTree/SpatialMomentum.h>
+#include <iDynTree/Transform.h>
+#include <iDynTree/Twist.h>
 #include <iDynTree/VectorDynSize.h>
 
 #include <iDynTree/EigenHelpers.h>
 
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/JointState.h>
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/Model.h>
-#include <iDynTree/JointState.h>
-#include <iDynTree/FreeFloatingState.h>
 
 #include <iDynTree/ModelTestUtils.h>
 
 #include <iDynTree/ModelLoader.h>
 
-
 namespace Eigen
 {
-    using Vector6d = Eigen::Matrix<double, 6, 1>;
+using Vector6d = Eigen::Matrix<double, 6, 1>;
 }
 
 using namespace iDynTree;
 
 double random_double()
 {
-    return 1.0*((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+    return 1.0 * ((double)rand() - RAND_MAX / 2) / ((double)RAND_MAX);
 }
 
 double real_random_double()
 {
-    return 1.0*((double)rand()-RAND_MAX/2)/((double)RAND_MAX);
+    return 1.0 * ((double)rand() - RAND_MAX / 2) / ((double)RAND_MAX);
 }
 
 int real_random_int(int initialValue, int finalValue)
@@ -46,11 +45,11 @@ int real_random_int(int initialValue, int finalValue)
     return initialValue + rand() % length;
 }
 
-void setRandomState(iDynTree::KinDynComputations & dynComp)
+void setRandomState(iDynTree::KinDynComputations& dynComp)
 {
     size_t dofs = dynComp.getNrOfDegreesOfFreedom();
     size_t posCoords = dynComp.model().getNrOfPosCoords();
-    Transform    worldTbase;
+    Transform worldTbase;
     Eigen::Vector6d baseVel;
     Eigen::Vector3d gravity;
 
@@ -88,7 +87,6 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
                                     make_span(dqj.data(), dqj.size()),
                                     make_span(gravity.data(), gravity.size()));
 
-
     ASSERT_IS_TRUE(ok);
 
     Eigen::VectorXd qj_read(posCoords), dqj_read(dofs);
@@ -110,21 +108,20 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
     ASSERT_EQUAL_MATRIX(transform_read, transform);
     ASSERT_EQUAL_VECTOR(baseVel_read, baseVel);
 
-    ASSERT_EQUAL_DOUBLE(ok,true);
+    ASSERT_EQUAL_DOUBLE(ok, true);
 }
 
-void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & dynComp)
+void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations& dynComp)
 {
     Eigen::Vector6d avgVel;
     Eigen::Vector6d mom, centroidalMom;
     Eigen::Vector6d avgVelCheck, momCheck, centroidalMomCheck;
-    Eigen::VectorXd nu(dynComp.getNrOfDegreesOfFreedom()+6);
+    Eigen::VectorXd nu(dynComp.getNrOfDegreesOfFreedom() + 6);
     ASSERT_IS_TRUE(dynComp.getModelVel(make_span(nu.data(), nu.size())));
 
-    Eigen::MatrixXd momJac(6, dynComp.getNrOfDegreesOfFreedom()+6);
-    Eigen::MatrixXd centroidalMomJac(6, dynComp.getNrOfDegreesOfFreedom()+6);
-    Eigen::MatrixXd avgVelJac(6, dynComp.getNrOfDegreesOfFreedom()+6);
-
+    Eigen::MatrixXd momJac(6, dynComp.getNrOfDegreesOfFreedom() + 6);
+    Eigen::MatrixXd centroidalMomJac(6, dynComp.getNrOfDegreesOfFreedom() + 6);
+    Eigen::MatrixXd avgVelJac(6, dynComp.getNrOfDegreesOfFreedom() + 6);
 
     bool ok = dynComp.getAverageVelocity(make_span(avgVel.data(), avgVel.size()));
     ASSERT_IS_TRUE(ok);
@@ -153,16 +150,15 @@ void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & 
     ASSERT_EQUAL_VECTOR(avgVelCheck, avgVel);
 }
 
-inline Eigen::VectorXd toEigen(const FreeFloatingGeneralizedTorques & genForces)
+inline Eigen::VectorXd toEigen(const FreeFloatingGeneralizedTorques& genForces)
 {
-    Eigen::VectorXd concat(6+genForces.jointTorques().size());
+    Eigen::VectorXd concat(6 + genForces.jointTorques().size());
     // TODO(traversaro) : We should teach toEigen to handle empty matrices correctly?
     // relevant: https://forum.kde.org/viewtopic.php?f=74&t=107974
-    if( genForces.jointTorques().size() > 0 )
+    if (genForces.jointTorques().size() > 0)
     {
         concat << toEigen(genForces.baseWrench()), toEigen(genForces.jointTorques());
-    }
-    else
+    } else
     {
         concat = toEigen(genForces.baseWrench());
     }
@@ -170,30 +166,29 @@ inline Eigen::VectorXd toEigen(const FreeFloatingGeneralizedTorques & genForces)
 }
 
 // Test different ways of computing inverse dynamics
-void testInverseDynamics(KinDynComputations & dynComp)
+void testInverseDynamics(KinDynComputations& dynComp)
 {
     int dofs = dynComp.getNrOfDegreesOfFreedom();
     Eigen::Vector6d baseAcc;
     Eigen::VectorXd shapeAccs(dynComp.getNrOfDegreesOfFreedom());
 
     iDynTree::LinkNetExternalWrenches netExternalWrenches(dynComp.model());
-    for(unsigned int link=0; link < dynComp.model().getNrOfLinks(); link++ )
+    for (unsigned int link = 0; link < dynComp.model().getNrOfLinks(); link++)
     {
         netExternalWrenches(link) = getRandomWrench();
     }
 
     // Go component for component, for simplifyng debugging
-    for(int i=0; i < 6+dofs; i++)
+    for (int i = 0; i < 6 + dofs; i++)
     {
         baseAcc.setZero();
         shapeAccs.setZero();
-        if( i < 6 )
+        if (i < 6)
         {
             baseAcc(i) = 1.0;
-        }
-        else
+        } else
         {
-            shapeAccs(i-6) = 1.0;
+            shapeAccs(i - 6) = 1.0;
         }
 
         FreeFloatingGeneralizedTorques invDynForces(dynComp.model());
@@ -202,50 +197,61 @@ void testInverseDynamics(KinDynComputations & dynComp)
         // Run classical inverse dynamics
         bool ok = dynComp.inverseDynamics(make_span(baseAcc.data(), baseAcc.size()),
                                           make_span(shapeAccs.data(), shapeAccs.size()),
-                                          netExternalWrenches,invDynForces);
+                                          netExternalWrenches,
+                                          invDynForces);
         ASSERT_IS_TRUE(ok);
 
         // Run inverse dynamics with mass matrix
-        Eigen::MatrixXd massMatrix(dynComp.getNrOfDegreesOfFreedom() + 6, dynComp.getNrOfDegreesOfFreedom() + 6);
+        Eigen::MatrixXd massMatrix(dynComp.getNrOfDegreesOfFreedom() + 6,
+                                   dynComp.getNrOfDegreesOfFreedom() + 6);
         ok = dynComp.getFreeFloatingMassMatrix(massMatrix);
         ASSERT_IS_TRUE(ok);
 
         Eigen::VectorXd invDynBiasForces(dynComp.getNrOfDegreesOfFreedom() + 6);
-        ok = dynComp.generalizedBiasForces(make_span(invDynBiasForces.data(), invDynBiasForces.size()));
+        ok = dynComp.generalizedBiasForces(
+            make_span(invDynBiasForces.data(), invDynBiasForces.size()));
         ASSERT_IS_TRUE(ok);
 
         FreeFloatingGeneralizedTorques invDynExtForces(dynComp.model());
         ok = dynComp.generalizedExternalForces(netExternalWrenches, invDynExtForces);
         ASSERT_IS_TRUE(ok);
 
-        Eigen::VectorXd massMatrixInvDynForcesContinuous(6+dofs);
+        Eigen::VectorXd massMatrixInvDynForcesContinuous(6 + dofs);
         Eigen::VectorXd robotAccs(baseAcc.size() + shapeAccs.size());
         robotAccs << baseAcc, shapeAccs;
 
-        massMatrixInvDynForcesContinuous = massMatrix * robotAccs + invDynBiasForces + toEigen(invDynExtForces);
-        toEigen(massMatrixInvDynForces.baseWrench().getLinearVec3()) = massMatrixInvDynForcesContinuous.segment<3>(0);
-        toEigen(massMatrixInvDynForces.baseWrench().getAngularVec3()) = massMatrixInvDynForcesContinuous.segment<3>(3);
-        toEigen(massMatrixInvDynForces.jointTorques()) = massMatrixInvDynForcesContinuous.segment(6,dofs);
+        massMatrixInvDynForcesContinuous
+            = massMatrix * robotAccs + invDynBiasForces + toEigen(invDynExtForces);
+        toEigen(massMatrixInvDynForces.baseWrench().getLinearVec3())
+            = massMatrixInvDynForcesContinuous.segment<3>(0);
+        toEigen(massMatrixInvDynForces.baseWrench().getAngularVec3())
+            = massMatrixInvDynForcesContinuous.segment<3>(3);
+        toEigen(massMatrixInvDynForces.jointTorques())
+            = massMatrixInvDynForcesContinuous.segment(6, dofs);
 
         ASSERT_EQUAL_SPATIAL_FORCE(massMatrixInvDynForces.baseWrench(), invDynForces.baseWrench());
         ASSERT_EQUAL_VECTOR(massMatrixInvDynForces.jointTorques(), invDynForces.jointTorques());
     }
 }
 
-void testRelativeJacobians(KinDynComputations & dynComp)
+void testRelativeJacobians(KinDynComputations& dynComp)
 {
-    if (dynComp.getNrOfLinks() < 2) return;
+    if (dynComp.getNrOfLinks() < 2)
+        return;
     FrameIndex frame = -1;
     FrameIndex refFrame = -1;
 
-    if (dynComp.getNrOfLinks() == 2) {
+    if (dynComp.getNrOfLinks() == 2)
+    {
         frame = 0;
         refFrame = 1;
-    } else {
-        //Pick two frames at random
+    } else
+    {
+        // Pick two frames at random
         frame = real_random_int(0, dynComp.getNrOfFrames());
-        //be sure to pick two different frames
-        do {
+        // be sure to pick two different frames
+        do
+        {
             refFrame = real_random_int(0, dynComp.getNrOfFrames());
         } while (refFrame == frame && frame >= 0);
     }
@@ -253,7 +259,7 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     FrameVelocityRepresentation representation = dynComp.getFrameVelocityRepresentation();
     dynComp.setFrameVelocityRepresentation(MIXED_REPRESENTATION);
 
-    //Compute the relative Jacobian
+    // Compute the relative Jacobian
     Eigen::MatrixXd relativeJacobian(6, dynComp.getNrOfDegreesOfFreedom());
     bool ok = dynComp.getRelativeJacobian(refFrame, frame, relativeJacobian);
     ASSERT_IS_TRUE(ok);
@@ -261,13 +267,13 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     Eigen::VectorXd qj(dynComp.getNrOfDegreesOfFreedom()), dqj(dynComp.getNrOfDegreesOfFreedom());
     Eigen::Vector3d gravity;
     dynComp.getRobotState(make_span(qj.data(), qj.size()),
-                               make_span(dqj.data(), dqj.size()),
-                               make_span(gravity.data(), gravity.size()));
+                          make_span(dqj.data(), dqj.size()),
+                          make_span(gravity.data(), gravity.size()));
 
     Eigen::Vector6d relativeVel;
     relativeVel = relativeJacobian * dqj;
 
-    //this velocity depends on where the Jacobian is expressed
+    // this velocity depends on where the Jacobian is expressed
 
     Eigen::Vector6d frameVel, refFrameVel;
     ok = dynComp.getFrameVel(frame, make_span(frameVel.data(), frameVel.size()));
@@ -276,38 +282,53 @@ void testRelativeJacobians(KinDynComputations & dynComp)
     ok = dynComp.getFrameVel(refFrame, make_span(refFrameVel.data(), refFrameVel.size()));
     ASSERT_IS_TRUE(ok);
 
-    if (dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION) {
-        //Inertial = right trivialized.
-        //frameVel is written wrt A
-        //refFrameVel is written wrt A
-        //relativeJacobian is written wrt refFrame
-        relativeVel = toEigen(dynComp.getWorldTransform(refFrame).asAdjointTransform()) * relativeVel;
-    } else if (dynComp.getFrameVelocityRepresentation() == BODY_FIXED_REPRESENTATION) {
-        //BODY = left trivialized.
-        //frameVel is written wrt frame
-        //refFrameVel is written wrt refFrame
-        //relativeJacobian is written wrt frame
-        //convert refFrameVel to frame
-        relativeVel = toEigen(dynComp.getRelativeTransform(frame, refFrame).asAdjointTransform()) * refFrameVel;
-    } else if (dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION) {
-        //MIXED
-        //frameVel is written wrt frame, [A]
-        //refFrameVel is written wrt refFrame, [A]
-        //relativeJacobian is written wrt frame, [refFrame]
-        //convert refFrameVel to frame, [A]
+    if (dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION)
+    {
+        // Inertial = right trivialized.
+        // frameVel is written wrt A
+        // refFrameVel is written wrt A
+        // relativeJacobian is written wrt refFrame
+        relativeVel
+            = toEigen(dynComp.getWorldTransform(refFrame).asAdjointTransform()) * relativeVel;
+    } else if (dynComp.getFrameVelocityRepresentation() == BODY_FIXED_REPRESENTATION)
+    {
+        // BODY = left trivialized.
+        // frameVel is written wrt frame
+        // refFrameVel is written wrt refFrame
+        // relativeJacobian is written wrt frame
+        // convert refFrameVel to frame
+        relativeVel = toEigen(dynComp.getRelativeTransform(frame, refFrame).asAdjointTransform())
+                      * refFrameVel;
+    } else if (dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION)
+    {
+        // MIXED
+        // frameVel is written wrt frame, [A]
+        // refFrameVel is written wrt refFrame, [A]
+        // relativeJacobian is written wrt frame, [refFrame]
+        // convert refFrameVel to frame, [A]
         Transform frame_A_H_frame(dynComp.getWorldTransform(frame).getRotation(), Position::Zero());
 
-        //refFrameVel = ref_[A]_v_ref, I want frame_[A]_v_ref. As I do not have an explicit A frame I do the following:
-        // frame_[A]_H_frame_[frame] * frame_[frame]_H_ref_[frame] * ref_[frame]_H_ref_[A] * ref_[A]_v_ref
-        Eigen::Vector6d temp = toEigen((frame_A_H_frame * dynComp.getRelativeTransformExplicit(frame, frame, refFrame, frame) * frame_A_H_frame.inverse()).asAdjointTransform()) * refFrameVel;
+        // refFrameVel = ref_[A]_v_ref, I want frame_[A]_v_ref. As I do not have an explicit A frame
+        // I do the following:
+        //  frame_[A]_H_frame_[frame] * frame_[frame]_H_ref_[frame] * ref_[frame]_H_ref_[A] *
+        //  ref_[A]_v_ref
+        Eigen::Vector6d temp
+            = toEigen((frame_A_H_frame
+                       * dynComp.getRelativeTransformExplicit(frame, frame, refFrame, frame)
+                       * frame_A_H_frame.inverse())
+                          .asAdjointTransform())
+              * refFrameVel;
         refFrameVel = temp;
-        //and relativeVel to frame [A]
-        temp = toEigen((frame_A_H_frame * dynComp.getRelativeTransformExplicit(frame, frame, frame, refFrame)).asAdjointTransform()) * relativeVel;
+        // and relativeVel to frame [A]
+        temp = toEigen((frame_A_H_frame
+                        * dynComp.getRelativeTransformExplicit(frame, frame, frame, refFrame))
+                           .asAdjointTransform())
+               * relativeVel;
         relativeVel = temp;
     }
 
-    //now compute the error velocity
-    //now they should be expressed in the same frame
+    // now compute the error velocity
+    // now they should be expressed in the same frame
     Eigen::Vector6d velDifference = frameVel - refFrameVel;
     ASSERT_EQUAL_VECTOR(velDifference, relativeVel);
 
@@ -316,14 +337,14 @@ void testRelativeJacobians(KinDynComputations & dynComp)
 
 // Dummy test: for now it just prints the frameBiasAcc, to check there is no
 // usage of not initialized memory
-void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
+void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations& dynComp)
 {
     FrameIndex frame = real_random_int(0, dynComp.getNrOfFrames());
 
     // Test Jacobian consistency
 
     // Get robot velocity
-    Eigen::VectorXd nu(6+dynComp.getNrOfDegreesOfFreedom());
+    Eigen::VectorXd nu(6 + dynComp.getNrOfDegreesOfFreedom());
     bool ok = dynComp.getModelVel(make_span(nu.data(), nu.size()));
     ASSERT_IS_TRUE(ok);
 
@@ -355,15 +376,14 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
     baseAcc(5) = 0;
 
     Eigen::VectorXd sddot(dynComp.model().getNrOfDOFs());
-    for(int i=0; i < sddot.size(); i++)
+    for (int i = 0; i < sddot.size(); i++)
     {
-        sddot(i) = i*0.1;
+        sddot(i) = i * 0.1;
     }
 
-    Eigen::VectorXd nuDot(6+dynComp.getNrOfDegreesOfFreedom());
+    Eigen::VectorXd nuDot(6 + dynComp.getNrOfDegreesOfFreedom());
     nuDot.head<6>() = baseAcc;
     nuDot.tail(dynComp.getNrOfDegreesOfFreedom()) = sddot;
-
 
     Eigen::Vector6d frameAcc, biasAcc, frameAccJac;
     ok = dynComp.getFrameAcc(frame,
@@ -391,7 +411,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
     ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 1; i++)
+    for (int i = 0; i < 1; i++)
     {
         setRandomState(dynComp);
         testAverageVelocityAndTotalMomentumJacobian(dynComp);
@@ -399,36 +419,39 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testRelativeJacobians(dynComp);
         testAbsoluteJacobiansAndFrameBiasAcc(dynComp);
     }
-
 }
 
 void testModelConsistencyAllRepresentations(std::string modelName)
 {
     std::string urdfFileName = getAbsModelPath(modelName);
-    std::cout << "Testing file " << urdfFileName <<  std::endl;
-    std::cout << "Testing MIXED_REPRESENTATION " << urdfFileName <<  std::endl;
-    testModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
-    std::cout << "Testing BODY_FIXED_REPRESENTATION " << urdfFileName <<  std::endl;
-    testModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
-    std::cout << "Testing INERTIAL_FIXED_REPRESENTATION " << urdfFileName <<  std::endl;
-    testModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
+    std::cout << "Testing file " << urdfFileName << std::endl;
+    std::cout << "Testing MIXED_REPRESENTATION " << urdfFileName << std::endl;
+    testModelConsistency(urdfFileName, iDynTree::MIXED_REPRESENTATION);
+    std::cout << "Testing BODY_FIXED_REPRESENTATION " << urdfFileName << std::endl;
+    testModelConsistency(urdfFileName, iDynTree::BODY_FIXED_REPRESENTATION);
+    std::cout << "Testing INERTIAL_FIXED_REPRESENTATION " << urdfFileName << std::endl;
+    testModelConsistency(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
-void testRelativeJacobianSparsity(KinDynComputations & dynComp)
+void testRelativeJacobianSparsity(KinDynComputations& dynComp)
 {
     // take two frames
-    if (dynComp.getNrOfLinks() < 2) return;
+    if (dynComp.getNrOfLinks() < 2)
+        return;
     FrameIndex frame = -1;
     FrameIndex refFrame = -1;
 
-    if (dynComp.getNrOfLinks() == 2) {
+    if (dynComp.getNrOfLinks() == 2)
+    {
         frame = 0;
         refFrame = 1;
-    } else {
-        //Pick two frames at random
+    } else
+    {
+        // Pick two frames at random
         frame = real_random_int(0, dynComp.getNrOfFrames());
-        //be sure to pick two different frames
-        do {
+        // be sure to pick two different frames
+        do
+        {
             refFrame = real_random_int(0, dynComp.getNrOfFrames());
         } while (refFrame == frame && frame >= 0);
     }
@@ -445,26 +468,32 @@ void testRelativeJacobianSparsity(KinDynComputations & dynComp)
 
     ASSERT_IS_TRUE(jacobian.rows() == jacobianPattern.rows() && jacobian.cols() == jacobian.cols());
 
-    for (size_t row = 0; row < jacobian.rows(); ++row) {
-        for (size_t col = 0; col < jacobian.cols(); ++col) {
+    for (size_t row = 0; row < jacobian.rows(); ++row)
+    {
+        for (size_t col = 0; col < jacobian.cols(); ++col)
+        {
             // if jacobian has value != 0, pattern should have 1
-            if (std::abs(jacobian(row, col)) > iDynTree::DEFAULT_TOL) {
+            if (std::abs(jacobian(row, col)) > iDynTree::DEFAULT_TOL)
+            {
                 ASSERT_EQUAL_DOUBLE(jacobianPattern(row, col), 1.0);
             }
         }
     }
 }
 
-void testAbsoluteJacobianSparsity(KinDynComputations & dynComp)
+void testAbsoluteJacobianSparsity(KinDynComputations& dynComp)
 {
     // take one frames
-    if (dynComp.getNrOfLinks() < 1) return;
+    if (dynComp.getNrOfLinks() < 1)
+        return;
     FrameIndex frame = -1;
 
-    if (dynComp.getNrOfLinks() == 1) {
+    if (dynComp.getNrOfLinks() == 1)
+    {
         frame = 0;
-    } else {
-        //Pick one frames at random
+    } else
+    {
+        // Pick one frames at random
         frame = real_random_int(0, dynComp.getNrOfFrames());
     }
 
@@ -480,10 +509,13 @@ void testAbsoluteJacobianSparsity(KinDynComputations & dynComp)
 
     ASSERT_IS_TRUE(jacobian.rows() == jacobianPattern.rows() && jacobian.cols() == jacobian.cols());
 
-    for (size_t row = 0; row < jacobian.rows(); ++row) {
-        for (size_t col = 0; col < jacobian.cols(); ++col) {
+    for (size_t row = 0; row < jacobian.rows(); ++row)
+    {
+        for (size_t col = 0; col < jacobian.cols(); ++col)
+        {
             // if jacobian has value != 0, pattern should have 1
-            if (std::abs(jacobian(row, col)) > iDynTree::DEFAULT_TOL) {
+            if (std::abs(jacobian(row, col)) > iDynTree::DEFAULT_TOL)
+            {
                 ASSERT_EQUAL_DOUBLE(jacobianPattern(row, col), 1.0);
             }
         }
@@ -492,7 +524,7 @@ void testAbsoluteJacobianSparsity(KinDynComputations & dynComp)
 
 void testSparsityPattern(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
-	iDynTree::KinDynComputations dynComp;
+    iDynTree::KinDynComputations dynComp;
     iDynTree::ModelLoader mdlLoader;
     bool ok = mdlLoader.loadModelFromFile(modelFilePath);
     ok = ok && dynComp.loadRobotModel(mdlLoader.model());
@@ -501,7 +533,7 @@ void testSparsityPattern(std::string modelFilePath, const FrameVelocityRepresent
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
     ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
         setRandomState(dynComp);
         testRelativeJacobianSparsity(dynComp);
@@ -512,10 +544,10 @@ void testSparsityPattern(std::string modelFilePath, const FrameVelocityRepresent
 void testSparsityPatternAllRepresentations(std::string modelName)
 {
     std::string urdfFileName = getAbsModelPath(modelName);
-    std::cout << "Testing file " << urdfFileName <<  std::endl;
-    testSparsityPattern(urdfFileName,iDynTree::MIXED_REPRESENTATION);
-    testSparsityPattern(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
-    testSparsityPattern(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
+    std::cout << "Testing file " << urdfFileName << std::endl;
+    testSparsityPattern(urdfFileName, iDynTree::MIXED_REPRESENTATION);
+    testSparsityPattern(urdfFileName, iDynTree::BODY_FIXED_REPRESENTATION);
+    testSparsityPattern(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
 int main()
@@ -535,8 +567,6 @@ int main()
     testSparsityPatternAllRepresentations("threeLinks.urdf");
     testSparsityPatternAllRepresentations("bigman.urdf");
     testSparsityPatternAllRepresentations("icub_skin_frames.urdf");
-
-
 
     return EXIT_SUCCESS;
 }

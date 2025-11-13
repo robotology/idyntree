@@ -14,25 +14,26 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-//Most of this file has been taken from https://github.com/Microsoft/GSL/blob/master/tests/span_tests.cpp
+// Most of this file has been taken from
+// https://github.com/Microsoft/GSL/blob/master/tests/span_tests.cpp
 
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/TestUtils.h>
 #include <iDynTree/Span.h>
+#include <iDynTree/TestUtils.h>
 
 #include <Eigen/Dense>
 
-#include <array>       // for array
-#include <iostream>    // for ptrdiff_t
-#include <iterator>    // for reverse_iterator, operator-, operator==
-#include <memory>      // for unique_ptr, shared_ptr, make_unique, allo...
-#include <regex>       // for match_results, sub_match, match_results<>...
-#include <stddef.h>    // for ptrdiff_t
-#include <string>      // for string
+#include <array> // for array
+#include <iostream> // for ptrdiff_t
+#include <iterator> // for reverse_iterator, operator-, operator==
+#include <memory> // for unique_ptr, shared_ptr, make_unique, allo...
+#include <regex> // for match_results, sub_match, match_results<>...
+#include <stddef.h> // for ptrdiff_t
+#include <string> // for string
 #include <type_traits> // for integral_constant<>::value, is_default_co...
-#include <vector>      // for vector
+#include <vector> // for vector
 
 using namespace std;
 using namespace iDynTree;
@@ -45,7 +46,7 @@ struct BaseClass
 struct DerivedClass : BaseClass
 {
 };
-}
+} // namespace
 
 void default_constructor()
 {
@@ -112,28 +113,28 @@ void from_nullptr_size_constructor()
         ASSERT_IS_TRUE((cs.size() == 0 && cs.data() == nullptr));
     }
 
-//    {
-//        auto workaround_macro = []() {
-//            Span<int, 1> s{nullptr, static_cast<Span<int>::index_type>(0)};
-//        };
-//        CHECK_THROWS_AS(workaround_macro(), fail_fast);
-//    }
+    //    {
+    //        auto workaround_macro = []() {
+    //            Span<int, 1> s{nullptr, static_cast<Span<int>::index_type>(0)};
+    //        };
+    //        CHECK_THROWS_AS(workaround_macro(), fail_fast);
+    //    }
 
-//    {
-//        auto workaround_macro = []() { Span<int> s{nullptr, 1}; };
-//        CHECK_THROWS_AS(workaround_macro(), fail_fast);
+    //    {
+    //        auto workaround_macro = []() { Span<int> s{nullptr, 1}; };
+    //        CHECK_THROWS_AS(workaround_macro(), fail_fast);
 
-//        auto const_workaround_macro = []() { Span<const int> cs{nullptr, 1}; };
-//        CHECK_THROWS_AS(const_workaround_macro(), fail_fast);
-//    }
+    //        auto const_workaround_macro = []() { Span<const int> cs{nullptr, 1}; };
+    //        CHECK_THROWS_AS(const_workaround_macro(), fail_fast);
+    //    }
 
-//    {
-//        auto workaround_macro = []() { Span<int, 0> s{nullptr, 1}; };
-//        CHECK_THROWS_AS(workaround_macro(), fail_fast);
+    //    {
+    //        auto workaround_macro = []() { Span<int, 0> s{nullptr, 1}; };
+    //        CHECK_THROWS_AS(workaround_macro(), fail_fast);
 
-//        auto const_workaround_macro = []() { Span<const int, 0> s{nullptr, 1}; };
-//        CHECK_THROWS_AS(const_workaround_macro(), fail_fast);
-//    }
+    //        auto const_workaround_macro = []() { Span<const int, 0> s{nullptr, 1}; };
+    //        CHECK_THROWS_AS(const_workaround_macro(), fail_fast);
+    //    }
 
     {
         Span<int*> s{nullptr, static_cast<Span<int>::index_type>(0)};
@@ -149,10 +150,10 @@ void from_pointer_length_constructor()
     int arr[4] = {1, 2, 3, 4};
 
     {
-        for(int i = 0; i<4 ; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             {
-                Span<int> s = { &arr[0], i };
+                Span<int> s = {&arr[0], i};
                 ASSERT_IS_TRUE(s.size() == i);
                 ASSERT_IS_TRUE(s.data() == &arr[0]);
                 ASSERT_IS_TRUE(s.empty() == (i == 0));
@@ -164,15 +165,15 @@ void from_pointer_length_constructor()
                 }
             }
             {
-                Span<int> s = { &arr[i], 4-i };
-                ASSERT_IS_TRUE(s.size() == 4-i);
+                Span<int> s = {&arr[i], 4 - i};
+                ASSERT_IS_TRUE(s.size() == 4 - i);
                 ASSERT_IS_TRUE(s.data() == &arr[i]);
-                ASSERT_IS_TRUE(s.empty() == (4-i == 0));
-                for (int j = 0; j < 4-i; ++j)
+                ASSERT_IS_TRUE(s.empty() == (4 - i == 0));
+                for (int j = 0; j < 4 - i; ++j)
                 {
-                    ASSERT_IS_TRUE(arr[j+i] == s[j]);
-                    ASSERT_IS_TRUE(arr[j+i] == s.at(j));
-                    ASSERT_IS_TRUE(arr[j+i] == s(j));
+                    ASSERT_IS_TRUE(arr[j + i] == s[j]);
+                    ASSERT_IS_TRUE(arr[j + i] == s.at(j));
+                    ASSERT_IS_TRUE(arr[j + i] == s(j));
                 }
             }
         }
@@ -190,11 +191,11 @@ void from_pointer_length_constructor()
         ASSERT_IS_TRUE((s.size() == 0 && s.data() == nullptr));
     }
 
-//    {
-//        int* p = nullptr;
-//        auto workaround_macro = [=]() { Span<int> s{p, 2}; };
-//        CHECK_THROWS_AS(workaround_macro(), fail_fast);
-//    }
+    //    {
+    //        int* p = nullptr;
+    //        auto workaround_macro = [=]() { Span<int> s{p, 2}; };
+    //        CHECK_THROWS_AS(workaround_macro(), fail_fast);
+    //    }
 
     {
         auto s = make_span(&arr[0], 2);
@@ -208,11 +209,11 @@ void from_pointer_length_constructor()
         ASSERT_IS_TRUE((s.size() == 0 && s.data() == nullptr));
     }
 
-//    {
-//        int* p = nullptr;
-//        auto workaround_macro = [=]() { make_span(p, 2); };
-//        CHECK_THROWS_AS(workaround_macro(), fail_fast);
-//    }
+    //    {
+    //        int* p = nullptr;
+    //        auto workaround_macro = [=]() { make_span(p, 2); };
+    //        CHECK_THROWS_AS(workaround_macro(), fail_fast);
+    //    }
 }
 
 void from_pointer_pointer_constructor()
@@ -384,7 +385,7 @@ void from_array_constructor()
 
 void from_dynamic_array_constructor()
 {
-    double(*arr)[3][4] = new double[100][3][4];
+    double (*arr)[3][4] = new double[100][3][4];
 
     {
         Span<double> s(&arr[0][0][0], 10);
@@ -408,7 +409,8 @@ void from_std_array_constructor()
         ASSERT_IS_TRUE((s.size() == static_cast<ptrdiff_t>(arr.size()) && s.data() == arr.data()));
 
         Span<const int> cs{arr};
-        ASSERT_IS_TRUE((cs.size() == static_cast<ptrdiff_t>(arr.size()) && cs.data() == arr.data()));
+        ASSERT_IS_TRUE(
+            (cs.size() == static_cast<ptrdiff_t>(arr.size()) && cs.data() == arr.data()));
     }
 
     {
@@ -416,7 +418,8 @@ void from_std_array_constructor()
         ASSERT_IS_TRUE((s.size() == static_cast<ptrdiff_t>(arr.size()) && s.data() == arr.data()));
 
         Span<const int, 4> cs{arr};
-        ASSERT_IS_TRUE((cs.size() == static_cast<ptrdiff_t>(arr.size()) && cs.data() == arr.data()));
+        ASSERT_IS_TRUE(
+            (cs.size() == static_cast<ptrdiff_t>(arr.size()) && cs.data() == arr.data()));
     }
 
 #ifdef CONFIRM_COMPILATION_ERRORS
@@ -554,7 +557,8 @@ void from_container_constructor()
         ASSERT_IS_TRUE((s.size() == static_cast<std::ptrdiff_t>(v.size()) && s.data() == v.data()));
 
         Span<const int> cs{v};
-        ASSERT_IS_TRUE((cs.size() == static_cast<std::ptrdiff_t>(v.size()) && cs.data() == v.data()));
+        ASSERT_IS_TRUE(
+            (cs.size() == static_cast<std::ptrdiff_t>(v.size()) && cs.data() == v.data()));
     }
 
     std::string str = "hello";
@@ -563,10 +567,12 @@ void from_container_constructor()
     {
 #ifdef CONFIRM_COMPILATION_ERRORS
         Span<char> s{str};
-        ASSERT_IS_TRUE((s.size() == static_cast<std::ptrdiff_t>(str.size()) && s.data() == str.data()));
+        ASSERT_IS_TRUE(
+            (s.size() == static_cast<std::ptrdiff_t>(str.size()) && s.data() == str.data()));
 #endif
         Span<const char> cs{str};
-        ASSERT_IS_TRUE((cs.size() == static_cast<std::ptrdiff_t>(str.size()) && cs.data() == str.data()));
+        ASSERT_IS_TRUE(
+            (cs.size() == static_cast<std::ptrdiff_t>(str.size()) && cs.data() == str.data()));
     }
 
     {
@@ -574,8 +580,8 @@ void from_container_constructor()
         Span<char> s{cstr};
 #endif
         Span<const char> cs{cstr};
-        ASSERT_IS_TRUE((cs.size() == static_cast<std::ptrdiff_t>(cstr.size()) &&
-              cs.data() == cstr.data()));
+        ASSERT_IS_TRUE(
+            (cs.size() == static_cast<std::ptrdiff_t>(cstr.size()) && cs.data() == cstr.data()));
     }
 
     {
@@ -632,7 +638,8 @@ void from_container_constructor()
         ASSERT_IS_TRUE((s.size() == static_cast<std::ptrdiff_t>(v.size()) && s.data() == v.data()));
 
         auto cs = make_span(cv);
-        ASSERT_IS_TRUE((cs.size() == static_cast<std::ptrdiff_t>(cv.size()) && cs.data() == cv.data()));
+        ASSERT_IS_TRUE(
+            (cs.size() == static_cast<std::ptrdiff_t>(cv.size()) && cs.data() == cv.data()));
     }
 }
 
@@ -645,14 +652,14 @@ void from_convertible_span_constructor()
     }
 
     {
-    #ifdef CONFIRM_COMPILATION_ERRORS
+#ifdef CONFIRM_COMPILATION_ERRORS
         Span<DerivedClass> avd;
         Span<BaseClass> avb = avd;
         static_cast<void>(avb);
-    #endif
+#endif
     }
 
-    #ifdef CONFIRM_COMPILATION_ERRORS
+#ifdef CONFIRM_COMPILATION_ERRORS
     {
         Span<int> s;
         Span<unsigned int> s2 = s;
@@ -670,7 +677,7 @@ void from_convertible_span_constructor()
         Span<short> s2 = s;
         static_cast<void>(s2);
     }
-    #endif
+#endif
 }
 
 void copy_move_and_assignment()
@@ -687,7 +694,8 @@ void copy_move_and_assignment()
     ASSERT_IS_TRUE(s2.empty());
 
     auto get_temp_span = [&]() -> Span<int> { return {&arr[1], 2}; };
-    auto use_span = [&](Span<const int> s) { ASSERT_IS_TRUE((s.size() == 2 && s.data() == &arr[1])); };
+    auto use_span
+        = [&](Span<const int> s) { ASSERT_IS_TRUE((s.size() == 2 && s.data() == &arr[1])); };
     use_span(get_temp_span());
 
     s1 = get_temp_span();
@@ -722,7 +730,7 @@ void first()
         ASSERT_IS_TRUE(av.first<6>().size() == 6);
         ASSERT_IS_TRUE(av.first<-1>().size() == -1);
 #endif
-        //CHECK_THROWS_AS(av.first(6).size(), fail_fast);
+        // CHECK_THROWS_AS(av.first(6).size(), fail_fast);
     }
 
     {
@@ -759,7 +767,7 @@ void last()
 #ifdef CONFIRM_COMPILATION_ERRORS
         ASSERT_IS_TRUE(av.last<6>().size() == 6);
 #endif
-        //CHECK_THROWS_AS(av.last(6).size(), fail_fast);
+        // CHECK_THROWS_AS(av.last(6).size(), fail_fast);
     }
 
     {
@@ -784,7 +792,7 @@ void subspan()
     {
         Span<int, 5> av = arr;
         ASSERT_IS_TRUE((av.subspan<0, 0>().size() == 0));
-        ASSERT_IS_TRUE(decltype(av.subspan<0,0>())::extent == 0);
+        ASSERT_IS_TRUE(decltype(av.subspan<0, 0>())::extent == 0);
         ASSERT_IS_TRUE(av.subspan(0, 0).size() == 0);
     }
 
@@ -794,8 +802,8 @@ void subspan()
         ASSERT_IS_TRUE(decltype(av.subspan<0, 5>())::extent == 5);
         ASSERT_IS_TRUE(av.subspan(0, 5).size() == 5);
 
-//        CHECK_THROWS_AS(av.subspan(0, 6).size(), fail_fast);
-//        CHECK_THROWS_AS(av.subspan(1, 5).size(), fail_fast);
+        //        CHECK_THROWS_AS(av.subspan(0, 6).size(), fail_fast);
+        //        CHECK_THROWS_AS(av.subspan(1, 5).size(), fail_fast);
     }
 
     {
@@ -804,7 +812,7 @@ void subspan()
         ASSERT_IS_TRUE(decltype(av.subspan<4, 0>())::extent == 0);
         ASSERT_IS_TRUE(av.subspan(4, 0).size() == 0);
         ASSERT_IS_TRUE(av.subspan(5, 0).size() == 0);
-//        CHECK_THROWS_AS(av.subspan(6, 0).size(), fail_fast);
+        //        CHECK_THROWS_AS(av.subspan(6, 0).size(), fail_fast);
     }
 
     {
@@ -818,13 +826,13 @@ void subspan()
         ASSERT_IS_TRUE((av.subspan<0, 0>().size() == 0));
         ASSERT_IS_TRUE((decltype(av.subspan<0, 0>())::extent == 0));
         ASSERT_IS_TRUE(av.subspan(0, 0).size() == 0);
-//        CHECK_THROWS_AS((av.subspan<1, 0>().size()), fail_fast);
+        //        CHECK_THROWS_AS((av.subspan<1, 0>().size()), fail_fast);
     }
 
     {
         Span<int> av;
         ASSERT_IS_TRUE(av.subspan(0).size() == 0);
-//        CHECK_THROWS_AS(av.subspan(1).size(), fail_fast);
+        //        CHECK_THROWS_AS(av.subspan(1).size(), fail_fast);
     }
 
     {
@@ -833,9 +841,10 @@ void subspan()
         ASSERT_IS_TRUE(av.subspan(1).size() == 4);
         ASSERT_IS_TRUE(av.subspan(4).size() == 1);
         ASSERT_IS_TRUE(av.subspan(5).size() == 0);
-//        CHECK_THROWS_AS(av.subspan(6).size(), fail_fast);
+        //        CHECK_THROWS_AS(av.subspan(6).size(), fail_fast);
         const auto av2 = av.subspan(1);
-        for (int i = 0; i < 4; ++i) ASSERT_IS_TRUE(av2[i] == i + 2);
+        for (int i = 0; i < 4; ++i)
+            ASSERT_IS_TRUE(av2[i] == i + 2);
     }
 
     {
@@ -844,9 +853,10 @@ void subspan()
         ASSERT_IS_TRUE(av.subspan(1).size() == 4);
         ASSERT_IS_TRUE(av.subspan(4).size() == 1);
         ASSERT_IS_TRUE(av.subspan(5).size() == 0);
-//        CHECK_THROWS_AS(av.subspan(6).size(), fail_fast);
+        //        CHECK_THROWS_AS(av.subspan(6).size(), fail_fast);
         const auto av2 = av.subspan(1);
-        for (int i = 0; i < 4; ++i) ASSERT_IS_TRUE(av2[i] == i + 2);
+        for (int i = 0; i < 4; ++i)
+            ASSERT_IS_TRUE(av2[i] == i + 2);
     }
 }
 
@@ -857,7 +867,7 @@ void at_call()
     {
         Span<int> s = arr;
         ASSERT_IS_TRUE(s.at(0) == 1);
-//        CHECK_THROWS_AS(s.at(5), fail_fast);
+        //        CHECK_THROWS_AS(s.at(5), fail_fast);
     }
 
     {
@@ -865,7 +875,7 @@ void at_call()
         Span<int, 2> s = arr2d;
         ASSERT_IS_TRUE(s.at(0) == 1);
         ASSERT_IS_TRUE(s.at(1) == 6);
-//        CHECK_THROWS_AS(s.at(2), fail_fast);
+        //        CHECK_THROWS_AS(s.at(2), fail_fast);
     }
 }
 
@@ -876,7 +886,7 @@ void operator_function_call()
     {
         Span<int> s = arr;
         ASSERT_IS_TRUE(s(0) == 1);
-//        CHECK_THROWS_AS(s(5), fail_fast);
+        //        CHECK_THROWS_AS(s(5), fail_fast);
     }
 
     {
@@ -884,7 +894,7 @@ void operator_function_call()
         Span<int, 2> s = arr2d;
         ASSERT_IS_TRUE(s(0) == 1);
         ASSERT_IS_TRUE(s(1) == 6);
-//        CHECK_THROWS_AS(s(2), fail_fast);
+        //        CHECK_THROWS_AS(s(2), fail_fast);
     }
 }
 
@@ -997,7 +1007,7 @@ void begin_end()
 
         auto beyond = s.end();
         ASSERT_IS_TRUE(it != beyond);
-        //CHECK_THROWS_AS(*beyond, fail_fast);
+        // CHECK_THROWS_AS(*beyond, fail_fast);
 
         ASSERT_IS_TRUE(beyond - first == 4);
         ASSERT_IS_TRUE(first - first == 0);
@@ -1012,7 +1022,8 @@ void begin_end()
 
         it = first;
         ASSERT_IS_TRUE(it == first);
-        while (it != s.end()) {
+        while (it != s.end())
+        {
             *it = 5;
             ++it;
         }
@@ -1020,7 +1031,8 @@ void begin_end()
         ASSERT_IS_TRUE(it == beyond);
         ASSERT_IS_TRUE(it - beyond == 0);
 
-        for (const auto& n : s) {
+        for (const auto& n : s)
+        {
             ASSERT_IS_TRUE(n == 5);
         }
     }
@@ -1052,7 +1064,7 @@ void cbegin_cend()
 
         auto beyond = s.cend();
         ASSERT_IS_TRUE(it != beyond);
-        //CHECK_THROWS_AS(*beyond, fail_fast);
+        // CHECK_THROWS_AS(*beyond, fail_fast);
 
         ASSERT_IS_TRUE(beyond - first == 4);
         ASSERT_IS_TRUE(first - first == 0);
@@ -1066,7 +1078,8 @@ void cbegin_cend()
         int last = 0;
         it = first;
         ASSERT_IS_TRUE(it == first);
-        while (it != s.cend()) {
+        while (it != s.cend())
+        {
             ASSERT_IS_TRUE(*it == last + 1);
 
             last = *it;
@@ -1091,7 +1104,7 @@ void rbegin_rend()
 
         auto beyond = s.rend();
         ASSERT_IS_TRUE(it != beyond);
-        //CHECK_THROWS_AS(*beyond, fail_fast);
+        // CHECK_THROWS_AS(*beyond, fail_fast);
 
         ASSERT_IS_TRUE(beyond - first == 4);
         ASSERT_IS_TRUE(first - first == 0);
@@ -1106,7 +1119,8 @@ void rbegin_rend()
 
         it = first;
         ASSERT_IS_TRUE(it == first);
-        while (it != s.rend()) {
+        while (it != s.rend())
+        {
             *it = 5;
             ++it;
         }
@@ -1114,7 +1128,8 @@ void rbegin_rend()
         ASSERT_IS_TRUE(it == beyond);
         ASSERT_IS_TRUE(it - beyond == 0);
 
-        for (const auto& n : s) {
+        for (const auto& n : s)
+        {
             ASSERT_IS_TRUE(n == 5);
         }
     }
@@ -1133,7 +1148,7 @@ void crbegin_crend()
 
         auto beyond = s.crend();
         ASSERT_IS_TRUE(it != beyond);
-        //CHECK_THROWS_AS(*beyond, fail_fast);
+        // CHECK_THROWS_AS(*beyond, fail_fast);
 
         ASSERT_IS_TRUE(beyond - first == 4);
         ASSERT_IS_TRUE(first - first == 0);
@@ -1147,7 +1162,8 @@ void crbegin_crend()
         it = first;
         ASSERT_IS_TRUE(it == first);
         int last = 5;
-        while (it != s.crend()) {
+        while (it != s.crend())
+        {
             ASSERT_IS_TRUE(*it == last - 1);
             last = *it;
 
@@ -1241,7 +1257,7 @@ void comparison_operators()
         int arr[] = {1, 2, 3};
 
         Span<int> s1 = {&arr[0], 2}; // shorter
-        Span<int> s2 = arr;          // longer
+        Span<int> s2 = arr; // longer
 
         ASSERT_IS_TRUE(s1 != s2);
         ASSERT_IS_TRUE(s2 != s1);
@@ -1312,7 +1328,7 @@ void fixed_size_conversions()
             Span<int, 2> s2 = s;
             static_cast<void>(s2);
         };
-//        CHECK_THROWS_AS(f(), fail_fast);
+        //        CHECK_THROWS_AS(f(), fail_fast);
     }
 
     // but doing so explicitly is ok
@@ -1351,7 +1367,7 @@ void fixed_size_conversions()
             Span<int, 4> _s4 = {arr2, 2};
             static_cast<void>(_s4);
         };
-//        CHECK_THROWS_AS(f(), fail_fast);
+        //        CHECK_THROWS_AS(f(), fail_fast);
     }
 
     // this should fail - we are trying to assign a small dynamic Span to a fixed_size larger one
@@ -1360,7 +1376,7 @@ void fixed_size_conversions()
         Span<int, 4> _s4 = av;
         static_cast<void>(_s4);
     };
-//    CHECK_THROWS_AS(f(), fail_fast);
+    //    CHECK_THROWS_AS(f(), fail_fast);
 }
 
 void interop_with_std_regex()
@@ -1403,18 +1419,21 @@ void from_eigen_constructor()
     Span<double> s(vec);
 
     ASSERT_IS_TRUE(vec.size() == s.size());
-    for(size_t i=0; i < vec.size(); i++) {
+    for (size_t i = 0; i < vec.size(); i++)
+    {
         ASSERT_IS_TRUE(vec[i] == s[i]);
     }
 
     auto other = make_span(vec);
     ASSERT_IS_TRUE(vec.size() == other.size());
-    for(size_t i=0; i < vec.size(); i++) {
+    for (size_t i = 0; i < vec.size(); i++)
+    {
         ASSERT_IS_TRUE(vec[i] == other[i]);
     }
 }
 
-int main(){
+int main()
+{
     default_constructor();
     size_optimization();
     from_nullptr_size_constructor();

@@ -1,11 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
+#include <iDynTree/AccelerometerSensor.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/Transform.h>
-#include <iDynTree/Sensors.h>
-#include <iDynTree/AccelerometerSensor.h>
-#include <iDynTree/SixAxisForceTorqueSensor.h>
 
 void checkList()
 {
@@ -15,26 +15,32 @@ void checkList()
 
     Transform dummy(Rotation::Identity(), Position::Zero());
 
-    SixAxisForceTorqueSensor ft1; ft1.setName("ft1");
+    SixAxisForceTorqueSensor ft1;
+    ft1.setName("ft1");
     ft1.setFirstLinkSensorTransform(0, dummy);
     ft1.setSecondLinkSensorTransform(1, dummy);
     ft1.setAppliedWrenchLink(0);
-    SixAxisForceTorqueSensor ft2; ft2.setName("ft2");
+    SixAxisForceTorqueSensor ft2;
+    ft2.setName("ft2");
     ft2.setFirstLinkSensorTransform(0, dummy);
     ft2.setSecondLinkSensorTransform(1, dummy);
     ft2.setAppliedWrenchLink(0);
-    SixAxisForceTorqueSensor ft3; ft3.setName("ft3");
+    SixAxisForceTorqueSensor ft3;
+    ft3.setName("ft3");
     ft3.setFirstLinkSensorTransform(0, dummy);
     ft3.setSecondLinkSensorTransform(1, dummy);
     ft3.setAppliedWrenchLink(0);
 
-    AccelerometerSensor acc1; acc1.setName("acc1");
+    AccelerometerSensor acc1;
+    acc1.setName("acc1");
     acc1.setLinkSensorTransform(dummy);
     acc1.setParentLinkIndex(0);
-    AccelerometerSensor acc2; acc2.setName("acc2");
+    AccelerometerSensor acc2;
+    acc2.setName("acc2");
     acc2.setLinkSensorTransform(dummy);
     acc2.setParentLinkIndex(0);
-    AccelerometerSensor acc3; acc3.setName("acc3");
+    AccelerometerSensor acc3;
+    acc3.setName("acc3");
     acc3.setLinkSensorTransform(dummy);
     acc3.setParentLinkIndex(0);
 
@@ -49,15 +55,18 @@ void checkList()
     ftsExpectedOrder[2] = &ft2;
 
     Sensor* allExpectedOrder[6];
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         allExpectedOrder[i] = ftsExpectedOrder[i];
     }
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         allExpectedOrder[3 + i] = accExpectedOrder[i];
     }
 
     SensorsList list;
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i)
+    {
         list.addSensor(*allExpectedOrder[i]);
     }
 
@@ -71,13 +80,12 @@ void checkList()
     ASSERT_IS_TRUE(list.getNrOfSensors(SIX_AXIS_FORCE_TORQUE) == 2);
 
     for (SensorsList::typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE);
-         it.isValid(); ++it) {
+         it.isValid();
+         ++it)
+    {
         ASSERT_IS_TRUE((*it)->getName() != ft3.getName());
     }
-
 }
-
-
 
 void checkIterator()
 {
@@ -87,26 +95,32 @@ void checkIterator()
 
     Transform dummy(Rotation::Identity(), Position::Zero());
 
-    SixAxisForceTorqueSensor ft1; ft1.setName("ft1");
+    SixAxisForceTorqueSensor ft1;
+    ft1.setName("ft1");
     ft1.setFirstLinkSensorTransform(0, dummy);
     ft1.setSecondLinkSensorTransform(1, dummy);
     ft1.setAppliedWrenchLink(0);
-    SixAxisForceTorqueSensor ft2; ft2.setName("ft2");
+    SixAxisForceTorqueSensor ft2;
+    ft2.setName("ft2");
     ft2.setFirstLinkSensorTransform(0, dummy);
     ft2.setSecondLinkSensorTransform(1, dummy);
     ft2.setAppliedWrenchLink(0);
-    SixAxisForceTorqueSensor ft3; ft3.setName("ft3");
+    SixAxisForceTorqueSensor ft3;
+    ft3.setName("ft3");
     ft3.setFirstLinkSensorTransform(0, dummy);
     ft3.setSecondLinkSensorTransform(1, dummy);
     ft3.setAppliedWrenchLink(0);
 
-    AccelerometerSensor acc1; acc1.setName("acc1");
+    AccelerometerSensor acc1;
+    acc1.setName("acc1");
     acc1.setLinkSensorTransform(dummy);
     acc1.setParentLinkIndex(0);
-    AccelerometerSensor acc2; acc2.setName("acc2");
+    AccelerometerSensor acc2;
+    acc2.setName("acc2");
     acc2.setLinkSensorTransform(dummy);
     acc2.setParentLinkIndex(0);
-    AccelerometerSensor acc3; acc3.setName("acc3");
+    AccelerometerSensor acc3;
+    acc3.setName("acc3");
     acc3.setLinkSensorTransform(dummy);
     acc3.setParentLinkIndex(0);
 
@@ -121,55 +135,69 @@ void checkIterator()
     ftsExpectedOrder[2] = &ft2;
 
     Sensor* allExpectedOrder[6];
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         allExpectedOrder[i] = ftsExpectedOrder[i];
     }
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         allExpectedOrder[3 + i] = accExpectedOrder[i];
     }
 
     SensorsList list;
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < 6; ++i)
+    {
         list.addSensor(*allExpectedOrder[i]);
     }
 
-    //Checking ACC iterator
+    // Checking ACC iterator
     int checkIndex = 0;
-    for (SensorsList::typed_iterator it = list.sensorsIteratorForType(ACCELEROMETER); it.isValid(); ++it, ++checkIndex) {
-        //The following cannot be used because sensors are cloned when put inside the SensorList
-//        ASSERT_IS_TRUE(*it == accExpectedOrder[checkIndex]);
-        //The following cannot be used as operator== does not exist in sensor
-//        ASSERT_IS_TRUE(**it == *accExpectedOrder[checkIndex]);
-        Sensor *s = *it;
+    for (SensorsList::typed_iterator it = list.sensorsIteratorForType(ACCELEROMETER); it.isValid();
+         ++it, ++checkIndex)
+    {
+        // The following cannot be used because sensors are cloned when put inside the SensorList
+        //        ASSERT_IS_TRUE(*it == accExpectedOrder[checkIndex]);
+        // The following cannot be used as operator== does not exist in sensor
+        //        ASSERT_IS_TRUE(**it == *accExpectedOrder[checkIndex]);
+        Sensor* s = *it;
         ASSERT_IS_TRUE(accExpectedOrder[checkIndex]->getName() == s->getName());
-        //the following does not work :( I don't know why
+        // the following does not work :( I don't know why
     }
 
-    //Checking FTS iterator
+    // Checking FTS iterator
     checkIndex = 0;
-    for (SensorsList::typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE); it.isValid(); ++it, ++checkIndex) {
-        Sensor *s = *it;
+    for (SensorsList::typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE);
+         it.isValid();
+         ++it, ++checkIndex)
+    {
+        Sensor* s = *it;
         ASSERT_IS_TRUE(ftsExpectedOrder[checkIndex]->getName() == s->getName());
     }
 
-    //Same checking on const iterator
+    // Same checking on const iterator
     checkIndex = 0;
-    for (SensorsList::const_typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE); it.isValid(); ++it, ++checkIndex) {
-        Sensor *s = *it;
+    for (SensorsList::const_typed_iterator it = list.sensorsIteratorForType(SIX_AXIS_FORCE_TORQUE);
+         it.isValid();
+         ++it, ++checkIndex)
+    {
+        Sensor* s = *it;
         ASSERT_IS_TRUE(ftsExpectedOrder[checkIndex]->getName() == s->getName());
     }
 
-    //Checking all sensors iterator
+    // Checking all sensors iterator
     checkIndex = 0;
-    for (SensorsList::iterator it = list.allSensorsIterator(); it.isValid(); ++it, ++checkIndex) {
-        Sensor *s = *it;
+    for (SensorsList::iterator it = list.allSensorsIterator(); it.isValid(); ++it, ++checkIndex)
+    {
+        Sensor* s = *it;
         ASSERT_IS_TRUE(allExpectedOrder[checkIndex]->getName() == s->getName());
     }
 
-    //Same checking on const iterator
+    // Same checking on const iterator
     checkIndex = 0;
-    for (SensorsList::const_iterator it = list.allSensorsIterator(); it.isValid(); ++it, ++checkIndex) {
-        Sensor *s = *it;
+    for (SensorsList::const_iterator it = list.allSensorsIterator(); it.isValid();
+         ++it, ++checkIndex)
+    {
+        Sensor* s = *it;
         ASSERT_IS_TRUE(allExpectedOrder[checkIndex]->getName() == s->getName());
     }
 
@@ -194,9 +222,7 @@ void checkIterator()
     ++ftsIterator3;
     ASSERT_IS_TRUE(ftsIterator == ftsIterator2);
     ASSERT_IS_TRUE(ftsIterator == ftsIterator3);
-
 }
-
 
 int main()
 {

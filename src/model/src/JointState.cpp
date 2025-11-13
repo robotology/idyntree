@@ -10,14 +10,14 @@
 namespace iDynTree
 {
 
-JointPosDoubleArray::JointPosDoubleArray(std::size_t nrOfPosCoords): VectorDynSize(nrOfPosCoords)
+JointPosDoubleArray::JointPosDoubleArray(std::size_t nrOfPosCoords)
+    : VectorDynSize(nrOfPosCoords)
 {
-
 }
 
-JointPosDoubleArray::JointPosDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfPosCoords())
+JointPosDoubleArray::JointPosDoubleArray(const iDynTree::Model& model)
+    : VectorDynSize(model.getNrOfPosCoords())
 {
-
 }
 
 void JointPosDoubleArray::resize(const iDynTree::Model& model)
@@ -45,18 +45,16 @@ JointPosDoubleArray& JointPosDoubleArray::operator=(const iDynTree::VectorDynSiz
 
 JointPosDoubleArray::~JointPosDoubleArray()
 {
-
 }
 
-
-JointDOFsDoubleArray::JointDOFsDoubleArray(std::size_t nrOfDOFs): VectorDynSize(nrOfDOFs)
+JointDOFsDoubleArray::JointDOFsDoubleArray(std::size_t nrOfDOFs)
+    : VectorDynSize(nrOfDOFs)
 {
-
 }
 
-JointDOFsDoubleArray::JointDOFsDoubleArray(const iDynTree::Model& model): VectorDynSize(model.getNrOfDOFs())
+JointDOFsDoubleArray::JointDOFsDoubleArray(const iDynTree::Model& model)
+    : VectorDynSize(model.getNrOfDOFs())
 {
-
 }
 
 void JointDOFsDoubleArray::resize(const iDynTree::Model& model)
@@ -84,7 +82,6 @@ JointDOFsDoubleArray& JointDOFsDoubleArray::operator=(const iDynTree::VectorDynS
 
 JointDOFsDoubleArray::~JointDOFsDoubleArray()
 {
-
 }
 
 DOFSpatialForceArray::DOFSpatialForceArray(std::size_t nrOfDOFs)
@@ -104,14 +101,13 @@ void DOFSpatialForceArray::resize(const iDynTree::Model& model)
 
 void DOFSpatialForceArray::resize(const std::size_t nrOfDOFs)
 {
-    this->m_dofSpatialForce.resize(nrOfDOFs,iDynTree::SpatialForceVector::Zero());
+    this->m_dofSpatialForce.resize(nrOfDOFs, iDynTree::SpatialForceVector::Zero());
 }
 
 bool DOFSpatialForceArray::isConsistent(const Model& model) const
 {
     return (this->m_dofSpatialForce.size() == model.getNrOfDOFs());
 }
-
 
 SpatialForceVector& DOFSpatialForceArray::operator()(const size_t dof)
 {
@@ -125,9 +121,7 @@ const SpatialForceVector& DOFSpatialForceArray::operator()(const size_t dof) con
 
 DOFSpatialForceArray::~DOFSpatialForceArray()
 {
-
 }
-
 
 DOFSpatialMotionArray::DOFSpatialMotionArray(std::size_t nrOfDOFs)
 {
@@ -151,9 +145,8 @@ bool DOFSpatialMotionArray::isConsistent(const Model& model) const
 
 void DOFSpatialMotionArray::resize(const std::size_t nrOfDOFs)
 {
-    this->m_dofSpatialMotion.resize(nrOfDOFs,iDynTree::SpatialMotionVector::Zero());
+    this->m_dofSpatialMotion.resize(nrOfDOFs, iDynTree::SpatialMotionVector::Zero());
 }
-
 
 SpatialMotionVector& DOFSpatialMotionArray::operator()(const size_t dof)
 {
@@ -167,7 +160,6 @@ const SpatialMotionVector& DOFSpatialMotionArray::operator()(const size_t dof) c
 
 DOFSpatialMotionArray::~DOFSpatialMotionArray()
 {
-
 }
 
-}
+} // namespace iDynTree

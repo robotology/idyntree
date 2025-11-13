@@ -5,10 +5,9 @@
 #define IDYNTREE_MODEL_CENTROIDAL_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/Centroidal.h> is deprecated. Please use <iDynTree/Centroidal.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Model/Centroidal.h> is deprecated. Please use <iDynTree/Centroidal.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Centroidal.h>
-
 
 #endif

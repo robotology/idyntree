@@ -8,12 +8,12 @@
 #include <iDynTree/InertialParametersSolidShapesHelpers.h>
 #include <iDynTree/ModelLoader.h>
 
-
 using namespace iDynTree;
 
 int main()
 {
-    // Open file with a external mesh (cube centered in 0 and with vertices in (1,0,0), (0,0,1), etc etc
+    // Open file with a external mesh (cube centered in 0 and with vertices in (1,0,0), (0,0,1), etc
+    // etc
     std::string urdfFileName = getAbsModelPath("oneLink.urdf");
 
     // Load model
@@ -25,7 +25,7 @@ int main()
     // Ensure that the model has one mesh
     Model model = mdlLoader.model();
 
-    //ASSERT_IS_TRUE(model.collisionSolidShapes().linkSolidShapes[0].size() ==  1);
+    // ASSERT_IS_TRUE(model.collisionSolidShapes().linkSolidShapes[0].size() ==  1);
 
     // Extract the inertial parameters assuming a total mass of 24 Kg
     // The principal moment of inertia for a cube of 2 meters side will
@@ -37,11 +37,12 @@ int main()
     rotInertia.zero();
     rotInertia(0, 0) = rotInertia(1, 1) = rotInertia(2, 2) = expectedInertia;
 
-
     VectorDynSize inertialParams;
     inertialParams.resize(10);
     inertialParams(2) = 3.0;
-    ok = estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(totalMass, model, inertialParams);
+    ok = estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(totalMass,
+                                                                     model,
+                                                                     inertialParams);
     ASSERT_IS_TRUE(ok);
 
     std::cerr << inertialParams.toString() << std::endl;
@@ -53,8 +54,8 @@ int main()
     // Check the inertial params
     iDynTree::SpatialInertia inertia = model.getLink(0)->getInertia();
 
-        std::cerr << inertia.getMass() << std::endl;
-        std::cerr << totalMass << std::endl;
+    std::cerr << inertia.getMass() << std::endl;
+    std::cerr << totalMass << std::endl;
 
     ASSERT_EQUAL_DOUBLE(inertia.getMass(), totalMass);
     Position comZero;
@@ -64,7 +65,6 @@ int main()
     std::cerr << rotInertia.toString() << std::endl;
 
     ASSERT_EQUAL_MATRIX(inertia.getRotationalInertiaWrtFrameOrigin(), rotInertia);
-
 
     std::cerr << "Test successful." << std::endl;
     return EXIT_SUCCESS;

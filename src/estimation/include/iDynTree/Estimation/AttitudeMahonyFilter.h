@@ -5,7 +5,7 @@
 #define IDYNTREE_ESTIMATION_ATTITUDE_MAHONY_FILTER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/AttitudeMahonyFilter.h> is deprecated. Please use <iDynTree/AttitudeMahonyFilter.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Estimation/AttitudeMahonyFilter.h> is deprecated. Please use <iDynTree/AttitudeMahonyFilter.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/AttitudeMahonyFilter.h>

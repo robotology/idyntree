@@ -4,28 +4,28 @@
 #ifndef IDYNTREE_CAMERA_H
 #define IDYNTREE_CAMERA_H
 
-#include <iDynTree/Visualizer.h>
 #include "CameraAnimator.h"
+#include <iDynTree/Visualizer.h>
 #include <irrlicht.h>
 
 namespace iDynTree
 {
 
-class Camera: public ICamera
+class Camera : public ICamera
 {
 private:
-    irr::scene::ICameraSceneNode * m_irrCamera;
+    irr::scene::ICameraSceneNode* m_irrCamera;
     CameraAnimator* m_animator;
 
 public:
     Camera();
     virtual ~Camera();
 
-    void setIrrlichtCamera(irr::scene::ICameraSceneNode * cam);
+    void setIrrlichtCamera(irr::scene::ICameraSceneNode* cam);
 
     void setCameraAnimator(CameraAnimator* animator);
 
-    irr::scene::ICameraSceneNode * irrlichtCamera();
+    irr::scene::ICameraSceneNode* irrlichtCamera();
 
     void setAspectRatio(double aspectRatio);
 
@@ -39,6 +39,6 @@ public:
     virtual ICameraAnimator* animator();
 };
 
-}
+} // namespace iDynTree
 
 #endif

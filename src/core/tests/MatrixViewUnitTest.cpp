@@ -1,15 +1,14 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
+#include <iDynTree/EigenHelpers.h>
 #include <iDynTree/MatrixDynSize.h>
 #include <iDynTree/MatrixView.h>
 #include <iDynTree/TestUtils.h>
-#include <iDynTree/EigenHelpers.h>
 
 using namespace iDynTree;
 
-template <class T, class U>
-void areMatricesEqual(const T & mat1, const U & mat2)
+template <class T, class U> void areMatricesEqual(const T& mat1, const U& mat2)
 {
     ASSERT_EQUAL_DOUBLE(mat1.rows(), mat2.rows());
     ASSERT_EQUAL_DOUBLE(mat1.cols(), mat2.cols());

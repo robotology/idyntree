@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #ifndef ACCELEROMETER_HPP
 #define ACCELEROMETER_HPP
 
@@ -9,129 +8,125 @@
 
 namespace iDynTree
 {
-    class Transform;
-    typedef LinearMotionVector3 LinAcceleration;
-    class SpatialAcc;
-    class Twist;
-}
+class Transform;
+typedef LinearMotionVector3 LinAcceleration;
+class SpatialAcc;
+class Twist;
+} // namespace iDynTree
 
 #include <iDynTree/Sensors.h>
 
-namespace iDynTree {
+namespace iDynTree
+{
+
+/**
+ * Interface to the Accelerometer class.
+ *
+ * An implementation of the Accelerometer Sensor
+ *
+ * \ingroup iDynTreeSensors
+ *
+ */
+class AccelerometerSensor : public LinkSensor
+{
+private:
+    struct AccelerometerPrivateAttributes;
+    AccelerometerPrivateAttributes* pimpl;
+
+public:
+    /**
+     * Constructor.
+     */
+    AccelerometerSensor();
 
     /**
-     * Interface to the Accelerometer class.
-     *
-     * An implementation of the Accelerometer Sensor
-     *
-     * \ingroup iDynTreeSensors
+     * Copy constructor
+     */
+    AccelerometerSensor(const AccelerometerSensor& other);
+
+    /**
+     * Copy operator
+     */
+    AccelerometerSensor& operator=(const AccelerometerSensor& other);
+
+    /**
+     * Destructor.
+     */
+    virtual ~AccelerometerSensor();
+
+    /**
+     * Set the name (id) of the sensor
      *
      */
-    class AccelerometerSensor: public LinkSensor
-    {
-    private:
-        struct AccelerometerPrivateAttributes;
-        AccelerometerPrivateAttributes * pimpl;
+    bool setName(const std::string& _name);
 
-    public:
-        /**
-         * Constructor.
-         */
-        AccelerometerSensor();
+    /**
+     * Set the transform from the sensor to the parent link attached to the sensor.
+     *
+     * @return true if link_index is parent link attached to the accelerometer sensor, false
+     * otherwise.
+     */
+    bool setLinkSensorTransform(const iDynTree::Transform& link_H_sensor);
 
-        /**
-         * Copy constructor
-         */
-        AccelerometerSensor(const AccelerometerSensor& other);
+    /*
+     * Documented in Sensor
+     */
+    bool setParentLink(const std::string& parent);
 
-        /**
-         * Copy operator
-         */
-        AccelerometerSensor& operator=(const AccelerometerSensor &other);
+    /*
+     * Documented in Sensor
+     */
+    bool setParentLinkIndex(const LinkIndex& parent_index);
 
-        /**
-         * Destructor.
-         */
-        virtual ~AccelerometerSensor();
+    /*
+     * Documented in the sensor
+     *
+     */
+    std::string getName() const;
 
-        /**
-         * Set the name (id) of the sensor
-         *
-         */
-        bool setName(const std::string &_name);
+    /*
+     * Documented in Sensor
+     */
+    SensorType getSensorType() const;
 
-       /**
-         * Set the transform from the sensor to the parent link attached to the sensor.
-         *
-         * @return true if link_index is parent link attached to the accelerometer sensor, false otherwise.
-         */
-        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor);
+    /*
+     * Documented in Sensor
+     */
+    std::string getParentLink() const;
 
-        /*
-         * Documented in Sensor
-         */
-        bool setParentLink(const std::string &parent);
+    /*
+     * Documented in Sensor
+     */
+    LinkIndex getParentLinkIndex() const;
 
-        /*
-         * Documented in Sensor
-         */
-        bool setParentLinkIndex(const LinkIndex & parent_index);
+    // Documented in LinkSensor
+    Transform getLinkSensorTransform() const;
 
-        /*
-         * Documented in the sensor
-         *
-         */
-        std::string getName() const;
+    /*
+     * Documented in Sensor
+     */
+    bool isValid() const;
 
-        /*
-         * Documented in Sensor
-         */
-        SensorType getSensorType() const;
+    /*
+     * Documented in Sensor
+     */
+    Sensor* clone() const;
 
+    /*
+     * Documented in Sensor
+     */
+    bool updateIndices(const Model& model);
 
-        /*
-         * Documented in Sensor
-         */
-        std::string getParentLink() const;
+    /**
+     * Following method is to be implemented after defining the interface
+     * Get wrench applied on the specified link expressed in the specified link frame.
+     *
+     * @return the predicted measurement as a LinAcceleration
+     */
+    iDynTree::LinAcceleration
+    predictMeasurement(const iDynTree::SpatialAcc& linkAcc, const iDynTree::Twist& linkTwist);
+};
 
-        /*
-         * Documented in Sensor
-         */
-        LinkIndex getParentLinkIndex() const;
-
-        // Documented in LinkSensor
-        Transform getLinkSensorTransform() const;
-
-        /*
-         * Documented in Sensor
-         */
-        bool isValid() const;
-
-        /*
-         * Documented in Sensor
-         */
-        Sensor * clone() const;
-
-        /*
-         * Documented in Sensor
-         */
-        bool updateIndices(const Model & model);
-
-      /**
-        * Following method is to be implemented after defining the interface
-        * Get wrench applied on the specified link expressed in the specified link frame.
-        *
-        * @return the predicted measurement as a LinAcceleration
-        */
-       iDynTree::LinAcceleration predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist);
-    };
-
-
-
-
-
-}
-
-
+} // namespace iDynTree
 
 #endif

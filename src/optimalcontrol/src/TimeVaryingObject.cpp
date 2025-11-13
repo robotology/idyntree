@@ -10,45 +10,47 @@
 
 #include <iDynTree/TimeVaryingObject.h>
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-        template<typename Object>
-        TimeInvariantObject<Object>::TimeInvariantObject()
-        { }
-
-        template<typename Object>
-        TimeInvariantObject<Object>::TimeInvariantObject(const Object &timeInvariantObject)
-            : m_invariantObject(timeInvariantObject)
-        { }
-
-        template<typename Object>
-        TimeInvariantObject<Object>::~TimeInvariantObject()
-        { }
-
-        template<typename Object>
-        Object &TimeInvariantObject<Object>::get()
-        {
-            return m_invariantObject;
-        }
-
-        template<typename Object>
-        const Object &TimeInvariantObject<Object>::get(double /*time*/, bool &isValid)
-        {
-            isValid = true;
-            return m_invariantObject;
-        }
-
-        template class TimeInvariantObject<double>;
-
-        template class TimeInvariantObject<VectorDynSize>;
-
-        template class TimeInvariantObject<MatrixDynSize>;
-
-        template class TimeInvariantObject<Transform>;
-
-        template class TimeInvariantObject<Rotation>;
-
-        template class TimeInvariantObject<Position>;
-    }
+template <typename Object> TimeInvariantObject<Object>::TimeInvariantObject()
+{
 }
+
+template <typename Object>
+TimeInvariantObject<Object>::TimeInvariantObject(const Object& timeInvariantObject)
+    : m_invariantObject(timeInvariantObject)
+{
+}
+
+template <typename Object> TimeInvariantObject<Object>::~TimeInvariantObject()
+{
+}
+
+template <typename Object> Object& TimeInvariantObject<Object>::get()
+{
+    return m_invariantObject;
+}
+
+template <typename Object>
+const Object& TimeInvariantObject<Object>::get(double /*time*/, bool& isValid)
+{
+    isValid = true;
+    return m_invariantObject;
+}
+
+template class TimeInvariantObject<double>;
+
+template class TimeInvariantObject<VectorDynSize>;
+
+template class TimeInvariantObject<MatrixDynSize>;
+
+template class TimeInvariantObject<Transform>;
+
+template class TimeInvariantObject<Rotation>;
+
+template class TimeInvariantObject<Position>;
+} // namespace optimalcontrol
+} // namespace iDynTree

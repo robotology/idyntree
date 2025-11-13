@@ -16,65 +16,68 @@
 #include <memory>
 #include <string>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
-    class VectorDynSize;
+class VectorDynSize;
 
-    namespace optimization {
+namespace optimization
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        class WorhpInterface : public Optimizer {
+class WorhpInterface : public Optimizer
+{
 
-            class WorhpInterfaceImplementation;
-            WorhpInterfaceImplementation *m_pimpl;
+    class WorhpInterfaceImplementation;
+    WorhpInterfaceImplementation* m_pimpl;
 
-        public:
+public:
+    WorhpInterface();
 
-            WorhpInterface();
+    WorhpInterface(const WorhpInterface& other) = delete;
 
-            WorhpInterface(const WorhpInterface &other) = delete;
+    virtual ~WorhpInterface() override;
 
-            virtual ~WorhpInterface() override;
+    virtual bool isAvailable() const override;
 
-            virtual bool isAvailable() const override;
+    virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem) override;
 
-            virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem) override;
+    virtual bool solve() override;
 
-            virtual bool solve() override;
+    virtual bool getPrimalVariables(VectorDynSize& primalVariables) override;
 
-            virtual bool getPrimalVariables(VectorDynSize &primalVariables) override;
+    virtual bool getDualVariables(VectorDynSize& constraintsMultipliers,
+                                  VectorDynSize& lowerBoundsMultipliers,
+                                  VectorDynSize& upperBoundsMultipliers) override;
 
-            virtual bool getDualVariables(VectorDynSize &constraintsMultipliers,
-                                          VectorDynSize &lowerBoundsMultipliers,
-                                          VectorDynSize &upperBoundsMultipliers) override;
+    virtual bool getOptimalCost(double& optimalCost) override;
 
-            virtual bool getOptimalCost(double &optimalCost) override;
+    virtual bool getOptimalConstraintsValues(VectorDynSize& constraintsValues) override;
 
-            virtual bool getOptimalConstraintsValues(VectorDynSize &constraintsValues) override;
+    virtual double minusInfinity() override;
 
-            virtual double minusInfinity() override;
+    virtual double plusInfinity() override;
 
-            virtual double plusInfinity() override;
+    void useApproximatedHessians(bool useApproximatedHessian = true);
 
-            void useApproximatedHessians(bool useApproximatedHessian = true);
+    bool setWorhpParam(const std::string& paramName, bool value);
 
-            bool setWorhpParam(const std::string &paramName, bool value);
+    bool setWorhpParam(const std::string& paramName, double value);
 
-            bool setWorhpParam(const std::string &paramName, double value);
+    bool setWorhpParam(const std::string& paramName, int value);
 
-            bool setWorhpParam(const std::string &paramName, int value);
+    bool getWorhpParam(const std::string& paramName, bool& value);
 
-            bool getWorhpParam(const std::string &paramName, bool &value);
+    bool getWorhpParam(const std::string& paramName, double& value);
 
-            bool getWorhpParam(const std::string &paramName, double &value);
-
-            bool getWorhpParam(const std::string &paramName, int &value);
-        };
-    }
-}
+    bool getWorhpParam(const std::string& paramName, int& value);
+};
+} // namespace optimization
+} // namespace iDynTree
 
 #endif // IDYNTREE_OPTIMALCONTROL_WORHPINTERFACE_H

@@ -5,25 +5,26 @@
 #define IDYNTREE_MODELIO_XML_XMLDOCUMENT_H
 
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
 
-namespace iDynTree {
-    class XMLDocument;
-    class XMLElement;
-    class XMLParser;
-    class XMLParserState;
-}
+namespace iDynTree
+{
+class XMLDocument;
+class XMLElement;
+class XMLParser;
+class XMLParserState;
+} // namespace iDynTree
 
-class iDynTree::XMLDocument {
+class iDynTree::XMLDocument
+{
     class XMLDocumentPimpl;
     std::unique_ptr<XMLDocumentPimpl> m_pimpl;
-    
+
     friend class XMLParser;
     void setRootElement(std::shared_ptr<XMLElement> root);
-    
+
 public:
-    
     explicit XMLDocument(XMLParserState& parserState);
     virtual ~XMLDocument();
 
@@ -33,12 +34,12 @@ public:
      * @param name name of the element to create
      * @return a new parser element for the corresponding tag
      */
-    virtual std::shared_ptr<XMLElement> rootElementForName(const std::string& name,
-                                                           const std::vector<std::string>& packageDirs);
+    virtual std::shared_ptr<XMLElement>
+    rootElementForName(const std::string& name, const std::vector<std::string>& packageDirs);
 
     // TODO: find a better name
     virtual bool documentHasBeenParsed();
-    
+
     const std::shared_ptr<XMLElement> root() const;
     std::string description() const;
 

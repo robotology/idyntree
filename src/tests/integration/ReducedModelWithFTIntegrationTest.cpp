@@ -1,12 +1,12 @@
-#include <iDynTree/TestUtils.h>
-#include <iDynTree/Transform.h>
-#include <iDynTree/Sensors.h>
-#include <iDynTree/SixAxisForceTorqueSensor.h>
-#include <iDynTree/ModelSensorsTransformers.h>
-#include <iDynTree/ModelTransformers.h>
+#include "testModels.h"
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelLoader.h>
-#include "testModels.h"
+#include <iDynTree/ModelSensorsTransformers.h>
+#include <iDynTree/ModelTransformers.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
+#include <iDynTree/TestUtils.h>
+#include <iDynTree/Transform.h>
 #include <iostream>
 #include <memory>
 
@@ -78,7 +78,8 @@ SensorsList getSensors(const std::string& fileName)
     return sensorList;
 }
 
-struct DataFT {
+struct DataFT
+{
     string jointName;
     // Links
     string parent_linkName;
@@ -90,21 +91,24 @@ struct DataFT {
     string childToGranchild_jointName;
 };
 
-struct ExperimentFT {
+struct ExperimentFT
+{
     DataFT dataFT;
     vector<string> removedJoints;
     string expectedFirstLinkName;
     string expectedSecondLinkName;
 };
 
-vector<string> removeJoints(const vector<string>& originalVector,
-                            const vector<string>& jointsToBeRemoved)
+vector<string>
+removeJoints(const vector<string>& originalVector, const vector<string>& jointsToBeRemoved)
 {
     vector<string> reducedJointList = originalVector;
 
-    for (auto joint : jointsToBeRemoved) {
+    for (auto joint : jointsToBeRemoved)
+    {
         auto it = std::find(reducedJointList.begin(), reducedJointList.end(), joint);
-        if(it != reducedJointList.end()) {
+        if (it != reducedJointList.end())
+        {
             cout << "Removing: " << joint << endl;
             reducedJointList.erase(it);
         }
@@ -116,8 +120,8 @@ vector<string> removeJoints(const vector<string>& originalVector,
 void printFT(const SixAxisForceTorqueSensor& ft)
 {
     cout << "Sensor Name:\t" << ft.getName() << endl;
-    cout << "Is Valid: \t"   << ft.isValid() << endl;
-    cout << "First Link:\t"  << ft.getFirstLinkName() << endl;
+    cout << "Is Valid: \t" << ft.isValid() << endl;
+    cout << "First Link:\t" << ft.getFirstLinkName() << endl;
     cout << "Second Link:\t" << ft.getSecondLinkName() << endl;
 }
 
@@ -164,22 +168,26 @@ int main()
     // 2) The reduced model doesn't contain the firstLink
     ExperimentFT test_removeFirstLink;
     test_removeFirstLink.dataFT = dataFT_l_leg;
-    test_removeFirstLink.removedJoints.push_back(test_removeFirstLink.dataFT.grandparentToParent_jointName);
+    test_removeFirstLink.removedJoints.push_back(
+        test_removeFirstLink.dataFT.grandparentToParent_jointName);
     test_removeFirstLink.expectedFirstLinkName = dataFT_l_leg.grandparent_linkName;
     test_removeFirstLink.expectedSecondLinkName = dataFT_l_leg.child_linkName;
 
     // 3) The reduced model doesn't contain the secondLink
     ExperimentFT test_removeSecondLink;
     test_removeSecondLink.dataFT = dataFT_l_leg;
-    test_removeSecondLink.removedJoints.push_back(test_removeSecondLink.dataFT.childToGranchild_jointName);
+    test_removeSecondLink.removedJoints.push_back(
+        test_removeSecondLink.dataFT.childToGranchild_jointName);
     test_removeSecondLink.expectedFirstLinkName = dataFT_l_leg.parent_linkName;
     test_removeSecondLink.expectedSecondLinkName = dataFT_l_leg.child_linkName;
 
     // 3) The reduced model doesn't contain both firstLink and secondLink
     ExperimentFT test_removeFirstAndSecondLink;
     test_removeFirstAndSecondLink.dataFT = dataFT_l_leg;
-    test_removeFirstAndSecondLink.removedJoints.push_back(test_removeFirstAndSecondLink.dataFT.grandparentToParent_jointName);
-    test_removeFirstAndSecondLink.removedJoints.push_back(test_removeFirstAndSecondLink.dataFT.childToGranchild_jointName);
+    test_removeFirstAndSecondLink.removedJoints.push_back(
+        test_removeFirstAndSecondLink.dataFT.grandparentToParent_jointName);
+    test_removeFirstAndSecondLink.removedJoints.push_back(
+        test_removeFirstAndSecondLink.dataFT.childToGranchild_jointName);
     test_removeFirstAndSecondLink.expectedFirstLinkName = dataFT_l_leg.grandparent_linkName;
     test_removeFirstAndSecondLink.expectedSecondLinkName = dataFT_l_leg.child_linkName;
 
@@ -228,7 +236,8 @@ int main()
         // Get the transform from the fixed joint.
         // It uses the createReducedModel() logic. It is used as ground truth.
         Transform parent_H_child;
-        auto jointFT = reducedModel.getJoint(reducedModel.getJointIndex(experiment.dataFT.jointName));
+        auto jointFT
+            = reducedModel.getJoint(reducedModel.getJointIndex(experiment.dataFT.jointName));
         parent_H_child = jointFT->getRestTransform(jointFT->getFirstAttachedLink(),
                                                    jointFT->getSecondAttachedLink());
 
@@ -239,12 +248,12 @@ int main()
         Transform firstLink_H_sensorFrame;
         Transform secondLink_H_sensorFrame;
         ok = true;
-        ok = ok && sensorCopy->getLinkSensorTransform(firstLinkIndex,  firstLink_H_sensorFrame);
+        ok = ok && sensorCopy->getLinkSensorTransform(firstLinkIndex, firstLink_H_sensorFrame);
         ok = ok && sensorCopy->getLinkSensorTransform(secondLinkIndex, secondLink_H_sensorFrame);
         ASSERT_IS_TRUE(ok);
 
         ASSERT_EQUAL_TRANSFORM(parent_H_child,
-                               firstLink_H_sensorFrame*secondLink_H_sensorFrame.inverse());
+                               firstLink_H_sensorFrame * secondLink_H_sensorFrame.inverse());
     }
 
     return EXIT_SUCCESS;

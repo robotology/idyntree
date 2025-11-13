@@ -8,26 +8,24 @@
 
 #include "cmdline.h"
 
-#include <iostream>
 #include <cstdlib>
+#include <iostream>
 
 /**
  * Add the option supported by the idyntree-model-info utility
  */
-void addOptions(cmdline::parser &cmd)
+void addOptions(cmdline::parser& cmd)
 {
-    cmd.add<std::string>("model", 'm',
-                         "Model to load.",
-                         true);
+    cmd.add<std::string>("model", 'm', "Model to load.", true);
 
-    cmd.add<std::string>("frames", 'f',
-                         "Frames to visualize, defined as a single string with a \", \" as separator. "
+    cmd.add<std::string>("frames",
+                         'f',
+                         "Frames to visualize, defined as a single string with a \", \" as "
+                         "separator. "
                          "For example \"l_sole, r_sole\".",
                          false);
 
-    cmd.add<std::string>("color-palette", 'c',
-                         "Color palette.",
-                         false);
+    cmd.add<std::string>("color-palette", 'c', "Color palette.", false);
     cmd.add("print", 'p', "Print the model.");
 }
 
@@ -42,7 +40,7 @@ int main(int argc, char** argv)
     iDynTree::ModelLoader mdlLoader;
     bool ok = mdlLoader.loadModelFromFile(modelPath);
 
-    if( !ok )
+    if (!ok)
     {
         std::cerr << "Impossible to read model at file " << modelPath << std::endl;
         return EXIT_FAILURE;
@@ -55,12 +53,12 @@ int main(int argc, char** argv)
 
     // Visualize the model
     iDynTree::Visualizer visualizer;
-    ok = visualizer.addModel(mdlLoader.model(),"model");
+    ok = visualizer.addModel(mdlLoader.model(), "model");
     const std::string& palette = cmd.get<std::string>("color-palette");
-    if(!palette.empty())
+    if (!palette.empty())
     {
         ok = visualizer.setColorPalette(palette);
-        if( !ok )
+        if (!ok)
         {
             std::cerr << "Impossible to set the color palette." << std::endl;
             return EXIT_FAILURE;
@@ -104,14 +102,14 @@ int main(int argc, char** argv)
 
     visualizer.camera().animator()->enableMouseControl();
 
-    if( !ok )
+    if (!ok)
     {
         std::cerr << "Impossible to read visualizer." << std::endl;
         return EXIT_FAILURE;
     }
 
     // Visualization loop
-    while( visualizer.run() )
+    while (visualizer.run())
     {
         visualizer.draw();
     }

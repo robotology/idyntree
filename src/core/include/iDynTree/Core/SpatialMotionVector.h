@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_SPATIAL_MOTION_RAW_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/SpatialMotionVector.h> is deprecated. Please use <iDynTree/SpatialMotionVector.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Core/SpatialMotionVector.h> is deprecated. Please use <iDynTree/SpatialMotionVector.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SpatialMotionVector.h>

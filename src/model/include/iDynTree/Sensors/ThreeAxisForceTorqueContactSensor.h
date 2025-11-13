@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_3D_FT_SENSOR_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h> is deprecated. Please use <iDynTree/ThreeAxisForceTorqueContactSensor.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h> is deprecated. Please use <iDynTree/ThreeAxisForceTorqueContactSensor.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ThreeAxisForceTorqueContactSensor.h>
