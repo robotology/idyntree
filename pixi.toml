@@ -40,6 +40,8 @@ test = { cmd = "ctest --test-dir .build --build-config Release", depends-on = ["
 install = { cmd = ["cmake", "--install", ".build", "--config", "Release"], depends-on = ["build"] }
 uninstall = { cmd = ["cmake", "--build", ".build", "--target", "uninstall"]}
 
+format = { cmd = "clang-format -i $(git ls-files '*.cpp' '*.h' '*.cxx' '*.hpp')" }
+format-fast = { cmd = "git ls-files '*.cpp' '*.h' | parallel --will-cite -j 4 clang-format -i" }
 
 [dependencies]
 cmake = "*"
@@ -60,6 +62,8 @@ numpy = "*"
 yarp = "*"
 osqp-eigen = "*"
 libsdformat = ">=16.0"
+clang-format = ">=21.1.5"
+parallel = "*"
 # Find a way to add this only for supported envs
 # icub-main = "*"
 

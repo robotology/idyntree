@@ -1,23 +1,22 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #include <iDynTree/EigenHelpers.h>
-#include <iDynTree/TestUtils.h>
 #include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
 
 #include <iDynTree/ModelLoader.h>
 
-#include <iDynTree/ForwardKinematics.h>
 #include <iDynTree/Dynamics.h>
+#include <iDynTree/ForwardKinematics.h>
 
+#include <iDynTree/FreeFloatingMatrices.h>
+#include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/JointState.h>
 #include <iDynTree/LinkState.h>
-#include <iDynTree/FreeFloatingState.h>
-#include <iDynTree/FreeFloatingMatrices.h>
 
 #include "testModels.h"
 
@@ -27,14 +26,13 @@
 
 using namespace iDynTree;
 
-void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
-                                                 const Traversal & traversal)
+void checkInverseAndForwardDynamicsAreIdempotent(const Model& model, const Traversal& traversal)
 {
     // Allocate input for both algorithms : robot position, velocity
     // and link external wrenches
     LinkNetExternalWrenches linkExtWrenches(model);
-    FreeFloatingPos   robotPos(model);
-    FreeFloatingVel   robotVel(model);
+    FreeFloatingPos robotPos(model);
+    FreeFloatingVel robotVel(model);
 
     // Input for direct dynamics algorithms
     // and output for inverse dynamics : joint torques
@@ -45,7 +43,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     robotVel.baseVel() = getRandomTwist();
     getRandomJointPositions(robotPos.jointPos(), model);
     getRandomVector(robotVel.jointVel());
-    for(unsigned int link=0; link < model.getNrOfLinks(); link++ )
+    for (unsigned int link = 0; link < model.getNrOfLinks(); link++)
     {
         linkExtWrenches(link) = getRandomWrench();
     }
@@ -57,8 +55,7 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
 
     // Allocate temporary data structures for ABA
     iDynTree::ArticulatedBodyAlgorithmInternalBuffers ABAbufs(model);
-    ASSERT_EQUAL_DOUBLE(ABAbufs.linksBiasAcceleration.getNrOfLinks(),model.getNrOfLinks());
-
+    ASSERT_EQUAL_DOUBLE(ABAbufs.linksBiasAcceleration.getNrOfLinks(), model.getNrOfLinks());
 
     // Run ABA
     ArticulatedBodyAlgorithm(model,
@@ -98,17 +95,18 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
     // and external forces are consistent, the resulting
     // base wrench should be zero, while the joint torque
     // should be equal to the one given in input to the ABA
-    Vector6 zeroVec; zeroVec.zero();
+    Vector6 zeroVec;
+    zeroVec.zero();
     std::cout << "Check base wrench" << std::endl;
-    ASSERT_EQUAL_VECTOR_TOL(RNEA_baseForceAndJointTorques.baseWrench().asVector(),
-                        zeroVec,1e-6);
+    ASSERT_EQUAL_VECTOR_TOL(RNEA_baseForceAndJointTorques.baseWrench().asVector(), zeroVec, 1e-6);
     std::cout << "Check joint torques" << std::endl;
-    ASSERT_EQUAL_VECTOR_TOL(RNEA_baseForceAndJointTorques.jointTorques(),ABA_jntTorques,1e-07);
+    ASSERT_EQUAL_VECTOR_TOL(RNEA_baseForceAndJointTorques.jointTorques(), ABA_jntTorques, 1e-07);
 
-    // Also check that the inverse dynamics as computed by regressor*inertial parameters  is consistent
-    MatrixDynSize regressor(6+model.getNrOfDOFs(), 10*model.getNrOfLinks());
-    VectorDynSize inertialParams(10*model.getNrOfLinks());
-    VectorDynSize invDynResults(6+model.getNrOfDOFs());
+    // Also check that the inverse dynamics as computed by regressor*inertial parameters  is
+    // consistent
+    MatrixDynSize regressor(6 + model.getNrOfDOFs(), 10 * model.getNrOfLinks());
+    VectorDynSize inertialParams(10 * model.getNrOfLinks());
+    VectorDynSize invDynResults(6 + model.getNrOfDOFs());
 
     bool ok = model.getInertialParameters(inertialParams);
     ASSERT_IS_TRUE(ok);
@@ -148,23 +146,28 @@ void checkInverseAndForwardDynamicsAreIdempotent(const Model & model,
 
     ASSERT_IS_TRUE(ok);
 
-    toEigen(invDynResults) =
-        toEigen(regressor)*toEigen(inertialParams);
+    toEigen(invDynResults) = toEigen(regressor) * toEigen(inertialParams);
 
     Vector6 REGR_baseWrench;
     VectorDynSize REGR_jointTorques(model.getNrOfDOFs());
 
-    toEigen(REGR_baseWrench) = toEigen(invDynResults).segment<6>(0) + toEigen(RNEA_EXT_baseForceAndJointTorques.baseWrench());
-    toEigen(REGR_jointTorques) = toEigen(invDynResults).segment(6, model.getNrOfDOFs()) + toEigen(RNEA_EXT_baseForceAndJointTorques.jointTorques());
+    toEigen(REGR_baseWrench) = toEigen(invDynResults).segment<6>(0)
+                               + toEigen(RNEA_EXT_baseForceAndJointTorques.baseWrench());
+    toEigen(REGR_jointTorques) = toEigen(invDynResults).segment(6, model.getNrOfDOFs())
+                                 + toEigen(RNEA_EXT_baseForceAndJointTorques.jointTorques());
 
     double tolRegr = 2e-6;
-    ASSERT_EQUAL_VECTOR_TOL(REGR_baseWrench, RNEA_baseForceAndJointTorques.baseWrench().asVector(), tolRegr);
-    ASSERT_EQUAL_VECTOR_TOL(REGR_jointTorques, RNEA_baseForceAndJointTorques.jointTorques(), tolRegr);
+    ASSERT_EQUAL_VECTOR_TOL(REGR_baseWrench,
+                            RNEA_baseForceAndJointTorques.baseWrench().asVector(),
+                            tolRegr);
+    ASSERT_EQUAL_VECTOR_TOL(REGR_jointTorques,
+                            RNEA_baseForceAndJointTorques.jointTorques(),
+                            tolRegr);
 }
 
 int main()
 {
-    for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
+    for (unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++)
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
         std::cout << "Checking dynamics test on " << urdfFileName << std::endl;
@@ -175,6 +178,6 @@ int main()
         Traversal traversal;
         ok = model.computeFullTreeTraversal(traversal);
         assert(ok);
-        checkInverseAndForwardDynamicsAreIdempotent(model,traversal);
+        checkInverseAndForwardDynamicsAreIdempotent(model, traversal);
     }
 }

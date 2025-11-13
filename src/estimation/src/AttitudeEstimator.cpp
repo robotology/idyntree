@@ -3,7 +3,6 @@
 
 #include <iDynTree/AttitudeEstimator.h>
 
-
 iDynTree::IAttitudeEstimator::~IAttitudeEstimator()
 {
 }

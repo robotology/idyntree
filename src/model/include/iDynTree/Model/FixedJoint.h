@@ -5,10 +5,9 @@
 #define IDYNTREE_MODEL_FIXED_JOINT_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/FixedJoint.h> is deprecated. Please use <iDynTree/FixedJoint.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Model/FixedJoint.h> is deprecated. Please use <iDynTree/FixedJoint.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/FixedJoint.h>
-
 
 #endif

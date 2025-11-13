@@ -11,38 +11,39 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_OPTIMALCONTROLSOLVER_H
 #define IDYNTREE_OPTIMALCONTROL_OPTIMALCONTROLSOLVER_H
 
-#include <memory>
 #include <cstddef>
+#include <memory>
 
-namespace iDynTree {
+namespace iDynTree
+{
 
-    class VectorDynSize;
+class VectorDynSize;
 
+namespace optimalcontrol
+{
 
-    namespace optimalcontrol {
+class OptimalControlProblem;
 
-        class OptimalControlProblem;
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+class OptimalControlSolver
+{
 
-        class OptimalControlSolver
-        {
+public:
+    OptimalControlSolver() = delete;
 
-        public:
-            OptimalControlSolver() = delete;
+    OptimalControlSolver(const std::shared_ptr<OptimalControlProblem> ocProblem);
 
-            OptimalControlSolver(const std::shared_ptr<OptimalControlProblem> ocProblem);
+    virtual ~OptimalControlSolver();
 
-            virtual ~OptimalControlSolver();
+    virtual bool solve() = 0;
+};
 
-            virtual bool solve() = 0;
-
-        };
-
-    }
-}
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_OPTIMALCONTROLSOLVER_H */

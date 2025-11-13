@@ -1,14 +1,13 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #include <iDynTree/Jacobians.h>
 
 #include <iDynTree/EigenHelpers.h>
 
+#include <iDynTree/LinkState.h>
 #include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
-#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {
@@ -26,8 +25,9 @@ bool FreeFloatingJacobianUsingLinkPos(const Model& model,
     toEigen(jacobian).setZero();
 
     // Compute base part
-    const Transform & world_H_base = world_H_links(traversal.getBaseLink()->getIndex());
-    toEigen(jacobian).block(0,0,6,6) = toEigen((jacobFrame_X_world*world_H_base*baseFrame_X_jacobBaseFrame).asAdjointTransform());
+    const Transform& world_H_base = world_H_links(traversal.getBaseLink()->getIndex());
+    toEigen(jacobian).block(0, 0, 6, 6) = toEigen(
+        (jacobFrame_X_world * world_H_base * baseFrame_X_jacobBaseFrame).asAdjointTransform());
 
     // Compute joint part
     // We iterate from the link up in the traveral until we reach the base
@@ -39,10 +39,12 @@ bool FreeFloatingJacobianUsingLinkPos(const Model& model,
         IJointConstPtr joint = traversal.getParentJointFromLinkIndex(visitedLinkIdx);
 
         size_t dofOffset = joint->getDOFsOffset();
-        for(int i=0; i < joint->getNrOfDOFs(); i++)
+        for (int i = 0; i < joint->getNrOfDOFs(); i++)
         {
-            toEigen(jacobian).block(0,6+dofOffset+i,6,1) =
-                toEigen(jacobFrame_X_world*(world_H_links(visitedLinkIdx)*joint->getMotionSubspaceVector(i,visitedLinkIdx,parentLinkIdx)));
+            toEigen(jacobian).block(0, 6 + dofOffset + i, 6, 1)
+                = toEigen(jacobFrame_X_world
+                          * (world_H_links(visitedLinkIdx)
+                             * joint->getMotionSubspaceVector(i, visitedLinkIdx, parentLinkIdx)));
         }
 
         visitedLinkIdx = parentLinkIdx;
@@ -51,5 +53,4 @@ bool FreeFloatingJacobianUsingLinkPos(const Model& model,
     return true;
 }
 
-
-}
+} // namespace iDynTree

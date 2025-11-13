@@ -8,19 +8,21 @@
 
 #include <pybind11/pybind11.h>
 
-
-namespace iDynTree {
-namespace {
+namespace iDynTree
+{
+namespace
+{
 
 namespace py = ::pybind11;
-PYBIND11_MODULE(pybind, m) {
-  iDynTree::bindings::iDynTreeCoreBindings(m);
-  iDynTree::bindings::iDynTreeModelBindings(m);
-  iDynTree::bindings::iDynTreeSensorsBindings(m);
-  iDynTree::bindings::iDynTreeModelIoUrdfBindings(m);
-  iDynTree::bindings::iDynTreeHighLevelBindings(m);
+PYBIND11_MODULE(pybind, m)
+{
+    iDynTree::bindings::iDynTreeCoreBindings(m);
+    iDynTree::bindings::iDynTreeModelBindings(m);
+    iDynTree::bindings::iDynTreeSensorsBindings(m);
+    iDynTree::bindings::iDynTreeModelIoUrdfBindings(m);
+    iDynTree::bindings::iDynTreeHighLevelBindings(m);
 }
 
-}  // namespace
+} // namespace
 
-}  // namespace iDynTree
+} // namespace iDynTree

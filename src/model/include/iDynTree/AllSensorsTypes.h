@@ -4,9 +4,9 @@
 #ifndef IDYNTREE_ALL_SENSORS_TYPE_H
 #define IDYNTREE_ALL_SENSORS_TYPE_H
 
-#include <iDynTree/SixAxisForceTorqueSensor.h>
 #include <iDynTree/AccelerometerSensor.h>
 #include <iDynTree/GyroscopeSensor.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
 #include <iDynTree/ThreeAxisAngularAccelerometerSensor.h>
 #include <iDynTree/ThreeAxisForceTorqueContactSensor.h>
 

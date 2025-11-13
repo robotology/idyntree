@@ -3,12 +3,10 @@
 
 #include <iDynTree/TestUtils.h>
 
-
 #include <iDynTree/InertialParametersSolidShapesHelpers.h>
 
-#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Model.h>
-
+#include <iDynTree/VectorDynSize.h>
 
 using namespace iDynTree;
 
@@ -16,8 +14,8 @@ void checkOneCubeVsEightSmallCubes()
 {
     // Create a model with one shape with one cube of 1 meter of side,
     // and another with 8 with 1/2 meter of side, placed to form a bigger cube
-    // As the density is linear, verify that given the same mass the estimated inertial parameters are
-    // the same
+    // As the density is linear, verify that given the same mass the estimated inertial parameters
+    // are the same
 
     iDynTree::Model oneCubeModel;
     iDynTree::Link oneCubeLink;
@@ -37,44 +35,46 @@ void checkOneCubeVsEightSmallCubes()
 
     iDynTree::Box smallCube;
     smallCube.setLink_H_geometry(Transform::Identity());
-    smallCube.setX(1.0/2.0);
-    smallCube.setY(1.0/2.0);
-    smallCube.setZ(1.0/2.0);
+    smallCube.setX(1.0 / 2.0);
+    smallCube.setY(1.0 / 2.0);
+    smallCube.setZ(1.0 / 2.0);
 
     // Generate origins for the small cubes
     std::vector<Position> smallCubesOrigins;
     // + + +
-    smallCubesOrigins.push_back(Position(+1.0/4.0, +1.0/4.0, +1.0/4.0));
+    smallCubesOrigins.push_back(Position(+1.0 / 4.0, +1.0 / 4.0, +1.0 / 4.0));
 
     // + + -
-    smallCubesOrigins.push_back(Position(+1.0/4.0, +1.0/4.0, -1.0/4.0));
+    smallCubesOrigins.push_back(Position(+1.0 / 4.0, +1.0 / 4.0, -1.0 / 4.0));
 
     // + - +
-    smallCubesOrigins.push_back(Position(+1.0/4.0, -1.0/4.0, +1.0/4.0));
+    smallCubesOrigins.push_back(Position(+1.0 / 4.0, -1.0 / 4.0, +1.0 / 4.0));
 
     // + - -
-    smallCubesOrigins.push_back(Position(+1.0/4.0, -1.0/4.0, -1.0/4.0));
+    smallCubesOrigins.push_back(Position(+1.0 / 4.0, -1.0 / 4.0, -1.0 / 4.0));
 
     // - + +
-    smallCubesOrigins.push_back(Position(-1.0/4.0, +1.0/4.0, +1.0/4.0));
+    smallCubesOrigins.push_back(Position(-1.0 / 4.0, +1.0 / 4.0, +1.0 / 4.0));
 
     // - + -
-    smallCubesOrigins.push_back(Position(-1.0/4.0, +1.0/4.0, -1.0/4.0));
+    smallCubesOrigins.push_back(Position(-1.0 / 4.0, +1.0 / 4.0, -1.0 / 4.0));
 
     // - - +
-    smallCubesOrigins.push_back(Position(-1.0/4.0, -1.0/4.0, +1.0/4.0));
+    smallCubesOrigins.push_back(Position(-1.0 / 4.0, -1.0 / 4.0, +1.0 / 4.0));
 
     // - - -
-    smallCubesOrigins.push_back(Position(-1.0/4.0, -1.0/4.0, -1.0/4.0));
+    smallCubesOrigins.push_back(Position(-1.0 / 4.0, -1.0 / 4.0, -1.0 / 4.0));
 
-    for(auto&& smallCubeOrigin: smallCubesOrigins) {
+    for (auto&& smallCubeOrigin : smallCubesOrigins)
+    {
         smallCube.setLink_H_geometry(Transform(Rotation::Identity(), smallCubeOrigin));
         eightCubeModel.collisionSolidShapes().getLinkSolidShapes()[0].push_back(new Box(smallCube));
     }
 
     // Compute the inertia with the bounding boxes for both cases
     double totalMass = 1.0;
-    VectorDynSize oneCubeParams(oneCubeModel.getNrOfLinks()*10), eightCubesParams(oneCubeModel.getNrOfLinks()*10);
+    VectorDynSize oneCubeParams(oneCubeModel.getNrOfLinks() * 10),
+        eightCubesParams(oneCubeModel.getNrOfLinks() * 10);
     bool ok = estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(totalMass,
                                                                           oneCubeModel,
                                                                           oneCubeParams);
@@ -94,11 +94,9 @@ void checkOneCubeVsEightSmallCubes()
     ASSERT_EQUAL_DOUBLE(oneCubeParams(0), totalMass);
 }
 
-
 int main()
 {
     checkOneCubeVsEightSmallCubes();
 
     return EXIT_SUCCESS;
 }
-

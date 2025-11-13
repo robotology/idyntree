@@ -11,23 +11,27 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_MPC_H
 #define IDYNTREE_OPTIMALCONTROL_MPC_H
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-        class MPC {
+class MPC
+{
 
-            //- here I should set a fake controller
-            //- define here the possibility to set constraints  and costs which take the full vector of optimization variables
-            //  eventually it is also possible to add here delay constraints
+    //- here I should set a fake controller
+    //- define here the possibility to set constraints  and costs which take the full vector of
+    // optimization variables
+    //  eventually it is also possible to add here delay constraints
+};
 
-        };
-
-    }
-}
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif /* end of include guard: IDYNTREE_OPTIMALCONTROL_MPC_H */

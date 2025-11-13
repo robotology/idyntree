@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 /**
-* @ingroup idyntree_tutorials
-*
-* A tutorial on how to use the KinDynComputations class
-* with Eigen data structures.
-*
-*
-*/
+ * @ingroup idyntree_tutorials
+ *
+ * A tutorial on how to use the KinDynComputations class
+ * with Eigen data structures.
+ *
+ *
+ */
 
 // C headers
 #include <cstdlib>
@@ -24,7 +24,6 @@
 // Helpers function to convert between
 // iDynTree datastructures
 #include <iDynTree/EigenHelpers.h>
-
 
 /**
  * Struct containing the floating robot state
@@ -51,7 +50,7 @@ struct EigenRobotState
 
     Eigen::Matrix4d world_H_base;
     Eigen::VectorXd jointPos;
-    Eigen::Matrix<double,6,1> baseVel;
+    Eigen::Matrix<double, 6, 1> baseVel;
     Eigen::VectorXd jointVel;
     Eigen::Vector3d gravity;
 
@@ -72,20 +71,21 @@ struct EigenRobotAcceleration
         jointAcc.setRandom();
     }
 
-    Eigen::Matrix<double,6,1> baseAcc;
+    Eigen::Matrix<double, 6, 1> baseAcc;
     Eigen::VectorXd jointAcc;
 
     // See https://eigen.tuxfamily.org/dox/group__TopicStructHavingEigenMembers.html
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
 
-
 /*****************************************************************/
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
-    if( argc != 2 )
+    if (argc != 2)
     {
-        std::cerr << "KinDynComputationsWithEigen usage: KinDynComputationsWithEigen ./path/to/modelName.urdf" << std::endl;
+        std::cerr << "KinDynComputationsWithEigen usage: KinDynComputationsWithEigen "
+                     "./path/to/modelName.urdf"
+                  << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -96,9 +96,10 @@ int main(int argc, char *argv[])
 
     bool ok = mdlLoader.loadModelFromFile(modelFile);
 
-    if( !ok )
+    if (!ok)
     {
-        std::cerr << "KinDynComputationsWithEigen: impossible to load model from " << modelFile << std::endl;
+        std::cerr << "KinDynComputationsWithEigen: impossible to load model from " << modelFile
+                  << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -106,14 +107,16 @@ int main(int argc, char *argv[])
     iDynTree::KinDynComputations kinDynComp;
     ok = kinDynComp.loadRobotModel(mdlLoader.model());
 
-    if( !ok )
+    if (!ok)
     {
-        std::cerr << "KinDynComputationsWithEigen: impossible to load the following model in a KinDynComputations class:" << std::endl
+        std::cerr << "KinDynComputationsWithEigen: impossible to load the following model in a "
+                     "KinDynComputations class:"
+                  << std::endl
                   << mdlLoader.model().toString() << std::endl;
         return EXIT_FAILURE;
     }
 
-    const iDynTree::Model & model = kinDynComp.model();
+    const iDynTree::Model& model = kinDynComp.model();
 
     // Now we create the robot state in Eigen datastructures
     EigenRobotState eigRobotState;
@@ -134,42 +137,51 @@ int main(int argc, char *argv[])
 
     // If you are interested in a frame with a given name, you can obtain its associated index with
     // the appropriate method
-    std::string arbitraryFrameName = model.getFrameName(model.getNrOfFrames()/2);
+    std::string arbitraryFrameName = model.getFrameName(model.getNrOfFrames() / 2);
 
     iDynTree::FrameIndex arbitraryFrameIndex = model.getFrameIndex(arbitraryFrameName);
 
-    Eigen::Matrix4d world_H_arbitraryFrame = iDynTree::toEigen(kinDynComp.getWorldTransform(arbitraryFrameIndex).asHomogeneousTransform());
+    Eigen::Matrix4d world_H_arbitraryFrame = iDynTree::toEigen(
+        kinDynComp.getWorldTransform(arbitraryFrameIndex).asHomogeneousTransform());
 
     // You can also get quantities directly with their name, but clearly this is less efficient
-    std::string anotherArbitraryFrameName = model.getFrameName(model.getNrOfFrames()/3);
+    std::string anotherArbitraryFrameName = model.getFrameName(model.getNrOfFrames() / 3);
 
-    Eigen::Matrix4d arbitraryFrame_H_anotherArbitraryFrame = iDynTree::toEigen(kinDynComp.getRelativeTransform(arbitraryFrameName,anotherArbitraryFrameName).asHomogeneousTransform());
+    Eigen::Matrix4d arbitraryFrame_H_anotherArbitraryFrame = iDynTree::toEigen(
+        kinDynComp.getRelativeTransform(arbitraryFrameName, anotherArbitraryFrameName)
+            .asHomogeneousTransform());
 
-    // More complex quantities (such as jacobians and matrices) need to be handled in a different way for efficency reasons
-    Eigen::MatrixXd eigMassMatrix(6+model.getNrOfDOFs(), 6+model.getNrOfDOFs());
+    // More complex quantities (such as jacobians and matrices) need to be handled in a different
+    // way for efficency reasons
+    Eigen::MatrixXd eigMassMatrix(6 + model.getNrOfDOFs(), 6 + model.getNrOfDOFs());
     ok = kinDynComp.getFreeFloatingMassMatrix(iDynTree::make_matrix_view(eigMassMatrix));
 
     if (!ok)
     {
-        std::cerr << "Matrix of wrong size passed to KinDynComputations::getFreeFloatingMassMatrix" << std::endl;
+        std::cerr << "Matrix of wrong size passed to KinDynComputations::getFreeFloatingMassMatrix"
+                  << std::endl;
         return EXIT_FAILURE;
     }
 
-    Eigen::MatrixXd eigJacobian(6, 6+model.getNrOfDOFs());
-    ok = kinDynComp.getFrameFreeFloatingJacobian(arbitraryFrameIndex, iDynTree::make_matrix_view(eigJacobian));
+    Eigen::MatrixXd eigJacobian(6, 6 + model.getNrOfDOFs());
+    ok = kinDynComp.getFrameFreeFloatingJacobian(arbitraryFrameIndex,
+                                                 iDynTree::make_matrix_view(eigJacobian));
 
     if (!ok)
     {
-        std::cerr << "Wrong frame index or wrong size passed to KinDynComputations::getFrameFreeFloatingJacobian" << std::endl;
+        std::cerr << "Wrong frame index or wrong size passed to "
+                     "KinDynComputations::getFrameFreeFloatingJacobian"
+                  << std::endl;
         return EXIT_FAILURE;
     }
 
-    Eigen::MatrixXd eigCOMJacobian(3, 6+model.getNrOfDOFs());
+    Eigen::MatrixXd eigCOMJacobian(3, 6 + model.getNrOfDOFs());
     ok = kinDynComp.getCenterOfMassJacobian(iDynTree::make_matrix_view(eigCOMJacobian));
 
     if (!ok)
     {
-        std::cerr << "Matrix of wrong size passed to KinDynComputations::getCenterOfMassJacobian" << std::endl;
+        std::cerr << "Matrix of wrong size passed to KinDynComputations::getCenterOfMassJacobian"
+                  << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -195,7 +207,7 @@ int main(int argc, char *argv[])
                                invDynTrqs);
 
     // The output of inv dynamics can be converted easily to eigen vectors
-    Eigen::Matrix<double,6,1> baseWrench = iDynTree::toEigen(invDynTrqs.baseWrench());
+    Eigen::Matrix<double, 6, 1> baseWrench = iDynTree::toEigen(invDynTrqs.baseWrench());
     Eigen::VectorXd jntTorques = iDynTree::toEigen(invDynTrqs.jointTorques());
 
     std::cerr << "Inverse dynamics torques: " << std::endl;
@@ -203,4 +215,3 @@ int main(int argc, char *argv[])
 
     return EXIT_SUCCESS;
 }
-

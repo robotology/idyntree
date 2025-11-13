@@ -13,7 +13,7 @@ namespace iDynTree
 
 class ModelVisualization;
 
-class JetsVisualization: public IJetsVisualization
+class JetsVisualization : public IJetsVisualization
 {
 private:
     JetsVisualization(const JetsVisualization& other);
@@ -22,13 +22,13 @@ private:
     void drawJet(size_t i, double intensity);
 
     irr::scene::ISceneManager* m_smgr;
-    ModelVisualization * m_modelViz;
-    std::vector<irr::scene::ISceneNode *> * m_framesNodes;
+    ModelVisualization* m_modelViz;
+    std::vector<irr::scene::ISceneNode*>* m_framesNodes;
 
     std::vector<FrameIndex> m_jetsFrameIndices;
-    std::vector<irr::scene::ISceneNode *> m_jetsNodes;
+    std::vector<irr::scene::ISceneNode*> m_jetsNodes;
     std::vector<Direction> m_jetsDirections;
-    std::vector<ColorViz>  m_jetsColors;
+    std::vector<ColorViz> m_jetsColors;
 
     double m_maxRadius;
     double m_minRadius;
@@ -38,18 +38,21 @@ private:
 
 public:
     JetsVisualization();
-    void init(irr::scene::ISceneManager* smgr, ModelVisualization * modelViz, std::vector<irr::scene::ISceneNode *> * framesNodes);
+    void init(irr::scene::ISceneManager* smgr,
+              ModelVisualization* modelViz,
+              std::vector<irr::scene::ISceneNode*>* framesNodes);
     ~JetsVisualization();
 
-    virtual bool setJetsFrames(const std::vector< std::string > & jetsFrames);
+    virtual bool setJetsFrames(const std::vector<std::string>& jetsFrames);
     virtual size_t getNrOfJets() const;
     virtual Direction getJetDirection(const int jetIndex) const;
-    virtual bool setJetDirection(const int jetIndex, const Direction & jetDirection);
-    virtual bool setJetColor(const int jetIndex, const ColorViz & jetColor);
-    virtual bool setJetsDimensions(const double & minRadius, const double & maxRadius, const double & maxLenght);
-    virtual bool setJetsIntensity(const VectorDynSize & jetsIntensity);
+    virtual bool setJetDirection(const int jetIndex, const Direction& jetDirection);
+    virtual bool setJetColor(const int jetIndex, const ColorViz& jetColor);
+    virtual bool
+    setJetsDimensions(const double& minRadius, const double& maxRadius, const double& maxLenght);
+    virtual bool setJetsIntensity(const VectorDynSize& jetsIntensity);
 };
 
-}
+} // namespace iDynTree
 
 #endif

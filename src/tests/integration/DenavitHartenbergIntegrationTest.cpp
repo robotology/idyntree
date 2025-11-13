@@ -1,12 +1,11 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
-#include <iDynTree/TestUtils.h>
 #include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/TestUtils.h>
 
-#include <iDynTree/Model.h>
 #include <iDynTree/DenavitHartenberg.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/KinDynComputations.h>
@@ -23,25 +22,25 @@ bool ExtractReducedJointPosFromFullModel(const Model& fullModel,
     assert(fullJntPos.size() == fullModel.getNrOfPosCoords());
     reducedJntPos.resize(reducedModel.getNrOfJoints());
 
-    for (JointIndex reducedJntIdx=0; reducedJntIdx < reducedModel.getNrOfJoints(); reducedJntIdx++)
+    for (JointIndex reducedJntIdx = 0; reducedJntIdx < reducedModel.getNrOfJoints();
+         reducedJntIdx++)
     {
         // Check that joint is present in the full model
         FrameIndex fullJntIdx = fullModel.getJointIndex(reducedModel.getJointName(reducedJntIdx));
         assert(fullJntIdx != FRAME_INVALID_INDEX);
 
         // Compute the dofs of the joints and full/reduced model offsets
-        assert(fullModel.getJoint(fullJntIdx)->getNrOfDOFs() ==
-               reducedModel.getJoint(reducedJntIdx)->getNrOfDOFs());
-        unsigned int nrOfDofs =fullModel.getJoint(fullJntIdx)->getNrOfDOFs();
+        assert(fullModel.getJoint(fullJntIdx)->getNrOfDOFs()
+               == reducedModel.getJoint(reducedJntIdx)->getNrOfDOFs());
+        unsigned int nrOfDofs = fullModel.getJoint(fullJntIdx)->getNrOfDOFs();
         size_t fullDofOffset = fullModel.getJoint(fullJntIdx)->getDOFsOffset();
         size_t reducedDofOffset = reducedModel.getJoint(reducedJntIdx)->getDOFsOffset();
 
         // Copy the jnt pos
-        for (int j=0; j < nrOfDofs; j++)
+        for (int j = 0; j < nrOfDofs; j++)
         {
-            reducedJntPos(reducedDofOffset+j) = fullJntPos(fullDofOffset+j);
+            reducedJntPos(reducedDofOffset + j) = fullJntPos(fullDofOffset + j);
         }
-
     }
 
     return true;
@@ -60,16 +59,17 @@ void checkDHConversionsOnArbitraryChains(const Model& model)
     getRandomJointPositions(fullJntPos, model);
     kinDynComp.setJointPos(fullJntPos);
 
-    for (int i=0; i < 10; i++)
+    for (int i = 0; i < 10; i++)
     {
         // Get a random couple of frames
-        FrameIndex baseFrameIdx   = getRandomInteger(0, model.getNrOfFrames()-1);
-        FrameIndex distalFrameIdx = getRandomInteger(0, model.getNrOfFrames()-1);
+        FrameIndex baseFrameIdx = getRandomInteger(0, model.getNrOfFrames() - 1);
+        FrameIndex distalFrameIdx = getRandomInteger(0, model.getNrOfFrames() - 1);
 
         std::string baseFrame = model.getFrameName(baseFrameIdx);
         std::string distalFrame = model.getFrameName(distalFrameIdx);
 
-        std::cerr << "Computing chain with base " << baseFrame << " and distal " << distalFrame << std::endl;
+        std::cerr << "Computing chain with base " << baseFrame << " and distal " << distalFrame
+                  << std::endl;
 
         // Extract the DH parameters for the chain connecting this two frames
         DHChain extractedDHParams;
@@ -78,8 +78,7 @@ void checkDHConversionsOnArbitraryChains(const Model& model)
 
         // Create a model from a DH chain
         Model extractedChain;
-        ok = CreateModelFromDHChain(extractedDHParams,
-                                    extractedChain);
+        ok = CreateModelFromDHChain(extractedDHParams, extractedChain);
         ASSERT_IS_TRUE(ok);
 
         // Extract the state of the Chain from the complete state
@@ -91,7 +90,8 @@ void checkDHConversionsOnArbitraryChains(const Model& model)
 
         // Compare the two frames
         ASSERT_EQUAL_TRANSFORM_TOL(kinDynComp.getRelativeTransform(baseFrame, distalFrame),
-                                   chainKinDynComp.getRelativeTransform("baseFrame", "distalFrame"), 1e-5);
+                                   chainKinDynComp.getRelativeTransform("baseFrame", "distalFrame"),
+                                   1e-5);
     }
 }
 
@@ -101,7 +101,7 @@ void checkDHConversionsOnArbitraryChains(const Model& model)
 // (i.e. two different DHChain generate the same model)
 // So pay attention to run this check on DHChain for which
 // you know that idempotemcy holds
-void checkDHIdempotency(const DHChain& chain, bool checkIdempotency=true)
+void checkDHIdempotency(const DHChain& chain, bool checkIdempotency = true)
 {
     // DH --> Model
     Model chainModel;
@@ -117,7 +117,7 @@ void checkDHIdempotency(const DHChain& chain, bool checkIdempotency=true)
     if (checkIdempotency)
     {
         ASSERT_EQUAL_TRANSFORM(chain.getH0(), chainCheck.getH0());
-        for (int i=0; i < chain.getNrOfDOFs(); i++)
+        for (int i = 0; i < chain.getNrOfDOFs(); i++)
         {
             DHLink dhLink = chain(i);
             DHLink dhLinkCheck = chainCheck(i);
@@ -161,7 +161,7 @@ int main()
     dh1dof(0).Offset = 1.0;
     // An offset in the last link cannot be distinguished from a rotation due
     // to HN, not checking idempotemcy in this case
-    bool checkIdempotency=false;
+    bool checkIdempotency = false;
     checkDHIdempotency(dh1dof, checkIdempotency);
     dh1dof(0).Offset = 0.0;
 
@@ -175,7 +175,7 @@ int main()
 
     dh2dof(0).A = dh2dof(0).D = dh2dof(0).Alpha = dh2dof(0).Offset = 0.0;
     dh2dof(1).A = dh2dof(1).D = dh2dof(1).Alpha = dh2dof(1).Offset = 0.0;
-    //checkDHIdempotency(dh2dof);
+    // checkDHIdempotency(dh2dof);
 
     dh2dof(0).A = dh2dof(1).A = 1.0;
     checkDHIdempotency(dh2dof);
@@ -183,21 +183,20 @@ int main()
 
     dh2dof(0).D = dh2dof(1).D = 1.0;
     checkDHIdempotency(dh2dof);
-    dh2dof(0).D = dh2dof(1).D  = 0.0;
+    dh2dof(0).D = dh2dof(1).D = 0.0;
 
-    dh2dof(0).Alpha = dh2dof(1).Alpha  = 1.0;
+    dh2dof(0).Alpha = dh2dof(1).Alpha = 1.0;
     checkDHIdempotency(dh2dof);
-    dh2dof(0).Alpha = dh2dof(1).Alpha  = 0.0;
+    dh2dof(0).Alpha = dh2dof(1).Alpha = 0.0;
 
-    dh2dof(0).Offset = dh2dof(1).Offset  = 1.0;
+    dh2dof(0).Offset = dh2dof(1).Offset = 1.0;
     // An offset in the last link cannot be distinguished from a rotation due
     // to HN, not checking idempotemcy in this case
-    checkIdempotency=false;
+    checkIdempotency = false;
     checkDHIdempotency(dh2dof, checkIdempotency);
-    dh2dof(0).Offset = dh2dof(1).Offset  = 0.0;
+    dh2dof(0).Offset = dh2dof(1).Offset = 0.0;
 
-
-    for (unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
+    for (unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++)
     {
         std::string urdfFileName = getAbsModelPath(std::string(IDYNTREE_TESTS_URDFS[mdl]));
         std::cout << "---> Checking DH conversions test on " << urdfFileName << std::endl;

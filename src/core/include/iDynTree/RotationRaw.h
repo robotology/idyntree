@@ -5,7 +5,7 @@
 #define IDYNTREE_ROTATION_RAW_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/RotationRaw.h> is deprecated. Please use <iDynTree/Rotation.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/RotationRaw.h> is deprecated. Please use <iDynTree/Rotation.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Rotation.h>

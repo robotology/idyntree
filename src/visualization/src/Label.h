@@ -19,7 +19,6 @@ class Label : public iDynTree::ILabel
     iDynTree::ColorViz m_color{0.0, 0.0, 0.0, 1.0};
 
 public:
-
     Label();
 
     Label(const Label& other);

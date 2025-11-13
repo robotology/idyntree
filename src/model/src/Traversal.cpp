@@ -1,9 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
-#include <iDynTree/Traversal.h>
 #include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
 
 #include <cassert>
 #include <sstream>
@@ -38,12 +37,14 @@ bool Traversal::reset(const unsigned int nrOfLinksInModel)
     this->links.resize(0);
     this->parents.resize(0);
     this->toParentJoints.resize(0);
-    this->linkIndexToTraversalIndex.resize(nrOfLinksInModel,-1);
+    this->linkIndexToTraversalIndex.resize(nrOfLinksInModel, -1);
 
     return true;
 }
 
-bool Traversal::addTraversalElement(const Link* link, const IJoint* jointToParent, const Link* parentLink)
+bool Traversal::addTraversalElement(const Link* link,
+                                    const IJoint* jointToParent,
+                                    const Link* parentLink)
 {
     // The traversal index of the link just added will be the current getNrOfVisitedLinks()
     this->linkIndexToTraversalIndex[link->getIndex()] = this->getNrOfVisitedLinks();
@@ -55,17 +56,16 @@ bool Traversal::addTraversalElement(const Link* link, const IJoint* jointToParen
     return true;
 }
 
-
 bool Traversal::addTraversalBase(const Link* link)
 {
-    if( this->getNrOfVisitedLinks() != 0 )
+    if (this->getNrOfVisitedLinks() != 0)
     {
         std::cerr << "[ERROR]  Traversal::addTraversalBase error :"
                   << " adding a base to Traversal that already has one." << std::endl;
         return false;
     }
 
-    return addTraversalElement(link,NULL,NULL);
+    return addTraversalElement(link, NULL, NULL);
 }
 
 unsigned int Traversal::getNrOfVisitedLinks() const
@@ -113,33 +113,32 @@ bool Traversal::reset(const Model& model)
     return reset(model.getNrOfLinks());
 }
 
-bool Traversal::isParentOf(const LinkIndex parentCandidate,
-                           const LinkIndex childCandidate) const
+bool Traversal::isParentOf(const LinkIndex parentCandidate, const LinkIndex childCandidate) const
 {
-    assert(childCandidate  < this->linkIndexToTraversalIndex.size());
+    assert(childCandidate < this->linkIndexToTraversalIndex.size());
     assert(parentCandidate < this->linkIndexToTraversalIndex.size());
-    assert(childCandidate  >= 0);
+    assert(childCandidate >= 0);
     assert(parentCandidate >= 0);
 
     // If the childCandidate is not in the traversal, then clearly
     // the parentCandidate is not its parent for this traversal
-    if( linkIndexToTraversalIndex[childCandidate] == -1 )
+    if (linkIndexToTraversalIndex[childCandidate] == -1)
     {
         return false;
     }
 
     LinkConstPtr parentPtr = this->getParentLinkFromLinkIndex(childCandidate);
-    if( parentPtr == 0 )
+    if (parentPtr == 0)
     {
         return false;
-    }
-    else
+    } else
     {
         return (this->getParentLinkFromLinkIndex(childCandidate)->getIndex() == parentCandidate);
     }
 }
 
-LinkIndex Traversal::getChildLinkIndexFromJointIndex(const Model& model, const JointIndex jntIdx) const
+LinkIndex
+Traversal::getChildLinkIndexFromJointIndex(const Model& model, const JointIndex jntIdx) const
 {
     // Get the two links connected by this joint
     IJointConstPtr jnt = model.getJoint(jntIdx);
@@ -153,11 +152,10 @@ LinkIndex Traversal::getChildLinkIndexFromJointIndex(const Model& model, const J
 
     // Get the traversal index of the child link (according to the traversal)
     LinkIndex childLink;
-    if( this->isParentOf(link1,link2) )
+    if (this->isParentOf(link1, link2))
     {
         childLink = link2;
-    }
-    else
+    } else
     {
         childLink = link1;
     }
@@ -165,7 +163,8 @@ LinkIndex Traversal::getChildLinkIndexFromJointIndex(const Model& model, const J
     return childLink;
 }
 
-LinkIndex Traversal::getParentLinkIndexFromJointIndex(const Model& model, const JointIndex jntIdx) const
+LinkIndex
+Traversal::getParentLinkIndexFromJointIndex(const Model& model, const JointIndex jntIdx) const
 {
     // Get the two links connected by this joint
     IJointConstPtr jnt = model.getJoint(jntIdx);
@@ -179,11 +178,10 @@ LinkIndex Traversal::getParentLinkIndexFromJointIndex(const Model& model, const 
 
     // Get the traversal index of the child link (according to the traversal)
     LinkIndex parentLink;
-    if( this->isParentOf(link1,link2) )
+    if (this->isParentOf(link1, link2))
     {
         parentLink = link1;
-    }
-    else
+    } else
     {
         parentLink = link2;
     }
@@ -191,24 +189,25 @@ LinkIndex Traversal::getParentLinkIndexFromJointIndex(const Model& model, const 
     return parentLink;
 }
 
-
-std::string Traversal::toString(const Model & model) const
+std::string Traversal::toString(const Model& model) const
 {
     std::stringstream ss;
 
     ss << "Traversal: " << std::endl;
-    for(size_t i=0; i < this->getNrOfVisitedLinks(); i++ )
+    for (size_t i = 0; i < this->getNrOfVisitedLinks(); i++)
     {
-        ss << "[" << i << "]\tLink: " << model.getLinkName(this->getLink(i)->getIndex()) << "[" << this->getLink(i)->getIndex() << "]" << std::endl;
-        if( i > 0 )
+        ss << "[" << i << "]\tLink: " << model.getLinkName(this->getLink(i)->getIndex()) << "["
+           << this->getLink(i)->getIndex() << "]" << std::endl;
+        if (i > 0)
         {
-           ss << "\tJoint to parent : " << model.getJointName(this->getParentJoint(i)->getIndex()) << "[" << this->getParentJoint(i)->getIndex() << "]" << std::endl;
-           ss << "\tParent link     : " << model.getLinkName(this->getParentLink(i)->getIndex()) << "[" << this->getParentLink(i)->getIndex() << "]" << std::endl;
+            ss << "\tJoint to parent : " << model.getJointName(this->getParentJoint(i)->getIndex())
+               << "[" << this->getParentJoint(i)->getIndex() << "]" << std::endl;
+            ss << "\tParent link     : " << model.getLinkName(this->getParentLink(i)->getIndex())
+               << "[" << this->getParentLink(i)->getIndex() << "]" << std::endl;
         }
     }
 
     return ss.str();
 }
 
-
-}
+} // namespace iDynTree

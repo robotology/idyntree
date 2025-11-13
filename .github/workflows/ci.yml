@@ -14,6 +14,23 @@ env:
   ICUB_TAG: v2.8.2
 
 jobs:
+  format-check:
+    name: '[pixi:format-check]'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Setup Pixi (format-check)
+      uses: prefix-dev/setup-pixi@v0.9.2
+      with:
+        pixi-version: "latest"
+        frozen: true
+
+    - name: Check formatting with clang-format
+      run: |
+        pixi run --frozen format-fast
+        git diff --exit-code
+
   build-with-conda-dependencies:
     name: '[conda:${{ matrix.os }}]'
     runs-on: ${{ matrix.os }}

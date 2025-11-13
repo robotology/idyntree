@@ -5,7 +5,7 @@
 #define IDYNTREE_SENSORS_GYROSCOPE_SENSOR_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Sensors/GyroscopeSensor.h> is deprecated. Please use <iDynTree/GyroscopeSensor.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Sensors/GyroscopeSensor.h> is deprecated. Please use <iDynTree/GyroscopeSensor.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/GyroscopeSensor.h>

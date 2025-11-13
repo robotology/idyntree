@@ -4,23 +4,27 @@
 #ifndef IDYNTREE_INTERNAL_TRANSFORM_CONSTRAINT_H
 #define IDYNTREE_INTERNAL_TRANSFORM_CONSTRAINT_H
 
-#include <iDynTree/Transform.h>
 #include <iDynTree/InverseKinematics.h>
+#include <iDynTree/Transform.h>
 
-namespace internal {
-    namespace kinematics {
-        class TransformConstraint;
-    }
+namespace internal
+{
+namespace kinematics
+{
+class TransformConstraint;
 }
+} // namespace internal
 
-namespace iDynTree {
-    class Position;
-    class Rotation;
-    class Transform;
-}
+namespace iDynTree
+{
+class Position;
+class Rotation;
+class Transform;
+} // namespace iDynTree
 
 /*!
- * @brief Class representing a constraint (full or partial) on a transform between a given frame and the absolute frame.
+ * @brief Class representing a constraint (full or partial) on a transform between a given frame and
+ * the absolute frame.
  *
  *
  *
@@ -33,15 +37,18 @@ namespace iDynTree {
  * Position Constraint: the linear position ${}^A o_C$ is constrained to a given constant value.
  *
  */
-class internal::kinematics::TransformConstraint {
+class internal::kinematics::TransformConstraint
+{
 public:
-
     /*!
      * @brief Type of the trasform constraint.
      */
-    enum TransformConstraintType {
-        TransformConstraintTypePosition, /*!< The trasform is related only to the position component (origin of the frame)  */
-        TransformConstraintTypeRotation, /*!< The trasform is related only to the orientation component */
+    enum TransformConstraintType
+    {
+        TransformConstraintTypePosition, /*!< The trasform is related only to the position component
+                                            (origin of the frame)  */
+        TransformConstraintTypeRotation, /*!< The trasform is related only to the orientation
+                                            component */
         TransformConstraintTypeFullTransform /*!< The full trasform is considered */
     };
 
@@ -56,13 +63,16 @@ private:
     TransformConstraintType m_type; /*!< type of transform */
     iDynTree::Transform m_transform; /*!< Constrained value for ${}^A H_C$. */
     std::string m_frameName; /*!< C constrained frame. */
-    double m_posWeight; /*!< Weight for the (eventual) cost associated with the position part of the task */
-    double m_rotWeight; /*!< Weight for the (eventual) cost associated with the rotation part of the task */
-    enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_resolutionMode; /*!< Resolution mode in case of target */
+    double m_posWeight; /*!< Weight for the (eventual) cost associated with the position part of the
+                           task */
+    double m_rotWeight; /*!< Weight for the (eventual) cost associated with the rotation part of the
+                           task */
+    enum iDynTree::InverseKinematicsTreatTargetAsConstraint m_resolutionMode; /*!< Resolution mode
+                                                                                 in case of target
+                                                                               */
     bool m_isActive; /*! Is the constraint active or not? */
 
 public:
-
     /*! @brief create a position constraint for the specified frame
      *
      * @see fullTransformConstraint
@@ -72,7 +82,9 @@ public:
      * @param posWeight the weight of the position cost if the position is associated with a cost
      * @return a newly created TransformConstraint object
      */
-    static TransformConstraint positionConstraint(const std::string& frameName, const iDynTree::Position &position, const double posWeight=1.0);
+    static TransformConstraint positionConstraint(const std::string& frameName,
+                                                  const iDynTree::Position& position,
+                                                  const double posWeight = 1.0);
 
     /*! @brief create an orientation constraint for the specified frame
      *
@@ -83,7 +95,9 @@ public:
      * @param rotWeight the weight of the rotation cost if the rotation is associated with a cost
      * @return a newly created Transform object
      */
-    static TransformConstraint rotationConstraint(const std::string& frameName, const iDynTree::Rotation &rotation, const double rotWeight=1.0);
+    static TransformConstraint rotationConstraint(const std::string& frameName,
+                                                  const iDynTree::Rotation& rotation,
+                                                  const double rotWeight = 1.0);
 
     /*! @brief create a full Transform constraint for the specified frame
      *
@@ -101,10 +115,10 @@ public:
      * @return a newly created Transform object
      */
     static TransformConstraint fullTransformConstraint(const std::string& constrainedFrameName,
-                                                       const iDynTree::Position &position,
-                                                       const iDynTree::Rotation &rotation,
-                                                       const double posWeight=1.0,
-                                                       const double rotWeight=1.0);
+                                                       const iDynTree::Position& position,
+                                                       const iDynTree::Rotation& rotation,
+                                                       const double posWeight = 1.0,
+                                                       const double rotWeight = 1.0);
 
     /*! @brief create a full Transform constraint for the specified frame
      *
@@ -121,9 +135,9 @@ public:
      * @return a newly created Transform object
      */
     static TransformConstraint fullTransformConstraint(const std::string& constrainedFrameName,
-                                                       const iDynTree::Transform &transform,
-                                                       const double posWeight=1.0,
-                                                       const double rotWeight=1.0);
+                                                       const iDynTree::Transform& transform,
+                                                       const double posWeight = 1.0,
+                                                       const double rotWeight = 1.0);
 
     /*!
      * @brief return the size of the constraint identified by this Constrained
@@ -214,7 +228,7 @@ public:
      * @param mode how to treat the targets
      */
     void setTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
-    
+
     /*! Return the current rotation parametrization used by the solver
      * @return the current rotation parametrization
      */
@@ -225,7 +239,6 @@ public:
 
     /*! Get if the task is active or not */
     bool isActive() const;
-
 };
 
 #endif /* end of include guard: IDYNTREE_INTERNAL_TRANSFORM_H */

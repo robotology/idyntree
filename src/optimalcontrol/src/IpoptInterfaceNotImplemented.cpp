@@ -16,12 +16,10 @@ using namespace iDynTree;
 
 IpoptInterface::IpoptInterface()
 {
-
 }
 
 IpoptInterface::~IpoptInterface()
 {
-
 }
 
 bool IpoptInterface::isAvailable() const
@@ -31,91 +29,136 @@ bool IpoptInterface::isAvailable() const
 
 bool IpoptInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
 {
-    reportError("IpoptInterface", "setProblem", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "setProblem",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
 bool IpoptInterface::solve()
 {
-    reportError("IpoptInterface", "solve", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "solve",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::getPrimalVariables(VectorDynSize &primalVariables)
+bool IpoptInterface::getPrimalVariables(VectorDynSize& primalVariables)
 {
-    reportError("IpoptInterface", "getPrimalVariables", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "getPrimalVariables",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::getDualVariables(VectorDynSize &constraintsMultipliers, VectorDynSize &lowerBoundsMultipliers, VectorDynSize &upperBoundsMultipliers)
+bool IpoptInterface::getDualVariables(VectorDynSize& constraintsMultipliers,
+                                      VectorDynSize& lowerBoundsMultipliers,
+                                      VectorDynSize& upperBoundsMultipliers)
 {
-    reportError("IpoptInterface", "getDualVariables", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "getDualVariables",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::getOptimalCost(double &optimalCost)
+bool IpoptInterface::getOptimalCost(double& optimalCost)
 {
-    reportError("IpoptInterface", "getOptimalCost", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "getOptimalCost",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::getOptimalConstraintsValues(VectorDynSize &constraintsValues)
+bool IpoptInterface::getOptimalConstraintsValues(VectorDynSize& constraintsValues)
 {
-    reportError("IpoptInterface", "getOptimalConstraintsValues", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "getOptimalConstraintsValues",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
 double IpoptInterface::minusInfinity()
 {
-    reportError("IpoptInterface", "minusInfinity", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "minusInfinity",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return Optimizer::minusInfinity();
 }
 
 double IpoptInterface::plusInfinity()
 {
-    reportError("IpoptInterface", "plusInfinity", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "plusInfinity",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return Optimizer::plusInfinity();
 }
 
 void IpoptInterface::useApproximatedHessians(bool useApproximatedHessian)
 {
-    reportError("IpoptInterface", "useApproximatedHessians", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "useApproximatedHessians",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
 }
 
-bool IpoptInterface::setIpoptOption(const std::string &tag, const std::string &value)
+bool IpoptInterface::setIpoptOption(const std::string& tag, const std::string& value)
 {
-    reportError("IpoptInterface", "setIpoptOption", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "setIpoptOption",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::setIpoptOption(const std::string &tag, double value)
+bool IpoptInterface::setIpoptOption(const std::string& tag, double value)
 {
-    reportError("IpoptInterface", "setIpoptOption", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "setIpoptOption",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::setIpoptOption(const std::string &tag, int value)
+bool IpoptInterface::setIpoptOption(const std::string& tag, int value)
 {
-    reportError("IpoptInterface", "setIpoptOption", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "setIpoptOption",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::getIpoptOption(const std::string &tag, std::string &value)
+bool IpoptInterface::getIpoptOption(const std::string& tag, std::string& value)
 {
-    reportError("IpoptInterface", "getIpoptOption", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "getIpoptOption",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::getIpoptOption(const std::string &tag, double &value)
+bool IpoptInterface::getIpoptOption(const std::string& tag, double& value)
 {
-    reportError("IpoptInterface", "getIpoptOption", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "getIpoptOption",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
 
-bool IpoptInterface::getIpoptOption(const std::string &tag, int &value)
+bool IpoptInterface::getIpoptOption(const std::string& tag, int& value)
 {
-    reportError("IpoptInterface", "getIpoptOption", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+    reportError("IpoptInterface",
+                "getIpoptOption",
+                "IpoptInterface not implemented. Have you compiled iDynTree with the "
+                "IDYNTREE_USES_IPOPT set to ON?");
     return false;
 }
-
-

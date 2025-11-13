@@ -5,7 +5,7 @@
 #define IDYNTREE_ESTIMATION_KALMAN_FILTER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/KalmanFilter.h> is deprecated. Please use <iDynTree/KalmanFilter.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Estimation/KalmanFilter.h> is deprecated. Please use <iDynTree/KalmanFilter.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/KalmanFilter.h>

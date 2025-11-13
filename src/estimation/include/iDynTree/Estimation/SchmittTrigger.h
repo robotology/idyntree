@@ -5,7 +5,7 @@
 #define IDYNTREE_ESTIMATION_SCHMITT_TRIGGER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/SchmittTrigger.h> is deprecated. Please use <iDynTree/SchmittTrigger.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Estimation/SchmittTrigger.h> is deprecated. Please use <iDynTree/SchmittTrigger.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SchmittTrigger.h>

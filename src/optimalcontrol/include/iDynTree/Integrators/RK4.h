@@ -11,44 +11,49 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_RK4_H
 #define IDYNTREE_OPTIMALCONTROL_RK4_H
 
-#include <iDynTree/Integrators/FixedStepIntegrator.h>
-#include <Eigen/Sparse>
 #include <Eigen/Dense>
+#include <Eigen/Sparse>
+#include <iDynTree/Integrators/FixedStepIntegrator.h>
 #include <iDynTree/VectorDynSize.h>
 
-namespace iDynTree {
-    namespace optimalcontrol {
+namespace iDynTree
+{
+namespace optimalcontrol
+{
 
-        class DynamicalSystem;
+class DynamicalSystem;
 
-        namespace integrators {
+namespace integrators
+{
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
+/**
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
 
-            class RK4 : public FixedStepIntegrator
-            {
-                Eigen::SparseMatrix<double> m_aCoefficents;
-                Eigen::VectorXd m_bCoefficients;
-                Eigen::VectorXd m_cCoefficients;
-                Eigen::MatrixXd m_K;
-                VectorDynSize m_computationBuffer;
+class RK4 : public FixedStepIntegrator
+{
+    Eigen::SparseMatrix<double> m_aCoefficents;
+    Eigen::VectorXd m_bCoefficients;
+    Eigen::VectorXd m_cCoefficients;
+    Eigen::MatrixXd m_K;
+    VectorDynSize m_computationBuffer;
 
-                bool oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
+    bool
+    oneStepIntegration(double t0, double dT, const VectorDynSize& x0, VectorDynSize& x) override;
 
-                bool allocateBuffers() override;
+    bool allocateBuffers() override;
 
-            public:
-                RK4();
+public:
+    RK4();
 
-                RK4(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
+    RK4(const std::shared_ptr<iDynTree::optimalcontrol::DynamicalSystem> dynamicalSystem);
 
-                virtual ~RK4();
-            };
-        }
-    }
-}
+    virtual ~RK4();
+};
+} // namespace integrators
+} // namespace optimalcontrol
+} // namespace iDynTree
 
 #endif // RK4_H

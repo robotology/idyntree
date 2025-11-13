@@ -12,11 +12,11 @@
 #define IDYNTREE_OPTIMALCONTROL_UMBRELLA
 
 // Include systems
-#include <iDynTree/DynamicalSystem.h>
-#include <iDynTree/LinearSystem.h>
 #include <iDynTree/Constraint.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/Cost.h>
+#include <iDynTree/DynamicalSystem.h>
+#include <iDynTree/LinearSystem.h>
 #include <iDynTree/OptimalControlProblem.h>
 #include <iDynTree/TimeRange.h>
 // TODO: add remaining headers

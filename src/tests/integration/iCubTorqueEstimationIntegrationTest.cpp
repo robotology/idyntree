@@ -6,10 +6,10 @@
 #include <cmath>
 #include <ctime>
 
-#include <iDynTree/TestUtils.h>
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/EigenSparseHelpers.h>
 #include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/TestUtils.h>
 
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelLoader.h>
@@ -27,16 +27,22 @@ void extractJointTorquesAndContactForces(const iDynTree::BerdyHelper& berdyHelpe
                                          const iDynTree::VectorDynSize& jointPos,
                                          const iDynTree::VectorDynSize& estimatedDynamicVariables,
                                          const iDynTree::LinkUnknownWrenchContacts& unknownWrenches,
-                                               iDynTree::VectorDynSize& estimatedJointTorques,
-                                               iDynTree::LinkContactWrenches& contactWrenches)
+                                         iDynTree::VectorDynSize& estimatedJointTorques,
+                                         iDynTree::LinkContactWrenches& contactWrenches)
 {
-    berdyHelper.extractJointTorquesFromDynamicVariables(estimatedDynamicVariables, jointPos, estimatedJointTorques);
+    berdyHelper.extractJointTorquesFromDynamicVariables(estimatedDynamicVariables,
+                                                        jointPos,
+                                                        estimatedJointTorques);
 
     LinkNetExternalWrenches netExtWrenches(berdyHelper.model());
 
-    berdyHelper.extractLinkNetExternalWrenchesFromDynamicVariables(estimatedDynamicVariables, netExtWrenches);
+    berdyHelper.extractLinkNetExternalWrenchesFromDynamicVariables(estimatedDynamicVariables,
+                                                                   netExtWrenches);
 
-    estimateLinkContactWrenchesFromLinkNetExternalWrenches(berdyHelper.model(), unknownWrenches, netExtWrenches, contactWrenches);
+    estimateLinkContactWrenchesFromLinkNetExternalWrenches(berdyHelper.model(),
+                                                           unknownWrenches,
+                                                           netExtWrenches,
+                                                           contactWrenches);
 
     return;
 }
@@ -48,9 +54,9 @@ struct CompareEstimatorsOptions
 
 void setDiagonalMatrix(SparseMatrix<ColumnMajor>& mat, const IndexRange range, double val)
 {
-    for (int i=0; i < range.size; i++)
+    for (int i = 0; i < range.size; i++)
     {
-        mat(range.offset+i, range.offset+i) = val;
+        mat(range.offset + i, range.offset + i) = val;
     }
 }
 
@@ -70,7 +76,7 @@ void compareEstimators(const std::string& urdfFileName,
 
     const Model& model = mdlLoader.model();
 
-    iDynTree::FrameIndex  imuFrameIdx = model.getFrameIndex(imuFrameName);
+    iDynTree::FrameIndex imuFrameIdx = model.getFrameIndex(imuFrameName);
     iDynTree::LinkIndex linkOfIMUIdx = model.getFrameLink(model.getFrameIndex(imuFrameName));
     std::string linkOfIMU = model.getLinkName(linkOfIMUIdx);
     iDynTree::Transform link_H_sensor = model.getFrameTransform(model.getFrameIndex(imuFrameName));
@@ -120,10 +126,10 @@ void compareEstimators(const std::string& urdfFileName,
     iDynTree::BerdyOptions berdyOptions;
     berdyOptions.berdyVariant = iDynTree::BERDY_FLOATING_BASE;
 
-    // For now, we use all the external wrenches as unknown and we just add the fact that some are known to be zero
-    // as sensors
+    // For now, we use all the external wrenches as unknown and we just add the fact that some are
+    // known to be zero as sensors
     berdyOptions.includeAllNetExternalWrenchesAsSensors = true;
-    berdyOptions.includeAllJointAccelerationsAsSensors  = true;
+    berdyOptions.includeAllJointAccelerationsAsSensors = true;
     ok = berdyHelper.init(model, usedSensors, berdyOptions);
     ASSERT_IS_TRUE(ok);
 
@@ -133,20 +139,21 @@ void compareEstimators(const std::string& urdfFileName,
 
     // Check that the number of sensor is the expected one
     //
-    int expectNumberOfMeasurements = 6*usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) + // FT sensors
-                                     3*usedSensors.getNrOfSensors(iDynTree::ACCELEROMETER) + // 1 accelerometer
-                                     3*usedSensors.getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER) + // 1 angular accelrometer
-                                     6*model.getNrOfLinks() + // external force/torques
-                                     model.getNrOfDOFs(); // joint accelerations
+    int expectNumberOfMeasurements
+        = 6 * usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) + // FT sensors
+          3 * usedSensors.getNrOfSensors(iDynTree::ACCELEROMETER) + // 1 accelerometer
+          3 * usedSensors.getNrOfSensors(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER)
+          + // 1 angular accelrometer
+          6 * model.getNrOfLinks() + // external force/torques
+          model.getNrOfDOFs(); // joint accelerations
     ASSERT_IS_TRUE(berdyHelper.getNrOfSensorsMeasurements() == expectNumberOfMeasurements);
 
     // We also make true we the number of unknows is equal to the number of ft sensors plus one
-    ASSERT_EQUAL_DOUBLE(contactFrames.size(), usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) + 1);
+    ASSERT_EQUAL_DOUBLE(contactFrames.size(),
+                        usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE) + 1);
 
     // Create a simple list of unknown contacts
     iDynTree::LinkUnknownWrenchContacts unknownWrenchContacts(model);
-
-
 
     // Usual unknowns : one for each submodel
     for (const std::string& frame : contactFrames)
@@ -155,12 +162,14 @@ void compareEstimators(const std::string& urdfFileName,
         fullyUnknownContact.unknownType = FULL_WRENCH;
         fullyUnknownContact.contactPoint = iDynTree::Position::Zero();
         ASSERT_IS_TRUE(model.getFrameIndex(frame) != iDynTree::FRAME_INVALID_INDEX);
-        ok = unknownWrenchContacts.addNewContactInFrame(model, model.getFrameIndex(frame), fullyUnknownContact);
+        ok = unknownWrenchContacts.addNewContactInFrame(model,
+                                                        model.getFrameIndex(frame),
+                                                        fullyUnknownContact);
         ASSERT_IS_TRUE(ok);
     }
 
     // Get random inputs
-    iDynTree::JointPosDoubleArray  jointPos(model);
+    iDynTree::JointPosDoubleArray jointPos(model);
     iDynTree::JointDOFsDoubleArray jointVel(model);
     iDynTree::JointDOFsDoubleArray jointAcc(model);
     iDynTree::Vector3 imuAngularVel;
@@ -177,7 +186,8 @@ void compareEstimators(const std::string& urdfFileName,
     iDynTree::Vector3 imuAngAccReading;
     iDynTree::getRandomVector(imuAngAccReading);
     sensMeas.setMeasurement(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, 0, imuAngAccReading);
-    for (int ftIdx = 0; ftIdx < usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ftIdx++)
+    for (int ftIdx = 0; ftIdx < usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+         ftIdx++)
     {
         iDynTree::Vector3 buf3;
         iDynTree::Wrench ftMeas;
@@ -194,15 +204,23 @@ void compareEstimators(const std::string& urdfFileName,
     JointDOFsDoubleArray jointTorquesEstimatedByDeterministic(model);
 
     std::clock_t tic = clock();
-    ok = determininsticEstimator.updateKinematicsFromFloatingBase(jointPos, jointVel, jointAcc, imuFrameIdx,
-                                                             imuLinAccReading, imuAngularVel, imuAngAccReading);
+    ok = determininsticEstimator.updateKinematicsFromFloatingBase(jointPos,
+                                                                  jointVel,
+                                                                  jointAcc,
+                                                                  imuFrameIdx,
+                                                                  imuLinAccReading,
+                                                                  imuAngularVel,
+                                                                  imuAngAccReading);
     ASSERT_IS_TRUE(ok);
 
-    ok = determininsticEstimator.estimateExtWrenchesAndJointTorques(unknownWrenchContacts, sensMeas,
-                                                                    contactWrenchesEstimatedByDeterministic, jointTorquesEstimatedByDeterministic);
+    ok = determininsticEstimator
+             .estimateExtWrenchesAndJointTorques(unknownWrenchContacts,
+                                                 sensMeas,
+                                                 contactWrenchesEstimatedByDeterministic,
+                                                 jointTorquesEstimatedByDeterministic);
     ASSERT_IS_TRUE(ok);
     std::clock_t toc = std::clock();
-    double deterministicTime = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
+    double deterministicTime = (static_cast<double>(toc - tic)) / CLOCKS_PER_SEC;
 
     /// PROBABILISTIC ESTIMATOR
     LinkContactWrenches contactWrenchesEstimatedByBerdy(model);
@@ -210,9 +228,10 @@ void compareEstimators(const std::string& urdfFileName,
 
     // Set the variances of the estimation problem
 
-    // We should have enough measurements to solve the system, put a high covariance on the regulariation of the dynamics variable
+    // We should have enough measurements to solve the system, put a high covariance on the
+    // regulariation of the dynamics variable
     double highCovariance = 1e6;
-    double lowCovariance  = 1e-6;
+    double lowCovariance = 1e-6;
 
     // Dynamics regularization
     tic = clock();
@@ -220,29 +239,38 @@ void compareEstimators(const std::string& urdfFileName,
     dynamicsPriorMean.zero();
     probabilistEstimator.setDynamicsRegularizationPriorExpectedValue(dynamicsPriorMean);
     iDynTree::Triplets dynamicsRegularizationCovarianceTriplets;
-    dynamicsRegularizationCovarianceTriplets.setDiagonalMatrix(0, 0, highCovariance, berdyHelper.getNrOfDynamicVariables());
-    iDynTree::SparseMatrix<iDynTree::ColumnMajor> dynamicsRegularizationCovariance(berdyHelper.getNrOfDynamicVariables(), berdyHelper.getNrOfDynamicVariables());
+    dynamicsRegularizationCovarianceTriplets
+        .setDiagonalMatrix(0, 0, highCovariance, berdyHelper.getNrOfDynamicVariables());
+    iDynTree::SparseMatrix<iDynTree::ColumnMajor>
+        dynamicsRegularizationCovariance(berdyHelper.getNrOfDynamicVariables(),
+                                         berdyHelper.getNrOfDynamicVariables());
     dynamicsRegularizationCovariance.setFromTriplets(dynamicsRegularizationCovarianceTriplets);
     ASSERT_IS_TRUE(ok);
     probabilistEstimator.setDynamicsRegularizationPriorCovariance(dynamicsRegularizationCovariance);
     toc = clock();
-    double timeToUpdateDynamicsRegularizationPrior = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
+    double timeToUpdateDynamicsRegularizationPrior
+        = (static_cast<double>(toc - tic)) / CLOCKS_PER_SEC;
 
-    // std::cerr << "dynamicsRegularizationCovariance:\n" << toEigen(dynamicsRegularizationCovariance) << std::endl;
-
+    // std::cerr << "dynamicsRegularizationCovariance:\n" <<
+    // toEigen(dynamicsRegularizationCovariance) << std::endl;
 
     // Dynamics contraint
     tic = std::clock();
     iDynTree::Triplets dynamicsConstraintCovarianceTriplets;
-    dynamicsConstraintCovarianceTriplets.setDiagonalMatrix(0, 0, lowCovariance, berdyHelper.getNrOfDynamicEquations());
-    iDynTree::SparseMatrix<iDynTree::ColumnMajor> dynamicsConstraintCovariance(berdyHelper.getNrOfDynamicEquations(), berdyHelper.getNrOfDynamicEquations());
+    dynamicsConstraintCovarianceTriplets.setDiagonalMatrix(0,
+                                                           0,
+                                                           lowCovariance,
+                                                           berdyHelper.getNrOfDynamicEquations());
+    iDynTree::SparseMatrix<iDynTree::ColumnMajor>
+        dynamicsConstraintCovariance(berdyHelper.getNrOfDynamicEquations(),
+                                     berdyHelper.getNrOfDynamicEquations());
     dynamicsConstraintCovariance.setFromTriplets(dynamicsConstraintCovarianceTriplets);
     probabilistEstimator.setDynamicsConstraintsPriorCovariance(dynamicsConstraintCovariance);
     toc = std::clock();
-    double timeToUpdateDynamicsConstraintPrior = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
+    double timeToUpdateDynamicsConstraintPrior = (static_cast<double>(toc - tic)) / CLOCKS_PER_SEC;
 
-    // std::cerr << "dynamicsConstraintCovariance:\n" << toEigen(dynamicsConstraintCovariance) << std::endl;
-
+    // std::cerr << "dynamicsConstraintCovariance:\n" << toEigen(dynamicsConstraintCovariance) <<
+    // std::endl;
 
     // Measurements covariance and values
     tic = std::clock();
@@ -250,43 +278,61 @@ void compareEstimators(const std::string& urdfFileName,
     tic = std::clock();
 
     // Known measurements all have low covariance
-    iDynTree::IndexRange linAccRange = berdyHelper.getRangeSensorVariable(iDynTree::ACCELEROMETER, 0);
+    iDynTree::IndexRange linAccRange
+        = berdyHelper.getRangeSensorVariable(iDynTree::ACCELEROMETER, 0);
     iDynTree::setSubVector(measures, linAccRange, imuLinAccReading);
-    setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(), linAccRange, 1.0/lowCovariance);
+    setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(),
+                      linAccRange,
+                      1.0 / lowCovariance);
 
-    iDynTree::IndexRange angAccRange = berdyHelper.getRangeSensorVariable(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, 0);
+    iDynTree::IndexRange angAccRange
+        = berdyHelper.getRangeSensorVariable(iDynTree::THREE_AXIS_ANGULAR_ACCELEROMETER, 0);
     iDynTree::setSubVector(measures, angAccRange, imuAngAccReading);
-    setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(), angAccRange, 1.0/lowCovariance);
+    setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(),
+                      angAccRange,
+                      1.0 / lowCovariance);
 
-    for (int ftIdx = 0; ftIdx < usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE); ftIdx++)
+    for (int ftIdx = 0; ftIdx < usedSensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+         ftIdx++)
     {
-        iDynTree::IndexRange ftRange = berdyHelper.getRangeSensorVariable(iDynTree::SIX_AXIS_FORCE_TORQUE, ftIdx);
+        iDynTree::IndexRange ftRange
+            = berdyHelper.getRangeSensorVariable(iDynTree::SIX_AXIS_FORCE_TORQUE, ftIdx);
         iDynTree::Wrench measuredFt;
         sensMeas.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE, ftIdx, measuredFt);
         iDynTree::setSubVector(measures, ftRange, iDynTree::toEigen(measuredFt));
-        setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(), ftRange, 1.0/lowCovariance);
+        setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(),
+                          ftRange,
+                          1.0 / lowCovariance);
     }
     for (int dofIdx = 0; dofIdx < model.getNrOfDOFs(); dofIdx++)
     {
-        iDynTree::IndexRange jointAccRange = berdyHelper.getRangeDOFSensorVariable(iDynTree::DOF_ACCELERATION_SENSOR, dofIdx);
+        iDynTree::IndexRange jointAccRange
+            = berdyHelper.getRangeDOFSensorVariable(iDynTree::DOF_ACCELERATION_SENSOR, dofIdx);
         iDynTree::setSubVector(measures, jointAccRange, jointAcc(dofIdx));
-        setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(), jointAccRange, 1.0/lowCovariance);
+        setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(),
+                          jointAccRange,
+                          1.0 / lowCovariance);
     }
 
-    // External wrench have low variance for all the wrenches that are not unknown, and high variance for the unknown one
+    // External wrench have low variance for all the wrenches that are not unknown, and high
+    // variance for the unknown one
     for (iDynTree::LinkIndex linkIdx = 0; linkIdx < model.getNrOfLinks(); linkIdx++)
     {
         // If there is an unknown on this link, estimate it
         bool linkUnknown = (unknownWrenchContacts.getNrOfContactsForLink(linkIdx) > 0);
-        iDynTree::IndexRange extWrenchRange = berdyHelper.getRangeLinkSensorVariable(iDynTree::NET_EXT_WRENCH_SENSOR, linkIdx);
+        iDynTree::IndexRange extWrenchRange
+            = berdyHelper.getRangeLinkSensorVariable(iDynTree::NET_EXT_WRENCH_SENSOR, linkIdx);
         if (linkUnknown)
         {
-            setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(), extWrenchRange, 1.0/highCovariance);
+            setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(),
+                              extWrenchRange,
+                              1.0 / highCovariance);
 
-        }
-        else
+        } else
         {
-            setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(), extWrenchRange, 1.0/lowCovariance);
+            setDiagonalMatrix(probabilistEstimator.measurementsPriorCovarianceInverse(),
+                              extWrenchRange,
+                              1.0 / lowCovariance);
         }
         // Regardless of the covariance, the known value is 0
         iDynTree::Vector6 zeroVec;
@@ -295,42 +341,57 @@ void compareEstimators(const std::string& urdfFileName,
     }
 
     toc = std::clock();
-    double timeToUpdateMeasurementsPrior = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
-
+    double timeToUpdateMeasurementsPrior = (static_cast<double>(toc - tic)) / CLOCKS_PER_SEC;
 
     // std::cerr << "measurementsCovariance:\n" << toEigen(measurementsCovariance) << std::endl;
 
     tic = clock();
-    probabilistEstimator.updateEstimateInformationFloatingBase(jointPos, jointVel, imuFrameIdx, imuAngularVel, measures);
+    probabilistEstimator.updateEstimateInformationFloatingBase(jointPos,
+                                                               jointVel,
+                                                               imuFrameIdx,
+                                                               imuAngularVel,
+                                                               measures);
     ASSERT_IS_TRUE(ok);
 
     ok = probabilistEstimator.doEstimate();
     ASSERT_IS_TRUE(ok);
     toc = clock();
-    double probabilisticTime = (static_cast<double>(toc-tic))/CLOCKS_PER_SEC;
-
+    double probabilisticTime = (static_cast<double>(toc - tic)) / CLOCKS_PER_SEC;
 
     iDynTree::VectorDynSize estimatedDynamicVariables(berdyHelper.getNrOfDynamicVariables());
     probabilistEstimator.getLastEstimate(estimatedDynamicVariables);
     ASSERT_IS_TRUE(ok);
 
     // Convert the BerdyVector is something understandable
-    extractJointTorquesAndContactForces(berdyHelper, jointPos, estimatedDynamicVariables, unknownWrenchContacts,
-                                        jointTorquesEstimatedByBerdy, contactWrenchesEstimatedByBerdy);
+    extractJointTorquesAndContactForces(berdyHelper,
+                                        jointPos,
+                                        estimatedDynamicVariables,
+                                        unknownWrenchContacts,
+                                        jointTorquesEstimatedByBerdy,
+                                        contactWrenchesEstimatedByBerdy);
 
     // Compare measurements
-    ASSERT_EQUAL_VECTOR_REL_TOL(jointTorquesEstimatedByDeterministic, jointTorquesEstimatedByBerdy, 1e-4, 1e-6);
+    ASSERT_EQUAL_VECTOR_REL_TOL(jointTorquesEstimatedByDeterministic,
+                                jointTorquesEstimatedByBerdy,
+                                1e-4,
+                                1e-6);
 
-    std::cerr << "iCubTorqueEstimationIntegrationTest working fine for model " << urdfFileName << std::endl;
-    std::cerr << "Number Of Dynamics Variables                 " << berdyHelper.getNrOfDynamicVariables() << std::endl;
-    std::cerr << "Number Of Dynamics Equations                 " << berdyHelper.getNrOfDynamicEquations() << std::endl;
-    std::cerr << "Number Of Measurements                       " << berdyHelper.getNrOfSensorsMeasurements() << std::endl;
-    std::cerr << "Time to update dynamics variables prior      " << timeToUpdateDynamicsRegularizationPrior << std::endl;
-    std::cerr << "Time to update dynamics equations prior      " << timeToUpdateDynamicsConstraintPrior << std::endl;
-    std::cerr << "Time to update measurements prior            " << timeToUpdateMeasurementsPrior << std::endl;
+    std::cerr << "iCubTorqueEstimationIntegrationTest working fine for model " << urdfFileName
+              << std::endl;
+    std::cerr << "Number Of Dynamics Variables                 "
+              << berdyHelper.getNrOfDynamicVariables() << std::endl;
+    std::cerr << "Number Of Dynamics Equations                 "
+              << berdyHelper.getNrOfDynamicEquations() << std::endl;
+    std::cerr << "Number Of Measurements                       "
+              << berdyHelper.getNrOfSensorsMeasurements() << std::endl;
+    std::cerr << "Time to update dynamics variables prior      "
+              << timeToUpdateDynamicsRegularizationPrior << std::endl;
+    std::cerr << "Time to update dynamics equations prior      "
+              << timeToUpdateDynamicsConstraintPrior << std::endl;
+    std::cerr << "Time to update measurements prior            " << timeToUpdateMeasurementsPrior
+              << std::endl;
     std::cerr << "Time for deterministic estimation            " << deterministicTime << std::endl;
     std::cerr << "Time for probabilistic estimation            " << probabilisticTime << std::endl;
-
 
     return;
 }
@@ -344,11 +405,11 @@ void compareEstimators(const std::string& urdfFileName)
 
     // Get a random frame to use both as contact frame and imu frame
     const Model& model = mdlLoader.model();
-    FrameIndex imuFrameIdx = model.getNrOfFrames()/2;
+    FrameIndex imuFrameIdx = model.getNrOfFrames() / 2;
     ASSERT_IS_TRUE(imuFrameIdx != LINK_INVALID_INDEX);
     std::string imuFrameName = model.getFrameName(imuFrameIdx);
 
-    std::vector<std::string> contactFrames = { imuFrameName };
+    std::vector<std::string> contactFrames = {imuFrameName};
 
     CompareEstimatorsOptions compareEstimatorsOptions;
     compareEstimatorsOptions.removeAllFTSensors = true;
@@ -400,9 +461,13 @@ int main()
 
     compareEstimatorsOptions.removeAllFTSensors = false;
     urdfFileName = "icub_skin_frames.urdf";
-    contactFrameNames = {"root_link", "l_hand_dh_frame", "r_hand_dh_frame",
-                         "l_lower_leg", "r_lower_leg", "r_foot_dh_frame", "l_foot_dh_frame"};
+    contactFrameNames = {"root_link",
+                         "l_hand_dh_frame",
+                         "r_hand_dh_frame",
+                         "l_lower_leg",
+                         "r_lower_leg",
+                         "r_foot_dh_frame",
+                         "l_foot_dh_frame"};
     imuFrameName = "imu_frame";
     compareEstimators(urdfFileName, contactFrameNames, imuFrameName, compareEstimatorsOptions);
 }
-

@@ -5,8 +5,8 @@
 #define IDYNTREE_ESTIMATION_EXTERNALWRENCHESTIMATION_H
 
 #include <iDynTree/Direction.h>
-#include <iDynTree/Position.h>
 #include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Position.h>
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/VectorFixSize.h>
 
@@ -54,7 +54,6 @@ enum UnknownWrenchContactType
     NO_UNKNOWNS
 };
 
-
 /**
  * \brief A contact whose wrench is unknown.
  *
@@ -69,18 +68,21 @@ struct UnknownWrenchContact
      * Constructor
      */
     UnknownWrenchContact()
-    {}
+    {
+    }
 
     UnknownWrenchContact(const UnknownWrenchContactType _unknownType,
-                         const Position  & _contactPoint,
-                         const Direction & _forceDirection = iDynTree::Direction::Default(),
-                         const Wrench    & _knownWrench = iDynTree::Wrench(),
-                         const unsigned long & _contactId = 0): unknownType(_unknownType),
-                                                                contactPoint(_contactPoint),
-                                                                forceDirection(_forceDirection),
-                                                                knownWrench(_knownWrench),
-                                                                contactId(_contactId)
-    {}
+                         const Position& _contactPoint,
+                         const Direction& _forceDirection = iDynTree::Direction::Default(),
+                         const Wrench& _knownWrench = iDynTree::Wrench(),
+                         const unsigned long& _contactId = 0)
+        : unknownType(_unknownType)
+        , contactPoint(_contactPoint)
+        , forceDirection(_forceDirection)
+        , knownWrench(_knownWrench)
+        , contactId(_contactId)
+    {
+    }
 
     /**
      * Type of the unknown contact.
@@ -121,7 +123,7 @@ struct UnknownWrenchContact
 class LinkUnknownWrenchContacts
 {
 private:
-    std::vector< std::vector<UnknownWrenchContact> > m_linkUnknownWrenchContacts;
+    std::vector<std::vector<UnknownWrenchContact>> m_linkUnknownWrenchContacts;
 
 public:
     /**
@@ -131,7 +133,7 @@ public:
      * @param[in] nrOfLinks the size of the vector.
      */
     LinkUnknownWrenchContacts(unsigned int nrOfLinks = 0);
-    LinkUnknownWrenchContacts(const Model & model);
+    LinkUnknownWrenchContacts(const Model& model);
 
     /**
      * Preserving the number of links, remove all the previously added unknowns.
@@ -144,7 +146,7 @@ public:
      * @param[in] nrOfLinks the number of links used to resize
      */
     void resize(unsigned int nrOfLinks);
-    void resize(const Model & model);
+    void resize(const Model& model);
 
     /**
      * Get the number of external contacts for a given link.
@@ -167,11 +169,12 @@ public:
      * wrench to the relative link frame.
      *
      * @param[in] model the model class for getting frame information.
-     * @param[in] frameIndex the index of the frame in which you are expressing the new unknown wrench.
+     * @param[in] frameIndex the index of the frame in which you are expressing the new unknown
+     * wrench.
      * @param[in] newContact the new unknown wrench to add.
      * @return true if all went well, false otherwise
      */
-    bool addNewContactInFrame(const Model & model,
+    bool addNewContactInFrame(const Model& model,
                               const FrameIndex frameIndex,
                               const UnknownWrenchContact& newContact);
 
@@ -184,27 +187,28 @@ public:
      *   addNewContactInFrame(model,frame,UnknownWrenchContact(FULL_WRENCH,Position::Zero()))
      *
      * @param[in] model the model class for getting frame information.
-     * @param[in] frameIndex the index of the frame in which you are expressing the new unknown wrench.
+     * @param[in] frameIndex the index of the frame in which you are expressing the new unknown
+     * wrench.
      * @return true if all went well, false otherwise
      */
-    bool addNewUnknownFullWrenchInFrameOrigin(const Model& model,
-                                              const FrameIndex frameIndex);
+    bool addNewUnknownFullWrenchInFrameOrigin(const Model& model, const FrameIndex frameIndex);
 
     /**
      * Get a specific ContactWrench
      *
      * @param[in] linkIndex the index of the link for which the contact is retrieved
-     * @param[in] contactIndex a index (between 0 and getNrOfContactsForLink(link)-1 ) identifing the specific contact.
+     * @param[in] contactIndex a index (between 0 and getNrOfContactsForLink(link)-1 ) identifing
+     * the specific contact.
      */
     UnknownWrenchContact& contactWrench(const LinkIndex linkIndex, const size_t contactIndex);
 
-    const UnknownWrenchContact& contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const;
-
+    const UnknownWrenchContact&
+    contactWrench(const LinkIndex linkIndex, const size_t contactIndex) const;
 
     /**
      * Get a human readable description of the LinkUnknownWrenchContacts (for debug)
      */
-    std::string toString(const Model & model) const;
+    std::string toString(const Model& model) const;
 };
 
 struct estimateExternalWrenchesBuffers
@@ -260,15 +264,16 @@ struct estimateExternalWrenchesBuffers
  */
 bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
                                                const Traversal& traversal,
-                                               const LinkUnknownWrenchContacts & unknownWrenches,
-                                               const JointPosDoubleArray & jointPos,
-                                               const LinkVelArray & linkVel,
-                                               const LinkAccArray & linkProperAcc,
-                                                     estimateExternalWrenchesBuffers & bufs,
-                                                     LinkContactWrenches & outputContactWrenches);
+                                               const LinkUnknownWrenchContacts& unknownWrenches,
+                                               const JointPosDoubleArray& jointPos,
+                                               const LinkVelArray& linkVel,
+                                               const LinkAccArray& linkProperAcc,
+                                               estimateExternalWrenchesBuffers& bufs,
+                                               LinkContactWrenches& outputContactWrenches);
 
 /**
- * \brief Estimate the external wrenches trasmitted by the contacts between the model and the external environment.
+ * \brief Estimate the external wrenches trasmitted by the contacts between the model and the
+ * external environment.
  *
  * This function exploits the measurements of internal FT sensors (whose structure is contained
  * in the sensors parameters and which measurements are contained in the ftSensorsMeasurements
@@ -279,8 +284,10 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
  * @param[in] subModels a decomposition of the model along the joint of the six axis F/T sensors.
  * @param[in] sensors a description of the sensors available in the model.
  * @param[in] unknownWrenches a description of the contacts for which the contact wrench is unknown.
- * @param[in] linkVel a vector of link twists, expressed w.r.t to the link orientation and the link origin
- * @param[in] linkProperAcc a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin
+ * @param[in] linkVel a vector of link twists, expressed w.r.t to the link orientation and the link
+ * origin
+ * @param[in] linkProperAcc a vector of link spatial (in the Featherstone sense) and proper
+ * accelerations, expressed w.r.t to the link orientation and the link origin
  * @param[in] ftSensorsMeasurements the measurements of the internal six axis F/T sensors.
  * @param[out] outputContactWrenches the estimated contact wrenches.
  * @return true if all went well (the dimension of the inputs are consistent), false otherwise
@@ -289,13 +296,13 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
 bool estimateExternalWrenches(const Model& model,
                               const SubModelDecomposition& subModels,
                               const SensorsList& sensors,
-                              const LinkUnknownWrenchContacts & unknownWrenches,
-                              const JointPosDoubleArray & jointPos,
-                              const LinkVelArray & linkVel,
-                              const LinkAccArray & linkProperAcc,
-                              const SensorsMeasurements & ftSensorsMeasurements,
-                                    estimateExternalWrenchesBuffers & bufs,
-                                    LinkContactWrenches & outputContactWrenches);
+                              const LinkUnknownWrenchContacts& unknownWrenches,
+                              const JointPosDoubleArray& jointPos,
+                              const LinkVelArray& linkVel,
+                              const LinkAccArray& linkProperAcc,
+                              const SensorsMeasurements& ftSensorsMeasurements,
+                              estimateExternalWrenchesBuffers& bufs,
+                              LinkContactWrenches& outputContactWrenches);
 
 /**
  * \brief Modified forward kinematics for torque/force estimation.
@@ -320,9 +327,9 @@ bool estimateExternalWrenches(const Model& model,
  * acceleration, while the angular velocity and angular accelerations are equal to zero.
  * The other way is to exploit the measure of an accelerometer and of a gyroscope
  * mounted on the base link of the traversal: the accelerometer will then measure
- * directly the classical proper acceleration, while the gyroscope will measure the angular velocity.
- * The angular acceleration can be computed by numerical derivation, or simply neglected if its
- * effect on the estimation is minimal.
+ * directly the classical proper acceleration, while the gyroscope will measure the angular
+ * velocity. The angular acceleration can be computed by numerical derivation, or simply neglected
+ * if its effect on the estimation is minimal.
  *
  *
  * \param[in] model the input model
@@ -333,21 +340,23 @@ bool estimateExternalWrenches(const Model& model,
  * \param[in] jointPos joint positions
  * \param[in] jointVel joint velocities
  * \param[in] jointAcc joint accelerations
- * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and origin
- * \param[out] linkProperAcc vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin
+ * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and
+ * origin
+ * \param[out] linkProperAcc vector of link proper spatial acceleration, expressed in the link frame
+ * for both orientation and origin
  * @return true if all went well, false otherwise
  *
  */
-bool dynamicsEstimationForwardVelAccKinematics(const Model & model,
-                                               const Traversal & traversal,
-                                               const Vector3 & base_classicalProperAcc,
-                                               const Vector3 & base_angularVel,
-                                               const Vector3 & base_angularAcc,
-                                               const JointPosDoubleArray & jointPos,
-                                               const JointDOFsDoubleArray & jointVel,
-                                               const JointDOFsDoubleArray & jointAcc,
-                                                     LinkVelArray & linkVel,
-                                                     LinkAccArray  & linkProperAcc);
+bool dynamicsEstimationForwardVelAccKinematics(const Model& model,
+                                               const Traversal& traversal,
+                                               const Vector3& base_classicalProperAcc,
+                                               const Vector3& base_angularVel,
+                                               const Vector3& base_angularAcc,
+                                               const JointPosDoubleArray& jointPos,
+                                               const JointDOFsDoubleArray& jointVel,
+                                               const JointDOFsDoubleArray& jointAcc,
+                                               LinkVelArray& linkVel,
+                                               LinkAccArray& linkProperAcc);
 
 /**
  * \brief Modified forward kinematics for floating basedynamics estimation.
@@ -376,27 +385,34 @@ bool dynamicsEstimationForwardVelAccKinematics(const Model & model,
  * \param[in] base_angularVel angular velocity of the base link frame
  * \param[in] jointPos joint positions
  * \param[in] jointVel joint velocities
- * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and origin
+ * \param[out] linkVel vector of link twists, expressed in the link frame for both orientation and
+ * origin
  * @return true if all went well, false otherwise
  */
-bool dynamicsEstimationForwardVelKinematics(const Model & model,
-                                            const Traversal & traversal,
-                                            const Vector3 & base_angularVel,
-                                            const JointPosDoubleArray & jointPos,
-                                            const JointDOFsDoubleArray & jointVel,
-                                                  LinkVelArray & linkVel);
+bool dynamicsEstimationForwardVelKinematics(const Model& model,
+                                            const Traversal& traversal,
+                                            const Vector3& base_angularVel,
+                                            const JointPosDoubleArray& jointPos,
+                                            const JointDOFsDoubleArray& jointVel,
+                                            LinkVelArray& linkVel);
 
 /**
- * \brief Compute the net internal and external wrenches (excluding gravity forces) acting on the links.
+ * \brief Compute the net internal and external wrenches (excluding gravity forces) acting on the
+ * links.
  * @param[in] model the input model
- * @param[in] linkVel a vector of link twists, expressed w.r.t to the link orientation and the link origin
- * @param[in] linkProperAcc a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin
- * @param[in] linkNetWrenchesWithoutGravity the vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on link i, expressed (both orientation and point) with respect to the reference frame of link i
+ * @param[in] linkVel a vector of link twists, expressed w.r.t to the link orientation and the link
+ * origin
+ * @param[in] linkProperAcc a vector of link spatial (in the Featherstone sense) and proper
+ * accelerations, expressed w.r.t to the link orientation and the link origin
+ * @param[in] linkNetWrenchesWithoutGravity the vector of the sum of all the wrenches (both internal
+ * and external, excluding gravity) acting on link i, expressed (both orientation and point) with
+ * respect to the reference frame of link i
  */
-bool computeLinkNetWrenchesWithoutGravity(const Model& model,
-                                          const LinkVelArray & linkVel,
-                                          const LinkAccArray & linkProperAcc,
-                                                LinkNetTotalWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
+bool computeLinkNetWrenchesWithoutGravity(
+    const Model& model,
+    const LinkVelArray& linkVel,
+    const LinkAccArray& linkProperAcc,
+    LinkNetTotalWrenchesWithoutGravity& linkNetWrenchesWithoutGravity);
 
 /**
  * Compute the link contact wrenches from the net external wrenches
@@ -407,11 +423,12 @@ bool computeLinkNetWrenchesWithoutGravity(const Model& model,
  *                    a least square fitting, similar to what implemented in
  *                    the estimateExternalWrenches .
  */
-bool estimateLinkContactWrenchesFromLinkNetExternalWrenches(const Model& model,
-                                                            const LinkUnknownWrenchContacts& unknownWrenches,
-                                                            const LinkNetExternalWrenches& netExtWrenches,
-                                                                  LinkContactWrenches & outputContactWrenches);
+bool estimateLinkContactWrenchesFromLinkNetExternalWrenches(
+    const Model& model,
+    const LinkUnknownWrenchContacts& unknownWrenches,
+    const LinkNetExternalWrenches& netExtWrenches,
+    LinkContactWrenches& outputContactWrenches);
 
-}
+} // namespace iDynTree
 
 #endif

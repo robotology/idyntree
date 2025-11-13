@@ -15,17 +15,18 @@ namespace iDynTree
  *
  * @param[in] totalMass The total mass of the model, in Kilograms.
  * @param[in] model The model, used to extract the bounding box of the links.
- * @param[out] inertialParameters vector of inertial parameters, in the format used by Model::getInertialParameters
+ * @param[out] inertialParameters vector of inertial parameters, in the format used by
+ * Model::getInertialParameters
  * @return true if all went well, false otherwise .
  *
  * @note if inertialParameters does not have the correct size, it will be resized.
- * @warning This function needs to allocate some internal buffers, and so it performs dynamic memory allocation.
+ * @warning This function needs to allocate some internal buffers, and so it performs dynamic memory
+ * allocation.
  *
  * @note This function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false.
  */
-bool estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(const double totalMass,
-                                                                 iDynTree::Model& model,
-                                                                 VectorDynSize& estimatedInertialParams);
+bool estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(
+    const double totalMass, iDynTree::Model& model, VectorDynSize& estimatedInertialParams);
 /**
  * @brief Compute bounding box from a solid shape object
  *
@@ -33,10 +34,12 @@ bool estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(const double to
  * @param[out] box The bounding box for the solid shape object
  * @return true if all went well, false otherwise .
  *
- * @note If the shape is an ExternalMesh type, this function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false.
- * @note If the shape is an ExternalMesh type, an Axis-Aligned Bounding Box (AABB) is computed from the mesh vertices. 
- *       This means that the returned bounding box is neither unique nor a minimum volume bounding box for the given mesh.
- *       The axes alignment to compute AABB is done with respect to the frame associated with the shape.
+ * @note If the shape is an ExternalMesh type, this function requires IDYNTREE_USES_ASSIMP to be
+ * true, otherwise it always returns false.
+ * @note If the shape is an ExternalMesh type, an Axis-Aligned Bounding Box (AABB) is computed from
+ * the mesh vertices. This means that the returned bounding box is neither unique nor a minimum
+ * volume bounding box for the given mesh. The axes alignment to compute AABB is done with respect
+ * to the frame associated with the shape.
  */
 bool computeBoundingBoxFromShape(const SolidShape& geom, Box& box);
 
@@ -47,6 +50,6 @@ bool computeBoundingBoxFromShape(const SolidShape& geom, Box& box);
  * @return vector of vertex positions in the link frame.
  */
 std::vector<Position> computeBoxVertices(const Box box);
-}
+} // namespace iDynTree
 
 #endif /* IDYNTREE_INERTIAL_PARAMETERS_HELPERS_H */

@@ -5,18 +5,18 @@
 #define IDYNTREE_BERDY_HELPER_H
 
 #include <iDynTree/Direction.h>
-#include <iDynTree/Position.h>
 #include <iDynTree/MatrixDynSize.h>
+#include <iDynTree/Position.h>
+#include <iDynTree/Triplets.h>
+#include <iDynTree/Utils.h>
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/VectorFixSize.h>
-#include <iDynTree/Utils.h>
-#include <iDynTree/Triplets.h>
 
+#include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/Indices.h>
 #include <iDynTree/LinkState.h>
 #include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
-#include <iDynTree/FreeFloatingState.h>
 
 #include <iDynTree/Sensors.h>
 
@@ -31,7 +31,8 @@ namespace iDynTree
  * Enumeration of the Berdy variants implemented
  * in this class.
  *
- * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
  * \ingroup iDynTreeExperimental
  */
 enum BerdyVariants
@@ -40,44 +41,49 @@ enum BerdyVariants
      * Original version of Berdy, as described in:
      *
      * Latella, C.; Kuppuswamy, N.; Romano, F.; Traversaro, S.; Nori, F.
-     * Whole-Body Human Inverse Dynamics with Distributed Micro-Accelerometers, Gyros and Force Sensing. Sensors 2016, 16, 727.
-     * http://www.mdpi.com/1424-8220/16/5/727
+     * Whole-Body Human Inverse Dynamics with Distributed Micro-Accelerometers, Gyros and Force
+     * Sensing. Sensors 2016, 16, 727. http://www.mdpi.com/1424-8220/16/5/727
      *
-     * The original version of Berdy is assuming that the joint numbering is a regular ordering of links and joints.
-     * For this reason the serialization of link/joints quantities follows the one defined in the traversal.
+     * The original version of Berdy is assuming that the joint numbering is a regular ordering of
+     * links and joints. For this reason the serialization of link/joints quantities follows the one
+     * defined in the traversal.
      *
-     * Furthremore, this version assumes that all joints have 1 Degree of freedom, so it does not work for models
-     * with fixed joints.
+     * Furthremore, this version assumes that all joints have 1 Degree of freedom, so it does not
+     * work for models with fixed joints.
      */
     ORIGINAL_BERDY_FIXED_BASE = 0,
 
     /**
      * Modified version of Berdy
-     * for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.
+     * for accounting for free floating dynamics and removing the
+     * NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.
      *
      */
     BERDY_FLOATING_BASE = 1,
 
     /**
      * Modified version of floating base Berdy
-     * for accounting centroidal dynamics constraints towards estimating the external link wrench independently of the internal joint torque estimates.
+     * for accounting centroidal dynamics constraints towards estimating the external link wrench
+     * independently of the internal joint torque estimates.
      */
     BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES = 2
 
 };
 
 /**
- * Enumeration describing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration)
- * used in Berdy
+ * Enumeration describing the dynamic variables types (link acceleration, net wrenches, joint
+ * wrenches, joint torques, joint acceleration) used in Berdy
  *
- * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
  * \ingroup iDynTreeExperimental
  */
 enum BerdyDynamicVariablesTypes
 {
     /*!< \f$ a_i  \f$
      * Note that is is the **spatial** proper acceleration expressed,
-     * i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame.
+     * i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body
+     * frame.
      **/
     LINK_BODY_PROPER_ACCELERATION,
     /*!< \f$ f^B_i \f$ */
@@ -92,10 +98,10 @@ enum BerdyDynamicVariablesTypes
     DOF_ACCELERATION,
     /*!<
      * This is the classical proper acceleration,
-     * i.e. the time derivative of the mixed velocity of the body frame minus the gravity expressed in body frame.
-     * In Traversaro's PhD thesis this is called sensor proper acceleration.
-     * This is the necessary for avoiding dependencies on the linear velocity of the base in the floating variant of
-     * Berdy.
+     * i.e. the time derivative of the mixed velocity of the body frame minus the gravity expressed
+     * in body frame. In Traversaro's PhD thesis this is called sensor proper acceleration. This is
+     * the necessary for avoiding dependencies on the linear velocity of the base in the floating
+     * variant of Berdy.
      */
     LINK_BODY_PROPER_CLASSICAL_ACCELERATION
 };
@@ -113,7 +119,8 @@ enum BerdyDynamicVariablesTypes
  * Enum values duplicates between BerdySensorTypes and SensorTypes are append a
  * _SENSOR suffix to avoid problems when wrapping such enum wit SWIG.
  *
- * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
  * \ingroup iDynTreeExperimental
  */
 enum BerdySensorTypes
@@ -122,14 +129,14 @@ enum BerdySensorTypes
     ACCELEROMETER_SENSOR = ACCELEROMETER,
     GYROSCOPE_SENSOR = GYROSCOPE,
     THREE_AXIS_ANGULAR_ACCELEROMETER_SENSOR = THREE_AXIS_ANGULAR_ACCELEROMETER,
-    THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR  = THREE_AXIS_FORCE_TORQUE_CONTACT,
+    THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR = THREE_AXIS_FORCE_TORQUE_CONTACT,
     DOF_ACCELERATION_SENSOR = 1000,
-    DOF_TORQUE_SENSOR       = 1001,
-    NET_EXT_WRENCH_SENSOR   = 1002,
+    DOF_TORQUE_SENSOR = 1001,
+    NET_EXT_WRENCH_SENSOR = 1002,
     /**
      * Non-physical sensor that measures the wrench trasmitted by a joint.
      */
-    JOINT_WRENCH_SENSOR     = 1003,
+    JOINT_WRENCH_SENSOR = 1003,
 
     /**
      * Non-physical sensor that holds the value of Rate of Change of Momentum (RCM) of the system
@@ -148,19 +155,21 @@ bool isDOFBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableT
  * Documentation of each option is provided as usual Doxygen documentation.
  * Default values for each options are specified in the contstructor.
  *
- * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
  * \ingroup iDynTreeExperimental
  */
 struct BerdyOptions
 {
 public:
-    BerdyOptions() : berdyVariant(ORIGINAL_BERDY_FIXED_BASE),
-                     includeAllNetExternalWrenchesAsDynamicVariables(true),
-                     includeAllJointAccelerationsAsSensors(true),
-                     includeAllJointTorquesAsSensors(false),
-                     includeAllNetExternalWrenchesAsSensors(true),
-                     includeFixedBaseExternalWrench(false),
-                     baseLink("")
+    BerdyOptions()
+        : berdyVariant(ORIGINAL_BERDY_FIXED_BASE)
+        , includeAllNetExternalWrenchesAsDynamicVariables(true)
+        , includeAllJointAccelerationsAsSensors(true)
+        , includeAllJointTorquesAsSensors(false)
+        , includeAllNetExternalWrenchesAsSensors(true)
+        , includeFixedBaseExternalWrench(false)
+        , baseLink("")
     {
     }
 
@@ -203,7 +212,8 @@ public:
 
     /**
      * If true, include the net external wrenches in the sensors vector.
-     * It is not compatible with the use of includeAllNetExternalWrenchesAsDynamicVariables set to false.
+     * It is not compatible with the use of includeAllNetExternalWrenchesAsDynamicVariables set to
+     * false.
      *
      * Default value: true .
      */
@@ -241,22 +251,24 @@ public:
     bool checkConsistency();
 };
 
-
-//Unfortunately some sensors used in berdy are not proper sensors.
-//I cannot use the Sensor class which has almost all the information needed
+// Unfortunately some sensors used in berdy are not proper sensors.
+// I cannot use the Sensor class which has almost all the information needed
 /**
  * Structure which describes the essential information about a sensor used in berdy
  * A sensor is identified by the pair (type, id)
  *
- * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
  * \ingroup iDynTreeExperimental
  */
-struct BerdySensor {
+struct BerdySensor
+{
     iDynTree::BerdySensorTypes type; /*!< type of the sensor */
     std::string id; /*!< ID of the sensor */
     iDynTree::IndexRange range; /*!< Range of the sensor
                                  * (starting location in the measurements equations
-                                 *  and number of measurements equations associated with the sensor) */
+                                 *  and number of measurements equations associated with the sensor)
+                                 */
 
     /**
      * Overload of equality operator
@@ -270,7 +282,8 @@ struct BerdySensor {
     bool operator<(const struct BerdySensor& sensor) const;
 };
 
-struct BerdyDynamicVariable {
+struct BerdyDynamicVariable
+{
     iDynTree::BerdyDynamicVariablesTypes type; /*!< type of the dynamic variable */
     std::string id; /*!< ID of the dynamic variable */
     iDynTree::IndexRange range; /*!< Range of the dynamic variable
@@ -308,12 +321,12 @@ struct BerdyDynamicVariable {
  *
  * Nori F, Kuppuswamy N, Traversaro S.
  * Simultaneous state and dynamics estimation in articulated structures.
- * In Intelligent Robots and Systems (IROS), 2015 IEEE/RSJ International Conference on 2015 Sep 28 (pp. 3380-3386). IEEE.
- * http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7353848
+ * In Intelligent Robots and Systems (IROS), 2015 IEEE/RSJ International Conference on 2015 Sep 28
+ * (pp. 3380-3386). IEEE. http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7353848
  *
  *
- * This helper class implements two different variants of the Berdy dynamics representation, identified
- * with the BerdyVariants enum:
+ * This helper class implements two different variants of the Berdy dynamics representation,
+ * identified with the BerdyVariants enum:
  * * The ORIGINAL_BERDY_FIXED_BASE is the original BERDY representation described in the papers,
  *   that was assuming a fixed base model with all the joints with 1-DOF .
  * * The BERDY_FLOATING_BASE is a variant in which the model is assumed to be floating,
@@ -321,18 +334,21 @@ struct BerdyDynamicVariable {
  *   joints with an arbitrary number of DOF .
  *
  * The sensors supported by this class are the one contained in the SensorsList representation,
- * which can be loaded directly from an URDF representation, see https://github.com/robotology/idyntree/blob/master/doc/model_loading.md#sensor-extensions .
- * Using this representation the following sensors can be loaded:
+ * which can be loaded directly from an URDF representation, see
+ * https://github.com/robotology/idyntree/blob/master/doc/model_loading.md#sensor-extensions . Using
+ * this representation the following sensors can be loaded:
  *   * Internal Six-Axis Force Torque sensors
  *   * Gyroscopes
  *   * Accelerometers
  * Support for joint torques/acceleration or external wrenches measurements still needs to be added.
  *
- * \note The dynamics representation of Berdy is highly dependent on the link assumed to be the floating
- *       base of the robot, even in the case that BERDY_FLOATING_BASE is used. The assumed traversal (i.e.
- *       which link is the floating base and how the link are visited) is accessible with the dynamicTraversal() method.
+ * \note The dynamics representation of Berdy is highly dependent on the link assumed to be the
+ * floating base of the robot, even in the case that BERDY_FLOATING_BASE is used. The assumed
+ * traversal (i.e. which link is the floating base and how the link are visited) is accessible with
+ * the dynamicTraversal() method.
  *
- * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * @warning This class is still in active development, and so API interface can change between
+ * iDynTree versions.
  * \ingroup iDynTreeExperimental
  */
 class BerdyHelper
@@ -371,7 +387,6 @@ class BerdyHelper
     size_t m_nrOfDynamicEquations;
     size_t m_nrOfSensorsMeasurements;
 
-
     /**
      * Joint positions
      */
@@ -381,7 +396,6 @@ class BerdyHelper
      * Joint velocities
      */
     JointDOFsDoubleArray m_jointVel;
-
 
     /**
      * Link body velocities (i.e. 6D velocity of the link, expressed
@@ -397,7 +411,8 @@ class BerdyHelper
     SpatialAcc m_gravity6D;
 
     std::vector<BerdySensor> m_sensorsOrdering; /*!< Sensor ordering. Created on init */
-    std::vector<BerdyDynamicVariable> m_dynamicVariablesOrdering; /*!< Dynamic variable ordering. Created on init */
+    std::vector<BerdyDynamicVariable> m_dynamicVariablesOrdering; /*!< Dynamic variable ordering.
+                                                                     Created on init */
 
     /**
      * Helpers method for initialization.
@@ -406,7 +421,8 @@ class BerdyHelper
     bool initBerdyFloatingBase();
     bool initSensorsMeasurements();
 
-    IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx) const;
+    IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType,
+                                              const TraversalIndex idx) const;
 
     /**
      * Ranges for specific dynamics equations
@@ -422,43 +438,49 @@ class BerdyHelper
     IndexRange getRangeAccelerationPropagationFloatingBase(const LinkIndex idx) const;
     IndexRange getRangeNewtonEulerEquationsFloatingBase(const LinkIndex idx) const;
 
-    // Y matrices computation 
+    // Y matrices computation
     bool computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
-    bool computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
+    bool
+    computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
 
     // D matrices computation
-    bool computeBerdyDynamicsMatricesFixedBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
-    bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
+    bool computeBerdyDynamicsMatricesFixedBase(SparseMatrix<iDynTree::ColumnMajor>& D,
+                                               VectorDynSize& bD);
+    bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D,
+                                                  VectorDynSize& bD);
 
     // Helper method
     Matrix6x1 getBiasTermJointAccelerationPropagation(IJointConstPtr joint,
                                                       const LinkIndex parentLinkIdx,
                                                       const LinkIndex childLinkIdx,
-                                                      const Transform &child_X_parent);
+                                                      const Transform& child_X_parent);
     void cacheSensorsOrdering();
     void cacheDynamicVariablesOrderingFixedBase();
     void cacheDynamicVariablesOrderingFloatingBase();
-    bool serializeDynamicVariablesFixedBase(LinkProperAccArray & properAccs,
-                                            LinkNetTotalWrenchesWithoutGravity & netTotalWrenchesWithoutGrav,
-                                            LinkNetExternalWrenches & netExtWrenches,
-                                            LinkInternalWrenches    & linkJointWrenches,
-                                            JointDOFsDoubleArray    & jointTorques,
-                                            JointDOFsDoubleArray    & jointAccs,
-                                            VectorDynSize& d);
-    bool serializeDynamicVariablesFloatingBase(LinkProperAccArray & properAccs,
-                                               LinkNetTotalWrenchesWithoutGravity & netTotalWrenchesWithoutGrav,
-                                               LinkNetExternalWrenches & netExtWrenches,
-                                               LinkInternalWrenches    & linkJointWrenches,
-                                               JointDOFsDoubleArray    & jointTorques,
-                                               JointDOFsDoubleArray    & jointAccs,
-                                               VectorDynSize& d);
+    bool serializeDynamicVariablesFixedBase(
+        LinkProperAccArray& properAccs,
+        LinkNetTotalWrenchesWithoutGravity& netTotalWrenchesWithoutGrav,
+        LinkNetExternalWrenches& netExtWrenches,
+        LinkInternalWrenches& linkJointWrenches,
+        JointDOFsDoubleArray& jointTorques,
+        JointDOFsDoubleArray& jointAccs,
+        VectorDynSize& d);
+    bool serializeDynamicVariablesFloatingBase(
+        LinkProperAccArray& properAccs,
+        LinkNetTotalWrenchesWithoutGravity& netTotalWrenchesWithoutGrav,
+        LinkNetExternalWrenches& netExtWrenches,
+        LinkInternalWrenches& linkJointWrenches,
+        JointDOFsDoubleArray& jointTorques,
+        JointDOFsDoubleArray& jointAccs,
+        VectorDynSize& d);
 
     bool serializeDynamicVariablesNonCollocatedWrenches(LinkNetExternalWrenches& netExtWrenches,
                                                         VectorDynSize& d);
     /**
      * Helper for mapping sensors measurements to the Y vector.
      */
-    struct {
+    struct
+    {
         size_t dofAccelerationOffset;
         size_t dofTorquesOffset;
         size_t netExtWrenchOffset;
@@ -469,15 +491,16 @@ class BerdyHelper
     /**
      * Helper of additional sensors.
      */
-    struct {
-      /**
-       * List of joint wrench sensors.
-       */
-      std::vector<JointIndex> wrenchSensors;
-      /**
-       * Mapping between jndIx in wrenchSensor and
-       */
-      std::vector<size_t> jntIdxToOffset;
+    struct
+    {
+        /**
+         * List of joint wrench sensors.
+         */
+        std::vector<JointIndex> wrenchSensors;
+        /**
+         * Mapping between jndIx in wrenchSensor and
+         */
+        std::vector<size_t> jntIdxToOffset;
     } berdySensorsInfo;
 
     /**
@@ -499,7 +522,6 @@ class BerdyHelper
      *
      */
     LinkPositions base_H_links;
-
 
 public:
     /**
@@ -548,8 +570,7 @@ public:
      * @param[in] options The used options, check BerdyOptions docs.
      * @return true if all went well, false otherwise.
      */
-    bool init(const Model& model,
-              const BerdyOptions options=BerdyOptions());
+    bool init(const Model& model, const BerdyOptions options = BerdyOptions());
 
     /**
      * Init the class
@@ -559,10 +580,11 @@ public:
      * @param[in] options The used options, check BerdyOptions docs.
      * @return true if all went well, false otherwise.
      */
-    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use the version in which sensors are passed via the iDynTree::Model")
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use the version in which sensors are passed "
+                                 "via the iDynTree::Model")
     bool init(const Model& model,
               const SensorsList& sensors,
-              const BerdyOptions options=BerdyOptions());
+              const BerdyOptions options = BerdyOptions());
 
     /**
      * Get currently used options.
@@ -589,30 +611,36 @@ public:
     /**
      * Resize and set to zero Berdy matrices.
      */
-    bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
-                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+    bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D,
+                                    VectorDynSize& bD,
+                                    SparseMatrix<iDynTree::ColumnMajor>& Y,
+                                    VectorDynSize& bY);
 
     /**
      * Resize and set to zero Berdy matrices.
      *
      */
-    bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
-                                    MatrixDynSize & Y, VectorDynSize & bY);
+    bool resizeAndZeroBerdyMatrices(MatrixDynSize& D,
+                                    VectorDynSize& bD,
+                                    MatrixDynSize& Y,
+                                    VectorDynSize& bY);
 
     /**
      * Get Berdy matrices
      */
-    bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
-                          SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+    bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D,
+                          VectorDynSize& bD,
+                          SparseMatrix<iDynTree::ColumnMajor>& Y,
+                          VectorDynSize& bY);
 
     /**
      * Get Berdy matrices
      *
      * \note internally this function uses sparse matrices
-     * Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &, VectorDynSize &, SparseMatrix &, VectorDynSize &)
+     * Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &, VectorDynSize &, SparseMatrix &,
+     * VectorDynSize &)
      */
-    bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
-                          MatrixDynSize & Y, VectorDynSize & bY);
+    bool getBerdyMatrices(MatrixDynSize& D, VectorDynSize& bD, MatrixDynSize& Y, VectorDynSize& bY);
 
     /**
      * Return the internal ordering of the sensors
@@ -628,49 +656,54 @@ public:
      * Get the range of the specified sensor in
      */
     IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx) const;
-    IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
-    IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
-    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
+    IndexRange
+    getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
+    IndexRange
+    getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
+    IndexRange
+    getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
     IndexRange getRangeRCMSensorVariable(const BerdySensorTypes sensorType) const;
 
     /**
      * Ranges of dynamic variables
      */
-    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx) const;
-    IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx) const;
-    IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx) const;
+    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType,
+                                    const LinkIndex idx) const;
+    IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType,
+                                     const JointIndex idx) const;
+    IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType,
+                                   const DOFIndex idx) const;
 
     const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering() const;
 
     /**
      * Serialized dynamic variables from the separate buffers
      */
-    bool serializeDynamicVariables(LinkProperAccArray & properAccs,
-                                   LinkNetTotalWrenchesWithoutGravity & netTotalWrenchesWithoutGrav,
-                                   LinkNetExternalWrenches & netExtWrenches,
-                                   LinkInternalWrenches    & linkJointWrenches,
-                                   JointDOFsDoubleArray    & jointTorques,
-                                   JointDOFsDoubleArray    & jointAccs,
+    bool serializeDynamicVariables(LinkProperAccArray& properAccs,
+                                   LinkNetTotalWrenchesWithoutGravity& netTotalWrenchesWithoutGrav,
+                                   LinkNetExternalWrenches& netExtWrenches,
+                                   LinkInternalWrenches& linkJointWrenches,
+                                   JointDOFsDoubleArray& jointTorques,
+                                   JointDOFsDoubleArray& jointAccs,
                                    VectorDynSize& d);
     /**
      * Serialize sensor variable from separate buffers.
      */
-    bool serializeSensorVariables(SensorsMeasurements     & sensMeas,
-                                  LinkNetExternalWrenches & netExtWrenches,
-                                  JointDOFsDoubleArray    & jointTorques,
-                                  JointDOFsDoubleArray    & jointAccs,
-                                  LinkInternalWrenches    & linkJointWrenches,
-                                  SpatialForceVector      & rcm, // Rate of Change of Momentum (RCM)
-                                  VectorDynSize           & y);
-
+    bool serializeSensorVariables(SensorsMeasurements& sensMeas,
+                                  LinkNetExternalWrenches& netExtWrenches,
+                                  JointDOFsDoubleArray& jointTorques,
+                                  JointDOFsDoubleArray& jointAccs,
+                                  LinkInternalWrenches& linkJointWrenches,
+                                  SpatialForceVector& rcm, // Rate of Change of Momentum (RCM)
+                                  VectorDynSize& y);
 
     /**
      * Debug function:
      *
      * \note This method has been added for debug, and could be removed soon.
      */
-    bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray  & jointAccs,
-                                                            LinkNetExternalWrenches & netExtWrenches,
+    bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray& jointAccs,
+                                                            LinkNetExternalWrenches& netExtWrenches,
                                                             VectorDynSize& d);
 
     /**
@@ -678,17 +711,17 @@ public:
      */
     bool extractJointTorquesFromDynamicVariables(const VectorDynSize& d,
                                                  const VectorDynSize& jointPos,
-                                                       VectorDynSize& jointTorques) const;
+                                                 VectorDynSize& jointTorques) const;
 
     /**
      * Extract the net external force-torques from the dynamic variables
      */
-    bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
-                                                            LinkNetExternalWrenches& netExtWrenches) const;
+    bool extractLinkNetExternalWrenchesFromDynamicVariables(
+        const VectorDynSize& d, LinkNetExternalWrenches& netExtWrenches) const;
 
     /**
-      * @name Methods to submit the input data for dynamics computations.
-      */
+     * @name Methods to submit the input data for dynamics computations.
+     */
     //@{
 
     /**
@@ -696,21 +729,21 @@ public:
      * angular velocity information of a floating frame.
      *
      * \note This method cannot be used if the selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.
-     * \note we not require to give the linear velocity of floating base because the dynamics equations
-     *       are invariant with respect to an offset in linear velocity. This convenient to avoid
-     *       any dependency on any prior floating base estimation.
+     * \note we not require to give the linear velocity of floating base because the dynamics
+     * equations are invariant with respect to an offset in linear velocity. This convenient to
+     * avoid any dependency on any prior floating base estimation.
      *
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
      * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
-     * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating frame,
-     *                       expressed in the specified floating frame orientation.
+     * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating
+     * frame, expressed in the specified floating frame orientation.
      * @return true if all went ok, false otherwise.
      */
-    bool updateKinematicsFromFloatingBase(const JointPosDoubleArray  & jointPos,
-                                          const JointDOFsDoubleArray & jointVel,
-                                          const FrameIndex & floatingFrame,
-                                          const Vector3 & angularVel);
+    bool updateKinematicsFromFloatingBase(const JointPosDoubleArray& jointPos,
+                                          const JointDOFsDoubleArray& jointVel,
+                                          const FrameIndex& floatingFrame,
+                                          const Vector3& angularVel);
 
     /**
      * Set the kinematic information necessary for the dynamics estimation assuming that a
@@ -718,21 +751,23 @@ public:
      *
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
-     * @param[in] fixedFrame the index of the frame that is not accelerating with respect to the inertial frame.
+     * @param[in] fixedFrame the index of the frame that is not accelerating with respect to the
+     * inertial frame.
      * @param[in] gravity the gravity acceleration vector, expressed in the specified fixed frame.
      *
      * \note gravity is used only if selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.
      *
      * @return true if all went ok, false otherwise.
      */
-    bool updateKinematicsFromFixedBase(const JointPosDoubleArray  & jointPos,
-                                       const JointDOFsDoubleArray & jointVel,
-                                       const FrameIndex & fixedFrame,
-                                       const Vector3 & gravity);
+    bool updateKinematicsFromFixedBase(const JointPosDoubleArray& jointPos,
+                                       const JointDOFsDoubleArray& jointVel,
+                                       const FrameIndex& fixedFrame,
+                                       const Vector3& gravity);
 
     /**
      * Set the kinematic information necessary for the dynamics estimation assuming that a
-     * given  baseframe (specified by the m_dynamicsTraversal) is not accelerating with respect to the inertial frame.
+     * given  baseframe (specified by the m_dynamicsTraversal) is not accelerating with respect to
+     * the inertial frame.
      *
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
@@ -742,51 +777,50 @@ public:
      *
      * @return true if all went ok, false otherwise.
      *
-     * @note this is equivalent to 
-     * @code updateKinematicsFromFixedBase(jointPos,jointVel,m_dynamicsTraversal.getBaseLink()->getIndex(),gravity);
+     * @note this is equivalent to
+     * @code
+     * updateKinematicsFromFixedBase(jointPos,jointVel,m_dynamicsTraversal.getBaseLink()->getIndex(),gravity);
      * @endcode
      *
      */
-    bool updateKinematicsFromTraversalFixedBase(const JointPosDoubleArray  & jointPos,
-                                                const JointDOFsDoubleArray & jointVel,
-                                                const Vector3 & gravity);
+    bool updateKinematicsFromTraversalFixedBase(const JointPosDoubleArray& jointPos,
+                                                const JointDOFsDoubleArray& jointVel,
+                                                const Vector3& gravity);
 
     //@}
 
     /**
-     * Set/get the transformation link_H_contact between the link frame and the frame in which the measured net ext wrench is expressed.
+     * Set/get the transformation link_H_contact between the link frame and the frame in which the
+     * measured net ext wrench is expressed.
      *
-     * The default value is the identity. This is extremly useful to correctly tune the variances when only a subset of the external
-     * net wrench is known (for example when it is known that the external net wrench is a pure force on a point different from the
-     * link frame.
+     * The default value is the identity. This is extremly useful to correctly tune the variances
+     * when only a subset of the external net wrench is known (for example when it is known that the
+     * external net wrench is a pure force on a point different from the link frame.
      *
-     * \note This will only change the frame in which the measurent equation of the net external wrench is expressed,
-     *       not how the Newton-Euler equation of the link are expressed or how the net ext wrenches are serialized in
-     *       the LinkNetExternalWrenches class.
+     * \note This will only change the frame in which the measurent equation of the net external
+     * wrench is expressed, not how the Newton-Euler equation of the link are expressed or how the
+     * net ext wrenches are serialized in the LinkNetExternalWrenches class.
      */
     ///@{
-    bool setNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, const Transform& link_H_contact);
-    bool getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_contact) const;
+    bool
+    setNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, const Transform& link_H_contact);
+    bool
+    getNetExternalWrenchMeasurementFrame(const LinkIndex lnkIndex, Transform& link_H_contact) const;
     ///@}
 
-
     /**
-      * @name Methods to get informations on the serialization used.
-      */
+     * @name Methods to get informations on the serialization used.
+     */
     //@{
 
     /**
      * Get a human readable description of the elements of the dynamic variables.
      */
-    //std::string getDescriptionOfDynamicVariables();
+    // std::string getDescriptionOfDynamicVariables();
 
     //@}
-
-
-
 };
 
-
-}
+} // namespace iDynTree
 
 #endif

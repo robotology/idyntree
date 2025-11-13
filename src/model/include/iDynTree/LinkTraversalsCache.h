@@ -4,15 +4,16 @@
 #ifndef IDYNTREE_MODEL_LINKTRAVERSALSCACHE_H
 #define IDYNTREE_MODEL_LINKTRAVERSALSCACHE_H
 
-#include <vector>
 #include <iDynTree/Indices.h>
+#include <vector>
 
-namespace iDynTree {
-    class Traversal;
-    class Model;
-    
-    class LinkTraversalsCache;
-}
+namespace iDynTree
+{
+class Traversal;
+class Model;
+
+class LinkTraversalsCache;
+} // namespace iDynTree
 
 /**
  * Link traversal cache, store a traversal for each link in the model.
@@ -24,7 +25,7 @@ namespace iDynTree {
 class iDynTree::LinkTraversalsCache
 {
 private:
-    std::vector<iDynTree::Traversal *> m_linkTraversals;
+    std::vector<iDynTree::Traversal*> m_linkTraversals;
     void deleteTraversals();
 
 public:
@@ -38,7 +39,6 @@ public:
      */
     ~LinkTraversalsCache();
 
-    
     /**
      * Resize the cache to contains the specified number of Traversals
      *
@@ -46,14 +46,12 @@ public:
      */
     void resize(unsigned int nrOfLinks);
 
-
     /**
      * Resize the cache to contains the number of Traversals for the specified model
      *
      * @param model the model
      */
     void resize(const iDynTree::Model& model);
-
 
     /**
      * return the traversal for the specified link in the specified model
@@ -66,9 +64,8 @@ public:
      * @param linkIdx the index to be considered as base
      * @return the traversal for the specified model link
      */
-    Traversal& getTraversalWithLinkAsBase(const iDynTree::Model & model,
-                                          const iDynTree::LinkIndex linkIdx);
+    Traversal&
+    getTraversalWithLinkAsBase(const iDynTree::Model& model, const iDynTree::LinkIndex linkIdx);
 };
-
 
 #endif /* end of include guard: IDYNTREE_MODEL_LINKTRAVERSALSCACHE_H */

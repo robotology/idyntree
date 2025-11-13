@@ -6,32 +6,34 @@
 
 #include <iDynTree/XMLElement.h>
 
-#include <iDynTree/Transform.h>
 #include <iDynTree/Sensors.h>
+#include <iDynTree/Transform.h>
 
 #include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-namespace iDynTree {
-    class SensorElement;
-    class SensorHelper;
-    class AccelerometerSensorHelper;
-    class GyroscopeSensorHelper;
+namespace iDynTree
+{
+class SensorElement;
+class SensorHelper;
+class AccelerometerSensorHelper;
+class GyroscopeSensorHelper;
 
-    class XMLAttribute;
-    class Sensor;
-    class Model;
-    class XMLParserState;
-}
+class XMLAttribute;
+class Sensor;
+class Model;
+class XMLParserState;
+} // namespace iDynTree
 
-
-class iDynTree::SensorElement: public iDynTree::XMLElement {
+class iDynTree::SensorElement : public iDynTree::XMLElement
+{
 public:
     // Class to keep the data needed to generate the actual Sensor implementation.
     // The only purpose is to keep it separate from the XML Element class
-    struct SensorInfo {
+    struct SensorInfo
+    {
     public:
         std::string m_name;
         // Explicitly keeping separate link and joint for error checking
@@ -45,22 +47,24 @@ public:
 private:
     std::shared_ptr<SensorElement::SensorInfo> m_info;
     std::vector<std::shared_ptr<SensorHelper>>& m_sensors;
-public:
 
+public:
     // I didn't find another clean way to return the generated Helper, instead of manually adding to
     // the vector
-    explicit SensorElement(
-        XMLParserState& parserState, 
-        std::vector<std::shared_ptr<SensorHelper>>& sensors);
+    explicit SensorElement(XMLParserState& parserState,
+                           std::vector<std::shared_ptr<SensorHelper>>& sensors);
 
     std::shared_ptr<XMLElement> childElementForName(const std::string& name) override;
-    bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) override;
+    bool
+    setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>&
+                      attributes) override;
 };
 
-
-class iDynTree::SensorHelper {
+class iDynTree::SensorHelper
+{
 protected:
     std::shared_ptr<const SensorElement::SensorInfo> m_sensorInfo;
+
 public:
     SensorHelper(std::shared_ptr<const SensorElement::SensorInfo> m_sensorInfo);
 
@@ -72,13 +76,15 @@ public:
 
 // Helpers for sensors that do not have a tag associated
 
-class iDynTree::AccelerometerSensorHelper final: public iDynTree::SensorHelper {
+class iDynTree::AccelerometerSensorHelper final : public iDynTree::SensorHelper
+{
 public:
     AccelerometerSensorHelper(std::shared_ptr<const SensorElement::SensorInfo> sensorInfo);
     Sensor* generateSensor(const Model& model) const override;
 };
 
-class iDynTree::GyroscopeSensorHelper final: public iDynTree::SensorHelper {
+class iDynTree::GyroscopeSensorHelper final : public iDynTree::SensorHelper
+{
 public:
     GyroscopeSensorHelper(std::shared_ptr<const SensorElement::SensorInfo> sensorInfo);
     Sensor* generateSensor(const Model& model) const override;

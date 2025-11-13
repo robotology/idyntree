@@ -6,10 +6,10 @@
 
 #include <iDynTree/Model.h>
 
-
-void iDynTree::FrameVisualization::setFrameTransform(size_t index, const iDynTree::Transform &transformation)
+void iDynTree::FrameVisualization::setFrameTransform(size_t index,
+                                                     const iDynTree::Transform& transformation)
 {
-    irr::scene::ISceneNode * frameSceneNode = m_frames[index].visualizationNode;
+    irr::scene::ISceneNode* frameSceneNode = m_frames[index].visualizationNode;
     frameSceneNode->setPosition(idyntree2irr_pos(transformation.getPosition()));
     frameSceneNode->setRotation(idyntree2irr_rot(transformation.getRotation()));
 }
@@ -17,10 +17,10 @@ void iDynTree::FrameVisualization::setFrameTransform(size_t index, const iDynTre
 iDynTree::FrameVisualization::FrameVisualization()
     : m_smgr(0)
 {
-
 }
 
-size_t iDynTree::FrameVisualization::addFrame(const iDynTree::Transform &transformation, double arrowLength)
+size_t iDynTree::FrameVisualization::addFrame(const iDynTree::Transform& transformation,
+                                              double arrowLength)
 {
     m_frames.emplace_back();
 
@@ -34,8 +34,9 @@ size_t iDynTree::FrameVisualization::addFrame(const iDynTree::Transform &transfo
 
 bool iDynTree::FrameVisualization::setVisible(size_t frameIndex, bool isVisible)
 {
-    if (frameIndex >= m_frames.size()) {
-        reportError("FrameVisualization","setVisible","frameIndex out of bounds.");
+    if (frameIndex >= m_frames.size())
+    {
+        reportError("FrameVisualization", "setVisible", "frameIndex out of bounds.");
         return false;
     }
 
@@ -49,31 +50,36 @@ size_t iDynTree::FrameVisualization::getNrOfFrames() const
     return m_frames.size();
 }
 
-bool iDynTree::FrameVisualization::getFrameTransform(size_t frameIndex, iDynTree::Transform &currentTransform) const
+bool iDynTree::FrameVisualization::getFrameTransform(size_t frameIndex,
+                                                     iDynTree::Transform& currentTransform) const
 {
-    if (frameIndex >= m_frames.size()) {
-        reportError("FrameVisualization","getFrameTransform","frameIndex out of bounds.");
+    if (frameIndex >= m_frames.size())
+    {
+        reportError("FrameVisualization", "getFrameTransform", "frameIndex out of bounds.");
         return false;
     }
 
-    irr::scene::ISceneNode * frameSceneNode = m_frames[frameIndex].visualizationNode;
+    irr::scene::ISceneNode* frameSceneNode = m_frames[frameIndex].visualizationNode;
     currentTransform.setPosition(irr2idyntree_pos(frameSceneNode->getPosition()));
     currentTransform.setRotation(irr2idyntree_rot(frameSceneNode->getRotation()));
 
     return true;
 }
 
-bool iDynTree::FrameVisualization::updateFrame(size_t frameIndex, const iDynTree::Transform &transformation)
+bool iDynTree::FrameVisualization::updateFrame(size_t frameIndex,
+                                               const iDynTree::Transform& transformation)
 {
-    if (frameIndex >= m_frames.size()) {
-        reportError("FrameVisualization","updateFrame","frameIndex out of bounds.");
+    if (frameIndex >= m_frames.size())
+    {
+        reportError("FrameVisualization", "updateFrame", "frameIndex out of bounds.");
         return false;
     }
     setFrameTransform(frameIndex, transformation);
     return true;
 }
 
-std::pair<std::string, std::string> iDynTree::FrameVisualization::getFrameParent(size_t frameIndex) const
+std::pair<std::string, std::string>
+iDynTree::FrameVisualization::getFrameParent(size_t frameIndex) const
 {
     if (frameIndex >= m_frames.size())
     {
@@ -83,7 +89,9 @@ std::pair<std::string, std::string> iDynTree::FrameVisualization::getFrameParent
     return std::make_pair(m_frames[frameIndex].parentModel, m_frames[frameIndex].parentFrame);
 }
 
-bool iDynTree::FrameVisualization::setFrameParent(size_t frameIndex, const std::string& modelName, const std::string& frameName)
+bool iDynTree::FrameVisualization::setFrameParent(size_t frameIndex,
+                                                  const std::string& modelName,
+                                                  const std::string& frameName)
 {
     if (frameIndex >= m_frames.size())
     {
@@ -107,8 +115,7 @@ bool iDynTree::FrameVisualization::setFrameParent(size_t frameIndex, const std::
                     iDynTree::LinkIndex root_link_index = model->model().getDefaultBaseLink();
                     actualFrameName = model->model().getLinkName(root_link_index);
                     parent = model->getFrameSceneNode(actualFrameName);
-                }
-                else
+                } else
                 {
                     actualFrameName = frameName;
                     parent = model->getFrameSceneNode(frameName);
@@ -122,8 +129,7 @@ bool iDynTree::FrameVisualization::setFrameParent(size_t frameIndex, const std::
             if (!found)
             {
                 error = "Model " + modelName + " not found";
-            }
-            else
+            } else
             {
                 error = "Frame " + frameName + " not found in model " + modelName;
             }
@@ -139,10 +145,11 @@ bool iDynTree::FrameVisualization::setFrameParent(size_t frameIndex, const std::
     return true;
 }
 
-iDynTree::ILabel *iDynTree::FrameVisualization::getFrameLabel(size_t frameIndex)
+iDynTree::ILabel* iDynTree::FrameVisualization::getFrameLabel(size_t frameIndex)
 {
-    if (frameIndex >= m_frames.size()) {
-        reportError("FrameVisualization","getFrameLabel","frameIndex out of bounds.");
+    if (frameIndex >= m_frames.size())
+    {
+        reportError("FrameVisualization", "getFrameLabel", "frameIndex out of bounds.");
         return nullptr;
     }
 
@@ -154,18 +161,21 @@ iDynTree::FrameVisualization::~FrameVisualization()
     close();
 }
 
-void iDynTree::FrameVisualization::init(irr::scene::ISceneManager* smgr, std::shared_ptr<std::vector<ModelVisualization*>> models)
+void iDynTree::FrameVisualization::init(irr::scene::ISceneManager* smgr,
+                                        std::shared_ptr<std::vector<ModelVisualization*>> models)
 {
     assert(smgr);
     m_smgr = smgr;
-    m_smgr->grab(); //Increment the reference count
+    m_smgr->grab(); // Increment the reference count
     m_models = models;
 }
 
 void iDynTree::FrameVisualization::close()
 {
-    for (auto& frames: m_frames) {
-        if (frames.visualizationNode) {
+    for (auto& frames : m_frames)
+    {
+        if (frames.visualizationNode)
+        {
             frames.visualizationNode->removeAll();
             frames.visualizationNode->remove();
             frames.visualizationNode->drop();
@@ -176,7 +186,7 @@ void iDynTree::FrameVisualization::close()
 
     if (m_smgr)
     {
-        m_smgr->drop(); //Drop the element (dual of "grab")
+        m_smgr->drop(); // Drop the element (dual of "grab")
         m_smgr = 0;
     }
     m_models = nullptr;

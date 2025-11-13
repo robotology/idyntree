@@ -5,10 +5,9 @@
 #define IDYNTREE_MODEL_FWD_KINEMATICS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/ForwardKinematics.h> is deprecated. Please use <iDynTree/ForwardKinematics.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Model/ForwardKinematics.h> is deprecated. Please use <iDynTree/ForwardKinematics.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ForwardKinematics.h>
-
 
 #endif

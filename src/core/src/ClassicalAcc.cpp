@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/ClassicalAcc.h>
+#include <iDynTree/Rotation.h>
 #include <iDynTree/SpatialAcc.h>
 #include <iDynTree/Twist.h>
-#include <iDynTree/Rotation.h>
 
 #include <Eigen/Dense>
 
@@ -12,30 +12,26 @@ namespace iDynTree
 {
 
 // \todo TODO avoid typedef duplication
-typedef Eigen::Matrix<double,6,1> Vector6d;
-typedef Eigen::Matrix<double,3,3,Eigen::RowMajor> Matrix3dRowMajor;
+typedef Eigen::Matrix<double, 6, 1> Vector6d;
+typedef Eigen::Matrix<double, 3, 3, Eigen::RowMajor> Matrix3dRowMajor;
 
-ClassicalAcc::ClassicalAcc(const double* in_data,
-             const unsigned int in_size):
-             Vector6(in_data, in_size)
+ClassicalAcc::ClassicalAcc(const double* in_data, const unsigned int in_size)
+    : Vector6(in_data, in_size)
 {
-
 }
 
-ClassicalAcc::ClassicalAcc(const ClassicalAcc& other):
-              Vector6(other.data(),6)
+ClassicalAcc::ClassicalAcc(const ClassicalAcc& other)
+    : Vector6(other.data(), 6)
 {
-
 }
-
 
 const ClassicalAcc& ClassicalAcc::changeCoordFrame(const Rotation& newCoordFrame)
 {
     Eigen::Map<Vector6d> thisData(this->data());
     Eigen::Map<const Matrix3dRowMajor> rotData(newCoordFrame.data());
 
-    thisData.segment<3>(0) = rotData*thisData.segment<3>(0);
-    thisData.segment<3>(3) = rotData*thisData.segment<3>(3);
+    thisData.segment<3>(0) = rotData * thisData.segment<3>(0);
+    thisData.segment<3>(3) = rotData * thisData.segment<3>(3);
 
     return *this;
 }
@@ -67,9 +63,7 @@ Vector3 ClassicalAcc::getAngularVec3() const
     return ret;
 }
 
-
-void ClassicalAcc::fromSpatial(const SpatialAcc& spatialAcc,
-                               const Twist& vel)
+void ClassicalAcc::fromSpatial(const SpatialAcc& spatialAcc, const Twist& vel)
 {
     // See equation 2.48 in Featherstone 2008 RNEA
     Eigen::Map<const Eigen::Vector3d> linSpatialAcc(spatialAcc.getLinearVec3().data());
@@ -79,7 +73,7 @@ void ClassicalAcc::fromSpatial(const SpatialAcc& spatialAcc,
     Eigen::Map<const Eigen::Vector3d> angTwist(vel.getAngularVec3().data());
 
     Eigen::Map<Eigen::Vector3d> linClassicalAcc(this->data());
-    Eigen::Map<Eigen::Vector3d> angClassicalAcc(this->data()+3);
+    Eigen::Map<Eigen::Vector3d> angClassicalAcc(this->data() + 3);
 
     // Linear part need to be converted
     linClassicalAcc = linSpatialAcc + angTwist.cross(linTwist);
@@ -98,7 +92,7 @@ void ClassicalAcc::toSpatial(SpatialAcc& spatialAcc, const Twist& vel) const
     Eigen::Map<const Eigen::Vector3d> angTwist(vel.getAngularVec3().data());
 
     Eigen::Map<const Eigen::Vector3d> linClassicalAcc(this->data());
-    Eigen::Map<const Eigen::Vector3d> angClassicalAcc(this->data()+3);
+    Eigen::Map<const Eigen::Vector3d> angClassicalAcc(this->data() + 3);
 
     // Linear part need to be converted
     linSpatialAcc = linClassicalAcc - angTwist.cross(linTwist);
@@ -107,6 +101,4 @@ void ClassicalAcc::toSpatial(SpatialAcc& spatialAcc, const Twist& vel) const
     angSpatialAcc = angClassicalAcc;
 }
 
-
-
-}
+} // namespace iDynTree

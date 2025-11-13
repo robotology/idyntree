@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_SPATIALMOMENTUM_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/SpatialMomentum.h> is deprecated. Please use <iDynTree/SpatialMomentum.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Core/SpatialMomentum.h> is deprecated. Please use <iDynTree/SpatialMomentum.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SpatialMomentum.h>

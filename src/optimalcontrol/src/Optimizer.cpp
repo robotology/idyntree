@@ -8,68 +8,70 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/Optimizer.h>
 #include <iDynTree/Utils.h>
+#include <iDynTree/VectorDynSize.h>
 
-namespace iDynTree {
-    namespace optimization {
+namespace iDynTree
+{
+namespace optimization
+{
 
-        Optimizer::Optimizer()
-        {
-
-        }
-
-        Optimizer::~Optimizer()
-        {
-
-        }
-
-        bool Optimizer::setProblem(std::shared_ptr<OptimizationProblem> problem)
-        {
-            m_problem = problem;
-            return true;
-        }
-
-        const std::weak_ptr<OptimizationProblem> Optimizer::problem() const
-        {
-            return m_problem;
-        }
-
-        bool Optimizer::getPrimalVariables(VectorDynSize &primalVariables)
-        {
-            reportError("Optimizer", "getPrimalVariables", "Method not implemented.");
-            return false;
-        }
-
-        bool Optimizer::getDualVariables(VectorDynSize &constraintsMultipliers, VectorDynSize &lowerBoundsMultipliers, VectorDynSize &upperBoundsMultipliers)
-        {
-            reportError("Optimizer", "getDualVariables", "Method not implemented.");
-            return false;
-        }
-
-        double Optimizer::minusInfinity()
-        {
-            return -1E19;
-        }
-
-        double Optimizer::plusInfinity()
-        {
-            return 1E19;
-        }
-
-        bool Optimizer::getOptimalCost(double &optimalCost)
-        {
-            reportError("Optimizer", "getDualVariables", "Method not implemented.");
-            return false;
-        }
-
-        bool Optimizer::getOptimalConstraintsValues(VectorDynSize &constraintsValues)
-        {
-            reportError("Optimizer", "getOptimalConstraintsValues", "Method not implemented.");
-            return false;
-        }
-
-    }
-
+Optimizer::Optimizer()
+{
 }
+
+Optimizer::~Optimizer()
+{
+}
+
+bool Optimizer::setProblem(std::shared_ptr<OptimizationProblem> problem)
+{
+    m_problem = problem;
+    return true;
+}
+
+const std::weak_ptr<OptimizationProblem> Optimizer::problem() const
+{
+    return m_problem;
+}
+
+bool Optimizer::getPrimalVariables(VectorDynSize& primalVariables)
+{
+    reportError("Optimizer", "getPrimalVariables", "Method not implemented.");
+    return false;
+}
+
+bool Optimizer::getDualVariables(VectorDynSize& constraintsMultipliers,
+                                 VectorDynSize& lowerBoundsMultipliers,
+                                 VectorDynSize& upperBoundsMultipliers)
+{
+    reportError("Optimizer", "getDualVariables", "Method not implemented.");
+    return false;
+}
+
+double Optimizer::minusInfinity()
+{
+    return -1E19;
+}
+
+double Optimizer::plusInfinity()
+{
+    return 1E19;
+}
+
+bool Optimizer::getOptimalCost(double& optimalCost)
+{
+    reportError("Optimizer", "getDualVariables", "Method not implemented.");
+    return false;
+}
+
+bool Optimizer::getOptimalConstraintsValues(VectorDynSize& constraintsValues)
+{
+    reportError("Optimizer", "getOptimalConstraintsValues", "Method not implemented.");
+    return false;
+}
+
+} // namespace optimization
+
+} // namespace iDynTree

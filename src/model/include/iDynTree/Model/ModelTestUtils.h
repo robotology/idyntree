@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_MODEL_TEST_UTILS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/ModelTestUtils.h> is deprecated. Please use <iDynTree/ModelTestUtils.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Model/ModelTestUtils.h> is deprecated. Please use <iDynTree/ModelTestUtils.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ModelTestUtils.h>

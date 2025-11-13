@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/Model.h>
 
@@ -28,13 +27,12 @@ void FreeFloatingPos::resize(const Model& model)
     this->m_jointPos.zero();
 }
 
-
 Transform& FreeFloatingPos::worldBasePos()
 {
     return this->m_worldBasePos;
 }
 
-JointPosDoubleArray & FreeFloatingPos::jointPos()
+JointPosDoubleArray& FreeFloatingPos::jointPos()
 {
     return this->m_jointPos;
 }
@@ -44,11 +42,10 @@ const Transform& FreeFloatingPos::worldBasePos() const
     return this->m_worldBasePos;
 }
 
-const JointPosDoubleArray & FreeFloatingPos::jointPos() const
+const JointPosDoubleArray& FreeFloatingPos::jointPos() const
 {
     return this->m_jointPos;
 }
-
 
 unsigned int FreeFloatingPos::getNrOfPosCoords() const
 {
@@ -65,7 +62,6 @@ FreeFloatingVel::FreeFloatingVel()
     this->m_jointVel.resize(0);
     this->m_jointVel.zero();
 }
-
 
 FreeFloatingVel::FreeFloatingVel(const Model& model)
 {
@@ -106,7 +102,6 @@ void FreeFloatingVel::resize(const Model& model)
 
 FreeFloatingVel::~FreeFloatingVel()
 {
-
 }
 
 FreeFloatingAcc::FreeFloatingAcc()
@@ -155,14 +150,12 @@ void FreeFloatingAcc::resize(const Model& model)
 
 FreeFloatingAcc::~FreeFloatingAcc()
 {
-
 }
 
 FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques()
 {
     this->m_jointTorques.resize(0);
 }
-
 
 FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques(const Model& model)
 {
@@ -201,8 +194,6 @@ unsigned int FreeFloatingGeneralizedTorques::getNrOfDOFs() const
 
 FreeFloatingGeneralizedTorques::~FreeFloatingGeneralizedTorques()
 {
-
 }
 
-
-}
+} // namespace iDynTree

@@ -35,11 +35,11 @@ enum FrameVelocityRepresentation
 class FrameFreeFloatingJacobian : public MatrixDynSize
 {
 public:
-    FrameFreeFloatingJacobian(size_t nrOfDofs=0);
-    FrameFreeFloatingJacobian(const iDynTree::Model & model);
+    FrameFreeFloatingJacobian(size_t nrOfDofs = 0);
+    FrameFreeFloatingJacobian(const iDynTree::Model& model);
 
-    void resize(const iDynTree::Model & model);
-    bool isConsistent(const iDynTree::Model & model) const;
+    void resize(const iDynTree::Model& model);
+    bool isConsistent(const iDynTree::Model& model) const;
 
     virtual ~FrameFreeFloatingJacobian();
 };
@@ -50,15 +50,14 @@ public:
 class MomentumFreeFloatingJacobian : public MatrixDynSize
 {
 public:
-    MomentumFreeFloatingJacobian(size_t nrOfDofs=0);
-    MomentumFreeFloatingJacobian(const iDynTree::Model & model);
+    MomentumFreeFloatingJacobian(size_t nrOfDofs = 0);
+    MomentumFreeFloatingJacobian(const iDynTree::Model& model);
 
-    void resize(const iDynTree::Model & model);
-    bool isConsistent(const iDynTree::Model & model) const;
+    void resize(const iDynTree::Model& model);
+    bool isConsistent(const iDynTree::Model& model) const;
 
     virtual ~MomentumFreeFloatingJacobian();
 };
-
 
 /**
  * Class representing the mass matrix of a Free Floating robot.
@@ -68,7 +67,7 @@ public:
 class FreeFloatingMassMatrix : public MatrixDynSize
 {
 public:
-    FreeFloatingMassMatrix(size_t nrOfDofs=0);
+    FreeFloatingMassMatrix(size_t nrOfDofs = 0);
 
     /**
      * Constructor from a model, to get the appropriate size of the
@@ -86,13 +85,12 @@ public:
      */
     void resize(const iDynTree::Model& model);
 
-
     /**
-      * Destructor
-      */
+     * Destructor
+     */
     virtual ~FreeFloatingMassMatrix();
 };
 
-}
+} // namespace iDynTree
 
 #endif

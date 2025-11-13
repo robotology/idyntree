@@ -1,27 +1,26 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
+#include <iDynTree/EigenHelpers.h>
 #include <iDynTree/SO3Utils.h>
 #include <iDynTree/Utils.h>
-#include <iDynTree/EigenHelpers.h>
 
-#include <cmath>
 #include <chrono>
-#include <string>
+#include <cmath>
 #include <numeric>
+#include <string>
 
-bool iDynTree::isValidRotationMatrix(const iDynTree::Rotation &r)
+bool iDynTree::isValidRotationMatrix(const iDynTree::Rotation& r)
 {
-    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor>> map = iDynTree::toEigen(r);
-    return std::isfinite(map.norm())
-        && iDynTree::checkDoublesAreEqual(map.determinant(), 1.0)
-        && (map * map.transpose()).isApprox(iDynTree::toEigen(iDynTree::Rotation::Identity()));
+    Eigen::Map<const Eigen::Matrix<double, 3, 3, Eigen::RowMajor>> map = iDynTree::toEigen(r);
+    return std::isfinite(map.norm()) && iDynTree::checkDoublesAreEqual(map.determinant(), 1.0)
+           && (map * map.transpose()).isApprox(iDynTree::toEigen(iDynTree::Rotation::Identity()));
 }
 
-double iDynTree::geodesicL2Distance(const iDynTree::Rotation& rotation1, const iDynTree::Rotation& rotation2)
+double iDynTree::geodesicL2Distance(const iDynTree::Rotation& rotation1,
+                                    const iDynTree::Rotation& rotation2)
 {
-    Eigen::Vector3d angvelEigen = iDynTree::toEigen((rotation1.inverse()*rotation2).log());
+    Eigen::Vector3d angvelEigen = iDynTree::toEigen((rotation1.inverse() * rotation2).log());
 
     return angvelEigen.norm();
 }
@@ -31,7 +30,10 @@ bool iDynTree::geodesicL2MeanRotation(const std::vector<iDynTree::Rotation>& inp
                                       const GeodesicL2MeanOptions& options)
 
 {
-    return geodesicL2WeightedMeanRotation(inputRotations, std::vector<double>(), meanRotation, options);
+    return geodesicL2WeightedMeanRotation(inputRotations,
+                                          std::vector<double>(),
+                                          meanRotation,
+                                          options);
 }
 
 bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotation>& inputRotations,
@@ -43,25 +45,34 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
 
     if (!inputRotations.size())
     {
-        iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "Empty inputRotations vector.");
+        iDynTree::reportError("SO3Utils",
+                              "geodesicL2WeightedMeanRotation",
+                              "Empty inputRotations vector.");
         return false;
     }
 
     if (weights.size() && (inputRotations.size() != weights.size()))
     {
-        iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "Vectors size mismatch: weights and inputRotations must be same size.");
+        iDynTree::reportError("SO3Utils",
+                              "geodesicL2WeightedMeanRotation",
+                              "Vectors size mismatch: weights and inputRotations must be same "
+                              "size.");
         return false;
     }
 
     if (options.tolerance < 0.0)
     {
-        iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "The tolerance is supposed to be a positive number.");
+        iDynTree::reportError("SO3Utils",
+                              "geodesicL2WeightedMeanRotation",
+                              "The tolerance is supposed to be a positive number.");
         return false;
     }
 
     if (options.stepSize < 0.0)
     {
-        iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "The stepSize is supposed to be non-negative.");
+        iDynTree::reportError("SO3Utils",
+                              "geodesicL2WeightedMeanRotation",
+                              "The stepSize is supposed to be non-negative.");
         return false;
     }
 
@@ -76,20 +87,23 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
             {
                 std::stringstream ss;
                 ss << "The weight at index " << i << " is negative.";
-                iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", ss.str().c_str());
+                iDynTree::reportError("SO3Utils",
+                                      "geodesicL2WeightedMeanRotation",
+                                      ss.str().c_str());
                 return false;
             }
             totalWeight += weights[i];
         }
-    }
-    else
+    } else
     {
         totalWeight = nrRot;
     }
 
     if (totalWeight < options.tolerance)
     {
-        iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "The sum of all the weights is lower than the tolerance.");
+        iDynTree::reportError("SO3Utils",
+                              "geodesicL2WeightedMeanRotation",
+                              "The sum of all the weights is lower than the tolerance.");
         return false;
     }
 
@@ -111,7 +125,7 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
             const iDynTree::Rotation& R_i = inputRotations[idx];
             double w_i = weights.size() ? weights[idx] : 1.0;
 
-            r =  r + w_i * toEigen((meanRotation.inverse() * R_i).log());
+            r = r + w_i * toEigen((meanRotation.inverse() * R_i).log());
         }
         r = r * (1.0 / totalWeight);
 
@@ -135,14 +149,15 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
             continue;
         }
 
-
         r *= options.stepSize;
 
         meanRotation = meanRotation * perturbation.exp();
 
         if (!isValidRotationMatrix(meanRotation))
         {
-            iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "The computed mean rotation is no more a rotation matrix.");
+            iDynTree::reportError("SO3Utils",
+                                  "geodesicL2WeightedMeanRotation",
+                                  "The computed mean rotation is no more a rotation matrix.");
             return false;
         }
 
@@ -152,18 +167,21 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
 
         if ((options.timeoutInSeconds > 0.0) && (time_lapsed > options.timeoutInSeconds))
         {
-            iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "Timeout reached, optimal mean not found.");
+            iDynTree::reportError("SO3Utils",
+                                  "geodesicL2WeightedMeanRotation",
+                                  "Timeout reached, optimal mean not found.");
             return false;
         }
 
         if ((options.maxIterations > 0) && (iteration >= options.maxIterations))
         {
-            iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "Maximum iteration reached, optimal mean not found.");
+            iDynTree::reportError("SO3Utils",
+                                  "geodesicL2WeightedMeanRotation",
+                                  "Maximum iteration reached, optimal mean not found.");
             return false;
         }
 
         iteration++;
-
     }
     std::chrono::steady_clock::time_point finish = std::chrono::steady_clock::now();
 
@@ -178,4 +196,3 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
 
     return true;
 }
-

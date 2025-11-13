@@ -6,50 +6,56 @@
 #include "IrrlichtUtils.h"
 
 #include <cassert>
-#include <string>
 #include <cmath>
+#include <string>
 
 using namespace iDynTree;
 
-
-
 void VectorsVisualization::drawVector(size_t vectorIndex)
 {
-    float arrowHeight = static_cast<float>(std::abs(m_vectors[vectorIndex].modulus) * m_heightScale);
-    float arrowWidth = static_cast<float>(m_radiusOffset +
-                                          m_radiusMultiplier * std::abs(m_vectors[vectorIndex].modulus) * m_heightScale);
-
+    float arrowHeight
+        = static_cast<float>(std::abs(m_vectors[vectorIndex].modulus) * m_heightScale);
+    float arrowWidth = static_cast<float>(
+        m_radiusOffset
+        + m_radiusMultiplier * std::abs(m_vectors[vectorIndex].modulus) * m_heightScale);
 
     auto arrowPosition = idyntree2irr_pos(m_vectors[vectorIndex].origin);
 
-    iDynTree::Direction vectorDirection = (m_vectors[vectorIndex].modulus < 0) ?
-                m_vectors[vectorIndex].direction.reverse() :
-                m_vectors[vectorIndex].direction;
+    iDynTree::Direction vectorDirection = (m_vectors[vectorIndex].modulus < 0)
+                                              ? m_vectors[vectorIndex].direction.reverse()
+                                              : m_vectors[vectorIndex].direction;
 
-    iDynTree::Direction yDirection(0.0, 1.0, 0.0); //Arrows in irrlicht are pointing in the y direction by default
+    iDynTree::Direction yDirection(0.0, 1.0, 0.0); // Arrows in irrlicht are pointing in the y
+                                                   // direction by default
 
     iDynTree::Direction rotationAxis;
 
-    iDynTree::toEigen(rotationAxis) = iDynTree::toEigen(yDirection).cross(iDynTree::toEigen(vectorDirection));
+    iDynTree::toEigen(rotationAxis)
+        = iDynTree::toEigen(yDirection).cross(iDynTree::toEigen(vectorDirection));
     rotationAxis.Normalize();
 
-    double rotationAngle = std::acos(iDynTree::toEigen(vectorDirection).dot(iDynTree::toEigen(yDirection)));
+    double rotationAngle
+        = std::acos(iDynTree::toEigen(vectorDirection).dot(iDynTree::toEigen(yDirection)));
 
-    iDynTree::Rotation arrowRotationMatrix = iDynTree::Rotation::RotAxis(rotationAxis, rotationAngle);
+    iDynTree::Rotation arrowRotationMatrix
+        = iDynTree::Rotation::RotAxis(rotationAxis, rotationAngle);
 
     irr::core::vector3df arrowRotation = idyntree2irr_rot(arrowRotationMatrix);
 
-    irr::scene::IMesh* arrowMesh = m_smgr->getGeometryCreator()->createArrowMesh(4, 8, arrowHeight, 0.9f * arrowHeight,
-                                                                                 arrowWidth, 2.0f * arrowWidth);
+    irr::scene::IMesh* arrowMesh = m_smgr->getGeometryCreator()->createArrowMesh(4,
+                                                                                 8,
+                                                                                 arrowHeight,
+                                                                                 0.9f * arrowHeight,
+                                                                                 arrowWidth,
+                                                                                 2.0f * arrowWidth);
 
     if (m_vectors[vectorIndex].visualizationNode)
     {
         m_vectors[vectorIndex].visualizationNode->setMesh(arrowMesh);
-    }
-    else
+    } else
     {
-        irr::scene::ISceneNode * frameNode = m_smgr->addEmptySceneNode();
-        m_vectors[vectorIndex].visualizationNode = m_smgr->addMeshSceneNode(arrowMesh,frameNode);
+        irr::scene::ISceneNode* frameNode = m_smgr->addEmptySceneNode();
+        m_vectors[vectorIndex].visualizationNode = m_smgr->addMeshSceneNode(arrowMesh, frameNode);
     }
     m_vectors[vectorIndex].visualizationNode->setPosition(arrowPosition);
     m_vectors[vectorIndex].visualizationNode->setRotation(arrowRotation);
@@ -59,14 +65,14 @@ void VectorsVisualization::drawVector(size_t vectorIndex)
     m_vectors[vectorIndex].visualizationNode->getMaterial(0) = arrowColor;
     m_vectors[vectorIndex].visualizationNode->getMaterial(1) = arrowColor;
 
-
     arrowMesh->drop();
     arrowMesh = nullptr;
 }
 
 void VectorsVisualization::drawAll()
 {
-    for (size_t i = 0; i < m_vectors.size(); ++i) {
+    for (size_t i = 0; i < m_vectors.size(); ++i)
+    {
         drawVector(i);
     }
 }
@@ -77,10 +83,9 @@ VectorsVisualization::VectorsVisualization()
     , m_radiusMultiplier(0.0)
     , m_heightScale(1.0)
 {
-
 }
 
-void VectorsVisualization::init(irr::scene::ISceneManager *smgr)
+void VectorsVisualization::init(irr::scene::ISceneManager* smgr)
 {
     assert(smgr);
     m_smgr = smgr;
@@ -89,8 +94,10 @@ void VectorsVisualization::init(irr::scene::ISceneManager *smgr)
 
 void VectorsVisualization::close()
 {
-    for (auto& vector: m_vectors) {
-        if (vector.visualizationNode) {
+    for (auto& vector : m_vectors)
+    {
+        if (vector.visualizationNode)
+        {
             vector.visualizationNode->removeAll();
             vector.visualizationNode = nullptr;
         }
@@ -109,7 +116,8 @@ VectorsVisualization::~VectorsVisualization()
     close();
 }
 
-size_t VectorsVisualization::addVector(const Position &origin, const Direction &direction, double modulus)
+size_t
+VectorsVisualization::addVector(const Position& origin, const Direction& direction, double modulus)
 {
     VectorsProperties newVector;
     newVector.origin = origin;
@@ -119,15 +127,17 @@ size_t VectorsVisualization::addVector(const Position &origin, const Direction &
 
     m_vectors.push_back(newVector);
 
-    drawVector(m_vectors.size()-1);
+    drawVector(m_vectors.size() - 1);
     m_vectors.back().label.init(m_smgr, m_vectors.back().visualizationNode);
 
     return m_vectors.size() - 1;
 }
 
-size_t VectorsVisualization::addVector(const Position &origin, const Vector3 &components)
+size_t VectorsVisualization::addVector(const Position& origin, const Vector3& components)
 {
-    return addVector(origin, Direction(components(0), components(1), components(2)), toEigen(components).norm());
+    return addVector(origin,
+                     Direction(components(0), components(1), components(2)),
+                     toEigen(components).norm());
 }
 
 size_t VectorsVisualization::getNrOfVectors() const
@@ -135,10 +145,14 @@ size_t VectorsVisualization::getNrOfVectors() const
     return m_vectors.size();
 }
 
-bool VectorsVisualization::getVector(size_t vectorIndex, Position &currentOrigin, Direction &currentDirection, double &currentModulus) const
+bool VectorsVisualization::getVector(size_t vectorIndex,
+                                     Position& currentOrigin,
+                                     Direction& currentDirection,
+                                     double& currentModulus) const
 {
-    if (vectorIndex >= m_vectors.size()) {
-        reportError("VectorsVisualization","getVector","vectorIndex out of bounds.");
+    if (vectorIndex >= m_vectors.size())
+    {
+        reportError("VectorsVisualization", "getVector", "vectorIndex out of bounds.");
         return false;
     }
 
@@ -149,23 +163,31 @@ bool VectorsVisualization::getVector(size_t vectorIndex, Position &currentOrigin
     return true;
 }
 
-bool VectorsVisualization::getVector(size_t vectorIndex, Position &currentOrigin, Vector3 &components) const
+bool VectorsVisualization::getVector(size_t vectorIndex,
+                                     Position& currentOrigin,
+                                     Vector3& components) const
 {
-    if (vectorIndex >= m_vectors.size()) {
-        reportError("VectorsVisualization","getVector","vectorIndex out of bounds.");
+    if (vectorIndex >= m_vectors.size())
+    {
+        reportError("VectorsVisualization", "getVector", "vectorIndex out of bounds.");
         return false;
     }
 
     currentOrigin = m_vectors[vectorIndex].origin;
-    toEigen(components) = m_vectors[vectorIndex].modulus * toEigen(m_vectors[vectorIndex].direction);
+    toEigen(components)
+        = m_vectors[vectorIndex].modulus * toEigen(m_vectors[vectorIndex].direction);
 
     return true;
 }
 
-bool VectorsVisualization::updateVector(size_t vectorIndex, const Position &origin, const Direction &direction, double modulus)
+bool VectorsVisualization::updateVector(size_t vectorIndex,
+                                        const Position& origin,
+                                        const Direction& direction,
+                                        double modulus)
 {
-    if (vectorIndex >= m_vectors.size()) {
-        reportError("VectorsVisualization","updateVector","vectorIndex out of bounds.");
+    if (vectorIndex >= m_vectors.size())
+    {
+        reportError("VectorsVisualization", "updateVector", "vectorIndex out of bounds.");
         return false;
     }
 
@@ -178,29 +200,36 @@ bool VectorsVisualization::updateVector(size_t vectorIndex, const Position &orig
     return true;
 }
 
-bool VectorsVisualization::updateVector(size_t vectorIndex, const Position &origin, const Vector3 &components)
+bool VectorsVisualization::updateVector(size_t vectorIndex,
+                                        const Position& origin,
+                                        const Vector3& components)
 {
-    return updateVector(vectorIndex, origin, Direction(components(0), components(1), components(2)), toEigen(components).norm());
+    return updateVector(vectorIndex,
+                        origin,
+                        Direction(components(0), components(1), components(2)),
+                        toEigen(components).norm());
 }
 
-void VectorsVisualization::setVectorsDefaultColor(const ColorViz &vectorColor)
+void VectorsVisualization::setVectorsDefaultColor(const ColorViz& vectorColor)
 {
     m_vectorsDefaultColor = vectorColor;
 }
 
-void VectorsVisualization::setVectorsColor(const ColorViz &vectorColor)
+void VectorsVisualization::setVectorsColor(const ColorViz& vectorColor)
 {
-    for(auto & vector : m_vectors) {
+    for (auto& vector : m_vectors)
+    {
         vector.color = vectorColor;
     }
 
     drawAll();
 }
 
-bool VectorsVisualization::setVectorColor(size_t vectorIndex, const ColorViz &vectorColor)
+bool VectorsVisualization::setVectorColor(size_t vectorIndex, const ColorViz& vectorColor)
 {
-    if (vectorIndex >= m_vectors.size()) {
-        reportError("VectorsVisualization","setVectorColor","vectorIndex out of bounds.");
+    if (vectorIndex >= m_vectors.size())
+    {
+        reportError("VectorsVisualization", "setVectorColor", "vectorIndex out of bounds.");
         return false;
     }
 
@@ -211,20 +240,31 @@ bool VectorsVisualization::setVectorColor(size_t vectorIndex, const ColorViz &ve
     return true;
 }
 
-bool VectorsVisualization::setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale)
+bool VectorsVisualization::setVectorsAspect(double zeroModulusRadius,
+                                            double modulusMultiplier,
+                                            double heightScale)
 {
-    if (zeroModulusRadius < 0) {
-        reportError("VectorsVisualization","setVectorsAspect","zeroModulusRadius is supposed to be non negative.");
+    if (zeroModulusRadius < 0)
+    {
+        reportError("VectorsVisualization",
+                    "setVectorsAspect",
+                    "zeroModulusRadius is supposed to be non negative.");
         return false;
     }
 
-    if (modulusMultiplier < 0) {
-        reportError("VectorsVisualization","setVectorsAspect","modulusMultiplier is supposed to be non negative.");
+    if (modulusMultiplier < 0)
+    {
+        reportError("VectorsVisualization",
+                    "setVectorsAspect",
+                    "modulusMultiplier is supposed to be non negative.");
         return false;
     }
 
-    if (heightScale < 0) {
-        reportError("VectorsVisualization","setVectorsAspect","heightScale is supposed to be non negative.");
+    if (heightScale < 0)
+    {
+        reportError("VectorsVisualization",
+                    "setVectorsAspect",
+                    "heightScale is supposed to be non negative.");
         return false;
     }
 
@@ -239,8 +279,9 @@ bool VectorsVisualization::setVectorsAspect(double zeroModulusRadius, double mod
 
 bool VectorsVisualization::setVisible(size_t vectorIndex, bool visible)
 {
-    if (vectorIndex >= m_vectors.size()) {
-        reportError("VectorsVisualization","setVisible","vectorIndex out of bounds.");
+    if (vectorIndex >= m_vectors.size())
+    {
+        reportError("VectorsVisualization", "setVisible", "vectorIndex out of bounds.");
         return false;
     }
 
@@ -249,10 +290,11 @@ bool VectorsVisualization::setVisible(size_t vectorIndex, bool visible)
     return true;
 }
 
-ILabel *VectorsVisualization::getVectorLabel(size_t vectorIndex)
+ILabel* VectorsVisualization::getVectorLabel(size_t vectorIndex)
 {
-    if (vectorIndex >= m_vectors.size()) {
-        reportError("VectorsVisualization","getVectorLabel","vectorIndex out of bounds.");
+    if (vectorIndex >= m_vectors.size())
+    {
+        reportError("VectorsVisualization", "getVectorLabel", "vectorIndex out of bounds.");
         return nullptr;
     }
 

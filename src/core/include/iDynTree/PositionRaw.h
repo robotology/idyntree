@@ -5,7 +5,7 @@
 #define IDYNTREE_POSITION_RAW_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/PositionRaw.h> is deprecated. Please use <iDynTree/Position.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/PositionRaw.h> is deprecated. Please use <iDynTree/Position.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Position.h>

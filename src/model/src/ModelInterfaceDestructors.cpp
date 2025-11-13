@@ -20,4 +20,4 @@ IJoint::~IJoint()
 {
 }
 
-}
+} // namespace iDynTree

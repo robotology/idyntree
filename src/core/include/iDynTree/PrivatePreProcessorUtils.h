@@ -6,7 +6,7 @@
 
 #ifdef __PRETTY_FUNCTION__
 #define IDYNTREE_PRETTY_FUNCTION __PRETTY_FUNCTION__
-#else 
+#else
 #define IDYNTREE_PRETTY_FUNCTION __FUNCTION__
 #endif
 

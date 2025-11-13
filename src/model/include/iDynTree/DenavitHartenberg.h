@@ -21,12 +21,12 @@ namespace iDynTree
  */
 struct DHLink
 {
-   double A;
-   double D;
-   double Alpha;
-   double Offset;
-   double Min;
-   double Max;
+    double A;
+    double D;
+    double Alpha;
+    double Offset;
+    double Min;
+    double Max;
 };
 
 /**
@@ -43,24 +43,24 @@ private:
     std::vector<std::string> dofNames;
 
 public:
-    void   setNrOfDOFs(size_t nDofs);
+    void setNrOfDOFs(size_t nDofs);
     size_t getNrOfDOFs() const;
 
-    void setH0(const iDynTree::Transform & _H0);
-    const iDynTree::Transform & getH0() const;
+    void setH0(const iDynTree::Transform& _H0);
+    const iDynTree::Transform& getH0() const;
 
-    void setHN(const Transform & _HN);
-    const Transform & getHN() const;
+    void setHN(const Transform& _HN);
+    const Transform& getHN() const;
 
     /**
      * Return a reference to the i-th link of the chain.
      */
-    DHLink & operator() (const size_t i);
+    DHLink& operator()(const size_t i);
 
     /**
      * Return a reference to the i-th link of the chain (const version).
      */
-    const DHLink & operator() (const size_t i) const;
+    const DHLink& operator()(const size_t i) const;
 
     /**
      * Get the name of the i-th DOF.
@@ -70,21 +70,19 @@ public:
     /**
      * Get the name of the i-th DOF.
      */
-    void setDOFName(size_t dofIdx, const std::string &dofName);
+    void setDOFName(size_t dofIdx, const std::string& dofName);
 
     /**
      * Create an iDynTree::Model from this DHChain.
      * \see CreateModelFromDHChain .
      */
-    bool toModel(Model & outputModel) const;
+    bool toModel(Model& outputModel) const;
 
     /**
      * Create a DHChain from a Model.
      * \see ExtractDHChainFromModel .
      */
-    bool fromModel(const iDynTree::Model & model,
-                   std::string baseFrame,
-                   std::string eeFrame);
+    bool fromModel(const iDynTree::Model& model, std::string baseFrame, std::string eeFrame);
 };
 
 /*
@@ -135,7 +133,7 @@ public:
  *
  * Function compatible with KDL's Frame::DH_Craig1989 method.
  */
-Transform TransformFromDHCraig1989(double a,double alpha,double d,double theta);
+Transform TransformFromDHCraig1989(double a, double alpha, double d, double theta);
 
 /**
  * DH : constructs a transformationmatrix T_link(i-1)_link(i) with
@@ -146,24 +144,25 @@ Transform TransformFromDHCraig1989(double a,double alpha,double d,double theta);
  *
  * Function compatible on KDL's Frame::DH method.
  */
-Transform TransformFromDH(double a,double alpha,double d,double theta);
+Transform TransformFromDH(double a, double alpha, double d, double theta);
 
 /**
  * Extract a Denavit Hartenberg Chain from a iDynTree::Model.
  * In particular you can specify the base frame and the end effector frame
  * of the chain. The chain is then extracted using the algorithm found
  * in:
- * Chapter 3, Spong, Mark W., Seth Hutchinson, and M. Vidyasagar. "Robot modeling and control". 2006.
- * (section 3.2.3 of http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf)
+ * Chapter 3, Spong, Mark W., Seth Hutchinson, and M. Vidyasagar. "Robot modeling and control".
+ * 2006. (section 3.2.3 of
+ * http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf)
  *
  *  \note The DH representation supports only revolute and translational
  *        1-DOF joints. In this implementation only revolute joints are supported.
  */
-bool ExtractDHChainFromModel(const iDynTree::Model & model,
+bool ExtractDHChainFromModel(const iDynTree::Model& model,
                              const std::string baseFrame,
                              const std::string eeFrame,
-                                   DHChain & outputChain,
-                                   double tolerance = 1e-5);
+                             DHChain& outputChain,
+                             double tolerance = 1e-5);
 
 /**
  * Create an iDynTree::Model from a DHChain.
@@ -175,11 +174,8 @@ bool ExtractDHChainFromModel(const iDynTree::Model & model,
  *
  * @return true if all went ok, false otherwise.
  */
-bool CreateModelFromDHChain(const DHChain & inputChain,
-                                  Model   & outputModel);
+bool CreateModelFromDHChain(const DHChain& inputChain, Model& outputModel);
 
-
-}
-
+} // namespace iDynTree
 
 #endif

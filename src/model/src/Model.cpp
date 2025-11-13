@@ -2,17 +2,16 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Model.h>
-#include <iDynTree/Traversal.h>
 #include <iDynTree/SolidShapes.h>
+#include <iDynTree/Traversal.h>
 
-#include <iDynTree/VectorDynSize.h>
 #include <iDynTree/EigenHelpers.h>
+#include <iDynTree/VectorDynSize.h>
 
 #include <cassert>
 #include <deque>
 #include <sstream>
 #include <string>
-
 
 namespace iDynTree
 {
@@ -22,7 +21,6 @@ Model::Model()
     , nrOfPosCoords(0)
     , nrOfDOFs(0)
 {
-
 }
 
 void Model::copy(const Model& other)
@@ -33,9 +31,9 @@ void Model::copy(const Model& other)
     this->packageDirs = other.packageDirs;
 
     // Add all the links, preserving the numbering
-    for(unsigned int lnk=0; lnk < other.getNrOfLinks(); lnk++ )
+    for (unsigned int lnk = 0; lnk < other.getNrOfLinks(); lnk++)
     {
-        this->addLink(other.linkNames[lnk],other.links[lnk]);
+        this->addLink(other.linkNames[lnk], other.links[lnk]);
     }
 
     // Add all joints, preserving the numbering
@@ -43,18 +41,18 @@ void Model::copy(const Model& other)
     nrOfPosCoords = 0;
     nrOfDOFs = 0;
 
-    for(unsigned int jnt=0; jnt < other.getNrOfJoints(); jnt++ )
+    for (unsigned int jnt = 0; jnt < other.getNrOfJoints(); jnt++)
     {
-        this->addJoint(other.jointNames[jnt],other.joints[jnt]);
+        this->addJoint(other.jointNames[jnt], other.joints[jnt]);
     }
 
     // Add all additional frames, preserving the numbering
-    for(unsigned int addFrm=other.getNrOfLinks(); addFrm < other.getNrOfFrames(); addFrm++ )
+    for (unsigned int addFrm = other.getNrOfLinks(); addFrm < other.getNrOfFrames(); addFrm++)
     {
         std::string linkName = other.getLinkName(other.getFrameLink(addFrm));
         std::string frameName = other.getFrameName(addFrm);
         Transform link_H_frame = other.getFrameTransform(addFrm);
-        this->addAdditionalFrameToLink(linkName,frameName,link_H_frame);
+        this->addAdditionalFrameToLink(linkName, frameName, link_H_frame);
     }
 
     // Copy the default base link
@@ -62,12 +60,11 @@ void Model::copy(const Model& other)
 
     // Copy the solid shapes
     this->m_collisionSolidShapes = other.m_collisionSolidShapes;
-    this->m_visualSolidShapes    = other.m_visualSolidShapes;
+    this->m_visualSolidShapes = other.m_visualSolidShapes;
 
     // Copy the sensors
     this->m_sensors = other.m_sensors;
 }
-
 
 Model::Model(const Model& other)
 {
@@ -76,7 +73,7 @@ Model::Model(const Model& other)
 
 Model& Model::operator=(const Model& other)
 {
-    if( &other != this )
+    if (&other != this)
     {
         destroy();
         copy(other);
@@ -89,7 +86,7 @@ void Model::destroy()
 {
     links.resize(0);
     linkNames.resize(0);
-    for(unsigned int jnt=0; jnt < this->getNrOfJoints(); jnt++ )
+    for (unsigned int jnt = 0; jnt < this->getNrOfJoints(); jnt++)
     {
         delete this->joints[jnt];
         this->joints[jnt] = 0;
@@ -124,20 +121,18 @@ void Model::setPackageDirs(const std::vector<std::string>& packageDirs)
 {
     this->packageDirs = packageDirs;
 
-    auto updatePackageDirs = [this](ModelSolidShapes& modelShapes) -> void
-                             {
-                                 for (auto& shapes : modelShapes.getLinkSolidShapes())
-                                 {
-                                     for (auto& shape : shapes)
-                                     {
-                                         if (shape != nullptr && shape->isExternalMesh())
-                                         {
-                                             shape->asExternalMesh()->setPackageDirs(this->packageDirs);
-                                         }
-                                     }
-                                 }
-
-                             };
+    auto updatePackageDirs = [this](ModelSolidShapes& modelShapes) -> void {
+        for (auto& shapes : modelShapes.getLinkSolidShapes())
+        {
+            for (auto& shape : shapes)
+            {
+                if (shape != nullptr && shape->isExternalMesh())
+                {
+                    shape->asExternalMesh()->setPackageDirs(this->packageDirs);
+                }
+            }
+        }
+    };
 
     updatePackageDirs(this->collisionSolidShapes());
     updatePackageDirs(this->visualSolidShapes());
@@ -150,9 +145,9 @@ size_t Model::getNrOfLinks() const
 
 LinkIndex Model::getLinkIndex(const std::string& linkName) const
 {
-    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    for (size_t i = 0; i < this->getNrOfLinks(); i++)
     {
-        if( linkName == linkNames[i] )
+        if (linkName == linkNames[i])
         {
             return i;
         }
@@ -160,7 +155,7 @@ LinkIndex Model::getLinkIndex(const std::string& linkName) const
 
     // Report an error and return an invalid index
     std::string error = "Impossible to find link " + linkName + " in the Model";
-    reportError("Model","getLinkIndex",error.c_str());
+    reportError("Model", "getLinkIndex", error.c_str());
 
     return LINK_INVALID_INDEX;
 }
@@ -169,7 +164,7 @@ double Model::getTotalMass() const
 {
     double totalMass = 0.0;
 
-    for(size_t l=0; l < this->getNrOfLinks(); l++)
+    for (size_t l = 0; l < this->getNrOfLinks(); l++)
     {
         totalMass += this->getLink(l)->getInertia().getMass();
     }
@@ -179,21 +174,20 @@ double Model::getTotalMass() const
 
 bool Model::isValidLinkIndex(const LinkIndex index) const
 {
-    return (index != LINK_INVALID_INDEX) &&
-           (index >= 0) && (index < this->getNrOfLinks());
+    return (index != LINK_INVALID_INDEX) && (index >= 0) && (index < this->getNrOfLinks());
 }
 
 std::string Model::getLinkName(const LinkIndex linkIndex) const
 {
-    if( linkIndex >= 0 && linkIndex < (LinkIndex) this->getNrOfLinks() )
+    if (linkIndex >= 0 && linkIndex < (LinkIndex)this->getNrOfLinks())
     {
         return linkNames[linkIndex];
-    }
-    else
+    } else
     {
         std::stringstream ss;
-        ss << "LinkIndex " << linkIndex << " is not valid, should be between 0 and " << this->getNrOfLinks()-1;
-        reportError("Model","getLinkName",ss.str().c_str());
+        ss << "LinkIndex " << linkIndex << " is not valid, should be between 0 and "
+           << this->getNrOfLinks() - 1;
+        reportError("Model", "getLinkName", ss.str().c_str());
         return LINK_INVALID_NAME;
     }
 }
@@ -215,9 +209,9 @@ size_t Model::getNrOfJoints() const
 
 JointIndex Model::getJointIndex(const std::string& jointName) const
 {
-    for(size_t i=0; i < this->getNrOfJoints(); i++ )
+    for (size_t i = 0; i < this->getNrOfJoints(); i++)
     {
-        if( jointName == jointNames[i] )
+        if (jointName == jointNames[i])
         {
             return i;
         }
@@ -225,29 +219,27 @@ JointIndex Model::getJointIndex(const std::string& jointName) const
 
     std::stringstream ss;
     ss << "jointName " << jointName << " not found in the model.";
-    reportError("Model","getJointIndex",ss.str().c_str());
+    reportError("Model", "getJointIndex", ss.str().c_str());
 
     return JOINT_INVALID_INDEX;
 }
 
 bool Model::isValidJointIndex(const JointIndex index) const
 {
-    return (index != JOINT_INVALID_INDEX) &&
-           (index >= 0) && (index < this->getNrOfJoints());
+    return (index != JOINT_INVALID_INDEX) && (index >= 0) && (index < this->getNrOfJoints());
 }
-
 
 std::string Model::getJointName(const JointIndex jointIndex) const
 {
-    if( jointIndex >= 0 && jointIndex < (JointIndex)this->getNrOfJoints() )
+    if (jointIndex >= 0 && jointIndex < (JointIndex)this->getNrOfJoints())
     {
         return jointNames[jointIndex];
-    }
-    else
+    } else
     {
         std::stringstream ss;
-        ss << "jointIndex " << jointIndex << " is not valid, should be between 0 and " << this->getNrOfJoints()-1;
-        reportError("Model","getJointName",ss.str().c_str());
+        ss << "jointIndex " << jointIndex << " is not valid, should be between 0 and "
+           << this->getNrOfJoints() - 1;
+        reportError("Model", "getJointName", ss.str().c_str());
         return JOINT_INVALID_NAME;
     }
 }
@@ -264,9 +256,9 @@ const IJoint* Model::getJoint(const JointIndex jointIndex) const
 
 bool Model::isLinkNameUsed(const std::string linkName) const
 {
-    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    for (size_t i = 0; i < this->getNrOfLinks(); i++)
     {
-        if( linkName == linkNames[i] )
+        if (linkName == linkNames[i])
         {
             return true;
         }
@@ -278,10 +270,10 @@ bool Model::isLinkNameUsed(const std::string linkName) const
 LinkIndex Model::addLink(const std::string& name, const Link& link)
 {
     // Check that the name is not already used by a link or frame
-    if(isFrameNameUsed(name))
+    if (isFrameNameUsed(name))
     {
         std::string error = "a link or frame of name " + name + " is already present in the model";
-        reportError("Model","addLink",error.c_str());
+        reportError("Model", "addLink", error.c_str());
         return LINK_INVALID_INDEX;
     }
 
@@ -293,14 +285,14 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     // add an empty adjacency list to the neighbors members
     neighbors.push_back(std::vector<Neighbor>());
 
-    LinkIndex newLinkIndex = (LinkIndex)(links.size()-1);
+    LinkIndex newLinkIndex = (LinkIndex)(links.size() - 1);
 
     links[newLinkIndex].setIndex(newLinkIndex);
 
     // if this is the first link added to the model
     // and the defaultBaseLink has not been setted,
     // set the defaultBaseLink to be this link
-    if( newLinkIndex == 0 && getDefaultBaseLink() == LINK_INVALID_INDEX )
+    if (newLinkIndex == 0 && getDefaultBaseLink() == LINK_INVALID_INDEX)
     {
         setDefaultBaseLink(newLinkIndex);
     }
@@ -311,15 +303,14 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     // Add an empty vector of visual shapes
     m_visualSolidShapes.getLinkSolidShapes().push_back(std::vector<SolidShape*>(0));
 
-
     return newLinkIndex;
 }
 
 bool Model::isJointNameUsed(const std::string jointName) const
 {
-    for(size_t i=0; i < this->getNrOfJoints(); i++ )
+    for (size_t i = 0; i < this->getNrOfJoints(); i++)
     {
-        if( jointName == jointNames[i] )
+        if (jointName == jointNames[i])
         {
             return true;
         }
@@ -328,65 +319,67 @@ bool Model::isJointNameUsed(const std::string jointName) const
     return false;
 }
 
-JointIndex Model::addJoint(const std::string & link1, const std::string & link2,
-                            const std::string & jointName, IJointConstPtr joint)
+JointIndex Model::addJoint(const std::string& link1,
+                           const std::string& link2,
+                           const std::string& jointName,
+                           IJointConstPtr joint)
 {
     IJointPtr jointCopy = joint->clone();
 
     LinkIndex link1Index = this->getLinkIndex(link1);
     LinkIndex link2Index = this->getLinkIndex(link2);
 
-    if( link1Index == LINK_INVALID_INDEX )
+    if (link1Index == LINK_INVALID_INDEX)
     {
         std::string error = "a link of name " + link1 + " is not present in the model";
-        reportError("Model","addJoint",error.c_str());
+        reportError("Model", "addJoint", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
-    if( link2Index == LINK_INVALID_INDEX )
+    if (link2Index == LINK_INVALID_INDEX)
     {
         std::string error = "a link of name " + link2 + " is not present in the model";
-        reportError("Model","addJoint",error.c_str());
+        reportError("Model", "addJoint", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
-    jointCopy->setAttachedLinks(link1Index,link2Index);
+    jointCopy->setAttachedLinks(link1Index, link2Index);
 
-    JointIndex jntIdx = addJoint(jointName,jointCopy);
+    JointIndex jntIdx = addJoint(jointName, jointCopy);
 
     delete jointCopy;
 
     return jntIdx;
 }
 
-
 JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
 {
     assert(joint->getFirstAttachedLink() != joint->getSecondAttachedLink());
 
-    if(isJointNameUsed(jointName))
+    if (isJointNameUsed(jointName))
     {
         std::string error = "a joint of name " + jointName + " is already present in the model";
-        reportError("Model","addJoint",error.c_str());
+        reportError("Model", "addJoint", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
     // Check that the joint is referring to links that are in the model
     LinkIndex firstLink = joint->getFirstAttachedLink();
     LinkIndex secondLink = joint->getSecondAttachedLink();
-    if( firstLink < 0 || firstLink >= (LinkIndex)this->getNrOfLinks() ||
-        secondLink < 0 || secondLink >= (LinkIndex)this->getNrOfLinks() )
+    if (firstLink < 0 || firstLink >= (LinkIndex)this->getNrOfLinks() || secondLink < 0
+        || secondLink >= (LinkIndex)this->getNrOfLinks())
     {
         std::string error = "joint " + jointName + " is attached to a link that does not exist";
-        reportError("Model","addJoint",error.c_str());
+        reportError("Model", "addJoint", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
     // Check that the joint is not connecting a link to itself
-    if( firstLink == secondLink )
+    if (firstLink == secondLink)
     {
-        std::string error = "joint " + jointName + " is connecting link " + this->getLinkName(firstLink) + " to itself";
-        reportError("Model","addJoint",error.c_str());
+        std::string error = "joint " + jointName + " is connecting link "
+                            + this->getLinkName(firstLink) + " to itself";
+        reportError("Model", "addJoint", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
@@ -394,7 +387,7 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
     jointNames.push_back(jointName);
     joints.push_back(joint->clone());
 
-    JointIndex thisJointIndex = (JointIndex)(joints.size()-1);
+    JointIndex thisJointIndex = (JointIndex)(joints.size() - 1);
 
     // Update the adjacency list
     Neighbor firstLinkNeighbor;
@@ -420,114 +413,120 @@ JointIndex Model::addJoint(const std::string& jointName, IJointConstPtr joint)
 }
 
 JointIndex Model::addJointAndLink(const std::string& existingLink,
-                                  const std::string& jointName, IJointConstPtr joint,
-                                  const std::string& newLinkName, Link& newLink)
+                                  const std::string& jointName,
+                                  IJointConstPtr joint,
+                                  const std::string& newLinkName,
+                                  Link& newLink)
 {
-    if( !(this->isLinkNameUsed(existingLink)) )
+    if (!(this->isLinkNameUsed(existingLink)))
     {
         std::string error = "a link of name " + existingLink + " is not present in the model";
-        reportError("Model","addJointAndLink",error.c_str());
+        reportError("Model", "addJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
-    LinkIndex newAddedLink = this->addLink(newLinkName,newLink);
+    LinkIndex newAddedLink = this->addLink(newLinkName, newLink);
 
-    if( newAddedLink == LINK_INVALID_INDEX )
+    if (newAddedLink == LINK_INVALID_INDEX)
     {
         std::string error = "Error adding link of name " + newLinkName;
-        reportError("Model","addJointAndLink",error.c_str());
+        reportError("Model", "addJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
-    return this->addJoint(existingLink,newLinkName,
-                          jointName,joint);
+    return this->addJoint(existingLink, newLinkName, jointName, joint);
 }
 
-JointIndex Model::insertLinkToExistingJointAndAddJointForDisplacedLink(const std::string & existingJointName,
-                                     const std::string & unmovableLink,
-                                     const Transform& _unmovableLink_X_newLink,
-                                  const std::string& jointName, IJointConstPtr joint,
-                                  const std::string& newLinkName, Link& newLink)
+JointIndex Model::insertLinkToExistingJointAndAddJointForDisplacedLink(
+    const std::string& existingJointName,
+    const std::string& unmovableLink,
+    const Transform& _unmovableLink_X_newLink,
+    const std::string& jointName,
+    IJointConstPtr joint,
+    const std::string& newLinkName,
+    Link& newLink)
 {
 
-
     // check the unmovableLink exists
-    if( !(this->isLinkNameUsed(unmovableLink)) )
+    if (!(this->isLinkNameUsed(unmovableLink)))
     {
         std::string error = "a link of name " + unmovableLink + " is not present in the model";
-        reportError("Model","insertJointAndLink",error.c_str());
+        reportError("Model", "insertJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
-    LinkIndex newAddedLink = this->addLink(newLinkName,newLink);
+    LinkIndex newAddedLink = this->addLink(newLinkName, newLink);
 
-    if( newAddedLink == LINK_INVALID_INDEX )
+    if (newAddedLink == LINK_INVALID_INDEX)
     {
         std::string error = "Error adding link of name " + newLinkName;
-        reportError("Model","insertJointAndLink",error.c_str());
+        reportError("Model", "insertJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
     // check joint exists
-    if( !(this->isJointNameUsed(existingJointName)) )
+    if (!(this->isJointNameUsed(existingJointName)))
     {
         std::string error = "a joint of name " + existingJointName + " is not present in the model";
-        reportError("Model","insertJointAndLink",error.c_str());
+        reportError("Model", "insertJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
-    JointIndex existingJointIndex=this->getJointIndex(existingJointName);
-    IJointPtr existingJoint=this->getJoint(existingJointIndex);
+    JointIndex existingJointIndex = this->getJointIndex(existingJointName);
+    IJointPtr existingJoint = this->getJoint(existingJointIndex);
 
     // get current link indexes of the links attached to existing joint
-    LinkIndex unmovableLinkIndex=this->getLinkIndex(unmovableLink);
-    int LinkPositionInJoint=0;
+    LinkIndex unmovableLinkIndex = this->getLinkIndex(unmovableLink);
+    int LinkPositionInJoint = 0;
 
     LinkIndex displacedLinkIndex;
 
-    if (existingJoint->getFirstAttachedLink() == unmovableLinkIndex )
+    if (existingJoint->getFirstAttachedLink() == unmovableLinkIndex)
     {
-        displacedLinkIndex=existingJoint->getSecondAttachedLink();
-        LinkPositionInJoint=1;
+        displacedLinkIndex = existingJoint->getSecondAttachedLink();
+        LinkPositionInJoint = 1;
     }
 
-    if (existingJoint->getSecondAttachedLink() == unmovableLinkIndex )
+    if (existingJoint->getSecondAttachedLink() == unmovableLinkIndex)
     {
-        displacedLinkIndex=existingJoint->getFirstAttachedLink();
-        LinkPositionInJoint=2;
+        displacedLinkIndex = existingJoint->getFirstAttachedLink();
+        LinkPositionInJoint = 2;
     }
 
     // check if the unmovable link is indeed attached to the joint
-    if (LinkPositionInJoint == 0 ){
-        std::string error = "a link of name " + unmovableLink + " is not attached to joint of name " + existingJointName + " in the model";
-        reportError("Model","insertJointAndLink",error.c_str());
+    if (LinkPositionInJoint == 0)
+    {
+        std::string error = "a link of name " + unmovableLink + " is not attached to joint of name "
+                            + existingJointName + " in the model";
+        reportError("Model", "insertJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
     // edit connections of existing link
-    if (LinkPositionInJoint==1){
-        existingJoint->setAttachedLinks(unmovableLinkIndex,newAddedLink);
-        existingJoint->setRestTransform(_unmovableLink_X_newLink);
-    }
-    else
+    if (LinkPositionInJoint == 1)
     {
-        existingJoint->setAttachedLinks(newAddedLink,unmovableLinkIndex);
+        existingJoint->setAttachedLinks(unmovableLinkIndex, newAddedLink);
+        existingJoint->setRestTransform(_unmovableLink_X_newLink);
+    } else
+    {
+        existingJoint->setAttachedLinks(newAddedLink, unmovableLinkIndex);
         existingJoint->setRestTransform(_unmovableLink_X_newLink.inverse());
     }
 
     // Check neighbors connections to find the previous connection index
-    int previousConnectionIndex=-1;
-    for(int i=0;i<this->neighbors[unmovableLinkIndex].size();i++ )
+    int previousConnectionIndex = -1;
+    for (int i = 0; i < this->neighbors[unmovableLinkIndex].size(); i++)
     {
-        if ( this->neighbors[unmovableLinkIndex].at(i).neighborLink == displacedLinkIndex )
+        if (this->neighbors[unmovableLinkIndex].at(i).neighborLink == displacedLinkIndex)
         {
-            previousConnectionIndex=i;
+            previousConnectionIndex = i;
         }
     }
     if (previousConnectionIndex == -1)
     {
-        std::string error = "could not find neighbor connection from " + unmovableLink + " to " + this->getJointName(displacedLinkIndex) + " in the model";
-        reportError("Model","insertJointAndLink",error.c_str());
+        std::string error = "could not find neighbor connection from " + unmovableLink + " to "
+                            + this->getJointName(displacedLinkIndex) + " in the model";
+        reportError("Model", "insertJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
 
@@ -535,7 +534,7 @@ JointIndex Model::insertLinkToExistingJointAndAddJointForDisplacedLink(const std
     Neighbor unmovableLinkNeighbor;
     unmovableLinkNeighbor.neighborLink = newAddedLink;
     unmovableLinkNeighbor.neighborJoint = existingJointIndex;
-    this->neighbors[unmovableLinkIndex].at(previousConnectionIndex)=unmovableLinkNeighbor;
+    this->neighbors[unmovableLinkIndex].at(previousConnectionIndex) = unmovableLinkNeighbor;
 
     Neighbor newAddedLinkNeighbor;
     newAddedLinkNeighbor.neighborLink = unmovableLinkIndex;
@@ -543,27 +542,28 @@ JointIndex Model::insertLinkToExistingJointAndAddJointForDisplacedLink(const std
     this->neighbors[newAddedLink].push_back(newAddedLinkNeighbor);
 
     // Erase neighbor connection from movable link to unmovable link
-    previousConnectionIndex=-1;
-    for(int i=0;i<this->neighbors[displacedLinkIndex].size();i++ )
+    previousConnectionIndex = -1;
+    for (int i = 0; i < this->neighbors[displacedLinkIndex].size(); i++)
     {
-        if ( this->neighbors[displacedLinkIndex].at(i).neighborLink == unmovableLinkIndex )
+        if (this->neighbors[displacedLinkIndex].at(i).neighborLink == unmovableLinkIndex)
         {
-            previousConnectionIndex=i;
+            previousConnectionIndex = i;
         }
     }
     if (previousConnectionIndex == -1)
     {
-        std::string error = "could not find neighbor connection from " + this->getJointName(displacedLinkIndex) + " to " + unmovableLink + " in the model";
-        reportError("Model","insertJointAndLink",error.c_str());
+        std::string error = "could not find neighbor connection from "
+                            + this->getJointName(displacedLinkIndex) + " to " + unmovableLink
+                            + " in the model";
+        reportError("Model", "insertJointAndLink", error.c_str());
         return JOINT_INVALID_INDEX;
     }
-    this->neighbors[displacedLinkIndex].erase(neighbors[displacedLinkIndex].begin()+previousConnectionIndex);
-    const std::string movableLinkName=this->getLinkName(displacedLinkIndex);
+    this->neighbors[displacedLinkIndex].erase(neighbors[displacedLinkIndex].begin()
+                                              + previousConnectionIndex);
+    const std::string movableLinkName = this->getLinkName(displacedLinkIndex);
     // we assume the rest transform for the new joint was set as newLink_x_movableLink
-    return this->addJoint(newLinkName,movableLinkName,
-                          jointName,joint);
+    return this->addJoint(newLinkName, movableLinkName, jointName, joint);
 }
-
 
 size_t Model::getNrOfPosCoords() const
 {
@@ -575,7 +575,6 @@ size_t Model::getNrOfDOFs() const
     return nrOfDOFs;
 }
 
-
 /////////////////////////////////////////////////////////////////////
 ///// Frame Related functions
 /////////////////////////////////////////////////////////////////////
@@ -586,36 +585,36 @@ size_t Model::getNrOfFrames() const
 
 std::string Model::getFrameName(const FrameIndex frameIndex) const
 {
-    if( frameIndex >= 0 && frameIndex < (FrameIndex)this->getNrOfLinks() )
+    if (frameIndex >= 0 && frameIndex < (FrameIndex)this->getNrOfLinks())
     {
         return linkNames[frameIndex];
-    }
-    else if( frameIndex >= (FrameIndex)this->getNrOfLinks() && frameIndex < (FrameIndex)this->getNrOfFrames() )
+    } else if (frameIndex >= (FrameIndex)this->getNrOfLinks()
+               && frameIndex < (FrameIndex)this->getNrOfFrames())
     {
-        return frameNames[frameIndex-getNrOfLinks()];
-    }
-    else
+        return frameNames[frameIndex - getNrOfLinks()];
+    } else
     {
         std::stringstream ss;
-        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
-        reportError("Model","getFrameName",ss.str().c_str());
+        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and "
+           << this->getNrOfFrames() - 1;
+        reportError("Model", "getFrameName", ss.str().c_str());
         return FRAME_INVALID_NAME;
     }
 }
 
 FrameIndex Model::getFrameIndex(const std::string& frameName) const
 {
-    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    for (size_t i = 0; i < this->getNrOfLinks(); i++)
     {
-        if( frameName == linkNames[i] )
+        if (frameName == linkNames[i])
         {
             return (FrameIndex)i;
         }
     }
 
-    for(size_t i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
+    for (size_t i = this->getNrOfLinks(); i < this->getNrOfFrames(); i++)
     {
-        if( frameName == this->frameNames[i-getNrOfLinks()] )
+        if (frameName == this->frameNames[i - getNrOfLinks()])
         {
             return (FrameIndex)i;
         }
@@ -623,29 +622,28 @@ FrameIndex Model::getFrameIndex(const std::string& frameName) const
 
     std::stringstream ss;
     ss << "Frame named " << frameName << " not found in the model.";
-    reportError("Model","getFrameIndex",ss.str().c_str());
+    reportError("Model", "getFrameIndex", ss.str().c_str());
     return FRAME_INVALID_INDEX;
 }
 
 bool Model::isValidFrameIndex(const FrameIndex index) const
 {
-    return (index != FRAME_INVALID_INDEX) &&
-           (index >= 0) && (index < this->getNrOfFrames());
+    return (index != FRAME_INVALID_INDEX) && (index >= 0) && (index < this->getNrOfFrames());
 }
 
 bool Model::isFrameNameUsed(const std::string frameName) const
 {
-    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    for (size_t i = 0; i < this->getNrOfLinks(); i++)
     {
-        if( frameName == linkNames[i] )
+        if (frameName == linkNames[i])
         {
             return true;
         }
     }
 
-    for(size_t i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
+    for (size_t i = this->getNrOfLinks(); i < this->getNrOfFrames(); i++)
     {
-        if( frameName == this->frameNames[i-getNrOfLinks()] )
+        if (frameName == this->frameNames[i - getNrOfLinks()])
         {
             return true;
         }
@@ -654,26 +652,26 @@ bool Model::isFrameNameUsed(const std::string frameName) const
     return false;
 }
 
-
 bool Model::addAdditionalFrameToLink(const std::string& linkName,
                                      const std::string& frameName,
                                      Transform link_H_frame)
 {
     // Check that the link actually exist
     LinkIndex linkIndex = this->getLinkIndex(linkName);
-    if( linkIndex == LINK_INVALID_INDEX )
+    if (linkIndex == LINK_INVALID_INDEX)
     {
-        std::string error = "error adding frame " + frameName + " : a link of name "
-                            + linkName + " is not present in the model";
-        reportError("Model","addAdditionalFrameToLink",error.c_str());
+        std::string error = "error adding frame " + frameName + " : a link of name " + linkName
+                            + " is not present in the model";
+        reportError("Model", "addAdditionalFrameToLink", error.c_str());
         return false;
     }
 
     // Check that the frame name is not already used by a link or frame
-    if(isFrameNameUsed(frameName))
+    if (isFrameNameUsed(frameName))
     {
-        std::string error = "a link or frame of name " + frameName + " is already present in the model";
-        reportError("Model","addAdditionalFrameToLink",error.c_str());
+        std::string error
+            = "a link or frame of name " + frameName + " is already present in the model";
+        reportError("Model", "addAdditionalFrameToLink", error.c_str());
         return false;
     }
 
@@ -690,75 +688,80 @@ bool Model::addAdditionalFrameToLink(const std::string& linkName,
 Transform Model::getFrameTransform(const FrameIndex frameIndex) const
 {
     // If frameIndex is invalid return an error
-    if( frameIndex < 0 || frameIndex >= (FrameIndex) this->getNrOfFrames() )
+    if (frameIndex < 0 || frameIndex >= (FrameIndex)this->getNrOfFrames())
     {
         std::stringstream ss;
-        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
-        reportError("Model","getFrameTransform",ss.str().c_str());
+        ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and "
+           << this->getNrOfFrames() - 1;
+        reportError("Model", "getFrameTransform", ss.str().c_str());
         return Transform::Identity();
     }
 
     // The link_H_frame transform for the link
     // main frame is the identity
-    if( frameIndex < (FrameIndex) this->getNrOfLinks() )
+    if (frameIndex < (FrameIndex)this->getNrOfLinks())
     {
         return Transform::Identity();
     }
 
     // For an additonal frame the transform is instead stored
     // in the additionalFrames vector
-    return this->additionalFrames[frameIndex-getNrOfLinks()];
+    return this->additionalFrames[frameIndex - getNrOfLinks()];
 }
-
 
 LinkIndex Model::getFrameLink(const FrameIndex frameIndex) const
 {
     // The link_H_frame transform for the link
     // main frame is the link it self
-    if( frameIndex >= 0 &&
-        frameIndex < (FrameIndex) this->getNrOfLinks() )
+    if (frameIndex >= 0 && frameIndex < (FrameIndex)this->getNrOfLinks())
     {
         return (LinkIndex)frameIndex;
     }
 
-    if( frameIndex >= (FrameIndex) this->getNrOfLinks() &&
-        frameIndex < (FrameIndex) this->getNrOfFrames() )
+    if (frameIndex >= (FrameIndex)this->getNrOfLinks()
+        && frameIndex < (FrameIndex)this->getNrOfFrames())
     {
         // For an additonal frame the link index is instead stored
         // in the additionalFramesLinks vector
-        return this->additionalFramesLinks[frameIndex-getNrOfLinks()];
+        return this->additionalFramesLinks[frameIndex - getNrOfLinks()];
     }
 
     // If the frameIndex is out of bounds, return an invalid index
     std::stringstream ss;
-    ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and " << this->getNrOfFrames()-1;
-    reportError("Model","getFrameLink",ss.str().c_str());
+    ss << "frameIndex " << frameIndex << " is not valid, should be between 0 and "
+       << this->getNrOfFrames() - 1;
+    reportError("Model", "getFrameLink", ss.str().c_str());
     return LINK_INVALID_INDEX;
 }
 
-bool Model::getLinkAdditionalFrames(const LinkIndex lnkIndex, std::vector<FrameIndex>& frameIndices) const
+bool Model::getLinkAdditionalFrames(const LinkIndex lnkIndex,
+                                    std::vector<FrameIndex>& frameIndices) const
 {
-    if (!isValidLinkIndex(lnkIndex)) {
+    if (!isValidLinkIndex(lnkIndex))
+    {
         std::stringstream ss;
-        ss << "LinkIndex " << lnkIndex << " is not valid, should be between 0 and " << this->getNrOfLinks()-1;
+        ss << "LinkIndex " << lnkIndex << " is not valid, should be between 0 and "
+           << this->getNrOfLinks() - 1;
         reportError("Model", "getLinkAdditionalFrames", ss.str().c_str());
         return false;
     }
 
     frameIndices.resize(0);
     // FrameIndex from 0 to this->getNrOfLinks()-1 are reserved for implicit frame of Links
-    // with the corresponding LinkIndex, while the frameIndex from getNrOfLinks() to getNrOfFrames()-1
-    // are the one of actual additional frames. See iDynTree::Model docs for more details
-    for (FrameIndex frameIndex=this->getNrOfLinks(); frameIndex < this->getNrOfFrames(); frameIndex++) {
-        if (this->getFrameLink(frameIndex) == lnkIndex) {
+    // with the corresponding LinkIndex, while the frameIndex from getNrOfLinks() to
+    // getNrOfFrames()-1 are the one of actual additional frames. See iDynTree::Model docs for more
+    // details
+    for (FrameIndex frameIndex = this->getNrOfLinks(); frameIndex < this->getNrOfFrames();
+         frameIndex++)
+    {
+        if (this->getFrameLink(frameIndex) == lnkIndex)
+        {
             frameIndices.push_back(frameIndex);
         }
     }
 
     return true;
 }
-
-
 
 unsigned int Model::getNrOfNeighbors(const LinkIndex link) const
 {
@@ -775,11 +778,10 @@ Neighbor Model::getNeighbor(const LinkIndex link, unsigned int neighborIndex) co
 
 bool Model::setDefaultBaseLink(const LinkIndex linkIndex)
 {
-    if( linkIndex < 0 || linkIndex >= (LinkIndex) this->getNrOfLinks() )
+    if (linkIndex < 0 || linkIndex >= (LinkIndex)this->getNrOfLinks())
     {
         return false;
-    }
-    else
+    } else
     {
         defaultBaseLink = linkIndex;
         return true;
@@ -791,15 +793,21 @@ LinkIndex Model::getDefaultBaseLink() const
     return defaultBaseLink;
 }
 
-bool Model::computeFullTreeTraversal(Traversal & traversal) const
+bool Model::computeFullTreeTraversal(Traversal& traversal) const
 {
-    return computeFullTreeTraversal(traversal,this->getDefaultBaseLink());
+    return computeFullTreeTraversal(traversal, this->getDefaultBaseLink());
 }
 
-struct stackEl { LinkConstPtr link; LinkConstPtr parent;};
+struct stackEl
+{
+    LinkConstPtr link;
+    LinkConstPtr parent;
+};
 
-void  addBaseLinkToTraversal(const Model & model, Traversal & traversal,
-                                    LinkIndex linkToAdd, std::deque<stackEl> & linkToVisit)
+void addBaseLinkToTraversal(const Model& model,
+                            Traversal& traversal,
+                            LinkIndex linkToAdd,
+                            std::deque<stackEl>& linkToVisit)
 {
     traversal.addTraversalBase(model.getLink(linkToAdd));
 
@@ -810,9 +818,12 @@ void  addBaseLinkToTraversal(const Model & model, Traversal & traversal,
     linkToVisit.push_back(el);
 }
 
-void addLinkToTraversal(const Model & model, Traversal & traversal,
-                        LinkIndex linkToAdd, JointIndex parentJointToAdd, LinkIndex parentLinkToAdd,
-                        std::deque<stackEl> & linkToVisit)
+void addLinkToTraversal(const Model& model,
+                        Traversal& traversal,
+                        LinkIndex linkToAdd,
+                        JointIndex parentJointToAdd,
+                        LinkIndex parentLinkToAdd,
+                        std::deque<stackEl>& linkToVisit)
 {
     traversal.addTraversalElement(model.getLink(linkToAdd),
                                   model.getJoint(parentJointToAdd),
@@ -825,11 +836,13 @@ void addLinkToTraversal(const Model & model, Traversal & traversal,
     linkToVisit.push_back(el);
 }
 
-bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex traversalBase) const
+bool Model::computeFullTreeTraversal(Traversal& traversal, const LinkIndex traversalBase) const
 {
-    if( traversalBase < 0 || traversalBase >= (LinkIndex)this->getNrOfLinks() )
+    if (traversalBase < 0 || traversalBase >= (LinkIndex)this->getNrOfLinks())
     {
-        reportError("Model","computeFullTreeTraversal","requested traversalBase is out of bounds");
+        reportError("Model",
+                    "computeFullTreeTraversal",
+                    "requested traversalBase is out of bounds");
         return false;
     }
 
@@ -841,10 +854,10 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
     std::deque<stackEl> linkToVisit;
 
     // We add as first link the requested traversalBase
-    addBaseLinkToTraversal(*this,traversal,traversalBase,linkToVisit);
+    addBaseLinkToTraversal(*this, traversal, traversalBase, linkToVisit);
 
     // while there is some link still to visit
-    while( linkToVisit.size() > 0 )
+    while (linkToVisit.size() > 0)
     {
         assert(linkToVisit.size() <= this->getNrOfLinks());
 
@@ -854,17 +867,22 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
         linkToVisit.pop_back();
 
-        for(unsigned int neigh_i=0; neigh_i < this->getNrOfNeighbors(visitedLinkIndex); neigh_i++ )
+        for (unsigned int neigh_i = 0; neigh_i < this->getNrOfNeighbors(visitedLinkIndex);
+             neigh_i++)
         {
             // add to the stack all the neighbors, except for parent link
             // (if the visited link is the base one, add all the neighbors)
             // the visited link is already in the Traversal, so we can use it
             // to check for its parent
-            Neighbor neighb = this->getNeighbor(visitedLinkIndex,neigh_i);
-            if( visitedLinkParent == 0 || neighb.neighborLink != visitedLinkParent->getIndex() )
+            Neighbor neighb = this->getNeighbor(visitedLinkIndex, neigh_i);
+            if (visitedLinkParent == 0 || neighb.neighborLink != visitedLinkParent->getIndex())
             {
-                addLinkToTraversal(*this,traversal,neighb.neighborLink,
-                    neighb.neighborJoint,visitedLink->getIndex(),linkToVisit);
+                addLinkToTraversal(*this,
+                                   traversal,
+                                   neighb.neighborLink,
+                                   neighb.neighborJoint,
+                                   visitedLink->getIndex(),
+                                   linkToVisit);
             }
         }
     }
@@ -880,34 +898,35 @@ bool Model::computeFullTreeTraversal(Traversal & traversal, const LinkIndex trav
 bool Model::getInertialParameters(VectorDynSize& modelInertialParams) const
 {
     // Resize vector if necessary
-    if( modelInertialParams.size() != this->getNrOfLinks()*10 )
+    if (modelInertialParams.size() != this->getNrOfLinks() * 10)
     {
-        modelInertialParams.resize(10*this->getNrOfLinks());
+        modelInertialParams.resize(10 * this->getNrOfLinks());
     }
 
-    for(LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++ )
+    for (LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++)
     {
-        Vector10       inertiaParamsBuf = links[linkIdx].inertia().asVector();
+        Vector10 inertiaParamsBuf = links[linkIdx].inertia().asVector();
 
-        toEigen(modelInertialParams).segment<10>(10*linkIdx) = toEigen(inertiaParamsBuf);
+        toEigen(modelInertialParams).segment<10>(10 * linkIdx) = toEigen(inertiaParamsBuf);
     }
 
     return true;
 }
 
-
 bool Model::updateInertialParameters(const VectorDynSize& modelInertialParams)
 {
-    if( modelInertialParams.size() != this->getNrOfLinks()*10 )
+    if (modelInertialParams.size() != this->getNrOfLinks() * 10)
     {
-        reportError("Model","updateInertialParameters","modelInertialParams has the wrong number of parameters");
+        reportError("Model",
+                    "updateInertialParameters",
+                    "modelInertialParams has the wrong number of parameters");
         return false;
     }
 
-    for(LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++ )
+    for (LinkIndex linkIdx = 0; linkIdx < this->getNrOfLinks(); linkIdx++)
     {
-        Vector10       inertiaParamsBuf;
-        toEigen(inertiaParamsBuf) = toEigen(modelInertialParams).segment<10>(10*linkIdx);
+        Vector10 inertiaParamsBuf;
+        toEigen(inertiaParamsBuf) = toEigen(modelInertialParams).segment<10>(10 * linkIdx);
 
         links[linkIdx].inertia().fromVector(inertiaParamsBuf);
     }
@@ -951,25 +970,25 @@ std::string Model::toString() const
 
     ss << "Model: " << std::endl;
     ss << "  Links: " << std::endl;
-    for(size_t i=0; i < this->getNrOfLinks(); i++ )
+    for (size_t i = 0; i < this->getNrOfLinks(); i++)
     {
         ss << "    [" << i << "] " << this->getLinkName(i) << std::endl;
     }
 
     ss << "  Frames: " << std::endl;
-    for(size_t i=this->getNrOfLinks(); i < this->getNrOfFrames(); i++ )
+    for (size_t i = this->getNrOfLinks(); i < this->getNrOfFrames(); i++)
     {
-        ss << "    [" << i << "] "
-           << this->getFrameName(i)
-           << " --> " << this->getLinkName(this->getFrameLink(i)) << std::endl;
+        ss << "    [" << i << "] " << this->getFrameName(i) << " --> "
+           << this->getLinkName(this->getFrameLink(i)) << std::endl;
     }
 
     ss << "  Joints: " << std::endl;
-    for(size_t i=0; i < this->getNrOfJoints(); i++ )
+    for (size_t i = 0; i < this->getNrOfJoints(); i++)
     {
-        ss << "    [" << i << "] "
-           << this->getJointName(i) << " (dofs: " << this->getJoint(i)->getNrOfDOFs() << ") : "
-           << this->getLinkName(this->getJoint(i)->getFirstAttachedLink()) << "<-->" << this->getLinkName(this->getJoint(i)->getSecondAttachedLink()) << std::endl;
+        ss << "    [" << i << "] " << this->getJointName(i)
+           << " (dofs: " << this->getJoint(i)->getNrOfDOFs()
+           << ") : " << this->getLinkName(this->getJoint(i)->getFirstAttachedLink()) << "<-->"
+           << this->getLinkName(this->getJoint(i)->getSecondAttachedLink()) << std::endl;
     }
 
     return ss.str();
@@ -980,4 +999,4 @@ bool Model::isValid() const
     return m_sensors.isConsistent(*this);
 }
 
-}
+} // namespace iDynTree

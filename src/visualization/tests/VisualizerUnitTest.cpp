@@ -8,12 +8,12 @@
 
 #include "testModels.h"
 
-void checkVizLoading(const iDynTree::Model & model)
+void checkVizLoading(const iDynTree::Model& model)
 {
     // Open visualizer
     iDynTree::Visualizer viz;
 
-    bool ok = viz.addModel(model,"model");
+    bool ok = viz.addModel(model, "model");
     ASSERT_IS_TRUE(ok);
 
     iDynTree::ILabel& label = viz.modelViz("model").label();
@@ -26,8 +26,7 @@ void checkVizLoading(const iDynTree::Model & model)
     ok = viz.run();
     ASSERT_IS_TRUE(ok);
 
-
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz.draw();
     }
@@ -50,19 +49,22 @@ void threeLinksReducedTest()
     // Load reduced model
     std::vector<std::string> consideredJoints;
     consideredJoints.push_back("joint_2_3");
-    ok = mdlLoaderReduced.loadReducedModelFromFullModel(mdlLoader.model(),consideredJoints);
+    ok = mdlLoaderReduced.loadReducedModelFromFullModel(mdlLoader.model(), consideredJoints);
     ASSERT_IS_TRUE(ok);
 
     // Check vizualization for reduced model
     checkVizLoading(mdlLoaderReduced.model());
 }
 
-void checkArrowsVisualization() {
+void checkArrowsVisualization()
+{
     iDynTree::Visualizer viz;
 
     iDynTree::IVectorsVisualization& vectors = viz.vectors();
 
-    size_t index = vectors.addVector(iDynTree::Position(0.1, 0.1, 0.0), iDynTree::Direction(0.0, -1.0, 0.0), 0.5);
+    size_t index = vectors.addVector(iDynTree::Position(0.1, 0.1, 0.0),
+                                     iDynTree::Direction(0.0, -1.0, 0.0),
+                                     0.5);
     ASSERT_IS_TRUE(index >= 0);
 
     iDynTree::Vector3 components;
@@ -82,7 +84,7 @@ void checkArrowsVisualization() {
 
     vectors.getVectorLabel(0)->setText("Vector0");
 
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz.draw();
     }
@@ -90,7 +92,7 @@ void checkArrowsVisualization() {
     ok = vectors.setVisible(0, false);
     ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz.draw();
     }
@@ -98,7 +100,8 @@ void checkArrowsVisualization() {
     viz.close();
 }
 
-void checkAdditionalTexture() {
+void checkAdditionalTexture()
+{
     iDynTree::Visualizer viz;
     iDynTree::VisualizerOptions mainWindowOptions, textureOptions;
 
@@ -119,7 +122,8 @@ void checkAdditionalTexture() {
     ok = texture->getPixels(pixels);
     ASSERT_IS_TRUE(ok);
 
-    ASSERT_IS_TRUE(pixels.size() == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));
+    ASSERT_IS_TRUE(pixels.size()
+                   == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));
     ASSERT_EQUAL_DOUBLE_TOL(pixels[0].a, backGroundColor.a, 1e-1);
     ASSERT_EQUAL_DOUBLE_TOL(pixels[0].r, backGroundColor.r, 1e-1);
     ASSERT_EQUAL_DOUBLE_TOL(pixels[0].g, backGroundColor.g, 1e-1);
@@ -127,22 +131,24 @@ void checkAdditionalTexture() {
 
     iDynTree::ColorViz newBackground(0.0, 0.0, 0.0, 0.0);
     texture->environment().setBackgroundColor(newBackground);
-    texture->enableDraw(false); //The texture should not be updated, hence the background color should not change
+    texture->enableDraw(false); // The texture should not be updated, hence the background color
+                                // should not change
 
     viz.draw();
 
     ok = texture->getPixels(pixels);
     ASSERT_IS_TRUE(ok);
 
-    ASSERT_IS_TRUE(pixels.size() == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));
+    ASSERT_IS_TRUE(pixels.size()
+                   == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));
     ASSERT_EQUAL_DOUBLE_TOL(pixels[0].a, backGroundColor.a, 1e-1);
     ASSERT_EQUAL_DOUBLE_TOL(pixels[0].r, backGroundColor.r, 1e-1);
     ASSERT_EQUAL_DOUBLE_TOL(pixels[0].g, backGroundColor.g, 1e-1);
     ASSERT_EQUAL_DOUBLE_TOL(pixels[0].b, backGroundColor.b, 1e-1);
-
 }
 
-void checkFrameVisualization() {
+void checkFrameVisualization()
+{
     iDynTree::Visualizer viz;
 
     viz.init();
@@ -155,7 +161,7 @@ void checkFrameVisualization() {
     iDynTree::IFrameVisualization& frames = viz.frames();
 
     iDynTree::Transform firstTransform;
-    firstTransform.setRotation(iDynTree::Rotation::RPY(1.57, 0,0));
+    firstTransform.setRotation(iDynTree::Rotation::RPY(1.57, 0, 0));
     firstTransform.setPosition(iDynTree::Position(0.0, -1.0, 0.0));
 
     size_t index = frames.addFrame(firstTransform);
@@ -163,14 +169,14 @@ void checkFrameVisualization() {
     frames.getFrameLabel(0)->setText("First");
 
     iDynTree::Transform secondTransform;
-    secondTransform.setRotation(iDynTree::Rotation::RPY(-1.57, 0,0));
+    secondTransform.setRotation(iDynTree::Rotation::RPY(-1.57, 0, 0));
     secondTransform.setPosition(iDynTree::Position(0.0, +1.0, 0.0));
 
     index = frames.addFrame(secondTransform);
     ASSERT_IS_TRUE(index == 1);
     frames.getFrameLabel(1)->setText("Second");
 
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz.draw();
     }
@@ -178,7 +184,7 @@ void checkFrameVisualization() {
     bool ok = frames.updateFrame(index, firstTransform);
     ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz.draw();
     }
@@ -198,11 +204,10 @@ void checkFrameVisualization() {
     ok = frames.setVisible(1, false);
     ASSERT_IS_TRUE(ok);
 
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz.draw();
     }
-
 }
 
 void checkLabelVisualization()
@@ -215,7 +220,7 @@ void checkLabelVisualization()
     label.setPosition(iDynTree::Position(-1.0, -1.0, 0.1));
     label.setColor(iDynTree::ColorViz(1.0, 0.0, 0.0, 0.0));
 
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz.draw();
     }
@@ -230,33 +235,34 @@ void checkViewPorts()
     leftLabel.setText("LEFT");
     iDynTree::ILabel& rightLabel = viz.getLabel("rightlabel");
     rightLabel.setText("RIGHT");
-    size_t frameIndex = viz.frames().addFrame(iDynTree::Transform(iDynTree::Rotation::Identity(), iDynTree::Position(0.5, 0.5, 0.1)));
+    size_t frameIndex = viz.frames().addFrame(
+        iDynTree::Transform(iDynTree::Rotation::Identity(), iDynTree::Position(0.5, 0.5, 0.1)));
 
-
-
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
-        viz.camera().setPosition(iDynTree::Position(1.0, 0.1*i + 1.0, 0.1*i + 1.0));
-        viz.run(); //to update the output of width() and height() in case of resize
+        viz.camera().setPosition(iDynTree::Position(1.0, 0.1 * i + 1.0, 0.1 * i + 1.0));
+        viz.run(); // to update the output of width() and height() in case of resize
 
         leftLabel.setVisible(true);
         rightLabel.setVisible(false);
         viz.frames().setVisible(frameIndex, false);
 
-        texture->setSubDrawArea(0, 0, texture->width()/2, texture->height());
-//        texture->enableDraw(false); //Uncomment this line to disable the drawing on the texture
-        viz.subDraw(0, 0, viz.width()/2, viz.height());
+        texture->setSubDrawArea(0, 0, texture->width() / 2, texture->height());
+        //        texture->enableDraw(false); //Uncomment this line to disable the drawing on the
+        //        texture
+        viz.subDraw(0, 0, viz.width() / 2, viz.height());
 
         leftLabel.setVisible(false);
         rightLabel.setVisible(true);
         viz.frames().setVisible(frameIndex, true);
 
-//        texture->enableDraw(true); //Uncomment this line to reenable the drawing on the texture
-        texture->setSubDrawArea(viz.width()/2, 0, texture->width()/2, texture->height());
-        viz.subDraw(viz.width()/2, 0, viz.width()/2, viz.height());
+        //        texture->enableDraw(true); //Uncomment this line to reenable the drawing on the
+        //        texture
+        texture->setSubDrawArea(viz.width() / 2, 0, texture->width() / 2, texture->height());
+        viz.subDraw(viz.width() / 2, 0, viz.width() / 2, viz.height());
         viz.draw();
-//      texture->drawToFile(); //Uncomment this line to check what is contained in the texture
-
+        //      texture->drawToFile(); //Uncomment this line to check what is contained in the
+        //      texture
     }
 }
 
@@ -267,8 +273,7 @@ void checkDoubleViz()
     viz1.getLabel("dummy").setText("VIZ1");
     viz2.getLabel("dummy").setText("VIZ2");
 
-
-    for(int i=0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         viz1.draw();
         viz2.draw();
@@ -321,7 +326,9 @@ void checkShapes()
     color.b = 1.0;
     ok = shapes.setShapeColor(index2, color);
     ASSERT_IS_TRUE(ok);
-    ok = shapes.setShapeTransform(index2, iDynTree::Transform(iDynTree::Rotation::Identity(), iDynTree::Position(1.0, 0.0, 0.0)));
+    ok = shapes.setShapeTransform(index2,
+                                  iDynTree::Transform(iDynTree::Rotation::Identity(),
+                                                      iDynTree::Position(1.0, 0.0, 0.0)));
     ASSERT_IS_TRUE(ok);
     ok = shapes.changeShape(index, sphere);
     ASSERT_IS_TRUE(ok);
@@ -332,7 +339,6 @@ void checkShapes()
     // Regression test for https://github.com/robotology/idyntree/issues/986
     ok = viz.run();
     ASSERT_IS_TRUE(ok);
-
 
     for (int i = 0; i < 5; i++)
     {
@@ -377,7 +383,6 @@ void checkFrameAttachedToModel()
     // Regression test for https://github.com/robotology/idyntree/issues/986
     ok = viz.run();
     ASSERT_IS_TRUE(ok);
-
 
     for (int i = 0; i < 5; i++)
     {

@@ -1,11 +1,10 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #include <iDynTree/ModelTransformersSolidShapes.h>
 
-#include <iDynTree/Model.h>
 #include <iDynTree/InertialParametersSolidShapesHelpers.h>
+#include <iDynTree/Model.h>
 
 #include <cassert>
 #include <set>
@@ -14,7 +13,7 @@ namespace iDynTree
 {
 
 bool approximateSolidShapesWithBoundingBoxes(const iDynTree::ModelSolidShapes& inputSolidShapes,
-                                         iDynTree::ModelSolidShapes& outputSolidShapes)
+                                             iDynTree::ModelSolidShapes& outputSolidShapes)
 {
     bool retValue = true;
     outputSolidShapes.clear();
@@ -37,9 +36,10 @@ bool approximateSolidShapesWithBoundingBoxes(const iDynTree::ModelSolidShapes& i
     return retValue;
 }
 
-bool approximateSolidShapesWithPrimitiveShape(const Model& inputModel,
-                                              Model& outputModel,
-                                              ApproximateSolidShapesWithPrimitiveShapeOptions options)
+bool approximateSolidShapesWithPrimitiveShape(
+    const Model& inputModel,
+    Model& outputModel,
+    ApproximateSolidShapesWithPrimitiveShapeOptions options)
 {
     bool retValue = true;
 
@@ -50,20 +50,27 @@ bool approximateSolidShapesWithPrimitiveShape(const Model& inputModel,
     // that approximates the solid shapes via the iDynTree::computeBoundingBoxFromShape function
 
     // Approximate visual shapes
-    if (options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::VisualShapes ||
-       options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes)
+    if (options.shapesToApproximate
+            == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::VisualShapes
+        || options.shapesToApproximate
+               == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes)
     {
-        retValue = retValue && approximateSolidShapesWithBoundingBoxes(inputModel.visualSolidShapes(), outputModel.visualSolidShapes());
+        retValue = retValue
+                   && approximateSolidShapesWithBoundingBoxes(inputModel.visualSolidShapes(),
+                                                              outputModel.visualSolidShapes());
     }
 
-    if (options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::CollisionShapes ||
-        options.shapesToApproximate == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes)
+    if (options.shapesToApproximate
+            == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::CollisionShapes
+        || options.shapesToApproximate
+               == ApproximateSolidShapesWithPrimitiveShapeShapesToApproximate::BothShapes)
     {
-        retValue = retValue && approximateSolidShapesWithBoundingBoxes(inputModel.collisionSolidShapes(), outputModel.collisionSolidShapes());
+        retValue = retValue
+                   && approximateSolidShapesWithBoundingBoxes(inputModel.collisionSolidShapes(),
+                                                              outputModel.collisionSolidShapes());
     }
 
     return retValue;
 }
 
-
-}
+} // namespace iDynTree

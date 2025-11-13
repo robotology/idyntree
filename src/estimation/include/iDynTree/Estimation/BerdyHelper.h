@@ -5,7 +5,7 @@
 #define IDYNTREE_ESTIMATION_BERDY_HELPER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Estimation/BerdyHelper.h> is deprecated. Please use <iDynTree/BerdyHelper.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Estimation/BerdyHelper.h> is deprecated. Please use <iDynTree/BerdyHelper.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/BerdyHelper.h>

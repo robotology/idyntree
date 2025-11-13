@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #ifndef GYROSCOPE_HPP
 #define GYROSCOPE_HPP
 
@@ -9,128 +8,122 @@
 
 namespace iDynTree
 {
-    class Transform;
-    typedef AngularMotionVector3 AngVelocity;
-}
+class Transform;
+typedef AngularMotionVector3 AngVelocity;
+} // namespace iDynTree
 
 #include <iDynTree/Sensors.h>
 #include <vector>
 
-namespace iDynTree {
+namespace iDynTree
+{
+
+/**
+ * Interface to the Gyroscope class.
+ *
+ * An implementation of the Gyroscope Sensor
+ *
+ * \ingroup iDynTreeSensors
+ *
+ */
+class GyroscopeSensor : public LinkSensor
+{
+private:
+    struct GyroscopePrivateAttributes;
+    GyroscopePrivateAttributes* pimpl;
+
+public:
+    /**
+     * Constructor.
+     */
+    GyroscopeSensor();
 
     /**
-     * Interface to the Gyroscope class.
-     *
-     * An implementation of the Gyroscope Sensor
-     *
-     * \ingroup iDynTreeSensors
+     * Copy constructor
+     */
+    GyroscopeSensor(const GyroscopeSensor& other);
+
+    /**
+     * Copy operator
+     */
+    GyroscopeSensor& operator=(const GyroscopeSensor& other);
+
+    /**
+     * Destructor.
+     */
+    virtual ~GyroscopeSensor();
+
+    /**
+     * Set the name (id) of the sensor
      *
      */
-    class GyroscopeSensor: public LinkSensor {
-    private:
-        struct GyroscopePrivateAttributes;
-        GyroscopePrivateAttributes * pimpl;
+    bool setName(const std::string& _name);
 
-    public:
-        /**
-         * Constructor.
-         */
-        GyroscopeSensor();
+    /**
+     * Set the transform from the sensor to the parent link sensor is attached to.
+     *
+     * @return true if link_index is the link attached to the Gyroscope, false otherwise.
+     */
+    bool setLinkSensorTransform(const iDynTree::Transform& link_H_sensor);
 
-        /**
-         * Copy constructor
-         */
-        GyroscopeSensor(const GyroscopeSensor& other);
+    /**
+     * Documented in Sensor
+     */
+    bool setParentLink(const std::string& parent);
 
-        /**
-         * Copy operator
-         */
-        GyroscopeSensor& operator=(const GyroscopeSensor &other);
+    /**
+     * Documented in Sensor
+     */
+    bool setParentLinkIndex(const LinkIndex& parent_index);
 
-        /**
-         * Destructor.
-         */
-        virtual ~GyroscopeSensor();
+    /**
+     * Documented in the sensor
+     *
+     */
+    std::string getName() const;
 
-        /**
-         * Set the name (id) of the sensor
-         *
-         */
-        bool setName(const std::string &_name);
+    /**
+     * Documented in Sensor
+     */
+    SensorType getSensorType() const;
 
-        /**
-         * Set the transform from the sensor to the parent link sensor is attached to.
-         *
-         * @return true if link_index is the link attached to the Gyroscope, false otherwise.
-         */
-        bool setLinkSensorTransform(const iDynTree::Transform & link_H_sensor);
+    /**
+     * Documented in Sensor
+     */
+    std::string getParentLink() const;
 
-        /**
-         * Documented in Sensor
-         */
-        bool setParentLink(const std::string &parent);
+    /**
+     * Documented in Sensor
+     */
+    LinkIndex getParentLinkIndex() const;
 
+    // Documented in LinkSensor
+    Transform getLinkSensorTransform() const;
 
-        /**
-         * Documented in Sensor
-         */
-        bool setParentLinkIndex(const LinkIndex &parent_index);
+    /**
+     * Documented in Sensor
+     */
+    bool isValid() const;
 
-        /**
-         * Documented in the sensor
-         *
-         */
-        std::string getName() const;
+    /**
+     * Documented in Sensor
+     */
+    Sensor* clone() const;
 
-        /**
-         * Documented in Sensor
-         */
-        SensorType getSensorType() const;
+    /*
+     * Documented in Sensor
+     */
+    bool updateIndices(const Model& model);
 
+    /**
+     * Predict sensor measurement when given the parent link spatial velocity, expressed
+     * in the link orientation and wrt the link origin.
+     *
+     * @return the predicted Measurement of an iDynTree::AngVelocity
+     */
+    iDynTree::AngVelocity predictMeasurement(const iDynTree::Twist& linkVel);
+};
 
-        /**
-         * Documented in Sensor
-         */
-        std::string getParentLink() const;
-
-        /**
-         * Documented in Sensor
-         */
-        LinkIndex getParentLinkIndex() const;
-
-        // Documented in LinkSensor
-        Transform getLinkSensorTransform() const;
-
-        /**
-         * Documented in Sensor
-         */
-        bool isValid() const;
-
-        /**
-         * Documented in Sensor
-         */
-        Sensor * clone() const;
-
-        /*
-         * Documented in Sensor
-         */
-        bool updateIndices(const Model & model);
-
-        /**
-         * Predict sensor measurement when given the parent link spatial velocity, expressed
-         * in the link orientation and wrt the link origin.
-         *
-         * @return the predicted Measurement of an iDynTree::AngVelocity
-         */
-        iDynTree::AngVelocity predictMeasurement(const iDynTree::Twist& linkVel);
-    };
-
-
-
-
-
-}
-
-
+} // namespace iDynTree
 
 #endif

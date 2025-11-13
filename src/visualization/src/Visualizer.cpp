@@ -1,35 +1,35 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Utils.h>
 #include <iDynTree/JointState.h>
+#include <iDynTree/Utils.h>
 #include <iDynTree/Visualizer.h>
 
 #ifdef IDYNTREE_USES_IRRLICHT
-#include <irrlicht.h>
-#include "IrrlichtUtils.h"
 #include "Camera.h"
+#include "CameraAnimator.h"
 #include "Environment.h"
-#include "ModelVisualization.h"
-#include "VectorsVisualization.h"
 #include "FrameVisualization.h"
+#include "IrrlichtUtils.h"
+#include "Label.h"
+#include "ModelVisualization.h"
 #include "ShapesVisualization.h"
 #include "TexturesHandler.h"
-#include "CameraAnimator.h"
-#include "Label.h"
+#include "VectorsVisualization.h"
+#include <irrlicht.h>
 
 #if defined(_WIN32)
- #define GLFW_EXPOSE_NATIVE_WIN32
- #define GLFW_EXPOSE_NATIVE_WGL
+#define GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WGL
 #elif defined(__APPLE__)
- #define GLFW_EXPOSE_NATIVE_COCOA
- #define GLFW_EXPOSE_NATIVE_NSGL
+#define GLFW_EXPOSE_NATIVE_COCOA
+#define GLFW_EXPOSE_NATIVE_NSGL
 #elif defined(__linux__)
- #define GLFW_EXPOSE_NATIVE_X11
- #if defined(IDYNTREE_GLFW_TRY_WAYLAND_FIRST)
-   #define GLFW_EXPOSE_NATIVE_WAYLAND
- #endif
- #define GLFW_EXPOSE_NATIVE_GLX
+#define GLFW_EXPOSE_NATIVE_X11
+#if defined(IDYNTREE_GLFW_TRY_WAYLAND_FIRST)
+#define GLFW_EXPOSE_NATIVE_WAYLAND
+#endif
+#define GLFW_EXPOSE_NATIVE_GLX
 #endif
 
 #include <GLFW/glfw3.h>
@@ -43,8 +43,8 @@
 #include <windows.h>
 #endif
 
-#if defined(_IRR_COMPILE_WITH_SDL_DEVICE_) || defined(_WIN32) ||  defined(__APPLE__)
-#if (defined(_WIN32) ||  defined(__APPLE__)) && !defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+#if defined(_IRR_COMPILE_WITH_SDL_DEVICE_) || defined(_WIN32) || defined(__APPLE__)
+#if (defined(_WIN32) || defined(__APPLE__)) && !defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
 #error "On Windows and MacOS it is necessary to use Irrlicht with SDL"
 #endif
 #define IDYNTREE_USE_GLFW_WINDOW
@@ -54,9 +54,9 @@
 
 #include "DummyImplementations.h"
 
-#include <unordered_map>
 #include <cassert>
 #include <memory>
+#include <unordered_map>
 
 namespace iDynTree
 {
@@ -71,7 +71,6 @@ IEnvironment::~IEnvironment()
 
 IJetsVisualization::~IJetsVisualization()
 {
-
 }
 
 IVectorsVisualization::~IVectorsVisualization()
@@ -100,27 +99,35 @@ ILight::~ILight()
 
 ITexture::~ITexture()
 {
-
 }
 
 ITexturesHandler::~ITexturesHandler()
 {
-
 }
 
-
-ColorViz::ColorViz(): r(1.0), g(1.0), b(1.0), a(1.0)
+ColorViz::ColorViz()
+    : r(1.0)
+    , g(1.0)
+    , b(1.0)
+    , a(1.0)
 {
     // default color is white
 }
 
-ColorViz::ColorViz(float _r, float _g, float _b, float _a): r(_r), g(_g), b(_b), a(_a)
+ColorViz::ColorViz(float _r, float _g, float _b, float _a)
+    : r(_r)
+    , g(_g)
+    , b(_b)
+    , a(_a)
 {
 }
 
-ColorViz::ColorViz(const Vector4& rgba): r(rgba(0)), g(rgba(1)), b(rgba(2)), a(rgba(3))
+ColorViz::ColorViz(const Vector4& rgba)
+    : r(rgba(0))
+    , g(rgba(1))
+    , b(rgba(2))
+    , a(rgba(3))
 {
-
 }
 
 Vector4 ColorViz::toVector4() const
@@ -241,14 +248,14 @@ struct Visualizer::VisualizerPimpl
 
     struct ColorPalette
     {
-        irr::video::SColorf background = irr::video::SColorf(0.0,0.4,0.4,1.0);
-        irr::video::SColor  gridColor = irr::video::SColor(100,0,0,255);
+        irr::video::SColorf background = irr::video::SColorf(0.0, 0.4, 0.4, 1.0);
+        irr::video::SColor gridColor = irr::video::SColor(100, 0, 0, 255);
 
-        irr::video::SColor xAxis = irr::video::SColor(20,255,0,0);
-        irr::video::SColor yAxis = irr::video::SColor(20,0,255,0);
-        irr::video::SColor zAxis = irr::video::SColor(20,0,0,255);
+        irr::video::SColor xAxis = irr::video::SColor(20, 255, 0, 0);
+        irr::video::SColor yAxis = irr::video::SColor(20, 0, 255, 0);
+        irr::video::SColor zAxis = irr::video::SColor(20, 0, 0, 255);
 
-        irr::video::SColor vector = irr::video::SColor(1,1,0,0);
+        irr::video::SColor vector = irr::video::SColor(1, 1, 0, 0);
     };
     std::unordered_map<std::string, ColorPalette> m_palette;
 
@@ -256,19 +263,19 @@ struct Visualizer::VisualizerPimpl
     {
         irr::u32 alphaLev = 20;
         // vanilla palette (This is the original palette of the visualizer)
-        m_palette["vanilla"].background = irr::video::SColorf(0.0,0.4,0.4,1.0);
-        m_palette["vanilla"].gridColor = irr::video::SColor(100,0,0,255);
-        m_palette["vanilla"].xAxis = irr::video::SColor(alphaLev,255,0,0);
-        m_palette["vanilla"].yAxis = irr::video::SColor(alphaLev,0,255,0);
-        m_palette["vanilla"].zAxis = irr::video::SColor(alphaLev,0,0,255);
-        m_palette["vanilla"].vector = irr::video::SColor(255,255,0,0);
+        m_palette["vanilla"].background = irr::video::SColorf(0.0, 0.4, 0.4, 1.0);
+        m_palette["vanilla"].gridColor = irr::video::SColor(100, 0, 0, 255);
+        m_palette["vanilla"].xAxis = irr::video::SColor(alphaLev, 255, 0, 0);
+        m_palette["vanilla"].yAxis = irr::video::SColor(alphaLev, 0, 255, 0);
+        m_palette["vanilla"].zAxis = irr::video::SColor(alphaLev, 0, 0, 255);
+        m_palette["vanilla"].vector = irr::video::SColor(255, 255, 0, 0);
 
-        m_palette["meshcat"].background = irr::video::SColorf(0.42,0.63,0.85,1.0);
-        m_palette["meshcat"].gridColor =  irr::video::SColor(128,128,128,100);
-        m_palette["meshcat"].xAxis = irr::video::SColor(alphaLev,234, 67, 53);
-        m_palette["meshcat"].yAxis = irr::video::SColor(alphaLev,52, 168, 83);
-        m_palette["meshcat"].zAxis = irr::video::SColor(alphaLev,66,133,244);
-        m_palette["meshcat"].vector = irr::video::SColor(255,253,98,2);
+        m_palette["meshcat"].background = irr::video::SColorf(0.42, 0.63, 0.85, 1.0);
+        m_palette["meshcat"].gridColor = irr::video::SColor(128, 128, 128, 100);
+        m_palette["meshcat"].xAxis = irr::video::SColor(alphaLev, 234, 67, 53);
+        m_palette["meshcat"].yAxis = irr::video::SColor(alphaLev, 52, 168, 83);
+        m_palette["meshcat"].zAxis = irr::video::SColor(alphaLev, 66, 133, 244);
+        m_palette["meshcat"].vector = irr::video::SColor(255, 253, 98, 2);
     }
 
 #ifdef IDYNTREE_USE_GLFW_WINDOW
@@ -319,47 +326,38 @@ struct Visualizer::VisualizerPimpl
             if (action == GLFW_PRESS)
             {
                 mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_RMOUSE_PRESSED_DOWN;
-            }
-            else if (action == GLFW_RELEASE)
+            } else if (action == GLFW_RELEASE)
             {
                 mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_RMOUSE_LEFT_UP;
-            }
-            else
+            } else
             {
                 return;
             }
-        }
-        else if (button == GLFW_MOUSE_BUTTON_LEFT)
+        } else if (button == GLFW_MOUSE_BUTTON_LEFT)
         {
             if (action == GLFW_PRESS)
             {
                 mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_PRESSED_DOWN;
-            }
-            else if (action == GLFW_RELEASE)
+            } else if (action == GLFW_RELEASE)
             {
                 mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_LEFT_UP;
-            }
-            else
+            } else
             {
                 return;
             }
-        }
-        else if (button == GLFW_MOUSE_BUTTON_MIDDLE)
+        } else if (button == GLFW_MOUSE_BUTTON_MIDDLE)
         {
             if (action == GLFW_PRESS)
             {
                 mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MMOUSE_PRESSED_DOWN;
-            }
-            else if (action == GLFW_RELEASE)
+            } else if (action == GLFW_RELEASE)
             {
                 mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MMOUSE_LEFT_UP;
-            }
-            else
+            } else
             {
                 return;
             }
-        }
-        else
+        } else
         {
             return;
         }
@@ -397,17 +395,20 @@ struct Visualizer::VisualizerPimpl
 
     static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
     {
-        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->cursorPositionCallback(window, xpos, ypos);
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))
+            ->cursorPositionCallback(window, xpos, ypos);
     }
 
     static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     {
-        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->mouseButtonCallback(window, button, action, mods);
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))
+            ->mouseButtonCallback(window, button, action, mods);
     }
 
     static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
     {
-        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->scrollCallback(window, xoffset, yoffset);
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))
+            ->scrollCallback(window, xoffset, yoffset);
     }
 #endif
 
@@ -429,9 +430,9 @@ struct Visualizer::VisualizerPimpl
 #ifdef IDYNTREE_USES_IRRLICHT
         m_modelViz = std::make_shared<std::vector<ModelVisualization*>>();
         m_modelViz->resize(0);
-        m_irrDevice  = 0;
-        m_irrSmgr    = 0;
-        m_irrDriver  = 0;
+        m_irrDevice = 0;
+        m_irrSmgr = 0;
+        m_irrDriver = 0;
 #endif
     }
 };
@@ -453,8 +454,8 @@ Visualizer& Visualizer::operator=(const Visualizer& /*other*/)
     return *this;
 }
 
-Visualizer::Visualizer():
-    pimpl(new VisualizerPimpl())
+Visualizer::Visualizer()
+    : pimpl(new VisualizerPimpl())
 {
 }
 
@@ -466,12 +467,14 @@ Visualizer::~Visualizer()
     pimpl = 0;
 }
 
-bool Visualizer::init(const VisualizerOptions &visualizerOptions)
+bool Visualizer::init(const VisualizerOptions& visualizerOptions)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( pimpl->m_isInitialized )
+    if (pimpl->m_isInitialized)
     {
-        reportWarning("Visualizer","init","Visualier already initialized, call close() to close it to open it again.");
+        reportWarning("Visualizer",
+                      "init",
+                      "Visualier already initialized, call close() to close it to open it again.");
         return false;
     }
 
@@ -483,18 +486,24 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 #ifdef IDYNTREE_USE_GLFW_WINDOW
     if (pimpl->m_glfwInstances == 0)
     {
-        if (!glfwInit()) {
+        if (!glfwInit())
+        {
             reportError("Visualizer", "init", "Unable to initialize GLFW");
             return false;
         }
 
-        glfwWindowHint(GLFW_SAMPLES, 4); //Antialiasing
+        glfwWindowHint(GLFW_SAMPLES, 4); // Antialiasing
     }
     pimpl->m_glfwInstances++;
 
-    pimpl->m_window = glfwCreateWindow(visualizerOptions.winWidth, visualizerOptions.winHeight, "iDynTree Visualizer", nullptr, nullptr);
-    if (!pimpl->m_window) {
-        reportError("Visualizer","init","Could not create window");
+    pimpl->m_window = glfwCreateWindow(visualizerOptions.winWidth,
+                                       visualizerOptions.winHeight,
+                                       "iDynTree Visualizer",
+                                       nullptr,
+                                       nullptr);
+    if (!pimpl->m_window)
+    {
+        reportError("Visualizer", "init", "Could not create window");
         return false;
     }
 
@@ -511,18 +520,17 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     void* nativeWindow = nullptr;
 
-    #ifdef IDYNTREE_GLFW_TRY_WAYLAND_FIRST
-        // Try Wayland first
-        struct wl_surface* waylandWindow = glfwGetWaylandWindow(pimpl->m_window);
-    #else
-        void* waylandWindow = nullptr;
-    #endif
+#ifdef IDYNTREE_GLFW_TRY_WAYLAND_FIRST
+    // Try Wayland first
+    struct wl_surface* waylandWindow = glfwGetWaylandWindow(pimpl->m_window);
+#else
+    void* waylandWindow = nullptr;
+#endif
 
     if (waylandWindow)
     {
         nativeWindow = static_cast<void*>(waylandWindow);
-    }
-    else
+    } else
     {
         // Fallback to X11
         Window x11Window = glfwGetX11Window(pimpl->m_window);
@@ -536,13 +544,16 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 #endif
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
-    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
+    irrDevParams.WindowSize
+        = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
     irrDevParams.WithAlphaChannel = true;
     irrDevParams.AntiAlias = 4;
 
-    if( visualizerOptions.verbose )
+    if (visualizerOptions.verbose)
     {
-        reportWarning("Visualizer","init","verbose flag found, enabling verbose output in Visualizer");
+        reportWarning("Visualizer",
+                      "init",
+                      "verbose flag found, enabling verbose output in Visualizer");
         irrDevParams.LoggingLevel = irr::ELL_DEBUG;
     }
 
@@ -554,8 +565,9 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 // and we restore it (or we unset it) after call
 // Workaround for https://github.com/robotology/idyntree/issues/986
 #if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
-    const char * SDL_VIDEODRIVER_value = NULL;
-    if (irrDevParams.DeviceType == irr::EIDT_SDL) {
+    const char* SDL_VIDEODRIVER_value = NULL;
+    if (irrDevParams.DeviceType == irr::EIDT_SDL)
+    {
         SDL_VIDEODRIVER_value = std::getenv("SDL_VIDEODRIVER");
     }
 #endif
@@ -563,21 +575,24 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     pimpl->m_irrDevice = irr::createDeviceEx(irrDevParams);
 
 #if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
-    if (irrDevParams.DeviceType == irr::EIDT_SDL) {
+    if (irrDevParams.DeviceType == irr::EIDT_SDL)
+    {
         SetEnvironmentVariableA("SDL_VIDEODRIVER", SDL_VIDEODRIVER_value);
     }
 #endif
 
     if (pimpl->m_irrDevice == 0)
     {
-        reportError("Visualizer","init","Impossible to load irrlicht device");
+        reportError("Visualizer", "init", "Impossible to load irrlicht device");
         return false; // could not create selected driver.
     }
 
     // Checking the irrDevice
     if (pimpl->m_irrDevice == (void*)1)
     {
-        reportError("Visualizer","init","Impossible to load irrlicht device, createDevice returned a 1 pointer");
+        reportError("Visualizer",
+                    "init",
+                    "Impossible to load irrlicht device, createDevice returned a 1 pointer");
         pimpl->m_irrDevice = 0;
         return false; // could not create selected driver.
     }
@@ -587,9 +602,13 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     // Get video driver
     pimpl->m_irrDriver = pimpl->m_irrDevice->getVideoDriver();
 
-    pimpl->m_irrVideoData = pimpl->m_irrDriver->getExposedVideoData(); //save the current window settings.
-                                                                       //This is helpful in case other Viualizer objects are created
-                                                                       // since Irrlicht by default draws on the last window opened.
+    pimpl->m_irrVideoData = pimpl->m_irrDriver->getExposedVideoData(); // save the current window
+                                                                       // settings. This is helpful
+                                                                       // in case other Viualizer
+                                                                       // objects are created
+                                                                       //  since Irrlicht by default
+                                                                       //  draws on the last window
+                                                                       //  opened.
 
     // Always visualize the mouse cursor
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
@@ -599,7 +618,9 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     pimpl->m_environment.init(pimpl->m_irrSmgr, pimpl->rootFrameArrowsDimension);
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
-    pimpl->m_camera.setCameraAnimator(new CameraAnimator(addFrameAxes(pimpl->m_irrSmgr, 0, 0.1), visualizerOptions.winWidth, visualizerOptions.winHeight));
+    pimpl->m_camera.setCameraAnimator(new CameraAnimator(addFrameAxes(pimpl->m_irrSmgr, 0, 0.1),
+                                                         visualizerOptions.winWidth,
+                                                         visualizerOptions.winHeight));
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
@@ -617,12 +638,15 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 #endif
 
     pimpl->m_isInitialized = true;
-    pimpl->lastFPS         = -1;
+    pimpl->lastFPS = -1;
 
     return true;
 #else
     IDYNTREE_UNUSED(visualizerOptions);
-    reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer",
+                "init",
+                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without "
+                "Irrlicht.");
     return false;
 #endif
 }
@@ -636,10 +660,9 @@ size_t Visualizer::getNrOfVisualizedModels()
 #endif
 }
 
-
 std::string Visualizer::getModelInstanceName(size_t modelInstanceIndex)
 {
-    if( modelInstanceIndex >= getNrOfVisualizedModels() )
+    if (modelInstanceIndex >= getNrOfVisualizedModels())
     {
         return "";
     }
@@ -649,15 +672,14 @@ std::string Visualizer::getModelInstanceName(size_t modelInstanceIndex)
 #else
     return "";
 #endif
-
 }
 
 int Visualizer::getModelInstanceIndex(const std::string instanceName)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    for(size_t mdlInst=0; mdlInst < getNrOfVisualizedModels(); mdlInst++)
+    for (size_t mdlInst = 0; mdlInst < getNrOfVisualizedModels(); mdlInst++)
     {
-        if( pimpl->m_modelViz->at(mdlInst)->getInstanceName() == instanceName )
+        if (pimpl->m_modelViz->at(mdlInst)->getInstanceName() == instanceName)
         {
             return static_cast<int>(mdlInst);
         }
@@ -666,28 +688,29 @@ int Visualizer::getModelInstanceIndex(const std::string instanceName)
     IDYNTREE_UNUSED(instanceName);
 #endif
 
-    reportError("Visualizer","getModelInstanceIndex","Impossible to find model instance with the specified name");
+    reportError("Visualizer",
+                "getModelInstanceIndex",
+                "Impossible to find model instance with the specified name");
     return -1;
 }
-
 
 bool Visualizer::addModel(const Model& model, const std::string& instanceName)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !this->pimpl->m_isInitialized )
+    if (!this->pimpl->m_isInitialized)
     {
         init();
     }
 
-    if( !this->pimpl->m_isInitialized )
+    if (!this->pimpl->m_isInitialized)
     {
-        reportError("Visualizer","addModel","Error in initializing Irrlicht device");
+        reportError("Visualizer", "addModel", "Error in initializing Irrlicht device");
         return false;
     }
 
-    ModelVisualization * newModelViz = new ModelVisualization();
+    ModelVisualization* newModelViz = new ModelVisualization();
 
-    if( !newModelViz->init(model,instanceName,pimpl->m_irrSmgr) )
+    if (!newModelViz->init(model, instanceName, pimpl->m_irrSmgr))
     {
         delete newModelViz;
         return false;
@@ -699,7 +722,10 @@ bool Visualizer::addModel(const Model& model, const std::string& instanceName)
 #else
     IDYNTREE_UNUSED(model);
     IDYNTREE_UNUSED(instanceName);
-    reportError("Visualizer","addModel","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer",
+                "addModel",
+                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without "
+                "Irrlicht.");
     return false;
 #endif
 }
@@ -707,9 +733,9 @@ bool Visualizer::addModel(const Model& model, const std::string& instanceName)
 void Visualizer::draw()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
-        reportError("Visualizer","draw","Impossible to run not initialized visualizer");
+        reportError("Visualizer", "draw", "Impossible to run not initialized visualizer");
         return;
     }
 
@@ -727,7 +753,10 @@ void Visualizer::draw()
         glfwMakeContextCurrent(pimpl->m_window);
 #endif
 
-        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
+        pimpl->m_irrDriver->beginScene(true,
+                                       true,
+                                       pimpl->m_environment.m_backgroundColor.toSColor(),
+                                       pimpl->m_irrVideoData);
 
         pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight));
 
@@ -768,28 +797,40 @@ void Visualizer::draw()
     }
 
 #else
-    reportError("Visualizer","draw","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer",
+                "draw",
+                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without "
+                "Irrlicht.");
 #endif
 }
 
-void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight)
+void Visualizer::subDraw(int xOffsetFromTopLeft,
+                         int yOffsetFromTopLeft,
+                         int subImageWidth,
+                         int subImageHeight)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
-        reportError("Visualizer","subDraw","Impossible to run not initialized visualizer");
+        reportError("Visualizer", "subDraw", "Impossible to run not initialized visualizer");
         return;
     }
 
     if (xOffsetFromTopLeft + subImageWidth > width())
     {
-        reportError("Visualizer","subDraw","The specified draw coordinates are out of bounds. The sum of the xOffsetFromTopLeft and width are greater than the window width.");
+        reportError("Visualizer",
+                    "subDraw",
+                    "The specified draw coordinates are out of bounds. The sum of the "
+                    "xOffsetFromTopLeft and width are greater than the window width.");
         return;
     }
 
     if (yOffsetFromTopLeft + subImageHeight > height())
     {
-        reportError("Visualizer","subDraw","The specified draw coordinates are out of bounds. The sum of the yOffsetFromTopLeft and height are greater than the window height.");
+        reportError("Visualizer",
+                    "subDraw",
+                    "The specified draw coordinates are out of bounds. The sum of the "
+                    "yOffsetFromTopLeft and height are greater than the window height.");
         return;
     }
 
@@ -804,26 +845,40 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
 #ifdef IDYNTREE_USE_GLFW_WINDOW
         glfwMakeContextCurrent(pimpl->m_window);
 #endif
-        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
+        pimpl->m_irrDriver->beginScene(true,
+                                       true,
+                                       pimpl->m_environment.m_backgroundColor.toSColor(),
+                                       pimpl->m_irrVideoData);
         pimpl->m_subDrawStarted = true;
         clearTextureBuffers = true;
     }
 
     pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, clearTextureBuffers);
 
-    pimpl->m_camera.setAspectRatio(subImageWidth/ (float)subImageHeight);
+    pimpl->m_camera.setAspectRatio(subImageWidth / (float)subImageHeight);
 
     int winWidth = width();
     int winHeight = height();
     pimpl->m_irrDriver->OnResize(irr::core::dimension2d<irr::u32>(winWidth, winHeight));
-    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight)); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
-    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(xOffsetFromTopLeft, yOffsetFromTopLeft,
-                                                              xOffsetFromTopLeft + subImageWidth, yOffsetFromTopLeft + subImageHeight));
+    pimpl->m_irrDriver->setViewPort(
+        irr::core::rect<
+            irr::s32>(0,
+                      0,
+                      winWidth,
+                      winHeight)); // workaround for
+                                   // http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
+    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(xOffsetFromTopLeft,
+                                                              yOffsetFromTopLeft,
+                                                              xOffsetFromTopLeft + subImageWidth,
+                                                              yOffsetFromTopLeft + subImageHeight));
 
     pimpl->m_irrSmgr->drawAll();
 
 #else
-    reportError("Visualizer","subDraw","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer",
+                "subDraw",
+                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without "
+                "Irrlicht.");
 #endif
 }
 
@@ -831,36 +886,38 @@ bool Visualizer::drawToFile(const std::string filename)
 {
     bool retValue = false;
 
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
-        reportError("Visualizer","drawToFile","Impossible to call drawToFile in a not initialized visualizer");
+        reportError("Visualizer",
+                    "drawToFile",
+                    "Impossible to call drawToFile in a not initialized visualizer");
         return false;
     }
 
 #ifdef IDYNTREE_USES_IRRLICHT
     // Method based on http://www.irrlicht3d.org/wiki/index.php?n=Main.TakingAScreenShot
     irr::video::IImage* const image = pimpl->m_irrDriver->createScreenShot();
-    if (image) //should always be true, but you never know
+    if (image) // should always be true, but you never know
     {
-        //write screenshot to file
+        // write screenshot to file
         if (!pimpl->m_irrDriver->writeImageToFile(image, filename.c_str()))
         {
             std::stringstream ss;
             ss << "Impossible to write image file to " << filename;
-            reportError("Visualizer","drawToFile",ss.str().c_str());
+            reportError("Visualizer", "drawToFile", ss.str().c_str());
             retValue = false;
-        }
-        else
+        } else
         {
             retValue = true;
         }
 
-        //Don't forget to drop image since we don't need it anymore.
+        // Don't forget to drop image since we don't need it anymore.
         image->drop();
-    }
-    else
+    } else
     {
-        reportError("Visualizer","drawToFile","Error in calling irr::video::IVideoDriver::createScreenShot method");
+        reportError("Visualizer",
+                    "drawToFile",
+                    "Error in calling irr::video::IVideoDriver::createScreenShot method");
         return false;
     }
 #else
@@ -870,11 +927,10 @@ bool Visualizer::drawToFile(const std::string filename)
     return retValue;
 }
 
-
 IModelVisualization& Visualizer::modelViz(const std::string& instanceName)
 {
     int idx = getModelInstanceIndex(instanceName);
-    if( idx < 0 )
+    if (idx < 0)
     {
         return this->pimpl->m_invalidModelViz;
     }
@@ -905,15 +961,15 @@ IEnvironment& Visualizer::enviroment()
     return environment();
 }
 
-IEnvironment &Visualizer::environment()
+IEnvironment& Visualizer::environment()
 {
     return pimpl->m_environment;
 }
 
-IVectorsVisualization &Visualizer::vectors()
+IVectorsVisualization& Visualizer::vectors()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !this->pimpl->m_isInitialized )
+    if (!this->pimpl->m_isInitialized)
     {
         init();
     }
@@ -923,10 +979,10 @@ IVectorsVisualization &Visualizer::vectors()
 #endif
 }
 
-IFrameVisualization &Visualizer::frames()
+IFrameVisualization& Visualizer::frames()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !this->pimpl->m_isInitialized )
+    if (!this->pimpl->m_isInitialized)
     {
         init();
     }
@@ -936,7 +992,7 @@ IFrameVisualization &Visualizer::frames()
 #endif
 }
 
-ITexturesHandler &Visualizer::textures()
+ITexturesHandler& Visualizer::textures()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
     return this->pimpl->m_textures;
@@ -958,14 +1014,14 @@ IShapeVisualization& Visualizer::shapes()
 #endif
 }
 
-ILabel &Visualizer::getLabel(const std::string &labelName)
+ILabel& Visualizer::getLabel(const std::string& labelName)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !this->pimpl->m_isInitialized )
+    if (!this->pimpl->m_isInitialized)
     {
         init();
     }
-    Label& requestedLabel =  this->pimpl->m_labels[labelName];
+    Label& requestedLabel = this->pimpl->m_labels[labelName];
     if (!requestedLabel.initialized())
     {
         requestedLabel.init(this->pimpl->m_irrSmgr);
@@ -979,9 +1035,9 @@ ILabel &Visualizer::getLabel(const std::string &labelName)
 int Visualizer::width() const
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
-        reportError("Visualizer","width","Visualizer not initialized.");
+        reportError("Visualizer", "width", "Visualizer not initialized.");
         return 0;
     }
 #ifdef IDYNTREE_USE_GLFW_WINDOW
@@ -1001,9 +1057,9 @@ int Visualizer::width() const
 int Visualizer::height() const
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
-        reportError("Visualizer","height","Visualizer not initialized.");
+        reportError("Visualizer", "height", "Visualizer not initialized.");
         return 0;
     }
 
@@ -1024,9 +1080,9 @@ int Visualizer::height() const
 bool Visualizer::run()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
-        reportError("Visualizer","run","Impossible to run not initialized visualizer");
+        reportError("Visualizer", "run", "Impossible to run not initialized visualizer");
         return false;
     }
     bool shouldClose = false;
@@ -1037,7 +1093,10 @@ bool Visualizer::run()
 
     return pimpl->m_irrDevice->run() && !shouldClose;
 #else
-    reportError("Visualizer","run","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer",
+                "run",
+                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without "
+                "Irrlicht.");
     return false;
 #endif
 }
@@ -1045,7 +1104,7 @@ bool Visualizer::run()
 void Visualizer::close()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
         return;
     }
@@ -1062,9 +1121,9 @@ void Visualizer::close()
     pimpl->m_irrDevice = nullptr;
     pimpl->m_isInitialized = false;
 
-    for(size_t mdl=0; mdl < pimpl->m_modelViz->size(); mdl++)
+    for (size_t mdl = 0; mdl < pimpl->m_modelViz->size(); mdl++)
     {
-        if( pimpl->m_modelViz->at(mdl))
+        if (pimpl->m_modelViz->at(mdl))
         {
             delete pimpl->m_modelViz->at(mdl);
             pimpl->m_modelViz->at(mdl) = nullptr;
@@ -1096,7 +1155,7 @@ void Visualizer::close()
 bool Visualizer::isWindowActive() const
 {
 #ifdef IDYNTREE_USES_IRRLICHT
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
         return false;
     }
@@ -1106,12 +1165,11 @@ bool Visualizer::isWindowActive() const
 #endif
 }
 
-
-bool Visualizer::setColorPalette(const std::string &name)
+bool Visualizer::setColorPalette(const std::string& name)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
 
-    if( !pimpl->m_isInitialized )
+    if (!pimpl->m_isInitialized)
     {
         reportError("Visualizer",
                     "setColorPalette",
@@ -1121,17 +1179,17 @@ bool Visualizer::setColorPalette(const std::string &name)
 
     const auto colors = pimpl->m_palette.find(name);
 
-    if(colors == pimpl->m_palette.end())
+    if (colors == pimpl->m_palette.end())
     {
         std::string paletteName;
-        for (const auto& tmp: pimpl->m_palette)
+        for (const auto& tmp : pimpl->m_palette)
             paletteName += " " + tmp.first;
 
         const std::string error = "The palette named " + name
-                                + " does not exist. The following palette are available"
-                                + paletteName + ".";
+                                  + " does not exist. The following palette are available"
+                                  + paletteName + ".";
 
-        reportError("Visualizer","setColorPalette", error.c_str());
+        reportError("Visualizer", "setColorPalette", error.c_str());
         return false;
     }
 
@@ -1152,9 +1210,11 @@ bool Visualizer::setColorPalette(const std::string &name)
     return true;
 
 #else
-    reportError("Visualizer","setColorPalette",
-                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer",
+                "setColorPalette",
+                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without "
+                "Irrlicht.");
     return false;
 #endif
 }
-}
+} // namespace iDynTree

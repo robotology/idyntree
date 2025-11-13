@@ -1,7 +1,6 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-
 #include <iDynTree/DynamicsLinearizationHelpers.h>
 
 #include <iDynTree/EigenHelpers.h>
@@ -13,7 +12,7 @@ SpatialForceWrtMotionDerivative SpatialForceWrtMotionDerivative::operator*(const
 {
     SpatialForceWrtMotionDerivative ret;
 
-    toEigen(ret) = toEigen(*this)*toEigen(a_X_b.asAdjointTransform());
+    toEigen(ret) = toEigen(*this) * toEigen(a_X_b.asAdjointTransform());
 
     return ret;
 }
@@ -22,34 +21,29 @@ SpatialMotionWrtMotionDerivative SpatialMotionWrtMotionDerivative::operator*(con
 {
     SpatialMotionWrtMotionDerivative ret;
 
-    toEigen(ret) = toEigen(*this)*toEigen(a_X_b.asAdjointTransform());
+    toEigen(ret) = toEigen(*this) * toEigen(a_X_b.asAdjointTransform());
 
     return ret;
 }
 
-SpatialMotionWrtMotionDerivative operator*(const Transform & a_X_b, const SpatialMotionWrtMotionDerivative & op2)
+SpatialMotionWrtMotionDerivative
+operator*(const Transform& a_X_b, const SpatialMotionWrtMotionDerivative& op2)
 {
     SpatialMotionWrtMotionDerivative ret;
 
-    toEigen(ret) = toEigen(a_X_b.asAdjointTransform())*toEigen(op2);
+    toEigen(ret) = toEigen(a_X_b.asAdjointTransform()) * toEigen(op2);
 
     return ret;
 }
 
-SpatialForceWrtMotionDerivative operator*(const Transform & a_X_b, const SpatialForceWrtMotionDerivative & op2)
+SpatialForceWrtMotionDerivative
+operator*(const Transform& a_X_b, const SpatialForceWrtMotionDerivative& op2)
 {
     SpatialForceWrtMotionDerivative ret;
 
-    toEigen(ret) = toEigen(a_X_b.asAdjointTransformWrench())*toEigen(op2);
+    toEigen(ret) = toEigen(a_X_b.asAdjointTransformWrench()) * toEigen(op2);
 
     return ret;
 }
 
-
-}
-
-
-
-
-
-
+} // namespace iDynTree

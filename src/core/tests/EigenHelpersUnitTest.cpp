@@ -1,9 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
+#include <cstdlib>
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/TestUtils.h>
-#include <cstdlib>
 
 using namespace iDynTree;
 
@@ -13,7 +13,7 @@ void validateSkewUnskew(const Vector3 randVec)
 
     toEigen(randVecCheck) = unskew(skew(toEigen(randVec)));
 
-    ASSERT_EQUAL_VECTOR(randVec,randVecCheck);
+    ASSERT_EQUAL_VECTOR(randVec, randVecCheck);
 }
 
 void testSpatialVectors()
@@ -21,12 +21,14 @@ void testSpatialVectors()
     SpatialForceVector zeroVector;
     zeroVector.zero();
 
-    for (size_t i = 0; i < zeroVector.size(); ++i) {
+    for (size_t i = 0; i < zeroVector.size(); ++i)
+    {
         ASSERT_EQUAL_DOUBLE(zeroVector(i), 0);
     }
 }
 
-void testSpanToEigen(const Vector3& input) {
+void testSpanToEigen(const Vector3& input)
+{
     Vector3 randVec, check;
     getRandomVector(randVec);
     Span<double> spanCheck = make_span(check);
@@ -38,8 +40,8 @@ void testSpanToEigen(const Vector3& input) {
     ASSERT_EQUAL_VECTOR(input, check);
 }
 
-template <class MatrixType>
-void testMatrixToEigen(const MatrixType& input) {
+template <class MatrixType> void testMatrixToEigen(const MatrixType& input)
+{
     MatrixDynSize randMat(input.rows(), input.cols()), check(input.rows(), input.cols());
     getRandomMatrix(randMat);
     MatrixView<double> matrixViewCheck(check);
@@ -51,7 +53,8 @@ void testMatrixToEigen(const MatrixType& input) {
     ASSERT_EQUAL_MATRIX(input, check);
 }
 
-void checkMatrixViewStorageOrder(const Eigen::MatrixXd& input) {
+void checkMatrixViewStorageOrder(const Eigen::MatrixXd& input)
+{
     auto matrixView = make_matrix_view(input);
 
     // The toEigen returns a RowMajor matrix even if the original matrix is ColMajor.
@@ -73,17 +76,16 @@ int main()
 
     testSpanToEigen(vec);
 
-
     // test the matrix view
     Matrix2x3 mat1;
     getRandomMatrix(mat1);
     testMatrixToEigen(mat1);
 
-    MatrixDynSize mat2(12,31);
+    MatrixDynSize mat2(12, 31);
     getRandomMatrix(mat2);
     testMatrixToEigen(mat2);
 
-    Eigen::MatrixXd mat3(12,31);
+    Eigen::MatrixXd mat3(12, 31);
     getRandomMatrix(mat3);
     testMatrixToEigen(mat3);
 

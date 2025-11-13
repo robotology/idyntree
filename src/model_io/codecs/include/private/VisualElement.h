@@ -8,25 +8,27 @@
 
 #include "MaterialElement.h"
 
-#include <iDynTree/Transform.h>
 #include <iDynTree/SolidShapes.h>
+#include <iDynTree/Transform.h>
 
 #include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-namespace iDynTree {
-    class VisualElement;
+namespace iDynTree
+{
+class VisualElement;
 
-    class XMLAttribute;
-    class XMLParserState;
-}
+class XMLAttribute;
+class XMLParserState;
+} // namespace iDynTree
 
-class iDynTree::VisualElement: public iDynTree::XMLElement
+class iDynTree::VisualElement : public iDynTree::XMLElement
 {
 public:
-    struct VisualInfo {
+    struct VisualInfo
+    {
         std::string m_name;
         bool m_nameAttributeFound;
         iDynTree::Transform m_origin{iDynTree::Transform::Identity()};
@@ -41,16 +43,16 @@ private:
     VisualInfo m_info;
 
 public:
-    explicit VisualElement(
-        XMLParserState& parserState,
-        const std::string& name,
-        const std::vector<std::string>& packageDirs);
+    explicit VisualElement(XMLParserState& parserState,
+                           const std::string& name,
+                           const std::vector<std::string>& packageDirs);
 
     const VisualInfo& visualInfo() const;
 
-    bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) override;
+    bool
+    setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>&
+                      attributes) override;
     std::shared_ptr<iDynTree::XMLElement> childElementForName(const std::string& name) override;
 };
 
 #endif /* end of include guard: IDYNTREE_MODELIO_URDF_VISUALELEMENT_H */
-

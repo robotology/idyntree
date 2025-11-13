@@ -5,10 +5,9 @@
 #define IDYNTREE_MODEL_LINK_STATE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/LinkState.h> is deprecated. Please use <iDynTree/LinkState.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Model/LinkState.h> is deprecated. Please use <iDynTree/LinkState.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/LinkState.h>
-
 
 #endif

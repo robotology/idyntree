@@ -10,51 +10,55 @@
 namespace iDynTree
 {
 
-//SparseMatrix helpers
-inline Eigen::Map< Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(iDynTree::SparseMatrix<iDynTree::RowMajor> & mat)
+// SparseMatrix helpers
+inline Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor>>
+toEigen(iDynTree::SparseMatrix<iDynTree::RowMajor>& mat)
 {
-    return Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
-                                                                     mat.columns(),
-                                                                     mat.numberOfNonZeros(),
-                                                                     mat.outerIndicesBuffer(),
-                                                                     mat.innerIndicesBuffer(),
-                                                                     mat.valuesBuffer(),
-                                                                     0); //compressed format
+    return Eigen::Map<Eigen::SparseMatrix<double, Eigen::RowMajor>>(mat.rows(),
+                                                                    mat.columns(),
+                                                                    mat.numberOfNonZeros(),
+                                                                    mat.outerIndicesBuffer(),
+                                                                    mat.innerIndicesBuffer(),
+                                                                    mat.valuesBuffer(),
+                                                                    0); // compressed format
 }
 
-inline Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> > toEigen(const iDynTree::SparseMatrix<iDynTree::RowMajor> & mat)
+inline Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor>>
+toEigen(const iDynTree::SparseMatrix<iDynTree::RowMajor>& mat)
 {
-    return Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor> >(mat.rows(),
-                                                                           mat.columns(),
-                                                                           mat.numberOfNonZeros(),
-                                                                           mat.outerIndicesBuffer(),
-                                                                           mat.innerIndicesBuffer(),
-                                                                           mat.valuesBuffer(),
-                                                                           0); //compressed format
+    return Eigen::Map<const Eigen::SparseMatrix<double, Eigen::RowMajor>>(mat.rows(),
+                                                                          mat.columns(),
+                                                                          mat.numberOfNonZeros(),
+                                                                          mat.outerIndicesBuffer(),
+                                                                          mat.innerIndicesBuffer(),
+                                                                          mat.valuesBuffer(),
+                                                                          0); // compressed format
 }
 
-inline Eigen::Map< Eigen::SparseMatrix<double, Eigen::ColMajor> > toEigen(iDynTree::SparseMatrix<iDynTree::ColumnMajor> & mat)
+inline Eigen::Map<Eigen::SparseMatrix<double, Eigen::ColMajor>>
+toEigen(iDynTree::SparseMatrix<iDynTree::ColumnMajor>& mat)
 {
-    return Eigen::Map<Eigen::SparseMatrix<double, Eigen::ColMajor> >(mat.rows(),
-                                                                     mat.columns(),
-                                                                     mat.numberOfNonZeros(),
-                                                                     mat.outerIndicesBuffer(),
-                                                                     mat.innerIndicesBuffer(),
-                                                                     mat.valuesBuffer(),
-                                                                     0); //compressed format
+    return Eigen::Map<Eigen::SparseMatrix<double, Eigen::ColMajor>>(mat.rows(),
+                                                                    mat.columns(),
+                                                                    mat.numberOfNonZeros(),
+                                                                    mat.outerIndicesBuffer(),
+                                                                    mat.innerIndicesBuffer(),
+                                                                    mat.valuesBuffer(),
+                                                                    0); // compressed format
 }
 
-inline Eigen::Map<const Eigen::SparseMatrix<double, Eigen::ColMajor> > toEigen(const iDynTree::SparseMatrix<iDynTree::ColumnMajor> & mat)
+inline Eigen::Map<const Eigen::SparseMatrix<double, Eigen::ColMajor>>
+toEigen(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& mat)
 {
-    return Eigen::Map<const Eigen::SparseMatrix<double, Eigen::ColMajor> >(mat.rows(),
-                                                                           mat.columns(),
-                                                                           mat.numberOfNonZeros(),
-                                                                           mat.outerIndicesBuffer(),
-                                                                           mat.innerIndicesBuffer(),
-                                                                           mat.valuesBuffer(),
-                                                                           0); //compressed format
+    return Eigen::Map<const Eigen::SparseMatrix<double, Eigen::ColMajor>>(mat.rows(),
+                                                                          mat.columns(),
+                                                                          mat.numberOfNonZeros(),
+                                                                          mat.outerIndicesBuffer(),
+                                                                          mat.innerIndicesBuffer(),
+                                                                          mat.valuesBuffer(),
+                                                                          0); // compressed format
 }
 
-}
+} // namespace iDynTree
 
 #endif /* IDYNTREE_EIGEN_SPARSE_HELPERS_H */

@@ -4,11 +4,11 @@
 #ifndef IDYNTREE_LINK_STATE_H
 #define IDYNTREE_LINK_STATE_H
 
+#include <iDynTree/ArticulatedBodyInertia.h>
+#include <iDynTree/SpatialAcc.h>
 #include <iDynTree/Transform.h>
 #include <iDynTree/Twist.h>
-#include <iDynTree/SpatialAcc.h>
 #include <iDynTree/Wrench.h>
-#include <iDynTree/ArticulatedBodyInertia.h>
 
 #include <iDynTree/Indices.h>
 
@@ -16,219 +16,218 @@
 
 namespace iDynTree
 {
-    class Model;
+class Model;
 
-    class LinkPositions
-    {
-    private:
-        std::vector<iDynTree::Transform> m_linkPos;
+class LinkPositions
+{
+private:
+    std::vector<iDynTree::Transform> m_linkPos;
 
-    public:
-        LinkPositions(std::size_t nrOfLinks = 0);
-        LinkPositions(const iDynTree::Model & model);
+public:
+    LinkPositions(std::size_t nrOfLinks = 0);
+    LinkPositions(const iDynTree::Model& model);
 
-        void resize(std::size_t nrOfLinks);
-        void resize(const iDynTree::Model & model);
+    void resize(std::size_t nrOfLinks);
+    void resize(const iDynTree::Model& model);
 
-        bool isConsistent(const Model& model) const;
+    bool isConsistent(const Model& model) const;
 
-        size_t getNrOfLinks() const;
+    size_t getNrOfLinks() const;
 
-        iDynTree::Transform & operator()(const LinkIndex link);
-        const iDynTree::Transform & operator()(const LinkIndex link) const;
+    iDynTree::Transform& operator()(const LinkIndex link);
+    const iDynTree::Transform& operator()(const LinkIndex link) const;
 
-        std::string toString(const Model & model) const;
+    std::string toString(const Model& model) const;
 
-        ~LinkPositions();
-    };
+    ~LinkPositions();
+};
 
+/**
+ * Vector of wrenches connected in some way to the link of a model.
+ *
+ * It is used to model both the total external wrench
+ * acting on a  link (LinkExternalWrenches), or the internal wrenches
+ * that a link excerts on his parent (given a Traversal)
+ * computed as a by product by the dynamic loop of the RNEA ( RNEADynamicPhase ).
+ *
+ * In both cases the Wrench corresponding to the link with LinkIndex i
+ * is always expressed with the orientation of the link frame and with
+ * respect to the link frame origin.
+ */
+class LinkWrenches
+{
+private:
+    std::vector<iDynTree::Wrench> m_linkWrenches;
+
+public:
     /**
-     * Vector of wrenches connected in some way to the link of a model.
+     * Create a LinkWrenches vector, with the size given
+     * by nrOfLinks .
      *
-     * It is used to model both the total external wrench
-     * acting on a  link (LinkExternalWrenches), or the internal wrenches
-     * that a link excerts on his parent (given a Traversal)
-     * computed as a by product by the dynamic loop of the RNEA ( RNEADynamicPhase ).
+     * @param[in] nrOfLinks the size of the vector.
+     */
+    LinkWrenches(std::size_t nrOfLinks = 0);
+    LinkWrenches(const iDynTree::Model& model);
+
+    /**
+     * Resize the vector to have size nrOfLinks.
      *
-     * In both cases the Wrench corresponding to the link with LinkIndex i
-     * is always expressed with the orientation of the link frame and with
-     * respect to the link frame origin.
+     * @param[in] nrOfLinks new size for the vector
      */
-    class LinkWrenches
-    {
-    private:
-        std::vector<iDynTree::Wrench> m_linkWrenches;
+    void resize(std::size_t nrOfLinks);
+    void resize(const iDynTree::Model& model);
 
-    public:
-        /**
-         * Create a LinkWrenches vector, with the size given
-         * by nrOfLinks .
-         *
-         * @param[in] nrOfLinks the size of the vector.
-         */
-        LinkWrenches(std::size_t nrOfLinks = 0);
-        LinkWrenches(const iDynTree::Model & model);
+    bool isConsistent(const Model& model) const;
+    size_t getNrOfLinks() const;
 
-        /**
-         * Resize the vector to have size nrOfLinks.
-         *
-         * @param[in] nrOfLinks new size for the vector
-         */
-        void resize(std::size_t nrOfLinks);
-        void resize(const iDynTree::Model & model);
+    iDynTree::Wrench& operator()(const LinkIndex link);
+    const iDynTree::Wrench& operator()(const LinkIndex link) const;
 
-        bool isConsistent(const Model& model) const;
-        size_t getNrOfLinks() const;
-
-        iDynTree::Wrench & operator()(const LinkIndex link);
-        const iDynTree::Wrench & operator()(const LinkIndex link) const;
-
-        std::string toString(const Model & model) const;
-
-        /**
-         * Set all the elements to zero.
-         */
-        void zero();
-
-        ~LinkWrenches();
-    };
+    std::string toString(const Model& model) const;
 
     /**
-     * Vector of the sum of all the  external wrenches excerted on each link.
-     *
-     * The wrench returned by operator(i) is the sum of all external wrenches
-     * (thus excluding the wrench applied on the link by other links in the model)
-     * that the environment applies on the link $i$, expressed (
-     * both orientation and point) with respect to the reference frame of link i.
+     * Set all the elements to zero.
      */
-    typedef LinkWrenches LinkNetExternalWrenches;
+    void zero();
 
-    /**
-     * Vector of the wrenches acting that a link excert on his parent,
-     * given a Traversal.
-     *
-     * Given a Traversal with base link b, the wrench returned by operator(i) is the wrench
-     * the parent of link i excerts on link i, expressed (both orientation
-     * and point) with respect to the reference frame of link i.
-     */
-    typedef LinkWrenches LinkInternalWrenches;
+    ~LinkWrenches();
+};
 
+/**
+ * Vector of the sum of all the  external wrenches excerted on each link.
+ *
+ * The wrench returned by operator(i) is the sum of all external wrenches
+ * (thus excluding the wrench applied on the link by other links in the model)
+ * that the environment applies on the link $i$, expressed (
+ * both orientation and point) with respect to the reference frame of link i.
+ */
+typedef LinkWrenches LinkNetExternalWrenches;
 
-    /**
-     * Vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on
-     * link i, expressed (both orientation and point) with respect to the reference frame of link i.
-     *
-     * This is tipically computed as I*a+v*(I*v) , where a is the proper acceleration.
-     */
-    typedef LinkWrenches LinkNetTotalWrenchesWithoutGravity;
+/**
+ * Vector of the wrenches acting that a link excert on his parent,
+ * given a Traversal.
+ *
+ * Given a Traversal with base link b, the wrench returned by operator(i) is the wrench
+ * the parent of link i excerts on link i, expressed (both orientation
+ * and point) with respect to the reference frame of link i.
+ */
+typedef LinkWrenches LinkInternalWrenches;
 
-    /**
-     * Class for storing a vector of SpatialInertia objects , one for each link in a model.
-     */
-    class LinkInertias
-    {
-    private:
-        std::vector<iDynTree::SpatialInertia> m_linkInertials;
+/**
+ * Vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on
+ * link i, expressed (both orientation and point) with respect to the reference frame of link i.
+ *
+ * This is tipically computed as I*a+v*(I*v) , where a is the proper acceleration.
+ */
+typedef LinkWrenches LinkNetTotalWrenchesWithoutGravity;
 
-    public:
-        LinkInertias(std::size_t nrOfLinks = 0);
-        LinkInertias(const iDynTree::Model & model);
+/**
+ * Class for storing a vector of SpatialInertia objects , one for each link in a model.
+ */
+class LinkInertias
+{
+private:
+    std::vector<iDynTree::SpatialInertia> m_linkInertials;
 
-        void resize(std::size_t nrOfLinks);
-        void resize(const iDynTree::Model & model);
+public:
+    LinkInertias(std::size_t nrOfLinks = 0);
+    LinkInertias(const iDynTree::Model& model);
 
-        bool isConsistent(const Model& model) const;
+    void resize(std::size_t nrOfLinks);
+    void resize(const iDynTree::Model& model);
 
-        iDynTree::SpatialInertia & operator()(const LinkIndex link);
-        const iDynTree::SpatialInertia & operator()(const LinkIndex link) const;
+    bool isConsistent(const Model& model) const;
 
-        ~LinkInertias();
-    };
+    iDynTree::SpatialInertia& operator()(const LinkIndex link);
+    const iDynTree::SpatialInertia& operator()(const LinkIndex link) const;
 
-    typedef LinkInertias LinkCompositeRigidBodyInertias;
+    ~LinkInertias();
+};
 
-    /**
-     * Class for storing a vector of ArticulatedBodyInertias objects , one for each link in a model.
-     */
-    class LinkArticulatedBodyInertias
-    {
-    private:
-        std::vector<iDynTree::ArticulatedBodyInertia> m_linkABIs;
+typedef LinkInertias LinkCompositeRigidBodyInertias;
 
-    public:
-        LinkArticulatedBodyInertias(std::size_t nrOfLinks = 0);
-        LinkArticulatedBodyInertias(const iDynTree::Model & model);
+/**
+ * Class for storing a vector of ArticulatedBodyInertias objects , one for each link in a model.
+ */
+class LinkArticulatedBodyInertias
+{
+private:
+    std::vector<iDynTree::ArticulatedBodyInertia> m_linkABIs;
 
-        void resize(std::size_t nrOfLinks);
-        void resize(const iDynTree::Model & model);
+public:
+    LinkArticulatedBodyInertias(std::size_t nrOfLinks = 0);
+    LinkArticulatedBodyInertias(const iDynTree::Model& model);
 
-        bool isConsistent(const Model& model) const;
+    void resize(std::size_t nrOfLinks);
+    void resize(const iDynTree::Model& model);
 
-        iDynTree::ArticulatedBodyInertia & operator()(const LinkIndex link);
-        const iDynTree::ArticulatedBodyInertia & operator()(const LinkIndex link) const;
+    bool isConsistent(const Model& model) const;
 
-        ~LinkArticulatedBodyInertias();
-    };
+    iDynTree::ArticulatedBodyInertia& operator()(const LinkIndex link);
+    const iDynTree::ArticulatedBodyInertia& operator()(const LinkIndex link) const;
 
-    /**
-     * Class for storing a vector of twists, one for each link in a model.
-     */
-    class LinkVelArray
-    {
-    private:
-        std::vector<iDynTree::Twist> m_linkTwist;
+    ~LinkArticulatedBodyInertias();
+};
 
-    public:
-        LinkVelArray(std::size_t nrOfLinks = 0);
-        LinkVelArray(const iDynTree::Model & model);
+/**
+ * Class for storing a vector of twists, one for each link in a model.
+ */
+class LinkVelArray
+{
+private:
+    std::vector<iDynTree::Twist> m_linkTwist;
 
-        void resize(std::size_t nrOfLinks);
-        void resize(const iDynTree::Model & model);
+public:
+    LinkVelArray(std::size_t nrOfLinks = 0);
+    LinkVelArray(const iDynTree::Model& model);
 
-        bool isConsistent(const Model& model) const;
+    void resize(std::size_t nrOfLinks);
+    void resize(const iDynTree::Model& model);
 
-        size_t getNrOfLinks() const;
+    bool isConsistent(const Model& model) const;
 
-        iDynTree::Twist & operator()(const LinkIndex link);
-        const iDynTree::Twist & operator()(const LinkIndex link) const;
+    size_t getNrOfLinks() const;
 
-        std::string toString(const Model & model) const;
+    iDynTree::Twist& operator()(const LinkIndex link);
+    const iDynTree::Twist& operator()(const LinkIndex link) const;
 
-        ~LinkVelArray();
-    };
+    std::string toString(const Model& model) const;
 
-    /**
-     * Class for storing a vector of spatial accelerations,
-     *  one for each link in a model.
-     */
-    class LinkAccArray
-    {
-    private:
-        std::vector<iDynTree::SpatialAcc> m_linkAcc;
+    ~LinkVelArray();
+};
 
-    public:
-        LinkAccArray(std::size_t nrOfLinks = 0);
-        LinkAccArray(const iDynTree::Model & model);
+/**
+ * Class for storing a vector of spatial accelerations,
+ *  one for each link in a model.
+ */
+class LinkAccArray
+{
+private:
+    std::vector<iDynTree::SpatialAcc> m_linkAcc;
 
-        void resize(std::size_t nrOfLinks);
-        void resize(const iDynTree::Model & model);
+public:
+    LinkAccArray(std::size_t nrOfLinks = 0);
+    LinkAccArray(const iDynTree::Model& model);
 
-        bool isConsistent(const Model& model) const;
+    void resize(std::size_t nrOfLinks);
+    void resize(const iDynTree::Model& model);
 
-        iDynTree::SpatialAcc & operator()(const LinkIndex link);
-        const iDynTree::SpatialAcc & operator()(const LinkIndex link) const;
+    bool isConsistent(const Model& model) const;
 
-        std::size_t getNrOfLinks() const;
+    iDynTree::SpatialAcc& operator()(const LinkIndex link);
+    const iDynTree::SpatialAcc& operator()(const LinkIndex link) const;
 
-        std::string toString(const Model & model) const;
+    std::size_t getNrOfLinks() const;
 
-        ~LinkAccArray();
-    };
+    std::string toString(const Model& model) const;
 
-    /**
-     * Typedef used when the vector is meant to be a vector of link proper accelerations. 
-     */
-    typedef LinkAccArray LinkProperAccArray;
-}
+    ~LinkAccArray();
+};
+
+/**
+ * Typedef used when the vector is meant to be a vector of link proper accelerations.
+ */
+typedef LinkAccArray LinkProperAccArray;
+} // namespace iDynTree
 
 #endif /* IDYNTREE_LINK_STATE_H */

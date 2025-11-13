@@ -18,8 +18,7 @@
 namespace iDynTree
 {
 
-
-bool inline stringToDoubleWithClassicLocale(const std::string & inStr, double & outDouble)
+bool inline stringToDoubleWithClassicLocale(const std::string& inStr, double& outDouble)
 {
     std::istringstream ss(inStr);
     ss.imbue(std::locale::classic());
@@ -27,7 +26,7 @@ bool inline stringToDoubleWithClassicLocale(const std::string & inStr, double & 
     return !(ss.fail());
 }
 
-bool inline stringToIntWithClassicLocale(const std::string & inStr, int & outInt)
+bool inline stringToIntWithClassicLocale(const std::string& inStr, int& outInt)
 {
     std::istringstream ss(inStr);
     ss.imbue(std::locale::classic());
@@ -35,7 +34,7 @@ bool inline stringToIntWithClassicLocale(const std::string & inStr, int & outInt
     return !(ss.fail());
 }
 
-bool inline stringToUnsignedIntWithClassicLocale(const std::string & inStr, unsigned int & outInt)
+bool inline stringToUnsignedIntWithClassicLocale(const std::string& inStr, unsigned int& outInt)
 {
     std::istringstream ss(inStr);
     ss.imbue(std::locale::classic());
@@ -43,14 +42,16 @@ bool inline stringToUnsignedIntWithClassicLocale(const std::string & inStr, unsi
     return !(ss.fail());
 }
 
-bool inline doubleToStringWithClassicLocale(const double & inDouble, std::string& outStr)
+bool inline doubleToStringWithClassicLocale(const double& inDouble, std::string& outStr)
 {
-    if (std::isnan(inDouble) || std::isinf(inDouble)) {
+    if (std::isnan(inDouble) || std::isinf(inDouble))
+    {
         return false;
     }
 
     // fpconv returns nul-terminated strings, that can be converted directly to C++ std::string
-    // see https://github.com/night-shift/fpconv/tree/4a087d1b2df765baa409536931916a2c082cdda4#example-usage
+    // see
+    // https://github.com/night-shift/fpconv/tree/4a087d1b2df765baa409536931916a2c082cdda4#example-usage
     char buf[24 + 1];
     int str_len = idyntree_private_fpconv_dtoa(inDouble, buf);
     buf[str_len] = '\0';
@@ -72,11 +73,10 @@ std::string inline intToString(const size_t inInt)
     return ss.str();
 }
 
-
 /**
  * Split string along spaces
  */
-bool inline splitString(const std::string & inStr, std::vector<std::string> & pieces)
+bool inline splitString(const std::string& inStr, std::vector<std::string>& pieces)
 {
     std::istringstream iss(inStr);
 
@@ -86,12 +86,11 @@ bool inline splitString(const std::string & inStr, std::vector<std::string> & pi
     {
         std::string sub;
         iss >> sub;
-        if( sub != "" )
+        if (sub != "")
         {
             pieces.push_back(sub);
         }
     } while (iss);
-
 
     return true;
 }
@@ -99,32 +98,34 @@ bool inline splitString(const std::string & inStr, std::vector<std::string> & pi
 /**
  *
  */
-bool inline vector3FromString(const std::string & vector_str, Vector3 & out)
+bool inline vector3FromString(const std::string& vector_str, Vector3& out)
 {
     std::vector<std::string> pieces;
     std::vector<double> xyz;
-    splitString(vector_str,pieces);
+    splitString(vector_str, pieces);
     for (unsigned int i = 0; i < pieces.size(); ++i)
     {
-      if (pieces[i] != ""){
-       double newDouble;
-       if( stringToDoubleWithClassicLocale(pieces[i],newDouble) )
-       {
-          xyz.push_back(newDouble);
-       }
-       else
-       {
-           std::string errStr = "Unable to parse component [" + pieces[i] + "] to a double (while parsing a vector value)";
-           reportError("","vector3FromString",errStr.c_str());
-           return false;
-       }
-      }
+        if (pieces[i] != "")
+        {
+            double newDouble;
+            if (stringToDoubleWithClassicLocale(pieces[i], newDouble))
+            {
+                xyz.push_back(newDouble);
+            } else
+            {
+                std::string errStr = "Unable to parse component [" + pieces[i]
+                                     + "] to a double (while parsing a vector value)";
+                reportError("", "vector3FromString", errStr.c_str());
+                return false;
+            }
+        }
     }
 
     if (xyz.size() != 3)
     {
-        std::string errStr = "Parser found " + intToString(xyz.size())  + " elements but 3 expected while parsing vector [" + vector_str + "]";
-        reportError("","vector3FromString",errStr.c_str());
+        std::string errStr = "Parser found " + intToString(xyz.size())
+                             + " elements but 3 expected while parsing vector [" + vector_str + "]";
+        reportError("", "vector3FromString", errStr.c_str());
         return false;
     }
 
@@ -135,8 +136,8 @@ bool inline vector3FromString(const std::string & vector_str, Vector3 & out)
     return true;
 }
 
-template<typename iDynTreeVectorType>
-bool inline vectorToString(const iDynTreeVectorType & in, std::string & out_str)
+template <typename iDynTreeVectorType>
+bool inline vectorToString(const iDynTreeVectorType& in, std::string& out_str)
 {
     std::stringstream ss;
     bool ok = true;
@@ -156,33 +157,34 @@ bool inline vectorToString(const iDynTreeVectorType & in, std::string & out_str)
     return ok;
 }
 
-
-bool inline vector4FromString(const std::string & vector_str, Vector4 & out)
+bool inline vector4FromString(const std::string& vector_str, Vector4& out)
 {
     std::vector<std::string> pieces;
     std::vector<double> rgba;
-    splitString(vector_str,pieces);
+    splitString(vector_str, pieces);
     for (unsigned int i = 0; i < pieces.size(); ++i)
     {
-      if (pieces[i] != ""){
-       double newDouble;
-       if( stringToDoubleWithClassicLocale(pieces[i],newDouble) )
-       {
-          rgba.push_back(newDouble);
-       }
-       else
-       {
-           std::string errStr = "Unable to parse component [" + pieces[i] + "] to a double (while parsing a vector value)";
-           reportError("","vector4FromString",errStr.c_str());
-           return false;
-       }
-      }
+        if (pieces[i] != "")
+        {
+            double newDouble;
+            if (stringToDoubleWithClassicLocale(pieces[i], newDouble))
+            {
+                rgba.push_back(newDouble);
+            } else
+            {
+                std::string errStr = "Unable to parse component [" + pieces[i]
+                                     + "] to a double (while parsing a vector value)";
+                reportError("", "vector4FromString", errStr.c_str());
+                return false;
+            }
+        }
     }
 
     if (rgba.size() != 4)
     {
-        std::string errStr = "Parser found " + intToString(rgba.size())  + " elements but 4 expected while parsing vector [" + vector_str + "]";
-        reportError("","vector4FromString",errStr.c_str());
+        std::string errStr = "Parser found " + intToString(rgba.size())
+                             + " elements but 4 expected while parsing vector [" + vector_str + "]";
+        reportError("", "vector4FromString", errStr.c_str());
         return false;
     }
 
@@ -194,6 +196,6 @@ bool inline vector4FromString(const std::string & vector_str, Vector4 & out)
     return true;
 }
 
-}
+} // namespace iDynTree
 
 #endif

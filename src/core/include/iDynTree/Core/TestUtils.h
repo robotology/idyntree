@@ -5,7 +5,7 @@
 #define IDYNTREE_CORE_TEST_UTILS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Core/TestUtils.h> is deprecated. Please use <iDynTree/TestUtils.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Core/TestUtils.h> is deprecated. Please use <iDynTree/TestUtils.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/TestUtils.h>

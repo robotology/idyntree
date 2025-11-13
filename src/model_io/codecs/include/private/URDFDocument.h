@@ -16,22 +16,24 @@
 #include <iDynTree/Sensors.h>
 
 #include <string>
-#include <vector>
 #include <unordered_map>
+#include <vector>
 
-namespace iDynTree {
-    class URDFDocument;
-    class XMLParserState;
-}
+namespace iDynTree
+{
+class URDFDocument;
+class XMLParserState;
+} // namespace iDynTree
 
-
-class iDynTree::URDFDocument: public iDynTree::XMLDocument {
+class iDynTree::URDFDocument : public iDynTree::XMLDocument
+{
     // This is the final output of the parsing + processing
     iDynTree::Model m_model;
 
     iDynTree::ModelParserOptions m_options;
 
-    struct {
+    struct
+    {
         // Intermediate variable needed for saving the parsing result before the processing
         std::vector<std::shared_ptr<SensorHelper>> sensorHelpers;
         std::unordered_map<std::string, JointElement::JointInfo> joints;
@@ -39,22 +41,23 @@ class iDynTree::URDFDocument: public iDynTree::XMLDocument {
         std::unordered_map<std::string, MaterialElement::MaterialInfo> materials;
         std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>> visuals;
         std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>> collisions;
-        
+
     } m_buffers;
 
 public:
-    explicit URDFDocument(XMLParserState& parserState, const iDynTree::ModelParserOptions& parserOptions);
+    explicit URDFDocument(XMLParserState& parserState,
+                          const iDynTree::ModelParserOptions& parserOptions);
     virtual ~URDFDocument();
 
     iDynTree::ModelParserOptions& options();
-    
+
     const iDynTree::Model& model() const;
     const iDynTree::SensorsList& sensors() const;
-    
-    std::shared_ptr<XMLElement> rootElementForName(const std::string& name,
-                                                   const std::vector<std::string>& packageDirs) override;
+
+    std::shared_ptr<XMLElement>
+    rootElementForName(const std::string& name,
+                       const std::vector<std::string>& packageDirs) override;
     bool documentHasBeenParsed() override;
 };
-
 
 #endif /* end of include guard: IDYNTREE_MODELIO_URDF_URDFDOCUMENT_H */

@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_MODEL_TRANSFOMERS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/ModelTransformers.h> is deprecated. Please use <iDynTree/ModelTransformers.h>. To disable this warning use -Wno-deprecated.
+#warning <iDynTree/Model/ModelTransformers.h> is deprecated. Please use <iDynTree/ModelTransformers.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ModelTransformers.h>

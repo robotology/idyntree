@@ -11,24 +11,28 @@
 #ifndef IDYNTREE_OPTIMALCONTROL_SPARSITYSTRUCTURE_H
 #define IDYNTREE_OPTIMALCONTROL_SPARSITYSTRUCTURE_H
 
-#include <iDynTree/Utils.h>
-#include <vector>
 #include <cstddef>
-#include <unordered_set>
+#include <iDynTree/Utils.h>
 #include <string>
+#include <unordered_set>
+#include <vector>
 
-namespace iDynTree {
-    namespace optimalcontrol {
-        class SparsityStructure;
+namespace iDynTree
+{
+namespace optimalcontrol
+{
+class SparsityStructure;
 
-        struct NonZero {
-            size_t row;
-            size_t col;
-        };
-    }
-}
+struct NonZero
+{
+    size_t row;
+    size_t col;
+};
+} // namespace optimalcontrol
+} // namespace iDynTree
 
-class iDynTree::optimalcontrol::SparsityStructure {
+class iDynTree::optimalcontrol::SparsityStructure
+{
     std::unordered_set<std::string> m_register;
 
     void addNonZero(size_t row, size_t col);
@@ -37,16 +41,17 @@ class iDynTree::optimalcontrol::SparsityStructure {
     std::vector<size_t> m_nonZeroElementColumns;
 
 public:
-
     SparsityStructure();
 
     ~SparsityStructure();
 
     bool merge(const SparsityStructure& other);
 
-    void addDenseBlock(size_t startRow, size_t startColumn, size_t numberOfRows, size_t numberOfColumns);
+    void
+    addDenseBlock(size_t startRow, size_t startColumn, size_t numberOfRows, size_t numberOfColumns);
 
-    bool addDenseBlock(const iDynTree::IndexRange& rowsRange, const iDynTree::IndexRange& columnsRange);
+    bool
+    addDenseBlock(const iDynTree::IndexRange& rowsRange, const iDynTree::IndexRange& columnsRange);
 
     void addIdentityBlock(size_t startRow, size_t startColumn, size_t dimension);
 
