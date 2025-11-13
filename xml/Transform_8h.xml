@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Transform_8h" kind="file" language="C++">
     <compoundname>Transform.h</compoundname>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
     <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
-    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
     <includes local="no">string</includes>
     <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/DenavitHartenberg.h</includedby>
     <includedby refid="FixedJoint_8h" local="no">iDynTree/FixedJoint.h</includedby>

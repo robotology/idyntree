@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Span.h" line="598" column="17" bodyfile="iDynTree/Span.h" bodystart="598" bodyend="-1"/>
+        <location file="iDynTree/Span.h" line="662" column="17" bodyfile="iDynTree/Span.h" bodystart="662" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Span.h" line="582" column="28" bodyfile="iDynTree/Span.h" bodystart="582" bodyend="585"/>
+        <location file="iDynTree/Span.h" line="640" column="28" bodyfile="iDynTree/Span.h" bodystart="640" bodyend="645"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Span_1_1storage__type_1aeb5b2c4dcc5cafaf74a4bd6d4e6cee28" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Span.h" line="589" column="28" bodyfile="iDynTree/Span.h" bodystart="589" bodyend="593"/>
+        <location file="iDynTree/Span.h" line="648" column="28" bodyfile="iDynTree/Span.h" bodystart="648" bodyend="654"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Span_1_1storage__type_1ae157946bd1d3fe5e4128c5e89cb009ad" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>IDYNTREE_CONSTEXPR pointer</type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Span.h" line="595" column="36" bodyfile="iDynTree/Span.h" bodystart="595" bodyend="595"/>
+        <location file="iDynTree/Span.h" line="656" column="36" bodyfile="iDynTree/Span.h" bodystart="656" bodyend="659"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -120,7 +120,7 @@
         <label>ExtentType</label>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Span.h" line="576" column="5" bodyfile="iDynTree/Span.h" bodystart="577" bodyend="599"/>
+    <location file="iDynTree/Span.h" line="634" column="16" bodyfile="iDynTree/Span.h" bodystart="635" bodyend="663"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Span_1_1storage__type_1ae157946bd1d3fe5e4128c5e89cb009ad" prot="public" virt="non-virtual"><scope>iDynTree::Span::storage_type</scope><name>data</name></member>
       <member refid="classiDynTree_1_1Span_1_1storage__type_1a6c8e611f411a9c277a19be7d8934d409" prot="private" virt="non-virtual"><scope>iDynTree::Span::storage_type</scope><name>data_</name></member>

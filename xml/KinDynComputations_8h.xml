@@ -4,13 +4,13 @@
     <compoundname>KinDynComputations.h</compoundname>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
     <includes refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includes>
-    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includes refid="Span_8h" local="no">iDynTree/Span.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="FreeFloatingMatrices_8h" local="no">iDynTree/FreeFloatingMatrices.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
     <incdepgraph>

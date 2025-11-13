@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="52" column="11" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="52" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="53" column="11" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a8e0a0934d651bbc4df90cb2ef36c16f8" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref></type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="53" column="27" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="53" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="54" column="27" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5188d8fcd4929c15ef9cd00fd73567d1" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="54" column="10" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="54" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="55" column="10" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ab37cbf8652a9ac0ed931260aeeefded6" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="55" column="10" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="55" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="56" column="10" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae0ce4359181d853be92b88cdeafa69ff" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref></type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="58" column="15" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="58" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="59" column="15" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a1882f61b3453b6a5c6112e35a4815ace" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkTraversalsCache" kindref="compound">LinkTraversalsCache</ref></type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="64" column="25" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="64" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="65" column="25" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ad66bd96fb4e15eebe79840a535301f51" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref></type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="66" column="25" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="66" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="67" column="25" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a0cdf56def127a01a7a629455c1f55b8b" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="67" column="26" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="67" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="68" column="26" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a687bcc088e718035e1448d5248d4e59b" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="68" column="26" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="68" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="69" column="26" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a940080c96e8902612b6ba498aab8bd2d" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref></type>
@@ -136,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="69" column="18" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="69" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="70" column="18" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a4ce21922d525f32ac0b4dad58a2dac4c" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref></type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="70" column="18" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="70" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="71" column="18" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1add15a23c42a1eed9bbdf5528a79aedfc" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref></type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="71" column="29" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="71" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="72" column="29" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a17ba66ad1147e01871b368cd7843f706" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkInternalWrenches</ref></type>
@@ -175,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="72" column="29" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="72" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="73" column="26" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a956b700980cdb249747a60a46b3da776" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1FreeFloatingGeneralizedTorques" kindref="compound">FreeFloatingGeneralizedTorques</ref></type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="73" column="36" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="73" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="74" column="36" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1af439c6052af9ab34ce6db052750cea1b" prot="private" static="no" mutable="no">
         <type><ref refid="structiDynTree_1_1estimateExternalWrenchesBuffers" kindref="compound">estimateExternalWrenchesBuffers</ref></type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="75" column="37" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="75" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="76" column="37" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae61e621887fff2419b6b58069791b186" prot="private" static="no" mutable="no">
         <type><ref refid="structiDynTree_1_1estimateExternalWrenchesBuffers" kindref="compound">estimateExternalWrenchesBuffers</ref></type>
@@ -214,7 +214,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="76" column="37" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="76" bodyend="-1"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="77" column="37" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1aab5d3c62ffa5c80d59069d7e80655c6f" prot="public" static="no" mutable="no">
+        <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+        <definition>const SensorsList&amp; iDynTree::ExtWrenchesAndJointTorquesEstimator::_sensors</definition>
+        <argsstring></argsstring>
+        <name>_sensors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="121" column="32" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -233,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="81" column="4" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="81" bodyend="81"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="82" column="5" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="82" bodyend="82"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a4bcfb0a181f1106f4a7eff14757f1ef5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator" kindref="compound">ExtWrenchesAndJointTorquesEstimator</ref> &amp;</type>
@@ -250,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="86" column="40" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="86" bodyend="86"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="88" column="5" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="88" bodyend="91"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -266,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="92" column="5"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="97" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a21ecaac3728255f5ad511123ca97ec77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -280,7 +295,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="97" column="5"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="102" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a559e22f6ae100c24fabe83d708bfdf32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -310,20 +325,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="105" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="110" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ab62c38a61392178a65af5a90a6a7a076" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::ExtWrenchesAndJointTorquesEstimator::setModelAndSensors</definition>
-        <argsstring>(const Model &amp;_model, const SensorsList &amp;_sensors)</argsstring>
-        <name>setModelAndSensors</name>
+      <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a181f05bfa2c2f9bed20497840eb0ba09" prot="public" static="no" const="yes" explicit="no" inline="no" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ExtWrenchesAndJointTorquesEstimator::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;Deprecated, please use variant of this method (i.e. setModel) &quot; &quot;where SensorsList is passed via the iDynTree::Model.&quot;) bool setModelAndSensors(const Model &amp;_model</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
         <param>
-          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
-          <declname>_model</declname>
+          <type>&quot;</type>
+          <declname>Deprecated</declname>
         </param>
         <param>
-          <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
-          <declname>_sensors</declname>
+          <type>please use variant of this method(i.e. <ref refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a559e22f6ae100c24fabe83d708bfdf32" kindref="member">setModel</ref>) &quot; &quot;where <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> is passed via the iDynTree::Model.&quot;</type>
         </param>
         <briefdescription>
 <para>Set model and sensors used for the estimation. </para>
@@ -352,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="115" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="119" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1af366663099c8b4772ab27485bc3581f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -397,7 +411,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="128" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="134" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a65ada8c5265bed3d7f19bd1b3694be18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -454,7 +468,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="142" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="149" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae1fcc20d0e3eb0eace44e334d931c0f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -471,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="152" column="18"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="158" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5da76e1decfef128f4580a108d865166" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -488,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="160" column="24"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="166" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a0ad964451590f8bbe0a9bb9e01de1374" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref> &amp;</type>
@@ -505,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="167" column="34"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="173" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5ac25475eaa0e7b750c4cd9e266fa758" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -609,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="195" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="201" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a7719cb1bcf6b3ba9f3d7f66e60738a68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -687,7 +701,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="214" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="221" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a903f0fca32abdb551ffe7eda013ce462" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -757,7 +771,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="244" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="251" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a2ce880f4ac64809b17c49f7a4bf60569" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -789,30 +803,30 @@
         </briefdescription>
         <detaileddescription>
 <para>For each submodel in which there are no external forces, we can write the following equation:</para>
-<para><formula id="107">\[ A w = b \]</formula> Where:<itemizedlist>
-<listitem><para><formula id="108">$w$</formula> is the vector of dimension 6*nrOfFTSensors obtained by stacking the FT sensors measures:</para>
+<para><formula id="109">\[ A w = b \]</formula> Where:<itemizedlist>
+<listitem><para><formula id="110">$w$</formula> is the vector of dimension 6*nrOfFTSensors obtained by stacking the FT sensors measures:</para>
 </listitem><listitem><para><formula id="4">$A$</formula> is a matrix of size 6 x 6*nrOfFTSensors that depends on position in space of the FT sensors</para>
-</listitem><listitem><para><formula id="109">$b$</formula> is a vector of size 6 that depends on the position, velocity, acceleration and gravity of each link in the submodel</para>
+</listitem><listitem><para><formula id="111">$b$</formula> is a vector of size 6 that depends on the position, velocity, acceleration and gravity of each link in the submodel</para>
 </listitem></itemizedlist>
 </para>
 <para>This function provides an easy way to compute A and B . Typically, these quantities are not used online during the estimation of external wrenches or internal torques, but rather as an helper method when calibrating FT sensors.</para>
 <para>In the rest of the documentation, we will refer to this quantities:<itemizedlist>
-<listitem><para>nrOfSubModels ( <formula id="110">$n_{sm}$</formula>): the number of submodels in which the model is divided, as induced by the FT sensors present in the model.</para>
+<listitem><para>nrOfSubModels ( <formula id="112">$n_{sm}$</formula>): the number of submodels in which the model is divided, as induced by the FT sensors present in the model.</para>
 </listitem><listitem><para>nrOfSubModelsWithoutExtWrenches: the number of submodels on which there is no external wrench</para>
-</listitem><listitem><para>nrOfFTSensors ( <formula id="111">$n_{ft}$</formula>): the number of FT sensors present in the model In particular, the value of A and b for a given submodel is the following. First of all, for any submodel $sm$ with no external force, we can write (from Equation 4.19 of <ulink url="https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf">https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf</ulink>, modified to account for all FT sensors in the submodel and to remove external wrenches):</para>
+</listitem><listitem><para>nrOfFTSensors ( <formula id="113">$n_{ft}$</formula>): the number of FT sensors present in the model In particular, the value of A and b for a given submodel is the following. First of all, for any submodel $sm$ with no external force, we can write (from Equation 4.19 of <ulink url="https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf">https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf</ulink>, modified to account for all FT sensors in the submodel and to remove external wrenches):</para>
 </listitem></itemizedlist>
 </para>
-<para><formula id="112">\[ \sum_{s=1}^{n_ft}~\mu_{sm, ft}~\sigma_{sm, ft}~{}_{B_{sm}} X^{ft} \mathrm{f}^{meas}_{ft} = \sum_{L \in \mathbb{L}_{sm}} {}_{B_{sm}} X^{L} {}_L \phi_L \]</formula></para>
+<para><formula id="114">\[ \sum_{s=1}^{n_ft}~\mu_{sm, ft}~\sigma_{sm, ft}~{}_{B_{sm}} X^{ft} \mathrm{f}^{meas}_{ft} = \sum_{L \in \mathbb{L}_{sm}} {}_{B_{sm}} X^{L} {}_L \phi_L \]</formula></para>
 <para>where:<itemizedlist>
-<listitem><para><formula id="113">$ \mu_{sm, ft} $</formula> is equal to <formula id="114">$1$</formula> if the sensor <formula id="115">$ft$</formula> is attached to the submodel <formula id="116">$sm$</formula>, and <formula id="117">$0$</formula> otherwise</para>
-</listitem><listitem><para><formula id="118">$ \sigma_{sm, ft} $</formula> is equal to <formula id="114">$1$</formula> if the sensor <formula id="115">$ft$</formula> is measuring the force applied on submodel <formula id="116">$sm$</formula> or <formula id="119">$-1$</formula> if it is measuring the force that the submodel excerts on its neighbor submodel</para>
-</listitem><listitem><para><formula id="120">$ {B_{sm}} $</formula> is a frame in which this equation is expressed, that for this function it is the base link of the submodel.</para>
+<listitem><para><formula id="115">$ \mu_{sm, ft} $</formula> is equal to <formula id="116">$1$</formula> if the sensor <formula id="117">$ft$</formula> is attached to the submodel <formula id="118">$sm$</formula>, and <formula id="119">$0$</formula> otherwise</para>
+</listitem><listitem><para><formula id="120">$ \sigma_{sm, ft} $</formula> is equal to <formula id="116">$1$</formula> if the sensor <formula id="117">$ft$</formula> is measuring the force applied on submodel <formula id="118">$sm$</formula> or <formula id="121">$-1$</formula> if it is measuring the force that the submodel excerts on its neighbor submodel</para>
+</listitem><listitem><para><formula id="122">$ {B_{sm}} $</formula> is a frame in which this equation is expressed, that for this function it is the base link of the submodel.</para>
 </listitem></itemizedlist>
 </para>
-<para>With this definitions, we can see that A_sm and b_sm for a given submodel <formula id="116">$sm$</formula> can be simply be defined as:</para>
-<para><formula id="121">$ A_{sm} = \begin{bmatrix} \mu_{sm, ft0}~\sigma_{sm, ft(0)}~{}_C X^{ft(0)} &amp; \hdots &amp; \mu_{sm, ft(n_ft-1)}~\sigma_{sm, ft(n_ft-1)}~X^{ft(n_ft-1)} \end{bmatrix} $</formula></para>
-<para><formula id="122">$ w_{sm} = \begin{bmatrix} \mathrm{f}^{meas}_{ft(0)} \\ \vdots \\ \mathrm{f}^{meas}_{ft(n_ft-1)} \end{bmatrix} $</formula></para>
-<para><formula id="123">$ b_{sm} = \sum_{L \in \mathbb{L}_{sm}} {}_C X^{L} {}^L \phi_L $</formula></para>
+<para>With this definitions, we can see that A_sm and b_sm for a given submodel <formula id="118">$sm$</formula> can be simply be defined as:</para>
+<para><formula id="123">$ A_{sm} = \begin{bmatrix} \mu_{sm, ft0}~\sigma_{sm, ft(0)}~{}_C X^{ft(0)} &amp; \hdots &amp; \mu_{sm, ft(n_ft-1)}~\sigma_{sm, ft(n_ft-1)}~X^{ft(n_ft-1)} \end{bmatrix} $</formula></para>
+<para><formula id="124">$ w_{sm} = \begin{bmatrix} \mathrm{f}^{meas}_{ft(0)} \\ \vdots \\ \mathrm{f}^{meas}_{ft(n_ft-1)} \end{bmatrix} $</formula></para>
+<para><formula id="125">$ b_{sm} = \sum_{L \in \mathbb{L}_{sm}} {}_C X^{L} {}^L \phi_L $</formula></para>
 <para><simplesect kind="warning"><para>Before calling this method, either updateKinematicsFromFloatingBase or updateKinematicsFromFixedBase must be called.</para>
 </simplesect>
 <parameterlist kind="param"><parameteritem>
@@ -862,7 +876,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="307" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="334" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a9abd2346013d2a811c5336255323962b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -933,7 +947,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="335" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="365" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a584e5d2ca3426529f407dbb5248f290e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -990,7 +1004,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="356" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="388" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ad52d10a9a145eba8d52c67ea65128554" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1021,7 +1035,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="371" column="10"/>
+        <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="403" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1037,12 +1051,26 @@
 <para>Note that in both ways there is no need (for the estimation) to provide the absolute position and linear velocity of the robot with respect to the inertial frame. The effect of gravity is considered by directly using the proper acceleration in the case of the floating frame (proper acceleration can be directly measured by an accelerometer) or by directly providing the gravity vector in the fixed frame case.</para>
 <para>Beside its main goal of estimation of external wrenches and joint torques, the class also provide methods that can be useful to calibrate the six-axis FT sensors of the robot. These methods are:<itemizedlist>
 <listitem><para><ref refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a903f0fca32abdb551ffe7eda013ce462" kindref="member">ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements</ref></para>
-</listitem><listitem><para><ref refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a2ce880f4ac64809b17c49f7a4bf60569" kindref="member">ExtWrenchesAndJointTorquesEstimator::computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</ref> Details of each method can be found in the method documentation </para>
 </listitem></itemizedlist>
 </para>
+<para><ref refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a2ce880f4ac64809b17c49f7a4bf60569" kindref="member">ExtWrenchesAndJointTorquesEstimator::computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</ref> Details of each method can be found in the method documentation </para>
     </detaileddescription>
-    <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="47" column="1" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="48" bodyend="373"/>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::ExtWrenchesAndJointTorquesEstimator</label>
+        <link refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_sensors</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SensorsList</label>
+        <link refid="classiDynTree_1_1SensorsList"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" line="48" column="1" bodyfile="iDynTree/ExtWrenchesAndJointTorquesEstimator.h" bodystart="49" bodyend="404"/>
     <listofallmembers>
+      <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1aab5d3c62ffa5c80d59069d7e80655c6f" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>_sensors</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a584e5d2ca3426529f407dbb5248f290e" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>checkThatTheModelIsStill</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a903f0fca32abdb551ffe7eda013ce462" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>computeExpectedFTSensorsMeasurements</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a2ce880f4ac64809b17c49f7a4bf60569" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</name></member>
@@ -1050,6 +1078,7 @@
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ad52d10a9a145eba8d52c67ea65128554" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>estimateLinkNetWrenchesWithoutGravity</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ab3725b4b03d337cfa361f2dfdbfed2d4" prot="private" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>ExtWrenchesAndJointTorquesEstimator</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1afaddafcf6ed76bc417e3780ceebf81db" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>ExtWrenchesAndJointTorquesEstimator</name></member>
+      <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a181f05bfa2c2f9bed20497840eb0ba09" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1af366663099c8b4772ab27485bc3581f8" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>loadModelAndSensorsFromFile</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a65ada8c5265bed3d7f19bd1b3694be18" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>loadModelAndSensorsFromFileWithSpecifiedDOFs</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae61e621887fff2419b6b58069791b186" prot="private" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>m_bufs</name></member>
@@ -1072,7 +1101,6 @@
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a4bcfb0a181f1106f4a7eff14757f1ef5" prot="private" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>operator=</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5da76e1decfef128f4580a108d865166" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>sensors</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a559e22f6ae100c24fabe83d708bfdf32" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>setModel</name></member>
-      <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ab62c38a61392178a65af5a90a6a7a076" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>setModelAndSensors</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a0ad964451590f8bbe0a9bb9e01de1374" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>submodels</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a7719cb1bcf6b3ba9f3d7f66e60738a68" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>updateKinematicsFromFixedBase</name></member>
       <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5ac25475eaa0e7b750c4cd9e266fa758" prot="public" virt="non-virtual"><scope>iDynTree::ExtWrenchesAndJointTorquesEstimator</scope><name>updateKinematicsFromFloatingBase</name></member>

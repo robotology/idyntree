@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="256" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="256" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="284" column="12" bodyfile="iDynTree/DynamicalSystem.h" bodystart="284" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a00d839c40133273c474849e70fce9bcf" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="257" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="257" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="285" column="12" bodyfile="iDynTree/DynamicalSystem.h" bodystart="285" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a0b4d67d17951d879a161733a1fdc303c" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="258" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="258" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="286" column="19" bodyfile="iDynTree/DynamicalSystem.h" bodystart="286" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a83ade897f2b42bfb09bec0e4c2d2ff5a" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="259" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="259" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="287" column="19" bodyfile="iDynTree/DynamicalSystem.h" bodystart="287" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="39" column="9"/>
+        <location file="iDynTree/DynamicalSystem.h" line="42" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ab82065e18425aa56e59b030519d5e123" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="47" column="9"/>
+        <location file="iDynTree/DynamicalSystem.h" line="50" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a4020c60fe630d1f5b6b4baf06e7b42a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="50" column="9"/>
+        <location file="iDynTree/DynamicalSystem.h" line="52" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a99a0776f0a23fd9a672c1be966839e81" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="52" column="17"/>
+        <location file="iDynTree/DynamicalSystem.h" line="54" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a1fdc25cc07f3bc2d02ac0cc2c74e8abc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="57" column="16"/>
+        <location file="iDynTree/DynamicalSystem.h" line="59" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae9048969fa6bb586f08332aa279ac01a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="62" column="16"/>
+        <location file="iDynTree/DynamicalSystem.h" line="64" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa10bd35bc49f5dfaea48ffeecf945312" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -193,7 +193,7 @@
 <para>Computes the system dynamics. </para>
         </briefdescription>
         <detaileddescription>
-<para>It return <formula id="332">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
+<para>It return <formula id="334">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
 </parameternamelist>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="75" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="79" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="87" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="91" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="96" column="37"/>
+        <location file="iDynTree/DynamicalSystem.h" line="100" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="106" column="24"/>
+        <location file="iDynTree/DynamicalSystem.h" line="110" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a8d4e1f2401927edd62ab3236f787bda0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="115" column="37"/>
+        <location file="iDynTree/DynamicalSystem.h" line="119" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aacad7dc34a95cc980482026aa0340ea5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="125" column="24"/>
+        <location file="iDynTree/DynamicalSystem.h" line="129" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="135" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="140" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae107a97a87ddc0f796e169c6de2cc39b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -402,7 +402,7 @@
 <para>Compute the partial derivative of the state dynamics wrt the state. </para>
         </briefdescription>
         <detaileddescription>
-<para>Namely it computes, <formula id="333">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
+<para>Namely it computes, <formula id="335">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="148" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="154" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adb980635dc572a927cef8bd46e6d5fb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -458,7 +458,7 @@
 <para>Compute the partial derivative of the state dynamics wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>Namely it computes, <formula id="334">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
+<para>Namely it computes, <formula id="336">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
@@ -490,7 +490,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="163" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="170" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a53c392202df88d48e4066a52e1ef3299" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -521,7 +521,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="173" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="182" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adce1c8de3d7c21ff9b349337c45526bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -552,7 +552,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="180" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="191" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a7525017f74a6be06a5b33f6ab1a534de" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -580,7 +580,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="335">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="337">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -619,7 +619,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="192" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="205" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a2fe62ab7639384a183bedce734aa6056" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -647,7 +647,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="336">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="338">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -686,7 +686,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="207" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="221" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa05844446c984946204dfda39a13aa8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -714,7 +714,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="337">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="339">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -753,7 +753,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="223" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="239" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a59b187545289936a58b328dd879d1804" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -786,7 +786,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="235" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="254" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae146dece07aaff9858da1f9ab0bb8464" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -819,7 +819,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="244" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="267" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adde7e5979c176b76d4334635210ead91" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -852,7 +852,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="253" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="280" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -861,7 +861,7 @@
     <detaileddescription>
 <para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions.</para>
 </simplesect>
-It defines a continuos time dynamical system, i.e. <formula id="331">$ \dot{x} = f(t,x,u) $</formula> Inherit publicly from this class in order to define your custiom dynamical system. </para>
+It defines a continuos time dynamical system, i.e. <formula id="333">$ \dot{x} = f(t,x,u) $</formula> Inherit publicly from this class in order to define your custiom dynamical system. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
@@ -881,7 +881,7 @@ It defines a continuos time dynamical system, i.e. <formula id="331">$ \dot{x} =
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/DynamicalSystem.h" line="35" column="5" bodyfile="iDynTree/DynamicalSystem.h" bodystart="35" bodyend="260"/>
+    <location file="iDynTree/DynamicalSystem.h" line="38" column="1" bodyfile="iDynTree/DynamicalSystem.h" bodystart="39" bodyend="288"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>controlInput</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>controlInput</name></member>

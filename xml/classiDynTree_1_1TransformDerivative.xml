@@ -17,12 +17,12 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="252">\[ {}^{\texttt{refFrame}} \dot{H}_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} \dot{R}_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} \dot{p}_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula></para>
+<para><formula id="254">\[ {}^{\texttt{refFrame}} \dot{H}_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} \dot{R}_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} \dot{p}_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula></para>
 <para>For details on this notation, check the <ref refid="classiDynTree_1_1Transform_1a8db2358dc66b742a7dcc19e5e43f4e39" kindref="member">Transform::asHomogeneousTransform()</ref> method . </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="127" column="19"/>
+        <location file="iDynTree/TransformDerivative.h" line="131" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a49312f51f1958233deaeabc6338f503e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -38,17 +38,17 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="253">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; \dot{p} \times R + p \times \dot{R} \\ 0_{3\times3} &amp; \dot{R} \end{bmatrix} \]</formula></para>
-<para>Where <formula id="247">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="248">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="249">$p \times$</formula> is the skew simmetric matrix such that <formula id="250">$(p \times) v = p \times v$</formula> .</para>
-<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="254">$ \dot{R} $</formula> and <formula id="255">$ \dot{p} $</formula>, you need to provide <formula id="159">$ R $</formula> and <formula id="256">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
+<para><formula id="255">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; \dot{p} \times R + p \times \dot{R} \\ 0_{3\times3} &amp; \dot{R} \end{bmatrix} \]</formula></para>
+<para>Where <formula id="249">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="250">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="251">$p \times$</formula> is the skew simmetric matrix such that <formula id="252">$(p \times) v = p \times v$</formula> .</para>
+<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="256">$ \dot{R} $</formula> and <formula id="257">$ \dot{p} $</formula>, you need to provide <formula id="161">$ R $</formula> and <formula id="258">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="164" column="19"/>
+        <location file="iDynTree/TransformDerivative.h" line="168" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1ab27febf007aa54fa3c88e74b37a3293c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -64,17 +64,17 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="257">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; 0_{3\times3} \\ \dot{p} \times R + p \times \dot{R} &amp; \dot{R} \end{bmatrix} \]</formula></para>
-<para>Where <formula id="247">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="248">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="249">$p \times$</formula> is the skew simmetric matrix such that <formula id="250">$(p \times) v = p \times v$</formula> .</para>
-<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="254">$ \dot{R} $</formula> and <formula id="255">$ \dot{p} $</formula>, you need to provide <formula id="159">$ R $</formula> and <formula id="256">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
+<para><formula id="259">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} \dot{R} &amp; 0_{3\times3} \\ \dot{p} \times R + p \times \dot{R} &amp; \dot{R} \end{bmatrix} \]</formula></para>
+<para>Where <formula id="249">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="250">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="251">$p \times$</formula> is the skew simmetric matrix such that <formula id="252">$(p \times) v = p \times v$</formula> .</para>
+<para>Given that the <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> object contains only <formula id="256">$ \dot{R} $</formula> and <formula id="257">$ \dot{p} $</formula>, you need to provide <formula id="161">$ R $</formula> and <formula id="258">$ p $</formula> to this method by passing the relative <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> object.</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="201" column="19"/>
+        <location file="iDynTree/TransformDerivative.h" line="205" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a1233fc928abded3318a8d34cdd6762ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -90,14 +90,14 @@
         </briefdescription>
         <detaileddescription>
 <para>This operation is useful to compose the derivative of a transform for a constant transform.</para>
-<para>If this transform derivative represent the derivative of a transform with respect to time <formula id="258">$ ~^a \dot{H}_b $</formula>, and we have a constant transform <formula id="259">$ ~^b H_c $</formula>, then this operation returns the derivative of the transform <formula id="260">$ ~^a H_c $</formula> : <formula id="261">\[ ~^a \dot{H}_c = ~^a \dot{H}_b ~^b H_c \]</formula></para>
+<para>If this transform derivative represent the derivative of a transform with respect to time <formula id="260">$ ~^a \dot{H}_b $</formula>, and we have a constant transform <formula id="261">$ ~^b H_c $</formula>, then this operation returns the derivative of the transform <formula id="262">$ ~^a H_c $</formula> : <formula id="263">\[ ~^a \dot{H}_c = ~^a \dot{H}_b ~^b H_c \]</formula></para>
 <para><simplesect kind="warning"><para>the otherTransform must be a quantity that does not depend on the derivation variable. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="220" column="29"/>
+        <location file="iDynTree/TransformDerivative.h" line="224" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1afadded161ac37c2ace8c182817ec3c3e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -112,11 +112,11 @@
 <para>Get the derivative of the inverse of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> is <formula id="258">$ ~^a \dot{H}_b $</formula> and the transform argument is <formula id="262">$ ~^a H_b $</formula>, returns the derivative of the inverse transform <formula id="263">$ ~^b {H}_a $</formula> computed as: <formula id="264">\[ ~^b \dot{H}_a = - ~^b {H}_a ~^a \dot{H}_b ~^b H_a \]</formula> </para>
+<para>If this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> is <formula id="260">$ ~^a \dot{H}_b $</formula> and the transform argument is <formula id="264">$ ~^a H_b $</formula>, returns the derivative of the inverse transform <formula id="265">$ ~^b {H}_a $</formula> computed as: <formula id="266">\[ ~^b \dot{H}_a = - ~^b {H}_a ~^a \dot{H}_b ~^b H_a \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="233" column="29"/>
+        <location file="iDynTree/TransformDerivative.h" line="237" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a27c594f59804d305f3fbb3e5edaff273" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
@@ -132,14 +132,14 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Given a articulated inertia <formula id="265">$I$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="266">$ ~^a\dot{X}_b $</formula> and a transform <formula id="267">$ ~^a{X}_b $</formula> return the articulated body inertia: </para>
+<para>Given a articulated inertia <formula id="267">$I$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="268">$ ~^a\dot{X}_b $</formula> and a transform <formula id="269">$ ~^a{X}_b $</formula> return the articulated body inertia: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="268">\[ ~_a \dot{X}^b Ia ~^a X_b + ~_a {X}^b Ia ~^a \dot{X}_b \]</formula> </para>
+<para><formula id="270">\[ ~_a \dot{X}^b Ia ~^a X_b + ~_a {X}^b Ia ~^a \dot{X}_b \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="242" column="32"/>
+        <location file="iDynTree/TransformDerivative.h" line="246" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a250449a4ca6bbae36481e15bb883c5aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -155,14 +155,14 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Given a <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> <formula id="269">$F$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="266">$ ~^a\dot{X}_b $</formula> and a transform <formula id="267">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
+<para>Given a <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> <formula id="271">$F$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="268">$ ~^a\dot{X}_b $</formula> and a transform <formula id="269">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="270">\[ ~_a \dot{X}^b F \]</formula> </para>
+<para><formula id="272">\[ ~_a \dot{X}^b F \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="251" column="28"/>
+        <location file="iDynTree/TransformDerivative.h" line="255" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a7b8b4747e5511931668ec4f1ef6159ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -178,14 +178,14 @@
           <declname>other</declname>
         </param>
         <briefdescription>
-<para>Given a <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> <formula id="9">$V$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="266">$ ~^a\dot{X}_b $</formula> and a transform <formula id="267">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
+<para>Given a <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> <formula id="9">$V$</formula> (other argument), this <ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref> <formula id="268">$ ~^a\dot{X}_b $</formula> and a transform <formula id="269">$ ~^a{X}_b $</formula> return the spatial force vector: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="271">\[ ~^a \dot{X}_b F \]</formula> </para>
+<para><formula id="273">\[ ~^a \dot{X}_b F \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="260" column="29"/>
+        <location file="iDynTree/TransformDerivative.h" line="264" column="25"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="34" column="17" bodyfile="iDynTree/TransformDerivative.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/TransformDerivative.h" line="34" column="13" bodyfile="iDynTree/TransformDerivative.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1TransformDerivative_1aae1bddabe0940d98e03251361e766570" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="39" column="19" bodyfile="iDynTree/TransformDerivative.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/TransformDerivative.h" line="39" column="15" bodyfile="iDynTree/TransformDerivative.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="47" column="9" bodyfile="iDynTree/TransformDerivative.h" bodystart="47" bodyend="47"/>
+        <location file="iDynTree/TransformDerivative.h" line="47" column="5" bodyfile="iDynTree/TransformDerivative.h" bodystart="47" bodyend="49"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a86d92c6237183c73b300a3d748eda395" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="54" column="9"/>
+        <location file="iDynTree/TransformDerivative.h" line="56" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a9ce3f86db8990c49d8dd2c68db4a68f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="59" column="9"/>
+        <location file="iDynTree/TransformDerivative.h" line="61" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a5b4091784bd95e9e6acc7122fd77f906" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="65" column="14"/>
+        <location file="iDynTree/TransformDerivative.h" line="67" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1aa7c10eaa9a3898fc9fb67fe6c8188e0e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -315,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="70" column="9" bodyfile="iDynTree/TransformDerivative.h" bodystart="70" bodyend="70"/>
+        <location file="iDynTree/TransformDerivative.h" line="72" column="5" bodyfile="iDynTree/TransformDerivative.h" bodystart="72" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a7e62b9e5318fda029f0bb1d14ae766fb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="76" column="26"/>
+        <location file="iDynTree/TransformDerivative.h" line="80" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a156f7b6ec1df03a6bdc3344e41aee40c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
@@ -343,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="82" column="24"/>
+        <location file="iDynTree/TransformDerivative.h" line="86" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a5cc3d9ce991a42f19d8858c19fd1573e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="88" column="14"/>
+        <location file="iDynTree/TransformDerivative.h" line="92" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1TransformDerivative_1a1da48139b879178dcefae4abf004ec15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -379,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="94" column="14"/>
+        <location file="iDynTree/TransformDerivative.h" line="98" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TransformDerivative.h" line="101" column="36"/>
+        <location file="iDynTree/TransformDerivative.h" line="105" column="32"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -443,7 +443,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/TransformDerivative.h" line="28" column="5" bodyfile="iDynTree/TransformDerivative.h" bodystart="29" bodyend="261"/>
+    <location file="iDynTree/TransformDerivative.h" line="28" column="1" bodyfile="iDynTree/TransformDerivative.h" bodystart="29" bodyend="265"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1TransformDerivative_1a49312f51f1958233deaeabc6338f503e" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>asAdjointTransformDerivative</name></member>
       <member refid="classiDynTree_1_1TransformDerivative_1ab27febf007aa54fa3c88e74b37a3293c" prot="public" virt="non-virtual"><scope>iDynTree::TransformDerivative</scope><name>asAdjointTransformWrenchDerivative</name></member>

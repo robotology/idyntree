@@ -123,7 +123,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Visualizer.h" line="73" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="74" bodyend="113"/>
+    <location file="iDynTree/Visualizer.h" line="73" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="74" bodyend="112"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ICamera_1a00fe788c2ad34ff3e8c62f18a42693ac" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>animator</name></member>
       <member refid="classiDynTree_1_1ICamera_1a42dc67363b38c6f2ef75015772757df8" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>getPosition</name></member>

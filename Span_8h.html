@@ -308,13 +308,13 @@
             </dt>
             <dd><span></span></dd>
             <dt id="acaebdb9ef4dfce796979f9392e238616">
-              <div class="m-doc-template">template&lt;class Ptr, typename = typename std::enable_if&lt;!SpanUtils::is_value_defined&lt;Ptr&gt;::value&amp;&amp; SpanUtils::is_element_defined&lt;Ptr&gt;::value&gt;::type&gt;</div>
+              <div class="m-doc-template">template&lt;class Ptr, typename = typename std::enable_if&lt;!SpanUtils::is_value_defined&lt;Ptr&gt;::value                                            &amp;&amp; SpanUtils::is_element_defined&lt;Ptr&gt;::value&gt;::type&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#acaebdb9ef4dfce796979f9392e238616" class="m-doc-self">make_span</a>(</span><span class="m-doc-wrap">Ptr&amp; cont) -&gt; IDYNTREE_CONSTEXPR Span&lt;typename Ptr::element_type&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a30a50da99346e81a568b2d5629347b92">
-              <div class="m-doc-template">template&lt;class Container, typename = typename std::enable_if&lt;!SpanUtils::is_value_defined&lt;Container&gt;::value&amp;&amp;                                                             !SpanUtils::is_element_defined&lt;Container&gt;::value&amp;&amp;                                                             SpanUtils::has_data_method&lt;Container&gt;::value&gt;::type&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a30a50da99346e81a568b2d5629347b92" class="m-doc-self">make_span</a>(</span><span class="m-doc-wrap">Container&amp; cont) -&gt; IDYNTREE_CONSTEXPR Span&lt;typename std::remove_pointer&lt;decltype(std::declval&lt;Container&gt;).data())&gt;::type&gt;</span>
+            <dt id="ad137f1627d79603c67b18aad291bb823">
+              <div class="m-doc-template">template&lt;class Container, typename = typename std::enable_if&lt;!SpanUtils::is_value_defined&lt;Container&gt;::value                                            &amp;&amp; !SpanUtils::is_element_defined&lt;Container&gt;::value                                            &amp;&amp; SpanUtils::has_data_method&lt;Container&gt;::value&gt;::type&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad137f1627d79603c67b18aad291bb823" class="m-doc-self">make_span</a>(</span><span class="m-doc-wrap">Container&amp; cont) -&gt; IDYNTREE_CONSTEXPR Span&lt;typename std::remove_pointer&lt;decltype(std::declval&lt;Container&gt;).data())&gt;::type&gt;</span>
             </dt>
             <dd><span></span></dd>
           </dl>

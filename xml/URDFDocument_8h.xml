@@ -11,8 +11,8 @@
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
     <includes local="no">string</includes>
-    <includes local="no">vector</includes>
     <includes local="no">unordered_map</includes>
+    <includes local="no">vector</includes>
     <incdepgraph>
       <node id="1">
         <label>private/URDFDocument.h</label>
@@ -27,10 +27,10 @@
       <node id="2">
         <label>string</label>
       </node>
-      <node id="3">
+      <node id="4">
         <label>vector</label>
       </node>
-      <node id="4">
+      <node id="3">
         <label>unordered_map</label>
       </node>
     </incdepgraph>

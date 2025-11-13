@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="LinkTraversalsCache_8h" kind="file" language="C++">
     <compoundname>LinkTraversalsCache.h</compoundname>
-    <includes local="no">vector</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
+    <includes local="no">vector</includes>
     <includedby refid="Model_2LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>

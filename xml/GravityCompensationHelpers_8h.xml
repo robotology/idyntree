@@ -2,13 +2,13 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="GravityCompensationHelpers_8h" kind="file" language="C++">
     <compoundname>GravityCompensationHelpers.h</compoundname>
+    <includes refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includes>
     <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
-    <includes refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includes>
+    <includes refid="ClassicalAcc_8h" local="no">iDynTree/ClassicalAcc.h</includes>
     <includes refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
-    <includes refid="ClassicalAcc_8h" local="no">iDynTree/ClassicalAcc.h</includes>
     <includes refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includes>
     <includedby refid="Estimation_2GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
     <innerclass refid="classiDynTree_1_1GravityCompensationHelper" prot="public">iDynTree::GravityCompensationHelper</innerclass>

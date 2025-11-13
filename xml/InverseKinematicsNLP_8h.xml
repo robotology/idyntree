@@ -3,11 +3,11 @@
   <compounddef id="InverseKinematicsNLP_8h" kind="file" language="C++">
     <compoundname>InverseKinematicsNLP.h</compoundname>
     <includes local="no">IpTNLP.hpp</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
-    <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes local="no">map</includes>
     <includedby refid="InverseKinematicsData_8h" local="yes">private/InverseKinematicsData.h</includedby>
     <incdepgraph>

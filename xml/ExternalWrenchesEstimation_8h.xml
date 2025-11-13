@@ -3,8 +3,8 @@
   <compounddef id="ExternalWrenchesEstimation_8h" kind="file" language="C++">
     <compoundname>ExternalWrenchesEstimation.h</compoundname>
     <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
-    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="261" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="261" declcolumn="6"/>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="265" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="265" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4c628669d7801fee070c5ac32312b45d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="289" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="289" declcolumn="6"/>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="296" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="296" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4552fdf67855209419f189466fbb8e69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="341" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="341" declcolumn="6"/>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="350" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="350" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a9c5c034c8fc89c4d0d19f17d2134a7a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -478,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="382" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="382" declcolumn="6"/>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="392" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="392" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a2cf3011d218d8a98440bdcafdd1d54e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -542,7 +542,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="396" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="396" declcolumn="6"/>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="411" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="411" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1ab6c0784c22088705cc07732b5b29dd4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -573,7 +573,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ExternalWrenchesEstimation.h" line="410" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="410" declcolumn="6"/>
+        <location file="iDynTree/ExternalWrenchesEstimation.h" line="426" column="6" declfile="iDynTree/ExternalWrenchesEstimation.h" declline="426" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

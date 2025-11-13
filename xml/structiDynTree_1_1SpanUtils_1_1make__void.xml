@@ -21,14 +21,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Span.h" line="76" column="41" bodyfile="iDynTree/Span.h" bodystart="76" bodyend="-1"/>
+        <location file="iDynTree/Span.h" line="79" column="18" bodyfile="iDynTree/Span.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Span.h" line="76" column="12" bodyfile="iDynTree/Span.h" bodystart="76" bodyend="76"/>
+    <location file="iDynTree/Span.h" line="77" column="12" bodyfile="iDynTree/Span.h" bodystart="78" bodyend="80"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1SpanUtils_1_1make__void_1acc50838eed461500c628f7fe1fe75d3d" prot="public" virt="non-virtual"><scope>iDynTree::SpanUtils::make_void</scope><name>type</name></member>
     </listofallmembers>

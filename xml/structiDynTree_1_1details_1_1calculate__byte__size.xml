@@ -39,7 +39,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Span.h" line="693" column="5" bodyfile="iDynTree/Span.h" bodystart="697" bodyend="698"/>
+    <location file="iDynTree/Span.h" line="754" column="1" bodyfile="iDynTree/Span.h" bodystart="758" bodyend="759"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

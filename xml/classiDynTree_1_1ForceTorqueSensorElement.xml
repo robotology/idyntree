@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="20" column="21" bodyfile="private/ForceTorqueSensorElement.h" bodystart="20" bodyend="-1"/>
+        <location file="private/ForceTorqueSensorElement.h" line="22" column="21" bodyfile="private/ForceTorqueSensorElement.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="22" column="14"/>
+        <location file="private/ForceTorqueSensorElement.h" line="25" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorElement_1aa4c6d5b64e0290c93ccd0f963701b816" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="26" column="21"/>
+        <location file="private/ForceTorqueSensorElement.h" line="28" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorElement_1ad3ac91fc185163b7f35acfb364b86a63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1SensorHelper" kindref="compound">iDynTree::SensorHelper</ref> &gt;</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="28" column="27"/>
+        <location file="private/ForceTorqueSensorElement.h" line="30" column="27"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -113,9 +113,9 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/ForceTorqueSensorElement.h" line="18" column="1" bodyfile="private/ForceTorqueSensorElement.h" bodystart="18" bodyend="29"/>
+    <location file="private/ForceTorqueSensorElement.h" line="19" column="1" bodyfile="private/ForceTorqueSensorElement.h" bodystart="20" bodyend="31"/>
     <listofallmembers>
-      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7983564fd2b7765dcd3eda619c866192" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>attributes</name></member>
       <member refid="classiDynTree_1_1ForceTorqueSensorElement_1aa4c6d5b64e0290c93ccd0f963701b816" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>childElementForName</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>childHasBeenParsed</name></member>

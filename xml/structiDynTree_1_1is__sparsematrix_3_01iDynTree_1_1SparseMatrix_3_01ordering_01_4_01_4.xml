@@ -36,7 +36,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/EigenHelpers.h" line="40" column="5" bodyfile="iDynTree/EigenHelpers.h" bodystart="40" bodyend="40"/>
+    <location file="iDynTree/EigenHelpers.h" line="41" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="42" bodyend="43"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Jacobians.h" line="41" column="10" declfile="iDynTree/Jacobians.h" declline="41" declcolumn="10"/>
+        <location file="iDynTree/Jacobians.h" line="40" column="6" declfile="iDynTree/Jacobians.h" declline="40" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

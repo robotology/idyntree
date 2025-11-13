@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="37" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="38" bodyend="67"/>
+        <location file="iDynTree/BerdyHelper.h" line="38" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="39" bodyend="71"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" prot="public" static="no" strong="no">
         <type></type>
@@ -97,7 +97,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="87">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="88">$ f^B_i $</formula> </para>
+<para><formula id="89">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="90">$ f^B_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" prot="public">
@@ -105,7 +105,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="89">$ f_i $</formula> </para>
+<para><formula id="91">$ f_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312adaecc7fb3d43b48487ae03dfec685fb8" prot="public">
@@ -113,7 +113,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="90">$ \tau_i $</formula> </para>
+<para><formula id="92">$ \tau_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a80199996cf9e8b7d5171d762533f6c0c" prot="public">
@@ -121,7 +121,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="91">$ f^x_i $</formula> </para>
+<para><formula id="93">$ f^x_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312aa13efb04f5c05ca865f2aee0fd03fe68" prot="public">
@@ -129,7 +129,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="92">$ \ddot{q}_i $</formula> </para>
+<para><formula id="94">$ \ddot{q}_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a9a69ec4d25d83b00175dc3adb8edce00" prot="public">
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="76" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="77" bodyend="101"/>
+        <location file="iDynTree/BerdyHelper.h" line="81" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="82" bodyend="107"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" prot="public" static="no" strong="no">
         <type></type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="119" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="120" bodyend="139"/>
+        <location file="iDynTree/BerdyHelper.h" line="126" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="127" bodyend="146"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

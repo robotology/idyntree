@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="iKinConversionsImplementation_8h" kind="file" language="C++">
     <compoundname>iKinConversionsImplementation.h</compoundname>
-    <includes refid="iKinConversions_8h" local="no">iDynTree/iKinConversions.h</includes>
     <includes refid="DenavitHartenberg_8h" local="no">iDynTree/DenavitHartenberg.h</includes>
+    <includes refid="iKinConversions_8h" local="no">iDynTree/iKinConversions.h</includes>
     <includes refid="YARPConversions_8h" local="no">iDynTree/YARPConversions.h</includes>
     <includes local="no">iCub/iKin/iKinFwd.h</includes>
     <includes local="no">cassert</includes>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="33" column="29" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="33" bodyend="38"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="33" column="29" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="33" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeICUB_1ga93e84fbc1880a920199aae0cbabd76ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="40" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="40" bodyend="63" declfile="iDynTree/iKinConversions.h" declline="25" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="43" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="43" bodyend="65" declfile="iDynTree/iKinConversions.h" declline="25" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeICUB_1gadb9ad80c8043481f2bb8f013542db690" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="65" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="65" bodyend="78" declfile="iDynTree/iKinConversions.h" declline="35" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="67" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="67" bodyend="80" declfile="iDynTree/iKinConversions.h" declline="34" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeICUB_1gaaedc638580c296a9a355975268ea25bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="119" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="119" bodyend="129" declfile="iDynTree/iKinConversions.h" declline="86" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="123" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="123" bodyend="132" declfile="iDynTree/iKinConversions.h" declline="83" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeICUB_1ga681d23161951646fcb60dc7681e59482" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="131" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="131" bodyend="140" declfile="iDynTree/iKinConversions.h" declline="76" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="134" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="134" bodyend="143" declfile="iDynTree/iKinConversions.h" declline="73" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="RK4_8h" kind="file" language="C++">
     <compoundname>RK4.h</compoundname>
-    <includes refid="FixedStepIntegrator_8h" local="no">iDynTree/Integrators/FixedStepIntegrator.h</includes>
-    <includes local="no">Eigen/Sparse</includes>
     <includes local="no">Eigen/Dense</includes>
+    <includes local="no">Eigen/Sparse</includes>
+    <includes refid="FixedStepIntegrator_8h" local="no">iDynTree/Integrators/FixedStepIntegrator.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <incdepgraph>
       <node id="1">
@@ -15,10 +15,10 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>Eigen/Sparse</label>
       </node>
-      <node id="3">
+      <node id="2">
         <label>Eigen/Dense</label>
       </node>
     </incdepgraph>

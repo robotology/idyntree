@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="95" column="31" bodyfile="iDynTree/LinearSystem.h" bodystart="94" bodyend="-1"/>
+        <location file="iDynTree/LinearSystem.h" line="104" column="23" bodyfile="iDynTree/LinearSystem.h" bodystart="103" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="35" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="37" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3437f9e6234fc7a698d4d4a590ec419b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="37" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="39" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a29645196589d2a947368e65c851c50bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="41" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="44" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a79af515c739a47f2c0b7ba77d2131b5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="43" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="46" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a1d874018df76571d25f2cf5b510c4467" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="46" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="49" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a36b039c6b817db400f277cfa3230802b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="48" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="51" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8909f5f3adbe11fa54c379760b417c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="51" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="54" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fa5cbf4e9a3fa25db27edeef20ca4de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="53" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="56" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a2596766c2b5a2346fc00633b1fcebc85" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -190,7 +190,7 @@
 <para>Computes the system dynamics. </para>
         </briefdescription>
         <detaileddescription>
-<para>It return <formula id="332">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
+<para>It return <formula id="334">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
 </parameternamelist>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="55" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="59" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8a775ab121adc0f62c2d2203801a331e" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -245,7 +245,7 @@
 <para>Compute the partial derivative of the state dynamics wrt the state. </para>
         </briefdescription>
         <detaileddescription>
-<para>Namely it computes, <formula id="333">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
+<para>Namely it computes, <formula id="335">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="59" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="61" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ae6521cb2dad7a528732ea7f6933a8071" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -301,7 +301,7 @@
 <para>Compute the partial derivative of the state dynamics wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>Namely it computes, <formula id="334">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
+<para>Namely it computes, <formula id="336">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
@@ -333,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="63" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="65" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ab50cd1fb480d10395eb58f5b978f0abb" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="67" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="69" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a766c7b4d1388006e06b4e985f32c4913" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="69" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="72" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1aad45c1bcb83441937a1724bee499f58c" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -423,7 +423,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="335">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="337">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -462,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="71" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="76" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a95d0eec0bfd0634ad3f0bf4c977b9a0b" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -490,7 +490,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="336">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="338">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -529,7 +529,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="76" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="82" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a51e2fb08d78286e68b3bc15d720b943a" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -557,7 +557,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="337">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="339">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -596,7 +596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="81" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="88" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ac7591a0eaa5140d4894f1a911a5b995f" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -629,7 +629,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="86" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="93" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fcadc398984a481f0509bded638bd05" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -662,7 +662,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="88" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="96" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a16b0a2f2acb0e0226510a15bcd578882" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -695,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="90" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="99" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -729,7 +729,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/LinearSystem.h" line="30" column="9" bodyfile="iDynTree/LinearSystem.h" bodystart="31" bodyend="97"/>
+    <location file="iDynTree/LinearSystem.h" line="33" column="1" bodyfile="iDynTree/LinearSystem.h" bodystart="34" bodyend="105"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>controlInput</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>controlInput</name></member>

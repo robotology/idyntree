@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="YARPConfigurationsLoader_8h" kind="file" language="C++">
     <compoundname>YARPConfigurationsLoader.h</compoundname>
-    <includes local="no">yarp/os/Searchable.h</includes>
     <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
     <includes local="no">string</includes>
+    <includes local="no">yarp/os/Searchable.h</includes>
     <includes refid="YARPConfigurationsLoaderImplementation_8h" local="yes">YARPConfigurationsLoaderImplementation.h</includes>
     <includedby refid="yarp_2YARPConfigurationsLoader_8h" local="no">iDynTree/yarp/YARPConfigurationsLoader.h</includedby>
     <incdepgraph>
@@ -16,10 +16,10 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>yarp/os/Searchable.h</label>
       </node>
-      <node id="3">
+      <node id="2">
         <label>string</label>
       </node>
     </incdepgraph>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConfigurationsLoader.h" line="21" column="10" bodyfile="iDynTree/YARPConfigurationsLoaderImplementation.h" bodystart="9" bodyend="39" declfile="iDynTree/YARPConfigurationsLoader.h" declline="21" declcolumn="10"/>
+        <location file="iDynTree/YARPConfigurationsLoader.h" line="21" column="6" bodyfile="iDynTree/YARPConfigurationsLoaderImplementation.h" bodystart="9" bodyend="41" declfile="iDynTree/YARPConfigurationsLoader.h" declline="21" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

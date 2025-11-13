@@ -3,10 +3,10 @@
   <compounddef id="MultipleShootingSolver_8h" kind="file" language="C++">
     <compoundname>MultipleShootingSolver.h</compoundname>
     <includes refid="OptimalControlSolver_8h" local="no">iDynTree/OptimalControlSolver.h</includes>
-    <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includes refid="Optimizer_8h" local="no">iDynTree/Optimizer.h</includes>
-    <includes local="no">vector</includes>
+    <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includes local="no">memory</includes>
+    <includes local="no">vector</includes>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/OCSolvers/MultipleShootingSolver.h</label>
@@ -16,10 +16,10 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>vector</label>
       </node>
-      <node id="3">
+      <node id="2">
         <label>memory</label>
       </node>
     </incdepgraph>

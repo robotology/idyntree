@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ControlledDynamicalSystem_8h" kind="file" language="C++">
     <compoundname>ControlledDynamicalSystem.h</compoundname>
-    <includes refid="DynamicalSystem_8h" local="no">iDynTree/DynamicalSystem.h</includes>
     <includes refid="Controller_8h" local="no">iDynTree/Controller.h</includes>
+    <includes refid="DynamicalSystem_8h" local="no">iDynTree/DynamicalSystem.h</includes>
     <includes local="no">memory</includes>
     <incdepgraph>
       <node id="1">

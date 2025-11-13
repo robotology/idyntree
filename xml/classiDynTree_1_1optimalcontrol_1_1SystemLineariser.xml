@@ -10,7 +10,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/SystemLineariser.h" line="23" column="9" bodyfile="iDynTree/SystemLineariser.h" bodystart="23" bodyend="25"/>
+    <location file="iDynTree/SystemLineariser.h" line="25" column="1" bodyfile="iDynTree/SystemLineariser.h" bodystart="26" bodyend="27"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

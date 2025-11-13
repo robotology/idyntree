@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="73" column="28" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="73" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="82" column="21" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1abedf340f114e51dacd483fd73f373fe5" prot="protected" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingVector</ref> &gt;</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="74" column="28" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="74" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="83" column="21" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a416877725e0df7d52ef0f599b39db143" prot="protected" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingDouble</ref> &gt;</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="75" column="28" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="75" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="84" column="21" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a41bc5547c17cf3b7490ea15361fc0de8" prot="protected" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingMatrix</ref> &gt;</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="76" column="28" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="76" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="85" column="21" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a9269110e23af528aae7b78aad054d0c9" prot="protected" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingVector</ref> &gt;</type>
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="77" column="28" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="77" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="86" column="21" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a379ea8c1910865e1ad109cc46ad8bfb6" prot="protected" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingDouble</ref> &gt;</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="78" column="28" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="78" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="87" column="21" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae9c9fd426f107159f3e5354fd3f0562e" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="80" column="17" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="80" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="89" column="10" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1aeb28846afd2fe3f4373b646d49fbba97" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="81" column="17" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="81" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="90" column="10" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae00c9061c568494f23b858ad05a0ff02" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="82" column="17" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="82" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="91" column="10" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a917cfae65e537e496290046a44d7ca94" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref></type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="84" column="30" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="84" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="93" column="23" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a55d298ac7b70590ad7e9122a21c03b7d" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref></type>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="85" column="30" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="85" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="94" column="23" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1aa329727f0449dd78cc65248c5ee2f7ec" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref></type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="86" column="30" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="86" bodyend="-1"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="95" column="23" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="95" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="31" column="20"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="33" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1afa7aa964e0221db0c39d9eec020b1bb0" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="33" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="35" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a4475397f2ecdcdf597460c050b32c62d" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -271,7 +271,7 @@
 <para>Evaluate cost first partial derivative wrt the state. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="326">$\frac{\partial g(t, x, u)}{\partial x}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="328">$\frac{\partial g(t, x, u)}{\partial x}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="38" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="41" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1abc543d1905aa851fbfcc296b6dc5d276" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -338,7 +338,7 @@
 <para>Evaluate cost first partial derivative wrt the control variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="327">$\frac{\partial g(t, x, u)}{\partial u}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="329">$\frac{\partial g(t, x, u)}{\partial u}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="43" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="47" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae8820c08b123bdb321c36fecff42d10d" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -405,7 +405,7 @@
 <para>Evaluate cost second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="328">$\frac{\partial^2 g(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="330">$\frac{\partial^2 g(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -444,7 +444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="48" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="53" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1aa30638553d8ff59f9d7e81d096df1fc5" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -472,7 +472,7 @@
 <para>Evaluate cost second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="329">$\frac{\partial^2 g(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="331">$\frac{\partial^2 g(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -511,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="53" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="59" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ac2a8f6f8f602edb75ba99fc497f72a07" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -539,7 +539,7 @@
 <para>Evaluate cost second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="330">$\frac{\partial^2 g(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="332">$\frac{\partial^2 g(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -578,7 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="59" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="65" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1af0cf7c4bb09a7f22b1924c8bed72ed34" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -611,7 +611,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="64" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="70" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a5c23504c3a9f8fabe3431a654073bbc2" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -644,7 +644,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="66" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="73" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae76e9ba84440737d2a7a7c96266fd847" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -677,7 +677,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="68" column="25"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="76" column="18"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -696,7 +696,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticLikeCost.h" line="71" column="12"/>
+        <location file="iDynTree/QuadraticLikeCost.h" line="80" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -774,7 +774,7 @@
         <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/QuadraticLikeCost.h" line="26" column="8" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="27" bodyend="88"/>
+    <location file="iDynTree/QuadraticLikeCost.h" line="29" column="1" bodyfile="iDynTree/QuadraticLikeCost.h" bodystart="30" bodyend="96"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a97ea5427f72a47d5abd6b37ca71a51f5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::QuadraticLikeCost</scope><name>Cost</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1afa7aa964e0221db0c39d9eec020b1bb0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::QuadraticLikeCost</scope><name>costEvaluation</name></member>

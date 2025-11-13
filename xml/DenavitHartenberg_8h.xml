@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="138" column="11" declfile="iDynTree/DenavitHartenberg.h" declline="138" declcolumn="11"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="136" column="11" declfile="iDynTree/DenavitHartenberg.h" declline="136" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1a259b4c68b0f4b9ae9ce389ed14f4c712" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Transform</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="149" column="11" declfile="iDynTree/DenavitHartenberg.h" declline="149" declcolumn="11"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="147" column="11" declfile="iDynTree/DenavitHartenberg.h" declline="147" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1ada11245ee6d17f4d64ccf59eeead8f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -114,14 +114,17 @@
 <para>Extract a Denavit Hartenberg Chain from a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para>In particular you can specify the base frame and the end effector frame of the chain. The chain is then extracted using the algorithm found in: Chapter 3, Spong, Mark W., Seth Hutchinson, and M. Vidyasagar. &quot;Robot modeling and control&quot;. 2006. (section 3.2.3 of <ulink url="http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf">http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf</ulink>)</para>
+<para>In particular you can specify the base frame and the end effector frame of the chain. The chain is then extracted using the algorithm found in: Chapter 3, Spong, Mark W., Seth Hutchinson, and M. Vidyasagar. &quot;Robot modeling and control&quot;.<orderedlist>
+<listitem><para>(section 3.2.3 of <ulink url="http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf">http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf</ulink>)</para>
 <para><simplesect kind="note"><para>The DH representation supports only revolute and translational 1-DOF joints. In this implementation only revolute joints are supported. </para>
 </simplesect>
+</para>
+</listitem></orderedlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="162" column="6" declfile="iDynTree/DenavitHartenberg.h" declline="162" declcolumn="6"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="161" column="6" declfile="iDynTree/DenavitHartenberg.h" declline="161" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1ac94534b93496e2703a218b38774c64a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -150,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="178" column="6" declfile="iDynTree/DenavitHartenberg.h" declline="178" declcolumn="6"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="177" column="6" declfile="iDynTree/DenavitHartenberg.h" declline="177" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

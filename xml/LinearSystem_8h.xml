@@ -3,8 +3,8 @@
   <compounddef id="LinearSystem_8h" kind="file" language="C++">
     <compoundname>LinearSystem.h</compoundname>
     <includes refid="DynamicalSystem_8h" local="no">iDynTree/DynamicalSystem.h</includes>
-    <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
+    <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includes local="no">memory</includes>
     <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>
     <incdepgraph>

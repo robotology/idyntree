@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="AttitudeEstimator_8h" kind="file" language="C++">
     <compoundname>AttitudeEstimator.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes local="no">iostream</includes>
     <includedby refid="AttitudeEstimatorUtils_8h" local="no">iDynTree/AttitudeEstimatorUtils.h</includedby>
     <includedby refid="AttitudeMahonyFilter_8h" local="no">iDynTree/AttitudeMahonyFilter.h</includedby>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="14" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="14" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="14" column="27" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="14" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="AttitudeEstimator_8h_1a94dcb1f9c90a22269981469e229ed6ce" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="15" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="15" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="15" column="27" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="AttitudeEstimator_8h_1ad170eb4fd0bd13bfb0bdbdb6460d28bc" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="16" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="16" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="16" column="27" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="AttitudeEstimator_8h_1a8953e202971beb38867767ab9f002c42" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref></type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="18" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="18" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="18" column="27" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="AttitudeEstimator_8h_1a48e2955e462d28103d57a10634d0654d" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/AttitudeEstimator.h" line="19" column="31" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="19" bodyend="-1"/>
+        <location file="iDynTree/AttitudeEstimator.h" line="19" column="27" bodyfile="iDynTree/AttitudeEstimator.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

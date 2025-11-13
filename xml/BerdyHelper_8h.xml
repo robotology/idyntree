@@ -3,17 +3,17 @@
   <compounddef id="BerdyHelper_8h" kind="file" language="C++">
     <compoundname>BerdyHelper.h</compoundname>
     <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
-    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
+    <includes refid="Triplets_8h" local="no">iDynTree/Triplets.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
-    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
-    <includes refid="Triplets_8h" local="no">iDynTree/Triplets.h</includes>
+    <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
-    <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
     <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
     <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/LinkTraversalsCache.h</includes>
     <includes local="no">vector</includes>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="37" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="38" bodyend="67"/>
+        <location file="iDynTree/BerdyHelper.h" line="38" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="39" bodyend="71"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" prot="public" static="no" strong="no">
         <type></type>
@@ -88,7 +88,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="87">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="88">$ f^B_i $</formula> </para>
+<para><formula id="89">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="90">$ f^B_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" prot="public">
@@ -96,7 +96,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="89">$ f_i $</formula> </para>
+<para><formula id="91">$ f_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312adaecc7fb3d43b48487ae03dfec685fb8" prot="public">
@@ -104,7 +104,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="90">$ \tau_i $</formula> </para>
+<para><formula id="92">$ \tau_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a80199996cf9e8b7d5171d762533f6c0c" prot="public">
@@ -112,7 +112,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="91">$ f^x_i $</formula> </para>
+<para><formula id="93">$ f^x_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312aa13efb04f5c05ca865f2aee0fd03fe68" prot="public">
@@ -120,7 +120,7 @@
           <briefdescription>
           </briefdescription>
           <detaileddescription>
-<para><formula id="92">$ \ddot{q}_i $</formula> </para>
+<para><formula id="94">$ \ddot{q}_i $</formula> </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a9a69ec4d25d83b00175dc3adb8edce00" prot="public">
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="76" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="77" bodyend="101"/>
+        <location file="iDynTree/BerdyHelper.h" line="81" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="82" bodyend="107"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" prot="public" static="no" strong="no">
         <type></type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="119" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="120" bodyend="139"/>
+        <location file="iDynTree/BerdyHelper.h" line="126" column="1" bodyfile="iDynTree/BerdyHelper.h" bodystart="127" bodyend="146"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="141" column="6" declfile="iDynTree/BerdyHelper.h" declline="141" declcolumn="6"/>
+        <location file="iDynTree/BerdyHelper.h" line="148" column="6" declfile="iDynTree/BerdyHelper.h" declline="148" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="142" column="6" declfile="iDynTree/BerdyHelper.h" declline="142" declcolumn="6"/>
+        <location file="iDynTree/BerdyHelper.h" line="149" column="6" declfile="iDynTree/BerdyHelper.h" declline="149" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdyHelper.h" line="143" column="6" declfile="iDynTree/BerdyHelper.h" declline="143" declcolumn="6"/>
+        <location file="iDynTree/BerdyHelper.h" line="150" column="6" declfile="iDynTree/BerdyHelper.h" declline="150" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

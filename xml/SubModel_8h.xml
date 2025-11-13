@@ -3,16 +3,16 @@
   <compounddef id="SubModel_8h" kind="file" language="C++">
     <compoundname>SubModel.h</compoundname>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
-    <includes local="no">vector</includes>
-    <includes local="no">string</includes>
     <includes local="no">cstddef</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
     <includedby refid="Model_2SubModel_8h" local="no">iDynTree/Model/SubModel.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>string</label>
       </node>
-      <node id="2">
+      <node id="4">
         <label>vector</label>
       </node>
       <node id="1">
@@ -25,7 +25,7 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="2">
         <label>cstddef</label>
       </node>
     </incdepgraph>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SubModel.h" line="126" column="10" declfile="iDynTree/SubModel.h" declline="126" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="126" column="6" declfile="iDynTree/SubModel.h" declline="126" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SubModel.h" line="141" column="10" declfile="iDynTree/SubModel.h" declline="141" declcolumn="10"/>
+        <location file="iDynTree/SubModel.h" line="141" column="6" declfile="iDynTree/SubModel.h" declline="141" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

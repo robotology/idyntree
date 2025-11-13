@@ -6,6 +6,190 @@
     <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
     <includedby refid="Sensors_2PredictSensorsMeasurements_8h" local="no">iDynTree/Sensors/PredictSensorsMeasurements.h</includedby>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a1eeab67ce7818eeabf066f4565c26a5b" prot="public" static="no" mutable="no">
+        <type>const SensorsList &amp;</type>
+        <definition>const SensorsList &amp; iDynTree::sensorList</definition>
+        <argsstring></argsstring>
+        <name>sensorList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="137" column="51" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a2221260b231e2f3ff9b5113f9dd182ee" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal &amp;</type>
+        <definition>const SensorsList const Traversal &amp; iDynTree::traversal</definition>
+        <argsstring></argsstring>
+        <name>traversal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="138" column="49" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a13378d83c5a83508c9929ca70199eaf0" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos&amp; iDynTree::robotPos</definition>
+        <argsstring></argsstring>
+        <name>robotPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="139" column="55" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1ad0c5f8eac1fbb8d265d760560588b6e3" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel&amp; iDynTree::robotVel</definition>
+        <argsstring></argsstring>
+        <name>robotVel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="140" column="55" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a96b08340336649636b3d0bbfda97fc11" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc&amp; iDynTree::robotAcc</definition>
+        <argsstring></argsstring>
+        <name>robotAcc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="141" column="55" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a69d5081c54af1527dc97c7831f2a6af8" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration&amp; iDynTree::gravity</definition>
+        <argsstring></argsstring>
+        <name>gravity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="142" column="55" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1ac21a810fb7e52d0ec67d581b806caef4" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches&amp; iDynTree::externalWrenches</definition>
+        <argsstring></argsstring>
+        <name>externalWrenches</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="143" column="63" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1ae58c1801364b329fed448e85fceeaea7" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc&amp; iDynTree::buf_properRobotAcc</definition>
+        <argsstring></argsstring>
+        <name>buf_properRobotAcc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="144" column="49" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1ad6bf6b6c3b8f7721d628486e8f355a28" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions&amp; iDynTree::buf_linkPos</definition>
+        <argsstring></argsstring>
+        <name>buf_linkPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="145" column="47" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a2dd4cc062a116aaf5aa8fbffea4dcce1" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray &amp;</type>
+        <definition>const SensorsList const Traversal const LinkVelArray &amp; iDynTree::buf_linkVel</definition>
+        <argsstring></argsstring>
+        <name>buf_linkVel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="146" column="46" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a78607604a70cef66d6abee26989ecaf0" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray &amp;</type>
+        <definition>const SensorsList const Traversal const LinkVelArray const LinkAccArray &amp; iDynTree::buf_linkProperAcc</definition>
+        <argsstring></argsstring>
+        <name>buf_linkProperAcc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="147" column="46" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a9d5da825c0a573af8b8e2d18c8f5895f" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray LinkInternalWrenches &amp;</type>
+        <definition>const SensorsList const Traversal const LinkVelArray const LinkAccArray const LinkInternalWrenches &amp; iDynTree::buf_internalWrenches</definition>
+        <argsstring></argsstring>
+        <name>buf_internalWrenches</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="148" column="54" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a94a76d721828f990586df83b13194d5c" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray LinkInternalWrenches FreeFloatingGeneralizedTorques &amp;</type>
+        <definition>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray LinkInternalWrenches FreeFloatingGeneralizedTorques&amp; iDynTree::buf_outputTorques</definition>
+        <argsstring></argsstring>
+        <name>buf_outputTorques</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="149" column="64" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="PredictSensorsMeasurements_8h_1a2f3fdb36b28a41db9ee23a0648c62bfb" prot="public" static="no" mutable="no">
+        <type>const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray LinkInternalWrenches FreeFloatingGeneralizedTorques SensorsMeasurements &amp;</type>
+        <definition>const SensorsList const Traversal const LinkVelArray const LinkAccArray const LinkInternalWrenches SensorsMeasurements &amp; iDynTree::predictedMeasurement</definition>
+        <argsstring></argsstring>
+        <name>predictedMeasurement</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="150" column="53" bodyfile="iDynTree/PredictSensorsMeasurements.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
       <sectiondef kind="func">
       <memberdef kind="function" id="group__iDynTreeSensors_1ga26f5afdf5245848ed0cf946cab8510d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -201,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PredictSensorsMeasurements.h" line="64" column="11" declfile="iDynTree/PredictSensorsMeasurements.h" declline="64" declcolumn="11"/>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="62" column="6" declfile="iDynTree/PredictSensorsMeasurements.h" declline="62" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeSensors_1ga85a09204a0c57c96bb77548d2a633677" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -292,72 +476,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PredictSensorsMeasurements.h" line="95" column="11" declfile="iDynTree/PredictSensorsMeasurements.h" declline="95" declcolumn="11"/>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="94" column="6" declfile="iDynTree/PredictSensorsMeasurements.h" declline="94" declcolumn="6"/>
       </memberdef>
-      <memberdef kind="function" id="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::predictSensorsMeasurements</definition>
-        <argsstring>(const Model &amp;model, const SensorsList &amp;sensorList, const Traversal &amp;traversal, const FreeFloatingPos &amp;robotPos, const FreeFloatingVel &amp;robotVel, const FreeFloatingAcc &amp;robotAcc, const LinAcceleration &amp;gravity, const LinkNetExternalWrenches &amp;externalWrenches, FreeFloatingAcc &amp;buf_properRobotAcc, LinkPositions &amp;buf_linkPos, LinkVelArray &amp;buf_linkVel, LinkAccArray &amp;buf_linkProperAcc, LinkInternalWrenches &amp;buf_internalWrenches, FreeFloatingGeneralizedTorques &amp;buf_outputTorques, SensorsMeasurements &amp;predictedMeasurement)</argsstring>
-        <name>predictSensorsMeasurements</name>
+      <memberdef kind="function" id="group__iDynTreeSensors_1ga33b3534aff07374967be92f1b293f32b" prot="public" static="no" const="yes" explicit="no" inline="no" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;Deprecated function, please use the version in which SensorsList is &quot; &quot;passed via iDynTree::Model&quot;) bool predictSensorsMeasurements(const Model &amp;model</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
         <param>
-          <type>const Model &amp;</type>
-          <declname>model</declname>
+          <type>&quot;Deprecated</type>
+          <declname>function</declname>
         </param>
         <param>
-          <type>const SensorsList &amp;</type>
-          <declname>sensorList</declname>
-        </param>
-        <param>
-          <type>const Traversal &amp;</type>
-          <declname>traversal</declname>
-        </param>
-        <param>
-          <type>const FreeFloatingPos &amp;</type>
-          <declname>robotPos</declname>
-        </param>
-        <param>
-          <type>const FreeFloatingVel &amp;</type>
-          <declname>robotVel</declname>
-        </param>
-        <param>
-          <type>const FreeFloatingAcc &amp;</type>
-          <declname>robotAcc</declname>
-        </param>
-        <param>
-          <type>const LinAcceleration &amp;</type>
-          <declname>gravity</declname>
-        </param>
-        <param>
-          <type>const LinkNetExternalWrenches &amp;</type>
-          <declname>externalWrenches</declname>
-        </param>
-        <param>
-          <type>FreeFloatingAcc &amp;</type>
-          <declname>buf_properRobotAcc</declname>
-        </param>
-        <param>
-          <type>LinkPositions &amp;</type>
-          <declname>buf_linkPos</declname>
-        </param>
-        <param>
-          <type>LinkVelArray &amp;</type>
-          <declname>buf_linkVel</declname>
-        </param>
-        <param>
-          <type>LinkAccArray &amp;</type>
-          <declname>buf_linkProperAcc</declname>
-        </param>
-        <param>
-          <type>LinkInternalWrenches &amp;</type>
-          <declname>buf_internalWrenches</declname>
-        </param>
-        <param>
-          <type>FreeFloatingGeneralizedTorques &amp;</type>
-          <declname>buf_outputTorques</declname>
-        </param>
-        <param>
-          <type>SensorsMeasurements &amp;</type>
-          <declname>predictedMeasurement</declname>
+          <type>please use the version in which SensorsList is &quot; &quot;passed via <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref>&quot;</type>
         </param>
         <briefdescription>
 <para>Predict the measurement of a set of sensors. </para>
@@ -486,52 +617,9 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>true if the sensors in the list are all valid </para>
+<simplesect kind="return"><para>true if the sensors in the list are all valid</para>
 </simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/PredictSensorsMeasurements.h" line="137" column="11" declfile="iDynTree/PredictSensorsMeasurements.h" declline="137" declcolumn="11"/>
-      </memberdef>
-      <memberdef kind="function" id="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::predictSensorsMeasurementsFromRawBuffers</definition>
-        <argsstring>(const Model &amp;model, const SensorsList &amp;sensorList, const Traversal &amp;traversal, const LinkVelArray &amp;buf_linkVel, const LinkAccArray &amp;buf_linkProperAcc, const LinkInternalWrenches &amp;buf_internalWrenches, SensorsMeasurements &amp;predictedMeasurement)</argsstring>
-        <name>predictSensorsMeasurementsFromRawBuffers</name>
-        <param>
-          <type>const Model &amp;</type>
-          <declname>model</declname>
-        </param>
-        <param>
-          <type>const SensorsList &amp;</type>
-          <declname>sensorList</declname>
-        </param>
-        <param>
-          <type>const Traversal &amp;</type>
-          <declname>traversal</declname>
-        </param>
-        <param>
-          <type>const LinkVelArray &amp;</type>
-          <declname>buf_linkVel</declname>
-        </param>
-        <param>
-          <type>const LinkAccArray &amp;</type>
-          <declname>buf_linkProperAcc</declname>
-        </param>
-        <param>
-          <type>const LinkInternalWrenches &amp;</type>
-          <declname>buf_internalWrenches</declname>
-        </param>
-        <param>
-          <type>SensorsMeasurements &amp;</type>
-          <declname>predictedMeasurement</declname>
-        </param>
-        <briefdescription>
-<para>Predict the measurement of a set of sensors. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>Helper function that works on buffers already compute with Dynamics functions</para>
+Helper function that works on buffers already compute with Dynamics functions</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">model</parametername>
@@ -595,7 +683,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PredictSensorsMeasurements.h" line="171" column="11" declfile="iDynTree/PredictSensorsMeasurements.h" declline="171" declcolumn="11"/>
+        <location file="iDynTree/PredictSensorsMeasurements.h" line="134" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

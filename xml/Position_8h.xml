@@ -30,26 +30,19 @@
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1Position" prot="public">iDynTree::Position</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
-      <sectiondef kind="func">
-      <memberdef kind="function" id="Position_8h_1aacc071e8e145a637bd7305dc9f120353" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
-        <argsstring>(&quot;iDynTree::PositionRaw is deprecated, use iDynTree::Position&quot;) typedef Position PositionRaw</argsstring>
-        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
-        <param>
-          <type>&quot;iDynTree::PositionRaw is</type>
-          <declname>deprecated</declname>
-        </param>
-        <param>
-          <type>use <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref>&quot;</type>
-        </param>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Position_8h_1a09382f6e994fb0a1b7c916d69c2ded0e" prot="public" static="no">
+        <type>Position</type>
+        <definition>typedef Position iDynTree::PositionRaw</definition>
+        <argsstring></argsstring>
+        <name>PositionRaw</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Position.h" line="109" column="5" declfile="iDynTree/Position.h" declline="109" declcolumn="5"/>
+        <location file="iDynTree/Position.h" line="110" column="18" bodyfile="iDynTree/Position.h" bodystart="110" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

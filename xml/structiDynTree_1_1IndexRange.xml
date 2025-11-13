@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Utils.h" line="107" column="24" bodyfile="iDynTree/Utils.h" bodystart="107" bodyend="-1"/>
+        <location file="iDynTree/Utils.h" line="105" column="20" bodyfile="iDynTree/Utils.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1IndexRange_1a2d8b0e8ce529b462041191553ad7886a" prot="public" static="no" mutable="no">
         <type>std::ptrdiff_t</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Utils.h" line="108" column="24" bodyfile="iDynTree/Utils.h" bodystart="108" bodyend="-1"/>
+        <location file="iDynTree/Utils.h" line="106" column="20" bodyfile="iDynTree/Utils.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Utils.h" line="110" column="14"/>
+        <location file="iDynTree/Utils.h" line="108" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Utils.h" line="111" column="27"/>
+        <location file="iDynTree/Utils.h" line="109" column="23"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -68,7 +68,7 @@
 <para>The offset attributes indicates the index of the first element of the range, while the size indicates the size of the range.</para>
 <para>Example: offset = 2, size = 3 measn the elements 2 3 4 . </para>
     </detaileddescription>
-    <location file="iDynTree/Utils.h" line="105" column="5" bodyfile="iDynTree/Utils.h" bodystart="106" bodyend="112"/>
+    <location file="iDynTree/Utils.h" line="103" column="1" bodyfile="iDynTree/Utils.h" bodystart="104" bodyend="110"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1IndexRange_1affd7afc62a97a9d638e7024733e13b4b" prot="public" virt="non-virtual"><scope>iDynTree::IndexRange</scope><name>InvalidRange</name></member>
       <member refid="structiDynTree_1_1IndexRange_1a1aab0a47e16b1282e907838558cdc512" prot="public" virt="non-virtual"><scope>iDynTree::IndexRange</scope><name>isValid</name></member>

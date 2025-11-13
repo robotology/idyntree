@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="30" column="35" bodyfile="iDynTree/BerdySparseMAPSolver.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="30" column="31" bodyfile="iDynTree/BerdySparseMAPSolver.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="33" column="9"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="33" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1abd25b426bcc0dbbe1c46caef70f21593" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="34" column="9"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="34" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a701f6cef4a81edd47dad7dceee9bbf7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="36" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="36" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9dce012842a2844047c8619e76f8d580" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="37" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="38" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a8c7420a41f6c78d33d100f93c85e15b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="38" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="40" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a0c252cfe0ac42168fd3e21d92dac8a5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="39" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="42" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a89b4db9aaa5f4762a0751a9931e7587d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="41" column="38"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="45" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9fb0682401703373f16426faef05209e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="42" column="32"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="47" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a5c0e5f5c818f5d0bc65bd98450eaa221" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="43" column="38"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="49" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1afa2cdabf4fdaa51d1a6e674235b44017" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="44" column="32"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="51" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a7ffe8c9b6f6a06532da3ea88971a53f9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="45" column="39"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="52" column="35"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9c3d33204dd0d484502df861c6a4860d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="46" column="33"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="53" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a4e65255aa706b6085dcd21e0385f9824" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="47" column="38"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="55" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a65bcc26ad5c2238f668f331441fdf897" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="48" column="32"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="57" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1afa78c94fadaeb70a2bc1df863773bb5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="50" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="59" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a94b057c0979d8fa75fa757032aff800f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="52" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="61" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9688a8bcc6393a250cbd7d06ca17d792" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -278,7 +278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="54" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="63" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1afc9692b826414fc1590aaf491f9a47fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="60" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="69" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a261899e0a79f8e3fdcc2f22617b8d71f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="66" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="75" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a754382b5a9743a48f9762022b6d75289" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="68" column="14"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="77" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a48e541a067026a24e483ceabbc4542cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
@@ -354,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BerdySparseMAPSolver.h" line="69" column="39"/>
+        <location file="iDynTree/BerdySparseMAPSolver.h" line="78" column="35"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -364,7 +364,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/BerdySparseMAPSolver.h" line="26" column="5" bodyfile="iDynTree/BerdySparseMAPSolver.h" bodystart="27" bodyend="72"/>
+    <location file="iDynTree/BerdySparseMAPSolver.h" line="26" column="1" bodyfile="iDynTree/BerdySparseMAPSolver.h" bodystart="27" bodyend="79"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a130a453068579e964dfab978436ea81c" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>BerdySparseMAPSolver</name></member>
       <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a261899e0a79f8e3fdcc2f22617b8d71f" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>doEstimate</name></member>

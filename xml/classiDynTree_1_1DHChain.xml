@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="46" column="12"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="46" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1ac8ec2b05145ff21bd09102050f41be52" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="50" column="32"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="50" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1aa08991e4469d716726dea2904b7659e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="53" column="22"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="53" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a6c8806befe921857a962d7620e00f3f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref> &amp;</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="58" column="13"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="58" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1a5d475054d91c46ebe509784d2b5c4c6e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="structiDynTree_1_1DHLink" kindref="compound">DHLink</ref> &amp;</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DenavitHartenberg.h" line="63" column="19"/>
+        <location file="iDynTree/DenavitHartenberg.h" line="63" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DHChain_1ae0d3f071d632ec173a33fa5d38e2bcdb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -281,7 +281,7 @@
     <detaileddescription>
 <para>Directly inspiered by the iCub::iKin::iKinChain class. </para>
     </detaileddescription>
-    <location file="iDynTree/DenavitHartenberg.h" line="37" column="1" bodyfile="iDynTree/DenavitHartenberg.h" bodystart="38" bodyend="88"/>
+    <location file="iDynTree/DenavitHartenberg.h" line="37" column="1" bodyfile="iDynTree/DenavitHartenberg.h" bodystart="38" bodyend="86"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1DHChain_1a4bfd1fcfa1968c65f7baa2417f82dc84" prot="private" virt="non-virtual"><scope>iDynTree::DHChain</scope><name>dhParams</name></member>
       <member refid="classiDynTree_1_1DHChain_1a304a1733fe9146f0e05ab7af018519c4" prot="private" virt="non-virtual"><scope>iDynTree::DHChain</scope><name>dofNames</name></member>

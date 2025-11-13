@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Cost_8h" kind="file" language="C++">
     <compoundname>Cost.h</compoundname>
-    <includes local="no">string</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
+    <includes local="no">string</includes>
     <includedby refid="L2NormCost_8h" local="no">iDynTree/L2NormCost.h</includedby>
     <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>
     <includedby refid="QuadraticLikeCost_8h" local="no">iDynTree/QuadraticLikeCost.h</includedby>

@@ -71,6 +71,7 @@
                 <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
@@ -93,11 +94,8 @@
               <span class="m-doc-wrap-bumper"><a href="#a4ba706f7101bb9519c017d60ef197cc6" class="m-doc-self">RevoluteSO2Joint</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Constructor.</dd>
-            <dt id="a78de953da11421752e970ae2413d66fd">
-              <span class="m-doc-wrap-bumper"><a href="#a78de953da11421752e970ae2413d66fd" class="m-doc-self">RevoluteSO2Joint</a>(</span><span class="m-doc-wrap">const LinkIndex link1,
-              const LinkIndex link2,
-              const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2,
-              const <a href="classiDynTree_1_1Axis.html" class="m-doc">Axis</a>&amp; _rotation_axis_wrt_link1)</span>
+            <dt id="a97f1a8d4f6e8d781c1d5ce2c55703180">
+              <span class="m-doc-wrap-bumper"><a href="#a97f1a8d4f6e8d781c1d5ce2c55703180" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Please use the setter methods to specify the parameters of the &quot; &quot;joint&quot;) RevoluteSO2Joint(const LinkIndex link1</span>
             </dt>
             <dd><span></span></dd>
             <dt>
@@ -113,6 +111,10 @@
               <span class="m-doc-wrap-bumper"><a href="#ae1dda38c084ce44dab4f34adfbedebc3" class="m-doc-self">~RevoluteSO2Joint</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Destructor.</dd>
+            <dt id="a59b62e2fc72d66bf40c13bf77eee86c1">
+              <span class="m-doc-wrap-bumper"><a href="#a59b62e2fc72d66bf40c13bf77eee86c1" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Please use the <a href="classiDynTree_1_1RevoluteSO2Joint.html#a1f3dffede2dac2a813cac411672d8094" class="m-doc">setAxis</a> method in which the link considered &quot; &quot;\&quot;child\&quot; is explicitly specified&quot;)</span>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -137,10 +139,6 @@
               const LinkIndex parent = LINK_INVALID_INDEX) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the revolute axis of the joint, expressed in specified link frame, that is considered the &quot;child&quot; frame regarding the sign of the axis.</dd>
-            <dt id="a97c05340151c4b146e2a3ac68113927b">
-              <span class="m-doc-wrap-bumper">void <a href="#a97c05340151c4b146e2a3ac68113927b" class="m-doc-self">setAxis</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Axis.html" class="m-doc">Axis</a>&amp; revoluteAxis_wrt_link1) <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd><span></span></dd>
             <dt id="a13f96e3e7bc95a7b359129655f98ce2a">
               <span class="m-doc-wrap-bumper">auto <a href="#a13f96e3e7bc95a7b359129655f98ce2a" class="m-doc-self">getFirstAttachedLink</a>(</span><span class="m-doc-wrap">) const -&gt; LinkIndex <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
@@ -310,6 +308,23 @@
               double angle) const</span>
             </dt>
             <dd>Set joint position from an angle.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a1be6fdfed8854b3d303a528498814f77">
+              const LinkIndex <a href="#a1be6fdfed8854b3d303a528498814f77" class="m-doc-self">link2</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a30f9660f9509fbe1a285bb0a16e96244">
+              const LinkIndex const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; <a href="#a30f9660f9509fbe1a285bb0a16e96244" class="m-doc-self">link1_X_link2</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa95f8a3fb1c36c9fa1c00c2609014e53">
+              const LinkIndex const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> const <a href="classiDynTree_1_1Axis.html" class="m-doc">Axis</a>&amp; <a href="#aa95f8a3fb1c36c9fa1c00c2609014e53" class="m-doc-self">_rotation_axis_wrt_link1</a>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section>

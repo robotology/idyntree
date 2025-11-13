@@ -69,6 +69,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
@@ -84,24 +85,41 @@
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af8355a73b30d3b5797fddae1f80ac778" class="m-doc">createReducedModelAndSensors</a>(</span><span class="m-doc-wrap">const Model&amp; fullModel,
-              const SensorsList&amp; fullSensors,
-              const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
-              Model&amp; reducedModel,
-              SensorsList&amp; reducedSensors) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper"><a href="#a57fda2c8c12be1a2c7bd1471fd2deb32" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;createReducedModelAndSensors is deprecated,
+              please use the &quot; &quot; createReducedModel,
+              see createReducedModelAndSensors documentation &quot; &quot;for more info&quot;) bool createReducedModelAndSensors(const Model &amp;fullModel</span>
             </dt>
             <dd>Variant of createReducedModel function that also process the sensorList .</dd>
           </dl>
         </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt id="ae5f4b93f1c43ee6bd1acb9579cad85bf">
+              const SensorsList&amp; <a href="#ae5f4b93f1c43ee6bd1acb9579cad85bf" class="m-doc-self">fullSensors</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5bf28c9e85e1f8a8b8696b62bbe6b9e2">
+              const SensorsList const std::vector&lt;std::string&gt;&amp; <a href="#a5bf28c9e85e1f8a8b8696b62bbe6b9e2" class="m-doc-self">jointsInReducedModel</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9f56e7e26a5648df2a12cd5e09d0c949">
+              const SensorsList const std::vector&lt;std::string&gt; Model&amp; <a href="#a9f56e7e26a5648df2a12cd5e09d0c949" class="m-doc-self">reducedModel</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9376872b9f9b1cda1829ad0ee25bc0bb">
+              const SensorsList const std::vector&lt;std::string&gt; Model SensorsList&amp; <a href="#a9376872b9f9b1cda1829ad0ee25bc0bb" class="m-doc-self">reducedSensors</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="af8355a73b30d3b5797fddae1f80ac778"><div>
+          <section class="m-doc-details" id="a57fda2c8c12be1a2c7bd1471fd2deb32"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8355a73b30d3b5797fddae1f80ac778" class="m-doc-self">createReducedModelAndSensors</a>(</span><span class="m-doc-wrap">const Model&amp; fullModel,
-              const SensorsList&amp; fullSensors,
-              const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
-              Model&amp; reducedModel,
-              SensorsList&amp; reducedSensors)</span></span>
+              <span class="m-doc-wrap-bumper"> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57fda2c8c12be1a2c7bd1471fd2deb32" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;createReducedModelAndSensors is deprecated,
+              please use the &quot; &quot; createReducedModel,
+              see createReducedModelAndSensors documentation &quot; &quot;for more info&quot;) bool createReducedModelAndSensors(const Model &amp;fullModel</span></span>
             </h3>
             <p>Variant of createReducedModel function that also process the sensorList .</p>
 <p>Note: since iDynTree 10, this has been superseded by the regular createReducedModel that also operated on the <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> associated with the model.</p><p>To migrate to this version, just change from:</p><p><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a> fullModel, reducedModel; std::vector&lt;std::string&gt; jointsInReducedModel; <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> fullSensors, reducedSensors;</p><p>bool ok = createReducedModelAndSensors(fullModel, fullSensors, jointsInReducedModel, reducedModel, reducedSensors);</p><p>// handle ok // access reducedModel and reducedSensors</p><p>to</p><p><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a> fullModel, reducedModel; std::vector&lt;std::string&gt; jointsInReducedModel; <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> fullSensors; fullModel.sensors() = fullSensors;</p><p>bool ok = createReducedModel(fullModel, jointsInReducedModel, reducedModel);</p><p>// Handle ok // access reducedModel and reducedModel.sensors()</p>

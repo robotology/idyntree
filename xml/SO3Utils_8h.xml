@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SO3Utils_8h" kind="file" language="C++">
     <compoundname>SO3Utils.h</compoundname>
-    <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
     <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
+    <includes refid="Rotation_8h" local="no">iDynTree/Rotation.h</includes>
     <includes local="no">vector</includes>
     <includedby refid="Core_2SO3Utils_8h" local="no">iDynTree/Core/SO3Utils.h</includedby>
     <incdepgraph>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SO3Utils.h" line="33" column="10" declfile="iDynTree/SO3Utils.h" declline="33" declcolumn="10"/>
+        <location file="iDynTree/SO3Utils.h" line="34" column="6" declfile="iDynTree/SO3Utils.h" declline="34" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="SO3Utils_8h_1a7950f68e2a23c633dc53411db5b5b573" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -67,7 +67,7 @@
 <para>Computes the geodesic distance between two rotation matrices. </para>
         </briefdescription>
         <detaileddescription>
-<para>It implements the angular distance presented in Sec. 4 of &quot;Rotation Averaging&quot; (available at <ulink url="http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf">http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf</ulink>), in particular <formula id="181">$d = ||log(R_1^\top R_2)||^2 $</formula>. <parameterlist kind="param"><parameteritem>
+<para>It implements the angular distance presented in Sec. 4 of &quot;Rotation Averaging&quot; (available at <ulink url="http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf">http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf</ulink>), in particular <formula id="183">$d = ||log(R_1^\top R_2)||^2 $</formula>. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>rotation1</parametername>
 </parameternamelist>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SO3Utils.h" line="44" column="12" declfile="iDynTree/SO3Utils.h" declline="44" declcolumn="12"/>
+        <location file="iDynTree/SO3Utils.h" line="46" column="8" declfile="iDynTree/SO3Utils.h" declline="46" declcolumn="8"/>
       </memberdef>
       <memberdef kind="function" id="SO3Utils_8h_1a2c019748c0b171a73279ba732546d87a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SO3Utils.h" line="58" column="10" declfile="iDynTree/SO3Utils.h" declline="58" declcolumn="10"/>
+        <location file="iDynTree/SO3Utils.h" line="61" column="6" declfile="iDynTree/SO3Utils.h" declline="61" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="SO3Utils_8h_1a07cf035073cc1e3f95ef18eda4928db5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SO3Utils.h" line="74" column="10" declfile="iDynTree/SO3Utils.h" declline="74" declcolumn="10"/>
+        <location file="iDynTree/SO3Utils.h" line="79" column="6" declfile="iDynTree/SO3Utils.h" declline="79" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

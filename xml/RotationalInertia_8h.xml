@@ -9,17 +9,17 @@
     <innerclass refid="classiDynTree_1_1RotationalInertia" prot="public">iDynTree::RotationalInertia</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
-      <memberdef kind="function" id="RotationalInertia_8h_1affa3ef6d96e03cfad96623d8d7dbcacf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="RotationalInertia_8h_1aad9d3489c43fe9059a6cc4eb29ef8d21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
-        <argsstring>(&quot;iDynTree::RotationalInertiaRaw is deprecated, use iDynTree::RotationalInertia&quot;) typedef RotationalInertia RotationalInertiaRaw</argsstring>
+        <argsstring>(&quot;iDynTree::RotationalInertiaRaw is deprecated, use &quot; &quot;iDynTree::RotationalInertia&quot;) typedef RotationalInertia RotationalInertiaRaw</argsstring>
         <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
         <param>
           <type>&quot;iDynTree::RotationalInertiaRaw is</type>
           <declname>deprecated</declname>
         </param>
         <param>
-          <type>use <ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">iDynTree::RotationalInertia</ref>&quot;</type>
+          <type>use &quot; &quot;<ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">iDynTree::RotationalInertia</ref>&quot;</type>
         </param>
         <briefdescription>
         </briefdescription>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RotationalInertia.h" line="47" column="5" declfile="iDynTree/RotationalInertia.h" declline="47" declcolumn="5"/>
+        <location file="iDynTree/RotationalInertia.h" line="48" column="1" declfile="iDynTree/RotationalInertia.h" declline="48" declcolumn="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

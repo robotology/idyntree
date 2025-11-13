@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SparseMatrix_8h" kind="file" language="C++">
     <compoundname>SparseMatrix.h</compoundname>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="Triplets_8h" local="no">iDynTree/Triplets.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes local="no">vector</includes>
     <includedby refid="Core_2SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includedby>
     <includedby refid="EigenHelpers_8h" local="no">iDynTree/EigenHelpers.h</includedby>

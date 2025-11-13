@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="BipedFootContactClassifier_8h" kind="file" language="C++">
     <compoundname>BipedFootContactClassifier.h</compoundname>
-    <includes local="no">memory</includes>
     <includes refid="ContactStateMachine_8h" local="yes">ContactStateMachine.h</includes>
+    <includes local="no">memory</includes>
     <includedby refid="Estimation_2BipedFootContactClassifier_8h" local="no">iDynTree/Estimation/BipedFootContactClassifier.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -33,8 +33,7 @@
         <enumvalue id="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946ad1645067b3ead8a700e7551ff0af01d9" prot="public">
           <name>LATEST_ACTIVE_CONTACT</name>
           <briefdescription>
-<para>Setting active foot to the one that made contact most recently <linebreak/>
- </para>
+<para>Setting active foot to the one that made contact most recently. </para>
           </briefdescription>
           <detaileddescription>
 <para><simplesect kind="warning"><para>this pattern remains unimplemented in the current version of this class using this pattern will always return left foot as the active foot </para>
@@ -45,8 +44,7 @@
         <enumvalue id="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946aa6e9a49639f39ee24e3fbafc4cee78f0" prot="public">
           <name>DEFAULT_CONTACT</name>
           <briefdescription>
-<para>Fixing active foot to the default foot defined by the user <linebreak/>
- </para>
+<para>Fixing active foot to the default foot defined by the user. </para>
           </briefdescription>
           <detaileddescription>
 <para><simplesect kind="warning"><para>this pattern remains unimplemented in the current version of this class using this pattern will always return left foot as the active foot </para>
@@ -61,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BipedFootContactClassifier.h" line="15" column="5" bodyfile="iDynTree/BipedFootContactClassifier.h" bodystart="16" bodyend="35"/>
+        <location file="iDynTree/BipedFootContactClassifier.h" line="14" column="1" bodyfile="iDynTree/BipedFootContactClassifier.h" bodystart="15" bodyend="34"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

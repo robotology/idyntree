@@ -2,13 +2,13 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Integrator_8h" kind="file" language="C++">
     <compoundname>Integrator.h</compoundname>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
-    <includes local="no">vector</includes>
-    <includes local="no">string</includes>
-    <includes local="no">memory</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes local="no">map</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
     <includedby refid="FixedStepIntegrator_8h" local="no">iDynTree/Integrators/FixedStepIntegrator.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -23,16 +23,16 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="3">
+      <node id="4">
         <label>string</label>
       </node>
-      <node id="5">
+      <node id="2">
         <label>map</label>
       </node>
-      <node id="2">
+      <node id="5">
         <label>vector</label>
       </node>
-      <node id="4">
+      <node id="3">
         <label>memory</label>
       </node>
     </incdepgraph>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="121" column="13" bodyfile="iDynTree/Integrator.h" bodystart="121" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="131" column="1" bodyfile="iDynTree/Integrator.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Integrator_8h_1a7a03df16db0b979f0c465865aaf2c5c4" prot="public" static="no">
         <type>std::map&lt; CollocationHessianIndex, SparsityStructure &gt;</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="123" column="13" bodyfile="iDynTree/Integrator.h" bodystart="123" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="133" column="1" bodyfile="iDynTree/Integrator.h" bodystart="133" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

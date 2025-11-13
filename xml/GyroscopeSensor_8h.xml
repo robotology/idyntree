@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="13" column="34" bodyfile="iDynTree/GyroscopeSensor.h" bodystart="12" bodyend="-1"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="12" column="30" bodyfile="iDynTree/GyroscopeSensor.h" bodystart="11" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

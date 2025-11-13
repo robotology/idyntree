@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="261" column="20" bodyfile="iDynTree/Constraint.h" bodystart="261" bodyend="-1"/>
+        <location file="iDynTree/Constraint.h" line="292" column="12" bodyfile="iDynTree/Constraint.h" bodystart="292" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a4ce3c6edac54f56a681737d1711debd3" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="262" column="25" bodyfile="iDynTree/Constraint.h" bodystart="262" bodyend="-1"/>
+        <location file="iDynTree/Constraint.h" line="293" column="17" bodyfile="iDynTree/Constraint.h" bodystart="293" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1affdd40d40644d57ba0c5a2aef9d19aa9" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="263" column="27" bodyfile="iDynTree/Constraint.h" bodystart="263" bodyend="-1"/>
+        <location file="iDynTree/Constraint.h" line="294" column="19" bodyfile="iDynTree/Constraint.h" bodystart="294" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="268" column="27" bodyfile="iDynTree/Constraint.h" bodystart="268" bodyend="-1"/>
+        <location file="iDynTree/Constraint.h" line="300" column="19" bodyfile="iDynTree/Constraint.h" bodystart="300" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a14742944fcb6cb9011b728dad5a688f9" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="272" column="27" bodyfile="iDynTree/Constraint.h" bodystart="272" bodyend="-1"/>
+        <location file="iDynTree/Constraint.h" line="304" column="19" bodyfile="iDynTree/Constraint.h" bodystart="304" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a5805024ea2d6064d0ce0c263cae83c8e" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="276" column="18" bodyfile="iDynTree/Constraint.h" bodystart="276" bodyend="-1"/>
+        <location file="iDynTree/Constraint.h" line="309" column="10" bodyfile="iDynTree/Constraint.h" bodystart="309" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a39b0f7fd8ff9ead00ce7010f7fc81896" prot="protected" static="no" mutable="no">
         <type>bool</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="280" column="18" bodyfile="iDynTree/Constraint.h" bodystart="280" bodyend="-1"/>
+        <location file="iDynTree/Constraint.h" line="314" column="10" bodyfile="iDynTree/Constraint.h" bodystart="314" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="47" column="13"/>
+        <location file="iDynTree/Constraint.h" line="49" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1aac7f9267eb8509b7828dd2e955c606e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="52" column="21"/>
+        <location file="iDynTree/Constraint.h" line="54" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a1df753c970a78df754d6ca54943dea93" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="58" column="20"/>
+        <location file="iDynTree/Constraint.h" line="60" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9b37070e58ce5d75baf90855f4f04808" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::string &amp;</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="64" column="31"/>
+        <location file="iDynTree/Constraint.h" line="66" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a3e3f580470ce860c9964d6e24b3ded5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="70" column="18"/>
+        <location file="iDynTree/Constraint.h" line="72" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9322706b7f88baa02e4924097605827b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -235,7 +235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="76" column="18"/>
+        <location file="iDynTree/Constraint.h" line="78" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a2b1b9fb5134c4d2e7bc52f20a9963173" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="82" column="18"/>
+        <location file="iDynTree/Constraint.h" line="84" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a41d21a8cfc855439a2601650e9c130ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="88" column="18"/>
+        <location file="iDynTree/Constraint.h" line="90" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9b63601a7ea03cfc2315fa74c62c1ce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -332,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="100" column="26"/>
+        <location file="iDynTree/Constraint.h" line="104" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9a7d980f35aebb6c3d60ba8f52b3829d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -399,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="113" column="26"/>
+        <location file="iDynTree/Constraint.h" line="115" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a0d23eb7e58ba321bfa402bbb88f2e778" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -466,7 +466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="127" column="26"/>
+        <location file="iDynTree/Constraint.h" line="133" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1abc4b05e1f91c36591a0d63852bdbf40d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -533,7 +533,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="141" column="26"/>
+        <location file="iDynTree/Constraint.h" line="150" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1ada3b1bca20bec3239323a79a375e211f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -550,7 +550,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="151" column="28"/>
+        <location file="iDynTree/Constraint.h" line="162" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a8481bdc1ba131e8e10229ff756a612c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -567,7 +567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="158" column="28"/>
+        <location file="iDynTree/Constraint.h" line="171" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1af82131c7ea2c278f44c91a0039ea6b03" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -600,7 +600,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="167" column="26"/>
+        <location file="iDynTree/Constraint.h" line="184" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9c3b6a333881fced8d5e7cc0c3684d21" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -633,7 +633,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="176" column="26"/>
+        <location file="iDynTree/Constraint.h" line="196" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a3e5ae8a1de6f5140882f5e4fdf4f56cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -665,7 +665,7 @@
 <para>Evaluate constraint second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="322">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="324">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -712,7 +712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="189" column="26"/>
+        <location file="iDynTree/Constraint.h" line="210" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1a36eca7d3d179539aacd227e56074dbf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -744,7 +744,7 @@
 <para>Evaluate constraint second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="323">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="325">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -791,7 +791,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="207" column="26"/>
+        <location file="iDynTree/Constraint.h" line="227" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1ac2a4fb546efaae5819d84b2f0847d95c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -823,7 +823,7 @@
 <para>Evaluate constraint second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="324">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="326">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -870,7 +870,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="226" column="26"/>
+        <location file="iDynTree/Constraint.h" line="246" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1ad11fbd41db2c6366579962d55737c08a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -903,7 +903,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="239" column="26"/>
+        <location file="iDynTree/Constraint.h" line="262" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1aa7ff11cc4a6d9b34d05c820320c8cc71" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -936,7 +936,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="248" column="26"/>
+        <location file="iDynTree/Constraint.h" line="275" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Constraint_1ab7e2298abf8ee28ab5658dae49c9bce2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -969,7 +969,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Constraint.h" line="257" column="26"/>
+        <location file="iDynTree/Constraint.h" line="288" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1006,7 +1006,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Constraint.h" line="36" column="9" bodyfile="iDynTree/Constraint.h" bodystart="36" bodyend="281"/>
+    <location file="iDynTree/Constraint.h" line="38" column="1" bodyfile="iDynTree/Constraint.h" bodystart="39" bodyend="315"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a48bd2962ef941257545801ed45a3550e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::Constraint</scope><name>Constraint</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1abc4b05e1f91c36591a0d63852bdbf40d" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::Constraint</scope><name>constraintJacobianWRTControl</name></member>

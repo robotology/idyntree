@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="IpoptInterface_8h" kind="file" language="C++">
     <compoundname>IpoptInterface.h</compoundname>
+    <includes refid="Optimizer_8h" local="no">iDynTree/Optimizer.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
-    <includes refid="Optimizer_8h" local="no">iDynTree/Optimizer.h</includes>
     <incdepgraph>
       <node id="3">
         <label>string</label>

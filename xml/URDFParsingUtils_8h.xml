@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="22" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="22" bodyend="28"/>
+        <location file="private/URDFParsingUtils.h" line="21" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="21" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1a9c8ea4244ff5dc2276f8008b53a609e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="30" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="30" bodyend="36"/>
+        <location file="private/URDFParsingUtils.h" line="29" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="29" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1ab5e3c195abc73e35657df0f831daab96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="38" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="38" bodyend="44"/>
+        <location file="private/URDFParsingUtils.h" line="37" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="37" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1a072b6eff9a6c9173d96ebef185343d90" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="46" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="46" bodyend="59"/>
+        <location file="private/URDFParsingUtils.h" line="45" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="45" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1adffeb935ed6aad8d6f30705238117df8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="61" column="20" bodyfile="private/URDFParsingUtils.h" bodystart="61" bodyend="66"/>
+        <location file="private/URDFParsingUtils.h" line="62" column="20" bodyfile="private/URDFParsingUtils.h" bodystart="62" bodyend="67"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1a49c5650f4d8f43d3af304224dcf880c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="68" column="20" bodyfile="private/URDFParsingUtils.h" bodystart="68" bodyend="73"/>
+        <location file="private/URDFParsingUtils.h" line="69" column="20" bodyfile="private/URDFParsingUtils.h" bodystart="69" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1ab77f7c41e63dbfbfc327283490b7cb92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="79" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="79" bodyend="97"/>
+        <location file="private/URDFParsingUtils.h" line="79" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="79" bodyend="96"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1a8645d0238ce891d16d8d7be074bd33dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="102" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="102" bodyend="136"/>
+        <location file="private/URDFParsingUtils.h" line="101" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="101" bodyend="137"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1a5872c10e6e9f23dbeeb87ad4b503a5ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="139" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="139" bodyend="157"/>
+        <location file="private/URDFParsingUtils.h" line="140" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="140" bodyend="158"/>
       </memberdef>
       <memberdef kind="function" id="URDFParsingUtils_8h_1ab55f4fdf60c8947b61adde47e0495b10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFParsingUtils.h" line="160" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="160" bodyend="195"/>
+        <location file="private/URDFParsingUtils.h" line="160" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="160" bodyend="197"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

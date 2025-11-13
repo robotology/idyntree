@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="101" column="13"/>
+        <location file="iDynTree/KinDynComputations.h" line="100" column="13"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="117" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="116" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1af5af27e0e4abc79c254f71d3bc0ce11c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="124" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="123" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1adf6af09df5e4d22c516fcbb59bbdd37c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="131" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="130" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a4de3c793ac2cb9f2e4e06cce68b45d0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>FrameVelocityRepresentation</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="137" column="33"/>
+        <location file="iDynTree/KinDynComputations.h" line="136" column="33"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aaf27395b392c1651654bf61d0107287c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="149" column="18"/>
+        <location file="iDynTree/KinDynComputations.h" line="147" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ae3b1aee30864bed3a04cab2a86d736ca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="155" column="17"/>
+        <location file="iDynTree/KinDynComputations.h" line="153" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ad5f1c26e1ac5452a35898273187a4093" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="162" column="17"/>
+        <location file="iDynTree/KinDynComputations.h" line="160" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ac2f26f2439d05a037905959055552e42" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="169" column="18"/>
+        <location file="iDynTree/KinDynComputations.h" line="166" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a79b55ab2338ec73bf5175fd475f819b5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -205,7 +205,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="179" column="18"/>
+        <location file="iDynTree/KinDynComputations.h" line="176" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a4b090dbfb91d4d9e8c98814778ec5abc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -222,7 +222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="186" column="17"/>
+        <location file="iDynTree/KinDynComputations.h" line="183" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a76b26b97933c562c11e88ab3f50bc06b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="194" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="191" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -259,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="205" column="18"/>
+        <location file="iDynTree/KinDynComputations.h" line="200" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aa08d31891d0069f947c591344e941b84" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="206" column="18"/>
+        <location file="iDynTree/KinDynComputations.h" line="201" column="17"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -337,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="229" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="224" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a3b75f92f8af4241e0e6c01564220921a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -397,7 +397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="248" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="243" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aff41a13a18c7b716ba0273440a6b96b7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -443,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="264" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="259" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a17c3a2be18ebd68a9860ccfeac1b12b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -491,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="281" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="276" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -526,7 +526,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="301" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="295" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1afa8862b110bf511a724028bf86eb42a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -559,7 +559,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="311" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="306" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a3eee3e784003d54a13e0d4e709bd25db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -591,7 +591,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="322" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="319" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aecb1ebd721765d1fdc2799b169e1b548" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -623,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="333" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="332" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a2e499491547624639c1765216e0d1f38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -701,7 +701,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="346" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="348" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a991bbdf0c9d047562fc51e4993ce0b1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -781,7 +781,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="364" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="370" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1adee49677666e96c5d4253e919a7a1fa4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -807,7 +807,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="377" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="383" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1af4c08dceadecb5318f295bd8014735d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -838,7 +838,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="389" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="396" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a24f941538023d1ed481839cf83274833" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -871,7 +871,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="393" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="400" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a78398ff7a6a6726c1fd06e75fe2f32ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -896,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="399" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="406" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aa9a9e494786b116842ae332a451baaa2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -929,7 +929,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="403" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="410" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a86b6441113bddbd2d1ccc7a40f91bd91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -954,7 +954,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="409" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="416" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a68c9dbca3120164bc2f58f20d12d8dc7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -968,7 +968,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="417" column="25"/>
+        <location file="iDynTree/KinDynComputations.h" line="423" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1afa212ccee1d3b3a1249cdeb1d03f245a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -985,7 +985,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="418" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="424" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a13d400bb68f3025be3a2cbc8aaebcff2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref></type>
@@ -998,7 +998,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="420" column="21"/>
+        <location file="iDynTree/KinDynComputations.h" line="426" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a4d61da63a30ef1dc1f5a74e343933765" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1015,7 +1015,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="421" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="427" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a39e8f4a9fbacf7f855ce049cab6a55c2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1032,7 +1032,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="423" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="429" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aeeef49f5d918e2f00b71c62ea2658018" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1055,7 +1055,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="430" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="437" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a11ebfc0466c7533d539313de604e9342" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1072,7 +1072,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="432" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="439" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a22bedec949d813ae47d3eb15447633ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1095,7 +1095,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="439" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="447" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ab11da83e4066bb284aef5160ac28d18a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1114,7 +1114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="445" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="453" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a948a3ffa6dc49a289ea21cde2ef08a4b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1137,11 +1137,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="453" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="462" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
-      <header>Methods to get transform information between frames in the model, given the current state.</header>
+      <header>Methods to get transform information between frames in the model, given the current</header>
+      <description><para>state. </para>
+</description>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a19d27b90072389664c33941f51a52c70" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
         <definition>int iDynTree::KinDynComputations::getFrameIndex</definition>
@@ -1161,7 +1163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="468" column="9"/>
+        <location file="iDynTree/KinDynComputations.h" line="477" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ad7d6d737d0bda18efbfa216dbf6b3063" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -1179,7 +1181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="474" column="17"/>
+        <location file="iDynTree/KinDynComputations.h" line="483" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aec6932d903d65f4a15617f5a593388ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -1197,7 +1199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="482" column="25"/>
+        <location file="iDynTree/KinDynComputations.h" line="491" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a5c638e17886f91f82c7915e182bae52e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1233,7 +1235,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="493" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="504" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a51f0ccd05fd1e3cd596065c40ea49d8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -1254,7 +1256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="502" column="25"/>
+        <location file="iDynTree/KinDynComputations.h" line="513" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a50f02bed7aa3c4b4f561d073738f0e15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1279,7 +1281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="511" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="523" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ab7bb03955ae5295ffdd9dddca830d9ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::Matrix4x4</ref> &gt;</type>
@@ -1297,7 +1299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="520" column="17"/>
+        <location file="iDynTree/KinDynComputations.h" line="532" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1abed3cf7f42d954c3f16cea2a02a12ba4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -1319,7 +1321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="528" column="25"/>
+        <location file="iDynTree/KinDynComputations.h" line="540" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aede402a1bc403f16f3204748ec3463ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1359,7 +1361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="540" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="555" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ad53211ac17c9540b8426aeb9436f6730" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -1391,7 +1393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="557" column="25"/>
+        <location file="iDynTree/KinDynComputations.h" line="574" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ab3d5d8f1ce44ad3add0aed6762d7160c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1428,7 +1430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="576" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="594" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a986af69045ecc8c26e69b5ed95b16e19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -1453,7 +1455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="588" column="25"/>
+        <location file="iDynTree/KinDynComputations.h" line="609" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a3ae49a5b34a052964ae3a3412250bf9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1482,7 +1484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="597" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="618" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -1503,7 +1505,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="610" column="21"/>
+        <location file="iDynTree/KinDynComputations.h" line="631" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1abd995120b57de79c77bc5359645fb0e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1531,7 +1533,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="619" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="641" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aa34ec2baaad71db424a67ed352566ab8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref></type>
@@ -1549,7 +1551,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="624" column="21"/>
+        <location file="iDynTree/KinDynComputations.h" line="646" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1abdb56fa4e6daecf7a78ddccd286ce961" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1577,7 +1579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="633" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="656" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ae41acdeb26c2cc2b5d93f35c2dc0f3ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector6</ref></type>
@@ -1606,7 +1608,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="640" column="13"/>
+        <location file="iDynTree/KinDynComputations.h" line="666" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aad6f28d4d1fdf93c1ffd74622f892ec1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1644,7 +1646,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="653" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="679" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a543031fbdf0de765c40b4a47e7d8ef38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector6</ref></type>
@@ -1673,7 +1675,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="663" column="13"/>
+        <location file="iDynTree/KinDynComputations.h" line="692" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ae357ba9c71b3a30a7877e8cc7b4ddf49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1711,7 +1713,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="676" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="705" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a27ae295bad4b1a53f7b26dc454edd52b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1736,7 +1738,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="686" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="715" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ae189be17f94340a7c39c4f4fb525dc78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1761,7 +1763,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="694" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="724" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1afb71b493c40274a519cf3e88068d1598" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1788,7 +1790,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="703" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="734" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a02fcea58df81d920e93bb89c7e0946d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1815,7 +1817,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="712" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="745" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a394d5696059c00b5d2d7692e19333364" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1838,11 +1840,11 @@
 <para>Return the relative Jacobian between the two frames. </para>
         </briefdescription>
         <detaileddescription>
-<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed depending on the velocity representation, i.e <formula id="272">\[ v_{refFrame, frame} = J_{refFrame, frame}(s) \dot{s} \]</formula> </para>
+<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed depending on the velocity representation, i.e <formula id="274">\[ v_{refFrame, frame} = J_{refFrame, frame}(s) \dot{s} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="727" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="758" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a9f5a0d7305591eb69d7e5ada3b68c098" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1865,7 +1867,7 @@
 <para>Return the relative Jacobian between the two frames (<ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> implementation). </para>
         </briefdescription>
         <detaileddescription>
-<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed depending on the velocity representation, i.e <formula id="272">\[ v_{refFrame, frame} = J_{refFrame, frame}(s) \dot{s} \]</formula></para>
+<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed depending on the velocity representation, i.e <formula id="274">\[ v_{refFrame, frame} = J_{refFrame, frame}(s) \dot{s} \]</formula></para>
 <para><simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
 </simplesect>
 <simplesect kind="return"><para>true if all went well, false otherwise. </para>
@@ -1874,7 +1876,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="743" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="775" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ad45015bd388547de9f694144c28f9316" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1905,7 +1907,7 @@
 <para>Return the relative Jacobian between the two frames. </para>
         </briefdescription>
         <detaileddescription>
-<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed in the specified frame, i.e <formula id="273">\[ {}^{expressedOriginFrame, [expressedOrientationFrame]} \mathrm{v}_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s} \]</formula></para>
+<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed in the specified frame, i.e <formula id="275">\[ {}^{expressedOriginFrame, [expressedOrientationFrame]} \mathrm{v}_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s} \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>refFrameIndex</parametername>
@@ -1945,7 +1947,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="762" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="795" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aa45294f28000cad7c03d92a10f128165" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1976,7 +1978,7 @@
 <para>Return the relative Jacobian between the two frames (<ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> implementation) </para>
         </briefdescription>
         <detaileddescription>
-<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed in the specified frame, i.e <formula id="273">\[ {}^{expressedOriginFrame, [expressedOrientationFrame]} \mathrm{v}_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s} \]</formula></para>
+<para>The Jacobian maps the internal robot shape with the relative velocity of refFrame w.r.t. frame expressed in the specified frame, i.e <formula id="275">\[ {}^{expressedOriginFrame, [expressedOrientationFrame]} \mathrm{v}_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s} \]</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>refFrameIndex</parametername>
@@ -2018,7 +2020,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="784" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="819" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a81f83749d1b0d4a7c68cfea82ef0491c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector6</ref></type>
@@ -2034,11 +2036,11 @@
         </briefdescription>
         <detaileddescription>
 <para>acceleration not due to robot acceleration) of the frame velocity.</para>
-<para>This term is usually called <formula id="274">$\dot{J} \nu$</formula> or <formula id="275">$\dot{J} \dot{q}$</formula>. </para>
+<para>This term is usually called <formula id="276">$\dot{J} \nu$</formula> or <formula id="277">$\dot{J} \dot{q}$</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="796" column="13"/>
+        <location file="iDynTree/KinDynComputations.h" line="831" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a91225cb25cccbc32ea7842825c361d54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2058,7 +2060,7 @@
         </briefdescription>
         <detaileddescription>
 <para>acceleration not due to robot acceleration) of the frame velocity.</para>
-<para>This term is usually called <formula id="274">$\dot{J} \nu$</formula> or <formula id="275">$\dot{J} \dot{q}$</formula>. <simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+<para>This term is usually called <formula id="276">$\dot{J} \nu$</formula> or <formula id="277">$\dot{J} \dot{q}$</formula>. <simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
 </simplesect>
 <simplesect kind="return"><para>true on success, false otherwise </para>
 </simplesect>
@@ -2066,7 +2068,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="805" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="842" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1afa27f56b8951ecf8a3dd6edc34bd6482" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector6</ref></type>
@@ -2082,11 +2084,11 @@
         </briefdescription>
         <detaileddescription>
 <para>acceleration not due to robot acceleration) of the frame velocity.</para>
-<para>This term is usually called <formula id="274">$\dot{J} \nu$</formula> or <formula id="275">$\dot{J} \dot{q}$</formula>. </para>
+<para>This term is usually called <formula id="276">$\dot{J} \nu$</formula> or <formula id="277">$\dot{J} \dot{q}$</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="812" column="13"/>
+        <location file="iDynTree/KinDynComputations.h" line="850" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a6ddeed39fa4aa8d67a7c6104addc4c79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2106,7 +2108,7 @@
         </briefdescription>
         <detaileddescription>
 <para>acceleration not due to robot acceleration) of the frame velocity.</para>
-<para>This term is usually called <formula id="274">$\dot{J} \nu$</formula> or <formula id="275">$\dot{J} \dot{q}$</formula>. <simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+<para>This term is usually called <formula id="276">$\dot{J} \nu$</formula> or <formula id="277">$\dot{J} \dot{q}$</formula>. <simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
 </simplesect>
 <simplesect kind="return"><para>true on success, false otherwise </para>
 </simplesect>
@@ -2114,7 +2116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="821" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="861" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -2137,7 +2139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="843" column="24"/>
+        <location file="iDynTree/KinDynComputations.h" line="883" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a453a6327824dd13ad1cc73f4a9edcfa1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2160,7 +2162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="851" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="892" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -2177,7 +2179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="859" column="23"/>
+        <location file="iDynTree/KinDynComputations.h" line="900" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a7da8f9278dc90954e5c1a78c8d298511" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2202,7 +2204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="869" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="911" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2217,11 +2219,11 @@
 <para>Return the center of mass jacobian, i.e. </para>
         </briefdescription>
         <detaileddescription>
-<para>the <formula id="276">$3 \times (n+6)$</formula> matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * <formula id="277">$ \nu$</formula>. </para>
+<para>the <formula id="278">$3 \times (n+6)$</formula> matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * <formula id="279">$ \nu$</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="876" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="918" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ad06724860f4cc84c3b3665c9d396884a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2236,7 +2238,7 @@
 <para>Return the center of mass jacobian, i.e. </para>
         </briefdescription>
         <detaileddescription>
-<para>the <formula id="276">$3 \times (n+6)$</formula> matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * <formula id="278">$\nu $</formula>.</para>
+<para>the <formula id="278">$3 \times (n+6)$</formula> matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * <formula id="280">$\nu $</formula>.</para>
 <para><simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
 </simplesect>
 <simplesect kind="return"><para>true on success, false otherwise. </para>
@@ -2245,7 +2247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="885" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="928" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a72b9d5992f44b1edca55d3067e6935fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
@@ -2259,7 +2261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="890" column="14"/>
+        <location file="iDynTree/KinDynComputations.h" line="933" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a96c5b14d641963cbe5d0a4e0c5e2ffd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2282,7 +2284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="897" column="11"/>
+        <location file="iDynTree/KinDynComputations.h" line="941" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a9eda2c0304b71cecb3e6d8f3a8523b6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref></type>
@@ -2302,7 +2304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="907" column="21"/>
+        <location file="iDynTree/KinDynComputations.h" line="953" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a00aed880308de20d568f5e9e2638f286" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2328,7 +2330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="917" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="966" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ad072dff147fe9cd88a09e687d7aad746" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2352,7 +2354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="927" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="978" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a210a38b01ff7aaf65e1a05dde26d7c46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2380,7 +2382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="939" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="993" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aae744a3efa13c67705ff9bed0f3cfa91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
@@ -2398,7 +2400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="948" column="20"/>
+        <location file="iDynTree/KinDynComputations.h" line="1003" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a5fa53ab2ec3bef686b04d5502d249bf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref></type>
@@ -2416,7 +2418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="961" column="21"/>
+        <location file="iDynTree/KinDynComputations.h" line="1017" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aa71b0698ac6fb8477c828234e919826d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2442,7 +2444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="976" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1034" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a8b6ff477fc86c5c4135ccb9359709877" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2461,7 +2463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="983" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1041" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a6d3e6f8f94959fdc1588f5ea62ff28a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2484,7 +2486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="992" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1052" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a3326cb327c1123b7e3c26f0b752a4196" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
@@ -2502,7 +2504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1001" column="20"/>
+        <location file="iDynTree/KinDynComputations.h" line="1061" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ad0399a36b1167706f317ce1e861c2ca0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">iDynTree::SpatialMomentum</ref></type>
@@ -2520,7 +2522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1009" column="31"/>
+        <location file="iDynTree/KinDynComputations.h" line="1070" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a03e340549c18073cc187554d5529f59b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2547,7 +2549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1020" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1083" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a25056bf8ed51001c1fdb3a730f44d425" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2569,7 +2571,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1028" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1092" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ab47904194526d6bc56061f6b5735c455" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2594,7 +2596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1037" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1103" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ac2a4ff5c105f79ff46701ed827445c47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">iDynTree::SpatialMomentum</ref></type>
@@ -2609,7 +2611,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1044" column="31"/>
+        <location file="iDynTree/KinDynComputations.h" line="1111" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a92fbb55b733db7850e5b305de93a565a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2633,7 +2635,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1053" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1122" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a0550abe10700c803723c0ef68f212580" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2665,7 +2667,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1066" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1135" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a336e26bd0eef654bc071b2df5a722caf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2699,29 +2701,29 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1080" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1151" column="5"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
       <header>Methods to get quantities related to unconstrained free floating equation of motions.</header>
       <description><para>This methods permits to compute several quantities related to free floating equation of methods.</para>
 <para>Note that this equations needs to be coupled with a description of the interaction between the model and the enviroment (such as a contant model, a bilateral constraint on some links or by considering some external forces as inputs) to actually obtain a dynamical system description of the mechanical model evolution.</para>
-<para>The equations of motion of a free floating mechanical system under the effect of a uniform gravitational field are: <formula id="279">\[ M(q) \dot{\nu} + C(q, \nu) \nu + G(q) = \begin{bmatrix} 0_{6\times1} \newline \tau \end{bmatrix} + \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \]</formula></para>
+<para>The equations of motion of a free floating mechanical system under the effect of a uniform gravitational field are: <formula id="281">\[ M(q) \dot{\nu} + C(q, \nu) \nu + G(q) = \begin{bmatrix} 0_{6\times1} \newline \tau \end{bmatrix} + \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \]</formula></para>
 <para>where:</para>
 <para><itemizedlist>
-<listitem><para><formula id="280">$n_{PC}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords</ref>,</para>
-</listitem><listitem><para><formula id="281">$n_{DOF}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" kindref="member">Model::getNrOfDOFs</ref>,</para>
-</listitem><listitem><para><formula id="282">$n_{L}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">Model::getNrOfLinks</ref>,</para>
-</listitem><listitem><para><formula id="283">$q \in \mathbb{R}^3 \times \textrm{SO}(3) \times \mathbb{R}^{n_{PC}}$</formula> is the robot position,</para>
-</listitem><listitem><para><formula id="284">$\nu \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot velocity,</para>
-</listitem><listitem><para><formula id="285">$\dot{\nu} \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot acceleration,</para>
-</listitem><listitem><para><formula id="286">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the free floating mass matrix,</para>
-</listitem><listitem><para><formula id="287">$C(q, \nu) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the coriolis matrix,</para>
-</listitem><listitem><para><formula id="288">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula> is the vector of gravity generalized forces,</para>
-</listitem><listitem><para><formula id="289">$\tau \in \mathbb{R}^6$</formula> is the vector of torques applied on the joint of the multibody model,</para>
-</listitem><listitem><para><formula id="290">$\mathcal{L}$</formula> is the set of all the links contained in the multibody model,</para>
-</listitem><listitem><para><formula id="291">$J_L \in \mathbb{R}^{6+n_{DOF}}$</formula> is the free floating jacobian of link <formula id="0">$L$</formula> as obtained by <ref refid="classiDynTree_1_1KinDynComputations_1a27ae295bad4b1a53f7b26dc454edd52b" kindref="member">KinDynComputations::getFrameFreeFloatingJacobian</ref>,</para>
-</listitem><listitem><para><formula id="292">$\mathrm{f}_L^x$</formula> is the 6D force/torque applied by the enviroment on link <formula id="0">$L$</formula>.</para>
+<listitem><para><formula id="282">$n_{PC}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords</ref>,</para>
+</listitem><listitem><para><formula id="283">$n_{DOF}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" kindref="member">Model::getNrOfDOFs</ref>,</para>
+</listitem><listitem><para><formula id="284">$n_{L}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">Model::getNrOfLinks</ref>,</para>
+</listitem><listitem><para><formula id="285">$q \in \mathbb{R}^3 \times \textrm{SO}(3) \times \mathbb{R}^{n_{PC}}$</formula> is the robot position,</para>
+</listitem><listitem><para><formula id="286">$\nu \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot velocity,</para>
+</listitem><listitem><para><formula id="287">$\dot{\nu} \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot acceleration,</para>
+</listitem><listitem><para><formula id="288">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the free floating mass matrix,</para>
+</listitem><listitem><para><formula id="289">$C(q, \nu) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the coriolis matrix,</para>
+</listitem><listitem><para><formula id="290">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula> is the vector of gravity generalized forces,</para>
+</listitem><listitem><para><formula id="291">$\tau \in \mathbb{R}^6$</formula> is the vector of torques applied on the joint of the multibody model,</para>
+</listitem><listitem><para><formula id="292">$\mathcal{L}$</formula> is the set of all the links contained in the multibody model,</para>
+</listitem><listitem><para><formula id="293">$J_L \in \mathbb{R}^{6+n_{DOF}}$</formula> is the free floating jacobian of link <formula id="0">$L$</formula> as obtained by <ref refid="classiDynTree_1_1KinDynComputations_1a27ae295bad4b1a53f7b26dc454edd52b" kindref="member">KinDynComputations::getFrameFreeFloatingJacobian</ref>,</para>
+</listitem><listitem><para><formula id="294">$\mathrm{f}_L^x$</formula> is the 6D force/torque applied by the enviroment on link <formula id="0">$L$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para>The precise definition of each quantity (in particular the part related to the base) actually depends on the choice of FrameVelocityRepresentation, specified with the setFrameVelocityRepresentation method. </para>
@@ -2739,7 +2741,7 @@
 <para>Get the free floating mass matrix of the system. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="286">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
+<para>This method computes <formula id="288">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
 <para>The mass matrix depends on the joint positions, specified by the setRobotState methods. If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION, the mass matrix depends also on the base orientation with respect to the inertial frame, that is also set by the setRobotState methods.</para>
 <para>For more details on the structure of the free floating mass matrix, please check: S. Traversaro, A. Saccon Multibody Dynamics Notation <ulink url="http://repository.tue.nl/849895">http://repository.tue.nl/849895</ulink></para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2757,7 +2759,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1148" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1226" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aade6b7d911481ea0e3763587247cd896" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2772,7 +2774,7 @@
 <para>Get the free floating mass matrix of the system (<ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> version). </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="286">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
+<para>This method computes <formula id="288">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
 <para>The mass matrix depends on the joint positions, specified by the setRobotState methods. If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION, the mass matrix depends also on the base orientation with respect to the inertial frame, that is also set by the setRobotState methods.</para>
 <para>For more details on the structure of the free floating mass matrix, please check: S. Traversaro, A. Saccon Multibody Dynamics Notation <ulink url="http://repository.tue.nl/849895">http://repository.tue.nl/849895</ulink></para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2792,7 +2794,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1169" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1249" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a60870f0f43c035fc63527ad42394f963" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2819,7 +2821,7 @@
 <para>Compute the free floating inverse dynamics. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="293">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="295">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of baseAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2861,7 +2863,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1187" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1268" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1abd0cffbfc42e25cee59bcb7d9f68138c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2888,7 +2890,7 @@
 <para>Compute the free floating inverse dynamics (<ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> version). </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="293">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="295">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of baseAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2932,7 +2934,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1209" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1292" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a4fda4e851c1817c520382741e7af6e9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2963,33 +2965,33 @@
 <para>This method is similar to inverseDynamics, but provides as an additional output the internal 6D force/torques (aka wrenches) excerted by the two links connected to each joint, in the linkInternalWrenches argument. </para>
         </briefdescription>
         <detaileddescription>
-<para>The <computeroutput>linkInternalWrenches</computeroutput> is a container of <formula id="282">$n_{L}$</formula> (number of links) 6D Force/Torques, one associated to each link. In particular, if the link <formula id="0">$L$</formula> is the link with index <formula id="0">$L$</formula> the element linkInternalWrenches(i) contains, depending on the choice of <computeroutput>FrameVelocityRepresentation</computeroutput>:</para>
+<para>The <computeroutput>linkInternalWrenches</computeroutput> is a container of <formula id="284">$n_{L}$</formula> (number of links) 6D Force/Torques, one associated to each link. In particular, if the link <formula id="0">$L$</formula> is the link with index <formula id="0">$L$</formula> the element linkInternalWrenches(i) contains, depending on the choice of <computeroutput>FrameVelocityRepresentation</computeroutput>:</para>
 <para><table rows="4" cols="2"><row>
 <entry thead="yes" align='center'><para><computeroutput>FrameVelocityRepresentation</computeroutput>   </para>
 </entry><entry thead="yes" align='center'><para><computeroutput>linkInternalWrenches(i)</computeroutput>    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para><computeroutput>MIXED_REPRESENTATION</computeroutput> (default)   </para>
-</entry><entry thead="no" align='center'><para><formula id="294">$ {}_{L[A]} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
+</entry><entry thead="no" align='center'><para><formula id="296">$ {}_{L[A]} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput>   </para>
-</entry><entry thead="no" align='center'><para><formula id="295">$ {}_{L} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
+</entry><entry thead="no" align='center'><para><formula id="297">$ {}_{L} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput>   </para>
-</entry><entry thead="no" align='center'><para><formula id="296">$ {}_{A} \mathrm{f}_{\lambda(L), L} $</formula>   </para>
+</entry><entry thead="no" align='center'><para><formula id="298">$ {}_{A} \mathrm{f}_{\lambda(L), L} $</formula>   </para>
 </entry></row>
 </table>
 </para>
-<para>Where if <formula id="297">$C$</formula> is a given frame, <formula id="298">$ {}_{C} \mathrm{f}_{\lambda(L), L} $</formula> is the 6D force/torque that the parent link <formula id="299">$\lambda(L)$</formula> excerts on its child <formula id="0">$L$</formula> expressed in frame <formula id="297">$C$</formula>.</para>
+<para>Where if <formula id="299">$C$</formula> is a given frame, <formula id="300">$ {}_{C} \mathrm{f}_{\lambda(L), L} $</formula> is the 6D force/torque that the parent link <formula id="301">$\lambda(L)$</formula> excerts on its child <formula id="0">$L$</formula> expressed in frame <formula id="299">$C$</formula>.</para>
 <para><simplesect kind="warning"><para>Note that this definition strictly depends on the floating base specified in the <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">KinDynComputations</ref> instances, as given a link <formula id="0">$L$</formula>, its parent \lambda(L) depends on the choosen base link. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1234" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1321" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1adc2cb49455b673fd6bfc5b40d00eb695" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3024,7 +3026,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1244" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1333" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a36e267abacd5773178bae3c2b6c26faa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3039,7 +3041,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="300">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="302">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedBiasForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -3057,7 +3059,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1262" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1353" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1aa9de9b73d42371a0c8d9002d494ad808" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3073,7 +3075,7 @@
         </briefdescription>
         <detaileddescription>
 <para>(<ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> version)</para>
-<para>This method computes <formula id="300">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="302">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedBiasForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><simplesect kind="note"><para>generalizedBiasForces has to be a (6 + dofs)-d vector. The first 6 elements will contain the bias forces related to the system base, while the last dofs elements related to the joints.</para>
@@ -3086,7 +3088,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1280" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1374" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a9033e15503c5befbd0d5107038ac37f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3101,7 +3103,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized gravity forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="288">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="290">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedGravityForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -3119,7 +3121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1294" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1389" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1ac7330ad350c6ede3ab55e906525c2328" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3134,7 +3136,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized gravity forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="288">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="290">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedGravityForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><simplesect kind="note"><para>generalizedGravityForces has to be a (6 + dofs)-d vector. The first 6 elements will contain the bias forces related to the system base, while the last dofs elements related to the joints.</para>
@@ -3147,7 +3149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1312" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1409" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a5a30a1e975f9510ef1b8fa605d0c6c03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3166,7 +3168,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized external forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="301">$ -\sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}} $</formula>.</para>
+<para>This method computes <formula id="303">$ -\sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}} $</formula>.</para>
 <para><simplesect kind="warning"><para>Note that this method returns the <bold>negated</bold> sum of the product of jacobian and the external force, consistently with how the generalized external forces are computed in the <ref refid="classiDynTree_1_1KinDynComputations_1a60870f0f43c035fc63527ad42394f963" kindref="member">KinDynComputations::inverseDynamics</ref> method.</para>
 </simplesect>
 The semantics of the base part of generalizedExternalForces and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</para>
@@ -3186,7 +3188,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1330" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1429" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a2945d5222c617680fc262ae01dca0f23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3209,8 +3211,8 @@ The semantics of the base part of generalizedExternalForces and of the elements 
 <para>Compute the free floating inverse dynamics as a linear function of inertial parameters. </para>
         </briefdescription>
         <detaileddescription>
-<para>This methods computes the <formula id="302">$ Y(\dot{\nu}, \nu, q) \in \mathbb{R}^{ (6+n_{DOF}) \times (10n_{L}) } $</formula> matrix such that: <formula id="303">\[ Y(\dot{\nu}, \nu, q) \phi = M(q) \dot{\nu} + C(q, \nu) \nu + G(q) \]</formula></para>
-<para>where <formula id="304">$\phi \in \mathbb{R}^{10n_{L}}$</formula> is the vector of inertial parameters returned by the <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> .</para>
+<para>This methods computes the <formula id="304">$ Y(\dot{\nu}, \nu, q) \in \mathbb{R}^{ (6+n_{DOF}) \times (10n_{L}) } $</formula> matrix such that: <formula id="305">\[ Y(\dot{\nu}, \nu, q) \phi = M(q) \dot{\nu} + C(q, \nu) \nu + G(q) \]</formula></para>
+<para>where <formula id="306">$\phi \in \mathbb{R}^{10n_{L}}$</formula> is the vector of inertial parameters returned by the <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> .</para>
 <para>The semantics of baseAcc, the base part (first six rows) of baseForceAndJointTorquesRegressor depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><simplesect kind="see"><para>iDynTree::InverseDynamicsInertialParametersRegressor for more info on the underlying algorithm.</para>
@@ -3246,7 +3248,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="1355" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="1460" column="5"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -3261,7 +3263,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="56" column="42" bodyfile="iDynTree/KinDynComputations.h" bodystart="55" bodyend="-1"/>
+        <location file="iDynTree/KinDynComputations.h" line="57" column="41" bodyfile="iDynTree/KinDynComputations.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -3280,7 +3282,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="59" column="5"/>
+        <location file="iDynTree/KinDynComputations.h" line="60" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a63c2d2251202bfe8d5a5945b47a0932f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">KinDynComputations</ref> &amp;</type>
@@ -3297,7 +3299,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="60" column="24"/>
+        <location file="iDynTree/KinDynComputations.h" line="61" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a1b87931ecbb1192dcbca6c1dff0d3f3b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3310,7 +3312,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="65" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="66" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a0f77386cadb313641227f34e5aa292c5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3323,7 +3325,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="70" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="71" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a7c1e789c31554c990c34f72985fe76b1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3336,7 +3338,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="75" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="76" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a6b53e9658acda7a8185e5d1bb0d36d31" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3349,7 +3351,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="78" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="79" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1KinDynComputations_1a4511bb4f2fcaf091a5b91123f42fa001" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3362,7 +3364,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/KinDynComputations.h" line="81" column="10"/>
+        <location file="iDynTree/KinDynComputations.h" line="82" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -3372,7 +3374,7 @@ The semantics of the base part of generalizedExternalForces and of the elements 
 <para>The kinematics dynamics computations class is an high level class stateful to access several algorithms related to kinematics and dynamics of free floating robot systems.</para>
 <para>This class supports three possible convention to express the floating base information : the inertial, the body-fixed and the mixed convention. To get more info on this three conventions, check section II.C of On the Base Frame Choice in Free-Floating Mechanical Systems and its Connection to Centroidal Dynamics <ulink url="https://traversaro.github.io/preprints/changebase.pdf">https://traversaro.github.io/preprints/changebase.pdf</ulink> </para>
     </detaileddescription>
-    <location file="iDynTree/KinDynComputations.h" line="53" column="1" bodyfile="iDynTree/KinDynComputations.h" bodystart="53" bodyend="1362"/>
+    <location file="iDynTree/KinDynComputations.h" line="53" column="1" bodyfile="iDynTree/KinDynComputations.h" bodystart="54" bodyend="1465"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1KinDynComputations_1a7c1e789c31554c990c34f72985fe76b1" prot="private" virt="non-virtual"><scope>iDynTree::KinDynComputations</scope><name>computeBiasAccFwdKinematics</name></member>
       <member refid="classiDynTree_1_1KinDynComputations_1a1b87931ecbb1192dcbca6c1dff0d3f3b" prot="private" virt="non-virtual"><scope>iDynTree::KinDynComputations</scope><name>computeFwdKinematics</name></member>

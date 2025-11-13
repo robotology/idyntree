@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="44" column="9"/>
+        <location file="iDynTree/JointState.h" line="44" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointDOFsDoubleArray_1ad7958cfaaf7c23a2e1ec0133f5be3109" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="45" column="9"/>
+        <location file="iDynTree/JointState.h" line="45" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointDOFsDoubleArray_1a9b301ad1063e206b9004e01350f55a3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="47" column="14"/>
+        <location file="iDynTree/JointState.h" line="47" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointDOFsDoubleArray_1a788595cebd4af5791674c4f4b506f82e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="48" column="14"/>
+        <location file="iDynTree/JointState.h" line="48" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointDOFsDoubleArray_1a634466c96b990921ee045b50d269acb0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="50" column="14"/>
+        <location file="iDynTree/JointState.h" line="50" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointDOFsDoubleArray_1afd385c540e540d2dcd5ca4bd320e37de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="51" column="30"/>
+        <location file="iDynTree/JointState.h" line="51" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointDOFsDoubleArray_1af32950db5c4fedbd963cdc7e7a2fb982" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/JointState.h" line="53" column="9"/>
+        <location file="iDynTree/JointState.h" line="53" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -151,7 +151,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/JointState.h" line="41" column="5" bodyfile="iDynTree/JointState.h" bodystart="42" bodyend="54"/>
+    <location file="iDynTree/JointState.h" line="41" column="1" bodyfile="iDynTree/JointState.h" bodystart="42" bodyend="54"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorDynSize_1a3ea2fb7a1554fed00d992b005b6c661a" prot="public" virt="non-virtual"><scope>iDynTree::JointDOFsDoubleArray</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorDynSize_1a5f0343d03d3920a41c1bd94d2e6ffff5" prot="public" virt="non-virtual"><scope>iDynTree::JointDOFsDoubleArray</scope><name>begin</name></member>

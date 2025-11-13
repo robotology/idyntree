@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrivateUtils.h" line="20" column="21" declfile="iDynTree/PrivateUtils.h" declline="20" declcolumn="21"/>
+        <location file="iDynTree/PrivateUtils.h" line="19" column="17" declfile="iDynTree/PrivateUtils.h" declline="19" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1a8dac2640419d7eaba00586c252ab99e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Eigen::Matrix3d</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrivateUtils.h" line="28" column="21" declfile="iDynTree/PrivateUtils.h" declline="28" declcolumn="21"/>
+        <location file="iDynTree/PrivateUtils.h" line="27" column="17" declfile="iDynTree/PrivateUtils.h" declline="27" declcolumn="17"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1ab4c72168cc4cc9909da74c433345e8d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrivateUtils.h" line="34" column="10" bodyfile="iDynTree/PrivateUtils.h" bodystart="34" bodyend="39"/>
+        <location file="iDynTree/PrivateUtils.h" line="32" column="18" bodyfile="iDynTree/PrivateUtils.h" bodystart="32" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1a9f173fe7a9b0aabdbfa0169513dd0afa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrivateUtils.h" line="45" column="14" bodyfile="iDynTree/PrivateUtils.h" bodystart="45" bodyend="51"/>
+        <location file="iDynTree/PrivateUtils.h" line="42" column="22" bodyfile="iDynTree/PrivateUtils.h" bodystart="42" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1ad44d09b939590fde0dca95ebd7f899c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrivateUtils.h" line="57" column="14" bodyfile="iDynTree/PrivateUtils.h" bodystart="57" bodyend="63"/>
+        <location file="iDynTree/PrivateUtils.h" line="54" column="10" bodyfile="iDynTree/PrivateUtils.h" bodystart="54" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1ada26d16396f1cd9f82b2e7c921fe202e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrivateUtils.h" line="70" column="16" bodyfile="iDynTree/PrivateUtils.h" bodystart="70" bodyend="81"/>
+        <location file="iDynTree/PrivateUtils.h" line="67" column="12" bodyfile="iDynTree/PrivateUtils.h" bodystart="67" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="PrivateUtils_8h_1a2941457a02de10e9de1dea4106588921" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/PrivateUtils.h" line="88" column="16" bodyfile="iDynTree/PrivateUtils.h" bodystart="88" bodyend="97"/>
+        <location file="iDynTree/PrivateUtils.h" line="88" column="12" bodyfile="iDynTree/PrivateUtils.h" bodystart="88" bodyend="99"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

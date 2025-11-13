@@ -267,6 +267,8 @@
     <member refid="classiDynTree_1_1BerdyHelper_1a63d1b9ff4e9bdebf861a20d7d36fd4ed" kind="variable"><name>rcmOffset</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a1bf2f8c62b8afde8b687a02191a3501b" kind="variable"><name>wrenchSensors</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1af8a24a4b0fae237d14a8b4931c706f40" kind="variable"><name>jntIdxToOffset</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1abfe8cea04fe536e265d04e581a4f94de" kind="variable"><name>sensors</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1af70bed42b866a9e7cefaf36ce5e24703" kind="variable"><name>options</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a1ceb40aa0d982d92d69c74bda7d478b3" kind="function"><name>initOriginalBerdyFixedBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a03994c76ebae7f3a5c9a9556092ab30a" kind="function"><name>initBerdyFloatingBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1ab3bd5c8ade693ccc8e45f613b64d9ba1" kind="function"><name>initSensorsMeasurements</name></member>
@@ -296,7 +298,7 @@
     <member refid="classiDynTree_1_1BerdyHelper_1ae9808ba9d9c2e8e680d70580d2c07712" kind="function"><name>sensors</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a1e159c73e14672efc1a4ad5db4e4c070" kind="function"><name>isValid</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a3d844581e38acd550df0478db151f6f9" kind="function"><name>init</name></member>
-    <member refid="classiDynTree_1_1BerdyHelper_1a4570e41df3b6dfedd00fe4dfcc2bc02b" kind="function"><name>init</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1a0e076d23646a8c125121d1477916ac07" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a744e3d20ec3a98f80ab341f2201c204e" kind="function"><name>getOptions</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a47b69a027609e28259584304ed786ff9" kind="function"><name>getNrOfDynamicVariables</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a8d104eb5b61cea207e4d2655530d5c61" kind="function"><name>getNrOfDynamicEquations</name></member>
@@ -468,10 +470,10 @@
     <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1acd9cccc7612f2c8df8e561c7eaa8efdc" kind="typedef"><name>pointer</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1a970cb921e2d50f8bc67291019f469c78" kind="typedef"><name>iterator_category</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1a51c57a31c0c18c18341920b6346dc830" kind="friend"><name>SensorsList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1ab2c846ade50c1dd8588fefe1d0faffd7" kind="variable"><name>internalIterator</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1ad9fd2ff70d9a872b611f936ca72a5da1" kind="variable"><name>externalIterator</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1ab2378205f881c0735fde85a0fb5257c6" kind="variable"><name>iteratingList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1abb3a970e0fe8052d9a552392e9a04dc3" kind="function"><name>ConstIterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1ad97df70f166c588f30b6d6fb6d99fec2" kind="variable"><name>internalIterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1a1d6eeac79877159fd0e0b67b0362297b" kind="variable"><name>externalIterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1ab8ccf2a9bef318638ac243151e591068" kind="variable"><name>iteratingList</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1a7f2f3b24a698db3f15db071e8ad19184" kind="function"><name>ConstIterator</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1aff2fe75597096e8e5695331ac7e87706" kind="function"><name>constructor</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1a5f0960f58f5ea1e18da0f1fca757f106" kind="function"><name>ConstIterator</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstIterator_1acc429528fbcd762b83f25f4090398c8f" kind="function"><name>operator++</name></member>
@@ -577,8 +579,8 @@
     <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1a17f21b802f07869341619a00063d1fdb" kind="typedef"><name>pointer</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1a3b3e65284f302aeb199ef1fdc1f80949" kind="typedef"><name>iterator_category</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1a51c57a31c0c18c18341920b6346dc830" kind="friend"><name>SensorsList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1aad1aaf12dac9c9932cedd82f0048e731" kind="variable"><name>iteratingList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1a663096d8b30221bbeb67564ef540ef96" kind="variable"><name>internalIterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1a048bd84193c0651d46be12051b572ba5" kind="variable"><name>iteratingList</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1aef75d323a32369058af940637e4191db" kind="variable"><name>internalIterator</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1a1fa739bc23b79871521bbbf979a6595a" kind="function"><name>ConstTypedIterator</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1a29b49e33da35831c6104650a976d136a" kind="function"><name>constructor</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator_1ae92fdc1297fd95c9fe792af1efe27f7c" kind="function"><name>ConstTypedIterator</name></member>
@@ -675,7 +677,7 @@
     <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a983297b5309a3d379935733dcb8a5ddf" kind="function"><name>costSecondPartialDerivativeWRTControlSparsity</name></member>
   </compound>
   <compound refid="classiDynTree_1_1CubicSpline" kind="class"><name>iDynTree::CubicSpline</name>
-    <member refid="classiDynTree_1_1CubicSpline_1ad739563db38250e24b5e6a5129fbce25" kind="variable"><name>m_coefficients</name></member>
+    <member refid="classiDynTree_1_1CubicSpline_1a0fd72e5f9d93a6d7cdf2487702fb9013" kind="variable"><name>m_coefficients</name></member>
     <member refid="classiDynTree_1_1CubicSpline_1af337bad6bb4d93873aba9cdeb5c50062" kind="variable"><name>m_velocities</name></member>
     <member refid="classiDynTree_1_1CubicSpline_1ac5839b1d1a47b59dc60a1a17ea759bb4" kind="variable"><name>m_time</name></member>
     <member refid="classiDynTree_1_1CubicSpline_1ab5eacaa424b24623a4a534d3061378ee" kind="variable"><name>m_y</name></member>
@@ -958,12 +960,13 @@
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a956b700980cdb249747a60a46b3da776" kind="variable"><name>m_generalizedTorques</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1af439c6052af9ab34ce6db052750cea1b" kind="variable"><name>m_calibBufs</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae61e621887fff2419b6b58069791b186" kind="variable"><name>m_bufs</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1aab5d3c62ffa5c80d59069d7e80655c6f" kind="variable"><name>_sensors</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ab3725b4b03d337cfa361f2dfdbfed2d4" kind="function"><name>ExtWrenchesAndJointTorquesEstimator</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a4bcfb0a181f1106f4a7eff14757f1ef5" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1afaddafcf6ed76bc417e3780ceebf81db" kind="function"><name>ExtWrenchesAndJointTorquesEstimator</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a21ecaac3728255f5ad511123ca97ec77" kind="function"><name>~ExtWrenchesAndJointTorquesEstimator</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a559e22f6ae100c24fabe83d708bfdf32" kind="function"><name>setModel</name></member>
-    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ab62c38a61392178a65af5a90a6a7a076" kind="function"><name>setModelAndSensors</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a181f05bfa2c2f9bed20497840eb0ba09" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1af366663099c8b4772ab27485bc3581f8" kind="function"><name>loadModelAndSensorsFromFile</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a65ada8c5265bed3d7f19bd1b3694be18" kind="function"><name>loadModelAndSensorsFromFileWithSpecifiedDOFs</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ae1fcc20d0e3eb0eace44e334d931c0f4" kind="function"><name>model</name></member>
@@ -1419,7 +1422,7 @@
     <member refid="classiDynTree_1_1IModelVisualization_1a47a8c09072212540ab0e233b1981254a" kind="function"><name>setLinkTransparency</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1ae9b1507fd93b3c47b62b69293dd0f7b3" kind="function"><name>setModelTransparency</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1a17fc5c0d21dbd2480e28afda70955804" kind="function"><name>resetLinkColor</name></member>
-    <member refid="classiDynTree_1_1IModelVisualization_1a4d216f8ba410a9a827b6e5495d1fa441" kind="function"><name>getLinkNames</name></member>
+    <member refid="classiDynTree_1_1IModelVisualization_1abc44b8476723276db66e8fe8f0ee43a8" kind="function"><name>getLinkNames</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1a86dcccc124cafe7280578d9f66dd13fd" kind="function"><name>setLinkVisibility</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1afc4739fc4e8cd0629b0d8a9b8fbe1e95" kind="function"><name>getFeatures</name></member>
     <member refid="classiDynTree_1_1IModelVisualization_1ae3a6d78785994edae56c168668932843" kind="function"><name>setFeatureVisibility</name></member>
@@ -1587,9 +1590,9 @@
     <member refid="classiDynTree_1_1InverseKinematics_1a0d9e4d4db2a590dad2f6b530b159cd06" kind="function"><name>~InverseKinematics</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1ac3e893981cbfa2afc88a231d1cace9a4" kind="function"><name>loadModelFromFile</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1abb9706235b5fe16f951731ba285582ae" kind="function"><name>setModel</name></member>
-    <member refid="classiDynTree_1_1InverseKinematics_1aa6e7d22dbc79871a62a0ba4c6e79fb97" kind="function"><name>setJointLimits</name></member>
+    <member refid="classiDynTree_1_1InverseKinematics_1a13a8c2abc6e04a58b255201a31d58a90" kind="function"><name>setJointLimits</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a5b4b33b310711d69dc2b6d840f159df0" kind="function"><name>setJointLimits</name></member>
-    <member refid="classiDynTree_1_1InverseKinematics_1a1ad4371be984af63072d7f7ffa1f79ca" kind="function"><name>getJointLimits</name></member>
+    <member refid="classiDynTree_1_1InverseKinematics_1a10ac06e0671f4ca1632ca6c7afe7f79d" kind="function"><name>getJointLimits</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a8b6f1ca189e803b63fdff9cef7efc691" kind="function"><name>getJointLimits</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a1d54045ad46403179e3cd3c076802978" kind="function"><name>clearProblem</name></member>
     <member refid="classiDynTree_1_1InverseKinematics_1a238847f4a1308b661cdf14ac4d10caf7" kind="function"><name>setFloatingBaseOnFrameNamed</name></member>
@@ -1691,9 +1694,9 @@
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a9e48974fb8f66b5bad0c711050e17ba0" kind="function"><name>configureCenterOfMassProjectionConstraint</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aad369db9c76d864b74e07d458f347687" kind="function"><name>InverseKinematicsData</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4024cf4ac217ef5026669d42a2941fdb" kind="function"><name>setModel</name></member>
-    <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1afd414dae2211bf7ce1422dd6ce3d363a" kind="function"><name>setJointLimits</name></member>
+    <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ae66096a11aeb5cc14e2de554a5de3d5b" kind="function"><name>setJointLimits</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aac691fcf35654be5bcc87bf945534cef" kind="function"><name>setJointLimits</name></member>
-    <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1aab5189ec5428a2f06d2bd159aca76c8f" kind="function"><name>getJointLimits</name></member>
+    <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1afbb64d30a4dc20d3ea15ec683633b0c3" kind="function"><name>getJointLimits</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1ac3931acff44363b905fc43c4f6f35efd" kind="function"><name>getJointLimits</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1af233d4272bccaf07f8bb18a601409312" kind="function"><name>clearProblem</name></member>
     <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c744c6b526f138c1144e9339cc55663" kind="function"><name>addFrameConstraint</name></member>
@@ -1831,10 +1834,10 @@
     <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1a27b608e2970953bb33aaa36e41b93bfe" kind="typedef"><name>pointer</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1a7b70cbed3d3e8e5b7c9acc40de52c909" kind="typedef"><name>iterator_category</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1a51c57a31c0c18c18341920b6346dc830" kind="friend"><name>SensorsList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1a6722b04fa45a062765763710476fc0ab" kind="variable"><name>internalIterator</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1aae3e80abfce782b822a0445cb7158042" kind="variable"><name>externalIterator</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1ada411ee0c5acc667f6e1d65802b63042" kind="variable"><name>iteratingList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1a34c805de7adccfd4fafaaad233c8ead3" kind="function"><name>Iterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1ad29d22ef36762451970adf4cc5c28de3" kind="variable"><name>internalIterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1ad40989424d5183c45a257703fa735c49" kind="variable"><name>externalIterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1ae3f699900bf8c487546ca926a68d5dbd" kind="variable"><name>iteratingList</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1a57cfb7422394d171679bf04f8b58179b" kind="function"><name>Iterator</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1aa49935a19a1388ea9f22563bc52c96b2" kind="function"><name>operator++</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1ae10bde3941d39365f307a83234c14cb8" kind="function"><name>operator++</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1Iterator_1a57b83b715355792198bd7b8faf970c18" kind="function"><name>operator==</name></member>
@@ -2201,7 +2204,7 @@
     <member refid="classiDynTree_1_1LinkArticulatedBodyInertias_1a76c89f6bcbb1afe3175e7306b542d980" kind="function"><name>~LinkArticulatedBodyInertias</name></member>
   </compound>
   <compound refid="classiDynTree_1_1LinkContactWrenches" kind="class"><name>iDynTree::LinkContactWrenches</name>
-    <member refid="classiDynTree_1_1LinkContactWrenches_1af94cb7fd3571e84afd0d89249827abb9" kind="variable"><name>m_linkContactWrenches</name></member>
+    <member refid="classiDynTree_1_1LinkContactWrenches_1adf92f570e07db8b260a4e9be096e24e5" kind="variable"><name>m_linkContactWrenches</name></member>
     <member refid="classiDynTree_1_1LinkContactWrenches_1a705f417ac0ec4fd0b7529b4f454c110a" kind="function"><name>LinkContactWrenches</name></member>
     <member refid="classiDynTree_1_1LinkContactWrenches_1a0516116ada91381967e333d5e6cc908b" kind="function"><name>LinkContactWrenches</name></member>
     <member refid="classiDynTree_1_1LinkContactWrenches_1ac785af8075bfcaaa89fac52ab10cc38e" kind="function"><name>resize</name></member>
@@ -2266,7 +2269,7 @@
     <member refid="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" kind="function"><name>isConsistent</name></member>
   </compound>
   <compound refid="classiDynTree_1_1LinkTraversalsCache" kind="class"><name>iDynTree::LinkTraversalsCache</name>
-    <member refid="classiDynTree_1_1LinkTraversalsCache_1aef790ef44a22115fa03a4889d777a0bb" kind="variable"><name>m_linkTraversals</name></member>
+    <member refid="classiDynTree_1_1LinkTraversalsCache_1a975350e4c71bc496dce093c5e7a9ad59" kind="variable"><name>m_linkTraversals</name></member>
     <member refid="classiDynTree_1_1LinkTraversalsCache_1ab7d325eeb7a92cddf4e29015a7a7820e" kind="function"><name>deleteTraversals</name></member>
     <member refid="classiDynTree_1_1LinkTraversalsCache_1ae978ab8498e4ffcacad8e0ecba45689f" kind="function"><name>LinkTraversalsCache</name></member>
     <member refid="classiDynTree_1_1LinkTraversalsCache_1aac83b2dea2a31b8066c5a25c4945f02a" kind="function"><name>~LinkTraversalsCache</name></member>
@@ -2275,7 +2278,7 @@
     <member refid="classiDynTree_1_1LinkTraversalsCache_1a7f3c518053ab374caefaa698ad2e6ce3" kind="function"><name>getTraversalWithLinkAsBase</name></member>
   </compound>
   <compound refid="classiDynTree_1_1LinkUnknownWrenchContacts" kind="class"><name>iDynTree::LinkUnknownWrenchContacts</name>
-    <member refid="classiDynTree_1_1LinkUnknownWrenchContacts_1abceffcafb431cb2543495f109e2d0334" kind="variable"><name>m_linkUnknownWrenchContacts</name></member>
+    <member refid="classiDynTree_1_1LinkUnknownWrenchContacts_1a905b47477c317c73bf905a176ed39449" kind="variable"><name>m_linkUnknownWrenchContacts</name></member>
     <member refid="classiDynTree_1_1LinkUnknownWrenchContacts_1a87a99a9299dd8228c474485dd2762acf" kind="function"><name>LinkUnknownWrenchContacts</name></member>
     <member refid="classiDynTree_1_1LinkUnknownWrenchContacts_1aa2eb8f43a372a3b3968a9489194d827a" kind="function"><name>LinkUnknownWrenchContacts</name></member>
     <member refid="classiDynTree_1_1LinkUnknownWrenchContacts_1ac2721f47e70d9363f649127fb6df2d36" kind="function"><name>clear</name></member>
@@ -2457,7 +2460,7 @@
     <member refid="classiDynTree_1_1Model_1a3e5f1bc51f4bd89f9c5450c61165dac8" kind="variable"><name>linkNames</name></member>
     <member refid="classiDynTree_1_1Model_1a6fd86eb6b7a813c89ef71ffda31e0210" kind="variable"><name>jointNames</name></member>
     <member refid="classiDynTree_1_1Model_1a7918eb0613b28e50c92f5af609875bda" kind="variable"><name>frameNames</name></member>
-    <member refid="classiDynTree_1_1Model_1ac70249ac612e3cf157cd89d1e90b7538" kind="variable"><name>neighbors</name></member>
+    <member refid="classiDynTree_1_1Model_1a42df7615d809406352556ca2f956c639" kind="variable"><name>neighbors</name></member>
     <member refid="classiDynTree_1_1Model_1a774db17a0420685ac979959453f80ad4" kind="variable"><name>packageDirs</name></member>
     <member refid="classiDynTree_1_1Model_1aba9b3e5e28b33093537fbb4d6d454560" kind="variable"><name>defaultBaseLink</name></member>
     <member refid="classiDynTree_1_1Model_1a7258bf4d518366514fc8caa4666f2485" kind="variable"><name>nrOfPosCoords</name></member>
@@ -2530,22 +2533,24 @@
     <member refid="classiDynTree_1_1ModelCalibrationHelper_1a583dcf51ec22f9d6a875103a6c4e8f76" kind="function"><name>updateModelInertialParametersToString</name></member>
     <member refid="classiDynTree_1_1ModelCalibrationHelper_1ad3ab40b088a598f6da9b259222b28bb1" kind="function"><name>updateModelInertialParametersToFile</name></member>
     <member refid="classiDynTree_1_1ModelCalibrationHelper_1a94ce715abf88213cee30f6ccb804210a" kind="function"><name>model</name></member>
-    <member refid="classiDynTree_1_1ModelCalibrationHelper_1ab73d50123d391c2ddf08bcc1c5f82485" kind="function"><name>sensors</name></member>
+    <member refid="classiDynTree_1_1ModelCalibrationHelper_1a3b5e6317f73000674533ac7c97ebe78d" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1ModelCalibrationHelper_1a884bd9c1a6b009191ccb34d1b374fe00" kind="function"><name>isValid</name></member>
     <member refid="classiDynTree_1_1ModelCalibrationHelper_1aa8c47f0f45dc2985f162f5379be3e653" kind="variable"><name>m_pimpl</name></member>
   </compound>
   <compound refid="classiDynTree_1_1ModelExporter" kind="class"><name>iDynTree::ModelExporter</name>
-    <member refid="classiDynTree_1_1ModelExporter_1afb8051cba34b2e3e60d0b375c0e790bf" kind="function"><name>ModelExporter</name></member>
-    <member refid="classiDynTree_1_1ModelExporter_1a0797985ef2e2cebb8bf25c0c0e4ed18b" kind="function"><name>~ModelExporter</name></member>
+    <member refid="classiDynTree_1_1ModelExporter_1ab3f35982a74924219fb8814fa6363f78" kind="variable"><name>sensors</name></member>
+    <member refid="classiDynTree_1_1ModelExporter_1a950cefff5048600ab9ed046407f2eb56" kind="variable"><name>options</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1ac7eee90d88819d3697225c412d6717d0" kind="function"><name>exportingOptions</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1aa7babe5fc2794ed01d3ba46c4a0ae041" kind="function"><name>setExportingOptions</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1a3f39bf50349e765b206cb12dbc82a317" kind="function"><name>init</name></member>
-    <member refid="classiDynTree_1_1ModelExporter_1a959f9388c81d35b164390bbb00999274" kind="function"><name>init</name></member>
+    <member refid="classiDynTree_1_1ModelExporter_1a447aa93e1f1d1b0fb32c343b7c7237db" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1a2a8eff680e7a14c66dafe5a9360d89a8" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1a8c208f8c87d5f6fae8faef6460a561ef" kind="function"><name>sensors</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1abcbf9a179e9f6a2da5c2fc59ea2c83e4" kind="function"><name>isValid</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1ab5523d12f0411456625313c8e51f8d8b" kind="function"><name>exportModelToString</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" kind="function"><name>exportModelToFile</name></member>
+    <member refid="classiDynTree_1_1ModelExporter_1afb8051cba34b2e3e60d0b375c0e790bf" kind="function"><name>ModelExporter</name></member>
+    <member refid="classiDynTree_1_1ModelExporter_1a0797985ef2e2cebb8bf25c0c0e4ed18b" kind="function"><name>~ModelExporter</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1ac60db32473a7c24daac48ac9627563db" kind="variable"><name>m_pimpl</name></member>
   </compound>
   <compound refid="structiDynTree_1_1ModelExporterOptions" kind="struct"><name>iDynTree::ModelExporterOptions</name>
@@ -2589,7 +2594,7 @@
     <member refid="structiDynTree_1_1ModelParserOptions_1aace65fc753b0bc44d5a88f8de61a0276" kind="function"><name>ModelParserOptions</name></member>
   </compound>
   <compound refid="classiDynTree_1_1ModelSolidShapes" kind="class"><name>iDynTree::ModelSolidShapes</name>
-    <member refid="classiDynTree_1_1ModelSolidShapes_1a060e1a95aa3ab52d945ad5b07ff342ef" kind="variable"><name>linkSolidShapes</name></member>
+    <member refid="classiDynTree_1_1ModelSolidShapes_1a85612891d1ab6472d8d0902cf66361d5" kind="variable"><name>linkSolidShapes</name></member>
     <member refid="classiDynTree_1_1ModelSolidShapes_1ab2a349f4f1c9f44ac089b9d61dfea0e7" kind="function"><name>copy</name></member>
     <member refid="classiDynTree_1_1ModelSolidShapes_1a812c4331ff427738bcac0e7d0d299070" kind="function"><name>ModelSolidShapes</name></member>
     <member refid="classiDynTree_1_1ModelSolidShapes_1a0315cbe40fa35ce0a39c50be63514466" kind="function"><name>~ModelSolidShapes</name></member>
@@ -2601,8 +2606,8 @@
     <member refid="classiDynTree_1_1ModelSolidShapes_1a02a27efc03b06425e5985ae57a498361" kind="function"><name>isConsistent</name></member>
     <member refid="classiDynTree_1_1ModelSolidShapes_1a67bcbce1f485a82de83364843d986217" kind="function"><name>clearSingleLinkSolidShapes</name></member>
     <member refid="classiDynTree_1_1ModelSolidShapes_1a5f5907eb6ed1ac628d4d8419c9718b72" kind="function"><name>addSingleLinkSolidShape</name></member>
-    <member refid="classiDynTree_1_1ModelSolidShapes_1a7c09f498a3b709929fcad003df961eec" kind="function"><name>getLinkSolidShapes</name></member>
-    <member refid="classiDynTree_1_1ModelSolidShapes_1ac0632e3d06e6b5f3e48859e8edba7ee8" kind="function"><name>getLinkSolidShapes</name></member>
+    <member refid="classiDynTree_1_1ModelSolidShapes_1a0914a7e4eb63a371019ce08d911ce8f2" kind="function"><name>getLinkSolidShapes</name></member>
+    <member refid="classiDynTree_1_1ModelSolidShapes_1aef4dd532988ee7fea75cd726839a53ab" kind="function"><name>getLinkSolidShapes</name></member>
   </compound>
   <compound refid="classiDynTree_1_1MomentumFreeFloatingJacobian" kind="class"><name>iDynTree::MomentumFreeFloatingJacobian</name>
     <member refid="classiDynTree_1_1MomentumFreeFloatingJacobian_1a7c5bb5cc57527076b7f2bf0d057566bb" kind="function"><name>MomentumFreeFloatingJacobian</name></member>
@@ -2934,20 +2939,23 @@
     <member refid="classiDynTree_1_1PrismaticJoint_1a6d884f6b58c3fab743af56a65d2ca9a4" kind="variable"><name>link2_X_link1</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a4851266f2394dc6907522ba7d0113030" kind="variable"><name>S_link1_link2</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ae8bc56ca5557142f172e996639533131" kind="variable"><name>S_link2_link1</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a2e4d4fe28b21efd7bf2175bcbeb75734" kind="variable"><name>link2</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a3d2a879f6b8c1d82ef2f50cd2612e29b" kind="variable"><name>link1_X_link2</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a8aee2bf5163f18f2f9f0f87414b9d563" kind="variable"><name>_translation_axis_wrt_link1</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ababcade9ad1d46f97912883b78c9111c" kind="function"><name>disablePosLimits</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ad5909faf79ce873324da7c5310f98e61" kind="function"><name>resetJointDynamics</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a5352289b3185771ca66b6163a32717c8" kind="function"><name>updateBuffers</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a693283039138367a864d05a97f1d48bb" kind="function"><name>resetBuffers</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a81d5439e47c00f25b57d4e7f4e351f0b" kind="function"><name>resetAxisBuffers</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a79ed0a8a9c7d67a9f47230bfc0214d7b" kind="function"><name>PrismaticJoint</name></member>
-    <member refid="classiDynTree_1_1PrismaticJoint_1aa83aec02a88dec71313860dcbb9a90ea" kind="function"><name>PrismaticJoint</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a1ff0cf625cfbc935e54edadb87268ad5" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a3f6bc8eedb120e0fb1c9920fea7319ca" kind="function"><name>PrismaticJoint</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a65531e877d712df301e2cd6e0ad04b42" kind="function"><name>~PrismaticJoint</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a1ac21ca360862669e3e90dcd2674ce37" kind="function"><name>clone</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1acc37e809466dbaa48c63d710172466d7" kind="function"><name>setAttachedLinks</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ac6cf334be17f178a4b1a8b8877a034d6" kind="function"><name>setRestTransform</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ab34363eae08df95076be5eb0ae54a08f" kind="function"><name>setAxis</name></member>
-    <member refid="classiDynTree_1_1PrismaticJoint_1ad0f4e013dee877bd775a8efafddb6f42" kind="function"><name>setAxis</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1ac584bc5cc0a39a72ad47aa17eccd7471" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a213fda83fc530f350e8bde91a04e2b4e" kind="function"><name>getFirstAttachedLink</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a742bd7aeca927a280704ae37daa6c55d" kind="function"><name>getSecondAttachedLink</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a6a54677981ef06a20d5374e212987c12" kind="function"><name>getAxis</name></member>
@@ -3030,13 +3038,16 @@
     <member refid="classiDynTree_1_1RevoluteJoint_1a98aa396b2c5880913e1a8f93c0fad716" kind="variable"><name>link2_X_link1</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a2cd60e1fa399d50697d31977c3181fa8" kind="variable"><name>S_link1_link2</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a63b5b07e4efcd2d3223e2b6c654a26f5" kind="variable"><name>S_link2_link1</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1ac48791d17b91ab581fd640159eb3b532" kind="variable"><name>link2</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a151f7b4d1080625bb116c58d96d50eaf" kind="variable"><name>link1_X_link2</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a631abcd98c07d5edd4a5ec20fd5a2c5f" kind="variable"><name>_rotation_axis_wrt_link1</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1affc24eb5821e46717f04db8f55314cc0" kind="function"><name>disablePosLimits</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1ae120b274f9c563582f9694f1a46d9de6" kind="function"><name>resetJointDynamics</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1ac9353cea48ca3448d9c3954b4fb77e56" kind="function"><name>updateBuffers</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1abea64170132558068a88804574ca7c87" kind="function"><name>resetBuffers</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1af697ff856633860ace4df9e45ad13204" kind="function"><name>resetAxisBuffers</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1aa09aee905d118d03a9d22b5bdc98e132" kind="function"><name>RevoluteJoint</name></member>
-    <member refid="classiDynTree_1_1RevoluteJoint_1a2340a2651002e2513df12ccd1b2b4040" kind="function"><name>RevoluteJoint</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a47990ee2c83ba0f46e15a5ce3cab4e09" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1ad0ba82884c9219ac78f9137f16f432e5" kind="function"><name>RevoluteJoint</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a23308fb8f761871832d44fe98b077bfd" kind="function"><name>RevoluteJoint</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a2988b3e47487b611a6db58149c76ade4" kind="function"><name>~RevoluteJoint</name></member>
@@ -3044,7 +3055,7 @@
     <member refid="classiDynTree_1_1RevoluteJoint_1ab0054852e1d734677a145eba7d855259" kind="function"><name>setAttachedLinks</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a01e2fa3bcf4c67533d2869d73124aa45" kind="function"><name>setRestTransform</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a8eb38f7d6b81de02f396a7464cb67b1e" kind="function"><name>setAxis</name></member>
-    <member refid="classiDynTree_1_1RevoluteJoint_1adae6f30b84188990fdd86ae68aa65527" kind="function"><name>setAxis</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a57e1e053bbe929b0322ddca8a5b623b0" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a5b22e4e2870280815c24f1e1fb0084ce" kind="function"><name>getFirstAttachedLink</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1ab51ac6ab6659dfdba43232dfedd24ea4" kind="function"><name>getSecondAttachedLink</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a7f3bc5c79ffa42a6eebd670e84c63358" kind="function"><name>getAxis</name></member>
@@ -3091,6 +3102,9 @@
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0d81835781978e6d994feda2a02a87db" kind="variable"><name>link2_X_link1</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a5518330f47b3922d38c636ee16f38c79" kind="variable"><name>S_link1_link2</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a84ab9b046137b380aac91bae4372047b" kind="variable"><name>S_link2_link1</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a1be6fdfed8854b3d303a528498814f77" kind="variable"><name>link2</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a30f9660f9509fbe1a285bb0a16e96244" kind="variable"><name>link1_X_link2</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa95f8a3fb1c36c9fa1c00c2609014e53" kind="variable"><name>_rotation_axis_wrt_link1</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1ae42e6efcb11b5dac6ac6f4e6ed4f28ce" kind="function"><name>disablePosLimits</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a77d53e2b990e68c3049fc8f79c181c95" kind="function"><name>resetJointDynamics</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4619faf8d34cc078f93c878d3778539e" kind="function"><name>updateBuffers</name></member>
@@ -3099,7 +3113,7 @@
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1aa9018cd5dfe867479fa0b499e199e3ce" kind="function"><name>complexToAngle</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a0446eca7eb2cf2889d0e9d33fdf8ea92" kind="function"><name>normalizeComplex</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4ba706f7101bb9519c017d60ef197cc6" kind="function"><name>RevoluteSO2Joint</name></member>
-    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a78de953da11421752e970ae2413d66fd" kind="function"><name>RevoluteSO2Joint</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a97f1a8d4f6e8d781c1d5ce2c55703180" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1abf579399e9be8d947cbbb9d943af170c" kind="function"><name>RevoluteSO2Joint</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a4b889cdfe463ddeaf592a1180bee6c30" kind="function"><name>RevoluteSO2Joint</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1ae1dda38c084ce44dab4f34adfbedebc3" kind="function"><name>~RevoluteSO2Joint</name></member>
@@ -3107,7 +3121,7 @@
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a122f1f85c605901a5318a76aaf289748" kind="function"><name>setAttachedLinks</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a196fa4d502b2ac42d6f9c82ded440ea3" kind="function"><name>setRestTransform</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a1f3dffede2dac2a813cac411672d8094" kind="function"><name>setAxis</name></member>
-    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a97c05340151c4b146e2a3ac68113927b" kind="function"><name>setAxis</name></member>
+    <member refid="classiDynTree_1_1RevoluteSO2Joint_1a59b62e2fc72d66bf40c13bf77eee86c1" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a13f96e3e7bc95a7b359129655f98ce2a" kind="function"><name>getFirstAttachedLink</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1a72d100d095cba9b89bdd07bca658844e" kind="function"><name>getSecondAttachedLink</name></member>
     <member refid="classiDynTree_1_1RevoluteSO2Joint_1aae0db8853ff73a95a698dbb40530b9b8" kind="function"><name>getAxis</name></member>
@@ -3425,7 +3439,7 @@
     <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1af767a41c2680e4bd6af1159f58ab249a" kind="function"><name>toString</name></member>
   </compound>
   <compound refid="classiDynTree_1_1skinDynLibConversionsHelper" kind="class"><name>iDynTree::skinDynLibConversionsHelper</name>
-    <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1aa0bfcb35a45db3895df970060d3899c1" kind="variable"><name>skinDynLibLinkMap</name></member>
+    <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a34b30eb75d87205d4ec9fcc1ada3f866" kind="variable"><name>skinDynLibLinkMap</name></member>
     <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a43bea15e71e84b0012407c758e3053a0" kind="function"><name>addSkinDynLibAlias</name></member>
     <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a55341267530b46337d2e359eb875de51" kind="function"><name>getSkinDynLibAlias</name></member>
     <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a0f89c9920c1df4564651fbb1e2b107fa" kind="function"><name>getSkinDynLibAlias</name></member>
@@ -3849,7 +3863,7 @@
     <member refid="classiDynTree_1_1Span_1_1storage__type_1ae157946bd1d3fe5e4128c5e89cb009ad" kind="function"><name>data</name></member>
   </compound>
   <compound refid="classiDynTree_1_1SubModelDecomposition" kind="class"><name>iDynTree::SubModelDecomposition</name>
-    <member refid="classiDynTree_1_1SubModelDecomposition_1a6d5fdc37d78e7a5948d71d997182be70" kind="variable"><name>subModelTraversals</name></member>
+    <member refid="classiDynTree_1_1SubModelDecomposition_1ab7a048497bf3e1ee4de085c9053a8128" kind="variable"><name>subModelTraversals</name></member>
     <member refid="classiDynTree_1_1SubModelDecomposition_1a4700199605f495eb12af9d70db8402ee" kind="variable"><name>link2subModelIndex</name></member>
     <member refid="classiDynTree_1_1SubModelDecomposition_1a275735a1fa7bdb5d0d2a91ab58f272c4" kind="function"><name>SubModelDecomposition</name></member>
     <member refid="classiDynTree_1_1SubModelDecomposition_1a5fe54e692ed2865a3d57fc8a761a301a" kind="function"><name>operator=</name></member>
@@ -4044,9 +4058,9 @@
     <member refid="classiDynTree_1_1TransformDerivative_1ad2a6c65d670801c051620087debd6f3c" kind="function"><name>Zero</name></member>
   </compound>
   <compound refid="classiDynTree_1_1Traversal" kind="class"><name>iDynTree::Traversal</name>
-    <member refid="classiDynTree_1_1Traversal_1afa7f5826509aa0c4c8251d52764ed3a9" kind="variable"><name>links</name></member>
-    <member refid="classiDynTree_1_1Traversal_1a1f6041d6cd6979509cff97cbebb2d74b" kind="variable"><name>parents</name></member>
-    <member refid="classiDynTree_1_1Traversal_1ac757e3901013df9b3ae714d7be572a41" kind="variable"><name>toParentJoints</name></member>
+    <member refid="classiDynTree_1_1Traversal_1a1ad4111a1a84ef7a8be7f02ef63adf58" kind="variable"><name>links</name></member>
+    <member refid="classiDynTree_1_1Traversal_1af80f53656b7c92da3e6f45e95b4b6bc2" kind="variable"><name>parents</name></member>
+    <member refid="classiDynTree_1_1Traversal_1ae75f508af4b1db8379f10bab116b893c" kind="variable"><name>toParentJoints</name></member>
     <member refid="classiDynTree_1_1Traversal_1ad39f554385ae05abbc7ba59ca65662dc" kind="variable"><name>linkIndexToTraversalIndex</name></member>
     <member refid="classiDynTree_1_1Traversal_1a1ec59e52bbb337808e95102b1b56e1b8" kind="function"><name>Traversal</name></member>
     <member refid="classiDynTree_1_1Traversal_1ab66800da2bc0b6dff8bc44142a212ba7" kind="function"><name>operator=</name></member>
@@ -4134,8 +4148,8 @@
     <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1af28534de09c45684f8859ef6319172d1" kind="typedef"><name>pointer</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1ad262dd406adfe039a2862c89f3440890" kind="typedef"><name>iterator_category</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a51c57a31c0c18c18341920b6346dc830" kind="friend"><name>SensorsList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1ac7ee465be4387bc906caaadb91b02f2e" kind="variable"><name>iteratingList</name></member>
-    <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a2d947be93b6bc58e2a6774855797f8f1" kind="variable"><name>internalIterator</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a38757d10f3c629aeabd2654055f15590" kind="variable"><name>iteratingList</name></member>
+    <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1ab708b8984bff37dc7317bdea5042f290" kind="variable"><name>internalIterator</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a568524cb196337f5fabbbfaf78770623" kind="function"><name>TypedIterator</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a7c70b016dee8475aa38e9669bbdc5010" kind="function"><name>operator++</name></member>
     <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1ae54f1c61074c8d3e5648c8cae9b3f5fe" kind="function"><name>operator++</name></member>
@@ -4276,7 +4290,7 @@
     <member refid="classiDynTree_1_1Visualizer_1acffed34d598dcfcbe7ec467c63df02b2" kind="function"><name>modelViz</name></member>
     <member refid="classiDynTree_1_1Visualizer_1ae4b712ffad9dd8dabfea93b87bbcaa08" kind="function"><name>modelViz</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a47223d048b3a13b751e89762aa65a55c" kind="function"><name>camera</name></member>
-    <member refid="classiDynTree_1_1Visualizer_1afaf0268b1cbd07b4ce22f237f863beab" kind="function"><name>enviroment</name></member>
+    <member refid="classiDynTree_1_1Visualizer_1af232dbb4db084e03bac083b7776e1a4a" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a8234a676b0a25e9bb9ac34e175b7fb27" kind="function"><name>environment</name></member>
     <member refid="classiDynTree_1_1Visualizer_1ad4761debeba7c653950ab787eb6ef8b0" kind="function"><name>vectors</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a3f444edda1dfd065fadc647f2f1db9e1" kind="function"><name>frames</name></member>
@@ -4371,7 +4385,7 @@
     <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" kind="function"><name>setAttributeCallback</name></member>
     <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" kind="function"><name>setExitScopeCallback</name></member>
     <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" kind="function"><name>setChildHasBeenParsedCallback</name></member>
-    <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" kind="function"><name>attributeCallback</name></member>
+    <member refid="classiDynTree_1_1XMLElement_1a7983564fd2b7765dcd3eda619c866192" kind="function"><name>attributeCallback</name></member>
     <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" kind="function"><name>exitScopeCallback</name></member>
     <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" kind="function"><name>name</name></member>
     <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" kind="function"><name>children</name></member>
@@ -4504,13 +4518,13 @@
     <member refid="LinkState_8h_1a8467b5079b622cd683df2fcdfd16b07c" kind="typedef"><name>LinkNetTotalWrenchesWithoutGravity</name></member>
     <member refid="LinkState_8h_1a4eebfd4c3b5feb2154a1de101578fb4a" kind="typedef"><name>LinkCompositeRigidBodyInertias</name></member>
     <member refid="LinkState_8h_1a104b2ec0864d4c37b58b808b43630171" kind="typedef"><name>LinkProperAccArray</name></member>
-    <member refid="MovableJointImpl_8h_1ac4ab72af9658e6e1503c06a97786db7f" kind="typedef"><name>MovableJointImpl1</name></member>
-    <member refid="MovableJointImpl_8h_1affe41311e5312f2897d5df6532e81143" kind="typedef"><name>MovableJointImpl21</name></member>
-    <member refid="MovableJointImpl_8h_1a24b411fa2a181857fd60881b7a1fa644" kind="typedef"><name>MovableJointImpl2</name></member>
-    <member refid="MovableJointImpl_8h_1ae4671e7929209092bc1d6a72f460872a" kind="typedef"><name>MovableJointImpl3</name></member>
-    <member refid="MovableJointImpl_8h_1a66158274373829ef7c8694995a9d6929" kind="typedef"><name>MovableJointImpl4</name></member>
-    <member refid="MovableJointImpl_8h_1a5b8dfe13ce097fa3e505f492b7906c63" kind="typedef"><name>MovableJointImpl5</name></member>
-    <member refid="MovableJointImpl_8h_1af1c9c077a2177994db5ee45257af1d48" kind="typedef"><name>MovableJointImpl6</name></member>
+    <member refid="MovableJointImpl_8h_1a0d4d662701aec083bfa5e3d349719b57" kind="typedef"><name>MovableJointImpl1</name></member>
+    <member refid="MovableJointImpl_8h_1a341bc6f5a6483474e08b3586d8b2faf4" kind="typedef"><name>MovableJointImpl21</name></member>
+    <member refid="MovableJointImpl_8h_1a70e5182b01fc50602f565dd0ea29bf05" kind="typedef"><name>MovableJointImpl2</name></member>
+    <member refid="MovableJointImpl_8h_1a69d5235688a989bc6d17ab58f22d6956" kind="typedef"><name>MovableJointImpl3</name></member>
+    <member refid="MovableJointImpl_8h_1a3ece2f96d6cbed41faa6c79729e8ab76" kind="typedef"><name>MovableJointImpl4</name></member>
+    <member refid="MovableJointImpl_8h_1a96b41433c6d711303d42defc977c69d6" kind="typedef"><name>MovableJointImpl5</name></member>
+    <member refid="MovableJointImpl_8h_1a0ee6fc71488a0480289dc3ec19d9e8f8" kind="typedef"><name>MovableJointImpl6</name></member>
     <member refid="AttitudeEstimator_8h_1adcfa60b3d3580f517fd47c8864534b36" kind="typedef"><name>LinearAccelerometerMeasurements</name></member>
     <member refid="AttitudeEstimator_8h_1a94dcb1f9c90a22269981469e229ed6ce" kind="typedef"><name>GyroscopeMeasurements</name></member>
     <member refid="AttitudeEstimator_8h_1ad170eb4fd0bd13bfb0bdbdb6460d28bc" kind="typedef"><name>MagnetometerMeasurements</name></member>
@@ -4518,8 +4532,8 @@
     <member refid="AttitudeEstimator_8h_1a48e2955e462d28103d57a10634d0654d" kind="typedef"><name>RPY</name></member>
     <member refid="EigenHelpers_8h_1acad81b92d9885b5eec826b3066af8960" kind="typedef"><name>iDynTreeEigenVector</name></member>
     <member refid="EigenHelpers_8h_1a60faf8b72189d4496f7b7920d5ea3b01" kind="typedef"><name>iDynTreeEigenConstVector</name></member>
-    <member refid="EigenHelpers_8h_1a8dd9b043a4e3ceaa1b9a173e826020aa" kind="typedef"><name>iDynTreeEigenMatrix</name></member>
-    <member refid="EigenHelpers_8h_1a2d3ea8f566b9d5684e3b008a1f8c8d6f" kind="typedef"><name>iDynTreeEigenConstMatrix</name></member>
+    <member refid="EigenHelpers_8h_1a3224b3d75df53227d31affae382f971b" kind="typedef"><name>iDynTreeEigenMatrix</name></member>
+    <member refid="EigenHelpers_8h_1a988789ff476b417c4a9cd215bf713c86" kind="typedef"><name>iDynTreeEigenConstMatrix</name></member>
     <member refid="EigenHelpers_8h_1a26eec6588ddf3f8a8546b9f7899590eb" kind="typedef"><name>iDynTreeEigenMatrixMap</name></member>
     <member refid="EigenHelpers_8h_1a2b2522205c120424f4e8740b30bad6aa" kind="typedef"><name>iDynTreeEigenConstMatrixMap</name></member>
     <member refid="GeomVector3_8h_1ad00786c331484214ec14e850f805602f" kind="typedef"><name>LinearMotionVector3</name></member>
@@ -4533,14 +4547,16 @@
     <member refid="GeomVector3_8h_1a55b4eeede0026f5a9ff630bf0e185f1a" kind="typedef"><name>AngMomentum</name></member>
     <member refid="GeomVector3_8h_1a6201e5c8d3cc72533773d11302674f5c" kind="typedef"><name>Torque</name></member>
     <member refid="GeomVector3_8h_1aaaf9fe3261e02ce6de58a3e752e6f891" kind="typedef"><name>MotionVector3</name></member>
-    <member refid="MatrixFixSize_8h_1a3f95b4a0200fda604f7717bcb0781b89" kind="typedef"><name>Matrix1x6</name></member>
-    <member refid="MatrixFixSize_8h_1a2502487a002cb2aec7b06190dfd1e787" kind="typedef"><name>Matrix2x3</name></member>
-    <member refid="MatrixFixSize_8h_1a1ab8ab0012e12e66db217bb4845881cf" kind="typedef"><name>Matrix3x3</name></member>
-    <member refid="MatrixFixSize_8h_1a739bd7039fa167036447689c29104cb4" kind="typedef"><name>Matrix4x4</name></member>
-    <member refid="MatrixFixSize_8h_1aa8530f3c198c90d18ec29e68f4d5e5fc" kind="typedef"><name>Matrix6x1</name></member>
-    <member refid="MatrixFixSize_8h_1ad298b89bf01794a5de35a255dd269d52" kind="typedef"><name>Matrix6x6</name></member>
-    <member refid="MatrixFixSize_8h_1a6d63b01d7d6de76185f849d32b9fbd29" kind="typedef"><name>Matrix6x10</name></member>
-    <member refid="MatrixFixSize_8h_1ad7bb9ef7fdaadb16f95a6e42cf32d622" kind="typedef"><name>Matrix10x16</name></member>
+    <member refid="MatrixFixSize_8h_1ab8418b997d8e4bb611024e56082e2c3c" kind="typedef"><name>Matrix1x6</name></member>
+    <member refid="MatrixFixSize_8h_1af75dd57e8898f0c1ea849b24a1c8368a" kind="typedef"><name>Matrix2x3</name></member>
+    <member refid="MatrixFixSize_8h_1ae89bdc8634a5d5f05a950f7bdb11d508" kind="typedef"><name>Matrix3x3</name></member>
+    <member refid="MatrixFixSize_8h_1a30188c333408596bbc40bbc2f4323a19" kind="typedef"><name>Matrix4x4</name></member>
+    <member refid="MatrixFixSize_8h_1a3dbce733503f8fec84656c507939ef8c" kind="typedef"><name>Matrix6x1</name></member>
+    <member refid="MatrixFixSize_8h_1a89d7b7c322bd53cbfc6791705a048537" kind="typedef"><name>Matrix6x6</name></member>
+    <member refid="MatrixFixSize_8h_1a1d225f462e6af4fe0a5c8785bba79942" kind="typedef"><name>Matrix6x10</name></member>
+    <member refid="MatrixFixSize_8h_1a68c96b1918011677cb4282c03c86c3fc" kind="typedef"><name>Matrix10x16</name></member>
+    <member refid="Position_8h_1a09382f6e994fb0a1b7c916d69c2ded0e" kind="typedef"><name>PositionRaw</name></member>
+    <member refid="Rotation_8h_1a774eb3b52db7beb26f96e5671bbe2075" kind="typedef"><name>RotationRaw</name></member>
     <member refid="VectorFixSize_8h_1a60f2b9c49979e66bbc9fd83dba192e07" kind="typedef"><name>Vector2</name></member>
     <member refid="VectorFixSize_8h_1a6ba91315448cf1d275f460097e36d134" kind="typedef"><name>Vector3</name></member>
     <member refid="VectorFixSize_8h_1a9827b82ba400214bc1c3f0a2714aee0a" kind="typedef"><name>Vector4</name></member>
@@ -4556,8 +4572,34 @@
     <member refid="Indices_8h_1a1a81b3c4ae6873a80debbb71bdc43218" kind="variable"><name>FRAME_INVALID_INDEX</name></member>
     <member refid="Indices_8h_1a6d57d4391d58c8fd9470846d4a72118f" kind="variable"><name>FRAME_INVALID_NAME</name></member>
     <member refid="Indices_8h_1a1ceb2215b00eb2c21af358eb9b7d88f4" kind="variable"><name>TRAVERSAL_INVALID_INDEX</name></member>
+    <member refid="ModelSensorsTransformers_8h_1ae5f4b93f1c43ee6bd1acb9579cad85bf" kind="variable"><name>fullSensors</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a5bf28c9e85e1f8a8b8696b62bbe6b9e2" kind="variable"><name>jointsInReducedModel</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a9f56e7e26a5648df2a12cd5e09d0c949" kind="variable"><name>reducedModel</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a9376872b9f9b1cda1829ad0ee25bc0bb" kind="variable"><name>reducedSensors</name></member>
     <member refid="ModelTestUtils_8h_1a58a0753df108d195a8c90ff75805b397" kind="variable"><name>SIMPLE_JOINT_TYPES</name></member>
     <member refid="ModelTestUtils_8h_1a839997025ffcdd75bf67981792b456aa" kind="variable"><name>ALL_JOINT_TYPES</name></member>
+    <member refid="ModelTestUtils_8h_1a50332f4f0881863d3c8fe60270977b03" kind="variable"><name>parentLink</name></member>
+    <member refid="ModelTestUtils_8h_1ad4e794e26402841e622af3968e401783" kind="variable"><name>newLinkName</name></member>
+    <member refid="ModelTestUtils_8h_1ad7d1604f483d792ab79f447581053440" kind="variable"><name>onlyRevoluteJoints</name></member>
+    <member refid="ModelTestUtils_8h_1a510d2130bd9378178388e9bfe4dbafc1" kind="variable"><name>nrOfAdditionalFrames</name></member>
+    <member refid="ModelTestUtils_8h_1a078a046385e4661e6ab9048262f8f3a0" kind="variable"><name>vel</name></member>
+    <member refid="ModelTestUtils_8h_1ae8ac2dfe482bafffcec9d9decdacd7ac" kind="variable"><name>acc</name></member>
+    <member refid="ModelTestUtils_8h_1ae78f4a8504b83a40f13da1bedf1d7247" kind="variable"><name>extWrenches</name></member>
+    <member refid="ModelTestUtils_8h_1a89ed543bac51135b0b8c32bb0978dd46" kind="variable"><name>true</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a1eeab67ce7818eeabf066f4565c26a5b" kind="variable"><name>sensorList</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a2221260b231e2f3ff9b5113f9dd182ee" kind="variable"><name>traversal</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a13378d83c5a83508c9929ca70199eaf0" kind="variable"><name>robotPos</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ad0c5f8eac1fbb8d265d760560588b6e3" kind="variable"><name>robotVel</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a96b08340336649636b3d0bbfda97fc11" kind="variable"><name>robotAcc</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a69d5081c54af1527dc97c7831f2a6af8" kind="variable"><name>gravity</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ac21a810fb7e52d0ec67d581b806caef4" kind="variable"><name>externalWrenches</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ae58c1801364b329fed448e85fceeaea7" kind="variable"><name>buf_properRobotAcc</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ad6bf6b6c3b8f7721d628486e8f355a28" kind="variable"><name>buf_linkPos</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a2dd4cc062a116aaf5aa8fbffea4dcce1" kind="variable"><name>buf_linkVel</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a78607604a70cef66d6abee26989ecaf0" kind="variable"><name>buf_linkProperAcc</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a9d5da825c0a573af8b8e2d18c8f5895f" kind="variable"><name>buf_internalWrenches</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a94a76d721828f990586df83b13194d5c" kind="variable"><name>buf_outputTorques</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a2f3fdb36b28a41db9ee23a0648c62bfb" kind="variable"><name>predictedMeasurement</name></member>
     <member refid="Sensors_8h_1a27f6da1749325b5fabe94ceb7278f0df" kind="variable"><name>NR_OF_SENSOR_TYPES</name></member>
     <member refid="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" kind="variable"><name>output_dimensions_with_magnetometer</name></member>
     <member refid="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" kind="variable"><name>output_dimensions_without_magnetometer</name></member>
@@ -4588,20 +4630,27 @@
     <member refid="ForwardKinematics_8h_1a16f1071f088ed89178092de7b820558d" kind="function"><name>ForwardBiasAccKinematics</name></member>
     <member refid="ForwardKinematics_8h_1a2249785bd035cf4d2f35851d9eb50d26" kind="function"><name>ForwardBiasAccKinematics</name></member>
     <member refid="group__iDynTreeModel_1gab0b6f0ce3e6e175b1532bdd897fd83c4" kind="function"><name>FreeFloatingJacobianUsingLinkPos</name></member>
-    <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a57fda2c8c12be1a2c7bd1471fd2deb32" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
     <member refid="ModelTestUtils_8h_1a8c8b8402523935bbb29f27cca71633ac" kind="function"><name>addRandomLinkToModel</name></member>
-    <member refid="ModelTestUtils_8h_1a4a517abc29acdad21e0893e8dc662524" kind="function"><name>addRandomLinkToModel</name></member>
+    <member refid="ModelTestUtils_8h_1aeb084c1b6b7d711be52d84c5a075f915" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1a94be02ff467c385a480a66a1ae46795d" kind="function"><name>if</name></member>
+    <member refid="ModelTestUtils_8h_1a00a0a4ee7187c1554ab15deea52df3ae" kind="function"><name>addRandomLinkToModel</name></member>
     <member refid="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" kind="function"><name>addRandomAdditionalFrameToModel</name></member>
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" kind="function"><name>int2string</name></member>
     <member refid="ModelTestUtils_8h_1a6be6dbbfd7e26ec48860775137fe7fd8" kind="function"><name>getRandomModel</name></member>
     <member refid="ModelTestUtils_8h_1a20caf6d53482cbe05ce5715ccc1cc1a3" kind="function"><name>getRandomChain</name></member>
-    <member refid="ModelTestUtils_8h_1a5988c0a11fee2013e9ed68cf32147b95" kind="function"><name>getRandomModel</name></member>
-    <member refid="ModelTestUtils_8h_1a3993eed2007bd777ecdc90d9cc10b4b9" kind="function"><name>getRandomChain</name></member>
+    <member refid="ModelTestUtils_8h_1af626f8f7b3fe718408f86c347bf2d807" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1aba0bd51435e4a8cb224c66ef3df112c8" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a15994534af6e123a3e159dcf00f0b71f" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1ae51b6e18daeb99c658fe34608e1b449c" kind="function"><name>getRandomChain</name></member>
     <member refid="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" kind="function"><name>getRandomJointPositions</name></member>
-    <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
+    <member refid="ModelTestUtils_8h_1add856b2ed3d5934e7c102377c4d32e2f" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1a4e3079603e27d3b8fabda9b9d12d7794" kind="function"><name>baseVel</name></member>
+    <member refid="ModelTestUtils_8h_1af88b0f645a90e7d5e8b5623f4371216d" kind="function"><name>baseAcc</name></member>
+    <member refid="ModelTestUtils_8h_1a2c7f3e5f4e9c100085651647b90e2f47" kind="function"><name>for</name></member>
     <member refid="ModelTestUtils_8h_1a6dfdcf7499dff86e08695945132e8b3a" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
     <member refid="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" kind="function"><name>removeFakeLinks</name></member>
     <member refid="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" kind="function"><name>createReducedModel</name></member>
@@ -4616,8 +4665,7 @@
     <member refid="ModelTransformers_8h_1a48383d5042c7b1a249db0440165131c3" kind="function"><name>convertThreeRevoluteJointsToSphericalJoint</name></member>
     <member refid="group__iDynTreeSensors_1ga26f5afdf5245848ed0cf946cab8510d6" kind="function"><name>predictSensorsMeasurements</name></member>
     <member refid="group__iDynTreeSensors_1ga85a09204a0c57c96bb77548d2a633677" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
-    <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
-    <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
+    <member refid="group__iDynTreeSensors_1ga33b3534aff07374967be92f1b293f32b" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="Sensors_8h_1a784ae0ef50c758f0cf07ab414f432963" kind="function"><name>isLinkSensor</name></member>
     <member refid="Sensors_8h_1a6edabe0d73bb9102d0ad456124c0f195" kind="function"><name>isJointSensor</name></member>
     <member refid="Sensors_8h_1a6b73f760e18bf9860c623ddc8a0f376c" kind="function"><name>getSensorTypeSize</name></member>
@@ -4654,20 +4702,20 @@
     <member refid="iKinConversionsImplementation_8h_1ae6d845189d4491128320b2c78c6082ec" kind="function"><name>DHLink2iKinLink</name></member>
     <member refid="skinDynLibConversionsImplementation_8h_1abd0cb602d0a91817a13e042d47004d79" kind="function"><name>fromSkinDynLibToiDynTreeHelper</name></member>
     <member refid="EigenHelpers_8h_1a5481a54f7c787fd4cf55a0f5fd21bbb0" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a0d2e67fee79a1191ed16ab1d522b0078" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1aeb13870cd5128cb3eec9c9566d24c539" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a3f48b18c53414248343c3adaf5db988c" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a3d1f28b899ee110b8af0c92c9945455c" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a529708f2899d75d6491fce5823c6c069" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a0007fc5ab429e207c6244ac715f82dc0" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1af9123b8fa68b1799fd197ab4a1acc618" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a4dc3574842fc660108111d96dac71b23" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a17939782b66cf87bba581ac4d6db6270" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1ac34e051a03bd114394e71919b795171e" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1ab60f7d72717e939931bf139b222b2832" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a3153f5d1e97e538fae73b906b511c518" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a9639a283e2caa3460084f5e3ac48aa49" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1af643aa15e4ab96c1e19f5364893d4b0b" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a4bb2e73fb98abd04aed4da600567b24b" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a996cf2353b8329c594a4f547744fa4be" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a7eba57262b432e1665d8cf0328f075a3" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a17c2608783495c4ce17c3f4f28af14a7" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a8e0c981e7a63b320efd9390db164242f" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a3fe7de9d5634446949f0c663f9c73034" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a3977bb029d435703aa123e215c2e2a02" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a34177b5a60c9f3dc3396d844dde42093" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a4190a56d86c4a75330bba0f751849d1c" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1ad5cf1d277ad40c270f897c28ba1fa5a3" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1acf2d7088e9fd094e6aa9c79bd4364b69" kind="function"><name>fromEigen</name></member>
     <member refid="EigenHelpers_8h_1a1943bf2f7027929dd5a9203b35d60b82" kind="function"><name>fromEigen</name></member>
     <member refid="EigenHelpers_8h_1ad32fda4b9fa803472c83dea084ec14d8" kind="function"><name>fromEigen</name></member>
@@ -4688,16 +4736,15 @@
     <member refid="EigenMathHelpers_8h_1a903238e532f385a1cd3db7b731fa884c" kind="function"><name>pseudoInverse_helper2</name></member>
     <member refid="EigenMathHelpers_8h_1aacb98344c6221dbf5e5d7678e3e75136" kind="function"><name>pseudoInverse_helper1</name></member>
     <member refid="EigenMathHelpers_8h_1a0b20a0208cab1ac6cdbd661612ca4c1b" kind="function"><name>pseudoInverse</name></member>
-    <member refid="EigenSparseHelpers_8h_1ade809da6861adf8889108908fd931ee5" kind="function"><name>toEigen</name></member>
+    <member refid="EigenSparseHelpers_8h_1a67e5d80540243ffecb9ef5b21b310977" kind="function"><name>toEigen</name></member>
     <member refid="EigenSparseHelpers_8h_1a3c0db1fc07367309957972bd66454c7e" kind="function"><name>toEigen</name></member>
-    <member refid="EigenSparseHelpers_8h_1a90ae57e2a42e7bad1cedda56db4ee3d4" kind="function"><name>toEigen</name></member>
+    <member refid="EigenSparseHelpers_8h_1a684ef23d77c01fb8b3e642fb9eeb84a9" kind="function"><name>toEigen</name></member>
     <member refid="EigenSparseHelpers_8h_1ae48cfcc0f75e51f21ae1ac34de84efc1" kind="function"><name>toEigen</name></member>
     <member refid="MatrixView_8h_1ae51124a635564fed29ab419da3ec3dcf" kind="function"><name>make_matrix_view</name></member>
     <member refid="MatrixView_8h_1a6bbb3790549d807aa71d5ed22512411f" kind="function"><name>make_matrix_view</name></member>
     <member refid="MatrixView_8h_1ace02c0a5e7df4f19a28615bbea0b2d49" kind="function"><name>make_matrix_view</name></member>
     <member refid="MatrixView_8h_1a60ffec30976d99d36dda278b50600853" kind="function"><name>make_matrix_view</name></member>
     <member refid="MatrixView_8h_1a6c7864c31a89d1f9f3a5196a21d8cf23" kind="function"><name>make_matrix_view</name></member>
-    <member refid="Position_8h_1aacc071e8e145a637bd7305dc9f120353" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="PrivateUtils_8h_1a5cb90836a26ae5bb773be45bad7dad54" kind="function"><name>squareCrossProductMatrix</name></member>
     <member refid="PrivateUtils_8h_1a8dac2640419d7eaba00586c252ab99e5" kind="function"><name>skew</name></member>
     <member refid="PrivateUtils_8h_1ab4c72168cc4cc9909da74c433345e8d0" kind="function"><name>efficient6dCopy</name></member>
@@ -4705,8 +4752,7 @@
     <member refid="PrivateUtils_8h_1ad44d09b939590fde0dca95ebd7f899c5" kind="function"><name>efficient6ddifference</name></member>
     <member refid="PrivateUtils_8h_1ada26d16396f1cd9f82b2e7c921fe202e" kind="function"><name>efficientTwistCrossTwist</name></member>
     <member refid="PrivateUtils_8h_1a2941457a02de10e9de1dea4106588921" kind="function"><name>efficientTwistCrossMomentum</name></member>
-    <member refid="Rotation_8h_1afc22a429e9fa472ce408d199475fa100" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
-    <member refid="RotationalInertia_8h_1affa3ef6d96e03cfad96623d8d7dbcacf" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="RotationalInertia_8h_1aad9d3489c43fe9059a6cc4eb29ef8d21" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
     <member refid="SO3Utils_8h_1a72d7e0a9ca21815a7dadb8ea94f5aef4" kind="function"><name>isValidRotationMatrix</name></member>
     <member refid="SO3Utils_8h_1a7950f68e2a23c633dc53411db5b5b573" kind="function"><name>geodesicL2Distance</name></member>
     <member refid="SO3Utils_8h_1a2c019748c0b171a73279ba732546d87a" kind="function"><name>geodesicL2MeanRotation</name></member>
@@ -4724,7 +4770,7 @@
     <member refid="Span_8h_1a9ecfc7eaccb7475c951c97cdf20a2b65" kind="function"><name>make_span</name></member>
     <member refid="Span_8h_1a7f2bdb0504977bcc9abcd0790dbd3a10" kind="function"><name>make_span</name></member>
     <member refid="Span_8h_1acaebdb9ef4dfce796979f9392e238616" kind="function"><name>make_span</name></member>
-    <member refid="Span_8h_1a30a50da99346e81a568b2d5629347b92" kind="function"><name>make_span</name></member>
+    <member refid="Span_8h_1ad137f1627d79603c67b18aad291bb823" kind="function"><name>make_span</name></member>
     <member refid="TestUtils_8h_1a668ee99a790b7af845958d4673161135" kind="function"><name>assertStringAreEqual</name></member>
     <member refid="TestUtils_8h_1a274077496ffac0ee45107923c3fe9cee" kind="function"><name>assertDoubleAreEqual</name></member>
     <member refid="TestUtils_8h_1ac18550f459dae84f3a502274b39193cf" kind="function"><name>assertTransformsAreEqual</name></member>
@@ -4746,7 +4792,7 @@
     <member refid="TestUtils_8h_1a91197a36381e2fa990a0b54da40abee9" kind="function"><name>printVector</name></member>
     <member refid="TestUtils_8h_1a2e5af240e2fab62a2527d450c4bdcabd" kind="function"><name>printVectorDifference</name></member>
     <member refid="TestUtils_8h_1aa25d97acb2792de12937a70d01e75ae7" kind="function"><name>printVectorWrongElements</name></member>
-    <member refid="TestUtils_8h_1a456896bb82abd7daca7ac57546380e94" kind="function"><name>printMatrixWrongElements</name></member>
+    <member refid="TestUtils_8h_1a3b5332697ffd34f94da5276c75c055aa" kind="function"><name>printMatrixWrongElements</name></member>
     <member refid="TestUtils_8h_1a004eafd55ec8125ba2842dc2458088be" kind="function"><name>printMatrixPercentageError</name></member>
     <member refid="TestUtils_8h_1aa20d8a80e1de786a905ee0e897e45586" kind="function"><name>assertVectorAreEqual</name></member>
     <member refid="TestUtils_8h_1a6b4c4d79f076ed9013708a5ab40e9273" kind="function"><name>assertVectorAreEqualWithRelativeTol</name></member>
@@ -4782,9 +4828,9 @@
     <member refid="group__iDynTreeYARP_1ga056a45c2887a5f314c963c89bb16a270" kind="function"><name>toiDynTree</name></member>
     <member refid="group__iDynTreeYARP_1gae1c1d7e3baf33d9b84f593330a3cf199" kind="function"><name>toiDynTree</name></member>
     <member refid="YARPEigenConversions_8h_1ae7c28c545c2775b437536fd84dabc97d" kind="function"><name>toEigen</name></member>
-    <member refid="YARPEigenConversions_8h_1a19f060a1b963d4cdd58a142372675f6b" kind="function"><name>toEigen</name></member>
+    <member refid="YARPEigenConversions_8h_1afb26f493c6a14a1427297792970e79c1" kind="function"><name>toEigen</name></member>
     <member refid="YARPEigenConversions_8h_1a0fc1ec0d7de0f823d4a8c32524aaecd7" kind="function"><name>toEigen</name></member>
-    <member refid="YARPEigenConversions_8h_1a4f400cf54f7b7757adbaa768205b9df9" kind="function"><name>toEigen</name></member>
+    <member refid="YARPEigenConversions_8h_1a93ab12c815cfcacc855a33ecec09c436" kind="function"><name>toEigen</name></member>
   </compound>
   <compound refid="namespaceiDynTree_1_1details" kind="namespace"><name>iDynTree::details</name>
     <member refid="Span_8h_1adf168de4de79fc034114dd1bb64d9cca" kind="function"><name>operator+</name></member>
@@ -4853,25 +4899,25 @@
   <compound refid="EigenHelpers_8h" kind="file"><name>EigenHelpers.h</name>
     <member refid="EigenHelpers_8h_1acad81b92d9885b5eec826b3066af8960" kind="typedef"><name>iDynTreeEigenVector</name></member>
     <member refid="EigenHelpers_8h_1a60faf8b72189d4496f7b7920d5ea3b01" kind="typedef"><name>iDynTreeEigenConstVector</name></member>
-    <member refid="EigenHelpers_8h_1a8dd9b043a4e3ceaa1b9a173e826020aa" kind="typedef"><name>iDynTreeEigenMatrix</name></member>
-    <member refid="EigenHelpers_8h_1a2d3ea8f566b9d5684e3b008a1f8c8d6f" kind="typedef"><name>iDynTreeEigenConstMatrix</name></member>
+    <member refid="EigenHelpers_8h_1a3224b3d75df53227d31affae382f971b" kind="typedef"><name>iDynTreeEigenMatrix</name></member>
+    <member refid="EigenHelpers_8h_1a988789ff476b417c4a9cd215bf713c86" kind="typedef"><name>iDynTreeEigenConstMatrix</name></member>
     <member refid="EigenHelpers_8h_1a26eec6588ddf3f8a8546b9f7899590eb" kind="typedef"><name>iDynTreeEigenMatrixMap</name></member>
     <member refid="EigenHelpers_8h_1a2b2522205c120424f4e8740b30bad6aa" kind="typedef"><name>iDynTreeEigenConstMatrixMap</name></member>
     <member refid="EigenHelpers_8h_1a5481a54f7c787fd4cf55a0f5fd21bbb0" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a0d2e67fee79a1191ed16ab1d522b0078" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1aeb13870cd5128cb3eec9c9566d24c539" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a3f48b18c53414248343c3adaf5db988c" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a3d1f28b899ee110b8af0c92c9945455c" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a529708f2899d75d6491fce5823c6c069" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1a0007fc5ab429e207c6244ac715f82dc0" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1af9123b8fa68b1799fd197ab4a1acc618" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a4dc3574842fc660108111d96dac71b23" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a17939782b66cf87bba581ac4d6db6270" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1ac34e051a03bd114394e71919b795171e" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1ab60f7d72717e939931bf139b222b2832" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a3153f5d1e97e538fae73b906b511c518" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a9639a283e2caa3460084f5e3ac48aa49" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1af643aa15e4ab96c1e19f5364893d4b0b" kind="function"><name>toEigen</name></member>
-    <member refid="EigenHelpers_8h_1a4bb2e73fb98abd04aed4da600567b24b" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a996cf2353b8329c594a4f547744fa4be" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a7eba57262b432e1665d8cf0328f075a3" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a17c2608783495c4ce17c3f4f28af14a7" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a8e0c981e7a63b320efd9390db164242f" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a3fe7de9d5634446949f0c663f9c73034" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a3977bb029d435703aa123e215c2e2a02" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a34177b5a60c9f3dc3396d844dde42093" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1a4190a56d86c4a75330bba0f751849d1c" kind="function"><name>toEigen</name></member>
+    <member refid="EigenHelpers_8h_1ad5cf1d277ad40c270f897c28ba1fa5a3" kind="function"><name>toEigen</name></member>
     <member refid="EigenHelpers_8h_1acf2d7088e9fd094e6aa9c79bd4364b69" kind="function"><name>fromEigen</name></member>
     <member refid="EigenHelpers_8h_1a1943bf2f7027929dd5a9203b35d60b82" kind="function"><name>fromEigen</name></member>
     <member refid="EigenHelpers_8h_1ad32fda4b9fa803472c83dea084ec14d8" kind="function"><name>fromEigen</name></member>
@@ -4900,9 +4946,9 @@
   <compound refid="Core_2EigenSparseHelpers_8h" kind="file"><name>EigenSparseHelpers.h</name>
   </compound>
   <compound refid="EigenSparseHelpers_8h" kind="file"><name>EigenSparseHelpers.h</name>
-    <member refid="EigenSparseHelpers_8h_1ade809da6861adf8889108908fd931ee5" kind="function"><name>toEigen</name></member>
+    <member refid="EigenSparseHelpers_8h_1a67e5d80540243ffecb9ef5b21b310977" kind="function"><name>toEigen</name></member>
     <member refid="EigenSparseHelpers_8h_1a3c0db1fc07367309957972bd66454c7e" kind="function"><name>toEigen</name></member>
-    <member refid="EigenSparseHelpers_8h_1a90ae57e2a42e7bad1cedda56db4ee3d4" kind="function"><name>toEigen</name></member>
+    <member refid="EigenSparseHelpers_8h_1a684ef23d77c01fb8b3e642fb9eeb84a9" kind="function"><name>toEigen</name></member>
     <member refid="EigenSparseHelpers_8h_1ae48cfcc0f75e51f21ae1ac34de84efc1" kind="function"><name>toEigen</name></member>
   </compound>
   <compound refid="Core_2GeomVector3_8h" kind="file"><name>GeomVector3.h</name>
@@ -4931,14 +4977,14 @@
   <compound refid="Core_2MatrixFixSize_8h" kind="file"><name>MatrixFixSize.h</name>
   </compound>
   <compound refid="MatrixFixSize_8h" kind="file"><name>MatrixFixSize.h</name>
-    <member refid="MatrixFixSize_8h_1a3f95b4a0200fda604f7717bcb0781b89" kind="typedef"><name>Matrix1x6</name></member>
-    <member refid="MatrixFixSize_8h_1a2502487a002cb2aec7b06190dfd1e787" kind="typedef"><name>Matrix2x3</name></member>
-    <member refid="MatrixFixSize_8h_1a1ab8ab0012e12e66db217bb4845881cf" kind="typedef"><name>Matrix3x3</name></member>
-    <member refid="MatrixFixSize_8h_1a739bd7039fa167036447689c29104cb4" kind="typedef"><name>Matrix4x4</name></member>
-    <member refid="MatrixFixSize_8h_1aa8530f3c198c90d18ec29e68f4d5e5fc" kind="typedef"><name>Matrix6x1</name></member>
-    <member refid="MatrixFixSize_8h_1ad298b89bf01794a5de35a255dd269d52" kind="typedef"><name>Matrix6x6</name></member>
-    <member refid="MatrixFixSize_8h_1a6d63b01d7d6de76185f849d32b9fbd29" kind="typedef"><name>Matrix6x10</name></member>
-    <member refid="MatrixFixSize_8h_1ad7bb9ef7fdaadb16f95a6e42cf32d622" kind="typedef"><name>Matrix10x16</name></member>
+    <member refid="MatrixFixSize_8h_1ab8418b997d8e4bb611024e56082e2c3c" kind="typedef"><name>Matrix1x6</name></member>
+    <member refid="MatrixFixSize_8h_1af75dd57e8898f0c1ea849b24a1c8368a" kind="typedef"><name>Matrix2x3</name></member>
+    <member refid="MatrixFixSize_8h_1ae89bdc8634a5d5f05a950f7bdb11d508" kind="typedef"><name>Matrix3x3</name></member>
+    <member refid="MatrixFixSize_8h_1a30188c333408596bbc40bbc2f4323a19" kind="typedef"><name>Matrix4x4</name></member>
+    <member refid="MatrixFixSize_8h_1a3dbce733503f8fec84656c507939ef8c" kind="typedef"><name>Matrix6x1</name></member>
+    <member refid="MatrixFixSize_8h_1a89d7b7c322bd53cbfc6791705a048537" kind="typedef"><name>Matrix6x6</name></member>
+    <member refid="MatrixFixSize_8h_1a1d225f462e6af4fe0a5c8785bba79942" kind="typedef"><name>Matrix6x10</name></member>
+    <member refid="MatrixFixSize_8h_1a68c96b1918011677cb4282c03c86c3fc" kind="typedef"><name>Matrix10x16</name></member>
   </compound>
   <compound refid="Core_2MatrixView_8h" kind="file"><name>MatrixView.h</name>
   </compound>
@@ -4953,7 +4999,7 @@
   <compound refid="Core_2Position_8h" kind="file"><name>Position.h</name>
   </compound>
   <compound refid="Position_8h" kind="file"><name>Position.h</name>
-    <member refid="Position_8h_1aacc071e8e145a637bd7305dc9f120353" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="Position_8h_1a09382f6e994fb0a1b7c916d69c2ded0e" kind="typedef"><name>PositionRaw</name></member>
   </compound>
   <compound refid="Core_2PositionRaw_8h" kind="file"><name>PositionRaw.h</name>
   </compound>
@@ -4978,7 +5024,7 @@
   <compound refid="Core_2Rotation_8h" kind="file"><name>Rotation.h</name>
   </compound>
   <compound refid="Rotation_8h" kind="file"><name>Rotation.h</name>
-    <member refid="Rotation_8h_1afc22a429e9fa472ce408d199475fa100" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="Rotation_8h_1a774eb3b52db7beb26f96e5671bbe2075" kind="typedef"><name>RotationRaw</name></member>
   </compound>
   <compound refid="Core_2RotationalInertiaRaw_8h" kind="file"><name>RotationalInertiaRaw.h</name>
   </compound>
@@ -5018,7 +5064,7 @@
     <member refid="Span_8h_1a9ecfc7eaccb7475c951c97cdf20a2b65" kind="function"><name>make_span</name></member>
     <member refid="Span_8h_1a7f2bdb0504977bcc9abcd0790dbd3a10" kind="function"><name>make_span</name></member>
     <member refid="Span_8h_1acaebdb9ef4dfce796979f9392e238616" kind="function"><name>make_span</name></member>
-    <member refid="Span_8h_1a30a50da99346e81a568b2d5629347b92" kind="function"><name>make_span</name></member>
+    <member refid="Span_8h_1ad137f1627d79603c67b18aad291bb823" kind="function"><name>make_span</name></member>
   </compound>
   <compound refid="Core_2SparseMatrix_8h" kind="file"><name>SparseMatrix.h</name>
   </compound>
@@ -5094,7 +5140,7 @@
     <member refid="TestUtils_8h_1a91197a36381e2fa990a0b54da40abee9" kind="function"><name>printVector</name></member>
     <member refid="TestUtils_8h_1a2e5af240e2fab62a2527d450c4bdcabd" kind="function"><name>printVectorDifference</name></member>
     <member refid="TestUtils_8h_1aa25d97acb2792de12937a70d01e75ae7" kind="function"><name>printVectorWrongElements</name></member>
-    <member refid="TestUtils_8h_1a456896bb82abd7daca7ac57546380e94" kind="function"><name>printMatrixWrongElements</name></member>
+    <member refid="TestUtils_8h_1a3b5332697ffd34f94da5276c75c055aa" kind="function"><name>printMatrixWrongElements</name></member>
     <member refid="TestUtils_8h_1a004eafd55ec8125ba2842dc2458088be" kind="function"><name>printMatrixPercentageError</name></member>
     <member refid="TestUtils_8h_1aa20d8a80e1de786a905ee0e897e45586" kind="function"><name>assertVectorAreEqual</name></member>
     <member refid="TestUtils_8h_1a6b4c4d79f076ed9013708a5ab40e9273" kind="function"><name>assertVectorAreEqualWithRelativeTol</name></member>
@@ -5157,7 +5203,7 @@
   <compound refid="Wrench_8h" kind="file"><name>Wrench.h</name>
   </compound>
   <compound refid="RotationalInertia_8h" kind="file"><name>RotationalInertia.h</name>
-    <member refid="RotationalInertia_8h_1affa3ef6d96e03cfad96623d8d7dbcacf" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="RotationalInertia_8h_1aad9d3489c43fe9059a6cc4eb29ef8d21" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
   </compound>
   <compound refid="AttitudeEstimator_8h" kind="file"><name>AttitudeEstimator.h</name>
     <member refid="AttitudeEstimator_8h_1adcfa60b3d3580f517fd47c8864534b36" kind="typedef"><name>LinearAccelerometerMeasurements</name></member>
@@ -5474,19 +5520,34 @@
     <member refid="ModelTestUtils_8h_1a2bcdae04682df042522f84e1d32573a7a9ebdbd2c8b1e85a49b05781cc821f088" kind="enumvalue"><name>JOINT_SPHERICAL</name></member>
     <member refid="ModelTestUtils_8h_1a58a0753df108d195a8c90ff75805b397" kind="variable"><name>SIMPLE_JOINT_TYPES</name></member>
     <member refid="ModelTestUtils_8h_1a839997025ffcdd75bf67981792b456aa" kind="variable"><name>ALL_JOINT_TYPES</name></member>
+    <member refid="ModelTestUtils_8h_1a50332f4f0881863d3c8fe60270977b03" kind="variable"><name>parentLink</name></member>
+    <member refid="ModelTestUtils_8h_1ad4e794e26402841e622af3968e401783" kind="variable"><name>newLinkName</name></member>
+    <member refid="ModelTestUtils_8h_1ad7d1604f483d792ab79f447581053440" kind="variable"><name>onlyRevoluteJoints</name></member>
+    <member refid="ModelTestUtils_8h_1a510d2130bd9378178388e9bfe4dbafc1" kind="variable"><name>nrOfAdditionalFrames</name></member>
+    <member refid="ModelTestUtils_8h_1a078a046385e4661e6ab9048262f8f3a0" kind="variable"><name>vel</name></member>
+    <member refid="ModelTestUtils_8h_1ae8ac2dfe482bafffcec9d9decdacd7ac" kind="variable"><name>acc</name></member>
+    <member refid="ModelTestUtils_8h_1ae78f4a8504b83a40f13da1bedf1d7247" kind="variable"><name>extWrenches</name></member>
+    <member refid="ModelTestUtils_8h_1a89ed543bac51135b0b8c32bb0978dd46" kind="variable"><name>true</name></member>
     <member refid="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" kind="function"><name>getRandomLink</name></member>
     <member refid="ModelTestUtils_8h_1a8c8b8402523935bbb29f27cca71633ac" kind="function"><name>addRandomLinkToModel</name></member>
-    <member refid="ModelTestUtils_8h_1a4a517abc29acdad21e0893e8dc662524" kind="function"><name>addRandomLinkToModel</name></member>
+    <member refid="ModelTestUtils_8h_1aeb084c1b6b7d711be52d84c5a075f915" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1a94be02ff467c385a480a66a1ae46795d" kind="function"><name>if</name></member>
+    <member refid="ModelTestUtils_8h_1a00a0a4ee7187c1554ab15deea52df3ae" kind="function"><name>addRandomLinkToModel</name></member>
     <member refid="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" kind="function"><name>addRandomAdditionalFrameToModel</name></member>
     <member refid="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" kind="function"><name>getRandomLinkIndexOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" kind="function"><name>getRandomLinkOfModel</name></member>
     <member refid="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" kind="function"><name>int2string</name></member>
     <member refid="ModelTestUtils_8h_1a6be6dbbfd7e26ec48860775137fe7fd8" kind="function"><name>getRandomModel</name></member>
     <member refid="ModelTestUtils_8h_1a20caf6d53482cbe05ce5715ccc1cc1a3" kind="function"><name>getRandomChain</name></member>
-    <member refid="ModelTestUtils_8h_1a5988c0a11fee2013e9ed68cf32147b95" kind="function"><name>getRandomModel</name></member>
-    <member refid="ModelTestUtils_8h_1a3993eed2007bd777ecdc90d9cc10b4b9" kind="function"><name>getRandomChain</name></member>
+    <member refid="ModelTestUtils_8h_1af626f8f7b3fe718408f86c347bf2d807" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1aba0bd51435e4a8cb224c66ef3df112c8" kind="function"><name>getRandomModel</name></member>
+    <member refid="ModelTestUtils_8h_1a15994534af6e123a3e159dcf00f0b71f" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1ae51b6e18daeb99c658fe34608e1b449c" kind="function"><name>getRandomChain</name></member>
     <member refid="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" kind="function"><name>getRandomJointPositions</name></member>
-    <member refid="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
+    <member refid="ModelTestUtils_8h_1add856b2ed3d5934e7c102377c4d32e2f" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
+    <member refid="ModelTestUtils_8h_1a4e3079603e27d3b8fabda9b9d12d7794" kind="function"><name>baseVel</name></member>
+    <member refid="ModelTestUtils_8h_1af88b0f645a90e7d5e8b5623f4371216d" kind="function"><name>baseAcc</name></member>
+    <member refid="ModelTestUtils_8h_1a2c7f3e5f4e9c100085651647b90e2f47" kind="function"><name>for</name></member>
     <member refid="ModelTestUtils_8h_1a6dfdcf7499dff86e08695945132e8b3a" kind="function"><name>getRandomInverseDynamicsInputs</name></member>
   </compound>
   <compound refid="Model_2ModelTransformers_8h" kind="file"><name>ModelTransformers.h</name>
@@ -5507,13 +5568,13 @@
   <compound refid="Model_2MovableJointImpl_8h" kind="file"><name>MovableJointImpl.h</name>
   </compound>
   <compound refid="MovableJointImpl_8h" kind="file"><name>MovableJointImpl.h</name>
-    <member refid="MovableJointImpl_8h_1ac4ab72af9658e6e1503c06a97786db7f" kind="typedef"><name>MovableJointImpl1</name></member>
-    <member refid="MovableJointImpl_8h_1affe41311e5312f2897d5df6532e81143" kind="typedef"><name>MovableJointImpl21</name></member>
-    <member refid="MovableJointImpl_8h_1a24b411fa2a181857fd60881b7a1fa644" kind="typedef"><name>MovableJointImpl2</name></member>
-    <member refid="MovableJointImpl_8h_1ae4671e7929209092bc1d6a72f460872a" kind="typedef"><name>MovableJointImpl3</name></member>
-    <member refid="MovableJointImpl_8h_1a66158274373829ef7c8694995a9d6929" kind="typedef"><name>MovableJointImpl4</name></member>
-    <member refid="MovableJointImpl_8h_1a5b8dfe13ce097fa3e505f492b7906c63" kind="typedef"><name>MovableJointImpl5</name></member>
-    <member refid="MovableJointImpl_8h_1af1c9c077a2177994db5ee45257af1d48" kind="typedef"><name>MovableJointImpl6</name></member>
+    <member refid="MovableJointImpl_8h_1a0d4d662701aec083bfa5e3d349719b57" kind="typedef"><name>MovableJointImpl1</name></member>
+    <member refid="MovableJointImpl_8h_1a341bc6f5a6483474e08b3586d8b2faf4" kind="typedef"><name>MovableJointImpl21</name></member>
+    <member refid="MovableJointImpl_8h_1a70e5182b01fc50602f565dd0ea29bf05" kind="typedef"><name>MovableJointImpl2</name></member>
+    <member refid="MovableJointImpl_8h_1a69d5235688a989bc6d17ab58f22d6956" kind="typedef"><name>MovableJointImpl3</name></member>
+    <member refid="MovableJointImpl_8h_1a3ece2f96d6cbed41faa6c79729e8ab76" kind="typedef"><name>MovableJointImpl4</name></member>
+    <member refid="MovableJointImpl_8h_1a96b41433c6d711303d42defc977c69d6" kind="typedef"><name>MovableJointImpl5</name></member>
+    <member refid="MovableJointImpl_8h_1a0ee6fc71488a0480289dc3ec19d9e8f8" kind="typedef"><name>MovableJointImpl6</name></member>
   </compound>
   <compound refid="Model_2PrismaticJoint_8h" kind="file"><name>PrismaticJoint.h</name>
   </compound>
@@ -5538,15 +5599,32 @@
   <compound refid="Traversal_8h" kind="file"><name>Traversal.h</name>
   </compound>
   <compound refid="ModelSensorsTransformers_8h" kind="file"><name>ModelSensorsTransformers.h</name>
-    <member refid="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" kind="function"><name>createReducedModelAndSensors</name></member>
+    <member refid="ModelSensorsTransformers_8h_1ae5f4b93f1c43ee6bd1acb9579cad85bf" kind="variable"><name>fullSensors</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a5bf28c9e85e1f8a8b8696b62bbe6b9e2" kind="variable"><name>jointsInReducedModel</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a9f56e7e26a5648df2a12cd5e09d0c949" kind="variable"><name>reducedModel</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a9376872b9f9b1cda1829ad0ee25bc0bb" kind="variable"><name>reducedSensors</name></member>
+    <member refid="ModelSensorsTransformers_8h_1a57fda2c8c12be1a2c7bd1471fd2deb32" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
   </compound>
   <compound refid="Sensors_2ModelSensorsTransformers_8h" kind="file"><name>ModelSensorsTransformers.h</name>
   </compound>
   <compound refid="PredictSensorsMeasurements_8h" kind="file"><name>PredictSensorsMeasurements.h</name>
+    <member refid="PredictSensorsMeasurements_8h_1a1eeab67ce7818eeabf066f4565c26a5b" kind="variable"><name>sensorList</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a2221260b231e2f3ff9b5113f9dd182ee" kind="variable"><name>traversal</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a13378d83c5a83508c9929ca70199eaf0" kind="variable"><name>robotPos</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ad0c5f8eac1fbb8d265d760560588b6e3" kind="variable"><name>robotVel</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a96b08340336649636b3d0bbfda97fc11" kind="variable"><name>robotAcc</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a69d5081c54af1527dc97c7831f2a6af8" kind="variable"><name>gravity</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ac21a810fb7e52d0ec67d581b806caef4" kind="variable"><name>externalWrenches</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ae58c1801364b329fed448e85fceeaea7" kind="variable"><name>buf_properRobotAcc</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1ad6bf6b6c3b8f7721d628486e8f355a28" kind="variable"><name>buf_linkPos</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a2dd4cc062a116aaf5aa8fbffea4dcce1" kind="variable"><name>buf_linkVel</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a78607604a70cef66d6abee26989ecaf0" kind="variable"><name>buf_linkProperAcc</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a9d5da825c0a573af8b8e2d18c8f5895f" kind="variable"><name>buf_internalWrenches</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a94a76d721828f990586df83b13194d5c" kind="variable"><name>buf_outputTorques</name></member>
+    <member refid="PredictSensorsMeasurements_8h_1a2f3fdb36b28a41db9ee23a0648c62bfb" kind="variable"><name>predictedMeasurement</name></member>
     <member refid="group__iDynTreeSensors_1ga26f5afdf5245848ed0cf946cab8510d6" kind="function"><name>predictSensorsMeasurements</name></member>
     <member refid="group__iDynTreeSensors_1ga85a09204a0c57c96bb77548d2a633677" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
-    <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
-    <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
+    <member refid="group__iDynTreeSensors_1ga33b3534aff07374967be92f1b293f32b" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
   </compound>
   <compound refid="Sensors_2PredictSensorsMeasurements_8h" kind="file"><name>PredictSensorsMeasurements.h</name>
   </compound>
@@ -5794,9 +5872,9 @@
   </compound>
   <compound refid="YARPEigenConversions_8h" kind="file"><name>YARPEigenConversions.h</name>
     <member refid="YARPEigenConversions_8h_1ae7c28c545c2775b437536fd84dabc97d" kind="function"><name>toEigen</name></member>
-    <member refid="YARPEigenConversions_8h_1a19f060a1b963d4cdd58a142372675f6b" kind="function"><name>toEigen</name></member>
+    <member refid="YARPEigenConversions_8h_1afb26f493c6a14a1427297792970e79c1" kind="function"><name>toEigen</name></member>
     <member refid="YARPEigenConversions_8h_1a0fc1ec0d7de0f823d4a8c32524aaecd7" kind="function"><name>toEigen</name></member>
-    <member refid="YARPEigenConversions_8h_1a4f400cf54f7b7757adbaa768205b9df9" kind="function"><name>toEigen</name></member>
+    <member refid="YARPEigenConversions_8h_1a93ab12c815cfcacc855a33ecec09c436" kind="function"><name>toEigen</name></member>
   </compound>
   <compound refid="group__iDynTreeCore" kind="group"><name>iDynTreeCore</name>
     <member refid="group__iDynTreeCore_1ga92610f375c318c6d08be7c5fb29c7222" kind="define"><name>SPATIALVECTOR_TEMPLATE_HDR</name></member>
@@ -5812,8 +5890,7 @@
   <compound refid="group__iDynTreeSensors" kind="group"><name>iDynTreeSensors</name>
     <member refid="group__iDynTreeSensors_1ga26f5afdf5245848ed0cf946cab8510d6" kind="function"><name>predictSensorsMeasurements</name></member>
     <member refid="group__iDynTreeSensors_1ga85a09204a0c57c96bb77548d2a633677" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
-    <member refid="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" kind="function"><name>predictSensorsMeasurements</name></member>
-    <member refid="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" kind="function"><name>predictSensorsMeasurementsFromRawBuffers</name></member>
+    <member refid="group__iDynTreeSensors_1ga33b3534aff07374967be92f1b293f32b" kind="function"><name>IDYNTREE_DEPRECATED_WITH_MSG</name></member>
   </compound>
   <compound refid="group__iDynTreeModelIO" kind="group"><name>iDynTreeModelIO</name>
     <member refid="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" kind="function"><name>dofsListFromURDF</name></member>

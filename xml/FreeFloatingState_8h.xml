@@ -6,8 +6,8 @@
     <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
-    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/LinkState.h</includes>
     <includes local="no">vector</includes>
     <includedby refid="Model_2FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
     <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>

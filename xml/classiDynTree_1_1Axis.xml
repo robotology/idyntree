@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="150" column="21"/>
+        <location file="iDynTree/Axis.h" line="152" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a80528ce33353f585f61f967e86f9e9ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="152" column="21"/>
+        <location file="iDynTree/Axis.h" line="154" column="17"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="31" column="19" bodyfile="iDynTree/Axis.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/Axis.h" line="31" column="15" bodyfile="iDynTree/Axis.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Axis_1a5e27763556aa489adfb3b61da001bd00" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="32" column="19" bodyfile="iDynTree/Axis.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/Axis.h" line="32" column="14" bodyfile="iDynTree/Axis.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="37" column="14"/>
+        <location file="iDynTree/Axis.h" line="37" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="45" column="16" bodyfile="iDynTree/Axis.h" bodystart="45" bodyend="45"/>
+        <location file="iDynTree/Axis.h" line="45" column="12" bodyfile="iDynTree/Axis.h" bodystart="45" bodyend="47"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a56cbca5b0f569174b2f8ce96b2b645e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="50" column="9"/>
+        <location file="iDynTree/Axis.h" line="52" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1add0c40dde7f3dc9e4c05f633a74354b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="55" column="9"/>
+        <location file="iDynTree/Axis.h" line="57" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a16fd918f81fe2496fe167f8396365449" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="60" column="14"/>
+        <location file="iDynTree/Axis.h" line="62" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a1bdc98a69afe6ba3ddc9f0c5c52f836e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="65" column="26"/>
+        <location file="iDynTree/Axis.h" line="67" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a601caad683259796af973dc9a5767f2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="70" column="25"/>
+        <location file="iDynTree/Axis.h" line="72" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1aea61e891277aabb22e1067404d6d50d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="75" column="14"/>
+        <location file="iDynTree/Axis.h" line="77" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1ae672b6d583b8d07ffda719bfeb4de766" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="80" column="14"/>
+        <location file="iDynTree/Axis.h" line="82" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a80b21674827ef8701daed4addc4e1ee1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="90" column="19"/>
+        <location file="iDynTree/Axis.h" line="92" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a134ff8af97722174e27fbb47db6fa729" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="96" column="29"/>
+        <location file="iDynTree/Axis.h" line="98" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a67346ce78cfcf70550028606af8fd8b5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="98" column="15"/>
+        <location file="iDynTree/Axis.h" line="100" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a847202356c483a5b60f628c22712c04b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -285,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="100" column="20"/>
+        <location file="iDynTree/Axis.h" line="102" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a57a3799baeaa916d82a1a010631b5cb3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="110" column="19"/>
+        <location file="iDynTree/Axis.h" line="112" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a215d3dcc5c1da6293c2576905ab046fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -321,7 +321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="116" column="29"/>
+        <location file="iDynTree/Axis.h" line="118" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a8cee386983f00c053a3632c0c061839f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="118" column="15"/>
+        <location file="iDynTree/Axis.h" line="120" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a1355ccdd4ea9f7dbf775920e3b2a694c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -355,7 +355,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="120" column="20"/>
+        <location file="iDynTree/Axis.h" line="122" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a5f9e8b8b7d511a6662d21be27570b1c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -396,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="128" column="14"/>
+        <location file="iDynTree/Axis.h" line="130" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1ab473268436d3549692c5ef59b7ad5730" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -410,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="133" column="14"/>
+        <location file="iDynTree/Axis.h" line="135" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1ad16da2abcd0d966f2814e93be10b63f2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -428,7 +428,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="138" column="18"/>
+        <location file="iDynTree/Axis.h" line="140" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Axis_1a4ccdcaeb59a5a21c216519cdd8e55f4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -446,7 +446,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Axis.h" line="143" column="16"/>
+        <location file="iDynTree/Axis.h" line="145" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -455,7 +455,7 @@
     <detaileddescription>
 <para>The axis is represented as a origin plus a direction. </para>
     </detaileddescription>
-    <location file="iDynTree/Axis.h" line="28" column="5" bodyfile="iDynTree/Axis.h" bodystart="29" bodyend="154"/>
+    <location file="iDynTree/Axis.h" line="28" column="1" bodyfile="iDynTree/Axis.h" bodystart="29" bodyend="156"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Axis_1aa1aff15197c9bdb23d6a8a397cfa5d79" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
       <member refid="classiDynTree_1_1Axis_1a56cbca5b0f569174b2f8ce96b2b645e0" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>

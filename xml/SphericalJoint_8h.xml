@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SphericalJoint_8h" kind="file" language="C++">
     <compoundname>SphericalJoint.h</compoundname>
-    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes refid="MovableJointImpl_8h" local="no">iDynTree/MovableJointImpl.h</includes>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>

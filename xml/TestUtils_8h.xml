@@ -9,8 +9,8 @@
     <includes local="no">iostream</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
-    <includes local="no">cstdlib</includes>
     <includes local="no">cmath</includes>
+    <includes local="no">cstdlib</includes>
     <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <includedby refid="Core_2TestUtils_8h" local="no">iDynTree/Core/TestUtils.h</includedby>
     <incdepgraph>
@@ -35,7 +35,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="7">
         <label>cmath</label>
       </node>
       <node id="5">
@@ -44,7 +44,7 @@
       <node id="6">
         <label>vector</label>
       </node>
-      <node id="7">
+      <node id="8">
         <label>cstdlib</label>
       </node>
       <node id="4">
@@ -60,7 +60,19 @@
       <memberdef kind="define" id="TestUtils_8h_1a187efc872711557e58cc6e85475ec53f" prot="public" static="no">
         <name>ASSERT_IS_TRUE</name>
         <param><defname>prop</defname></param>
-        <initializer>iDynTree::assertTrue(prop,__FILE__,__LINE__)</initializer>
+        <initializer>iDynTree::assertTrue(prop, __FILE__, __LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/TestUtils.h" line="32" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a6bd7df9ed662cc61bb377703a5476a5f" prot="public" static="no">
+        <name>ASSERT_IS_FALSE</name>
+        <param><defname>prop</defname></param>
+        <initializer>iDynTree::assertTrue(!(prop), __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -69,10 +81,11 @@
         </inbodydescription>
         <location file="iDynTree/TestUtils.h" line="33" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="33" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a6bd7df9ed662cc61bb377703a5476a5f" prot="public" static="no">
-        <name>ASSERT_IS_FALSE</name>
-        <param><defname>prop</defname></param>
-        <initializer>iDynTree::assertTrue(!(prop),__FILE__,__LINE__)</initializer>
+      <memberdef kind="define" id="TestUtils_8h_1ab6e6df4db528a1a4e2392fc726d69243" prot="public" static="no">
+        <name>ASSERT_EQUAL_STRING</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>    iDynTree::assertStringAreEqual(val1, val2, iDynTree::DEFAULT_TOL, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -81,24 +94,11 @@
         </inbodydescription>
         <location file="iDynTree/TestUtils.h" line="34" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="34" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1ab6e6df4db528a1a4e2392fc726d69243" prot="public" static="no">
-        <name>ASSERT_EQUAL_STRING</name>
-        <param><defname>val1</defname></param>
-        <param><defname>val2</defname></param>
-        <initializer>iDynTree::assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="35" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="35" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="define" id="TestUtils_8h_1a8358fe401a2b1aecfe83504deea8579f" prot="public" static="no">
         <name>ASSERT_EQUAL_DOUBLE</name>
         <param><defname>val1</defname></param>
         <param><defname>val2</defname></param>
-        <initializer>iDynTree::assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <initializer>    iDynTree::assertDoubleAreEqual(val1, val2, iDynTree::DEFAULT_TOL, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -112,20 +112,7 @@
         <param><defname>val1</defname></param>
         <param><defname>val2</defname></param>
         <param><defname>tol</defname></param>
-        <initializer>iDynTree::assertDoubleAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="37" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="37" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a2845c548a6ff5828b1e521aed1c4cf08" prot="public" static="no">
-        <name>ASSERT_EQUAL_VECTOR</name>
-        <param><defname>val1</defname></param>
-        <param><defname>val2</defname></param>
-        <initializer>assertVectorAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <initializer>    iDynTree::assertDoubleAreEqual(val1, val2, tol, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -134,27 +121,11 @@
         </inbodydescription>
         <location file="iDynTree/TestUtils.h" line="38" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1ab13d2e5a259c103fd03e24f6a95d5212" prot="public" static="no">
-        <name>ASSERT_EQUAL_VECTOR_TOL</name>
+      <memberdef kind="define" id="TestUtils_8h_1a2845c548a6ff5828b1e521aed1c4cf08" prot="public" static="no">
+        <name>ASSERT_EQUAL_VECTOR</name>
         <param><defname>val1</defname></param>
         <param><defname>val2</defname></param>
-        <param><defname>tol</defname></param>
-        <initializer>assertVectorAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="39" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="39" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a2f0028972e244cb04d56af33b61a45fd" prot="public" static="no">
-        <name>ASSERT_EQUAL_VECTOR_REL_TOL</name>
-        <param><defname>val1</defname></param>
-        <param><defname>val2</defname></param>
-        <param><defname>relTol</defname></param>
-        <param><defname>minAbsTol</defname></param>
-        <initializer>assertVectorAreEqualWithRelativeTol(val1,val2,relTol,minAbsTol,__FILE__,__LINE__)</initializer>
+        <initializer>    assertVectorAreEqual(val1, val2, iDynTree::DEFAULT_TOL, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -163,24 +134,12 @@
         </inbodydescription>
         <location file="iDynTree/TestUtils.h" line="40" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="40" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a0c45c03414419c518b44c8a386aed6a6" prot="public" static="no">
-        <name>ASSERT_EQUAL_SPATIAL_MOTION</name>
+      <memberdef kind="define" id="TestUtils_8h_1ab13d2e5a259c103fd03e24f6a95d5212" prot="public" static="no">
+        <name>ASSERT_EQUAL_VECTOR_TOL</name>
         <param><defname>val1</defname></param>
         <param><defname>val2</defname></param>
-        <initializer>assertSpatialMotionAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="41" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="41" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a0020d3bf4ab892c0a95af429d92e0330" prot="public" static="no">
-        <name>ASSERT_EQUAL_SPATIAL_FORCE</name>
-        <param><defname>val1</defname></param>
-        <param><defname>val2</defname></param>
-        <initializer>assertSpatialForceAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <param><defname>tol</defname></param>
+        <initializer>    assertVectorAreEqual(val1, val2, tol, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -189,25 +148,13 @@
         </inbodydescription>
         <location file="iDynTree/TestUtils.h" line="42" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="42" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a89834a776ba0a06401b30d32b2e3698b" prot="public" static="no">
-        <name>ASSERT_EQUAL_SPATIAL_FORCE_TOL</name>
+      <memberdef kind="define" id="TestUtils_8h_1a2f0028972e244cb04d56af33b61a45fd" prot="public" static="no">
+        <name>ASSERT_EQUAL_VECTOR_REL_TOL</name>
         <param><defname>val1</defname></param>
         <param><defname>val2</defname></param>
-        <param><defname>tol</defname></param>
-        <initializer>assertSpatialForceAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="43" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="43" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a68e554e8d27aca5a55c7a29621e93306" prot="public" static="no">
-        <name>ASSERT_EQUAL_MATRIX</name>
-        <param><defname>val1</defname></param>
-        <param><defname>val2</defname></param>
-        <initializer>assertMatrixAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <param><defname>relTol</defname></param>
+        <param><defname>minAbsTol</defname></param>
+        <initializer>    assertVectorAreEqualWithRelativeTol(val1, val2, relTol, minAbsTol, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -216,25 +163,11 @@
         </inbodydescription>
         <location file="iDynTree/TestUtils.h" line="44" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="44" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a9a977b732f304f9f725a068cbf474eff" prot="public" static="no">
-        <name>ASSERT_EQUAL_MATRIX_TOL</name>
+      <memberdef kind="define" id="TestUtils_8h_1a0c45c03414419c518b44c8a386aed6a6" prot="public" static="no">
+        <name>ASSERT_EQUAL_SPATIAL_MOTION</name>
         <param><defname>val1</defname></param>
         <param><defname>val2</defname></param>
-        <param><defname>tol</defname></param>
-        <initializer>assertMatrixAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="45" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="45" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a42c3c48d507c766d464ccf2502c6031c" prot="public" static="no">
-        <name>ASSERT_EQUAL_TRANSFORM</name>
-        <param><defname>val1</defname></param>
-        <param><defname>val2</defname></param>
-        <initializer>assertTransformsAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <initializer>    assertSpatialMotionAreEqual(val1, val2, iDynTree::DEFAULT_TOL, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -243,19 +176,86 @@
         </inbodydescription>
         <location file="iDynTree/TestUtils.h" line="46" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="46" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="TestUtils_8h_1a7747a8a71ec7815e6558bf6f6295f6b3" prot="public" static="no">
-        <name>ASSERT_EQUAL_TRANSFORM_TOL</name>
+      <memberdef kind="define" id="TestUtils_8h_1a0020d3bf4ab892c0a95af429d92e0330" prot="public" static="no">
+        <name>ASSERT_EQUAL_SPATIAL_FORCE</name>
         <param><defname>val1</defname></param>
         <param><defname>val2</defname></param>
-        <param><defname>tol</defname></param>
-        <initializer>assertTransformsAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
+        <initializer>    assertSpatialForceAreEqual(val1, val2, iDynTree::DEFAULT_TOL, __FILE__, __LINE__)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="47" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/TestUtils.h" line="48" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a89834a776ba0a06401b30d32b2e3698b" prot="public" static="no">
+        <name>ASSERT_EQUAL_SPATIAL_FORCE_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>    assertSpatialForceAreEqual(val1, val2, tol, __FILE__, __LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/TestUtils.h" line="50" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a68e554e8d27aca5a55c7a29621e93306" prot="public" static="no">
+        <name>ASSERT_EQUAL_MATRIX</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>    assertMatrixAreEqual(val1, val2, iDynTree::DEFAULT_TOL, __FILE__, __LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/TestUtils.h" line="52" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a9a977b732f304f9f725a068cbf474eff" prot="public" static="no">
+        <name>ASSERT_EQUAL_MATRIX_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>    assertMatrixAreEqual(val1, val2, tol, __FILE__, __LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/TestUtils.h" line="54" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a42c3c48d507c766d464ccf2502c6031c" prot="public" static="no">
+        <name>ASSERT_EQUAL_TRANSFORM</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>    assertTransformsAreEqual(val1, val2, iDynTree::DEFAULT_TOL, __FILE__, __LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/TestUtils.h" line="56" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a7747a8a71ec7815e6558bf6f6295f6b3" prot="public" static="no">
+        <name>ASSERT_EQUAL_TRANSFORM_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>    assertTransformsAreEqual(val1, val2, tol, __FILE__, __LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/TestUtils.h" line="58" column="9" bodyfile="iDynTree/TestUtils.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="TestUtils_8h_1a43c6e7afb45c2e3d1430924cf65c4b14" prot="public" static="no">
         <name>IDYNTREE_MATCH_CHARACTER</name>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="226" column="9"/>
+        <location file="iDynTree/TestUtils.h" line="260" column="9"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -304,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="59" column="10" declfile="iDynTree/TestUtils.h" declline="59" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="75" column="6" declfile="iDynTree/TestUtils.h" declline="75" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a274077496ffac0ee45107923c3fe9cee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="62" column="10" declfile="iDynTree/TestUtils.h" declline="62" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="81" column="6" declfile="iDynTree/TestUtils.h" declline="81" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1ac18550f459dae84f3a502274b39193cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -377,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="69" column="10" declfile="iDynTree/TestUtils.h" declline="69" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="92" column="6" declfile="iDynTree/TestUtils.h" declline="92" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1ae326a16295b6efe5e6023665cb2a012f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -414,7 +414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="76" column="10" declfile="iDynTree/TestUtils.h" declline="76" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="103" column="6" declfile="iDynTree/TestUtils.h" declline="103" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a0c0a527efda465b7b190e726c148b5dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -451,7 +451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="83" column="10" declfile="iDynTree/TestUtils.h" declline="83" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="114" column="6" declfile="iDynTree/TestUtils.h" declline="114" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a1289062400b0dd99e49653356d569e8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -478,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="85" column="10" declfile="iDynTree/TestUtils.h" declline="85" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="120" column="6" declfile="iDynTree/TestUtils.h" declline="120" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a2296e58922e46f4fc2d91689f9e59da9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -492,7 +492,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="90" column="10" declfile="iDynTree/TestUtils.h" declline="90" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="125" column="6" declfile="iDynTree/TestUtils.h" declline="125" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a051e689c0d7974b18929629680c95619" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -516,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="95" column="12" declfile="iDynTree/TestUtils.h" declline="95" declcolumn="12"/>
+        <location file="iDynTree/TestUtils.h" line="130" column="8" declfile="iDynTree/TestUtils.h" declline="130" declcolumn="8"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1ab3920b4ee524d6bb9062435d7c9d7065" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -539,7 +539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="101" column="9" declfile="iDynTree/TestUtils.h" declline="101" declcolumn="9"/>
+        <location file="iDynTree/TestUtils.h" line="136" column="5" declfile="iDynTree/TestUtils.h" declline="136" declcolumn="5"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a30e37efb8be6e98f4bf9aabd7493748c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -572,7 +572,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="107" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="107" bodyend="113"/>
+        <location file="iDynTree/TestUtils.h" line="142" column="6" bodyfile="iDynTree/TestUtils.h" bodystart="142" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a8960c4bd871d87f67470f2ab8f8b5e8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -595,7 +595,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="119" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="119" bodyend="128"/>
+        <location file="iDynTree/TestUtils.h" line="153" column="18" bodyfile="iDynTree/TestUtils.h" bodystart="153" bodyend="162"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a553049a8d951cbad14dd59168935a7b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Position</type>
@@ -609,7 +609,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="133" column="14" declfile="iDynTree/TestUtils.h" declline="133" declcolumn="14"/>
+        <location file="iDynTree/TestUtils.h" line="167" column="10" declfile="iDynTree/TestUtils.h" declline="167" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a9929fdbd53800f02bd76305f9d985942" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Rotation</type>
@@ -623,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="138" column="14" declfile="iDynTree/TestUtils.h" declline="138" declcolumn="14"/>
+        <location file="iDynTree/TestUtils.h" line="172" column="10" declfile="iDynTree/TestUtils.h" declline="172" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a977a15d73114a87fd6705dd9a8f7c736" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Transform</type>
@@ -637,7 +637,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="143" column="15" declfile="iDynTree/TestUtils.h" declline="143" declcolumn="15"/>
+        <location file="iDynTree/TestUtils.h" line="177" column="11" declfile="iDynTree/TestUtils.h" declline="177" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1ae4c3a6982c0bec99386eb3f4c05632d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Axis</type>
@@ -651,7 +651,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="148" column="10" declfile="iDynTree/TestUtils.h" declline="148" declcolumn="10"/>
+        <location file="iDynTree/TestUtils.h" line="182" column="6" declfile="iDynTree/TestUtils.h" declline="182" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a293fa271f52f72d795f4858b34273ed6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SpatialInertia</type>
@@ -665,7 +665,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="153" column="20" declfile="iDynTree/TestUtils.h" declline="153" declcolumn="20"/>
+        <location file="iDynTree/TestUtils.h" line="187" column="16" declfile="iDynTree/TestUtils.h" declline="187" declcolumn="16"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a088ed6a480496334ee1dd51f088c6bb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SpatialMotionVector</type>
@@ -679,7 +679,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="158" column="25" declfile="iDynTree/TestUtils.h" declline="158" declcolumn="25"/>
+        <location file="iDynTree/TestUtils.h" line="192" column="21" declfile="iDynTree/TestUtils.h" declline="192" declcolumn="21"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a04bcdc7077b46c1944825327875cb65b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>SpatialForceVector</type>
@@ -693,7 +693,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="163" column="24" declfile="iDynTree/TestUtils.h" declline="163" declcolumn="24"/>
+        <location file="iDynTree/TestUtils.h" line="197" column="20" declfile="iDynTree/TestUtils.h" declline="197" declcolumn="20"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a91197a36381e2fa990a0b54da40abee9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -719,7 +719,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="169" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="169" bodyend="176"/>
+        <location file="iDynTree/TestUtils.h" line="202" column="18" bodyfile="iDynTree/TestUtils.h" bodystart="202" bodyend="209"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a2e5af240e2fab62a2527d450c4bdcabd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -753,7 +753,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="182" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="182" bodyend="196"/>
+        <location file="iDynTree/TestUtils.h" line="215" column="6" bodyfile="iDynTree/TestUtils.h" bodystart="215" bodyend="230"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1aa25d97acb2792de12937a70d01e75ae7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -775,19 +775,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="202" column="17" bodyfile="iDynTree/TestUtils.h" bodystart="202" bodyend="217"/>
+        <location file="iDynTree/TestUtils.h" line="236" column="13" bodyfile="iDynTree/TestUtils.h" bodystart="236" bodyend="250"/>
       </memberdef>
-      <memberdef kind="function" id="TestUtils_8h_1a456896bb82abd7daca7ac57546380e94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="TestUtils_8h_1a3b5332697ffd34f94da5276c75c055aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void iDynTree::printMatrixWrongElements</definition>
-        <argsstring>(std::string name, std::vector&lt; std::vector&lt; TestMatrixMismatch &gt; &gt; &amp;correctElems)</argsstring>
+        <argsstring>(std::string name, std::vector&lt; std::vector&lt; TestMatrixMismatch &gt;&gt; &amp;correctElems)</argsstring>
         <name>printMatrixWrongElements</name>
         <param>
           <type>std::string</type>
           <declname>name</declname>
         </param>
         <param>
-          <type>std::vector&lt; std::vector&lt; TestMatrixMismatch &gt; &gt; &amp;</type>
+          <type>std::vector&lt; std::vector&lt; TestMatrixMismatch &gt;&gt; &amp;</type>
           <declname>correctElems</declname>
         </param>
         <briefdescription>
@@ -797,7 +797,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="223" column="17" bodyfile="iDynTree/TestUtils.h" bodystart="223" bodyend="253"/>
+        <location file="iDynTree/TestUtils.h" line="256" column="13" bodyfile="iDynTree/TestUtils.h" bodystart="256" bodyend="288"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a004eafd55ec8125ba2842dc2458088be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -827,7 +827,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="260" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="260" bodyend="276"/>
+        <location file="iDynTree/TestUtils.h" line="295" column="6" bodyfile="iDynTree/TestUtils.h" bodystart="295" bodyend="311"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1aa20d8a80e1de786a905ee0e897e45586" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -869,7 +869,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="284" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="284" bodyend="314"/>
+        <location file="iDynTree/TestUtils.h" line="318" column="6" bodyfile="iDynTree/TestUtils.h" bodystart="318" bodyend="349"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1a6b4c4d79f076ed9013708a5ab40e9273" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -916,7 +916,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="323" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="323" bodyend="354"/>
+        <location file="iDynTree/TestUtils.h" line="358" column="6" bodyfile="iDynTree/TestUtils.h" bodystart="358" bodyend="397"/>
       </memberdef>
       <memberdef kind="function" id="TestUtils_8h_1ac3a22c22491b65545bdfbab336950530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -958,7 +958,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TestUtils.h" line="362" column="10" bodyfile="iDynTree/TestUtils.h" bodystart="362" bodyend="398"/>
+        <location file="iDynTree/TestUtils.h" line="405" column="6" bodyfile="iDynTree/TestUtils.h" bodystart="405" bodyend="445"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

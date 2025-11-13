@@ -34,14 +34,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Span.h" line="375" column="7" bodyfile="iDynTree/Span.h" bodystart="375" bodyend="-1"/>
+        <location file="iDynTree/Span.h" line="384" column="5" bodyfile="iDynTree/Span.h" bodystart="387" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Span.h" line="373" column="5" bodyfile="iDynTree/Span.h" bodystart="374" bodyend="376"/>
+    <location file="iDynTree/Span.h" line="382" column="1" bodyfile="iDynTree/Span.h" bodystart="383" bodyend="388"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1details_1_1calculate__subspan__type_1aa2737e67ca087bb17788bbaf284f374f" prot="public" virt="non-virtual"><scope>iDynTree::details::calculate_subspan_type</scope><name>type</name></member>
     </listofallmembers>

@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="172" column="18" bodyfile="iDynTree/Visualizer.h" bodystart="172" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="170" column="18" bodyfile="iDynTree/Visualizer.h" bodystart="170" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1PixelViz_1a6ddc11ba6a301e09ac9a2644a87f28fc" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="177" column="18" bodyfile="iDynTree/Visualizer.h" bodystart="177" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="175" column="18" bodyfile="iDynTree/Visualizer.h" bodystart="175" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -63,7 +63,7 @@
         <link refid="classiDynTree_1_1ColorViz"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Visualizer.h" line="165" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="166" bodyend="179"/>
+    <location file="iDynTree/Visualizer.h" line="164" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="165" bodyend="176"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ColorViz_1a097c11ce78907c8cca1f932bb53f9a15" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>a</name></member>
       <member refid="classiDynTree_1_1ColorViz_1ab7bb92c9c5bc5d9b83190143136f277a" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>b</name></member>

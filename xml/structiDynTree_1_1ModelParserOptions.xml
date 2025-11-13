@@ -138,7 +138,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/ModelLoader.h" line="22" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="23" bodyend="82"/>
+    <location file="iDynTree/ModelLoader.h" line="23" column="1" bodyfile="iDynTree/ModelLoader.h" bodystart="24" bodyend="81"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1ModelParserOptions_1acca6da96631f8577cc259f939872d156" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>addSensorFramesAsAdditionalFrames</name></member>
       <member refid="structiDynTree_1_1ModelParserOptions_1a2eaa5dc58dec6de63a8f118373805748" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>convertThreeRevoluteJointsToSphericalJoint</name></member>

@@ -74,30 +74,25 @@
             <li>
               Reference
               <ul>
-                <li><a href="#constructordestructor">Constructor/Destructor</a></li>
                 <li><a href="#model-exporting-and-definition-methods">Model exporting and definition methods</a></li>
+                <li><a href="#constructordestructor">Constructor/Destructor</a></li>
               </ul>
             </li>
           </ul>
         </nav>
 <p>Currently the only format supported for export is the URDF format, as it is described in <a href="http://wiki.ros.org/urdf/XML">http:/<wbr />/<wbr />wiki.ros.org/<wbr />urdf/<wbr />XML</a> .</p><p>Only <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> classes that represent multibody system with no loops can be exported.</p><p>Furthermore, currently the model exporter only exports a subset of the features supported in <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>. In particular, the following features are not exported:</p><ul><li>Sensors</li><li>Joint limits, damping and static friction.</li></ul><section id="autotoc_md4"><h2><a href="#autotoc_md4">Format documentation</a></h2><p>The following format are supported by the exporter.</p><table class="m-table"><thead><tr><th>Format</th><th>Extendend Name</th><th>Website</th><th>String for filetype argument</th></tr></thead><tbody><tr><td>URDF</td><td>Unified Robot Description Format</td><td><a href="http://wiki.ros.org/urdf">http:/<wbr />/<wbr />wiki.ros.org/<wbr />urdf</a></td><td><code>urdf</code></td></tr></tbody></table><section id="autotoc_md5"><h3><a href="#autotoc_md5">URDF</a></h3><p>As the URDF format does not distinguish between frames and links (see <a href="https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56">https:/<wbr />/<wbr />discourse.ros.org/<wbr />t/<wbr />urdf-ng-link-and-frame-concepts/<wbr />56</a> for an extensive discussion on this) the URDF model exporter converts iDynTree&#x27;s <em>additional frames</em> to mass-less and shape-less <em>fake</em> URDF links that are connected as child links via <code>fixed</code> joints to the corresponding <strong>real</strong> URDF links.</p><p>Furthermore, it is widespread use in URDF models to never use a real link (with mass) as the root link of a model, mainly due to workaround a bug in official KDL parser used in ROS (see <a href="https://github.com/ros/kdl_parser/issues/27">https://github.com/ros/kdl_<wbr />parser/issues/27</a> for more info). For this reason, if the selected base_link has at least one additional frame, by default the first additional frame of the base link is added as a <strong>parent</strong> fake URDF link, instead as a <strong>child</strong> fake URDF link as done with the rest of iDynTree&#x27;s additional frames. If no additional frame is available for the base link, the base link of the URDF will have a mass, and will generate a warning then used with the ROS&#x27;s <a href="https://github.com/ros/kdl_parser"><code>kdl_parser</code></a> . This behaviour can be disabled by setting to false the <code>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</code> attribute of <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>.</p></section></section>
-        <section id="constructordestructor">
-          <h2><a href="#constructordestructor">Constructor/Destructor</a></h2>
-          <dl class="m-doc">
-            <dt id="afb8051cba34b2e3e60d0b375c0e790bf">
-              <span class="m-doc-wrap-bumper"><a href="#afb8051cba34b2e3e60d0b375c0e790bf" class="m-doc-self">ModelExporter</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd>Constructor.</dd>
-            <dt id="a0797985ef2e2cebb8bf25c0c0e4ed18b">
-              <span class="m-doc-wrap-bumper"><a href="#a0797985ef2e2cebb8bf25c0c0e4ed18b" class="m-doc-self">~ModelExporter</a>(</span><span class="m-doc-wrap">)</span>
-            </dt>
-            <dd><span></span></dd>
-          </dl>
-        </section>
         <section id="model-exporting-and-definition-methods">
           <h2><a href="#model-exporting-and-definition-methods">Model exporting and definition methods</a></h2>
 <p>This methods are used to export the structure of your model.</p>
           <dl class="m-doc">
+            <dt id="ab3f35982a74924219fb8814fa6363f78">
+              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; <a href="#ab3f35982a74924219fb8814fa6363f78" class="m-doc-self">sensors</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a950cefff5048600ab9ed046407f2eb56">
+              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> const <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> <a href="#a950cefff5048600ab9ed046407f2eb56" class="m-doc-self">options</a>
+            </dt>
+            <dd><span></span></dd>
             <dt id="ac7eee90d88819d3697225c412d6717d0">
               <span class="m-doc-wrap-bumper">auto <a href="#ac7eee90d88819d3697225c412d6717d0" class="m-doc-self">exportingOptions</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>&amp;</span>
             </dt>
@@ -112,9 +107,8 @@
             </dt>
             <dd>Specifies the model of the robot to export.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a959f9388c81d35b164390bbb00999274" class="m-doc">init</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; sensors,
-              const <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper"><a href="#a447aa93e1f1d1b0fb32c343b7c7237db" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot; Deprecated,
+              please use the variant in which the sensors are &quot; &quot;passed as part of the iDynTree::Model.&quot;) bool init(const Model &amp;model</span>
             </dt>
             <dd>Specifies the model of the robot to export.</dd>
             <dt id="a2a8eff680e7a14c66dafe5a9360d89a8">
@@ -139,6 +133,19 @@
               const std::string filetype = &quot;urdf&quot;) -&gt; bool</span>
             </dt>
             <dd>Export the model of the robot to an external file.</dd>
+          </dl>
+        </section>
+        <section id="constructordestructor">
+          <h2><a href="#constructordestructor">Constructor/Destructor</a></h2>
+          <dl class="m-doc">
+            <dt id="afb8051cba34b2e3e60d0b375c0e790bf">
+              <span class="m-doc-wrap-bumper"><a href="#afb8051cba34b2e3e60d0b375c0e790bf" class="m-doc-self">ModelExporter</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt id="a0797985ef2e2cebb8bf25c0c0e4ed18b">
+              <span class="m-doc-wrap-bumper"><a href="#a0797985ef2e2cebb8bf25c0c0e4ed18b" class="m-doc-self">~ModelExporter</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section>
@@ -171,34 +178,16 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a959f9388c81d35b164390bbb00999274"><div>
+          <section class="m-doc-details" id="a447aa93e1f1d1b0fb32c343b7c7237db"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelExporter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a959f9388c81d35b164390bbb00999274" class="m-doc-self">init</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; sensors,
-              const <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>())</span></span>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />ModelExporter::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a447aa93e1f1d1b0fb32c343b7c7237db" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot; Deprecated,
+              please use the variant in which the sensors are &quot; &quot;passed as part of the iDynTree::Model.&quot;) bool init(const Model &amp;model</span></span>
             </h3>
             <p>Specifies the model of the robot to export.</p>
             <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">model&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The used model.</td>
-                </tr>
-                <tr>
-                  <td>sensors&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The used sensors.</td>
-                </tr>
-                <tr>
-                  <td>options&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The used options.</td>
-                </tr>
-              </tbody>
               <tfoot>
                 <tr>
-                  <th>Returns</th>
+                  <th style="width: 1%">Returns</th>
                   <td>true if all went well, false otherwise.</td>
                 </tr>
               </tfoot>

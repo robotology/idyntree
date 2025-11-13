@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="34" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="34" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="36" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1SparsityHelper_1a0c52a44ac07b19bf1ce1efe599056004" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::vector&lt; size_t &gt; &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="35" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="35" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="37" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-static-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="37" column="30" bodyfile="private/InverseKinematicsNLP.h" bodystart="37" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="39" column="30" bodyfile="private/InverseKinematicsNLP.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="50" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="51" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="75" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="74" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a6b208df3000cb0d2d2490b0cb08b2489" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="83" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="82" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a99dcd1e84f9214b4a5f77bd813d89bda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="92" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="91" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a8b3ee065ee574981db57061005421f16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="102" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="101" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1ae67e37f45fb3a99fd8a57d196fc62e4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="114" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="113" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a1c446d2bce1d6a5467e6a9dc71e03874" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -408,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="124" column="12"/>
+        <location file="private/InverseKinematicsNLP.h" line="122" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1ab06c1fd524494a9f573662b197608578" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -425,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="132" column="12"/>
+        <location file="private/InverseKinematicsNLP.h" line="129" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a43cb1e0d1525be72e1989569b044dcba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -455,7 +455,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="141" column="12"/>
+        <location file="private/InverseKinematicsNLP.h" line="137" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a0642d6a8c920a525456fbd2e84de3e2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::vector&lt; size_t &gt; &amp;</type>
@@ -485,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="150" column="23"/>
+        <location file="private/InverseKinematicsNLP.h" line="145" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1aa11d2449f0c659104ddcf8488910a182" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -549,7 +549,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="162" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="156" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1ae8593fcbf475f77ab3452db4e18fdf9f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -568,7 +568,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="175" column="17"/>
+        <location file="private/InverseKinematicsNLP.h" line="168" column="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -576,7 +576,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="private/InverseKinematicsNLP.h" line="32" column="1" bodyfile="private/InverseKinematicsNLP.h" bodystart="33" bodyend="177"/>
+    <location file="private/InverseKinematicsNLP.h" line="34" column="1" bodyfile="private/InverseKinematicsNLP.h" bodystart="35" bodyend="169"/>
     <listofallmembers>
       <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a6b208df3000cb0d2d2490b0cb08b2489" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>addConstraintSparsityPattern</name></member>
       <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a99dcd1e84f9214b4a5f77bd813d89bda" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>addConstraintSparsityPattern</name></member>

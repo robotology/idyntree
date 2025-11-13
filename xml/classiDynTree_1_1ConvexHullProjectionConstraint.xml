@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="128" column="14" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="128" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="130" column="10" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="130" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="152" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="152" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="155" column="15" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="155" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1ae9a9c4c0431f2304a4d96fbe05050c02" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="157" column="23" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="157" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="160" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="160" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a5b139d3f1537af28205aa35951cf9efc" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="162" column="23" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="162" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="165" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="165" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a14a6666c07b7422f23842628c06dc869" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="168" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="168" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="171" column="15" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="171" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a1bad4948a74b4d6b609396ab13deea40" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="175" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="175" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="178" column="15" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="178" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a6045a81d03a76f3384b3c68ced17cfba" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="180" column="23" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="180" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="183" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="183" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a041fceaaceea5cdc5a53670e26352f8c" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="186" column="28" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="186" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="189" column="24" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="189" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1abecdae2b60c7cbfd13b585679271f99b" prot="public" static="no" mutable="no">
         <type>std::vector&lt; int &gt;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="206" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="206" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="213" column="17" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="213" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a612270a7771c882f80c76d64a220e54a" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="211" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="211" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="218" column="17" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="218" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="123" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="125" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="133" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="136" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a6f2c6f94c250f829c773ccd57af8c91b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="139" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="142" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a352974d52215c352df2b7782e96cea52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="145" column="16"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="148" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a13e3880c7cbe8c9edefcdf55acc6453c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="197" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="204" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a59453b10a697b26c1bb8412ff6de23bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="217" column="17"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="224" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a059bd064100e5d7ec355db11d8eb2247" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="225" column="16"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="232" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1abcc2fb91f6aaf4af760ab85f4274aafd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -354,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="234" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="241" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a0da48123b22e79621d2d031a4e8cfc2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="243" column="17"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="250" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -520,7 +520,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/ConvexHullHelpers.h" line="117" column="5" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="118" bodyend="245"/>
+    <location file="iDynTree/ConvexHullHelpers.h" line="119" column="1" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="120" bodyend="251"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1ae9a9c4c0431f2304a4d96fbe05050c02" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>A</name></member>
       <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a612270a7771c882f80c76d64a220e54a" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>absoluteFrame_X_supportFrame</name></member>

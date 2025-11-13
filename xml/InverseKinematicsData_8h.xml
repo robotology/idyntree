@@ -6,17 +6,17 @@
     <includes refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includes>
     <includes refid="InverseKinematics_8h" local="no">iDynTree/InverseKinematics.h</includes>
     <includes refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includes>
-    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes local="no">IpIpoptApplication.hpp</includes>
-    <includes local="no">vector</includes>
     <includes local="no">map</includes>
     <includes local="no">unordered_map</includes>
+    <includes local="no">vector</includes>
     <incdepgraph>
-      <node id="4">
+      <node id="3">
         <label>map</label>
       </node>
       <node id="1">
@@ -31,13 +31,13 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="3">
+      <node id="5">
         <label>vector</label>
       </node>
       <node id="2">
         <label>IpIpoptApplication.hpp</label>
       </node>
-      <node id="5">
+      <node id="4">
         <label>unordered_map</label>
       </node>
     </incdepgraph>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="30" column="22" bodyfile="private/InverseKinematicsData.h" bodystart="29" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="31" column="18" bodyfile="private/InverseKinematicsData.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

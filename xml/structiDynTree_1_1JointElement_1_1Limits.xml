@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="49" column="16" bodyfile="private/JointElement.h" bodystart="49" bodyend="-1"/>
+        <location file="private/JointElement.h" line="53" column="16" bodyfile="private/JointElement.h" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1Limits_1a35617d7eec38445b76e30ff7d035a861" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="50" column="16" bodyfile="private/JointElement.h" bodystart="50" bodyend="-1"/>
+        <location file="private/JointElement.h" line="54" column="16" bodyfile="private/JointElement.h" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1Limits_1a9586747998acbb9963671488e3c6b93c" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="51" column="16" bodyfile="private/JointElement.h" bodystart="51" bodyend="-1"/>
+        <location file="private/JointElement.h" line="55" column="16" bodyfile="private/JointElement.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1Limits_1ad154ed47268fe8dda6a70d9599f98294" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -53,14 +53,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="52" column="16" bodyfile="private/JointElement.h" bodystart="52" bodyend="-1"/>
+        <location file="private/JointElement.h" line="56" column="16" bodyfile="private/JointElement.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="private/JointElement.h" line="48" column="5" bodyfile="private/JointElement.h" bodystart="48" bodyend="53"/>
+    <location file="private/JointElement.h" line="51" column="5" bodyfile="private/JointElement.h" bodystart="52" bodyend="57"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1JointElement_1_1Limits_1a9586747998acbb9963671488e3c6b93c" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::Limits</scope><name>effort</name></member>
       <member refid="structiDynTree_1_1JointElement_1_1Limits_1ae9d791d5f1002fe6307c34680b21a230" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::Limits</scope><name>positionLower</name></member>

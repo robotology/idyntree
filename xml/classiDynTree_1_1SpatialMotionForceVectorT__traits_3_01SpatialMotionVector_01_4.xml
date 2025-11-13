@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SpatialVector.h" line="33" column="37" bodyfile="iDynTree/SpatialVector.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="32" column="33" bodyfile="iDynTree/SpatialVector.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialMotionVector_01_4_1a647a1590ad87a13495f632f287f9fa66" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">AngularMotionVector3</ref></type>
@@ -29,14 +29,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SpatialVector.h" line="34" column="38" bodyfile="iDynTree/SpatialVector.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="33" column="34" bodyfile="iDynTree/SpatialVector.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/SpatialVector.h" line="30" column="5" bodyfile="iDynTree/SpatialVector.h" bodystart="31" bodyend="35"/>
+    <location file="iDynTree/SpatialVector.h" line="29" column="11" bodyfile="iDynTree/SpatialVector.h" bodystart="30" bodyend="34"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialMotionVector_01_4_1a647a1590ad87a13495f632f287f9fa66" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionVector &gt;</scope><name>AngularVector3Type</name></member>
       <member refid="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialMotionVector_01_4_1afa68fedfc26d965b728703a46929c74b" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionVector &gt;</scope><name>LinearVector3Type</name></member>

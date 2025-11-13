@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/OriginElement.h" line="21" column="25" bodyfile="private/OriginElement.h" bodystart="21" bodyend="-1"/>
+        <location file="private/OriginElement.h" line="23" column="25" bodyfile="private/OriginElement.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/OriginElement.h" line="24" column="14"/>
+        <location file="private/OriginElement.h" line="26" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1OriginElement_1a82a9b00d78ef244faca75274786dad3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/OriginElement.h" line="26" column="10"/>
+        <location file="private/OriginElement.h" line="29" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -87,9 +87,9 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/OriginElement.h" line="19" column="1" bodyfile="private/OriginElement.h" bodystart="19" bodyend="28"/>
+    <location file="private/OriginElement.h" line="20" column="1" bodyfile="private/OriginElement.h" bodystart="21" bodyend="31"/>
     <listofallmembers>
-      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7983564fd2b7765dcd3eda619c866192" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>attributes</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>childElementForName</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>childHasBeenParsed</name></member>

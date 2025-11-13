@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="267" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="267" bodyend="270"/>
+        <location file="private/InverseKinematicsNLP.h" line="276" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="277" bodyend="283"/>
       </memberdef>
       <memberdef kind="typedef" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a5c8d9601169b9c1a6bb796517fda4dea" prot="private" static="no">
         <type>std::map&lt; int, FrameInfo &gt;</type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="227" column="22" bodyfile="private/InverseKinematicsNLP.h" bodystart="227" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="222" column="22" bodyfile="private/InverseKinematicsNLP.h" bodystart="222" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="216" column="20" bodyfile="private/InverseKinematicsNLP.h" bodystart="216" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="208" column="20" bodyfile="private/InverseKinematicsNLP.h" bodystart="208" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1450f2677a42eb1706f11fc335309217" prot="private" static="no" mutable="no">
         <type><ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> &amp;</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="229" column="27" bodyfile="private/InverseKinematicsNLP.h" bodystart="229" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="224" column="27" bodyfile="private/InverseKinematicsNLP.h" bodystart="224" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a51a201a9797042e025c3e536006e91ed" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 3, 4 &gt;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="232" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="232" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="229" column="9" bodyfile="private/InverseKinematicsNLP.h" bodystart="229" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ad852cebb6d68178f25072629a730b41d" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="233" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="233" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="234" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="234" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ac9720762f81e4667cb600a2095cb91b0" prot="private" static="no" mutable="no">
         <type>FrameInfoMap</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="235" column="18" bodyfile="private/InverseKinematicsNLP.h" bodystart="235" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="237" column="18" bodyfile="private/InverseKinematicsNLP.h" bodystart="237" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a97acf7321a31800353286fbb24ce3164" prot="private" static="no" mutable="no">
         <type>FrameInfoMap</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="236" column="18" bodyfile="private/InverseKinematicsNLP.h" bodystart="236" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="238" column="18" bodyfile="private/InverseKinematicsNLP.h" bodystart="238" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a22652dd5cab7c9961fb5f848d24aa0f4" prot="private" static="no" mutable="no">
         <type>COMInfo</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="246" column="13" bodyfile="private/InverseKinematicsNLP.h" bodystart="246" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="251" column="13" bodyfile="private/InverseKinematicsNLP.h" bodystart="251" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a369a475af01621d7624be97ed7afa6d5" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="249" column="24" bodyfile="private/InverseKinematicsNLP.h" bodystart="249" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="254" column="24" bodyfile="private/InverseKinematicsNLP.h" bodystart="254" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a3ce92924c9c68fd54a715322ee1effd0" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref></type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="250" column="23" bodyfile="private/InverseKinematicsNLP.h" bodystart="250" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="256" column="23" bodyfile="private/InverseKinematicsNLP.h" bodystart="256" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ac76130341cb33736ab2559e66b84a4f4" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="251" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="251" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="259" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="259" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-static-attrib">
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="341" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="341" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="356" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="356" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1698ffdd96cd0dcff188016b101b64dd" prot="private" static="yes" mutable="no">
         <type>bool</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="342" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="342" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="357" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="357" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ad76275da4e4f3821ba15f5dcdccc3613" prot="private" static="yes" mutable="no">
         <type>bool</type>
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="343" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="343" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="358" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="358" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a6b1277656aee9972271425b88e84a1bb" prot="private" static="yes" mutable="no">
         <type>bool</type>
@@ -242,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="344" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="344" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="359" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="359" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="262" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="271" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a6075b85db6f90cfc2689c225a3097e4c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="288" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="301" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1264db941b0b12117530a2040b25940a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="294" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="309" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a33c3a5b237a4da4c62f2a3a1a2842f64" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -409,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="300" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="316" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a130e6839f62101ede263b9fdaa6a47f6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -428,7 +428,7 @@
 <para>Map between RPY angles and angular velocity in the inertial frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The angular velocity <formula id="318">$ \omega $</formula> is related with the derivative of the RPY angles by a 3x3 matrix, i.e. <formula id="319">\[ {}^I \omega = M(w) \frac{d w}{dt}, \]</formula> where <formula id="320">$ w \in \mathbb{R}^3 $</formula> are the roll, pitch and yaw angles. <parameterlist kind="param"><parameteritem>
+<para>The angular velocity <formula id="320">$ \omega $</formula> is related with the derivative of the RPY angles by a 3x3 matrix, i.e. <formula id="321">\[ {}^I \omega = M(w) \frac{d w}{dt}, \]</formula> where <formula id="322">$ w \in \mathbb{R}^3 $</formula> are the roll, pitch and yaw angles. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">rpyAngles</parametername>
 </parameternamelist>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="316" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="332" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a304dacba90eaddf7d65c9862edae646f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -489,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="326" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="340" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab3b086048389870a36f17000f1effb08" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -506,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="333" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="348" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -535,7 +535,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="351" column="5"/>
+        <location file="private/InverseKinematicsNLP.h" line="366" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a621e6ac530bac07010f5f951e4f01ca0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -548,7 +548,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="353" column="13"/>
+        <location file="private/InverseKinematicsNLP.h" line="368" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a5101116fc4a577ac8a1fc3170e4cbaac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -580,7 +580,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="361" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="376" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1acc6ed278f52c48771a2004c18bf0be35" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -613,7 +613,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="365" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="380" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adc349c58bd4bdd13fb57311affa45347" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -650,7 +650,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="371" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="386" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a08950dd1b24eb1023b774130673d7204" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -699,7 +699,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="374" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="393" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a88c3fb57f34a5ed876b122d0ca9b98b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -728,7 +728,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="379" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="404" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aea9791edf5f4bb14a8ad90c3064c9832" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -757,7 +757,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="382" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="407" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a9ccb613e5e1fbf083d25cdb09f6f5fc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -790,7 +790,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="385" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="410" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adf6c1b305d2e9914e953dc51e34b961d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -835,7 +835,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="388" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="412" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab431f8ad6fa8541792e38f773ee719b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -892,7 +892,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="392" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="421" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a2b91e0f231d2b65fa11016a7fb722ad7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -949,7 +949,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="397" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="433" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a7f4acc157127dc4a4b6420fe91277f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>Ipopt::Index</type>
@@ -962,7 +962,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="404" column="26"/>
+        <location file="private/InverseKinematicsNLP.h" line="445" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aa5804d08c2a4f934bb2f2a17f70400af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -983,7 +983,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="406" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="448" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aa57b45a83c4fc124b2588b685733d864" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1048,7 +1048,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="409" column="18"/>
+        <location file="private/InverseKinematicsNLP.h" line="450" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a9913323824e6cb6d8545b00f4073ca10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1081,14 +1081,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="419" column="10"/>
+        <location file="private/InverseKinematicsNLP.h" line="464" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Implementation of the inverse kinematics with IPOPT. </para>
     </briefdescription>
     <detaileddescription>
-<para>Implements the following optimization problem <formula id="316">\begin{align} \min_{x} &amp; \sum_i || {}^w H_{f_i} ( {}^w H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\ \text{s.t.} &amp; {}^w H_{f_i} = {}^w H_{f_i}^d \\ &amp; q_{min} \leq q \leq q_{max} \end{align}</formula> where <formula id="317">\begin{align} &amp; q = \{ {}^w H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\ &amp; {}^w H_{f_i} \in SE(3) \end{align}</formula></para>
+<para>Implements the following optimization problem <formula id="318">\begin{align} \min_{x} &amp; \sum_i || {}^w H_{f_i} ( {}^w H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\ \text{s.t.} &amp; {}^w H_{f_i} = {}^w H_{f_i}^d \\ &amp; q_{min} \leq q \leq q_{max} \end{align}</formula> where <formula id="319">\begin{align} &amp; q = \{ {}^w H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\ &amp; {}^w H_{f_i} \in SE(3) \end{align}</formula></para>
 <para>A target (entirely or partially, with partial meaning the two components composing a tranform, i.e. position and orientation) can be enforced by either considering it as a constraint or as a cost</para>
 <para><simplesect kind="note"><para>Implementation details this class coordinates with <ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> to manages internal data In particular to manages constraints and targets it uses an std::map which is an ordered container. Once the order is defined at configuration time, it is exploited during the optimization by iterating on its elements. As this order is the same as the IPOPT variables the fact that we use a map instead of an unordered_map (which is faster at construction and for random access) is relevant.</para>
 </simplesect>
@@ -1116,7 +1116,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/InverseKinematicsNLP.h" line="214" column="1" bodyfile="private/InverseKinematicsNLP.h" bodystart="214" bodyend="421"/>
+    <location file="private/InverseKinematicsNLP.h" line="205" column="1" bodyfile="private/InverseKinematicsNLP.h" bodystart="206" bodyend="469"/>
     <listofallmembers>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a304dacba90eaddf7d65c9862edae646f" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>addSparsityInformationForConstraint</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a22652dd5cab7c9961fb5f848d24aa0f4" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>comInfo</name></member>

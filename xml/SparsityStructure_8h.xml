@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SparsityStructure_8h" kind="file" language="C++">
     <compoundname>SparsityStructure.h</compoundname>
-    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
-    <includes local="no">vector</includes>
     <includes local="no">cstddef</includes>
-    <includes local="no">unordered_set</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includes local="no">string</includes>
+    <includes local="no">unordered_set</includes>
+    <includes local="no">vector</includes>
     <includedby refid="Constraint_8h" local="no">iDynTree/Constraint.h</includedby>
     <includedby refid="ConstraintsGroup_8h" local="no">iDynTree/ConstraintsGroup.h</includedby>
     <includedby refid="Cost_8h" local="no">iDynTree/Cost.h</includedby>
@@ -16,7 +16,7 @@
     <includedby refid="LinearSystem_8h" local="no">iDynTree/LinearSystem.h</includedby>
     <includedby refid="OptimalControlProblem_8h" local="no">iDynTree/OptimalControlProblem.h</includedby>
     <incdepgraph>
-      <node id="5">
+      <node id="3">
         <label>string</label>
       </node>
       <node id="4">
@@ -34,10 +34,10 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="5">
         <label>vector</label>
       </node>
-      <node id="3">
+      <node id="2">
         <label>cstddef</label>
       </node>
     </incdepgraph>

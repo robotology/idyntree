@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="Rotation_8h" kind="file" language="C++">
     <compoundname>Rotation.h</compoundname>
-    <includes local="no">string</includes>
     <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
     <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
+    <includes local="no">string</includes>
     <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/AttitudeEstimator.h</includedby>
     <includedby refid="Core_2Rotation_8h" local="no">iDynTree/Core/Rotation.h</includedby>
     <includedby refid="Core_2RotationRaw_8h" local="no">iDynTree/Core/RotationRaw.h</includedby>
@@ -30,26 +30,19 @@
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1Rotation" prot="public">iDynTree::Rotation</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
-      <sectiondef kind="func">
-      <memberdef kind="function" id="Rotation_8h_1afc22a429e9fa472ce408d199475fa100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type></type>
-        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
-        <argsstring>(&quot;iDynTree::RotationRaw is deprecated, use iDynTree::Rotation&quot;) typedef Rotation RotationRaw</argsstring>
-        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
-        <param>
-          <type>&quot;iDynTree::RotationRaw is</type>
-          <declname>deprecated</declname>
-        </param>
-        <param>
-          <type>use <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref>&quot;</type>
-        </param>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Rotation_8h_1a774eb3b52db7beb26f96e5671bbe2075" prot="public" static="no">
+        <type>Rotation</type>
+        <definition>typedef Rotation iDynTree::RotationRaw</definition>
+        <argsstring></argsstring>
+        <name>RotationRaw</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Rotation.h" line="479" column="5" declfile="iDynTree/Rotation.h" declline="479" declcolumn="5"/>
+        <location file="iDynTree/Rotation.h" line="501" column="18" bodyfile="iDynTree/Rotation.h" bodystart="501" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

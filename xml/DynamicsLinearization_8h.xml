@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="DynamicsLinearization_8h" kind="file" language="C++">
     <compoundname>DynamicsLinearization.h</compoundname>
-    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
     <includes refid="Dynamics_8h" local="no">iDynTree/Dynamics.h</includes>
     <includes refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/DynamicsLinearizationHelpers.h</includes>
     <includedby refid="Model_2DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicsLinearization.h" line="89" column="10" declfile="iDynTree/DynamicsLinearization.h" declline="89" declcolumn="10"/>
+        <location file="iDynTree/DynamicsLinearization.h" line="88" column="6" declfile="iDynTree/DynamicsLinearization.h" declline="88" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

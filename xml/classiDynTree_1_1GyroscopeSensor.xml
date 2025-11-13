@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="32" column="37" bodyfile="iDynTree/GyroscopeSensor.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="33" column="32" bodyfile="iDynTree/GyroscopeSensor.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="38" column="9"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="39" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1aeb3a9d504f9809fd1d3f9796cc17820b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="43" column="9"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="44" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a550dcf5e73745d696665f01e2043b45b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GyroscopeSensor" kindref="compound">GyroscopeSensor</ref> &amp;</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="48" column="25"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="49" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1abac1374d86237be72167f83607116d0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="53" column="17"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="54" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a056d2caa535815b23a6b8732180d7c8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="59" column="14"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="60" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1ae0e36ae99719844f4553cfa2e5782902" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="66" column="14"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="67" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a221b7c3ebb5d1915ab13cf14b7a496c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="71" column="14"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="72" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1ab0e964fe971d4e569e5a6cae3fd2cd5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="77" column="14"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="77" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a752a648315e33507e9d4ac7f76c5377e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="83" column="21"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="83" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a162084c8f8d22edf2c21b822c50f325a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>SensorType</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="88" column="20"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="88" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a8d610e5ce1ab010dd1aa3710b32e4bc0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>std::string</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="94" column="21"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="93" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a5aacbe3a66640b3ce644cfded2ca67a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="99" column="19"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="98" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a36450e27fe86b188ec0f1a002444bcf6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="102" column="19"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="101" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a29f2d548c97f8a945a0dd79647249f43" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="107" column="14"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="106" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1aa4629cd992fe475e9287fdebf51e0c53" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -270,7 +270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="112" column="17"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="111" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1af9fba9009f28b235bc9ebaae469b6f4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="117" column="14"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="116" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1ad5861db8a983722ef0b746be10bb1e5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">iDynTree::AngVelocity</ref></type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/GyroscopeSensor.h" line="125" column="31"/>
+        <location file="iDynTree/GyroscopeSensor.h" line="124" column="27"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -355,7 +355,7 @@
         <link refid="classiDynTree_1_1Sensor"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/GyroscopeSensor.h" line="29" column="5" bodyfile="iDynTree/GyroscopeSensor.h" bodystart="29" bodyend="126"/>
+    <location file="iDynTree/GyroscopeSensor.h" line="29" column="1" bodyfile="iDynTree/GyroscopeSensor.h" bodystart="30" bodyend="125"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1GyroscopeSensor_1aa4629cd992fe475e9287fdebf51e0c53" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1GyroscopeSensor_1a36450e27fe86b188ec0f1a002444bcf6" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>getLinkSensorTransform</name></member>

@@ -3,9 +3,9 @@
   <compounddef id="classiDynTree_1_1CubicSpline" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::CubicSpline</compoundname>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ad739563db38250e24b5e6a5129fbce25" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1a0fd72e5f9d93a6d7cdf2487702fb9013" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref> &gt;</type>
-        <definition>std::vector&lt; iDynTree::Vector4 &gt; iDynTree::CubicSpline::m_coefficients</definition>
+        <definition>std::vector&lt;iDynTree::Vector4&gt; iDynTree::CubicSpline::m_coefficients</definition>
         <argsstring></argsstring>
         <name>m_coefficients</name>
         <briefdescription>
@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="15" column="21" bodyfile="iDynTree/CubicSpline.h" bodystart="15" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="15" column="17" bodyfile="iDynTree/CubicSpline.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1af337bad6bb4d93873aba9cdeb5c50062" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="16" column="33" bodyfile="iDynTree/CubicSpline.h" bodystart="16" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="16" column="29" bodyfile="iDynTree/CubicSpline.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ac5839b1d1a47b59dc60a1a17ea759bb4" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="17" column="33" bodyfile="iDynTree/CubicSpline.h" bodystart="17" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="17" column="29" bodyfile="iDynTree/CubicSpline.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ab5eacaa424b24623a4a534d3061378ee" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="18" column="33" bodyfile="iDynTree/CubicSpline.h" bodystart="18" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="18" column="29" bodyfile="iDynTree/CubicSpline.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ab91c8740ea6aa28d2789ac924509a42f" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="19" column="33" bodyfile="iDynTree/CubicSpline.h" bodystart="19" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="19" column="29" bodyfile="iDynTree/CubicSpline.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ac61f88137643f5e88b7bf1bff5bd4327" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="21" column="16" bodyfile="iDynTree/CubicSpline.h" bodystart="21" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="21" column="12" bodyfile="iDynTree/CubicSpline.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1a9418a0225f8deb8d2d11fa3f5719e529" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="22" column="16" bodyfile="iDynTree/CubicSpline.h" bodystart="22" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="22" column="12" bodyfile="iDynTree/CubicSpline.h" bodystart="22" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1a1c9a6e82e4cb26a3a80c15c2798113e7" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="23" column="16" bodyfile="iDynTree/CubicSpline.h" bodystart="23" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="23" column="12" bodyfile="iDynTree/CubicSpline.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1a2834df671057628390d087148e306993" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="24" column="16" bodyfile="iDynTree/CubicSpline.h" bodystart="24" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="24" column="12" bodyfile="iDynTree/CubicSpline.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1abed92788a440c10f6bdaf0a4f5cf7876" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="30" column="14" bodyfile="iDynTree/CubicSpline.h" bodystart="30" bodyend="-1"/>
+        <location file="iDynTree/CubicSpline.h" line="30" column="10" bodyfile="iDynTree/CubicSpline.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="26" column="14"/>
+        <location file="iDynTree/CubicSpline.h" line="26" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a1349e8d034b0702d8d742424c3a47010" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="27" column="14"/>
+        <location file="iDynTree/CubicSpline.h" line="27" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a034c790773883eda501d882114bc3e7b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="28" column="14"/>
+        <location file="iDynTree/CubicSpline.h" line="28" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="33" column="9"/>
+        <location file="iDynTree/CubicSpline.h" line="33" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1af8cf647e87fe3bb2b20892c064cc6299" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="35" column="9"/>
+        <location file="iDynTree/CubicSpline.h" line="35" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1aa710c371f1764b3ded4c987eaa332d50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="37" column="14"/>
+        <location file="iDynTree/CubicSpline.h" line="37" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a7e3bc04b73fd0eaba3777e792d24d1d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="38" column="14"/>
+        <location file="iDynTree/CubicSpline.h" line="38" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a1788387538428d08b01fc64d4e14fbbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="39" column="14"/>
+        <location file="iDynTree/CubicSpline.h" line="39" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1abfee06bdec13637fa531fab8e9af3c32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -284,7 +284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="40" column="16"/>
+        <location file="iDynTree/CubicSpline.h" line="40" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a939f5cc592336be4ff7f92caee1f784b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -309,14 +309,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/CubicSpline.h" line="41" column="16"/>
+        <location file="iDynTree/CubicSpline.h" line="41" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/CubicSpline.h" line="14" column="5" bodyfile="iDynTree/CubicSpline.h" bodystart="14" bodyend="42"/>
+    <location file="iDynTree/CubicSpline.h" line="13" column="1" bodyfile="iDynTree/CubicSpline.h" bodystart="14" bodyend="42"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1CubicSpline_1a034c790773883eda501d882114bc3e7b" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>computeCoefficients</name></member>
       <member refid="classiDynTree_1_1CubicSpline_1a1349e8d034b0702d8d742424c3a47010" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>computeIntermediateVelocities</name></member>
@@ -328,7 +328,7 @@
       <member refid="classiDynTree_1_1CubicSpline_1a1c9a6e82e4cb26a3a80c15c2798113e7" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_a0</name></member>
       <member refid="classiDynTree_1_1CubicSpline_1a2834df671057628390d087148e306993" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_af</name></member>
       <member refid="classiDynTree_1_1CubicSpline_1abed92788a440c10f6bdaf0a4f5cf7876" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_areCoefficientsUpdated</name></member>
-      <member refid="classiDynTree_1_1CubicSpline_1ad739563db38250e24b5e6a5129fbce25" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_coefficients</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a0fd72e5f9d93a6d7cdf2487702fb9013" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_coefficients</name></member>
       <member refid="classiDynTree_1_1CubicSpline_1ab91c8740ea6aa28d2789ac924509a42f" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_T</name></member>
       <member refid="classiDynTree_1_1CubicSpline_1ac5839b1d1a47b59dc60a1a17ea759bb4" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_time</name></member>
       <member refid="classiDynTree_1_1CubicSpline_1ac61f88137643f5e88b7bf1bff5bd4327" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_v0</name></member>

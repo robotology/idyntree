@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="173" column="25" bodyfile="iDynTree/Cost.h" bodystart="173" bodyend="-1"/>
+        <location file="iDynTree/Cost.h" line="186" column="17" bodyfile="iDynTree/Cost.h" bodystart="186" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="42" column="13"/>
+        <location file="iDynTree/Cost.h" line="44" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1aa956dac8cebf92d37d7682b5be30ed32" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="44" column="21"/>
+        <location file="iDynTree/Cost.h" line="46" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1aaaea0b41a2a114e1efcd42e58e9bbb78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::string &amp;</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="50" column="31"/>
+        <location file="iDynTree/Cost.h" line="52" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a1bb0880783d8f4ed6baff2b922a571f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="60" column="26"/>
+        <location file="iDynTree/Cost.h" line="62" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a632e5dfae0ce8c117ea636daf417c5bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -174,7 +174,7 @@
 <para>Evaluate cost first partial derivative wrt the state. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="326">$\frac{\partial g(t, x, u)}{\partial x}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="328">$\frac{\partial g(t, x, u)}{\partial x}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="75" column="26"/>
+        <location file="iDynTree/Cost.h" line="78" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1acce9d7b5bb53e71d0c2e55340636d531" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -242,7 +242,7 @@
 <para>Evaluate cost first partial derivative wrt the control variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="327">$\frac{\partial g(t, x, u)}{\partial u}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="329">$\frac{\partial g(t, x, u)}{\partial u}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="90" column="26"/>
+        <location file="iDynTree/Cost.h" line="93" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a79f931220587a1922770067c0833f0a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -310,7 +310,7 @@
 <para>Evaluate cost second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="328">$\frac{\partial^2 g(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="330">$\frac{\partial^2 g(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="105" column="26"/>
+        <location file="iDynTree/Cost.h" line="108" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a9870c1daad9a147705e3d44be7357a2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -378,7 +378,7 @@
 <para>Evaluate cost second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="329">$\frac{\partial^2 g(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="331">$\frac{\partial^2 g(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -417,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="121" column="26"/>
+        <location file="iDynTree/Cost.h" line="123" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1abb75feccd10750af47e792723e187c82" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -446,7 +446,7 @@
 <para>Evaluate cost second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="330">$\frac{\partial^2 g(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="332">$\frac{\partial^2 g(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -485,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="138" column="26"/>
+        <location file="iDynTree/Cost.h" line="141" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a4b1d17aa266ad7bcdc421a71aa141d46" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -519,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="150" column="26"/>
+        <location file="iDynTree/Cost.h" line="156" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1ad4a1b35416b75e61b2491152a784f175" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -553,7 +553,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="159" column="26"/>
+        <location file="iDynTree/Cost.h" line="169" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a983297b5309a3d379935733dcb8a5ddf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -587,7 +587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="168" column="26"/>
+        <location file="iDynTree/Cost.h" line="182" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -628,7 +628,7 @@
         <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Cost.h" line="35" column="9" bodyfile="iDynTree/Cost.h" bodystart="35" bodyend="174"/>
+    <location file="iDynTree/Cost.h" line="37" column="1" bodyfile="iDynTree/Cost.h" bodystart="38" bodyend="187"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a97ea5427f72a47d5abd6b37ca71a51f5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::Cost</scope><name>Cost</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a1bb0880783d8f4ed6baff2b922a571f0" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::Cost</scope><name>costEvaluation</name></member>

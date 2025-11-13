@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SpatialInertia_8h" kind="file" language="C++">
     <compoundname>SpatialInertia.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="RotationalInertia_8h" local="no">iDynTree/RotationalInertia.h</includes>
-    <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
-    <includes refid="SpatialMomentum_8h" local="no">iDynTree/SpatialMomentum.h</includes>
     <includes refid="SpatialAcc_8h" local="no">iDynTree/SpatialAcc.h</includes>
+    <includes refid="SpatialMomentum_8h" local="no">iDynTree/SpatialMomentum.h</includes>
+    <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="Wrench_8h" local="no">iDynTree/Wrench.h</includes>
     <includedby refid="DynamicsUtils_8h" local="no">iDynTree/DynamicsUtils.h</includedby>
     <includedby refid="Link_8h" local="no">iDynTree/Link.h</includedby>

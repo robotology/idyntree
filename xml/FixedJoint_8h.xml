@@ -3,8 +3,8 @@
   <compounddef id="FixedJoint_8h" kind="file" language="C++">
     <compoundname>FixedJoint.h</compoundname>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
-    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes refid="IJoint_8h" local="no">iDynTree/IJoint.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includedby refid="Model_2FixedJoint_8h" local="no">iDynTree/Model/FixedJoint.h</includedby>
     <includedby refid="ModelTestUtils_8h" local="no">iDynTree/ModelTestUtils.h</includedby>
     <innerclass refid="classiDynTree_1_1FixedJoint" prot="public">iDynTree::FixedJoint</innerclass>

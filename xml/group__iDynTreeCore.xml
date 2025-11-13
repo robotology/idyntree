@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SpatialVector.h" line="69" column="9" bodyfile="iDynTree/SpatialVector.h" bodystart="69" bodyend="-1"/>
+        <location file="iDynTree/SpatialVector.h" line="75" column="9" bodyfile="iDynTree/SpatialVector.h" bodystart="75" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

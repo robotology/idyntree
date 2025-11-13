@@ -110,12 +110,20 @@
             </dt>
             <dd>Add a random link with random model.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#a4a517abc29acdad21e0893e8dc662524" class="m-doc">addRandomLinkToModel</a>(</span><span class="m-doc-wrap">Model&amp; model,
-              std::string parentLink,
-              std::string newLinkName,
-              bool onlyRevoluteJoints)</span>
+              <span class="m-doc-wrap-bumper"><a href="#aeb084c1b6b7d711be52d84c5a075f915" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Use addRandomLinkToModel variant that takes in input the &quot; &quot;allowedJointTypes as bitset.&quot;) inline void addRandomLinkToModel(Model &amp;model</span>
             </dt>
             <dd>Add a random link with random model.</dd>
+            <dt id="a94be02ff467c385a480a66a1ae46795d">
+              <span class="m-doc-wrap-bumper"><a href="#a94be02ff467c385a480a66a1ae46795d" class="m-doc-self">if</a>(</span><span class="m-doc-wrap">onlyRevoluteJoints)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a00a0a4ee7187c1554ab15deea52df3ae">
+              <span class="m-doc-wrap-bumper">auto <a href="#a00a0a4ee7187c1554ab15deea52df3ae" class="m-doc-self">addRandomLinkToModel</a>(</span><span class="m-doc-wrap">model,
+              parentLink,
+              newLinkName,
+              allowedJointTypes) -&gt; return</span>
+            </dt>
+            <dd><span></span></dd>
             <dt id="abbc9efd0eed3caf7826a0f67056972f8">
               <span class="m-doc-wrap-bumper">void <a href="#abbc9efd0eed3caf7826a0f67056972f8" class="m-doc-self">addRandomAdditionalFrameToModel</a>(</span><span class="m-doc-wrap">Model&amp; model,
               std::string parentLink,
@@ -146,16 +154,24 @@
               unsigned int allowedJointTypes = SIMPLE_JOINT_TYPES) -&gt; Model</span>
             </dt>
             <dd>Generate a random chain (sequential links) with the specified number of joints and additional frames.</dd>
-            <dt id="a5988c0a11fee2013e9ed68cf32147b95">
-              <span class="m-doc-wrap-bumper">auto <a href="#a5988c0a11fee2013e9ed68cf32147b95" class="m-doc-self">getRandomModel</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
-              size_t nrOfAdditionalFrames,
-              bool onlyRevoluteJoints) -&gt; Model</span>
+            <dt id="af626f8f7b3fe718408f86c347bf2d807">
+              <span class="m-doc-wrap-bumper"><a href="#af626f8f7b3fe718408f86c347bf2d807" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Use getRandomModel variant that takes in input the allowedJointTypes &quot; &quot;as bitset.&quot;) inline Model getRandomModel(unsigned int nrOfJoints</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a3993eed2007bd777ecdc90d9cc10b4b9">
-              <span class="m-doc-wrap-bumper">auto <a href="#a3993eed2007bd777ecdc90d9cc10b4b9" class="m-doc-self">getRandomChain</a>(</span><span class="m-doc-wrap">unsigned int nrOfJoints,
-              size_t nrOfAdditionalFrames,
-              bool onlyRevoluteJoints) -&gt; Model</span>
+            <dt id="aba0bd51435e4a8cb224c66ef3df112c8">
+              <span class="m-doc-wrap-bumper">auto <a href="#aba0bd51435e4a8cb224c66ef3df112c8" class="m-doc-self">getRandomModel</a>(</span><span class="m-doc-wrap">nrOfJoints,
+              nrOfAdditionalFrames,
+              allowedJointTypes) -&gt; return</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a15994534af6e123a3e159dcf00f0b71f">
+              <span class="m-doc-wrap-bumper"><a href="#a15994534af6e123a3e159dcf00f0b71f" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Use getRandomChain variant that takes in input the allowedJointTypes &quot; &quot;as bitset.&quot;) inline Model getRandomChain(unsigned int nrOfJoints</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae51b6e18daeb99c658fe34608e1b449c">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae51b6e18daeb99c658fe34608e1b449c" class="m-doc-self">getRandomChain</a>(</span><span class="m-doc-wrap">nrOfJoints,
+              nrOfAdditionalFrames,
+              allowedJointTypes) -&gt; return</span>
             </dt>
             <dd><span></span></dd>
             <dt>
@@ -164,12 +180,21 @@
             </dt>
             <dd>Get random joint position consistently with the limits of the model.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a72bed46cd07c0617f3f59ffbbb0823a0" class="m-doc">getRandomInverseDynamicsInputs</a>(</span><span class="m-doc-wrap">FreeFloatingPos&amp; pos,
-              FreeFloatingVel&amp; vel,
-              FreeFloatingAcc&amp; acc,
-              LinkNetExternalWrenches&amp; extWrenches) -&gt; bool <span class="m-label m-danger">deprecated</span></span>
+              <span class="m-doc-wrap-bumper"><a href="#add856b2ed3d5934e7c102377c4d32e2f" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;This function does not work properly with RevoluteSO2Joint joints. &quot; &quot;Use the version that takes a Model parameter instead.&quot;) inline bool getRandomInverseDynamicsInputs(FreeFloatingPos &amp;pos <span class="m-label m-danger">deprecated</span></span>
             </dt>
             <dd>Get random robot positions, velocities and accelerations and external wrenches to be given as an input to InverseDynamics.</dd>
+            <dt id="a4e3079603e27d3b8fabda9b9d12d7794">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4e3079603e27d3b8fabda9b9d12d7794" class="m-doc-self">baseVel</a>(</span><span class="m-doc-wrap">) -&gt; vel</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af88b0f645a90e7d5e8b5623f4371216d">
+              <span class="m-doc-wrap-bumper">auto <a href="#af88b0f645a90e7d5e8b5623f4371216d" class="m-doc-self">baseAcc</a>(</span><span class="m-doc-wrap">) -&gt; acc</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2c7f3e5f4e9c100085651647b90e2f47">
+              <span class="m-doc-wrap-bumper"><a href="#a2c7f3e5f4e9c100085651647b90e2f47" class="m-doc-self">for</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><span></span></dd>
             <dt id="a6dfdcf7499dff86e08695945132e8b3a">
               <span class="m-doc-wrap-bumper">auto <a href="#a6dfdcf7499dff86e08695945132e8b3a" class="m-doc-self">getRandomInverseDynamicsInputs</a>(</span><span class="m-doc-wrap">const Model&amp; model,
               FreeFloatingPos&amp; pos,
@@ -191,16 +216,45 @@
               const unsigned int <a href="#a839997025ffcdd75bf67981792b456aa" class="m-doc-self">ALL_JOINT_TYPES</a>
             </dt>
             <dd><span></span></dd>
+            <dt id="a50332f4f0881863d3c8fe60270977b03">
+              std::string <a href="#a50332f4f0881863d3c8fe60270977b03" class="m-doc-self">parentLink</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad4e794e26402841e622af3968e401783">
+              std::string std::string <a href="#ad4e794e26402841e622af3968e401783" class="m-doc-self">newLinkName</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad7d1604f483d792ab79f447581053440">
+              std::string std::string bool <a href="#ad7d1604f483d792ab79f447581053440" class="m-doc-self">onlyRevoluteJoints</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a510d2130bd9378178388e9bfe4dbafc1">
+              size_t <a href="#a510d2130bd9378178388e9bfe4dbafc1" class="m-doc-self">nrOfAdditionalFrames</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a078a046385e4661e6ab9048262f8f3a0">
+              FreeFloatingVel&amp; <a href="#a078a046385e4661e6ab9048262f8f3a0" class="m-doc-self">vel</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae8ac2dfe482bafffcec9d9decdacd7ac">
+              FreeFloatingVel FreeFloatingAcc&amp; <a href="#ae8ac2dfe482bafffcec9d9decdacd7ac" class="m-doc-self">acc</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae78f4a8504b83a40f13da1bedf1d7247">
+              FreeFloatingVel FreeFloatingAcc LinkNetExternalWrenches&amp; <a href="#ae78f4a8504b83a40f13da1bedf1d7247" class="m-doc-self">extWrenches</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a89ed543bac51135b0b8c32bb0978dd46">
+              return <a href="#a89ed543bac51135b0b8c32bb0978dd46" class="m-doc-self">true</a>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a4a517abc29acdad21e0893e8dc662524"><div>
+          <section class="m-doc-details" id="aeb084c1b6b7d711be52d84c5a075f915"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4a517abc29acdad21e0893e8dc662524" class="m-doc-self">addRandomLinkToModel</a>(</span><span class="m-doc-wrap">Model&amp; model,
-              std::string parentLink,
-              std::string newLinkName,
-              bool onlyRevoluteJoints)</span></span>
+              <span class="m-doc-wrap-bumper"> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aeb084c1b6b7d711be52d84c5a075f915" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Use addRandomLinkToModel variant that takes in input the &quot; &quot;allowedJointTypes as bitset.&quot;) inline void addRandomLinkToModel(Model &amp;model</span></span>
             </h3>
             <p>Add a random link with random model.</p>
 <p>This version is deprecated as it can only permit to either add revolute, prismatic and fixed joints (when onlyRevoluteJoints=false) or only revolute (when onlyRevoluteJoints=true). Please migrate to use addRandomLinkToModel in which the fourth argument is an unsigned int</p>
@@ -268,12 +322,9 @@
             <p>Get random joint position consistently with the limits of the model.</p>
 <p>If the input vector has the wrong size, it will be resized.</p>
           </div></section>
-          <section class="m-doc-details" id="a72bed46cd07c0617f3f59ffbbb0823a0"><div>
+          <section class="m-doc-details" id="add856b2ed3d5934e7c102377c4d32e2f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a72bed46cd07c0617f3f59ffbbb0823a0" class="m-doc-self">getRandomInverseDynamicsInputs</a>(</span><span class="m-doc-wrap">FreeFloatingPos&amp; pos,
-              FreeFloatingVel&amp; vel,
-              FreeFloatingAcc&amp; acc,
-              LinkNetExternalWrenches&amp; extWrenches)</span></span>
+              <span class="m-doc-wrap-bumper"> </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#add856b2ed3d5934e7c102377c4d32e2f" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;This function does not work properly with RevoluteSO2Joint joints. &quot; &quot;Use the version that takes a Model parameter instead.&quot;) inline bool getRandomInverseDynamicsInputs(FreeFloatingPos &amp;pos</span></span>
             </h3>
             <p>Get random robot positions, velocities and accelerations and external wrenches to be given as an input to InverseDynamics.</p>
 <aside class="m-note m-danger"><h4><a href="deprecated.html#_deprecated000001" class="m-doc">Deprecated</a></h4><p>This function does not work properly with <a href="classiDynTree_1_1RevoluteSO2Joint.html" class="m-doc">RevoluteSO2Joint</a> joints. Use the version that takes a <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a> parameter instead.</p></aside>

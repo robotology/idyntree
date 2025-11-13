@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="194" column="20" bodyfile="iDynTree/FreeFloatingState.h" bodystart="194" bodyend="-1"/>
+        <location file="iDynTree/FreeFloatingState.h" line="192" column="16" bodyfile="iDynTree/FreeFloatingState.h" bodystart="192" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingAcc_1a990e5281e7260dfb47fba49d2060b14e" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="195" column="30" bodyfile="iDynTree/FreeFloatingState.h" bodystart="195" bodyend="-1"/>
+        <location file="iDynTree/FreeFloatingState.h" line="193" column="26" bodyfile="iDynTree/FreeFloatingState.h" bodystart="193" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="199" column="9"/>
+        <location file="iDynTree/FreeFloatingState.h" line="197" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a46bb95f9257aeb2b5b7611a7f82179e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="200" column="9"/>
+        <location file="iDynTree/FreeFloatingState.h" line="198" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a1cad94ffbc176207a498dc610351356f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="211" column="13"/>
+        <location file="iDynTree/FreeFloatingState.h" line="209" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a64a547a751917fa8ca6776186b439dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="216" column="20"/>
+        <location file="iDynTree/FreeFloatingState.h" line="214" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1acb5b0b7ff7a2a8b0caca1066e6b2a87a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="221" column="30"/>
+        <location file="iDynTree/FreeFloatingState.h" line="219" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1ad9c2a152af95dd4fa22323317d722df6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="226" column="26"/>
+        <location file="iDynTree/FreeFloatingState.h" line="224" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1ab4faf25b7240699717517c43ff3fd548" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="231" column="36"/>
+        <location file="iDynTree/FreeFloatingState.h" line="229" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a3a56360f7bb4652150bb615ae9e9eee0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="236" column="21"/>
+        <location file="iDynTree/FreeFloatingState.h" line="234" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a2e64dacc9a5ca428722254bb15a913be" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -174,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/FreeFloatingState.h" line="241" column="17"/>
+        <location file="iDynTree/FreeFloatingState.h" line="239" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -182,7 +182,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/FreeFloatingState.h" line="191" column="5" bodyfile="iDynTree/FreeFloatingState.h" bodystart="192" bodyend="242"/>
+    <location file="iDynTree/FreeFloatingState.h" line="189" column="1" bodyfile="iDynTree/FreeFloatingState.h" bodystart="190" bodyend="240"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1FreeFloatingAcc_1a64a547a751917fa8ca6776186b439dba" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>baseAcc</name></member>
       <member refid="classiDynTree_1_1FreeFloatingAcc_1ad9c2a152af95dd4fa22323317d722df6" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>baseAcc</name></member>

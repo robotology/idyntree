@@ -3,14 +3,14 @@
   <compounddef id="XMLDocument_8h" kind="file" language="C++">
     <compoundname>XMLDocument.h</compoundname>
     <includes local="no">memory</includes>
-    <includes local="no">vector</includes>
     <includes local="no">string</includes>
+    <includes local="no">vector</includes>
     <includedby refid="URDFDocument_8h" local="no">private/URDFDocument.h</includedby>
     <incdepgraph>
-      <node id="4">
+      <node id="3">
         <label>string</label>
       </node>
-      <node id="3">
+      <node id="4">
         <label>vector</label>
       </node>
       <node id="1">

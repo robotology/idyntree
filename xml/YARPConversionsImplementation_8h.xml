@@ -5,12 +5,12 @@
     <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
-    <includes local="no">yarp/math/Math.h</includes>
     <includes local="no">cstring</includes>
+    <includes local="no">yarp/math/Math.h</includes>
     <includedby refid="yarp_2YARPConversionsImplementation_8h" local="no">iDynTree/yarp/YARPConversionsImplementation.h</includedby>
     <includedby refid="YARPConversions_8h" local="yes">iDynTree/YARPConversions.h</includedby>
     <incdepgraph>
-      <node id="2">
+      <node id="3">
         <label>yarp/math/Math.h</label>
       </node>
       <node id="1">
@@ -21,7 +21,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="3">
+      <node id="2">
         <label>cstring</label>
       </node>
     </incdepgraph>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="32" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="32" bodyend="42" declfile="iDynTree/YARPConversions.h" declline="35" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="31" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="31" bodyend="41" declfile="iDynTree/YARPConversions.h" declline="35" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1gaf7ed1a24bb847b7742685eb9f59bb92b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="44" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="44" bodyend="53" declfile="iDynTree/YARPConversions.h" declline="44" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="43" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="43" bodyend="52" declfile="iDynTree/YARPConversions.h" declline="45" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1gafcb81129ef0d16f5f1eb1cc6e1df4252" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="55" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="55" bodyend="64" declfile="iDynTree/YARPConversions.h" declline="53" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="54" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="54" bodyend="63" declfile="iDynTree/YARPConversions.h" declline="55" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1ga9020f2412b884fd0ef63e726c1342947" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -236,7 +236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="66" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="66" bodyend="75" declfile="iDynTree/YARPConversions.h" declline="62" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="65" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="65" bodyend="74" declfile="iDynTree/YARPConversions.h" declline="64" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1gaea2d5b8825259e8fa15c166cb843ee40" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="77" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="77" bodyend="90" declfile="iDynTree/YARPConversions.h" declline="74" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="76" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="76" bodyend="89" declfile="iDynTree/YARPConversions.h" declline="77" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1ga6b716f09fcb568a6b3eea04b44160f19" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="92" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="92" bodyend="101" declfile="iDynTree/YARPConversions.h" declline="84" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="91" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="91" bodyend="100" declfile="iDynTree/YARPConversions.h" declline="87" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1ga8c4d32377000e6629f2855a6d5aebf72" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="103" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="103" bodyend="108" declfile="iDynTree/YARPConversions.h" declline="115" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="102" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="102" bodyend="107" declfile="iDynTree/YARPConversions.h" declline="119" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1gaa01de51e3acfd87599aa688e4c3d32c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -408,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="110" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="110" bodyend="139" declfile="iDynTree/YARPConversions.h" declline="94" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="110" column="1" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="110" bodyend="137" declfile="iDynTree/YARPConversions.h" declline="97" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeYARP_1ga0c1a2189345fb926b98f2d82219d5dd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -450,7 +450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPConversionsImplementation.h" line="141" column="13" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="141" bodyend="149" declfile="iDynTree/YARPConversions.h" declline="104" declcolumn="6"/>
+        <location file="iDynTree/YARPConversionsImplementation.h" line="140" column="1" bodyfile="iDynTree/YARPConversionsImplementation.h" bodystart="140" bodyend="147" declfile="iDynTree/YARPConversions.h" declline="108" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

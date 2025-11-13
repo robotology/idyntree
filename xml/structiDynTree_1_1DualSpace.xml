@@ -13,7 +13,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/SpatialVector.h" line="48" column="16" bodyfile="iDynTree/SpatialVector.h" bodystart="48" bodyend="48"/>
+    <location file="iDynTree/SpatialVector.h" line="46" column="12" bodyfile="iDynTree/SpatialVector.h" bodystart="47" bodyend="48"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

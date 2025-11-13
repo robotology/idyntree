@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="32" column="5" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="32" bodyend="46"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="32" column="5" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="32" bodyend="44"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibLinkID_1a5387b3b9594e5d1b09006e844b8f0b9e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="48" column="10" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="48" bodyend="52"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="46" column="10" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="46" bodyend="49"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -72,7 +72,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/skinDynLibConversions.h" line="26" column="1" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="27" bodyend="53"/>
+    <location file="iDynTree/skinDynLibConversions.h" line="26" column="1" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="27" bodyend="50"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1skinDynLibLinkID_1af650c500de48fcacfc9618255f9c1a66" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibLinkID</scope><name>body_part</name></member>
       <member refid="classiDynTree_1_1skinDynLibLinkID_1a9647fd6dd263bd8d4217c50be892e962" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibLinkID</scope><name>local_link_index</name></member>

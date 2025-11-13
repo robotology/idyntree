@@ -4,9 +4,9 @@
     <compoundname>iDynTree::LinkTraversalsCache</compoundname>
     <includes local="no">iDynTree/LinkTraversalsCache.h</includes>
       <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classiDynTree_1_1LinkTraversalsCache_1aef790ef44a22115fa03a4889d777a0bb" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classiDynTree_1_1LinkTraversalsCache_1a975350e4c71bc496dce093c5e7a9ad59" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> * &gt;</type>
-        <definition>std::vector&lt;iDynTree::Traversal *&gt; iDynTree::LinkTraversalsCache::m_linkTraversals</definition>
+        <definition>std::vector&lt;iDynTree::Traversal*&gt; iDynTree::LinkTraversalsCache::m_linkTraversals</definition>
         <argsstring></argsstring>
         <name>m_linkTraversals</name>
         <briefdescription>
@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkTraversalsCache.h" line="27" column="17" bodyfile="iDynTree/LinkTraversalsCache.h" bodystart="27" bodyend="-1"/>
+        <location file="iDynTree/LinkTraversalsCache.h" line="28" column="17" bodyfile="iDynTree/LinkTraversalsCache.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkTraversalsCache.h" line="28" column="10"/>
+        <location file="iDynTree/LinkTraversalsCache.h" line="29" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkTraversalsCache.h" line="34" column="5"/>
+        <location file="iDynTree/LinkTraversalsCache.h" line="35" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1aac83b2dea2a31b8066c5a25c4945f02a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkTraversalsCache.h" line="39" column="5"/>
+        <location file="iDynTree/LinkTraversalsCache.h" line="40" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1a26383ef1b495477b0a6b074c9d420fb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkTraversalsCache.h" line="55" column="10"/>
+        <location file="iDynTree/LinkTraversalsCache.h" line="54" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1a7f3c518053ab374caefaa698ad2e6ce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkTraversalsCache.h" line="69" column="15"/>
+        <location file="iDynTree/LinkTraversalsCache.h" line="68" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -168,12 +168,12 @@
     <detaileddescription>
 <para>Class that stores a traversal for each link in the model. It actually computes the traversal on the first time that a given traversal is requested </para>
     </detaileddescription>
-    <location file="iDynTree/LinkTraversalsCache.h" line="24" column="1" bodyfile="iDynTree/LinkTraversalsCache.h" bodystart="25" bodyend="71"/>
+    <location file="iDynTree/LinkTraversalsCache.h" line="25" column="1" bodyfile="iDynTree/LinkTraversalsCache.h" bodystart="26" bodyend="69"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1LinkTraversalsCache_1ab7d325eeb7a92cddf4e29015a7a7820e" prot="private" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>deleteTraversals</name></member>
       <member refid="classiDynTree_1_1LinkTraversalsCache_1a7f3c518053ab374caefaa698ad2e6ce3" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>getTraversalWithLinkAsBase</name></member>
       <member refid="classiDynTree_1_1LinkTraversalsCache_1ae978ab8498e4ffcacad8e0ecba45689f" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>LinkTraversalsCache</name></member>
-      <member refid="classiDynTree_1_1LinkTraversalsCache_1aef790ef44a22115fa03a4889d777a0bb" prot="private" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>m_linkTraversals</name></member>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1a975350e4c71bc496dce093c5e7a9ad59" prot="private" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>m_linkTraversals</name></member>
       <member refid="classiDynTree_1_1LinkTraversalsCache_1a26383ef1b495477b0a6b074c9d420fb3" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>resize</name></member>
       <member refid="classiDynTree_1_1LinkTraversalsCache_1af75c2b1b4dd62e24dcf0abb5666b5f94" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>resize</name></member>
       <member refid="classiDynTree_1_1LinkTraversalsCache_1aac83b2dea2a31b8066c5a25c4945f02a" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>~LinkTraversalsCache</name></member>

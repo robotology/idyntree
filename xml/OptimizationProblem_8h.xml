@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="OptimizationProblem_8h" kind="file" language="C++">
     <compoundname>OptimizationProblem.h</compoundname>
-    <includes local="no">vector</includes>
-    <includes local="no">memory</includes>
     <includes local="no">cstddef</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">vector</includes>
     <includedby refid="Optimizer_8h" local="no">iDynTree/Optimizer.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -17,10 +17,10 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="4">
         <label>vector</label>
       </node>
-      <node id="4">
+      <node id="2">
         <label>cstddef</label>
       </node>
       <node id="3">

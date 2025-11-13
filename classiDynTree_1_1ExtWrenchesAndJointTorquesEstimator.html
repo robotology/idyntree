@@ -70,11 +70,12 @@
               <ul>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
         </nav>
-<p>This is a class for estimating external wrenches and joint torques using as an input the robot velocities and the accelerations and the measurement of internal six axis F/T sensors.</p><p>The kinematic information (position,velocity and acceleration) necessary for the estimation can be provided in two ways:</p><ul><li>using the updateKinematicsFromFloatingBase</li><li>using the updateKinematicsFromFixedBase</li></ul><p>Note that in both ways there is no need (for the estimation) to provide the absolute position and linear velocity of the robot with respect to the inertial frame. The effect of gravity is considered by directly using the proper acceleration in the case of the floating frame (proper acceleration can be directly measured by an accelerometer) or by directly providing the gravity vector in the fixed frame case.</p><p>Beside its main goal of estimation of external wrenches and joint torques, the class also provide methods that can be useful to calibrate the six-axis FT sensors of the robot. These methods are:</p><ul><li><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a903f0fca32abdb551ffe7eda013ce462" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeExpectedFTSensorsMeasurements</a></li><li><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a2ce880f4ac64809b17c49f7a4bf60569" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a> Details of each method can be found in the method documentation</li></ul>
+<p>This is a class for estimating external wrenches and joint torques using as an input the robot velocities and the accelerations and the measurement of internal six axis F/T sensors.</p><p>The kinematic information (position,velocity and acceleration) necessary for the estimation can be provided in two ways:</p><ul><li>using the updateKinematicsFromFloatingBase</li><li>using the updateKinematicsFromFixedBase</li></ul><p>Note that in both ways there is no need (for the estimation) to provide the absolute position and linear velocity of the robot with respect to the inertial frame. The effect of gravity is considered by directly using the proper acceleration in the case of the floating frame (proper acceleration can be directly measured by an accelerometer) or by directly providing the gravity vector in the fixed frame case.</p><p>Beside its main goal of estimation of external wrenches and joint torques, the class also provide methods that can be useful to calibrate the six-axis FT sensors of the robot. These methods are:</p><ul><li><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a903f0fca32abdb551ffe7eda013ce462" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeExpectedFTSensorsMeasurements</a></li></ul><p><a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a2ce880f4ac64809b17c49f7a4bf60569" class="m-doc">ExtWrenchesAndJointTorquesEstimator::<wbr />computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</a> Details of each method can be found in the method documentation</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -86,6 +87,11 @@
               <span class="m-doc-wrap-bumper"><a href="#a21ecaac3728255f5ad511123ca97ec77" class="m-doc-self">~ExtWrenchesAndJointTorquesEstimator</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Destructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a181f05bfa2c2f9bed20497840eb0ba09" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot; Deprecated,
+              please use variant of this method(i.e. <a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a559e22f6ae100c24fabe83d708bfdf32" class="m-doc">setModel</a>) &quot; &quot;where <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> is passed via the iDynTree::Model.&quot;) bool setModelAndSensors(const Model &amp;_model</span>
+            </dt>
+            <dd>Set model and sensors used for the estimation.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -93,11 +99,6 @@
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a559e22f6ae100c24fabe83d708bfdf32" class="m-doc">setModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model) -&gt; bool</span>
-            </dt>
-            <dd>Set model and sensors used for the estimation.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab62c38a61392178a65af5a90a6a7a076" class="m-doc">setModelAndSensors</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model,
-              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; _sensors) -&gt; bool</span>
             </dt>
             <dd>Set model and sensors used for the estimation.</dd>
             <dt>
@@ -175,8 +176,32 @@
             <dd>Compute the vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on link i, expressed (both orientation and point) with respect to the reference frame of link i, using the articulated body model and the kinematics information provided by the updateKinematics* methods.</dd>
           </dl>
         </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="aab5d3c62ffa5c80d59069d7e80655c6f">
+              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; <a href="#aab5d3c62ffa5c80d59069d7e80655c6f" class="m-doc-self">_sensors</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a181f05bfa2c2f9bed20497840eb0ba09"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a181f05bfa2c2f9bed20497840eb0ba09" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot; Deprecated,
+              please use variant of this method(i.e. <a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html#a559e22f6ae100c24fabe83d708bfdf32" class="m-doc">setModel</a>) &quot; &quot;where <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> is passed via the iDynTree::Model.&quot;) bool setModelAndSensors(const Model &amp;_model</span></span>
+            </h3>
+            <p>Set model and sensors used for the estimation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if all went well (model and sensors are well formed), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a559e22f6ae100c24fabe83d708bfdf32"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a559e22f6ae100c24fabe83d708bfdf32" class="m-doc-self">setModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model)</span></span>
@@ -190,34 +215,6 @@
                 <tr>
                   <td style="width: 1%">_model&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td>the kinematic and dynamic model used for the estimation.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if all went well (model and sensors are well formed), false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
-          <section class="m-doc-details" id="ab62c38a61392178a65af5a90a6a7a076"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ExtWrenchesAndJointTorquesEstimator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab62c38a61392178a65af5a90a6a7a076" class="m-doc-self">setModelAndSensors</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; _model,
-              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; _sensors)</span></span>
-            </h3>
-            <p>Set model and sensors used for the estimation.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">_model&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the kinematic and dynamic model used for the estimation.</td>
-                </tr>
-                <tr>
-                  <td>_sensors&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the sensor model used for the estimation.</td>
                 </tr>
               </tbody>
               <tfoot>

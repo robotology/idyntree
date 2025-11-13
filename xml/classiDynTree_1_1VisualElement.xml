@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/VisualElement.h" line="41" column="16" bodyfile="private/VisualElement.h" bodystart="41" bodyend="-1"/>
+        <location file="private/VisualElement.h" line="43" column="16" bodyfile="private/VisualElement.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/VisualElement.h" line="44" column="14"/>
+        <location file="private/VisualElement.h" line="46" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VisualElement_1a6c6d3c6ad896e9fececea30461130655" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualInfo</ref> &amp;</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/VisualElement.h" line="49" column="22"/>
+        <location file="private/VisualElement.h" line="50" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VisualElement_1aafcde4f7f8a04701de0d07935bc93a7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/VisualElement.h" line="51" column="10"/>
+        <location file="private/VisualElement.h" line="53" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1VisualElement_1a1411f595ab1cf35b492e564a8c111bed" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/VisualElement.h" line="52" column="21"/>
+        <location file="private/VisualElement.h" line="55" column="21"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -136,9 +136,9 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/VisualElement.h" line="26" column="1" bodyfile="private/VisualElement.h" bodystart="27" bodyend="53"/>
+    <location file="private/VisualElement.h" line="27" column="1" bodyfile="private/VisualElement.h" bodystart="28" bodyend="56"/>
     <listofallmembers>
-      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7983564fd2b7765dcd3eda619c866192" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>attributes</name></member>
       <member refid="classiDynTree_1_1VisualElement_1a1411f595ab1cf35b492e564a8c111bed" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>childElementForName</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>childHasBeenParsed</name></member>

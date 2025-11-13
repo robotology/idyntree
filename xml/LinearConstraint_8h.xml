@@ -4,12 +4,12 @@
     <compoundname>LinearConstraint.h</compoundname>
     <includes refid="Constraint_8h" local="no">iDynTree/Constraint.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
-    <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
-    <includes local="no">string</includes>
+    <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
     <includes local="no">memory</includes>
+    <includes local="no">string</includes>
     <incdepgraph>
-      <node id="2">
+      <node id="3">
         <label>string</label>
       </node>
       <node id="1">
@@ -20,7 +20,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="3">
+      <node id="2">
         <label>memory</label>
       </node>
     </incdepgraph>

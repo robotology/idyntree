@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="OptimalControlSolver_8h" kind="file" language="C++">
     <compoundname>OptimalControlSolver.h</compoundname>
-    <includes local="no">memory</includes>
     <includes local="no">cstddef</includes>
+    <includes local="no">memory</includes>
     <includedby refid="MultipleShootingSolver_8h" local="no">iDynTree/OCSolvers/MultipleShootingSolver.h</includedby>
     <incdepgraph>
-      <node id="3">
+      <node id="2">
         <label>cstddef</label>
       </node>
       <node id="1">
@@ -17,7 +17,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>memory</label>
       </node>
     </incdepgraph>

@@ -108,12 +108,12 @@
               using <a href="#a60faf8b72189d4496f7b7920d5ea3b01" class="m-doc-self">iDynTreeEigenConstVector</a> = Eigen::Map&lt;const Eigen::VectorXd&gt;
             </dt>
             <dd><span></span></dd>
-            <dt id="a8dd9b043a4e3ceaa1b9a173e826020aa">
-              using <a href="#a8dd9b043a4e3ceaa1b9a173e826020aa" class="m-doc-self">iDynTreeEigenMatrix</a> = Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;
+            <dt id="a3224b3d75df53227d31affae382f971b">
+              using <a href="#a3224b3d75df53227d31affae382f971b" class="m-doc-self">iDynTreeEigenMatrix</a> = Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;
             </dt>
             <dd><span></span></dd>
-            <dt id="a2d3ea8f566b9d5684e3b008a1f8c8d6f">
-              using <a href="#a2d3ea8f566b9d5684e3b008a1f8c8d6f" class="m-doc-self">iDynTreeEigenConstMatrix</a> = const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;
+            <dt id="a988789ff476b417c4a9cd215bf713c86">
+              using <a href="#a988789ff476b417c4a9cd215bf713c86" class="m-doc-self">iDynTreeEigenConstMatrix</a> = const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;
             </dt>
             <dd><span></span></dd>
             <dt id="a26eec6588ddf3f8a8546b9f7899590eb">
@@ -133,8 +133,8 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a5481a54f7c787fd4cf55a0f5fd21bbb0" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">VectorDynSize&amp; vec) -&gt; Eigen::Map&lt;Eigen::VectorXd&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a0d2e67fee79a1191ed16ab1d522b0078">
-              <span class="m-doc-wrap-bumper">auto <a href="#a0d2e67fee79a1191ed16ab1d522b0078" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixDynSize&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
+            <dt id="aeb13870cd5128cb3eec9c9566d24c539">
+              <span class="m-doc-wrap-bumper">auto <a href="#aeb13870cd5128cb3eec9c9566d24c539" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixDynSize&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
             <dt id="a3f48b18c53414248343c3adaf5db988c">
@@ -153,46 +153,46 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a0007fc5ab429e207c6244ac715f82dc0" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const MatrixView&lt;double&gt;&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;, 0, Eigen::Stride&lt;Eigen::Dynamic, Eigen::Dynamic&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="af9123b8fa68b1799fd197ab4a1acc618">
-              <span class="m-doc-wrap-bumper">auto <a href="#af9123b8fa68b1799fd197ab4a1acc618" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const MatrixDynSize&amp; mat) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
+            <dt id="a996cf2353b8329c594a4f547744fa4be">
+              <span class="m-doc-wrap-bumper">auto <a href="#a996cf2353b8329c594a4f547744fa4be" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const MatrixDynSize&amp; mat) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a4dc3574842fc660108111d96dac71b23">
+            <dt id="a7eba57262b432e1665d8cf0328f075a3">
               <div class="m-doc-template">template&lt;unsigned int VecSize&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4dc3574842fc660108111d96dac71b23" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">VectorFixSize&lt;VecSize&gt;&amp; vec) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, VecSize, 1&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7eba57262b432e1665d8cf0328f075a3" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">VectorFixSize&lt;VecSize&gt;&amp; vec) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, VecSize, 1&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a17939782b66cf87bba581ac4d6db6270">
+            <dt id="a17c2608783495c4ce17c3f4f28af14a7">
               <div class="m-doc-template">template&lt;unsigned int VecSize&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a17939782b66cf87bba581ac4d6db6270" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const VectorFixSize&lt;VecSize&gt;&amp; vec) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, VecSize, 1&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a17c2608783495c4ce17c3f4f28af14a7" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const VectorFixSize&lt;VecSize&gt;&amp; vec) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, VecSize, 1&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="ac34e051a03bd114394e71919b795171e">
+            <dt id="a8e0c981e7a63b320efd9390db164242f">
               <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ac34e051a03bd114394e71919b795171e" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixFixSize&lt;nRows, nCols&gt;&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, nRows, nCols, Eigen::RowMajor&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8e0c981e7a63b320efd9390db164242f" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixFixSize&lt;nRows, nCols&gt;&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, nRows, nCols, Eigen::RowMajor&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="ab60f7d72717e939931bf139b222b2832">
+            <dt id="a3fe7de9d5634446949f0c663f9c73034">
               <div class="m-doc-template">template&lt;unsigned int nRows&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab60f7d72717e939931bf139b222b2832" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixFixSize&lt;nRows, 1&gt;&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, nRows, 1&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3fe7de9d5634446949f0c663f9c73034" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixFixSize&lt;nRows, 1&gt;&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, nRows, 1&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a3153f5d1e97e538fae73b906b511c518">
+            <dt id="a3977bb029d435703aa123e215c2e2a02">
               <div class="m-doc-template">template&lt;unsigned int nCols&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3153f5d1e97e538fae73b906b511c518" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixFixSize&lt;1, nCols&gt;&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, 1, nCols&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3977bb029d435703aa123e215c2e2a02" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">MatrixFixSize&lt;1, nCols&gt;&amp; mat) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, 1, nCols&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a9639a283e2caa3460084f5e3ac48aa49">
+            <dt id="a34177b5a60c9f3dc3396d844dde42093">
               <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="#a9639a283e2caa3460084f5e3ac48aa49" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const MatrixFixSize&lt;nRows, nCols&gt;&amp; mat) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, nRows, nCols, Eigen::RowMajor&gt;&gt;</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a34177b5a60c9f3dc3396d844dde42093" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const MatrixFixSize&lt;nRows, nCols&gt;&amp; mat) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, nRows, nCols, Eigen::RowMajor&gt;&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="af643aa15e4ab96c1e19f5364893d4b0b">
-              <span class="m-doc-wrap-bumper">auto <a href="#af643aa15e4ab96c1e19f5364893d4b0b" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const SpatialMotionVector&amp; vec) -&gt; const Eigen::Matrix&lt;double, 6, 1&gt;</span>
+            <dt id="a4190a56d86c4a75330bba0f751849d1c">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4190a56d86c4a75330bba0f751849d1c" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const SpatialMotionVector&amp; vec) -&gt; const Eigen::Matrix&lt;double, 6, 1&gt;</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a4bb2e73fb98abd04aed4da600567b24b">
-              <span class="m-doc-wrap-bumper">auto <a href="#a4bb2e73fb98abd04aed4da600567b24b" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const SpatialForceVector&amp; vec) -&gt; const Eigen::Matrix&lt;double, 6, 1&gt;</span>
+            <dt id="ad5cf1d277ad40c270f897c28ba1fa5a3">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad5cf1d277ad40c270f897c28ba1fa5a3" class="m-doc-self">toEigen</a>(</span><span class="m-doc-wrap">const SpatialForceVector&amp; vec) -&gt; const Eigen::Matrix&lt;double, 6, 1&gt;</span>
             </dt>
             <dd><span></span></dd>
             <dt id="acf2d7088e9fd094e6aa9c79bd4364b69">

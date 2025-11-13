@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ContactStateMachine_8h" kind="file" language="C++">
     <compoundname>ContactStateMachine.h</compoundname>
+    <includes refid="SchmittTrigger_8h" local="yes">SchmittTrigger.h</includes>
     <includes local="no">iostream</includes>
     <includes local="no">memory</includes>
-    <includes refid="SchmittTrigger_8h" local="yes">SchmittTrigger.h</includes>
     <includedby refid="BipedFootContactClassifier_8h" local="yes">iDynTree/BipedFootContactClassifier.h</includedby>
     <includedby refid="Estimation_2ContactStateMachine_8h" local="no">iDynTree/Estimation/ContactStateMachine.h</includedby>
     <incdepgraph>

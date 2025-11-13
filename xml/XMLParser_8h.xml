@@ -5,14 +5,14 @@
     <includes local="no">functional</includes>
     <includes local="no">memory</includes>
     <includes local="no">mutex</includes>
-    <includes local="no">vector</includes>
     <includes local="no">string</includes>
     <includes local="no">unordered_map</includes>
+    <includes local="no">vector</includes>
     <incdepgraph>
       <node id="2">
         <label>functional</label>
       </node>
-      <node id="6">
+      <node id="5">
         <label>string</label>
       </node>
       <node id="1">
@@ -31,10 +31,10 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="7">
         <label>vector</label>
       </node>
-      <node id="7">
+      <node id="6">
         <label>unordered_map</label>
       </node>
       <node id="4">

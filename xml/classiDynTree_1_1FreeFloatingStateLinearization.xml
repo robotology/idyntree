@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicsLinearization.h" line="76" column="9"/>
+        <location file="iDynTree/DynamicsLinearization.h" line="75" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingStateLinearization_1ac23b2bd5fb9d78d41a795d45560bd3c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicsLinearization.h" line="78" column="9"/>
+        <location file="iDynTree/DynamicsLinearization.h" line="77" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingStateLinearization_1af536053e82534e8a01170955689312a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicsLinearization.h" line="80" column="14"/>
+        <location file="iDynTree/DynamicsLinearization.h" line="79" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -80,7 +80,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/DynamicsLinearization.h" line="73" column="5" bodyfile="iDynTree/DynamicsLinearization.h" bodystart="74" bodyend="81"/>
+    <location file="iDynTree/DynamicsLinearization.h" line="72" column="1" bodyfile="iDynTree/DynamicsLinearization.h" bodystart="73" bodyend="80"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingStateLinearization</scope><name>capacity</name></member>
       <member refid="classiDynTree_1_1MatrixDynSize_1a18a9a6232ac5c967cf541caa21586d71" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingStateLinearization</scope><name>cols</name></member>

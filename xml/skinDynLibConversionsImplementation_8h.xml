@@ -5,9 +5,9 @@
     <includes refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includes>
     <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="Wrench_8h" local="no">iDynTree/Wrench.h</includes>
+    <includes refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includes>
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
-    <includes refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includes>
     <includes refid="YARPConversions_8h" local="no">iDynTree/YARPConversions.h</includes>
     <includes local="no">cassert</includes>
     <includedby refid="skinDynLibConversions_8h" local="yes">iDynTree/skinDynLibConversions.h</includedby>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversionsImplementation.h" line="159" column="6" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="159" bodyend="233"/>
+        <location file="iDynTree/skinDynLibConversionsImplementation.h" line="175" column="6" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="175" bodyend="252"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

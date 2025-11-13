@@ -18,9 +18,9 @@
     </incdepgraph>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
-      <memberdef kind="function" id="EigenSparseHelpers_8h_1ade809da6861adf8889108908fd931ee5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenSparseHelpers_8h_1a67e5d80540243ffecb9ef5b21b310977" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; Eigen::SparseMatrix&lt; double, Eigen::RowMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt; Eigen::SparseMatrix&lt;double, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::SparseMatrix&lt;double, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(iDynTree::SparseMatrix&lt; iDynTree::RowMajor &gt; &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenSparseHelpers.h" line="14" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="14" bodyend="23"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="15" column="1" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="15" bodyend="24"/>
       </memberdef>
       <memberdef kind="function" id="EigenSparseHelpers_8h_1a3c0db1fc07367309957972bd66454c7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::SparseMatrix&lt; double, Eigen::RowMajor &gt; &gt;</type>
@@ -50,11 +50,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenSparseHelpers.h" line="25" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="25" bodyend="34"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="27" column="1" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="27" bodyend="36"/>
       </memberdef>
-      <memberdef kind="function" id="EigenSparseHelpers_8h_1a90ae57e2a42e7bad1cedda56db4ee3d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenSparseHelpers_8h_1a684ef23d77c01fb8b3e642fb9eeb84a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; Eigen::SparseMatrix&lt; double, Eigen::ColMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt; Eigen::SparseMatrix&lt;double, Eigen::ColMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::SparseMatrix&lt;double, Eigen::ColMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(iDynTree::SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenSparseHelpers.h" line="36" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="36" bodyend="45"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="39" column="1" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="39" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="EigenSparseHelpers_8h_1ae48cfcc0f75e51f21ae1ac34de84efc1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::SparseMatrix&lt; double, Eigen::ColMajor &gt; &gt;</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenSparseHelpers.h" line="47" column="19" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="47" bodyend="56"/>
+        <location file="iDynTree/EigenSparseHelpers.h" line="51" column="1" bodyfile="iDynTree/EigenSparseHelpers.h" bodystart="51" bodyend="60"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="33" column="14" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="33" column="10" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="57" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="57" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="58" column="15" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a67e2db7524cabbada251ebfec6118d76" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="62" column="23" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="62" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="63" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a174e78fcbd73beb939c18fc7793819ca" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="67" column="23" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="67" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="68" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a0965c5b8cf5d35b5eb6359e813ee08f4" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="73" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="73" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="74" column="15" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1aabea435e6e536c29f835e2253eb58b51" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="80" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="80" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="81" column="15" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1aed4485913893e4e6392ff5be2a5ca82c" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="85" column="23" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="85" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="86" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a1a1819a14597fd17e759b6b1a1ede95e" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="91" column="28" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="91" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="92" column="24" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a3e1874b20406c550cc38d335b8753f8c" prot="public" static="no" mutable="no">
         <type>std::vector&lt; int &gt;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="111" column="21" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="111" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="116" column="17" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1aec7064bb7cb6d238bf0c8473984d293c" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="116" column="21" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="116" bodyend="-1"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="121" column="17" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="28" column="14"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="28" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="38" column="14"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="39" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a81936e6f83d733acb670173d3b30141d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="44" column="14"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="45" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a804e9f94e56b62cf35d269eb0fed0639" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="50" column="16"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="51" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1af283e0be96a667d9446be6a737569804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="102" column="14"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="107" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a9d97dc9a2a54e958ed345faae3d51f54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
@@ -305,7 +305,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="122" column="17"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="127" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a8b0076cd2583bcc73035920345fc8c1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="131" column="14"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="136" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a930823fe7cb62c1ff65a5c1b2ad33863" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/BoundingBoxHelpers.h" line="140" column="17"/>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="145" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -501,7 +501,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/BoundingBoxHelpers.h" line="22" column="5" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="23" bodyend="142"/>
+    <location file="iDynTree/BoundingBoxHelpers.h" line="22" column="1" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="23" bodyend="146"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a67e2db7524cabbada251ebfec6118d76" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>A</name></member>
       <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1aec7064bb7cb6d238bf0c8473984d293c" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>absoluteFrame_X_supportFrame</name></member>

@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="LinkState_8h" kind="file" language="C++">
     <compoundname>LinkState.h</compoundname>
+    <includes refid="ArticulatedBodyInertia_8h" local="no">iDynTree/ArticulatedBodyInertia.h</includes>
+    <includes refid="SpatialAcc_8h" local="no">iDynTree/SpatialAcc.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="Twist_8h" local="no">iDynTree/Twist.h</includes>
-    <includes refid="SpatialAcc_8h" local="no">iDynTree/SpatialAcc.h</includes>
     <includes refid="Wrench_8h" local="no">iDynTree/Wrench.h</includes>
-    <includes refid="ArticulatedBodyInertia_8h" local="no">iDynTree/ArticulatedBodyInertia.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Indices.h</includes>
     <includes local="no">vector</includes>
     <includedby refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includedby>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkState.h" line="104" column="26" bodyfile="iDynTree/LinkState.h" bodystart="104" bodyend="-1"/>
+        <location file="iDynTree/LinkState.h" line="104" column="22" bodyfile="iDynTree/LinkState.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="LinkState_8h_1ab0304c1c94e9d9f0bbd646fceaad6e40" prot="public" static="no">
         <type>LinkWrenches</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkState.h" line="114" column="26" bodyfile="iDynTree/LinkState.h" bodystart="114" bodyend="-1"/>
+        <location file="iDynTree/LinkState.h" line="114" column="22" bodyfile="iDynTree/LinkState.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="LinkState_8h_1a8467b5079b622cd683df2fcdfd16b07c" prot="public" static="no">
         <type>LinkWrenches</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkState.h" line="123" column="26" bodyfile="iDynTree/LinkState.h" bodystart="123" bodyend="-1"/>
+        <location file="iDynTree/LinkState.h" line="122" column="22" bodyfile="iDynTree/LinkState.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="LinkState_8h_1a4eebfd4c3b5feb2154a1de101578fb4a" prot="public" static="no">
         <type>LinkInertias</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkState.h" line="148" column="26" bodyfile="iDynTree/LinkState.h" bodystart="148" bodyend="-1"/>
+        <location file="iDynTree/LinkState.h" line="147" column="22" bodyfile="iDynTree/LinkState.h" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="LinkState_8h_1a104b2ec0864d4c37b58b808b43630171" prot="public" static="no">
         <type>LinkAccArray</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinkState.h" line="231" column="26" bodyfile="iDynTree/LinkState.h" bodystart="231" bodyend="-1"/>
+        <location file="iDynTree/LinkState.h" line="230" column="22" bodyfile="iDynTree/LinkState.h" bodystart="230" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

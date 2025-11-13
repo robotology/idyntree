@@ -69,6 +69,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#func-members">Functions</a></li>
+                <li><a href="#var-members">Variables</a></li>
               </ul>
             </li>
           </ul>
@@ -110,33 +111,71 @@
             </dt>
             <dd>Predict the measurement of a set of sensors.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeSensors.html#gacf87de6a0acc7c79369e4ea587ef19bc" class="m-doc">predictSensorsMeasurements</a>(</span><span class="m-doc-wrap">const Model&amp; model,
-              const SensorsList&amp; sensorList,
-              const Traversal&amp; traversal,
-              const FreeFloatingPos&amp; robotPos,
-              const FreeFloatingVel&amp; robotVel,
-              const FreeFloatingAcc&amp; robotAcc,
-              const LinAcceleration&amp; gravity,
-              const LinkNetExternalWrenches&amp; externalWrenches,
-              FreeFloatingAcc&amp; buf_properRobotAcc,
-              LinkPositions&amp; buf_linkPos,
-              LinkVelArray&amp; buf_linkVel,
-              LinkAccArray&amp; buf_linkProperAcc,
-              LinkInternalWrenches&amp; buf_internalWrenches,
-              FreeFloatingGeneralizedTorques&amp; buf_outputTorques,
-              SensorsMeasurements&amp; predictedMeasurement) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper"><a href="group__iDynTreeSensors.html#ga33b3534aff07374967be92f1b293f32b" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Deprecated function,
+              please use the version in which SensorsList is &quot; &quot;passed via <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&quot;) bool predictSensorsMeasurements(const Model &amp;model</span>
             </dt>
             <dd>Predict the measurement of a set of sensors.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeSensors.html#gaa68c8cac6b85223f729cd8855627d35e" class="m-doc">predictSensorsMeasurementsFromRawBuffers</a>(</span><span class="m-doc-wrap">const Model&amp; model,
-              const SensorsList&amp; sensorList,
-              const Traversal&amp; traversal,
-              const LinkVelArray&amp; buf_linkVel,
-              const LinkAccArray&amp; buf_linkProperAcc,
-              const LinkInternalWrenches&amp; buf_internalWrenches,
-              SensorsMeasurements&amp; predictedMeasurement) -&gt; bool</span>
+          </dl>
+        </section>
+        <section id="var-members">
+          <h2><a href="#var-members">Variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a1eeab67ce7818eeabf066f4565c26a5b">
+              const SensorsList&amp; <a href="#a1eeab67ce7818eeabf066f4565c26a5b" class="m-doc-self">sensorList</a>
             </dt>
-            <dd>Predict the measurement of a set of sensors.</dd>
+            <dd><span></span></dd>
+            <dt id="a2221260b231e2f3ff9b5113f9dd182ee">
+              const SensorsList const Traversal&amp; <a href="#a2221260b231e2f3ff9b5113f9dd182ee" class="m-doc-self">traversal</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a13378d83c5a83508c9929ca70199eaf0">
+              const SensorsList const Traversal const FreeFloatingPos&amp; <a href="#a13378d83c5a83508c9929ca70199eaf0" class="m-doc-self">robotPos</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad0c5f8eac1fbb8d265d760560588b6e3">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel&amp; <a href="#ad0c5f8eac1fbb8d265d760560588b6e3" class="m-doc-self">robotVel</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a96b08340336649636b3d0bbfda97fc11">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc&amp; <a href="#a96b08340336649636b3d0bbfda97fc11" class="m-doc-self">robotAcc</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a69d5081c54af1527dc97c7831f2a6af8">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration&amp; <a href="#a69d5081c54af1527dc97c7831f2a6af8" class="m-doc-self">gravity</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac21a810fb7e52d0ec67d581b806caef4">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches&amp; <a href="#ac21a810fb7e52d0ec67d581b806caef4" class="m-doc-self">externalWrenches</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae58c1801364b329fed448e85fceeaea7">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc&amp; <a href="#ae58c1801364b329fed448e85fceeaea7" class="m-doc-self">buf_properRobotAcc</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad6bf6b6c3b8f7721d628486e8f355a28">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions&amp; <a href="#ad6bf6b6c3b8f7721d628486e8f355a28" class="m-doc-self">buf_linkPos</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2dd4cc062a116aaf5aa8fbffea4dcce1">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray&amp; <a href="#a2dd4cc062a116aaf5aa8fbffea4dcce1" class="m-doc-self">buf_linkVel</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a78607604a70cef66d6abee26989ecaf0">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray&amp; <a href="#a78607604a70cef66d6abee26989ecaf0" class="m-doc-self">buf_linkProperAcc</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9d5da825c0a573af8b8e2d18c8f5895f">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray LinkInternalWrenches&amp; <a href="#a9d5da825c0a573af8b8e2d18c8f5895f" class="m-doc-self">buf_internalWrenches</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a94a76d721828f990586df83b13194d5c">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray LinkInternalWrenches FreeFloatingGeneralizedTorques&amp; <a href="#a94a76d721828f990586df83b13194d5c" class="m-doc-self">buf_outputTorques</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2f3fdb36b28a41db9ee23a0648c62bfb">
+              const SensorsList const Traversal const FreeFloatingPos const FreeFloatingVel const FreeFloatingAcc const LinAcceleration const LinkNetExternalWrenches FreeFloatingAcc LinkPositions LinkVelArray LinkAccArray LinkInternalWrenches FreeFloatingGeneralizedTorques SensorsMeasurements&amp; <a href="#a2f3fdb36b28a41db9ee23a0648c62bfb" class="m-doc-self">predictedMeasurement</a>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
       </div>

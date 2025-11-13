@@ -3,13 +3,13 @@
   <compounddef id="ExtWrenchesAndJointTorquesEstimator_8h" kind="file" language="C++">
     <compoundname>ExtWrenchesAndJointTorquesEstimator.h</compoundname>
     <includes refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includes>
+    <includes refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includes>
+    <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
+    <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/LinkTraversalsCache.h</includes>
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
     <includes refid="SubModel_8h" local="no">iDynTree/SubModel.h</includes>
-    <includes refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includes>
     <includes refid="Traversal_8h" local="no">iDynTree/Traversal.h</includes>
-    <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
-    <includes refid="FreeFloatingState_8h" local="no">iDynTree/FreeFloatingState.h</includes>
-    <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/LinkTraversalsCache.h</includes>
     <includes refid="Sensors_8h" local="no">iDynTree/Sensors.h</includes>
     <includedby refid="Estimation_2ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <innerclass refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator" prot="public">iDynTree::ExtWrenchesAndJointTorquesEstimator</innerclass>

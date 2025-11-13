@@ -2,11 +2,11 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="URDFDofsImport_8h" kind="file" language="C++">
     <compoundname>URDFDofsImport.h</compoundname>
-    <includes local="no">vector</includes>
     <includes local="no">string</includes>
+    <includes local="no">vector</includes>
     <includedby refid="ModelIO_2URDFDofsImport_8h" local="no">iDynTree/ModelIO/URDFDofsImport.h</includedby>
     <incdepgraph>
-      <node id="3">
+      <node id="2">
         <label>string</label>
       </node>
       <node id="1">
@@ -17,7 +17,7 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="3">
         <label>vector</label>
       </node>
     </incdepgraph>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/URDFDofsImport.h" line="32" column="6" declfile="iDynTree/URDFDofsImport.h" declline="32" declcolumn="6"/>
+        <location file="iDynTree/URDFDofsImport.h" line="31" column="6" declfile="iDynTree/URDFDofsImport.h" declline="31" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

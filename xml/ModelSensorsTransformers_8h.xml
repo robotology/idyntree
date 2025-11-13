@@ -5,31 +5,76 @@
     <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includedby refid="Sensors_2ModelSensorsTransformers_8h" local="no">iDynTree/Sensors/ModelSensorsTransformers.h</includedby>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="ModelSensorsTransformers_8h_1ae5f4b93f1c43ee6bd1acb9579cad85bf" prot="public" static="no" mutable="no">
+        <type>const SensorsList &amp;</type>
+        <definition>const SensorsList&amp; iDynTree::fullSensors</definition>
+        <argsstring></argsstring>
+        <name>fullSensors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelSensorsTransformers.h" line="60" column="53" bodyfile="iDynTree/ModelSensorsTransformers.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ModelSensorsTransformers_8h_1a5bf28c9e85e1f8a8b8696b62bbe6b9e2" prot="public" static="no" mutable="no">
+        <type>const SensorsList const std::vector&lt; std::string &gt; &amp;</type>
+        <definition>const SensorsList const std::vector&lt;std::string&gt;&amp; iDynTree::jointsInReducedModel</definition>
+        <argsstring></argsstring>
+        <name>jointsInReducedModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelSensorsTransformers.h" line="61" column="53" bodyfile="iDynTree/ModelSensorsTransformers.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ModelSensorsTransformers_8h_1a9f56e7e26a5648df2a12cd5e09d0c949" prot="public" static="no" mutable="no">
+        <type>const SensorsList const std::vector&lt; std::string &gt; Model &amp;</type>
+        <definition>const SensorsList const std::vector&lt;std::string&gt; Model&amp; iDynTree::reducedModel</definition>
+        <argsstring></argsstring>
+        <name>reducedModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelSensorsTransformers.h" line="62" column="41" bodyfile="iDynTree/ModelSensorsTransformers.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="ModelSensorsTransformers_8h_1a9376872b9f9b1cda1829ad0ee25bc0bb" prot="public" static="no" mutable="no">
+        <type>const SensorsList const std::vector&lt; std::string &gt; Model SensorsList &amp;</type>
+        <definition>const SensorsList const std::vector&lt;std::string&gt; Model SensorsList&amp; iDynTree::reducedSensors</definition>
+        <argsstring></argsstring>
+        <name>reducedSensors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelSensorsTransformers.h" line="63" column="47" bodyfile="iDynTree/ModelSensorsTransformers.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
       <sectiondef kind="func">
-      <memberdef kind="function" id="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool iDynTree::createReducedModelAndSensors</definition>
-        <argsstring>(const Model &amp;fullModel, const SensorsList &amp;fullSensors, const std::vector&lt; std::string &gt; &amp;jointsInReducedModel, Model &amp;reducedModel, SensorsList &amp;reducedSensors)</argsstring>
-        <name>createReducedModelAndSensors</name>
+      <memberdef kind="function" id="ModelSensorsTransformers_8h_1a57fda2c8c12be1a2c7bd1471fd2deb32" prot="public" static="no" const="yes" explicit="no" inline="no" refqual="lvalue" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::IDYNTREE_DEPRECATED_WITH_MSG</definition>
+        <argsstring>(&quot;createReducedModelAndSensors is deprecated, please use the &quot; &quot;createReducedModel, see createReducedModelAndSensors documentation &quot; &quot;for more info&quot;) bool createReducedModelAndSensors(const Model &amp;fullModel</argsstring>
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
         <param>
-          <type>const Model &amp;</type>
-          <declname>fullModel</declname>
+          <type>&quot;createReducedModelAndSensors is</type>
+          <declname>deprecated</declname>
         </param>
         <param>
-          <type>const SensorsList &amp;</type>
-          <declname>fullSensors</declname>
+          <type>please use the &quot; &quot;</type>
+          <declname>createReducedModel</declname>
         </param>
         <param>
-          <type>const std::vector&lt; std::string &gt; &amp;</type>
-          <declname>jointsInReducedModel</declname>
-        </param>
-        <param>
-          <type>Model &amp;</type>
-          <declname>reducedModel</declname>
-        </param>
-        <param>
-          <type>SensorsList &amp;</type>
-          <declname>reducedSensors</declname>
+          <type>see createReducedModelAndSensors documentation &quot; &quot;for more info&quot;</type>
         </param>
         <briefdescription>
 <para>Variant of createReducedModel function that also process the sensorList . </para>
@@ -47,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelSensorsTransformers.h" line="58" column="6" declfile="iDynTree/ModelSensorsTransformers.h" declline="58" declcolumn="6"/>
+        <location file="iDynTree/ModelSensorsTransformers.h" line="56" column="1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

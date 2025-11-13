@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RotationalInertia.h" line="35" column="9"/>
+        <location file="iDynTree/RotationalInertia.h" line="35" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationalInertia_1a340a4908597f68423747d76991bdb88f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RotationalInertia.h" line="36" column="9"/>
+        <location file="iDynTree/RotationalInertia.h" line="36" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationalInertia_1af7c7f4f07ac6230c19eee4c6af9ec069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RotationalInertia.h" line="37" column="9"/>
+        <location file="iDynTree/RotationalInertia.h" line="39" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RotationalInertia_1a73592c4c8febd334850b82da60714fe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationalInertia" kindref="compound">RotationalInertia</ref> &amp;</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RotationalInertia.h" line="38" column="27"/>
+        <location file="iDynTree/RotationalInertia.h" line="40" column="23"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/RotationalInertia.h" line="43" column="34"/>
+        <location file="iDynTree/RotationalInertia.h" line="45" column="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -142,7 +142,7 @@ We use a parent Matrix3x3 for storage of the rotational inertia matrix: given th
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/RotationalInertia.h" line="26" column="5" bodyfile="iDynTree/RotationalInertia.h" bodystart="27" bodyend="45"/>
+    <location file="iDynTree/RotationalInertia.h" line="26" column="1" bodyfile="iDynTree/RotationalInertia.h" bodystart="27" bodyend="46"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1MatrixFixSize_1ae38fd55ba7321a950d4d99a215508bf2" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertia</scope><name>cols</name></member>
       <member refid="classiDynTree_1_1MatrixFixSize_1afa9fff22a34eb198785d87ffe161488f" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertia</scope><name>data</name></member>

@@ -71,6 +71,7 @@
                 <li><a href="#base-classes">Base classes</a></li>
                 <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
                 <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
               </ul>
             </li>
           </ul>
@@ -93,11 +94,8 @@
               <span class="m-doc-wrap-bumper"><a href="#a79ed0a8a9c7d67a9f47230bfc0214d7b" class="m-doc-self">PrismaticJoint</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Constructor.</dd>
-            <dt id="aa83aec02a88dec71313860dcbb9a90ea">
-              <span class="m-doc-wrap-bumper"><a href="#aa83aec02a88dec71313860dcbb9a90ea" class="m-doc-self">PrismaticJoint</a>(</span><span class="m-doc-wrap">const LinkIndex link1,
-              const LinkIndex link2,
-              const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; link1_X_link2,
-              const <a href="classiDynTree_1_1Axis.html" class="m-doc">Axis</a>&amp; _translation_axis_wrt_link1)</span>
+            <dt id="a1ff0cf625cfbc935e54edadb87268ad5">
+              <span class="m-doc-wrap-bumper"><a href="#a1ff0cf625cfbc935e54edadb87268ad5" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Please use the setter methods to specify the parameters of the &quot; &quot;joint&quot;) PrismaticJoint(const LinkIndex link1</span>
             </dt>
             <dd><span></span></dd>
             <dt id="a3f6bc8eedb120e0fb1c9920fea7319ca">
@@ -108,6 +106,10 @@
               <span class="m-doc-wrap-bumper"><a href="#a65531e877d712df301e2cd6e0ad04b42" class="m-doc-self">~PrismaticJoint</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Destructor.</dd>
+            <dt id="ac584bc5cc0a39a72ad47aa17eccd7471">
+              <span class="m-doc-wrap-bumper"><a href="#ac584bc5cc0a39a72ad47aa17eccd7471" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot;Please use the <a href="classiDynTree_1_1PrismaticJoint.html#ab34363eae08df95076be5eb0ae54a08f" class="m-doc">setAxis</a> method in which the link considered &quot; &quot;\&quot;child\&quot; is explicitly specified&quot;)</span>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -132,10 +134,6 @@
               const LinkIndex parent = LINK_INVALID_INDEX) <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the prismatic axis of the joint, expressed in specified link frame, that is considered the &quot;child&quot; frame regarding the sign of the axis.</dd>
-            <dt id="ad0f4e013dee877bd775a8efafddb6f42">
-              <span class="m-doc-wrap-bumper">void <a href="#ad0f4e013dee877bd775a8efafddb6f42" class="m-doc-self">setAxis</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Axis.html" class="m-doc">Axis</a>&amp; prismaticAxis_wrt_link1) <span class="m-label m-flat m-warning">virtual</span></span>
-            </dt>
-            <dd><span></span></dd>
             <dt id="a213fda83fc530f350e8bde91a04e2b4e">
               <span class="m-doc-wrap-bumper">auto <a href="#a213fda83fc530f350e8bde91a04e2b4e" class="m-doc-self">getFirstAttachedLink</a>(</span><span class="m-doc-wrap">) const -&gt; LinkIndex <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
@@ -296,6 +294,23 @@
               double staticFriction) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set static friction parameter of the joint, for the _index dof.</dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a2e4d4fe28b21efd7bf2175bcbeb75734">
+              const LinkIndex <a href="#a2e4d4fe28b21efd7bf2175bcbeb75734" class="m-doc-self">link2</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3d2a879f6b8c1d82ef2f50cd2612e29b">
+              const LinkIndex const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; <a href="#a3d2a879f6b8c1d82ef2f50cd2612e29b" class="m-doc-self">link1_X_link2</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8aee2bf5163f18f2f9f0f87414b9d563">
+              const LinkIndex const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a> const <a href="classiDynTree_1_1Axis.html" class="m-doc">Axis</a>&amp; <a href="#a8aee2bf5163f18f2f9f0f87414b9d563" class="m-doc-self">_translation_axis_wrt_link1</a>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section>

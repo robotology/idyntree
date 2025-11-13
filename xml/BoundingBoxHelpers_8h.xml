@@ -4,11 +4,11 @@
     <compoundname>BoundingBoxHelpers.h</compoundname>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
+    <includes refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
     <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
-    <includes refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includes>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/BoundingBoxHelpers.h</label>

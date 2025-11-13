@@ -3,14 +3,14 @@
   <compounddef id="OptimalControlProblem_8h" kind="file" language="C++">
     <compoundname>OptimalControlProblem.h</compoundname>
     <includes local="no">memory</includes>
-    <includes local="no">vector</includes>
     <includes local="no">string</includes>
-    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes local="no">vector</includes>
     <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
     <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
     <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>
     <incdepgraph>
-      <node id="4">
+      <node id="3">
         <label>string</label>
       </node>
       <node id="1">
@@ -23,7 +23,7 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="3">
+      <node id="4">
         <label>vector</label>
       </node>
       <node id="2">

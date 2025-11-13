@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="SpatialForceVector_8h" kind="file" language="C++">
     <compoundname>SpatialForceVector.h</compoundname>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="GeomVector3_8h" local="no">iDynTree/GeomVector3.h</includes>
     <includes refid="SpatialVector_8h" local="no">iDynTree/SpatialVector.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includedby refid="DynamicsUtils_8h" local="no">iDynTree/DynamicsUtils.h</includedby>
     <includedby refid="JointState_8h" local="no">iDynTree/JointState.h</includedby>
     <includedby refid="Core_2SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includedby>

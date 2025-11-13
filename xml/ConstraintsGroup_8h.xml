@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="ConstraintsGroup_8h" kind="file" language="C++">
     <compoundname>ConstraintsGroup.h</compoundname>
+    <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
-    <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
     <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>
     <incdepgraph>
       <node id="1">

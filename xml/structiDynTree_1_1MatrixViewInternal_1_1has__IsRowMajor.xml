@@ -41,7 +41,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/MatrixView.h" line="34" column="9" bodyfile="iDynTree/MatrixView.h" bodystart="34" bodyend="34"/>
+    <location file="iDynTree/MatrixView.h" line="32" column="15" bodyfile="iDynTree/MatrixView.h" bodystart="33" bodyend="34"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

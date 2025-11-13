@@ -37,7 +37,7 @@
         <label>std::integral_constant&lt; bool, std::is_convertible&lt; From(*)[], To(*)[]&gt;::value &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Span.h" line="169" column="5" bodyfile="iDynTree/Span.h" bodystart="171" bodyend="172"/>
+    <location file="iDynTree/Span.h" line="168" column="1" bodyfile="iDynTree/Span.h" bodystart="170" bodyend="171"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

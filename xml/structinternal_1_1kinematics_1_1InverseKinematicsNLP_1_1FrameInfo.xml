@@ -11,11 +11,11 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>frame w.r.t. global frame, i.e. <formula id="321">$ {}^w R_f $</formula> </para>
+<para>frame w.r.t. global frame, i.e. <formula id="323">$ {}^w R_f $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="223" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="223" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="216" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="216" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a9bb90b4e7fe2b06a1a3bbbebbc60a295" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="224" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="224" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="217" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="217" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a0e9c6f90278a9f664c4d063ee9dbacf9" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 4, 3 &gt;</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="225" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="225" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="218" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="218" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -120,7 +120,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/InverseKinematicsNLP.h" line="222" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="222" bodyend="226"/>
+    <location file="private/InverseKinematicsNLP.h" line="214" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="215" bodyend="221"/>
     <listofallmembers>
       <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a9bb90b4e7fe2b06a1a3bbbebbc60a295" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::FrameInfo</scope><name>jacobian</name></member>
       <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a0e9c6f90278a9f664c4d063ee9dbacf9" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::FrameInfo</scope><name>quaternionDerivativeMap</name></member>

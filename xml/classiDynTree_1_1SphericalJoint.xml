@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="38" column="19" bodyfile="iDynTree/SphericalJoint.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="38" column="15" bodyfile="iDynTree/SphericalJoint.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a5053768175c86ba160071f5c48b3e239" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="39" column="19" bodyfile="iDynTree/SphericalJoint.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="39" column="15" bodyfile="iDynTree/SphericalJoint.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a9acba9ba438107516ab10118be67c401" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="40" column="19" bodyfile="iDynTree/SphericalJoint.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="40" column="15" bodyfile="iDynTree/SphericalJoint.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a7626067f0829e1d9c8ae3af435dff8b8" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="43" column="18" bodyfile="iDynTree/SphericalJoint.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="43" column="14" bodyfile="iDynTree/SphericalJoint.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a949c4863e2d75d1d309d4a70ce22d6ed" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="46" column="25" bodyfile="iDynTree/SphericalJoint.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="46" column="21" bodyfile="iDynTree/SphericalJoint.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a48261dc22a116aba5dc76b8c20457808" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="47" column="27" bodyfile="iDynTree/SphericalJoint.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="47" column="23" bodyfile="iDynTree/SphericalJoint.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a1f92e40bcd4922fa69fa9251526c0d92" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="48" column="27" bodyfile="iDynTree/SphericalJoint.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="48" column="23" bodyfile="iDynTree/SphericalJoint.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1ae58c2b653cc605bc210c213bf4021ea6" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="49" column="37" bodyfile="iDynTree/SphericalJoint.h" bodystart="49" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="49" column="33" bodyfile="iDynTree/SphericalJoint.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SphericalJoint_1a825400c4ee32a58445eae550ec105435" prot="private" static="no" mutable="yes">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="50" column="37" bodyfile="iDynTree/SphericalJoint.h" bodystart="50" bodyend="-1"/>
+        <location file="iDynTree/SphericalJoint.h" line="50" column="33" bodyfile="iDynTree/SphericalJoint.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="52" column="14"/>
+        <location file="iDynTree/SphericalJoint.h" line="52" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1adb9adf2f0d3ab5b3e269e209520ea643" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="53" column="14"/>
+        <location file="iDynTree/SphericalJoint.h" line="53" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ad382febaee7aab75182487e3e7c367e0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="54" column="14"/>
+        <location file="iDynTree/SphericalJoint.h" line="54" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a1f932911587cba3201064eae99787c71" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="57" column="14"/>
+        <location file="iDynTree/SphericalJoint.h" line="57" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="63" column="9"/>
+        <location file="iDynTree/SphericalJoint.h" line="63" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a74517ac3c83476b2fe07c38e775b6ef2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="71" column="9"/>
+        <location file="iDynTree/SphericalJoint.h" line="71" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a40db5b94cc1e6103fe1d21eb881b7219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="76" column="9"/>
+        <location file="iDynTree/SphericalJoint.h" line="76" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a166ed2bc01fabd47daeb8c032f4b9f44" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="81" column="17"/>
+        <location file="iDynTree/SphericalJoint.h" line="81" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ad4223aca4cfa8492b50b24449a45de03" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="84" column="25"/>
+        <location file="iDynTree/SphericalJoint.h" line="84" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ab78cf32b9be287a67b1db72951259f7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -309,7 +309,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="87" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="87" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1adcbe0e09dd56be8fab15ebcfa5d96888" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="90" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="90" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a20fff9ddd8df8f243cc3cde64152dc3c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -344,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="93" column="27"/>
+        <location file="iDynTree/SphericalJoint.h" line="93" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a86b866a94a73033fce6f1118526196f8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>LinkIndex</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="96" column="27"/>
+        <location file="iDynTree/SphericalJoint.h" line="96" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ab70d106f4802464e0a39949c3be328a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -383,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="99" column="27"/>
+        <location file="iDynTree/SphericalJoint.h" line="99" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ad3b89c9e25a876c197053e68fa9e7ada" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -410,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="104" column="34"/>
+        <location file="iDynTree/SphericalJoint.h" line="103" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a48823c4c84871c42567165600bef710c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -443,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="109" column="29"/>
+        <location file="iDynTree/SphericalJoint.h" line="106" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac826a020da936cf288682cb6798026c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -480,7 +480,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="115" column="37"/>
+        <location file="iDynTree/SphericalJoint.h" line="113" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a6a2ad355eb68a3ba9c5e3abbfbb9ddf5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -528,7 +528,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="120" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="118" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a73a14825d62e9b88df41a1bf7736591a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -563,7 +563,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="129" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="128" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a5238aa880f1805f981e1de5e343913cc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -606,7 +606,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="135" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="135" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac25d78a707e10e17321c1bf99406911a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -649,7 +649,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="143" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="144" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a130ee52253aa1a415668951eb3c4a757" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -688,7 +688,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="151" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="153" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aa20cf53d939a9d8db30e4419344ec993" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -765,7 +765,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="158" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="161" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ae2ca9d6846ed46244a232c1707746099" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -783,7 +783,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="165" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="168" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac63625c756f5e78063424c0d60dbda8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -805,7 +805,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="168" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="171" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1add97d0d292274cc456afa2671bdcc655" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -844,7 +844,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="171" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="174" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ae9bda342e5dc9542b21b432437dfe332" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -863,7 +863,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="174" column="24"/>
+        <location file="iDynTree/SphericalJoint.h" line="177" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aca0b0fe6594d72170b0dac1d15dc1a2b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -882,7 +882,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="177" column="24"/>
+        <location file="iDynTree/SphericalJoint.h" line="180" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a396ea876b931d17dc8e03949bce6625a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -912,7 +912,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="180" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="183" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a50059b12e9d0d87712991aedb2ae08a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>JointDynamicsType</type>
@@ -932,7 +932,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="183" column="35"/>
+        <location file="iDynTree/SphericalJoint.h" line="186" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a61576a14d6c6ab81e0762d6e78851ad7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -956,7 +956,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="186" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="189" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1abf6c4559224cd3de3b1e6c779a3dafb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -996,7 +996,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="189" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="192" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a82f964b4aefa299b60aa4b558160eff4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1036,7 +1036,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="192" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="195" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a28c5e9d8f2200f6bedb0de12b2b04606" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1060,7 +1060,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="195" column="24"/>
+        <location file="iDynTree/SphericalJoint.h" line="198" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ab7a434b4d6a0d05858478de55ad11bb4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -1084,7 +1084,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="198" column="24"/>
+        <location file="iDynTree/SphericalJoint.h" line="201" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1a036281e499435c35f6337648800a1a46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1134,7 +1134,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="201" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="204" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aa9a555e5f26050cd375a42da96c53e39" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1165,7 +1165,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="205" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="208" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac76b9ec07a437154076270a5101d3570" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -1197,7 +1197,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="208" column="22"/>
+        <location file="iDynTree/SphericalJoint.h" line="211" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1aa07ece34d86d5988f9ef060163f0ce5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1237,7 +1237,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="215" column="14"/>
+        <location file="iDynTree/SphericalJoint.h" line="218" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SphericalJoint_1ac470edb00c2106bf4f0a7211e871ac22" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -1267,7 +1267,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SphericalJoint.h" line="222" column="18"/>
+        <location file="iDynTree/SphericalJoint.h" line="225" column="14"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1333,7 +1333,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/SphericalJoint.h" line="34" column="5" bodyfile="iDynTree/SphericalJoint.h" bodystart="35" bodyend="223"/>
+    <location file="iDynTree/SphericalJoint.h" line="34" column="1" bodyfile="iDynTree/SphericalJoint.h" bodystart="35" bodyend="226"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SphericalJoint_1ad4223aca4cfa8492b50b24449a45de03" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1SphericalJoint_1ac25d78a707e10e17321c1bf99406911a" prot="public" virt="virtual"><scope>iDynTree::SphericalJoint</scope><name>computeChildAcc</name></member>

@@ -5,7 +5,7 @@
     <includes local="no">iDynTree/Transform.h</includes>
       <sectiondef kind="user-defined">
       <header>Overloaded operators.</header>
-      <description><para>This operators are used to change the frame in which a quantity is expressed from the <formula id="225">$\texttt{frame}$</formula> to the <formula id="226">$\texttt{refFrame}$</formula> of the transform. </para>
+      <description><para>This operators are used to change the frame in which a quantity is expressed from the <formula id="227">$\texttt{frame}$</formula> to the <formula id="228">$\texttt{refFrame}$</formula> of the transform. </para>
 </description>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a83a88c7dbba949bfced19dac0a133f4e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -20,13 +20,13 @@
 <para>Combine two transforms. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="227">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> and the argument is <formula id="228">\[ (p&apos;,R&apos;) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} , {}^{\texttt{orient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
-<para>The resulting transform will be: <formula id="229">\[ (p+Rp&apos;, RR&apos;) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} , {}^{\texttt{refOrient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
-<para>Notice that this is equivalent to multiply the associated homogemeous matrices: <formula id="230">\[ {}^{\texttt{refFrame}} H_{\texttt{newFrame}} = {}^{\texttt{refFrame}} H_{\texttt{frame}} {}^{\texttt{frame}} H_{\texttt{newFrame}} \]</formula> or the associated adjoint matrices : <formula id="231">\[ {}^{\texttt{refFrame}} X_{\texttt{newFrame}} = {}^{\texttt{refFrame}} X_{\texttt{frame}} {}^{\texttt{frame}} X_{\texttt{newFrame}} \]</formula> </para>
+<para>If this object is <formula id="229">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> and the argument is <formula id="230">\[ (p&apos;,R&apos;) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} , {}^{\texttt{orient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
+<para>The resulting transform will be: <formula id="231">\[ (p+Rp&apos;, RR&apos;) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} , {}^{\texttt{refOrient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
+<para>Notice that this is equivalent to multiply the associated homogemeous matrices: <formula id="232">\[ {}^{\texttt{refFrame}} H_{\texttt{newFrame}} = {}^{\texttt{refFrame}} H_{\texttt{frame}} {}^{\texttt{frame}} H_{\texttt{newFrame}} \]</formula> or the associated adjoint matrices : <formula id="233">\[ {}^{\texttt{refFrame}} X_{\texttt{newFrame}} = {}^{\texttt{refFrame}} X_{\texttt{frame}} {}^{\texttt{frame}} X_{\texttt{newFrame}} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="201" column="19"/>
+        <location file="iDynTree/Transform.h" line="207" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a8a58af1e6c5d582c5765d91e5cdc1675" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -37,11 +37,11 @@
 <para>Return the inverse of this <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="227">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> this function will return: <formula id="232">\[ (-R^\top p , R^\top) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{refPoint}} , {}^{\texttt{orient}} R_{\texttt{refOrient}} ) \]</formula> </para>
+<para>If this object is <formula id="229">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> this function will return: <formula id="234">\[ (-R^\top p , R^\top) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{refPoint}} , {}^{\texttt{orient}} R_{\texttt{refOrient}} ) \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="216" column="19"/>
+        <location file="iDynTree/Transform.h" line="224" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a47a4606065be27e235712f9805b3bdc9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -56,13 +56,13 @@
 <para>Change reference frame of a point. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="227">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> argument represent a point: <formula id="233">\[ p&apos; = {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} \]</formula></para>
-<para>The result of the operation is: <formula id="234">\[ Rp&apos; + p = {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} \]</formula> </para>
+<para>If this object is <formula id="229">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> argument represent a point: <formula id="235">\[ p&apos; = {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} \]</formula></para>
+<para>The result of the operation is: <formula id="236">\[ Rp&apos; + p = {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="237" column="18"/>
+        <location file="iDynTree/Transform.h" line="246" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1af120c9b238d9efdf947109b47c4e4fdf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -77,13 +77,13 @@
 <para>Change frame in which a <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="227">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is a wrench: <formula id="235">\[ {}_{\texttt{frame}} F = \begin{bmatrix} f \\ \tau \end{bmatrix} \]</formula></para>
-<para>The result of this operation is : <formula id="236">\[ {}_{\texttt{refFrame}} F = {}_{\texttt{refFrame}}X^{\texttt{frame}} {}_{\texttt{frame}} F = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \begin{bmatrix} f \\ \tau \end{bmatrix} = \begin{bmatrix} Rf \\ p \times R f + R\tau \end{bmatrix} \]</formula> </para>
+<para>If this object is <formula id="229">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is a wrench: <formula id="237">\[ {}_{\texttt{frame}} F = \begin{bmatrix} f \\ \tau \end{bmatrix} \]</formula></para>
+<para>The result of this operation is : <formula id="238">\[ {}_{\texttt{refFrame}} F = {}_{\texttt{refFrame}}X^{\texttt{frame}} {}_{\texttt{frame}} F = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \begin{bmatrix} f \\ \tau \end{bmatrix} = \begin{bmatrix} Rf \\ p \times R f + R\tau \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="277" column="18"/>
+        <location file="iDynTree/Transform.h" line="287" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a5ecf98714169de1a297c543305005a92" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -98,13 +98,13 @@
 <para>Change the frame in which a <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="227">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is a twist: <formula id="237">\[ {}^{\texttt{frame}} V = \begin{bmatrix} v \\ \omega \end{bmatrix} \]</formula></para>
-<para>The result of this operation is : <formula id="238">\[ {}^{\texttt{refFrame}} V = {}^{\texttt{refFrame}}X_{\texttt{frame}} {}^{\texttt{frame}} V = \begin{bmatrix} R &amp; p \times R\\ 0_{3\times3} &amp; R \end{bmatrix} \begin{bmatrix} v \\ \omega \end{bmatrix} = \begin{bmatrix} R v + p \times R \omega \\ R\omega \end{bmatrix} \]</formula> </para>
+<para>If this object is <formula id="229">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is a twist: <formula id="239">\[ {}^{\texttt{frame}} V = \begin{bmatrix} v \\ \omega \end{bmatrix} \]</formula></para>
+<para>The result of this operation is : <formula id="240">\[ {}^{\texttt{refFrame}} V = {}^{\texttt{refFrame}}X_{\texttt{frame}} {}^{\texttt{frame}} V = \begin{bmatrix} R &amp; p \times R\\ 0_{3\times3} &amp; R \end{bmatrix} \begin{bmatrix} v \\ \omega \end{bmatrix} = \begin{bmatrix} R v + p \times R \omega \\ R\omega \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="317" column="18"/>
+        <location file="iDynTree/Transform.h" line="328" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a9698f396afb2d422caae294fd6a8894c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="325" column="25"/>
+        <location file="iDynTree/Transform.h" line="336" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1adb61420ce0cf15da881551147ced2000" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="333" column="22"/>
+        <location file="iDynTree/Transform.h" line="344" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ac77626420790ccdf7bc8672f0f8238d4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="341" column="31"/>
+        <location file="iDynTree/Transform.h" line="352" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ad0351792d47583c938b5dab0d678bafc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="349" column="30"/>
+        <location file="iDynTree/Transform.h" line="360" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a1434f959c24d6047900578768e29909c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="355" column="24"/>
+        <location file="iDynTree/Transform.h" line="366" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a909ab9d195c19ede41da8b503be868c0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="361" column="32"/>
+        <location file="iDynTree/Transform.h" line="372" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a4b630c9130ea310c7dc05034a145557f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
@@ -231,13 +231,13 @@
 <para>Change the frame in which a <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="227">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is a direction represented by a unit norm 3d vector : <formula id="239">\[ {}^{\texttt{orient}} d \]</formula></para>
-<para>The result of this operation is: <formula id="240">\[ {}^{\texttt{refOrient}} d = R {}^{\texttt{orient}} d \]</formula> </para>
+<para>If this object is <formula id="229">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is a direction represented by a unit norm 3d vector : <formula id="241">\[ {}^{\texttt{orient}} d \]</formula></para>
+<para>The result of this operation is: <formula id="242">\[ {}^{\texttt{refOrient}} d = R {}^{\texttt{orient}} d \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="383" column="24"/>
+        <location file="iDynTree/Transform.h" line="394" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1aa342f1751789eba01433f662d2b0c512" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
@@ -252,13 +252,13 @@
 <para>Change the frame in which a <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="227">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is an axis, specified by the axis origin and the axis direction: <formula id="241">\[ {}^{\texttt{frame}} A = ({}^{\texttt{orient}} p_{\texttt{point},\texttt{axisOrigin}} , {}^{\texttt{orient}} d) = (p&apos;,d) \]</formula></para>
-<para>The result of this operation is: <formula id="242">\[ {}^{\texttt{refFrame}} A = ({}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{axisOrigin}} , {}^{\texttt{refOrient}} d) = ( Rp&apos; + p , Rd) \]</formula> </para>
+<para>If this object is <formula id="229">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is an axis, specified by the axis origin and the axis direction: <formula id="243">\[ {}^{\texttt{frame}} A = ({}^{\texttt{orient}} p_{\texttt{point},\texttt{axisOrigin}} , {}^{\texttt{orient}} d) = (p&apos;,d) \]</formula></para>
+<para>The result of this operation is: <formula id="244">\[ {}^{\texttt{refFrame}} A = ({}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{axisOrigin}} , {}^{\texttt{refOrient}} d) = ( Rp&apos; + p , Rd) \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="404" column="24"/>
+        <location file="iDynTree/Transform.h" line="418" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -275,12 +275,12 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="244">\[ {}^{\texttt{refFrame}} H_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} R_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula> Where <formula id="224">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="245">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para><formula id="246">\[ {}^{\texttt{refFrame}} H_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} R_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula> Where <formula id="226">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="247">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="449" column="19"/>
+        <location file="iDynTree/Transform.h" line="463" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1afadd977e513cdb2813b8763abe627121" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -292,16 +292,16 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="246">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} R &amp; p \times R \\ 0_{3\times3} &amp; R \end{bmatrix} \]</formula></para>
-<para>Where <formula id="247">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="248">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="249">$p \times$</formula> is the skew simmetric matrix such that <formula id="250">$(p \times) v = p \times v$</formula> .</para>
+<para><formula id="248">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} R &amp; p \times R \\ 0_{3\times3} &amp; R \end{bmatrix} \]</formula></para>
+<para>Where <formula id="249">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="250">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="251">$p \times$</formula> is the skew simmetric matrix such that <formula id="252">$(p \times) v = p \times v$</formula> .</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="482" column="19"/>
+        <location file="iDynTree/Transform.h" line="496" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a860616069f3511b9a78b82b4a3de1f2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -313,16 +313,16 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="251">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \]</formula></para>
-<para>Where <formula id="247">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="248">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="249">$p \times$</formula> is the skew simmetric matrix such that <formula id="250">$(p \times) v = p \times v$</formula> .</para>
+<para><formula id="253">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \]</formula></para>
+<para>Where <formula id="249">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="250">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="251">$p \times$</formula> is the skew simmetric matrix such that <formula id="252">$(p \times) v = p \times v$</formula> .</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="515" column="19"/>
+        <location file="iDynTree/Transform.h" line="529" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a0020412b9f32230742d028960fcdc811" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="521" column="29"/>
+        <location file="iDynTree/Transform.h" line="535" column="25"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="530" column="21"/>
+        <location file="iDynTree/Transform.h" line="544" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a3cfe8175a9139f543034665f40743535" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -366,7 +366,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="532" column="21"/>
+        <location file="iDynTree/Transform.h" line="546" column="17"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-attrib">
@@ -379,11 +379,11 @@
 <para>The position part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>The 3d vector <formula id="217">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para>The 3d vector <formula id="219">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="71" column="18" bodyfile="iDynTree/Transform.h" bodystart="71" bodyend="-1"/>
+        <location file="iDynTree/Transform.h" line="72" column="14" bodyfile="iDynTree/Transform.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Transform_1a473cab87d96deea511e558fa67b21e57" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -394,11 +394,11 @@
 <para>The rotation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set the rotation matrix <formula id="224">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
+<para>Set the rotation matrix <formula id="226">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="81" column="18" bodyfile="iDynTree/Transform.h" bodystart="81" bodyend="-1"/>
+        <location file="iDynTree/Transform.h" line="82" column="14" bodyfile="iDynTree/Transform.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -415,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="89" column="9"/>
+        <location file="iDynTree/Transform.h" line="90" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a46a45cf7fbe614298b85c4784f3518de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -437,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="94" column="9"/>
+        <location file="iDynTree/Transform.h" line="95" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a51b7b01d69d3e0cf26851745a742a8a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -465,7 +465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="100" column="9"/>
+        <location file="iDynTree/Transform.h" line="101" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a813733bebe23163c27cecab9e289aeef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="105" column="9"/>
+        <location file="iDynTree/Transform.h" line="106" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1adf94fe4e7e534b90a8515d9fe2b03d9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -511,7 +511,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="111" column="14"/>
+        <location file="iDynTree/Transform.h" line="112" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a5c0d49ae7be0a639762f99c31af25369" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -541,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="120" column="19"/>
+        <location file="iDynTree/Transform.h" line="121" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ad2a5547291451dbae5c9b5ca5fe32cd1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
@@ -552,11 +552,11 @@
 <para>Get the rotation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get the rotation matrix <formula id="224">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
+<para>Get the rotation matrix <formula id="226">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="130" column="25"/>
+        <location file="iDynTree/Transform.h" line="131" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a63f8b8f234ecea5da3c0210ca1214f27" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -567,11 +567,11 @@
 <para>Get the translation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get 3d vector <formula id="217">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para>Get 3d vector <formula id="219">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="140" column="25"/>
+        <location file="iDynTree/Transform.h" line="141" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a2b95e05edabf49b5584efb38d105f9be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -586,11 +586,11 @@
 <para>Set the rotation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set the rotation matrix <formula id="224">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
+<para>Set the rotation matrix <formula id="226">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="150" column="14"/>
+        <location file="iDynTree/Transform.h" line="151" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ac27f7fdc364760a5e0e24b3c0abab7a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -605,11 +605,11 @@
 <para>Set the translation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set 3d vector <formula id="217">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para>Set 3d vector <formula id="219">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="160" column="14"/>
+        <location file="iDynTree/Transform.h" line="161" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -632,7 +632,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="163" column="26"/>
+        <location file="iDynTree/Transform.h" line="164" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1ae07533c65a0654bc797006083fddbd65" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -649,7 +649,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="164" column="26"/>
+        <location file="iDynTree/Transform.h" line="165" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a706809fe4f1904e07634ed3d0c493fcd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -660,14 +660,14 @@
 <para>Return an identity transfom. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set the rotation to the identity and the translation to 0 : <formula id="243">\[ (0_{3 \times 1}, I_{3 \times 3}) \]</formula></para>
+<para>Set the rotation to the identity and the translation to 0 : <formula id="245">\[ (0_{3 \times 1}, I_{3 \times 3}) \]</formula></para>
 <para><simplesect kind="return"><para>an identity transform. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Transform.h" line="417" column="26"/>
+        <location file="iDynTree/Transform.h" line="431" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -677,11 +677,11 @@
 <para><image type="html" name="transform.svg"></image>
 </para>
 <para>This class is designed to be an easy to use proxy to perform change of frame of expression for <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref>, <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref>, <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> and other data structure in <ref refid="group__iDynTreeCore" kindref="compound">iDynTree core data structures</ref>. For this reason the class is called &quot;Transform&quot;, because it will be mainly used to transform quantities between frames.</para>
-<para>Given that this class it may used to represent homogeneous transform matrix as well as adjoint matrix, no raw access to the underline storage ( data() method ) is provided, because it does not have a canonical representation. Instead, access is given to the two elements of a transform: The position vector <formula id="217">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula> and the rotation matrix <formula id="218">${}^{\texttt{refOrient}} R_{\texttt{orient}}$</formula>.</para>
-<para>We will indicate this tranform as <formula id="219">$( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} )$</formula></para>
-<para>The frame whose origin is the reference point and whose orientation the reference orientation is often indicated as <formula id="220">$ \texttt{refFrame} = (\texttt{refPoint},\texttt{refOrient}) $</formula>.</para>
-<para>Similarly the frame whose origin is the point and whose orientation is the orientation is indicated as <formula id="221">$ \texttt{frame} = (\texttt{point},\texttt{orient}) $</formula>.</para>
-<para>This transform object can be obtained as the <formula id="222">${}^{\texttt{refFrame}} H_{\texttt{frame}}$</formula> 4x4 homogeneous matrix using the asHomogeneousTransform method, or as the <formula id="223">${}^{\texttt{refFrame}} X_{\texttt{frame}}$</formula> 6x6 adjoint matrix using the asAdjointTransform . </para>
+<para>Given that this class it may used to represent homogeneous transform matrix as well as adjoint matrix, no raw access to the underline storage ( data() method ) is provided, because it does not have a canonical representation. Instead, access is given to the two elements of a transform: The position vector <formula id="219">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula> and the rotation matrix <formula id="220">${}^{\texttt{refOrient}} R_{\texttt{orient}}$</formula>.</para>
+<para>We will indicate this tranform as <formula id="221">$( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} )$</formula></para>
+<para>The frame whose origin is the reference point and whose orientation the reference orientation is often indicated as <formula id="222">$ \texttt{refFrame} = (\texttt{refPoint},\texttt{refOrient}) $</formula>.</para>
+<para>Similarly the frame whose origin is the point and whose orientation is the orientation is indicated as <formula id="223">$ \texttt{frame} = (\texttt{point},\texttt{orient}) $</formula>.</para>
+<para>This transform object can be obtained as the <formula id="224">${}^{\texttt{refFrame}} H_{\texttt{frame}}$</formula> 4x4 homogeneous matrix using the asHomogeneousTransform method, or as the <formula id="225">${}^{\texttt{refFrame}} X_{\texttt{frame}}$</formula> 6x6 adjoint matrix using the asAdjointTransform . </para>
     </detaileddescription>
     <collaborationgraph>
       <node id="7">
@@ -729,7 +729,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Transform.h" line="60" column="5" bodyfile="iDynTree/Transform.h" bodystart="61" bodyend="535"/>
+    <location file="iDynTree/Transform.h" line="61" column="1" bodyfile="iDynTree/Transform.h" bodystart="62" bodyend="548"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Transform_1afadd977e513cdb2813b8763abe627121" prot="public" virt="non-virtual"><scope>iDynTree::Transform</scope><name>asAdjointTransform</name></member>
       <member refid="classiDynTree_1_1Transform_1a860616069f3511b9a78b82b4a3de1f2d" prot="public" virt="non-virtual"><scope>iDynTree::Transform</scope><name>asAdjointTransformWrench</name></member>

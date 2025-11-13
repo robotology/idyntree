@@ -3,8 +3,8 @@
   <compounddef id="Visualizer_8h" kind="file" language="C++">
     <compoundname>Visualizer.h</compoundname>
     <includes local="no">string</includes>
-    <includes local="no">vector</includes>
     <includes local="no">utility</includes>
+    <includes local="no">vector</includes>
     <includes refid="Direction_8h" local="no">iDynTree/Direction.h</includes>
     <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="JointState_8h" local="no">iDynTree/JointState.h</includes>
@@ -14,7 +14,7 @@
       <node id="2">
         <label>string</label>
       </node>
-      <node id="3">
+      <node id="4">
         <label>vector</label>
       </node>
       <node id="1">
@@ -27,7 +27,7 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="3">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="181" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="182" bodyend="187"/>
+        <location file="iDynTree/Visualizer.h" line="178" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="179" bodyend="184"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

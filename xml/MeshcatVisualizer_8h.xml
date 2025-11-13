@@ -4,11 +4,11 @@
     <compoundname>MeshcatVisualizer.h</compoundname>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>
-    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
-    <includes refid="Span_8h" local="no">iDynTree/Span.h</includes>
     <includes refid="MatrixView_8h" local="no">iDynTree/MatrixView.h</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <includes refid="Model_8h" local="no">iDynTree/Model.h</includes>
+    <includes refid="Span_8h" local="no">iDynTree/Span.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/MeshcatVisualizer.h</label>

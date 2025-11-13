@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="36" column="29" bodyfile="iDynTree/SparseMatrix.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/SparseMatrix.h" line="35" column="29" bodyfile="iDynTree/SparseMatrix.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1a0588cded62c075e1bf3b877c2b274125" prot="private" static="no" mutable="no">
         <type>std::vector&lt; int &gt;</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="38" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/SparseMatrix.h" line="37" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1aea1e508066b17d84a9e167e79847cf3a" prot="private" static="no" mutable="no">
         <type>std::vector&lt; int &gt;</type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="39" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/SparseMatrix.h" line="38" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1a86fc38b6dea5fcb388c7679595fef329" prot="private" static="no" mutable="no">
         <type>std::size_t</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="44" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/SparseMatrix.h" line="42" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1a049d6fe4a9710f4e40260379c646ee6f" prot="private" static="no" mutable="no">
         <type>std::size_t</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="46" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/SparseMatrix.h" line="45" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1aebbdae0a0f21a4b5c1ba506a68d7fd87" prot="private" static="no" mutable="no">
         <type>std::size_t</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="47" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/SparseMatrix.h" line="46" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="49" column="10"/>
+        <location file="iDynTree/SparseMatrix.h" line="48" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1aecc7b6b4a639cbabbdf786a6eb93d332" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t</type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="60" column="17"/>
+        <location file="iDynTree/SparseMatrix.h" line="59" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a351ac8ff6ea79ef48784a2ce656a17e6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -258,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="74" column="10"/>
+        <location file="iDynTree/SparseMatrix.h" line="73" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -321,7 +321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="90" column="5"/>
+        <location file="iDynTree/SparseMatrix.h" line="89" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a5b69f06f3e4a624b72a7f20efc4d17cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -381,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="103" column="5"/>
+        <location file="iDynTree/SparseMatrix.h" line="102" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1abd7191cc9ed4ee2962ef8a1100c34605" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t</type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="110" column="17"/>
+        <location file="iDynTree/SparseMatrix.h" line="109" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ad4fc0c67e5e53b62591fbbc5a638ecf1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -442,7 +442,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="120" column="10"/>
+        <location file="iDynTree/SparseMatrix.h" line="119" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ad4fd25bdfb662d7083991c27933f3054" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -515,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="133" column="10"/>
+        <location file="iDynTree/SparseMatrix.h" line="135" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a08e7b1d008307f13ae8513746f29d85c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -532,7 +532,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="142" column="10"/>
+        <location file="iDynTree/SparseMatrix.h" line="143" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a48cb8c9c1703b5746d70051ebbfe548e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -692,7 +692,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="206" column="12"/>
+        <location file="iDynTree/SparseMatrix.h" line="207" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a950011e2e956f72f3fdd21fc399cf376" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>double</type>
@@ -713,7 +713,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="208" column="19" bodyfile="iDynTree/SparseMatrix.h" bodystart="208" bodyend="211"/>
+        <location file="iDynTree/SparseMatrix.h" line="209" column="19" bodyfile="iDynTree/SparseMatrix.h" bodystart="209" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a18301103400395c4929b49ae6186319a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -738,7 +738,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="213" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="213" bodyend="217"/>
+        <location file="iDynTree/SparseMatrix.h" line="214" column="17" bodyfile="iDynTree/SparseMatrix.h" bodystart="214" bodyend="218"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a22d6e9d316ee0ae91633bd6a232e7e1d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t</type>
@@ -785,7 +785,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="233" column="13"/>
+        <location file="iDynTree/SparseMatrix.h" line="233" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ae872a9018f8693cdaee2823739926f73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double const  *</type>
@@ -798,7 +798,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="235" column="19"/>
+        <location file="iDynTree/SparseMatrix.h" line="235" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a1101b4d764330352150925bab064484f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int *</type>
@@ -811,7 +811,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="237" column="10"/>
+        <location file="iDynTree/SparseMatrix.h" line="237" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ae5214eb0040f8eb1dbd24600d57107e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>int const  *</type>
@@ -824,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="239" column="16"/>
+        <location file="iDynTree/SparseMatrix.h" line="239" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a0dc994408183cc6ac39ba29f63bf10af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int *</type>
@@ -837,7 +837,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="241" column="10"/>
+        <location file="iDynTree/SparseMatrix.h" line="241" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ae6ac3d5cb21c9dd00d39f96ec8ee846f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>int const  *</type>
@@ -850,7 +850,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/SparseMatrix.h" line="243" column="16"/>
+        <location file="iDynTree/SparseMatrix.h" line="243" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a17fa321f04e7f09c14f162665a850502" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -982,7 +982,7 @@
     <detaileddescription>
 <para>This class uses the Compressed Column (Row) Storage scheme (see <ulink url="https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29">https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29</ulink>) which is compatible with the format used in the Eigen library (by using Map). </para>
     </detaileddescription>
-    <location file="iDynTree/SparseMatrix.h" line="32" column="1" bodyfile="iDynTree/SparseMatrix.h" bodystart="33" bodyend="274"/>
+    <location file="iDynTree/SparseMatrix.h" line="32" column="12" bodyfile="iDynTree/SparseMatrix.h" bodystart="33" bodyend="273"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SparseMatrix_1a804a8020e247807116212ae8afbca7f0" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>begin</name></member>
       <member refid="classiDynTree_1_1SparseMatrix_1a12bfd109d081181b2fa14d9da5350df5" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>begin</name></member>

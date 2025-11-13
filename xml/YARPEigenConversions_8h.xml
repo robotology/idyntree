@@ -59,9 +59,9 @@
         </inbodydescription>
         <location file="iDynTree/YARPEigenConversions.h" line="20" column="19" bodyfile="iDynTree/YARPEigenConversions.h" bodystart="20" bodyend="23"/>
       </memberdef>
-      <memberdef kind="function" id="YARPEigenConversions_8h_1a19f060a1b963d4cdd58a142372675f6b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="YARPEigenConversions_8h_1afb26f493c6a14a1427297792970e79c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(yarp::sig::Matrix &amp;yarpMatrix)</argsstring>
         <name>toEigen</name>
         <param>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPEigenConversions.h" line="30" column="19" bodyfile="iDynTree/YARPEigenConversions.h" bodystart="30" bodyend="33"/>
+        <location file="iDynTree/YARPEigenConversions.h" line="32" column="1" bodyfile="iDynTree/YARPEigenConversions.h" bodystart="32" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="YARPEigenConversions_8h_1a0fc1ec0d7de0f823d4a8c32524aaecd7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::VectorXd &gt;</type>
@@ -117,11 +117,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPEigenConversions.h" line="40" column="19" bodyfile="iDynTree/YARPEigenConversions.h" bodystart="40" bodyend="43"/>
+        <location file="iDynTree/YARPEigenConversions.h" line="45" column="19" bodyfile="iDynTree/YARPEigenConversions.h" bodystart="45" bodyend="48"/>
       </memberdef>
-      <memberdef kind="function" id="YARPEigenConversions_8h_1a4f400cf54f7b7757adbaa768205b9df9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="YARPEigenConversions_8h_1a93ab12c815cfcacc855a33ecec09c436" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(const yarp::sig::Matrix &amp;yarpMatrix)</argsstring>
         <name>toEigen</name>
         <param>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/YARPEigenConversions.h" line="50" column="19" bodyfile="iDynTree/YARPEigenConversions.h" bodystart="50" bodyend="53"/>
+        <location file="iDynTree/YARPEigenConversions.h" line="57" column="1" bodyfile="iDynTree/YARPEigenConversions.h" bodystart="57" bodyend="61"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

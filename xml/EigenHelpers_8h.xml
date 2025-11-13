@@ -4,14 +4,14 @@
     <compoundname>EigenHelpers.h</compoundname>
     <includes local="no">cstddef</includes>
     <includes local="no">Eigen/Dense</includes>
-    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
-    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="MatrixDynSize_8h" local="no">iDynTree/MatrixDynSize.h</includes>
     <includes refid="MatrixFixSize_8h" local="no">iDynTree/MatrixFixSize.h</includes>
-    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includes>
     <includes refid="SpatialForceVector_8h" local="no">iDynTree/SpatialForceVector.h</includes>
+    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/SpatialMotionVector.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Utils.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/VectorDynSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/VectorFixSize.h</includes>
     <includes refid="SparseMatrix_8h" local="no">iDynTree/SparseMatrix.h</includes>
     <includedby refid="AttitudeEstimatorUtils_8h" local="no">iDynTree/AttitudeEstimatorUtils.h</includedby>
     <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/GravityCompensationHelpers.h</includedby>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="28" column="24" bodyfile="iDynTree/EigenHelpers.h" bodystart="28" bodyend="-1"/>
+        <location file="iDynTree/EigenHelpers.h" line="27" column="20" bodyfile="iDynTree/EigenHelpers.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="EigenHelpers_8h_1a60faf8b72189d4496f7b7920d5ea3b01" prot="public" static="no">
         <type>Eigen::Map&lt; const Eigen::VectorXd &gt;</type>
@@ -62,11 +62,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="29" column="24" bodyfile="iDynTree/EigenHelpers.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/EigenHelpers.h" line="28" column="20" bodyfile="iDynTree/EigenHelpers.h" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="EigenHelpers_8h_1a8dd9b043a4e3ceaa1b9a173e826020aa" prot="public" static="no">
+      <memberdef kind="typedef" id="EigenHelpers_8h_1a3224b3d75df53227d31affae382f971b" prot="public" static="no">
         <type>Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;</type>
-        <definition>typedef Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; iDynTree::iDynTreeEigenMatrix</definition>
+        <definition>typedef Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt; iDynTree::iDynTreeEigenMatrix</definition>
         <argsstring></argsstring>
         <name>iDynTreeEigenMatrix</name>
         <briefdescription>
@@ -75,11 +75,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="30" column="27" bodyfile="iDynTree/EigenHelpers.h" bodystart="30" bodyend="-1"/>
+        <location file="iDynTree/EigenHelpers.h" line="29" column="23" bodyfile="iDynTree/EigenHelpers.h" bodystart="29" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="EigenHelpers_8h_1a2d3ea8f566b9d5684e3b008a1f8c8d6f" prot="public" static="no">
+      <memberdef kind="typedef" id="EigenHelpers_8h_1a988789ff476b417c4a9cd215bf713c86" prot="public" static="no">
         <type>const Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;</type>
-        <definition>typedef const Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; iDynTree::iDynTreeEigenConstMatrix</definition>
+        <definition>typedef const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt; iDynTree::iDynTreeEigenConstMatrix</definition>
         <argsstring></argsstring>
         <name>iDynTreeEigenConstMatrix</name>
         <briefdescription>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="31" column="33" bodyfile="iDynTree/EigenHelpers.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/EigenHelpers.h" line="31" column="5" bodyfile="iDynTree/EigenHelpers.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="EigenHelpers_8h_1a26eec6588ddf3f8a8546b9f7899590eb" prot="public" static="no">
         <type>Eigen::Map&lt; iDynTreeEigenMatrix &gt;</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="32" column="24" bodyfile="iDynTree/EigenHelpers.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/EigenHelpers.h" line="32" column="20" bodyfile="iDynTree/EigenHelpers.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="EigenHelpers_8h_1a2b2522205c120424f4e8740b30bad6aa" prot="public" static="no">
         <type>Eigen::Map&lt; iDynTreeEigenConstMatrix &gt;</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="33" column="24" bodyfile="iDynTree/EigenHelpers.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/EigenHelpers.h" line="33" column="20" bodyfile="iDynTree/EigenHelpers.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -133,11 +133,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="46" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="46" bodyend="49"/>
+        <location file="iDynTree/EigenHelpers.h" line="47" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="47" bodyend="50"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1a0d2e67fee79a1191ed16ab1d522b0078" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1aeb13870cd5128cb3eec9c9566d24c539" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(MatrixDynSize &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="51" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="51" bodyend="54"/>
+        <location file="iDynTree/EigenHelpers.h" line="53" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="53" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a3f48b18c53414248343c3adaf5db988c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::VectorXd &gt;</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="56" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="56" bodyend="59"/>
+        <location file="iDynTree/EigenHelpers.h" line="61" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="61" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a3d1f28b899ee110b8af0c92c9945455c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::VectorXd &gt;</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="62" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="62" bodyend="65"/>
+        <location file="iDynTree/EigenHelpers.h" line="67" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="67" bodyend="70"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a529708f2899d75d6491fce5823c6c069" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;, 0, Eigen::Stride&lt; Eigen::Dynamic, Eigen::Dynamic &gt; &gt;</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="75" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="75" bodyend="119"/>
+        <location file="iDynTree/EigenHelpers.h" line="80" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="80" bodyend="127"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a0007fc5ab429e207c6244ac715f82dc0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;, 0, Eigen::Stride&lt; Eigen::Dynamic, Eigen::Dynamic &gt; &gt;</type>
@@ -218,11 +218,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="124" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="124" bodyend="168"/>
+        <location file="iDynTree/EigenHelpers.h" line="132" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="132" bodyend="179"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1af9123b8fa68b1799fd197ab4a1acc618" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a996cf2353b8329c594a4f547744fa4be" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(const MatrixDynSize &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -235,9 +235,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="172" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="172" bodyend="175"/>
+        <location file="iDynTree/EigenHelpers.h" line="184" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="184" bodyend="190"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1a4dc3574842fc660108111d96dac71b23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a7eba57262b432e1665d8cf0328f075a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>unsigned int</type>
@@ -246,7 +246,7 @@
           </param>
         </templateparamlist>
         <type>Eigen::Map&lt; Eigen::Matrix&lt; double, VecSize, 1 &gt; &gt;</type>
-        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double,VecSize,1&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double, VecSize, 1&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(VectorFixSize&lt; VecSize &gt; &amp;vec)</argsstring>
         <name>toEigen</name>
         <param>
@@ -259,9 +259,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="179" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="179" bodyend="182"/>
+        <location file="iDynTree/EigenHelpers.h" line="194" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="194" bodyend="197"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1a17939782b66cf87bba581ac4d6db6270" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a17c2608783495c4ce17c3f4f28af14a7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>unsigned int</type>
@@ -270,7 +270,7 @@
           </param>
         </templateparamlist>
         <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, VecSize, 1 &gt; &gt;</type>
-        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double,VecSize,1&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double, VecSize, 1&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(const VectorFixSize&lt; VecSize &gt; &amp;vec)</argsstring>
         <name>toEigen</name>
         <param>
@@ -283,9 +283,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="185" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="185" bodyend="188"/>
+        <location file="iDynTree/EigenHelpers.h" line="201" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="201" bodyend="204"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1ac34e051a03bd114394e71919b795171e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a8e0c981e7a63b320efd9390db164242f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>unsigned int</type>
@@ -299,7 +299,7 @@
           </param>
         </templateparamlist>
         <type>Eigen::Map&lt; Eigen::Matrix&lt; double, nRows, nCols, Eigen::RowMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,nRows,nCols,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double, nRows, nCols, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(MatrixFixSize&lt; nRows, nCols &gt; &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -312,9 +312,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="191" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="191" bodyend="194"/>
+        <location file="iDynTree/EigenHelpers.h" line="208" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="208" bodyend="211"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1ab60f7d72717e939931bf139b222b2832" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a3fe7de9d5634446949f0c663f9c73034" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>unsigned int</type>
@@ -323,7 +323,7 @@
           </param>
         </templateparamlist>
         <type>Eigen::Map&lt; Eigen::Matrix&lt; double, nRows, 1 &gt; &gt;</type>
-        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,nRows,1&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double, nRows, 1&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(MatrixFixSize&lt; nRows, 1 &gt; &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -336,9 +336,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="197" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="197" bodyend="200"/>
+        <location file="iDynTree/EigenHelpers.h" line="214" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="214" bodyend="217"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1a3153f5d1e97e538fae73b906b511c518" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a3977bb029d435703aa123e215c2e2a02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>unsigned int</type>
@@ -347,7 +347,7 @@
           </param>
         </templateparamlist>
         <type>Eigen::Map&lt; Eigen::Matrix&lt; double, 1, nCols &gt; &gt;</type>
-        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,1,nCols&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double, 1, nCols&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(MatrixFixSize&lt; 1, nCols &gt; &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -360,9 +360,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="203" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="203" bodyend="206"/>
+        <location file="iDynTree/EigenHelpers.h" line="220" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="220" bodyend="223"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1a9639a283e2caa3460084f5e3ac48aa49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a34177b5a60c9f3dc3396d844dde42093" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>unsigned int</type>
@@ -376,7 +376,7 @@
           </param>
         </templateparamlist>
         <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, nRows, nCols, Eigen::RowMajor &gt; &gt;</type>
-        <definition>Eigen::Map&lt; const Eigen::Matrix&lt;double,nRows,nCols,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double, nRows, nCols, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
         <argsstring>(const MatrixFixSize&lt; nRows, nCols &gt; &amp;mat)</argsstring>
         <name>toEigen</name>
         <param>
@@ -389,11 +389,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="209" column="19" bodyfile="iDynTree/EigenHelpers.h" bodystart="209" bodyend="212"/>
+        <location file="iDynTree/EigenHelpers.h" line="227" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="227" bodyend="230"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1af643aa15e4ab96c1e19f5364893d4b0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1a4190a56d86c4a75330bba0f751849d1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>const Eigen::Matrix&lt; double, 6, 1 &gt;</type>
-        <definition>const Eigen::Matrix&lt;double,6,1&gt; iDynTree::toEigen</definition>
+        <definition>const Eigen::Matrix&lt;double, 6, 1&gt; iDynTree::toEigen</definition>
         <argsstring>(const SpatialMotionVector &amp;vec)</argsstring>
         <name>toEigen</name>
         <param>
@@ -406,11 +406,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="215" column="28" bodyfile="iDynTree/EigenHelpers.h" bodystart="215" bodyend="223"/>
+        <location file="iDynTree/EigenHelpers.h" line="233" column="28" bodyfile="iDynTree/EigenHelpers.h" bodystart="233" bodyend="241"/>
       </memberdef>
-      <memberdef kind="function" id="EigenHelpers_8h_1a4bb2e73fb98abd04aed4da600567b24b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="EigenHelpers_8h_1ad5cf1d277ad40c270f897c28ba1fa5a3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>const Eigen::Matrix&lt; double, 6, 1 &gt;</type>
-        <definition>const Eigen::Matrix&lt;double,6,1&gt; iDynTree::toEigen</definition>
+        <definition>const Eigen::Matrix&lt;double, 6, 1&gt; iDynTree::toEigen</definition>
         <argsstring>(const SpatialForceVector &amp;vec)</argsstring>
         <name>toEigen</name>
         <param>
@@ -423,7 +423,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="225" column="28" bodyfile="iDynTree/EigenHelpers.h" bodystart="225" bodyend="233"/>
+        <location file="iDynTree/EigenHelpers.h" line="243" column="28" bodyfile="iDynTree/EigenHelpers.h" bodystart="243" bodyend="251"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1acf2d7088e9fd094e6aa9c79bd4364b69" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -444,7 +444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="236" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="236" bodyend="240"/>
+        <location file="iDynTree/EigenHelpers.h" line="254" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="254" bodyend="258"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a1943bf2f7027929dd5a9203b35d60b82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -465,7 +465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="242" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="242" bodyend="246"/>
+        <location file="iDynTree/EigenHelpers.h" line="260" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="260" bodyend="264"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1ad32fda4b9fa803472c83dea084ec14d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -486,7 +486,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="248" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="248" bodyend="258"/>
+        <location file="iDynTree/EigenHelpers.h" line="266" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="266" bodyend="276"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1ae5b49ed3e6ce87e8262be598d41b01bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -508,7 +508,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="261" column="22" bodyfile="iDynTree/EigenHelpers.h" bodystart="261" bodyend="267"/>
+        <location file="iDynTree/EigenHelpers.h" line="280" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="280" bodyend="293"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a8e4347585aaeb967bfb2916b135b9357" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -530,7 +530,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="270" column="22" bodyfile="iDynTree/EigenHelpers.h" bodystart="270" bodyend="274"/>
+        <location file="iDynTree/EigenHelpers.h" line="296" column="22" bodyfile="iDynTree/EigenHelpers.h" bodystart="296" bodyend="301"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1afdc6aa2eb9f7336bab5dcc93ce434d69" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -553,7 +553,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="281" column="22" bodyfile="iDynTree/EigenHelpers.h" bodystart="281" bodyend="298"/>
+        <location file="iDynTree/EigenHelpers.h" line="309" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="309" bodyend="326"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1aa729e01f528b84f9abd8029f3a05bc4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -576,7 +576,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="306" column="22" bodyfile="iDynTree/EigenHelpers.h" bodystart="306" bodyend="317"/>
+        <location file="iDynTree/EigenHelpers.h" line="335" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="335" bodyend="346"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1ab923f233e9624344a28e361ddc2c4c10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -621,7 +621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="323" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="323" bodyend="334"/>
+        <location file="iDynTree/EigenHelpers.h" line="352" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="352" bodyend="365"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a46433c21ed1226e759f6d2471731ff20" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -658,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="337" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="337" bodyend="347"/>
+        <location file="iDynTree/EigenHelpers.h" line="368" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="368" bodyend="379"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a15eb97c903bd5a5a44d7b36997a383f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -692,7 +692,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="350" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="350" bodyend="362"/>
+        <location file="iDynTree/EigenHelpers.h" line="382" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="382" bodyend="395"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1acab405374af27aa1405539284ac1c79a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -722,7 +722,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="365" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="365" bodyend="378"/>
+        <location file="iDynTree/EigenHelpers.h" line="398" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="398" bodyend="412"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a05bb9e8c80231289997f79ffc0b2e97c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -752,7 +752,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="381" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="381" bodyend="394"/>
+        <location file="iDynTree/EigenHelpers.h" line="415" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="415" bodyend="429"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a6dd6e3fecb51492464bb6648090d9785" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -784,7 +784,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="398" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="398" bodyend="404"/>
+        <location file="iDynTree/EigenHelpers.h" line="433" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="433" bodyend="437"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1ac065bee2dbb9521e07df4d769992ccd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -809,7 +809,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="406" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="406" bodyend="413"/>
+        <location file="iDynTree/EigenHelpers.h" line="439" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="439" bodyend="444"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a60fc528e9cb5bb8f0a41ad51ae464ac5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -834,7 +834,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="415" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="415" bodyend="422"/>
+        <location file="iDynTree/EigenHelpers.h" line="447" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="447" bodyend="452"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a6c26a20e65041a0023677f35f84563f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -859,7 +859,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="424" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="424" bodyend="431"/>
+        <location file="iDynTree/EigenHelpers.h" line="455" column="1" bodyfile="iDynTree/EigenHelpers.h" bodystart="455" bodyend="460"/>
       </memberdef>
       <memberdef kind="function" id="EigenHelpers_8h_1a3707e4cd79954877014299710fee2607" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -889,7 +889,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/EigenHelpers.h" line="434" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="434" bodyend="440"/>
+        <location file="iDynTree/EigenHelpers.h" line="463" column="13" bodyfile="iDynTree/EigenHelpers.h" bodystart="463" bodyend="467"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

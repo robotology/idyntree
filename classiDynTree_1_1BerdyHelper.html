@@ -84,6 +84,11 @@
               <span class="m-doc-wrap-bumper"><a href="#a87d946099a5c1491b7b5143eea33cbea" class="m-doc-self">BerdyHelper</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
             <dd>Constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a0e076d23646a8c125121d1477916ac07" class="m-doc">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot; Deprecated,
+              please use the version in which sensors are passed &quot; &quot;via the <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&quot;) bool init(const Model &amp;model</span>
+            </dt>
+            <dd>Init the class.</dd>
           </dl>
         </section>
         <section id="pub-methods">
@@ -115,12 +120,6 @@
             <dd>Returns if the helper is valid.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a3d844581e38acd550df0478db151f6f9" class="m-doc">init</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a> options = <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a>()) -&gt; bool</span>
-            </dt>
-            <dd>Init the class.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4570e41df3b6dfedd00fe4dfcc2bc02b" class="m-doc">init</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; sensors,
               const <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a> options = <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a>()) -&gt; bool</span>
             </dt>
             <dd>Init the class.</dd>
@@ -285,6 +284,14 @@
               std::vector&lt;size_t&gt; <a href="#af8a24a4b0fae237d14a8b4931c706f40" class="m-doc-self">jntIdxToOffset</a>
             </dt>
             <dd>Mapping between jndIx in wrenchSensor and.</dd>
+            <dt id="abfe8cea04fe536e265d04e581a4f94de">
+              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; <a href="#abfe8cea04fe536e265d04e581a4f94de" class="m-doc-self">sensors</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af70bed42b866a9e7cefaf36ce5e24703">
+              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> const <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a> <a href="#af70bed42b866a9e7cefaf36ce5e24703" class="m-doc-self">options</a>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section id="methods-to-submit-the-input-data-for-dynamics-computations">
@@ -324,6 +331,21 @@
         </section>
         <section>
           <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a0e076d23646a8c125121d1477916ac07"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />BerdyHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0e076d23646a8c125121d1477916ac07" class="m-doc-self">IDYNTREE_DEPRECATED_WITH_MSG</a>(</span><span class="m-doc-wrap">&quot; Deprecated,
+              please use the version in which sensors are passed &quot; &quot;via the <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&quot;) bool init(const Model &amp;model</span></span>
+            </h3>
+            <p>Init the class.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if all went well, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
           <section class="m-doc-details" id="a1e159c73e14672efc1a4ad5db4e4c070"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />BerdyHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1e159c73e14672efc1a4ad5db4e4c070" class="m-doc-self">isValid</a>(</span><span class="m-doc-wrap">) const</span></span>
@@ -367,39 +389,6 @@
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a4570e41df3b6dfedd00fe4dfcc2bc02b"><div>
-            <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />BerdyHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4570e41df3b6dfedd00fe4dfcc2bc02b" class="m-doc-self">init</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; sensors,
-              const <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a> options = <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a>())</span></span>
-            </h3>
-            <p>Init the class.</p>
-            <table class="m-table m-fullwidth m-flat">
-              <thead>
-                <tr><th colspan="2">Parameters</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="width: 1%">model&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The used model.</td>
-                </tr>
-                <tr>
-                  <td>sensors&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The used sensors.</td>
-                </tr>
-                <tr>
-                  <td>options&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>The used options, check <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a> docs.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Returns</th>
-                  <td>true if all went well, false otherwise.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div></section>
           <section class="m-doc-details" id="a47b69a027609e28259584304ed786ff9"><div>
             <h3>
               <span class="m-doc-wrap-bumper">size_t iDynTree::<wbr />BerdyHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a47b69a027609e28259584304ed786ff9" class="m-doc-self">getNrOfDynamicVariables</a>(</span><span class="m-doc-wrap">) const</span></span>
@@ -415,7 +404,7 @@
               <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; bY)</span></span>
             </h3>
             <p>Get Berdy matrices.</p>
-<aside class="m-note m-info"><h4>Note</h4><p>internally this function uses sparse matrices Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &amp;, VectorDynSize &amp;, SparseMatrix &amp;, VectorDynSize &amp;)</p></aside>
+<aside class="m-note m-info"><h4>Note</h4><p>internally this function uses sparse matrices Prefer the use of resizeAndZeroBerdyMatrices(<a href="classiDynTree_1_1SparseMatrix.html" class="m-doc">SparseMatrix</a> &amp;, <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a> &amp;, <a href="classiDynTree_1_1SparseMatrix.html" class="m-doc">SparseMatrix</a> &amp;, <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a> &amp;)</p></aside>
           </div></section>
           <section class="m-doc-details" id="ac5f9f3dd120d88458150782f3156f9d0"><div>
             <h3>
