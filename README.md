@@ -6,7 +6,7 @@ iDynTree is a library of robots dynamics algorithms for control, estimation and 
 The **major characteristic features** of iDynTree are:
 * It is written in **C++**, with **Python** and **MATLAB** bindings.
 * It uses an  **undirected graph data structure** (`iDynTree::Model`) that is used to represent robots, to easily change the **base link** that you are using for your kinematics and dynamics computations without the need to reload your model or change your joint or link serializations. This is done as iDynTree was developed for floating-base robots such as humanoids, in which the most convenient choice of **base link** can change.
-* It contains support for **reading and writing URDF files** from a `iDynTree::Model`, making it useful to write tools that modify robot models and saves them back to file. This is done as iDynTree was meant to develop **tools for identification of kinematics and dynamics parameters**.
+* It contains support for **reading and writing URDF files** and **reading SDFormat files** from a `iDynTree::Model`, making it useful to write tools that modify robot models and saves them back to file. This is done as iDynTree was meant to develop **tools for identification of kinematics and dynamics parameters**.
 * It defaults to use the **mixed representation** to represent link quantities (including the velocity and acceleration of the base link), but it can optionally use also **body (left-trivialized)** or **inertial (right-trivialized)** representation if requested. This is done because iDynTree was developed to satisfy the needs of **research in synthesis of floating-base whole-body controllers**. If you are not familiar with the different representation for 6D quantities, check  [Section 6 of "Multibody dynamics notation (version 2)"](
 https://pure.tue.nl/ws/portalfiles/portal/139293126/A_Multibody_Dynamics_Notation_Revision_2_.pdf).
 * It contains an implementation of the algorithm used in the iCub humanoid robot to **estimate the joint torques without the need of collocated joint torque sensors**, exploting the specific **undirected graph data structure** . This is done as this was one of the originally goal for the implementation of iDynTree. See the class [`iDynTree::ExtWrenchesAndJointTorquesEstimator`](https://github.com/robotology/idyntree/blob/master/src/estimation/include/iDynTree/ExtWrenchesAndJointTorquesEstimator.h) and [Chapter 6 of "Modelling, Estimation and Identification of Humanoid Robots Dynamics"](https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf).
@@ -29,7 +29,7 @@ To avoid confusion, it is also useful to clarify what **iDynTree is not**:
 
 ## Installation
 
-### conda (recommended) 
+### conda (recommended)
 
 You can easily install the C++ and Python library with via [`conda-forge`](https://conda-forge.org) using the following command
 ~~~
@@ -45,7 +45,7 @@ If you are not familiar with conda or conda-forge, you can read an introduction 
 
 ### robotology-superbuild (advanced)
 
-If you are installing iDynTree for use as part of [iCub humanoid robot software installation](https://icub-tech-iit.github.io/documentation/sw_installation/), you may want to install iDynTree through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](https://www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild. If you want to install also iDynTree Python or MATLAB bindings, remember to enable the `ROBOTOLOGY_USES_PYTHON` or `ROBOTOLOGY_USES_MATLAB` options. 
+If you are installing iDynTree for use as part of [iCub humanoid robot software installation](https://icub-tech-iit.github.io/documentation/sw_installation/), you may want to install iDynTree through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](https://www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild. If you want to install also iDynTree Python or MATLAB bindings, remember to enable the `ROBOTOLOGY_USES_PYTHON` or `ROBOTOLOGY_USES_MATLAB` options.
 
 ### Build from source (advanced)
 
@@ -85,7 +85,7 @@ These tutorials describe how to use specific parts of iDynTree. Are you interest
 | Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/classiDynTree_1_1KinDynComputations.html). | [examples/python/KinDynComputationsTutorial.py](examples/python/KinDynComputationsTutorial.py) | Python |
 | Basic usage of the [MeshcatVisualizer class](bindings/python/visualize/meshcat_visualizer.py). | [examples/python/MeshcatVisualizerExample.ipynb](examples/python/MeshcatVisualizerExample.ipynb) | Python |
 
-## Tools Usage 
+## Tools Usage
 
 iDynTree also includes some command line tools to use some of the functionality of the library without writing any line of code. The available command line tools are listed in the following, and each tool also includes an online help that is tipically available by passing the `-h` flag.
 
@@ -109,9 +109,9 @@ idyntree-model-view -m <location-of-the-model>
 
 ### `idyntree-model-simplify-shapes`
 
-Tool that reads a model from a file, and returns in output the same model, but with all 
-solid shapes of the model (both collision and visual) substituted with a primitive shape 
-that approximates in some way the original solid shape. At the moment, the only conversion 
+Tool that reads a model from a file, and returns in output the same model, but with all
+solid shapes of the model (both collision and visual) substituted with a primitive shape
+that approximates in some way the original solid shape. At the moment, the only conversion
 type provided is to approximate each solid shape of the model with its axis aligned bounding box.
 
 Example: Approximate a given model

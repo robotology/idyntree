@@ -3,11 +3,13 @@
 
 #include "iDynTree/ModelLoader.h"
 
+#include "SDFormatDocument.h"
 #include "URDFDocument.h"
 
-#include <iDynTree/XMLParser.h>
 #include <iDynTree/ModelTransformers.h>
+#include <iDynTree/XMLParser.h>
 
+#include <algorithm>
 #include <string>
 #include <vector>
 
@@ -22,17 +24,16 @@ namespace iDynTree
     , sphericalJointOrthogonalityTolerance(1e-6)
     , sphericalJointIntersectionTolerance(1e-6) {}
 
-
     class ModelLoader::ModelLoaderPimpl {
     public:
         Model m_model;
         bool m_isModelValid;
         ModelParserOptions m_options;
 
-        bool setModel(const Model& _model);
+        bool setModel(const Model &_model);
     };
 
-    bool ModelLoader::ModelLoaderPimpl::setModel(const Model& _model)
+    bool ModelLoader::ModelLoaderPimpl::setModel(const Model &_model)
     {
         m_model = _model;
 
@@ -41,7 +42,7 @@ namespace iDynTree
 
         if (!m_isModelValid)
         {
-            reportError("ModelLoader","setModel","Loading failed, resetting ModelLoader to be invalid");
+            reportError("ModelLoader", "setModel", "Loading failed, resetting ModelLoader to be invalid");
             m_model = Model();
         }
 
@@ -56,12 +57,12 @@ namespace iDynTree
 
     ModelLoader::~ModelLoader() {}
 
-    const Model& ModelLoader::model()
+    const Model &ModelLoader::model()
     {
         return m_pimpl->m_model;
     }
 
-    const SensorsList& ModelLoader::sensors()
+    const SensorsList &ModelLoader::sensors()
     {
         return m_pimpl->m_model.sensors();
     }
@@ -71,22 +72,64 @@ namespace iDynTree
         return m_pimpl->m_isModelValid;
     }
 
+    const ModelParserOptions &ModelLoader::parsingOptions() const { return m_pimpl->m_options; }
 
-    const ModelParserOptions& ModelLoader::parsingOptions() const { return m_pimpl->m_options; }
-
-    void ModelLoader::setParsingOptions(const ModelParserOptions& options)
+    void ModelLoader::setParsingOptions(const ModelParserOptions &options)
     {
         m_pimpl->m_options = options;
     }
 
-    bool ModelLoader::loadModelFromFile(const std::string& filename,
-                                        const std::string& /*filetype*/,
-                                        const std::vector<std::string>& packageDirs /* = {} */)
+    bool ModelLoader::loadModelFromFile(const std::string &filename,
+                                        const std::string &filetype,
+                                        const std::vector<std::string> &packageDirs /* = {} */)
     {
+        // Determine the file type - either from explicit parameter or from file
+        // extension
+        std::string actualFileType = filetype;
+        if (actualFileType.empty())
+        {
+            // Try to determine from extension
+            size_t dotPos = filename.rfind('.');
+            if (dotPos != std::string::npos)
+            {
+                actualFileType = filename.substr(dotPos + 1);
+                // Convert to lowercase for comparison
+                std::transform(actualFileType.begin(), actualFileType.end(),
+                               actualFileType.begin(), ::tolower);
+            }
+        }
+
+        // Check if this is an SDF file
+        if (actualFileType == "sdf" || actualFileType == "world")
+        {
+#ifdef IDYNTREE_USES_SDFORMAT
+            // Use SDFormat parser
+            auto parserOptions = this->m_pimpl->m_options;
+            auto sdfDocument = std::make_shared<SDFormatDocument>(parserOptions);
+
+            if (!sdfDocument->loadFromFile(filename, packageDirs))
+            {
+                reportError("ModelLoader", "loadModelFromFile",
+                            "Error in parsing model from SDF file.");
+                return false;
+            }
+
+            return m_pimpl->setModel(sdfDocument->model());
+#else
+            reportError("ModelLoader", "loadModelFromFile",
+                        "SDF file format detected but iDynTree was not compiled with "
+                        "SDFormat support. "
+                        "Please rebuild iDynTree with IDYNTREE_USES_SDFORMAT option "
+                        "enabled.");
+            return false;
+#endif
+        }
+
+        // Default to URDF parsing
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
-        auto parserOptions =  this->m_pimpl->m_options;
-        auto documentFactoryWithOptions = [parserOptions](XMLParserState& state){
+        auto parserOptions = this->m_pimpl->m_options;
+        auto documentFactoryWithOptions = [parserOptions](XMLParserState &state){
             return std::shared_ptr<XMLDocument>(new URDFDocument(state, parserOptions));
             };
         parser->setDocumentFactory(documentFactoryWithOptions);
@@ -106,14 +149,57 @@ namespace iDynTree
         return m_pimpl->setModel(urdfDocument->model());
     }
 
-    bool ModelLoader::loadModelFromString(const std::string& modelString,
-                                          const std::string& /*filetype*/,
-                                          const std::vector<std::string>& packageDirs /* = {} */)
+    bool ModelLoader::loadModelFromString(const std::string &modelString,
+                                          const std::string &filetype,
+                                          const std::vector<std::string> &packageDirs /* = {} */)
     {
+        // Check if this is an SDF string (look for <sdf> tag)
+        bool isSDF = false;
+        if (filetype == "sdf" || filetype == "world")
+        {
+            isSDF = true;
+        }
+        else if (filetype.empty())
+        {
+            // Try to detect from content
+            size_t sdfPos = modelString.find("<sdf");
+            if (sdfPos != std::string::npos &&
+                sdfPos < 1000) // Check in first 1000 chars
+            {
+                isSDF = true;
+            }
+        }
+
+        if (isSDF)
+        {
+#ifdef IDYNTREE_USES_SDFORMAT
+            // Use SDFormat parser
+            auto parserOptions = this->m_pimpl->m_options;
+            auto sdfDocument = std::make_shared<SDFormatDocument>(parserOptions);
+
+            if (!sdfDocument->loadFromString(modelString, packageDirs))
+            {
+                reportError("ModelLoader", "loadModelFromString",
+                            "Error in parsing model from SDF string.");
+                return false;
+            }
+
+            return m_pimpl->setModel(sdfDocument->model());
+#else
+            reportError("ModelLoader", "loadModelFromString",
+                        "SDF format detected but iDynTree was not compiled with "
+                        "SDFormat support. "
+                        "Please rebuild iDynTree with IDYNTREE_USES_SDFORMAT option "
+                        "enabled.");
+            return false;
+#endif
+        }
+
+        // Default to URDF parsing
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
-        auto parserOptions =  this->m_pimpl->m_options;
-        auto documentFactoryWithOptions = [parserOptions](XMLParserState& state){
+        auto parserOptions = this->m_pimpl->m_options;
+        auto documentFactoryWithOptions = [parserOptions](XMLParserState &state){
             return std::shared_ptr<XMLDocument>(new URDFDocument(state, parserOptions));
             };
 
@@ -169,7 +255,7 @@ namespace iDynTree
         _modelReduced.setPackageDirs(fullModel.getPackageDirs());
         bool ok = createReducedModel(fullModel,consideredJoints,_modelReduced, removedJointPositions);
 
-        if( !ok )
+        if (!ok)
         {
             return false;
         }
@@ -184,7 +270,7 @@ namespace iDynTree
     {
         // Convert the double-based map to vector-based map for backward compatibility
         std::unordered_map<std::string, std::vector<double>> removedJointPositionsVector;
-        for (const auto& pair : removedJointPositions)
+        for (const auto &pair : removedJointPositions)
         {
             removedJointPositionsVector[pair.first] = {pair.second};
         }
@@ -222,7 +308,7 @@ namespace iDynTree
     {
         // Convert the double-based map to vector-based map for backward compatibility
         std::unordered_map<std::string, std::vector<double>> removedJointPositionsVector;
-        for (const auto& pair : removedJointPositions)
+        for (const auto &pair : removedJointPositions)
         {
             removedJointPositionsVector[pair.first] = {pair.second};
         }
@@ -259,7 +345,7 @@ namespace iDynTree
     {
         // Convert the double-based map to vector-based map for backward compatibility
         std::unordered_map<std::string, std::vector<double>> removedJointPositionsVector;
-        for (const auto& pair : removedJointPositions)
+        for (const auto &pair : removedJointPositions)
         {
             removedJointPositionsVector[pair.first] = {pair.second};
         }

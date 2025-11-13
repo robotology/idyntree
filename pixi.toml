@@ -23,6 +23,7 @@ configure = { cmd = [
     "-DIDYNTREE_USES_PYTHON:BOOL=ON",
     "-DIDYNTREE_USES_PYTHON_PYBIND11:BOOL=ON",
     "-DIDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES:BOOL=ON",
+    "-DIDYNTREE_USES_SDFORMAT:BOOL=ON",
     # Use the cross-platform Ninja generator
     "-G",
     "Ninja",
@@ -58,6 +59,7 @@ python = "*"
 numpy = "*"
 yarp = "*"
 osqp-eigen = "*"
+libsdformat = ">=16.0"
 # Find a way to add this only for supported envs
 # icub-main = "*"
 

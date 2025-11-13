@@ -7,6 +7,7 @@ set(IDYNTREE_MODELIO_HEADERS include/iDynTree/URDFDofsImport.h
                                   include/iDynTree/ModelCalibrationHelper.h)
 
 set(IDYNTREE_MODELIO_PRIVATE_HEADERS include/private/URDFDocument.h
+                                          include/private/SDFormatDocument.h
                                           include/private/InertialElement.h
                                           include/private/JointElement.h
                                           include/private/LinkElement.h
@@ -21,6 +22,7 @@ set(IDYNTREE_MODELIO_PRIVATE_HEADERS include/private/URDFDocument.h
                                           include/private/URDFModelExport.h)
 
 set(IDYNTREE_MODELIO_URDF_XMLELEMENTS_SOURCES src/URDFDocument.cpp
+                                              src/SDFormatDocument.cpp
                                               src/InertialElement.cpp
                                               src/JointElement.cpp
                                               src/LinkElement.cpp
@@ -53,6 +55,13 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-modelio-xml
                                      PRIVATE Eigen3::Eigen LibXml2::LibXml2)
+
+# Add SDFormat support if available
+if(IDYNTREE_USES_SDFORMAT)
+    target_link_libraries(${libraryname} PRIVATE sdformat::sdformat)
+    target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_SDFORMAT)
+endif()
+
 # See https://stackoverflow.com/questions/38832528/transitive-target-include-directories-on-object-libraries
 # Can be removed with CMake 3.12
 target_include_directories(${libraryname} PRIVATE $<TARGET_PROPERTY:idyntree-private-fpconv,INTERFACE_INCLUDE_DIRECTORIES>)

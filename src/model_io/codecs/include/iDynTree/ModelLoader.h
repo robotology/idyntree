@@ -7,13 +7,12 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/Sensors.h>
 
-#include <unordered_map>
 #include <memory>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
-namespace iDynTree
-{
+namespace iDynTree {
 
 /**
  * \ingroup iDynTreeModelIO
@@ -40,14 +39,15 @@ public:
      * This attribute is the original filename of the URDF sensor parsed.
      * It is useful when loading a model from a string, if that URDF string
      * has <geometry> tags that point to external meshes. To find the location
-     * of this external meshes, we need also the original filename of the URDF file.
+     * of this external meshes, we need also the original filename of the URDF
+     * file.
      */
     std::string originalFilename;
 
     /**
-     * If true, three consecutive revolute joints with zero-mass intermediate links
-     * and orthogonal axes intersecting at a point are converted to a single spherical joint.
-     * Default: true
+     * If true, three consecutive revolute joints with zero-mass intermediate
+     * links and orthogonal axes intersecting at a point are converted to a single
+     * spherical joint. Default: true
      */
     bool convertThreeRevoluteJointsToSphericalJoint;
 
@@ -59,15 +59,15 @@ public:
     double sphericalJointZeroMassTolerance;
 
     /**
-     * Tolerance for checking if revolute joint axes are orthogonal when converting
-     * three revolute joints to spherical joints.
+     * Tolerance for checking if revolute joint axes are orthogonal when
+     * converting three revolute joints to spherical joints.
      * Default: 1e-6
      */
     double sphericalJointOrthogonalityTolerance;
 
     /**
-     * Tolerance for checking if revolute joint axes intersect at a point when converting
-     * three revolute joints to spherical joints.
+     * Tolerance for checking if revolute joint axes intersect at a point when
+     * converting three revolute joints to spherical joints.
      * Default: 1e-6
      */
     double sphericalJointIntersectionTolerance;
@@ -81,16 +81,15 @@ public:
 
 };
 
-
 /**
  * \ingroup iDynTreeModelIO
  *
  * Helper class to load a model from a generic format.
  *
- * Unless the methods for loading a model with an explicit serialization are used,
- * the default joint serialization of the model loaded will be a "normalized" joint serialization
- * based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function
- * for more details.
+ * Unless the methods for loading a model with an explicit serialization are
+ * used, the default joint serialization of the model loaded will be a
+ * "normalized" joint serialization based on the default base link, see the
+ * iDynTree::createModelWithNormalizedJointNumbering function for more details.
  */
 class ModelLoader
 {
@@ -100,7 +99,6 @@ private:
     std::unique_ptr<ModelLoaderPimpl> m_pimpl;
 
 public:
-
     /**
      * @name Constructor/Destructor
      */
@@ -121,63 +119,73 @@ public:
      * This methods are used to load the structure of your model.
      */
     //@{
-    const ModelParserOptions& parsingOptions() const;
+    const ModelParserOptions &parsingOptions() const;
 
-    void setParsingOptions(const ModelParserOptions& options);
+    void setParsingOptions(const ModelParserOptions &options);
 
     /**
      * Load the model of the robot  from a string.
      *
      * @param modelString string containg the model of the robot.
-     * @param filetype type of the file to load, currently supporting only urdf type
-     * @param packageDirs a vector containing the different directories where to search for model meshes
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @param filetype type of the file to load, currently supporting only urdf
+     * type
+     * @param packageDirs a vector containing the different directories where to
+     * search for model meshes
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      */
-    bool loadModelFromString(const std::string & modelString,
-                             const std::string & filetype="urdf",
-                             const std::vector<std::string>& packageDirs = {});
+    bool loadModelFromString(const std::string &modelString,
+                             const std::string &filetype = "",
+                             const std::vector<std::string> &packageDirs = {});
 
     /**
      * Load the model of the robot from an external file.
      *
      * @param filename path to the file to load
-     * @param filetype type of the file to load, currently supporting only urdf type.
-     * @param packageDirs a vector containing the different directories where to search for model meshes
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @param filetype type of the file to load, currently supporting only urdf
+     * type.
+     * @param packageDirs a vector containing the different directories where to
+     * search for model meshes
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      */
-    bool loadModelFromFile(const std::string & filename,
-                           const std::string & filetype="urdf",
-                           const std::vector<std::string>& packageDirs = {});
+    bool loadModelFromFile(const std::string &filename,
+                           const std::string &filetype = "",
+                           const std::vector<std::string> &packageDirs = {});
 
     /**
-     * Load reduced model from another model, specifyng only the desired joints in the model.
+     * Load reduced model from another model, specifyng only the desired joints in
+     * the model.
      *
      * All other joints will be considered to be fixed to their default position,
      * and their child links will be lumped together.
      *
      * @note the order of the degreese of freedom of the newly loaded model
-     * will be the one specified by the input joints serialization, i.e. consideredJoints
+     * will be the one specified by the input joints serialization, i.e.
+     * consideredJoints
      *
      * @param[in] filename path to the file to load.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] filetype (optional) explicit definition of the type of the loaded file. Only "urdf" is supported at the moment.
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] filetype (optional) explicit definition of the type of the
+     * loaded file. Only "urdf" is supported at the moment.
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * \note Until https://github.com/robotology/idyntree/issues/132 is fixed, this method does not
-     *       accounts for sensors.
+     * \note Until https://github.com/robotology/idyntree/issues/132 is fixed,
+     * this method does not accounts for sensors.
      *
      */
-    bool loadReducedModelFromFullModel(const Model& fullModel,
-                                       const std::vector<std::string> & consideredJoints,
-                                       const std::string filetype="");
+    bool loadReducedModelFromFullModel(const Model &fullModel,
+                                       const std::vector<std::string> &consideredJoints,
+                                       const std::string filetype = "");
 
     /**
      * Load reduced model from string, specifyng only the desired joints in the model.
@@ -189,21 +197,23 @@ public:
      * @param[in] consideredJoints list of joints to consider in the model.
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
-     * @param[in] packageDirs (optional) a vector containing the different directories where to
-     *                        search for model meshes
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] packageDirs (optional) a vector containing the different
+     * directories where to search for model meshes
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      *
      */
     bool loadReducedModelFromString(const std::string modelString,
-                                    const std::vector<std::string> & consideredJoints,
-                                    const std::string filetype="",
-                                    const std::vector<std::string>& packageDirs = {});
+                                    const std::vector<std::string> &consideredJoints,
+                                    const std::string filetype = "",
+                                    const std::vector<std::string> &packageDirs = {});
 
     /**
      * Load reduced model from file, specifyng only the desired joints in the model.
@@ -215,70 +225,83 @@ public:
      * @param[in] consideredJoints list of joints to consider in the model.
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
-     * @param[in] packageDirs (optional) a vector containing the different directories where to
-     *                        search for model meshes
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] packageDirs (optional) a vector containing the different
+     * directories where to search for model meshes
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      */
     bool loadReducedModelFromFile(const std::string filename,
-                                  const std::vector<std::string> & consideredJoints,
-                                  const std::string filetype="",
-                                  const std::vector<std::string>& packageDirs = {});
+                                  const std::vector<std::string> &consideredJoints,
+                                  const std::string filetype = "",
+                                  const std::vector<std::string> &packageDirs = {});
     /**
-     * Load reduced model from another model, specifyng only the desired joints in the model.
+     * Load reduced model from another model, specifyng only the desired joints in
+     * the model.
      *
      * All other joints will be considered to be fixed to their default position,
      * and their child links will be lumped together.
      *
      * @note the order of the degreese of freedom of the newly loaded model
-     * will be the one specified by the input joints serialization, i.e. consideredJoints
+     * will be the one specified by the input joints serialization, i.e.
+     * consideredJoints
      *
      * @param[in] filename path to the file to load.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] removedJointPositions map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model
-     * @param[in] filetype (optional) explicit definition of the type of the loaded file. Only "urdf" is supported at the moment.
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] removedJointPositions map between the dof name of the dof no in
+     * consideredJoints and their (fixed) position in the reduced model
+     * @param[in] filetype (optional) explicit definition of the type of the
+     * loaded file. Only "urdf" is supported at the moment.
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * \note Until https://github.com/robotology/idyntree/issues/132 is fixed, this method does not
-     *       accounts for sensors.
+     * \note Until https://github.com/robotology/idyntree/issues/132 is fixed,
+     * this method does not accounts for sensors.
      *
      */
-    bool loadReducedModelFromFullModel(const Model& fullModel,
-                                       const std::vector<std::string> & consideredJoints,
-                                       const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
-                                       const std::string filetype="");
+    bool loadReducedModelFromFullModel(const Model &fullModel,
+                                       const std::vector<std::string> &consideredJoints,
+                                       const std::unordered_map<std::string, std::vector<double>> &removedJointPositions,
+                                       const std::string filetype = "");
 
     /**
-     * Load reduced model from another model, specifyng only the desired joints in the model.
+     * Load reduced model from another model, specifyng only the desired joints in
+     * the model.
      *
      * All other joints will be considered to be fixed to their default position,
      * and their child links will be lumped together.
      *
      * @note the order of the degreese of freedom of the newly loaded model
-     * will be the one specified by the input joints serialization, i.e. consideredJoints
+     * will be the one specified by the input joints serialization, i.e.
+     * consideredJoints
      *
      * @param[in] filename path to the file to load.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] removedJointPositions map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model
-     * @param[in] filetype (optional) explicit definition of the type of the loaded file. Only "urdf" is supported at the moment.
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] removedJointPositions map between the dof name of the dof no in
+     * consideredJoints and their (fixed) position in the reduced model
+     * @param[in] filetype (optional) explicit definition of the type of the
+     * loaded file. Only "urdf" is supported at the moment.
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * @warning This overload will not work with joints with position coordinates dimension > 1.
-     *          Use the std::vector<double> version for full support of all joint types.
+     * @warning This overload will not work with joints with position coordinates
+     * dimension > 1. Use the std::vector<double> version for full support of all
+     * joint types.
      *
-     * \note Until https://github.com/robotology/idyntree/issues/132 is fixed, this method does not
-     *       accounts for sensors.
+     * \note Until https://github.com/robotology/idyntree/issues/132 is fixed,
+     * this method does not accounts for sensors.
      *
      */
-    bool loadReducedModelFromFullModel(const Model& fullModel,
-                                       const std::vector<std::string> & consideredJoints,
-                                       const std::unordered_map<std::string, double>& removedJointPositions,
-                                       const std::string filetype="");
+    bool loadReducedModelFromFullModel(const Model &fullModel,
+                                       const std::vector<std::string> &consideredJoints,
+                                       const std::unordered_map<std::string, double> &removedJointPositions,
+                                       const std::string filetype = "");
 
     /**
      * Load reduced model from string, specifyng only the desired joints in the model.
@@ -288,25 +311,28 @@ public:
      *
      * @param[in] modelString string containg the model of the robot.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] removedJointPositions map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model
+     * @param[in] removedJointPositions map between the dof name of the dof no in
+     * consideredJoints and their (fixed) position in the reduced model
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
-     * @param[in] packageDirs (optional) a vector containing the different directories where to
-     *                        search for model meshes
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] packageDirs (optional) a vector containing the different
+     * directories where to search for model meshes
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      *
      */
     bool loadReducedModelFromString(const std::string modelString,
-                                    const std::vector<std::string> & consideredJoints,
-                                    const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
-                                    const std::string filetype="",
-                                    const std::vector<std::string>& packageDirs = {});
+                                    const std::vector<std::string> &consideredJoints,
+                                    const std::unordered_map<std::string, std::vector<double>> &removedJointPositions,
+                                    const std::string filetype = "",
+                                    const std::vector<std::string> &packageDirs = {});
 
     /**
      * Load reduced model from string, specifyng only the desired joints in the model.
@@ -316,21 +342,25 @@ public:
      *
      * @param[in] modelString string containg the model of the robot.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] removedJointPositions map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model
+     * @param[in] removedJointPositions map between the dof name of the dof no in
+     * consideredJoints and their (fixed) position in the reduced model
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
-     * @param[in] packageDirs (optional) a vector containing the different directories where to
-     *                        search for model meshes
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] packageDirs (optional) a vector containing the different
+     * directories where to search for model meshes
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * @warning This overload will not work with joints with position coordinates dimension > 1.
-     *          Use the std::vector<double> version for full support of all joint types.
+     * @warning This overload will not work with joints with position coordinates
+     * dimension > 1. Use the std::vector<double> version for full support of all
+     * joint types.
      *
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      *
      */
     bool loadReducedModelFromString(const std::string modelString,
@@ -347,61 +377,68 @@ public:
      *
      * @param[in] filename path to the file to load.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] removedJointPositions map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model
+     * @param[in] removedJointPositions map between the dof name of the dof no in
+     * consideredJoints and their (fixed) position in the reduced model
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
-     * @param[in] packageDirs (optional) a vector containing the different directories where to
-     *                        search for model meshes
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] packageDirs (optional) a vector containing the different
+     * directories where to search for model meshes
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      */
     bool loadReducedModelFromFile(const std::string filename,
-                                  const std::vector<std::string> & consideredJoints,
-                                  const std::unordered_map<std::string, std::vector<double>>& removedJointPositions,
-                                  const std::string filetype="",
-                                  const std::vector<std::string>& packageDirs = {});
+                                  const std::vector<std::string> &consideredJoints,
+                                  const std::unordered_map<std::string, std::vector<double>> &removedJointPositions,
+                                  const std::string filetype = "",
+                                  const std::vector<std::string> &packageDirs = {});
 
     /**
-     * Load reduced model from file, specifyng only the desired joints in the model.
+     * Load reduced model from file, specifyng only the desired joints in the
+     * model.
      *
      * All other joints will be considered to be fixed to their default position,
      * and their child links will be lumped together.
      *
      * @param[in] filename path to the file to load.
      * @param[in] consideredJoints list of joints to consider in the model.
-     * @param[in] removedJointPositions map between the dof name of the dof no in consideredJoints and their (fixed) position in the reduced model
+     * @param[in] removedJointPositions map between the dof name of the dof no in
+     * consideredJoints and their (fixed) position in the reduced model
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
-     * @param[in] packageDirs (optional) a vector containing the different directories where to
-     *                        search for model meshes
-     * @return true if all went well (files were correctly loaded and consistent), false otherwise.
+     * @param[in] packageDirs (optional) a vector containing the different
+     * directories where to search for model meshes
+     * @return true if all went well (files were correctly loaded and consistent),
+     * false otherwise.
      *
-     * @warning This overload will not work with joints with position coordinates dimension > 1.
-     *          Use the std::vector<double> version for full support of all joint types.
+     * @warning This overload will not work with joints with position coordinates
+     * dimension > 1. Use the std::vector<double> version for full support of all
+     * joint types.
      *
-     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
-     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
-     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
-     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
-     * should contain `/usr/local/share`.
+     * @note In case no package is specified ModelLoader will look for the meshes
+     * in `GAZEBO_MODEL_PATH`, `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in
+     * `package://StrangeModel/Nested/mesh.stl`, and the actual mesh is in
+     * `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs` should
+     * contain `/usr/local/share`.
      */
     bool loadReducedModelFromFile(const std::string filename,
-                                  const std::vector<std::string> & consideredJoints,
-                                  const std::unordered_map<std::string, double>& removedJointPositions,
-                                  const std::string filetype="",
-                                  const std::vector<std::string>& packageDirs = {});
-
+                                  const std::vector<std::string> &consideredJoints,
+                                  const std::unordered_map<std::string, double> &removedJointPositions,
+                                  const std::string filetype = "",
+                                  const std::vector<std::string> &packageDirs = {});
 
     /**
      * Get the loaded model.
      *
      */
-    const Model & model();
+    const Model &model();
 
     /**
      * Get the loaded sensors.
