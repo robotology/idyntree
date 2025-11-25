@@ -9,6 +9,7 @@
 #include <iDynTree/IJoint.h>
 
 #include <iDynTree/Axis.h>
+#include <iDynTree/Position.h>
 #include <iDynTree/Transform.h>
 
 #include <memory>
@@ -35,6 +36,8 @@ public:
         iDynTree::Axis axis;
         std::string parentLinkName;
         std::string childLinkName;
+        bool hasJointCenter{false};
+        iDynTree::Position jointCenterInParentFrame{iDynTree::Position::Zero()};
     };
 
 private:

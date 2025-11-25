@@ -7,6 +7,7 @@
 
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelLoader.h>
+#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/URDFDofsImport.h>
 
 #include <algorithm>
@@ -314,6 +315,60 @@ void checkaddSensorFramesAsAdditionalFramesOption()
     }
 }
 
+void checkSphericalJointImport()
+{
+    auto loadAndValidate = [](const std::string& jointType) {
+        std::string urdf = std::string("<robot name=\"spherical_robot\">\n"
+                                       "  <link name=\"base\">\n"
+                                       "    <inertial>\n"
+                                       "      <mass value=\"1\"/>\n"
+                                       "    </inertial>\n"
+                                       "  </link>\n"
+                                       "  <link name=\"tip\">\n"
+                                       "    <inertial>\n"
+                                       "      <mass value=\"1\"/>\n"
+                                       "    </inertial>\n"
+                                       "  </link>\n"
+                                       "  <joint name=\"ball_joint\" type=\"")
+                           + jointType
+                           + std::string("\">\n"
+                                         "    <origin xyz=\"0.1 0.2 0.3\" rpy=\"0 0 0\"/>\n"
+                                         "    <parent link=\"base\"/>\n"
+                                         "    <child link=\"tip\"/>\n"
+                                         "  </joint>\n"
+                                         "</robot>\n");
+
+        ModelLoader loader;
+        ASSERT_IS_TRUE(loader.loadModelFromString(urdf));
+
+        const Model& model = loader.model();
+        ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(), 1);
+        ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(), 3);
+        ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()), "base");
+
+        JointIndex jointIdx = model.getJointIndex("ball_joint");
+        const IJoint* joint = model.getJoint(jointIdx);
+        const auto* spherical = dynamic_cast<const SphericalJoint*>(joint);
+        ASSERT_IS_TRUE(spherical != nullptr);
+
+        LinkIndex parentIdx = model.getLinkIndex("base");
+        LinkIndex childIdx = model.getLinkIndex("tip");
+
+        Position centerInParent = spherical->getJointCenter(parentIdx);
+        Position centerInChild = spherical->getJointCenter(childIdx);
+
+        ASSERT_EQUAL_DOUBLE(centerInParent(0), 0.1);
+        ASSERT_EQUAL_DOUBLE(centerInParent(1), 0.2);
+        ASSERT_EQUAL_DOUBLE(centerInParent(2), 0.3);
+        ASSERT_EQUAL_DOUBLE(centerInChild(0), 0.0);
+        ASSERT_EQUAL_DOUBLE(centerInChild(1), 0.0);
+        ASSERT_EQUAL_DOUBLE(centerInChild(2), 0.0);
+    };
+
+    loadAndValidate("spherical");
+    loadAndValidate("ball");
+}
+
 int main()
 {
     checkURDF(getAbsModelPath("/simple_model.urdf"), 1, 0, 0, 1, 1, 0, "link1");
@@ -330,6 +385,7 @@ int main()
 
     checkLoadReducedModelOrderIsKept(getAbsModelPath("iCubGenova02.urdf"));
     checkaddSensorFramesAsAdditionalFramesOption();
+    checkSphericalJointImport();
 
     return EXIT_SUCCESS;
 }
