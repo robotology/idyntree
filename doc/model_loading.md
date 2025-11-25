@@ -19,7 +19,7 @@ Furthermore, we also use some extension to the URDF specs, as defined in the fol
 
 The `URDF` specification do not support Spherical Joints, that instead iDynTree support. 
 
-As a non-standard extension, iDynTree also accepts URDF joints whose `type` attribute is set to `"spherical"` (or `"ball"`). In this case the joint origin is used as the spherical joint center and the joint is loaded directly as an `iDynTree::SphericalJoint` without requiring any conversion.
+As a non-standard extension, iDynTree also accepts URDF joints whose `type` attribute is set to `"spherical"` (or `"ball"`). In this case the joint origin is used as the spherical joint center and the joint is loaded directly as an `iDynTree::SphericalJoint` without requiring any conversion. Please note that URDF that contain `spherical` or `ball` joints are not supported by most URDF tools, so there use is discouraged.
 
 To allow to easily load and export standard URDF models that contain spherical joints, iDynTree URDF parser exposes an option `ModelParserOptions::convertThreeRevoluteJointsToSphericalJoint` that is off by default, but if enable can detect if the model contains three consecutive `revolute` or `continuous` joints with this conditions:
 * The three joint axis intersect at a single point
