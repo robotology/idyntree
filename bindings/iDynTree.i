@@ -89,6 +89,7 @@
 #include "iDynTree/FixedJoint.h"
 #include "iDynTree/MovableJointImpl.h"
 #include "iDynTree/RevoluteJoint.h"
+#include "iDynTree/SphericalJoint.h"
 #include "iDynTree/PrismaticJoint.h"
 #include "iDynTree/Traversal.h"
 #include "iDynTree/SolidShapes.h"
@@ -267,10 +268,12 @@ namespace std {
 %template(MovableJointImpl2) iDynTree::MovableJointImpl<2,2>;
 %template(MovableJointImpl3) iDynTree::MovableJointImpl<3,3>;
 %template(MovableJointImpl4) iDynTree::MovableJointImpl<4,4>;
+%template(MovableJointImpl4_3) iDynTree::MovableJointImpl<4,3>;
 %template(MovableJointImpl5) iDynTree::MovableJointImpl<5,5>;
 %template(MovableJointImpl6) iDynTree::MovableJointImpl<6,6>;
 
 %include "iDynTree/RevoluteJoint.h"
+%include "iDynTree/SphericalJoint.h"
 %include "iDynTree/PrismaticJoint.h"
 %include "iDynTree/Traversal.h"
 %include "iDynTree/SolidShapes.h"
@@ -341,4 +344,3 @@ namespace std {
 // Inverse Kinematics
 %include "iDynTree/ConvexHullHelpers.h"
 %include "iDynTree/InverseKinematics.h"
-

@@ -11,6 +11,7 @@
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/SolidShapes.h>
+#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/Traversal.h>
 
 #include <pybind11/operators.h>
@@ -279,6 +280,12 @@ void iDynTreeModelBindings(pybind11::module& module)
         .def("set_axis",
              py::overload_cast<const Axis&, const LinkIndex, const LinkIndex>(
                  &PrismaticJoint::setAxis));
+
+    py::class_<SphericalJoint, IJoint>(module, "SphericalJoint")
+        .def(py::init())
+        .def(py::init<const Transform&>())
+        .def("set_joint_center", &SphericalJoint::setJointCenter)
+        .def("get_joint_center", &SphericalJoint::getJointCenter);
 
     py::class_<FixedJoint, IJoint>(module, "FixedJoint").def(py::init());
 

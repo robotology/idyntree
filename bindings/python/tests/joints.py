@@ -4,15 +4,15 @@
 
 import sys
 
-# This test is meant to be executed from the build,
-# so we add in sys.path the location of iDynTree.py and _iDynTree.so
-# TODO: this probably does not work on Windows, fix it
-sys.path.append("../../python/")
-sys.path.append("../../../lib/python/")
-sys.path.append("../../../lib/python/Debug/")
+from pathlib import Path
+
+# Prefer the freshly built SWIG module from the build tree.
+THIS_DIR = Path(__file__).resolve().parent
+SWIG_DIR = THIS_DIR.parent / "idyntree"
+sys.path.insert(0, str(SWIG_DIR))
 
 import unittest
-import idyntree.swig as iDynTree
+import swig as iDynTree
 import random
 
 class JointTest(unittest.TestCase):
@@ -25,6 +25,9 @@ class JointTest(unittest.TestCase):
 
     def testFixedJoint(self):
         fixJoint = iDynTree.FixedJoint(iDynTree.Transform.Identity());
+
+    def testSphericalJoint(self):
+        sphJoint = iDynTree.SphericalJoint();
 
 if __name__ == '__main__':
     # initalize the seed to have predictable results

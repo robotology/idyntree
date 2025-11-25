@@ -41,7 +41,13 @@ if(Python3_INTERPRETER_ID STREQUAL "PyPy")
     set_property (TARGET ${target_name} PROPERTY SUFFIX "${IDYNTREE_PYTHON_EXT_SUFFIX}")
 endif()
 
-if(NOT MSVC)
+if(MSVC)
+    # The SWIG-generated wrapper for Python is large enough to exceed MSVC's default
+    # section limit; /bigobj avoids fatal error C1128 in CI on Windows.
+    set_property(
+        TARGET ${target_name}
+        PROPERTY SWIG_GENERATED_COMPILE_OPTIONS /bigobj)
+else()
     set_property(
         TARGET ${target_name}
         PROPERTY SWIG_COMPILE_OPTIONS -Wextra -threads)

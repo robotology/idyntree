@@ -56,7 +56,23 @@ void iDynTreeModelIoUrdfBindings(pybind11::module& module)
         .def_readwrite("base_link", &ModelExporterOptions::baseLink)
         .def_readwrite("robot_exported_name", &ModelExporterOptions::robotExportedName)
         .def_readwrite("export_first_base_link_additional_frame_as_fake_urdfbase",
-                       &ModelExporterOptions::exportFirstBaseLinkAdditionalFrameAsFakeURDFBase);
+                       &ModelExporterOptions::exportFirstBaseLinkAdditionalFrameAsFakeURDFBase)
+        .def_readwrite("export_spherical_joints_as_three_revolute_joints",
+                       &ModelExporterOptions::exportSphericalJointsAsThreeRevoluteJoints);
+
+    py::class_<ModelParserOptions>(module, "ModelParserOptions")
+        .def(py::init())
+        .def_readwrite("add_sensor_frames_as_additional_frames",
+                       &ModelParserOptions::addSensorFramesAsAdditionalFrames)
+        .def_readwrite("original_filename", &ModelParserOptions::originalFilename)
+        .def_readwrite("convert_three_revolute_joints_to_spherical_joint",
+                       &ModelParserOptions::convertThreeRevoluteJointsToSphericalJoint)
+        .def_readwrite("spherical_joint_zero_mass_tolerance",
+                       &ModelParserOptions::sphericalJointZeroMassTolerance)
+        .def_readwrite("spherical_joint_orthogonality_tolerance",
+                       &ModelParserOptions::sphericalJointOrthogonalityTolerance)
+        .def_readwrite("spherical_joint_intersection_tolerance",
+                       &ModelParserOptions::sphericalJointIntersectionTolerance);
 
     py::class_<ModelExporter>(module, "ModelExporter")
         .def(py::init())
@@ -80,7 +96,11 @@ void iDynTreeModelIoUrdfBindings(pybind11::module& module)
              [](ModelLoader* this_, const Model& model, const std::vector<std::string>& joints) {
                  return this_->loadReducedModelFromFullModel(model, joints);
              })
-        .def_property_readonly("model", &ModelLoader::model);
+        .def_property_readonly("model", &ModelLoader::model)
+        .def_property(
+            "parsing_options",
+            [](ModelLoader& loader) { return loader.parsingOptions(); },
+            &ModelLoader::setParsingOptions);
 }
 
 } // namespace bindings
