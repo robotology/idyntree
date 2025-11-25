@@ -12,6 +12,7 @@
 #include <iDynTree/FixedJoint.h>
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/SphericalJoint.h>
 
 #include <array>
 
@@ -42,9 +43,14 @@ bool JointElement::setAttributes(
     if (found != attributes.end())
     {
         m_jointType = found->second->value();
+        if (m_jointType == "ball")
+        {
+            // Accept "ball" as an alias for spherical joints
+            m_jointType = "spherical";
+        }
         // Explicitly check the supported types
         if (m_jointType != "fixed" && m_jointType != "revolute" && m_jointType != "continuous"
-            && m_jointType != "prismatic")
+            && m_jointType != "prismatic" && m_jointType != "spherical")
         {
             std::string errStr = "Joint " + m_jointName + " has type " + m_jointType
                                  + " that is not currently supported by iDynTree.";
@@ -208,6 +214,14 @@ void JointElement::exitElementScope()
         prism_joint->setRestTransform(m_jointFrame);
         info.joint = std::shared_ptr<IJoint>(prism_joint);
         map = &m_joints;
+    } else if (m_jointType == "spherical")
+    {
+        auto spherical_joint = std::make_shared<SphericalJoint>();
+        spherical_joint->setRestTransform(m_jointFrame);
+        info.joint = spherical_joint;
+        info.hasJointCenter = true;
+        info.jointCenterInParentFrame = m_jointFrame.getPosition();
+        map = &m_joints;
     }
 
     if (info.joint && map)
@@ -219,8 +233,16 @@ void JointElement::exitElementScope()
         if (m_limits)
         {
             // Limits found
-            info.joint->enablePosLimits(true);
-            info.joint->setPosLimits(0, m_limits->positionLower, m_limits->positionUpper);
+            if (m_jointType == "spherical")
+            {
+                std::string warnStr
+                    = "Limits specified for spherical joint " + m_jointName + " will be ignored.";
+                reportWarning("JointElement", "", warnStr.c_str());
+            } else
+            {
+                info.joint->enablePosLimits(true);
+                info.joint->setPosLimits(0, m_limits->positionLower, m_limits->positionUpper);
+            }
         } else if (m_jointType == "revolute" || m_jointType == "prismatic")
         {
             std::string errStr = "Joint " + m_jointName + " misses the limit tag.";
@@ -229,9 +251,17 @@ void JointElement::exitElementScope()
 
         if (m_dynamic_params)
         {
-            info.joint->setJointDynamicsType(URDFJointDynamics);
-            info.joint->setDamping(0, m_dynamic_params->damping);
-            info.joint->setStaticFriction(0, m_dynamic_params->staticFriction);
+            if (m_jointType == "spherical")
+            {
+                std::string warnStr
+                    = "Dynamics parameters for spherical joint " + m_jointName + " are ignored.";
+                reportWarning("JointElement", "", warnStr.c_str());
+            } else
+            {
+                info.joint->setJointDynamicsType(URDFJointDynamics);
+                info.joint->setDamping(0, m_dynamic_params->damping);
+                info.joint->setStaticFriction(0, m_dynamic_params->staticFriction);
+            }
         }
 
         if (!map->insert(

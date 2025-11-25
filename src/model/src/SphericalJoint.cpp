@@ -425,6 +425,7 @@ void SphericalJoint::computeChildPosVelAcc(const VectorDynSize& jntPos,
     linkVels(child) = child_X_parent * linkVels(parent) + joint_twist;
 
     // Propagate acceleration: similar to velocity but also including joint acceleration
+    // and the velocity-dependent (Coriolis-like) term
     SpatialAcc joint_acc = SpatialAcc::Zero();
     for (int dof = 0; dof < 3; dof++)
     {
@@ -433,7 +434,8 @@ void SphericalJoint::computeChildPosVelAcc(const VectorDynSize& jntPos,
                           * jntAcc(this->getDOFsOffset() + dof);
     }
 
-    linkAccs(child) = child_X_parent * linkAccs(parent) + joint_acc;
+    // Add the velocity-dependent term: linkVels(child) * vj (Coriolis/centrifugal)
+    linkAccs(child) = child_X_parent * linkAccs(parent) + joint_acc + linkVels(child) * joint_twist;
 }
 
 void SphericalJoint::computeChildVel(const VectorDynSize& jntPos,
@@ -469,6 +471,16 @@ void SphericalJoint::computeChildVelAcc(const VectorDynSize& jntPos,
     // Then compute acceleration
     const Transform& child_X_parent = this->getTransform(jntPos, child, parent);
 
+    // Compute joint velocity vj = sum of S_i * qdot_i
+    Twist vj = Twist::Zero();
+    for (int dof = 0; dof < 3; dof++)
+    {
+        vj = vj
+             + this->getMotionSubspaceVector(dof, child, parent)
+                   * jntVel(this->getDOFsOffset() + dof);
+    }
+
+    // Compute joint acceleration contribution
     SpatialAcc joint_acc = SpatialAcc::Zero();
     for (int dof = 0; dof < 3; dof++)
     {
@@ -477,7 +489,8 @@ void SphericalJoint::computeChildVelAcc(const VectorDynSize& jntPos,
                           * jntAcc(this->getDOFsOffset() + dof);
     }
 
-    linkAccs(child) = child_X_parent * linkAccs(parent) + joint_acc;
+    // Add the velocity-dependent term: linkVels(child) * vj (Coriolis/centrifugal)
+    linkAccs(child) = child_X_parent * linkAccs(parent) + joint_acc + linkVels(child) * vj;
 }
 
 void SphericalJoint::computeChildAcc(const VectorDynSize& jntPos,
@@ -490,6 +503,16 @@ void SphericalJoint::computeChildAcc(const VectorDynSize& jntPos,
 {
     const Transform& child_X_parent = this->getTransform(jntPos, child, parent);
 
+    // Compute joint velocity vj = sum of S_i * qdot_i
+    Twist vj = Twist::Zero();
+    for (int dof = 0; dof < 3; dof++)
+    {
+        vj = vj
+             + this->getMotionSubspaceVector(dof, child, parent)
+                   * jntVel(this->getDOFsOffset() + dof);
+    }
+
+    // Compute joint acceleration contribution
     SpatialAcc joint_acc = SpatialAcc::Zero();
     for (int dof = 0; dof < 3; dof++)
     {
@@ -498,7 +521,8 @@ void SphericalJoint::computeChildAcc(const VectorDynSize& jntPos,
                           * jntAcc(this->getDOFsOffset() + dof);
     }
 
-    linkAccs(child) = child_X_parent * linkAccs(parent) + joint_acc;
+    // Add the velocity-dependent term: linkVels(child) * vj (Coriolis/centrifugal)
+    linkAccs(child) = child_X_parent * linkAccs(parent) + joint_acc + linkVels(child) * vj;
 }
 
 void SphericalJoint::computeChildBiasAcc(const VectorDynSize& jntPos,
@@ -510,7 +534,17 @@ void SphericalJoint::computeChildBiasAcc(const VectorDynSize& jntPos,
 {
     const Transform& child_X_parent = this->getTransform(jntPos, child, parent);
 
-    linkBiasAccs(child) = child_X_parent * linkBiasAccs(parent);
+    // Compute joint velocity vj = sum of S_i * qdot_i
+    Twist vj = Twist::Zero();
+    for (int dof = 0; dof < 3; dof++)
+    {
+        vj = vj
+             + this->getMotionSubspaceVector(dof, child, parent)
+                   * jntVel(this->getDOFsOffset() + dof);
+    }
+
+    // Bias acceleration = parent bias + Coriolis-like term (linkVels(child) * vj)
+    linkBiasAccs(child) = child_X_parent * linkBiasAccs(parent) + linkVels(child) * vj;
 }
 
 void SphericalJoint::computeJointTorque(const VectorDynSize& jntPos,

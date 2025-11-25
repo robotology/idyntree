@@ -240,6 +240,13 @@ processJoints(iDynTree::Model& model,
                    = std::dynamic_pointer_cast<PrismaticJoint>(joint))
         {
             prismatic->setAxis(pair.second.axis, childLinkIndex, parentLinkIndex);
+        } else if (std::shared_ptr<SphericalJoint> spherical
+                   = std::dynamic_pointer_cast<SphericalJoint>(joint))
+        {
+            if (pair.second.hasJointCenter)
+            {
+                spherical->setJointCenter(parentLinkIndex, pair.second.jointCenterInParentFrame);
+            }
         } else
         {
             reportError("URDFDocument", "processJoints", "Unrecognized joint type");
