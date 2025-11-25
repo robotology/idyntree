@@ -2,9 +2,10 @@
 // Bindings extention of IJoint interface
 // (to overcome lack of dynamic casts in high level languages)
 
-namespace iDynTree{
+namespace iDynTree
+{
 
-%extend IJoint
+% extend IJoint
 {
     // Expose all sensors type
 
@@ -14,59 +15,51 @@ namespace iDynTree{
 
     bool isRevoluteJoint() const
     {
-        const iDynTree::RevoluteJoint * p =
-            dynamic_cast<const iDynTree::RevoluteJoint*>($self);
+        const iDynTree::RevoluteJoint* p = dynamic_cast<const iDynTree::RevoluteJoint*>($self);
         return (p != 0);
     }
 
     bool isFixedJoint() const
     {
-        const iDynTree::FixedJoint * p =
-            dynamic_cast<const iDynTree::FixedJoint*>($self);
+        const iDynTree::FixedJoint* p = dynamic_cast<const iDynTree::FixedJoint*>($self);
         return (p != 0);
     }
-    
+
     bool isPrismaticJoint() const
     {
-        const iDynTree::PrismaticJoint * p =
-            dynamic_cast<const iDynTree::PrismaticJoint*>($self);
+        const iDynTree::PrismaticJoint* p = dynamic_cast<const iDynTree::PrismaticJoint*>($self);
         return (p != 0);
     }
 
     bool isSphericalJoint() const
     {
-        const iDynTree::SphericalJoint * p =
-            dynamic_cast<const iDynTree::SphericalJoint*>($self);
+        const iDynTree::SphericalJoint* p = dynamic_cast<const iDynTree::SphericalJoint*>($self);
         return (p != 0);
     }
 
-    iDynTree::RevoluteJoint * asRevoluteJoint()
+    iDynTree::RevoluteJoint* asRevoluteJoint()
     {
-        iDynTree::RevoluteJoint * p =
-            static_cast<iDynTree::RevoluteJoint*>($self);
+        iDynTree::RevoluteJoint* p = static_cast<iDynTree::RevoluteJoint*>($self);
         return p;
     }
 
-    iDynTree::FixedJoint * asFixedJoint()
+    iDynTree::FixedJoint* asFixedJoint()
     {
-        iDynTree::FixedJoint * p =
-            static_cast<iDynTree::FixedJoint*>($self);
+        iDynTree::FixedJoint* p = static_cast<iDynTree::FixedJoint*>($self);
         return p;
     }
 
-    iDynTree::PrismaticJoint * asPrismaticJoint()
+    iDynTree::PrismaticJoint* asPrismaticJoint()
     {
-        iDynTree::PrismaticJoint * p =
-            static_cast<iDynTree::PrismaticJoint*>($self);
+        iDynTree::PrismaticJoint* p = static_cast<iDynTree::PrismaticJoint*>($self);
         return p;
     }
 
-    iDynTree::SphericalJoint * asSphericalJoint()
+    iDynTree::SphericalJoint* asSphericalJoint()
     {
-        iDynTree::SphericalJoint * p =
-            static_cast<iDynTree::SphericalJoint*>($self);
+        iDynTree::SphericalJoint* p = static_cast<iDynTree::SphericalJoint*>($self);
         return p;
     }
 }
 
-}
+} // namespace iDynTree

@@ -10,8 +10,8 @@
 #include <iDynTree/ModelTestUtils.h>
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteJoint.h>
-#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/SolidShapes.h>
+#include <iDynTree/SphericalJoint.h>
 #include <iDynTree/Traversal.h>
 
 #include <pybind11/operators.h>
