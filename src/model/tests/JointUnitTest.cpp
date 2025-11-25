@@ -389,8 +389,8 @@ void validateJointBiasAcc(const JointType& joint,
 
     // Numerical differentiation: bias_acc = (vel_plus - vel_minus) / dt
     // This gives us the velocity-dependent acceleration term
-    Eigen::Matrix<double, 6, 1> biasAccNumericalEigen =
-        (toEigen(linkVelsPlus(child)) - toEigen(linkVelsMinus(child))) / dt;
+    Eigen::Matrix<double, 6, 1> biasAccNumericalEigen
+        = (toEigen(linkVelsPlus(child)) - toEigen(linkVelsMinus(child))) / dt;
 
     // Compare analytic and numerical bias acceleration directly using Eigen
     ASSERT_EQUAL_VECTOR_TOL(biasAccAnalytic.asVector(),

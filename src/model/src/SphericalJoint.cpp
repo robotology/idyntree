@@ -475,8 +475,9 @@ void SphericalJoint::computeChildVelAcc(const VectorDynSize& jntPos,
     Twist vj = Twist::Zero();
     for (int dof = 0; dof < 3; dof++)
     {
-        vj = vj + this->getMotionSubspaceVector(dof, child, parent)
-                      * jntVel(this->getDOFsOffset() + dof);
+        vj = vj
+             + this->getMotionSubspaceVector(dof, child, parent)
+                   * jntVel(this->getDOFsOffset() + dof);
     }
 
     // Compute joint acceleration contribution
@@ -506,8 +507,9 @@ void SphericalJoint::computeChildAcc(const VectorDynSize& jntPos,
     Twist vj = Twist::Zero();
     for (int dof = 0; dof < 3; dof++)
     {
-        vj = vj + this->getMotionSubspaceVector(dof, child, parent)
-                      * jntVel(this->getDOFsOffset() + dof);
+        vj = vj
+             + this->getMotionSubspaceVector(dof, child, parent)
+                   * jntVel(this->getDOFsOffset() + dof);
     }
 
     // Compute joint acceleration contribution
@@ -536,8 +538,9 @@ void SphericalJoint::computeChildBiasAcc(const VectorDynSize& jntPos,
     Twist vj = Twist::Zero();
     for (int dof = 0; dof < 3; dof++)
     {
-        vj = vj + this->getMotionSubspaceVector(dof, child, parent)
-                      * jntVel(this->getDOFsOffset() + dof);
+        vj = vj
+             + this->getMotionSubspaceVector(dof, child, parent)
+                   * jntVel(this->getDOFsOffset() + dof);
     }
 
     // Bias acceleration = parent bias + Coriolis-like term (linkVels(child) * vj)
