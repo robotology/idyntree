@@ -5,6 +5,7 @@
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
     <includes refid="IJoint_8h" local="no">iDynTree/IJoint.h</includes>
     <includes refid="Axis_8h" local="no">iDynTree/Axis.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Position.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Transform.h</includes>
     <includes local="no">memory</includes>
     <includes local="no">string</includes>

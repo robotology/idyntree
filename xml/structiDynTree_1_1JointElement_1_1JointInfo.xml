@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="34" column="25" bodyfile="private/JointElement.h" bodystart="34" bodyend="-1"/>
+        <location file="private/JointElement.h" line="35" column="25" bodyfile="private/JointElement.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1adfd0d29071e4d58fd7f7a16931e61984" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">iDynTree::Axis</ref></type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="35" column="24" bodyfile="private/JointElement.h" bodystart="35" bodyend="-1"/>
+        <location file="private/JointElement.h" line="36" column="24" bodyfile="private/JointElement.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1a9cf00a788a755396d038e6a689dfabdf" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="36" column="21" bodyfile="private/JointElement.h" bodystart="36" bodyend="-1"/>
+        <location file="private/JointElement.h" line="37" column="21" bodyfile="private/JointElement.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1ab5f290de2faa0b6c57fe348a1221abe0" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -53,7 +53,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="37" column="21" bodyfile="private/JointElement.h" bodystart="37" bodyend="-1"/>
+        <location file="private/JointElement.h" line="38" column="21" bodyfile="private/JointElement.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1a962d3d9757cddca29667c43734f5abf4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::JointElement::JointInfo::hasJointCenter</definition>
+        <argsstring></argsstring>
+        <name>hasJointCenter</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="39" column="14" bodyfile="private/JointElement.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1a3b423d5a937a6953c26093eb6f1a478d" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position iDynTree::JointElement::JointInfo::jointCenterInParentFrame</definition>
+        <argsstring></argsstring>
+        <name>jointCenterInParentFrame</name>
+        <initializer>{iDynTree::Position::Zero()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="40" column="28" bodyfile="private/JointElement.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -61,7 +89,11 @@
     <detaileddescription>
     </detaileddescription>
     <collaborationgraph>
-      <node id="7">
+      <node id="9">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="10">
         <label>iDynTree::Axis</label>
         <link refid="classiDynTree_1_1Axis"/>
       </node>
@@ -76,6 +108,12 @@
       </node>
       <node id="6">
         <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="7">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
       </node>
       <node id="2">
         <label>std::shared_ptr&lt; iDynTree::IJoint &gt;</label>
@@ -94,7 +132,17 @@
           <edgelabel>parentLinkName</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
+          <edgelabel>jointCenterInParentFrame</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
           <edgelabel>axis</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="9" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
         </childnode>
       </node>
       <node id="5">
@@ -103,11 +151,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/JointElement.h" line="32" column="5" bodyfile="private/JointElement.h" bodystart="33" bodyend="38"/>
+    <location file="private/JointElement.h" line="33" column="5" bodyfile="private/JointElement.h" bodystart="34" bodyend="41"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1adfd0d29071e4d58fd7f7a16931e61984" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>axis</name></member>
       <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1ab5f290de2faa0b6c57fe348a1221abe0" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>childLinkName</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1a962d3d9757cddca29667c43734f5abf4" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>hasJointCenter</name></member>
       <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1abdef7db922e065f44be965be7c2abb90" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>joint</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1a3b423d5a937a6953c26093eb6f1a478d" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>jointCenterInParentFrame</name></member>
       <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1a9cf00a788a755396d038e6a689dfabdf" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>parentLinkName</name></member>
     </listofallmembers>
   </compounddef>

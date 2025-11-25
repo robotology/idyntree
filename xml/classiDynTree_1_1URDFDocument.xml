@@ -457,6 +457,9 @@
           <edgelabel>childLinkName</edgelabel>
           <edgelabel>parentLinkName</edgelabel>
         </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>jointCenterInParentFrame</edgelabel>
+        </childnode>
         <childnode refid="31" relation="usage">
           <edgelabel>axis</edgelabel>
         </childnode>

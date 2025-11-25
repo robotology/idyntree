@@ -1937,6 +1937,8 @@
     <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1adfd0d29071e4d58fd7f7a16931e61984" kind="variable"><name>axis</name></member>
     <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1a9cf00a788a755396d038e6a689dfabdf" kind="variable"><name>parentLinkName</name></member>
     <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1ab5f290de2faa0b6c57fe348a1221abe0" kind="variable"><name>childLinkName</name></member>
+    <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1a962d3d9757cddca29667c43734f5abf4" kind="variable"><name>hasJointCenter</name></member>
+    <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1a3b423d5a937a6953c26093eb6f1a478d" kind="variable"><name>jointCenterInParentFrame</name></member>
   </compound>
   <compound refid="classiDynTree_1_1JointPosDoubleArray" kind="class"><name>iDynTree::JointPosDoubleArray</name>
     <member refid="classiDynTree_1_1JointPosDoubleArray_1a11b9feb216427962eb76bb56a16b2e7e" kind="function"><name>JointPosDoubleArray</name></member>

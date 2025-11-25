@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="61" column="27" bodyfile="private/JointElement.h" bodystart="61" bodyend="-1"/>
+        <location file="private/JointElement.h" line="64" column="27" bodyfile="private/JointElement.h" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a183a00529daa7d927e0fe21035d930d9" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="62" column="16" bodyfile="private/JointElement.h" bodystart="62" bodyend="-1"/>
+        <location file="private/JointElement.h" line="65" column="16" bodyfile="private/JointElement.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a442a5dbb5ce61c92e486d7be60cbed22" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -40,14 +40,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="63" column="16" bodyfile="private/JointElement.h" bodystart="63" bodyend="-1"/>
+        <location file="private/JointElement.h" line="66" column="16" bodyfile="private/JointElement.h" bodystart="66" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="private/JointElement.h" line="59" column="5" bodyfile="private/JointElement.h" bodystart="60" bodyend="64"/>
+    <location file="private/JointElement.h" line="62" column="5" bodyfile="private/JointElement.h" bodystart="63" bodyend="67"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a183a00529daa7d927e0fe21035d930d9" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointDynamicsParams</scope><name>damping</name></member>
       <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1ab1e8b89611e52cac89f52808e0e81c18" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointDynamicsParams</scope><name>jointDynamicsType</name></member>

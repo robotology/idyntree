@@ -7,6 +7,7 @@
     <includedby refid="ContactWrench_8h" local="no">iDynTree/ContactWrench.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/BerdyHelper.h</includedby>
     <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/ExternalWrenchesEstimation.h</includedby>
+    <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
     <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
     <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
     <includedby refid="Axis_8h" local="no">iDynTree/Axis.h</includedby>
