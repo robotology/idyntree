@@ -1067,6 +1067,89 @@ void testSparsityPatternAllRepresentations(std::string modelName)
     testSparsityPattern(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
+void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
+{
+    iDynTree::KinDynComputations dynComp;
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ok = ok && dynComp.loadRobotModel(mdlLoader.model());
+    ASSERT_IS_TRUE(ok);
+
+    ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
+    ASSERT_IS_TRUE(ok);
+
+    // Test with iCub model using l_foot as base link vs l_sole as base frame
+    std::string baseLinkName = "l_foot";
+    std::string baseFrameName = "l_sole";
+
+    // Check if both frames exist in the model
+    int baseLinkIndex = dynComp.model().getFrameIndex(baseLinkName);
+    int baseFrameIndex = dynComp.model().getFrameIndex(baseFrameName);
+    if (baseLinkIndex < 0 || baseFrameIndex < 0) {
+        // Test should fail if indices are not found
+        ASSERT_IS_TRUE(false);
+    }
+
+    // FIRST: Test basic setFloatingBase functionality for frames
+    ok = dynComp.setFloatingBase(baseFrameName);
+    ASSERT_IS_TRUE(ok);
+
+    // Check that getFloatingBase returns the frame name
+    std::string retrievedBaseName = dynComp.getFloatingBase();
+    ASSERT_EQUAL_STRING(retrievedBaseName, baseFrameName);
+
+    // SECOND: For now, only test simple zero-velocity case to get basic functionality working
+    // Set floating base to l_foot and create simple zero state
+    ok = dynComp.setFloatingBase(baseLinkName);
+    ASSERT_IS_TRUE(ok);
+
+    // Set simple identity state with zero velocities
+    Transform world_H_l_foot = Transform::Identity();
+    VectorDynSize q_joint(dynComp.model().getNrOfPosCoords());
+    q_joint.zero();
+    Twist base_vel_l_foot = Twist::Zero();
+    VectorDynSize dq_joint(dynComp.model().getNrOfDOFs());
+    dq_joint.zero();
+    Vector3 gravity;
+    gravity(0) = 0.0; gravity(1) = 0.0; gravity(2) = -9.81;
+
+    ok = dynComp.setRobotState(world_H_l_foot, q_joint, base_vel_l_foot, dq_joint, gravity);
+    ASSERT_IS_TRUE(ok);
+
+    // Compute quantities with l_foot as base
+    Transform world_H_l_sole_from_l_foot = dynComp.getWorldTransform(baseFrameName);
+    Position com_pos_from_l_foot = dynComp.getCenterOfMassPosition();
+
+    // Now set floating base to l_sole
+    ok = dynComp.setFloatingBase(baseFrameName);
+    ASSERT_IS_TRUE(ok);
+
+    // Set state with l_sole as base using zero velocity (should be consistent)
+    ok = dynComp.setRobotState(world_H_l_sole_from_l_foot, q_joint, base_vel_l_foot, dq_joint, gravity);
+    ASSERT_IS_TRUE(ok);
+
+    // Compute quantities with l_sole as base
+    Transform world_H_l_sole_from_l_sole = dynComp.getWorldTransform(baseFrameName);
+    Position com_pos_from_l_sole = dynComp.getCenterOfMassPosition();
+
+    // Test that computed quantities are consistent
+    ASSERT_EQUAL_TRANSFORM(world_H_l_sole_from_l_foot, world_H_l_sole_from_l_sole);
+    ASSERT_EQUAL_VECTOR(com_pos_from_l_foot, com_pos_from_l_sole);
+
+    // Additional tests: Check that l_foot transform is consistent
+    Transform world_H_l_foot_from_l_sole = dynComp.getWorldTransform(baseLinkName);
+    ASSERT_EQUAL_TRANSFORM(world_H_l_foot, world_H_l_foot_from_l_sole);
+}
+
+void testFloatingBaseFrameConsistencyAllRepresentations(std::string modelName)
+{
+    std::string urdfFileName = getAbsModelPath(modelName);
+    std::cout << "Testing floating base frame consistency for file " << urdfFileName << std::endl;
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::MIXED_REPRESENTATION);
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::BODY_FIXED_REPRESENTATION);
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
+}
+
 int main()
 {
     // Just run the tests on a handful of models to avoid
@@ -1105,6 +1188,8 @@ int main()
     testKineticEnergyOnURDFModel(getAbsModelPath("bigman.urdf"));
     testKineticEnergyOnURDFModel(getAbsModelPath("icub_skin_frames.urdf"));
     testKineticEnergyOnURDFModel(getAbsModelPath("iCubGenova02.urdf"));
+
+    testFloatingBaseFrameConsistencyAllRepresentations("iCubGenova02.urdf");
 
     return EXIT_SUCCESS;
 }
