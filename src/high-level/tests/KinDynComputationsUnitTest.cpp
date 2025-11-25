@@ -6,6 +6,7 @@
 
 #include <iDynTree/Position.h>
 #include <iDynTree/SpatialAcc.h>
+#include <iDynTree/SpatialInertia.h>
 #include <iDynTree/SpatialMomentum.h>
 #include <iDynTree/Transform.h>
 #include <iDynTree/Twist.h>
@@ -16,6 +17,7 @@
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/JointState.h>
 #include <iDynTree/KinDynComputations.h>
+#include <iDynTree/Link.h>
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelTransformers.h>
 #include <iDynTree/SubModel.h>
@@ -809,6 +811,133 @@ void testSubModelConsistencyAllRepresentations(std::string modelName)
     testSubModelConsistency(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
+/**
+ * Test that verifies the mass matrix via kinetic energy computation.
+ *
+ * The kinetic energy is computed in two ways:
+ * 1. Via body 6D velocities: KE = 0.5 * sum_l v_l^T * I_l * v_l
+ *    where v_l is the body-fixed velocity of link l, and I_l is the spatial inertia of link l
+ * 2. Via the mass matrix: KE = 0.5 * nu^T * M(q) * nu
+ *    where nu is the generalized velocity vector and M(q) is the mass matrix
+ *
+ * Both methods should yield the same kinetic energy value.
+ */
+void testKineticEnergyConsistency(KinDynComputations& dynComp)
+{
+    const Model& model = dynComp.model();
+    size_t nrOfLinks = model.getNrOfLinks();
+    size_t nrOfDofs = dynComp.getNrOfDegreesOfFreedom();
+
+    // Store the original frame velocity representation
+    FrameVelocityRepresentation origRepr = dynComp.getFrameVelocityRepresentation();
+
+    // Use BODY_FIXED representation for computing link velocities
+    // This is because the spatial inertia I_l is expressed in the link frame,
+    // and we need the velocity to be expressed in the same frame for v^T * I * v
+    dynComp.setFrameVelocityRepresentation(BODY_FIXED_REPRESENTATION);
+
+    // Method 1: Compute kinetic energy via body velocities
+    // KE = 0.5 * sum_l v_l^T * I_l * v_l
+    double kineticEnergyFromBodyVelocities = 0.0;
+
+    for (LinkIndex linkIdx = 0; linkIdx < static_cast<LinkIndex>(nrOfLinks); linkIdx++)
+    {
+        // Get the body-fixed velocity of the link
+        // In BODY_FIXED representation, getFrameVel returns the velocity expressed in the link
+        // frame
+        Twist linkVel = dynComp.getFrameVel(linkIdx);
+
+        // Get the spatial inertia of the link (expressed in the link frame)
+        const SpatialInertia& linkInertia = model.getLink(linkIdx)->getInertia();
+
+        // Compute v^T * I * v using the 6x6 matrix representation
+        // The spatial inertia matrix M is such that momentum h = M * v
+        // So kinetic energy for this link is 0.5 * v^T * M * v
+        Eigen::Matrix<double, 6, 6> inertiaMatrix = toEigen(linkInertia.asMatrix());
+        Eigen::Matrix<double, 6, 1> velEigen = toEigen(linkVel);
+
+        double linkKE = 0.5 * velEigen.transpose() * inertiaMatrix * velEigen;
+        kineticEnergyFromBodyVelocities += linkKE;
+    }
+
+    // Method 2: Compute kinetic energy via mass matrix
+    // KE = 0.5 * nu^T * M(q) * nu
+    MatrixDynSize massMatrix(6 + nrOfDofs, 6 + nrOfDofs);
+    bool ok = dynComp.getFreeFloatingMassMatrix(massMatrix);
+    ASSERT_IS_TRUE(ok);
+
+    // Get the generalized velocity nu = [baseVel; jointVel]
+    VectorDynSize nu(6 + nrOfDofs);
+    ok = dynComp.getModelVel(nu);
+    ASSERT_IS_TRUE(ok);
+
+    // Compute kinetic energy: 0.5 * nu^T * M * nu
+    double kineticEnergyFromMassMatrix
+        = 0.5 * toEigen(nu).transpose() * toEigen(massMatrix) * toEigen(nu);
+
+    // Compare the two kinetic energies
+    // Use a relative tolerance since the energies can be large
+    double tolerance = 1e-8 * std::max(1.0, std::abs(kineticEnergyFromMassMatrix));
+    ASSERT_EQUAL_DOUBLE_TOL(kineticEnergyFromBodyVelocities,
+                            kineticEnergyFromMassMatrix,
+                            tolerance);
+
+    // Restore the original frame velocity representation
+    dynComp.setFrameVelocityRepresentation(origRepr);
+}
+
+/**
+ * Test kinetic energy consistency on a random model with various joint types.
+ */
+void testKineticEnergyOnRandomModels()
+{
+    std::cout << "Testing kinetic energy consistency on random models..." << std::endl;
+
+    // Test with different model sizes
+    for (unsigned int nrOfJoints = 1; nrOfJoints <= 20; nrOfJoints += 5)
+    {
+        std::cout << "  Testing random model with " << nrOfJoints << " joints..." << std::endl;
+
+        // Create a random model with revolute, spherical, and other joint types
+        Model randomModel
+            = getRandomModel(nrOfJoints,
+                             5,
+                             SIMPLE_JOINT_TYPES | JOINT_REVOLUTE_SO2 | JOINT_SPHERICAL);
+
+        KinDynComputations dynComp;
+        bool ok = dynComp.loadRobotModel(randomModel);
+        ASSERT_IS_TRUE(ok);
+
+        // Test multiple random configurations
+        for (int iter = 0; iter < 5; iter++)
+        {
+            setRandomState(dynComp);
+            testKineticEnergyConsistency(dynComp);
+        }
+    }
+}
+
+/**
+ * Test kinetic energy consistency on URDF models loaded from files.
+ */
+void testKineticEnergyOnURDFModel(std::string modelFilePath)
+{
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ASSERT_IS_TRUE(ok);
+
+    KinDynComputations dynComp;
+    ok = dynComp.loadRobotModel(mdlLoader.model());
+    ASSERT_IS_TRUE(ok);
+
+    // Test multiple random configurations
+    for (int iter = 0; iter < 5; iter++)
+    {
+        setRandomState(dynComp);
+        testKineticEnergyConsistency(dynComp);
+    }
+}
+
 void testModelConsistencyAllRepresentations(std::string modelName)
 {
     std::string urdfFileName = getAbsModelPath(modelName);
@@ -963,6 +1092,19 @@ int main()
     testSparsityPatternAllRepresentations("threeLinks.urdf");
     testSparsityPatternAllRepresentations("bigman.urdf");
     testSparsityPatternAllRepresentations("icub_skin_frames.urdf");
+
+    // Test kinetic energy consistency on random models with various joint types
+    // (including revolute, spherical, and others)
+    testKineticEnergyOnRandomModels();
+
+    // Test kinetic energy consistency on URDF models
+    std::cout << "Testing kinetic energy consistency on URDF models..." << std::endl;
+    testKineticEnergyOnURDFModel(getAbsModelPath("oneLink.urdf"));
+    testKineticEnergyOnURDFModel(getAbsModelPath("twoLinks.urdf"));
+    testKineticEnergyOnURDFModel(getAbsModelPath("threeLinks.urdf"));
+    testKineticEnergyOnURDFModel(getAbsModelPath("bigman.urdf"));
+    testKineticEnergyOnURDFModel(getAbsModelPath("icub_skin_frames.urdf"));
+    testKineticEnergyOnURDFModel(getAbsModelPath("iCubGenova02.urdf"));
 
     return EXIT_SUCCESS;
 }
