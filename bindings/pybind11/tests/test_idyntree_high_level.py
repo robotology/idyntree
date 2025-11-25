@@ -1,9 +1,15 @@
 """Tests for idyntree-high-level Python bindings."""
 import itertools
 import math
+import sys
+from pathlib import Path
 import unittest
 
-import idyntree.pybind as iDynTree
+ROOT = Path(__file__).resolve().parents[3]
+PYBIND_DIR = ROOT / "build" / "bindings" / "pybind11" / "idyntree"
+sys.path.insert(0, str(PYBIND_DIR))
+
+import pybind as iDynTree
 import numpy as np
 
 
