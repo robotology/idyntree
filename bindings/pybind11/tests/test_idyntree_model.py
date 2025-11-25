@@ -192,6 +192,23 @@ class IDynTreePrismaticJointTest(unittest.TestCase):
     self.assertEqual(joint.get_max_pos_limit(0), limits[1])
 
 
+class IDynTreeSphericalJointTest(unittest.TestCase):
+
+  def test_attached_links(self):
+    joint = iDynTree.SphericalJoint()
+    joint.set_attached_links(1, 2)
+    self.assertEqual(joint.get_first_attached_link(), 1)
+    self.assertEqual(joint.get_second_attached_link(), 2)
+
+  def test_joint_center(self):
+    joint = iDynTree.SphericalJoint()
+    joint.set_attached_links(0, 1)
+    center = iDynTree.Position(0.1, -0.2, 0.3)
+    joint.set_joint_center(0, center)
+    stored_center = joint.get_joint_center(0)
+    self.assertEqual(list(stored_center), list(center))
+
+
 class IDynTreeFixedJointTest(unittest.TestCase):
 
   def test_attached_links(self):

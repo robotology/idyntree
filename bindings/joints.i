@@ -33,6 +33,13 @@ namespace iDynTree{
         return (p != 0);
     }
 
+    bool isSphericalJoint() const
+    {
+        const iDynTree::SphericalJoint * p =
+            dynamic_cast<const iDynTree::SphericalJoint*>($self);
+        return (p != 0);
+    }
+
     iDynTree::RevoluteJoint * asRevoluteJoint()
     {
         iDynTree::RevoluteJoint * p =
@@ -51,6 +58,13 @@ namespace iDynTree{
     {
         iDynTree::PrismaticJoint * p =
             static_cast<iDynTree::PrismaticJoint*>($self);
+        return p;
+    }
+
+    iDynTree::SphericalJoint * asSphericalJoint()
+    {
+        iDynTree::SphericalJoint * p =
+            static_cast<iDynTree::SphericalJoint*>($self);
         return p;
     }
 }

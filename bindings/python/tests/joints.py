@@ -26,6 +26,9 @@ class JointTest(unittest.TestCase):
     def testFixedJoint(self):
         fixJoint = iDynTree.FixedJoint(iDynTree.Transform.Identity());
 
+    def testSphericalJoint(self):
+        sphJoint = iDynTree.SphericalJoint();
+
 if __name__ == '__main__':
     # initalize the seed to have predictable results
     random.seed(0);
