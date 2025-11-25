@@ -97,9 +97,10 @@ void iDynTreeModelIoUrdfBindings(pybind11::module& module)
                  return this_->loadReducedModelFromFullModel(model, joints);
              })
         .def_property_readonly("model", &ModelLoader::model)
-        .def_property("parsing_options",
-                      [](ModelLoader& loader) { return loader.parsingOptions(); },
-                      &ModelLoader::setParsingOptions);
+        .def_property(
+            "parsing_options",
+            [](ModelLoader& loader) { return loader.parsingOptions(); },
+            &ModelLoader::setParsingOptions);
 }
 
 } // namespace bindings
