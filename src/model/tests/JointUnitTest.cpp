@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Link.h>
+#include <iDynTree/LinkState.h>
 
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/MatrixFixSize.h>
@@ -318,6 +319,86 @@ template <> SphericalJoint getRandomJoint<SphericalJoint>()
 }
 
 /**
+ * Validates the computeChildBiasAcc method for a joint by comparing the bias
+ * acceleration against numerical differentiation.
+ *
+ * The bias acceleration is defined as the acceleration term when joint acceleration is zero.
+ * This includes the Coriolis/centrifugal terms: linkVels(child) * vj
+ *
+ * For validation, we compute the frame velocity at two time instants (t-dt/2 and t+dt/2)
+ * and use finite differences to approximate the acceleration.
+ */
+template <typename JointType>
+void validateJointBiasAcc(const JointType& joint,
+                          const VectorDynSize& jointPos,
+                          const VectorDynSize& jointVel,
+                          const LinkIndex child,
+                          const LinkIndex parent)
+{
+    const double dt = 1e-7;
+    const double tol = 1e-4;
+
+    // Create link velocity arrays (for a single joint, we need 2 links)
+    LinkVelArray linkVels(2);
+    LinkAccArray linkBiasAccs(2);
+
+    // Set parent velocity to random value
+    linkVels(parent) = getRandomTwist();
+    linkBiasAccs(parent) = SpatialAcc::Zero();
+
+    // Compute child velocity using the joint
+    joint.computeChildVel(jointPos, jointVel, linkVels, child, parent);
+
+    // Compute bias acceleration using the joint's computeChildBiasAcc
+    joint.computeChildBiasAcc(jointPos, jointVel, linkVels, linkBiasAccs, child, parent);
+    Twist biasAccAnalytic = linkBiasAccs(child);
+
+    // Now compute the bias acceleration numerically by finite differencing the velocity
+
+    // Get perturbed joint positions using position derivative Jacobian
+    MatrixDynSize positionDerivative_J_velocity;
+    positionDerivative_J_velocity.resize(joint.getNrOfPosCoords(), joint.getNrOfDOFs());
+    MatrixView<double> jacobianView(positionDerivative_J_velocity);
+    joint.getPositionDerivativeVelocityJacobian(jointPos, jacobianView);
+
+    Eigen::VectorXd theta
+        = toEigen(jointPos).segment(joint.getPosCoordsOffset(), joint.getNrOfPosCoords());
+    Eigen::VectorXd nuTheta = toEigen(jointVel).segment(joint.getDOFsOffset(), joint.getNrOfDOFs());
+
+    VectorDynSize jointPosPlus = jointPos;
+    VectorDynSize jointPosMinus = jointPos;
+
+    toEigen(jointPosPlus).segment(joint.getPosCoordsOffset(), joint.getNrOfPosCoords())
+        = theta + toEigen(positionDerivative_J_velocity) * nuTheta * dt / 2;
+    toEigen(jointPosMinus).segment(joint.getPosCoordsOffset(), joint.getNrOfPosCoords())
+        = theta - toEigen(positionDerivative_J_velocity) * nuTheta * dt / 2;
+
+    // Normalize quaternions if needed
+    joint.normalizeJointPosCoords(jointPosPlus);
+    joint.normalizeJointPosCoords(jointPosMinus);
+
+    // Compute velocities at perturbed positions
+    LinkVelArray linkVelsPlus(2);
+    LinkVelArray linkVelsMinus(2);
+
+    linkVelsPlus(parent) = linkVels(parent);
+    linkVelsMinus(parent) = linkVels(parent);
+
+    joint.computeChildVel(jointPosPlus, jointVel, linkVelsPlus, child, parent);
+    joint.computeChildVel(jointPosMinus, jointVel, linkVelsMinus, child, parent);
+
+    // Numerical differentiation: bias_acc = (vel_plus - vel_minus) / dt
+    // This gives us the velocity-dependent acceleration term
+    Eigen::Matrix<double, 6, 1> biasAccNumericalEigen
+        = (toEigen(linkVelsPlus(child)) - toEigen(linkVelsMinus(child))) / dt;
+
+    // Compare analytic and numerical bias acceleration directly using Eigen
+    ASSERT_EQUAL_VECTOR_TOL(biasAccAnalytic.asVector(),
+                            Vector6(biasAccNumericalEigen.data(), 6),
+                            tol);
+}
+
+/**
  * Test helper function that creates and tests a joint of a specific type
  * using both validation methods.
  */
@@ -357,6 +438,18 @@ template <typename JointType> void testJoint(bool printProgress = false)
                                           jointVel,
                                           joint.getSecondAttachedLink(),
                                           joint.getFirstAttachedLink());
+
+        // Test bias acceleration (Coriolis/centrifugal terms) in both directions
+        validateJointBiasAcc(joint,
+                             jointPos,
+                             jointVel,
+                             joint.getSecondAttachedLink(),
+                             joint.getFirstAttachedLink());
+        validateJointBiasAcc(joint,
+                             jointPos,
+                             jointVel,
+                             joint.getFirstAttachedLink(),
+                             joint.getSecondAttachedLink());
 
         if (printProgress)
         {
