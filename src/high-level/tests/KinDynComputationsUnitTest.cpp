@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include "iDynTree/FreeFloatingMatrices.h"
+#include "iDynTree/MatrixDynSize.h"
 #include "iDynTree/Rotation.h"
 #include "testModels.h"
 #include <iDynTree/TestUtils.h>
@@ -1070,7 +1071,8 @@ void testSparsityPatternAllRepresentations(std::string modelName)
     testSparsityPattern(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
-void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
+void testFloatingBaseFrameConsistency(std::string modelFilePath,
+                                      const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
     iDynTree::ModelLoader mdlLoader;
@@ -1089,7 +1091,8 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelo
     int baseLinkIndex = dynComp.model().getFrameIndex(baseLinkName);
     int baseFrameIndex = dynComp.model().getFrameIndex(baseFrameName);
 
-    if (baseLinkIndex < 0 || baseFrameIndex < 0) {
+    if (baseLinkIndex < 0 || baseFrameIndex < 0)
+    {
         // if frames are not present, test should fail
         ASSERT_IS_TRUE(false);
     }
@@ -1110,7 +1113,9 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelo
     getRandomVector(dq_joint);
 
     Vector3 gravity;
-    gravity(0) = 0.0; gravity(1) = 0.0; gravity(2) = -9.81;
+    gravity(0) = 0.0;
+    gravity(1) = 0.0;
+    gravity(2) = -9.81;
 
     // Set state with l_foot as floating base
     ok = dynComp.setRobotState(world_H_l_foot, q_joint, base_vel_l_foot, dq_joint, gravity);
@@ -1123,17 +1128,20 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelo
     Twist l_sole_velocity_with_l_foot_base = dynComp.getFrameVel(baseFrameName);
     Twist l_foot_velocity_with_l_foot_base = dynComp.getFrameVel(baseLinkName);
     Transform l_foot_H_l_sole = world_H_l_foot.inverse() * world_H_l_sole_with_l_foot_base;
-
-    // Store joint velocities for consistency check
-    VectorDynSize dq_joint_with_l_foot_base(dynComp.getNrOfDegreesOfFreedom());
-    dynComp.getJointVel(dq_joint_with_l_foot_base);
+    MatrixDynSize MassMatrix_with_l_foot_base(6 + dynComp.getNrOfDegreesOfFreedom(),
+                                              6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_foot_base);
 
     // Now set floating base to l_sole
     ok = dynComp.setFloatingBase(baseFrameName);
     ASSERT_IS_TRUE(ok);
 
     // Set state with l_sole as base - using the computed transform and velocity from previous state
-    ok = dynComp.setRobotState(world_H_l_sole_with_l_foot_base, q_joint, l_sole_velocity_with_l_foot_base, dq_joint, gravity);
+    ok = dynComp.setRobotState(world_H_l_sole_with_l_foot_base,
+                               q_joint,
+                               l_sole_velocity_with_l_foot_base,
+                               dq_joint,
+                               gravity);
     ASSERT_IS_TRUE(ok);
 
     // Compute quantities with l_sole as base
@@ -1142,25 +1150,47 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelo
     Position com_pos_with_l_sole_base = dynComp.getCenterOfMassPosition();
     Twist l_sole_velocity_with_l_sole_base = dynComp.getFrameVel(baseFrameName);
     Twist l_foot_velocity_with_l_sole_base = dynComp.getFrameVel(baseLinkName);
+    MatrixDynSize MassMatrix_with_l_sole_base(6 + dynComp.getNrOfDegreesOfFreedom(),
+                                              6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_sole_base);
 
     // Test that computed quantities are consistent regardless of floating base choice
     ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
     ASSERT_EQUAL_TRANSFORM(world_H_l_foot_with_l_foot_base, world_H_l_foot_with_l_sole_base);
     ASSERT_EQUAL_VECTOR(com_pos_with_l_foot_base, com_pos_with_l_sole_base);
-    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(), l_sole_velocity_with_l_sole_base.asVector());
-    ASSERT_EQUAL_VECTOR(l_foot_velocity_with_l_foot_base.asVector(), l_foot_velocity_with_l_sole_base.asVector());
-    ASSERT_EQUAL_VECTOR(dynComp.getBaseTwist().asVector(), l_sole_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(),
+                        l_sole_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(l_foot_velocity_with_l_foot_base.asVector(),
+                        l_foot_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(dynComp.getBaseTwist().asVector(),
+                        l_sole_velocity_with_l_sole_base.asVector());
 
     // recompute some quantities with getRobotState
     dynComp.getRobotState(world_H_l_sole_with_l_sole_base,
-                           q_joint,
-                           l_sole_velocity_with_l_sole_base,
-                           dq_joint,
-                           gravity);
+                          q_joint,
+                          l_sole_velocity_with_l_sole_base,
+                          dq_joint,
+                          gravity);
 
     // check getRobotState consistency
     ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
-    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(), l_sole_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(),
+                        l_sole_velocity_with_l_sole_base.asVector());
+
+    // Mass matrix and consistency check via kinetic energy
+    VectorDynSize nu_with_l_foot_base(6 + dynComp.getNrOfDegreesOfFreedom());
+    toEigen(nu_with_l_foot_base) = toEigen(l_foot_velocity_with_l_foot_base.asVector(), dq_joint);
+    VectorDynSize nu_with_l_sole_base(6 + dynComp.getNrOfDegreesOfFreedom());
+    toEigen(nu_with_l_sole_base) = toEigen(l_sole_velocity_with_l_sole_base.asVector(), dq_joint);
+
+    double kinetic_energy_with_l_foot_base = toEigen(nu_with_l_foot_base).transpose()
+                                           * toEigen(MassMatrix_with_l_foot_base)
+                                           * toEigen(nu_with_l_foot_base);
+    double kinetic_energy_with_l_sole_base = toEigen(nu_with_l_sole_base).transpose()
+                                           * toEigen(MassMatrix_with_l_sole_base)
+                                           * toEigen(nu_with_l_sole_base);
+    // kinetic energy should be the same regardless of floating base choice
+    ASSERT_EQUAL_DOUBLE(kinetic_energy_with_l_foot_base, kinetic_energy_with_l_sole_base);
 }
 
 void testFloatingBaseFrameConsistencyAllRepresentations(std::string modelName)
