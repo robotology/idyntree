@@ -1133,8 +1133,6 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelo
     ASSERT_IS_TRUE(ok);
 
     // Set state with l_sole as base - using the computed transform and velocity from previous state
-    l_foot_H_l_sole.setRotation(iDynTree::Rotation::Identity());
-    Twist tmp = l_foot_H_l_sole.inverse() * l_foot_velocity_with_l_foot_base;
     ok = dynComp.setRobotState(world_H_l_sole_with_l_foot_base, q_joint, l_sole_velocity_with_l_foot_base, dq_joint, gravity);
     ASSERT_IS_TRUE(ok);
 
