@@ -218,6 +218,25 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
                     size_t dofIndex = toParentJoint->getDOFsOffset() + dofIdx;
                     massMatrix(6 + dofIndex, 6 + dofIndex) = S_visitedDof.dot(F);
 
+                    // For multi-DOF joints (e.g., spherical joints with 3 DOFs),
+                    // compute the intra-joint off-diagonal terms: M[dof_i, dof_j] = S_j^T * F
+                    // where F = Ic * S_i, for all other DOFs j of the same joint.
+                    // These represent the coupling between different DOFs of the same joint.
+                    for (unsigned int otherDofIdx = dofIdx + 1; otherDofIdx < nrOfDOFs;
+                         otherDofIdx++)
+                    {
+                        SpatialMotionVector S_otherDof
+                            = toParentJoint->getMotionSubspaceVector(otherDofIdx,
+                                                                     visitedLink->getIndex(),
+                                                                     parentLinkIndex);
+                        size_t otherDofIndex = toParentJoint->getDOFsOffset() + otherDofIdx;
+
+                        // M[i,j] = S_j^T * (Ic * S_i) = S_j^T * F
+                        double coupling = S_otherDof.dot(F);
+                        massMatrix(6 + dofIndex, 6 + otherDofIndex) = coupling;
+                        massMatrix(6 + otherDofIndex, 6 + dofIndex) = coupling; // Symmetric
+                    }
+
                     // Then we compute all the off-diagonal terms relative to
                     // the ancestors of the currently visited link
 
