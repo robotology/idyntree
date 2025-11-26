@@ -1922,20 +1922,46 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
 
     // To address for different representation of the base velocity, we construct the
     // baseFrame_X_jacobBaseFrame matrix
-    Transform baseFrame_X_jacobBaseFrame;
+    Transform baseLink_X_jacobBaseFrame;
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
-        baseFrame_X_jacobBaseFrame = Transform::Identity();
+        if (this->pimpl->m_isFloatingBaseFrame)
+        {
+            // Convert from base link to base frame
+            Transform baseLink_X_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
+            baseLink_X_jacobBaseFrame = baseLink_X_baseFrame;
+        }
+        else
+        {
+            // Floating base is a link - use directly
+            baseLink_X_jacobBaseFrame = Transform::Identity();
+        }
+
     } else if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        Transform base_X_world
-            = (pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex())).inverse();
-        baseFrame_X_jacobBaseFrame = Transform(base_X_world.getRotation(), Position::Zero());
+        if (this->pimpl->m_isFloatingBaseFrame)
+        {
+            // Convert from base link to base frame
+            Transform baseLink_X_world
+                = (pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex())).inverse();
+            Transform baseLink_X_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
+            Transform world_X_baseFrame = baseLink_X_world.inverse() * baseLink_X_baseFrame;
+            Transform baseFrame_X_baseFrame_mixed = Transform(world_X_baseFrame.inverse().getRotation(),
+                                                            Position::Zero());
+            baseLink_X_jacobBaseFrame
+                = baseLink_X_baseFrame * baseFrame_X_baseFrame_mixed;
+        }
+        else
+        {
+            Transform baseLink_X_world
+                = (pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex())).inverse();
+            baseLink_X_jacobBaseFrame = Transform(baseLink_X_world.getRotation(), Position::Zero());
+        }
     } else
     {
         assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
         Transform world_X_base = (pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
-        baseFrame_X_jacobBaseFrame = world_X_base.inverse();
+        baseLink_X_jacobBaseFrame = world_X_base.inverse();
     }
 
     return FreeFloatingJacobianUsingLinkPos(pimpl->m_robot_model,
@@ -1944,7 +1970,7 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
                                             pimpl->m_linkPos,
                                             jacobLink,
                                             jacobFrame_X_world,
-                                            baseFrame_X_jacobBaseFrame,
+                                            baseLink_X_jacobBaseFrame,
                                             outJacobian);
 }
 
