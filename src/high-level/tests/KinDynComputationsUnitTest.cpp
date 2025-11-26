@@ -1086,12 +1086,14 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     // Test with iCub model using l_foot as base link vs l_sole as base frame
     std::string baseLinkName = "l_foot";
     std::string baseFrameName = "l_sole";
+    std::string rootLinkName = "root_link";
 
     // Check if both frames exist in the model
     int baseLinkIndex = dynComp.model().getFrameIndex(baseLinkName);
     int baseFrameIndex = dynComp.model().getFrameIndex(baseFrameName);
+    int rootLinkIndex = dynComp.model().getFrameIndex(rootLinkName);
 
-    if (baseLinkIndex < 0 || baseFrameIndex < 0)
+    if (baseLinkIndex < 0 || baseFrameIndex < 0 || rootLinkIndex < 0)
     {
         // if frames are not present, test should fail
         ASSERT_IS_TRUE(false);
@@ -1131,6 +1133,8 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     MatrixDynSize MassMatrix_with_l_foot_base(6 + dynComp.getNrOfDegreesOfFreedom(),
                                               6 + dynComp.getNrOfDegreesOfFreedom());
     dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_foot_base);
+    MatrixDynSize Jacobian_rootLink_with_l_foot_base(6, 6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFrameFreeFloatingJacobian(rootLinkName, Jacobian_rootLink_with_l_foot_base);
 
     // Now set floating base to l_sole
     ok = dynComp.setFloatingBase(baseFrameName);
@@ -1153,6 +1157,8 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     MatrixDynSize MassMatrix_with_l_sole_base(6 + dynComp.getNrOfDegreesOfFreedom(),
                                               6 + dynComp.getNrOfDegreesOfFreedom());
     dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_sole_base);
+    MatrixDynSize Jacobian_rootLink_with_l_sole_base(6, 6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFrameFreeFloatingJacobian(rootLinkName, Jacobian_rootLink_with_l_sole_base);
 
     // Test that computed quantities are consistent regardless of floating base choice
     ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
@@ -1191,6 +1197,16 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
                                            * toEigen(nu_with_l_sole_base);
     // kinetic energy should be the same regardless of floating base choice
     ASSERT_EQUAL_DOUBLE(kinetic_energy_with_l_foot_base, kinetic_energy_with_l_sole_base);
+
+    // Check Jacobian consistency
+    VectorDynSize rootLink_vel_with_l_foot_base(6);
+    toEigen(rootLink_vel_with_l_foot_base) = toEigen(Jacobian_rootLink_with_l_foot_base) * toEigen(nu_with_l_foot_base);
+
+    VectorDynSize rootLink_vel_with_l_sole_base(6);
+    toEigen(rootLink_vel_with_l_sole_base) = toEigen(Jacobian_rootLink_with_l_sole_base) * toEigen(nu_with_l_sole_base);
+
+    ASSERT_EQUAL_VECTOR(rootLink_vel_with_l_foot_base, rootLink_vel_with_l_sole_base);
+
 }
 
 void testFloatingBaseFrameConsistencyAllRepresentations(std::string modelName)
