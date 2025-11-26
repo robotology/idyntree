@@ -559,7 +559,9 @@ bool KinDynComputations::setFloatingBase(const std::string& floatingBaseName)
         return ok;
     }
 
-    // If not a link, try as a frame
+    // If not a link, try as a frame.
+    // Note that the KinDynComputations class will use the body_fixed velocity of the link
+    // to which the frame is attached for its computations.
     FrameIndex frameIndex = this->pimpl->m_robot_model.getFrameIndex(floatingBaseName);
     if (frameIndex == FRAME_INVALID_INDEX)
     {
@@ -2374,25 +2376,67 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
 {
     assert(mat.cols() == m_robot_model.getNrOfDOFs() + 6);
 
-    Transform baseFrame_X_newJacobBaseFrame;
+    Transform baseFrame_T_newJacobBaseFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
+        if (m_isFloatingBaseFrame)
+        {
+            // For body-fixed with frame base:
+            // baseLink_v = Ad_{baseLink_T_baseFrame} * baseFrame_v
+            Matrix6x6 baseLink_X_baseFrame_ = m_baseLinkToBaseFrame.asAdjointTransform();
+            int rows = mat.rows();
+            toEigen(mat).block(0, 0, rows, 6)
+                = toEigen(mat).block(0, 0, rows, 6) * toEigen(baseLink_X_baseFrame_);
+        }
         return;
     } else if (m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        Transform base_X_world = (m_linkPos(m_traversal.getBaseLink()->getIndex())).inverse();
-        baseFrame_X_newJacobBaseFrame = Transform(base_X_world.getRotation(), Position::Zero());
+        // Get world_T_baseLink
+        Transform world_T_baseLink = m_linkPos(m_traversal.getBaseLink()->getIndex());
+
+        if (m_isFloatingBaseFrame)
+        {
+            // For mixed with frame base:
+            // baseLink_v = Ad_{baseLink_T_baseFrame} * baseFrame_X_baseFrame_mixed * baseFrame_mixed_v
+            Transform world_T_baseFrame = world_T_baseLink * m_baseLinkToBaseFrame;
+            Transform baseFrame_T_world = world_T_baseFrame.inverse();
+            Transform baseFrame_T_baseFrame_mixed = Transform(baseFrame_T_world.getRotation(), Position::Zero());
+
+            // Combined transformation: baseLink_H_baseFrame * baseFrame_X_baseFrame_mixed
+            Transform baseLink_X_baseFrame_mixed = m_baseLinkToBaseFrame * baseFrame_T_baseFrame_mixed;
+            baseFrame_T_newJacobBaseFrame = baseLink_X_baseFrame_mixed;
+        }
+        else
+        {
+            Transform baseLink_T_world = world_T_baseLink.inverse();
+            baseFrame_T_newJacobBaseFrame = Transform(baseLink_T_world.getRotation(), Position::Zero());
+        }
     } else
     {
         assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
-        Transform world_X_base = (m_linkPos(m_traversal.getBaseLink()->getIndex()));
-        baseFrame_X_newJacobBaseFrame = world_X_base.inverse();
+        Transform world_T_baseLink = m_linkPos(m_traversal.getBaseLink()->getIndex());
+
+        if (m_isFloatingBaseFrame)
+        {
+            // For inertial-fixed with frame base:
+            // baseLink_v = Ad_{baseLink_T_baseFrame} * baseFrame_X_world * world_v
+            Transform world_T_baseFrame = world_T_baseLink * m_baseLinkToBaseFrame;
+            Transform baseFrame_T_world = world_T_baseFrame.inverse();
+
+            // Combined transformation: baseLink_T_baseFrame * baseFrame_X_world
+            Transform baseLink_T_world = m_baseLinkToBaseFrame * baseFrame_T_world;
+            baseFrame_T_newJacobBaseFrame = baseLink_T_world;
+        }
+        else
+        {
+            baseFrame_T_newJacobBaseFrame = world_T_baseLink.inverse();
+        }
     }
 
-    Matrix6x6 baseFrame_X_newJacobBaseFrame_ = baseFrame_X_newJacobBaseFrame.asAdjointTransform();
+    Matrix6x6 baseFrame_X_newJacobBaseFrame_ = baseFrame_T_newJacobBaseFrame.asAdjointTransform();
 
     // The first six columns of the matrix needs to be modified to account for a different
-    // representation for the base velocity. This can be written as as a modification of the rows
+    // representation for the base velocity. This can be written as a modification of the rows
     // \times 6 left submatrix.
     int rows = mat.rows();
     toEigen(mat).block(0, 0, rows, 6)
@@ -2404,22 +2448,64 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
 {
     assert(jac.rows() == 6);
 
-    Transform newOutputFrame_X_oldOutputFrame;
+    // Get the appropriate world_T_base transform
+    Transform world_T_baseLink = m_pos.worldBasePos();
+    Transform world_T_base;
+    if (m_isFloatingBaseFrame)
+    {
+        world_T_base = world_T_baseLink * m_baseLinkToBaseFrame;
+    }
+    else
+    {
+        world_T_base = world_T_baseLink;
+    }
+
+    Transform newOutputFrame_T_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
+        if (m_isFloatingBaseFrame)
+        {
+            // For body-fixed with frame base:
+            // baseFrame_v = Ad_{baseFrame_T_baseLink} * baseLink_v
+            Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
+            Matrix6x6 baseFrame_X_baseLink_ = baseFrame_T_baseLink.asAdjointTransform();
+            toEigen(jac) = toEigen(baseFrame_X_baseLink_) * toEigen(jac);
+        }
         return;
     } else if (m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        Transform& world_X_base = m_pos.worldBasePos();
-        newOutputFrame_X_oldOutputFrame = Transform(world_X_base.getRotation(), Position::Zero());
+        if (m_isFloatingBaseFrame)
+        {
+            // For mixed with frame base:
+            // mixed_baseFrame_v = mixed_baseFrame_X_baseFrame * Ad_{baseFrame_T_baseLink} * baseLink_v
+            Transform mixed_baseFrame_T_baseFrame = Transform(world_T_base.getRotation(), Position::Zero());
+            Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
+
+            Transform mixed_baseFrame_T_baseLink = mixed_baseFrame_T_baseFrame * baseFrame_T_baseLink;
+            newOutputFrame_T_oldOutputFrame = mixed_baseFrame_T_baseLink;
+        }
+        else
+        {
+            newOutputFrame_T_oldOutputFrame = Transform(world_T_base.getRotation(), Position::Zero());
+        }
     } else
     {
         assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
-        newOutputFrame_X_oldOutputFrame = m_pos.worldBasePos();
+        if (m_isFloatingBaseFrame)
+        {
+            // For inertial-fixed with frame base:
+            // world_v = world_X_baseFrame * Ad_{baseFrame_H_baseLink} * baseLink_v
+            Transform baseFrame_H_baseLink = m_baseLinkToBaseFrame.inverse();
+            newOutputFrame_T_oldOutputFrame = world_T_base * baseFrame_H_baseLink;
+        }
+        else
+        {
+            newOutputFrame_T_oldOutputFrame = world_T_base;
+        }
     }
 
     Matrix6x6 newOutputFrame_X_oldOutputFrame_
-        = newOutputFrame_X_oldOutputFrame.asAdjointTransform();
+        = newOutputFrame_T_oldOutputFrame.asAdjointTransform();
 
     toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_) * toEigen(jac);
 }
@@ -2427,23 +2513,67 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
 void KinDynComputations::KinDynComputationsPrivateAttributes::
     processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixView<double> jac)
 {
-    Transform newOutputFrame_X_oldOutputFrame;
+    // Get the appropriate world_T_base transform
+    Transform world_T_baseLink = m_pos.worldBasePos();
+    Transform world_T_base;
+    if (m_isFloatingBaseFrame)
+    {
+        world_T_base = world_T_baseLink * m_baseLinkToBaseFrame;
+    }
+    else
+    {
+        world_T_base = world_T_baseLink;
+    }
+
+    Transform newOutputFrame_T_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
+        if (m_isFloatingBaseFrame)
+        {
+            // For body-fixed with frame base:
+            // baseFrame_f = Ad^*_{baseFrame_T_baseLink} * baseLink_f
+            Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
+            Matrix6x6 baseFrame_X_baseLink_ = baseFrame_T_baseLink.asAdjointTransformWrench();
+            int cols = jac.cols();
+            toEigen(jac).block(0, 0, 6, cols)
+                = toEigen(baseFrame_X_baseLink_) * toEigen(jac).block(0, 0, 6, cols);
+        }
         return;
     } else if (m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        Transform& world_X_base = m_pos.worldBasePos();
-        newOutputFrame_X_oldOutputFrame = Transform(world_X_base.getRotation(), Position::Zero());
+        if (m_isFloatingBaseFrame)
+        {
+            // For mixed with frame base:
+            // mixed_baseFrame_f = Ad^*_{mixed_baseFrame_T_baseFrame} * Ad^*_{baseFrame_T_baseLink} * baseLink_f
+            Transform mixed_baseFrame_T_baseFrame = Transform(world_T_base.getRotation(), Position::Zero());
+            Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
+
+            // Combined transformation: mixed_baseFrame_T_baseFrame * baseFrame_T_baseLink
+            Transform mixed_baseFrame_T_baseLink = mixed_baseFrame_T_baseFrame * baseFrame_T_baseLink;
+            newOutputFrame_T_oldOutputFrame = mixed_baseFrame_T_baseLink;
+        }
+        else
+        {
+            newOutputFrame_T_oldOutputFrame = Transform(world_T_base.getRotation(), Position::Zero());
+        }
     } else
     {
         assert(m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
-        newOutputFrame_X_oldOutputFrame = m_pos.worldBasePos();
+        if (m_isFloatingBaseFrame)
+        {
+            // For inertial-fixed with frame base:
+            // world_f = Ad^*_{world_T_baseFrame} * Ad^*_{baseFrame_T_baseLink} * baseLink_f
+            Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
+            newOutputFrame_T_oldOutputFrame = world_T_base * baseFrame_T_baseLink;
+        }
+        else
+        {
+            newOutputFrame_T_oldOutputFrame = world_T_base;
+        }
     }
 
     Matrix6x6 newOutputFrame_X_oldOutputFrame_
-        = newOutputFrame_X_oldOutputFrame.asAdjointTransformWrench();
-
+        = newOutputFrame_T_oldOutputFrame.asAdjointTransformWrench();
     int cols = jac.cols();
     toEigen(jac).block(0, 0, 6, cols)
         = toEigen(newOutputFrame_X_oldOutputFrame_) * toEigen(jac).block(0, 0, 6, cols);
