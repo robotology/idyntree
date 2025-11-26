@@ -911,17 +911,39 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
     if (this->pimpl->m_isFloatingBaseFrame)
     {
         // world_T_base is for the frame, but we need world_T_baseLink for internal storage
-        // world_T_baseFrame = world_T_baseLink * baseLink_T_baseFrame
         // So: world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink
-        Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
+        Transform baseLink_T_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
+        Transform baseFrame_T_baseLink = baseLink_T_baseFrame.inverse();
         world_T_baseLink = world_T_base * baseFrame_T_baseLink;
 
-        // For velocity transformation, we need to be careful about the representation
-        // The input base_velocity is expressed in the frame coordinates with the specified representation
-        // We need to convert it to base link coordinates with the same representation
+        // For velocity transformation, we need to be careful about the representation.
+        // The input base_velocity is expressed with the representation stored in pimpl->m_frameVelRepr.
+        // We need to convert it to base link coordinates with the same representation.
 
-        // Let's use the standard twist transformation
-        baseLinkVelocity = baseFrame_T_baseLink * base_velocity;
+        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+        {
+            baseLinkVelocity = base_velocity;
+        }
+        else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+        {
+            baseLinkVelocity = baseLink_T_baseFrame * base_velocity;
+        }
+        else
+        {
+            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+
+            // world_T_baseFrame[world]
+            Transform world_T_base_mixed = world_T_base;
+            world_T_base_mixed.setRotation(Rotation::Identity());
+
+            // world_T_baseLink[world]
+            Transform world_T_baseLink_mixed = world_T_baseLink;
+            world_T_baseLink_mixed.setRotation(Rotation::Identity());
+
+            Transform mixed_transform = world_T_baseLink_mixed.inverse() * world_T_base_mixed;
+
+            baseLinkVelocity = mixed_transform * base_velocity;
+        }
     }
     else
     {
@@ -1005,9 +1027,34 @@ void KinDynComputations::getRobotState(Transform& world_T_base,
     // Transform velocity if needed (when floating base is a frame)
     if (this->pimpl->m_isFloatingBaseFrame)
     {
-        // Convert velocity from base link to base frame
-        Transform baseLink_T_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
-        base_velocity = baseLink_T_baseFrame * baseLinkVelocity;
+        // Convert velocity from base link to base frame considering representation
+        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+        {
+            // In INERTIAL_FIXED_REPRESENTATION, both are in world coordinates
+            base_velocity = baseLinkVelocity;
+        }
+        else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+        {
+            // Body-fixed: transform from base link body to frame body coordinates
+            Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
+            base_velocity = baseFrame_T_baseLink * baseLinkVelocity;
+        }
+        else
+        {
+            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+
+            // world_T_baseFrame[world]
+            Transform world_T_base_mixed = world_T_base;
+            world_T_base_mixed.setRotation(Rotation::Identity());
+
+            // world_T_baseLink[world]
+            Transform world_T_baseLink_mixed = world_T_baseLink;
+            world_T_baseLink_mixed.setRotation(Rotation::Identity());
+
+            Transform mixed_transform = world_T_base_mixed.inverse() *world_T_baseLink_mixed;
+
+            base_velocity = mixed_transform * baseLinkVelocity;
+        }
     }
     else
     {
@@ -1202,10 +1249,37 @@ Twist KinDynComputations::getBaseTwist() const
 
     // Transform velocity if needed
     if (this->pimpl->m_isFloatingBaseFrame)
-    {
-        // Convert velocity from base link to base frame
-        Transform baseLink_T_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
-        return baseLink_T_baseFrame * baseLinkVelocity;
+    {        
+        // Convert velocity from base link to base frame considering representation
+        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+        {
+            return baseLinkVelocity;
+        }
+        else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+        {
+            Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
+            return baseFrame_T_baseLink * baseLinkVelocity;
+        }
+        else
+        {
+            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+
+            Transform world_T_baseFrame = this->getWorldBaseTransform();
+            Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
+            Transform world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink;
+
+            // world_T_baseFrame[world]
+            Transform world_T_base_mixed = world_T_baseFrame;
+            world_T_base_mixed.setRotation(Rotation::Identity());
+
+            // world_T_baseLink[world]
+            Transform world_T_baseLink_mixed = world_T_baseLink;
+            world_T_baseLink_mixed.setRotation(Rotation::Identity());
+
+            Transform mixed_transform = world_T_base_mixed.inverse() * world_T_baseLink_mixed;
+
+            return mixed_transform * baseLinkVelocity;
+        }
     }
     else
     {

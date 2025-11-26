@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
+#include "iDynTree/FreeFloatingMatrices.h"
+#include "iDynTree/Rotation.h"
 #include "testModels.h"
 #include <iDynTree/TestUtils.h>
 
@@ -26,6 +28,7 @@
 #include <iDynTree/ModelTestUtils.h>
 
 #include <iDynTree/ModelLoader.h>
+#include <iostream>
 
 using namespace iDynTree;
 
@@ -1085,69 +1088,90 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath, const FrameVelo
     // Check if both frames exist in the model
     int baseLinkIndex = dynComp.model().getFrameIndex(baseLinkName);
     int baseFrameIndex = dynComp.model().getFrameIndex(baseFrameName);
+
     if (baseLinkIndex < 0 || baseFrameIndex < 0) {
-        // Test should fail if indices are not found
+        // if frames are not present, test should fail
         ASSERT_IS_TRUE(false);
     }
 
-    // FIRST: Test basic setFloatingBase functionality for frames
-    ok = dynComp.setFloatingBase(baseFrameName);
-    ASSERT_IS_TRUE(ok);
-
-    // Check that getFloatingBase returns the frame name
-    std::string retrievedBaseName = dynComp.getFloatingBase();
-    ASSERT_EQUAL_STRING(retrievedBaseName, baseFrameName);
-
-    // SECOND: For now, only test simple zero-velocity case to get basic functionality working
-    // Set floating base to l_foot and create simple zero state
+    // Set floating base to l_foot and create a state with non-zero velocities
     ok = dynComp.setFloatingBase(baseLinkName);
     ASSERT_IS_TRUE(ok);
 
-    // Set simple identity state with zero velocities
-    Transform world_H_l_foot = Transform::Identity();
+    // Create a non-trivial state with non-zero velocities for both base and joints
+    Transform world_H_l_foot = getRandomTransform();
     VectorDynSize q_joint(dynComp.model().getNrOfPosCoords());
-    q_joint.zero();
-    Twist base_vel_l_foot = Twist::Zero();
+    getRandomJointPositions(q_joint, dynComp.model());
+
+    // Generate non-zero base velocity
+    Twist base_vel_l_foot = getRandomTwist();
+
     VectorDynSize dq_joint(dynComp.model().getNrOfDOFs());
-    dq_joint.zero();
+    getRandomVector(dq_joint);
+
     Vector3 gravity;
     gravity(0) = 0.0; gravity(1) = 0.0; gravity(2) = -9.81;
 
+    // Set state with l_foot as floating base
     ok = dynComp.setRobotState(world_H_l_foot, q_joint, base_vel_l_foot, dq_joint, gravity);
     ASSERT_IS_TRUE(ok);
 
     // Compute quantities with l_foot as base
-    Transform world_H_l_sole_from_l_foot = dynComp.getWorldTransform(baseFrameName);
-    Position com_pos_from_l_foot = dynComp.getCenterOfMassPosition();
+    Transform world_H_l_sole_with_l_foot_base = dynComp.getWorldTransform(baseFrameName);
+    Transform world_H_l_foot_with_l_foot_base = dynComp.getWorldTransform(baseLinkName);
+    Position com_pos_with_l_foot_base = dynComp.getCenterOfMassPosition();
+    Twist l_sole_velocity_with_l_foot_base = dynComp.getFrameVel(baseFrameName);
+    Twist l_foot_velocity_with_l_foot_base = dynComp.getFrameVel(baseLinkName);
+    Transform l_foot_H_l_sole = world_H_l_foot.inverse() * world_H_l_sole_with_l_foot_base;
+
+    // Store joint velocities for consistency check
+    VectorDynSize dq_joint_with_l_foot_base(dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getJointVel(dq_joint_with_l_foot_base);
 
     // Now set floating base to l_sole
     ok = dynComp.setFloatingBase(baseFrameName);
     ASSERT_IS_TRUE(ok);
 
-    // Set state with l_sole as base using zero velocity (should be consistent)
-    ok = dynComp.setRobotState(world_H_l_sole_from_l_foot, q_joint, base_vel_l_foot, dq_joint, gravity);
+    // Set state with l_sole as base - using the computed transform and velocity from previous state
+    l_foot_H_l_sole.setRotation(iDynTree::Rotation::Identity());
+    Twist tmp = l_foot_H_l_sole.inverse() * l_foot_velocity_with_l_foot_base;
+    ok = dynComp.setRobotState(world_H_l_sole_with_l_foot_base, q_joint, l_sole_velocity_with_l_foot_base, dq_joint, gravity);
     ASSERT_IS_TRUE(ok);
 
     // Compute quantities with l_sole as base
-    Transform world_H_l_sole_from_l_sole = dynComp.getWorldTransform(baseFrameName);
-    Position com_pos_from_l_sole = dynComp.getCenterOfMassPosition();
+    Transform world_H_l_sole_with_l_sole_base = dynComp.getWorldTransform(baseFrameName);
+    Transform world_H_l_foot_with_l_sole_base = dynComp.getWorldTransform(baseLinkName);
+    Position com_pos_with_l_sole_base = dynComp.getCenterOfMassPosition();
+    Twist l_sole_velocity_with_l_sole_base = dynComp.getFrameVel(baseFrameName);
+    Twist l_foot_velocity_with_l_sole_base = dynComp.getFrameVel(baseLinkName);
 
-    // Test that computed quantities are consistent
-    ASSERT_EQUAL_TRANSFORM(world_H_l_sole_from_l_foot, world_H_l_sole_from_l_sole);
-    ASSERT_EQUAL_VECTOR(com_pos_from_l_foot, com_pos_from_l_sole);
+    // Test that computed quantities are consistent regardless of floating base choice
+    ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
+    ASSERT_EQUAL_TRANSFORM(world_H_l_foot_with_l_foot_base, world_H_l_foot_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(com_pos_with_l_foot_base, com_pos_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(), l_sole_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(l_foot_velocity_with_l_foot_base.asVector(), l_foot_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(dynComp.getBaseTwist().asVector(), l_sole_velocity_with_l_sole_base.asVector());
 
-    // Additional tests: Check that l_foot transform is consistent
-    Transform world_H_l_foot_from_l_sole = dynComp.getWorldTransform(baseLinkName);
-    ASSERT_EQUAL_TRANSFORM(world_H_l_foot, world_H_l_foot_from_l_sole);
+    // recompute some quantities with getRobotState
+    dynComp.getRobotState(world_H_l_sole_with_l_sole_base,
+                           q_joint,
+                           l_sole_velocity_with_l_sole_base,
+                           dq_joint,
+                           gravity);
+
+    // check getRobotState consistency
+    ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(), l_sole_velocity_with_l_sole_base.asVector());
 }
 
 void testFloatingBaseFrameConsistencyAllRepresentations(std::string modelName)
 {
     std::string urdfFileName = getAbsModelPath(modelName);
     std::cout << "Testing floating base frame consistency for file " << urdfFileName << std::endl;
-    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::MIXED_REPRESENTATION);
-    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::BODY_FIXED_REPRESENTATION);
     testFloatingBaseFrameConsistency(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::BODY_FIXED_REPRESENTATION);
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::MIXED_REPRESENTATION);
 }
 
 int main()
