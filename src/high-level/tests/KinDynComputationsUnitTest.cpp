@@ -1111,8 +1111,13 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     // Generate non-zero base velocity
     Twist base_vel_l_foot = getRandomTwist();
 
+    // Generate non-zero base acceleration
+    iDynTree::Vector6 base_acc_l_foot = getRandomTwist().asVector();
+
     VectorDynSize dq_joint(dynComp.model().getNrOfDOFs());
     getRandomVector(dq_joint);
+    VectorDynSize ddq_joint(dynComp.model().getNrOfDOFs());
+    getRandomVector(ddq_joint);
 
     Vector3 gravity;
     gravity(0) = 0.0;
@@ -1130,6 +1135,11 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     Twist l_sole_velocity_with_l_foot_base = dynComp.getFrameVel(baseFrameName);
     Twist l_foot_velocity_with_l_foot_base = dynComp.getFrameVel(baseLinkName);
     Transform l_foot_H_l_sole = world_H_l_foot.inverse() * world_H_l_sole_with_l_foot_base;
+    iDynTree::Vector6 l_sole_acceleration_with_l_foot_base
+        = dynComp.getFrameAcc(baseFrameName, base_acc_l_foot, ddq_joint);
+    iDynTree::Vector6 rootLinkAcceleration_with_l_foot_base
+        = dynComp.getFrameAcc(rootLinkName, base_acc_l_foot, ddq_joint);
+    iDynTree::Vector6 rootLink_bias_acc_with_l_foot_base = dynComp.getFrameBiasAcc(rootLinkName);
     MatrixDynSize MassMatrix_with_l_foot_base(6 + dynComp.getNrOfDegreesOfFreedom(),
                                               6 + dynComp.getNrOfDegreesOfFreedom());
     dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_foot_base);
@@ -1154,6 +1164,9 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     Position com_pos_with_l_sole_base = dynComp.getCenterOfMassPosition();
     Twist l_sole_velocity_with_l_sole_base = dynComp.getFrameVel(baseFrameName);
     Twist l_foot_velocity_with_l_sole_base = dynComp.getFrameVel(baseLinkName);
+    iDynTree::Vector6 rootLinkAcceleration_with_l_sole_base
+        = dynComp.getFrameAcc(rootLinkName, l_sole_acceleration_with_l_foot_base, ddq_joint);
+    iDynTree::Vector6 rootLink_bias_acc_with_l_sole_base = dynComp.getFrameBiasAcc(rootLinkIndex);
     MatrixDynSize MassMatrix_with_l_sole_base(6 + dynComp.getNrOfDegreesOfFreedom(),
                                               6 + dynComp.getNrOfDegreesOfFreedom());
     dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_sole_base);
@@ -1170,6 +1183,9 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
                         l_foot_velocity_with_l_sole_base.asVector());
     ASSERT_EQUAL_VECTOR(dynComp.getBaseTwist().asVector(),
                         l_sole_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(rootLink_bias_acc_with_l_foot_base, rootLink_bias_acc_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(rootLinkAcceleration_with_l_foot_base,
+                        rootLinkAcceleration_with_l_sole_base);
 
     // recompute some quantities with getRobotState
     dynComp.getRobotState(world_H_l_sole_with_l_sole_base,
