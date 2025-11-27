@@ -1119,6 +1119,13 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     VectorDynSize ddq_joint(dynComp.model().getNrOfDOFs());
     getRandomVector(ddq_joint);
 
+    LinkNetExternalWrenches externalWrenches(dynComp.model());
+    for (LinkIndex lnkIdx = 0; lnkIdx < dynComp.model().getNrOfLinks(); lnkIdx++)
+    {
+        // Generate random external wrenches
+        externalWrenches(lnkIdx) = getRandomWrench();
+    }
+
     Vector3 gravity;
     gravity(0) = 0.0;
     gravity(1) = 0.0;
@@ -1145,6 +1152,11 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_foot_base);
     MatrixDynSize Jacobian_rootLink_with_l_foot_base(6, 6 + dynComp.getNrOfDegreesOfFreedom());
     dynComp.getFrameFreeFloatingJacobian(rootLinkName, Jacobian_rootLink_with_l_foot_base);
+    FreeFloatingGeneralizedTorques baseForceAndJointTorques_with_l_foot_base(dynComp.model());
+    ASSERT_IS_TRUE(dynComp.inverseDynamics(base_acc_l_foot,
+                                           ddq_joint,
+                                           externalWrenches,
+                                           baseForceAndJointTorques_with_l_foot_base));
 
     // Now set floating base to l_sole
     ok = dynComp.setFloatingBase(baseFrameName);
@@ -1172,6 +1184,11 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_sole_base);
     MatrixDynSize Jacobian_rootLink_with_l_sole_base(6, 6 + dynComp.getNrOfDegreesOfFreedom());
     dynComp.getFrameFreeFloatingJacobian(rootLinkName, Jacobian_rootLink_with_l_sole_base);
+    FreeFloatingGeneralizedTorques baseForceAndJointTorques_with_l_sole_base(dynComp.model());
+    ASSERT_IS_TRUE(dynComp.inverseDynamics(l_sole_acceleration_with_l_foot_base,
+                                           ddq_joint,
+                                           externalWrenches,
+                                           baseForceAndJointTorques_with_l_sole_base));
 
     // Test that computed quantities are consistent regardless of floating base choice
     ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
@@ -1186,6 +1203,10 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     ASSERT_EQUAL_VECTOR(rootLink_bias_acc_with_l_foot_base, rootLink_bias_acc_with_l_sole_base);
     ASSERT_EQUAL_VECTOR(rootLinkAcceleration_with_l_foot_base,
                         rootLinkAcceleration_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(baseForceAndJointTorques_with_l_foot_base.jointTorques(),
+                        baseForceAndJointTorques_with_l_sole_base.jointTorques());
+    ASSERT_EQUAL_VECTOR(baseForceAndJointTorques_with_l_foot_base.baseWrench(),
+                        baseForceAndJointTorques_with_l_sole_base.baseWrench());
 
     // recompute some quantities with getRobotState
     dynComp.getRobotState(world_H_l_sole_with_l_sole_base,
