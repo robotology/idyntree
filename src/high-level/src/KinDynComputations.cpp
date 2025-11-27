@@ -932,17 +932,17 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
         {
             assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
 
-            // world_T_baseFrame[world]
-            Transform world_T_base_mixed = world_T_base;
-            world_T_base_mixed.setRotation(Rotation::Identity());
+            // W_T_baseFrame[W]: a pure translation from world to base frame
+            Transform world_Ttrans_baseFrame
+                = Transform(Rotation::Identity(), world_T_base.getPosition());
+            // W_T_baseLink[W]: a pure translation from world to base link
+            Transform world_Ttrans_baseLink
+                = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
+            // baseLink[W]_T_baseFrame[W]: a pure translation from base link to base frame
+            Transform baseLink_Ttrans_baseFrame
+                = world_Ttrans_baseLink.inverse() * world_Ttrans_baseFrame;
 
-            // world_T_baseLink[world]
-            Transform world_T_baseLink_mixed = world_T_baseLink;
-            world_T_baseLink_mixed.setRotation(Rotation::Identity());
-
-            Transform mixed_transform = world_T_baseLink_mixed.inverse() * world_T_base_mixed;
-
-            baseLinkVelocity = mixed_transform * base_velocity;
+            baseLinkVelocity = baseLink_Ttrans_baseFrame * base_velocity;
         }
     } else
     {
@@ -1040,17 +1040,17 @@ void KinDynComputations::getRobotState(Transform& world_T_base,
         {
             assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
 
-            // world_T_baseFrame[world]
-            Transform world_T_base_mixed = world_T_base;
-            world_T_base_mixed.setRotation(Rotation::Identity());
+            // W_T_baseFrame[W]: a pure translation from world to base frame
+            Transform world_Ttrans_baseFrame
+                = Transform(Rotation::Identity(), world_T_base.getPosition());
+            // W_T_baseLink[W]: a pure translation from world to base link
+            Transform world_Ttrans_baseLink
+                = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
+            // baseFrame[W]_T_baseLink[W]: a pure translation from base frame to base link
+            Transform baseFrame_Ttrans_baseLink
+                = world_Ttrans_baseFrame.inverse() * world_Ttrans_baseLink;
 
-            // world_T_baseLink[world]
-            Transform world_T_baseLink_mixed = world_T_baseLink;
-            world_T_baseLink_mixed.setRotation(Rotation::Identity());
-
-            Transform mixed_transform = world_T_base_mixed.inverse() * world_T_baseLink_mixed;
-
-            base_velocity = mixed_transform * baseLinkVelocity;
+            base_velocity = baseFrame_Ttrans_baseLink * baseLinkVelocity;
         }
     } else
     {
@@ -1257,21 +1257,23 @@ Twist KinDynComputations::getBaseTwist() const
         {
             assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
 
+            // W_T_baseFrame
             Transform world_T_baseFrame = this->getWorldBaseTransform();
+            // baseFrame_T_baseLink
             Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
+            // world_T_baseLink
             Transform world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink;
+            // W_T_baseFrame[W]: a pure translation from world to base frame
+            Transform world_Ttrans_baseFrame
+                = Transform(Rotation::Identity(), world_T_baseFrame.getPosition());
+            // W_T_baseLink[W]: a pure translation from world to base link
+            Transform world_Ttrans_baseLink
+                = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
+            // baseFrame[W]_T_baseLink[W]: a pure translation from base frame to base link
+            Transform baseFrame_Ttrans_baseLink
+                = world_Ttrans_baseFrame.inverse() * world_Ttrans_baseLink;
 
-            // world_T_baseFrame[world]
-            Transform world_T_base_mixed = world_T_baseFrame;
-            world_T_base_mixed.setRotation(Rotation::Identity());
-
-            // world_T_baseLink[world]
-            Transform world_T_baseLink_mixed = world_T_baseLink;
-            world_T_baseLink_mixed.setRotation(Rotation::Identity());
-
-            Transform mixed_transform = world_T_base_mixed.inverse() * world_T_baseLink_mixed;
-
-            return mixed_transform * baseLinkVelocity;
+            return baseFrame_Ttrans_baseLink * baseLinkVelocity;
         }
     } else
     {
@@ -2010,9 +2012,10 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
                 = (pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex())).inverse();
             Transform baseLink_X_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
             Transform world_X_baseFrame = baseLink_X_world.inverse() * baseLink_X_baseFrame;
-            Transform baseFrame_X_baseFrame_mixed
+            // baseFrame_X_baseFrame[W] = pure rotation transform from base frame to world
+            Transform baseFrame_R_world
                 = Transform(world_X_baseFrame.inverse().getRotation(), Position::Zero());
-            baseLink_X_jacobBaseFrame = baseLink_X_baseFrame * baseFrame_X_baseFrame_mixed;
+            baseLink_X_jacobBaseFrame = baseLink_X_baseFrame * baseFrame_R_world;
         } else
         {
             Transform baseLink_X_world
@@ -2484,18 +2487,15 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
 
         if (m_isFloatingBaseFrame)
         {
-            // For mixed with frame base:
-            // baseLink_v = Ad_{baseLink_T_baseFrame} * baseFrame_X_baseFrame_mixed *
-            // baseFrame_mixed_v
+            // baseLink_v = Ad_{baseLink_T_baseFrame} * baseFrame_T_baseFrame[W] *
+            // baseFrame[W]_v
             Transform world_T_baseFrame = world_T_baseLink * m_baseLinkToBaseFrame;
             Transform baseFrame_T_world = world_T_baseFrame.inverse();
-            Transform baseFrame_T_baseFrame_mixed
+            // baseFrame_T_baseFrame[W] = baseFrame_R_world (a pure rotation transform)
+            Transform baseFrame_R_world
                 = Transform(baseFrame_T_world.getRotation(), Position::Zero());
-
-            // Combined transformation: baseLink_H_baseFrame * baseFrame_X_baseFrame_mixed
-            Transform baseLink_X_baseFrame_mixed
-                = m_baseLinkToBaseFrame * baseFrame_T_baseFrame_mixed;
-            baseFrame_T_newJacobBaseFrame = baseLink_X_baseFrame_mixed;
+            // baseLink_T_baseFrame[W] = baseLink_T_baseFrame * baseFrame_T_baseFrame[W]
+            baseFrame_T_newJacobBaseFrame = m_baseLinkToBaseFrame * baseFrame_R_world;
         } else
         {
             Transform baseLink_T_world = world_T_baseLink.inverse();
