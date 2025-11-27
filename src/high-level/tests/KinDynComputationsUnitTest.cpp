@@ -1206,23 +1206,24 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     toEigen(nu_with_l_sole_base) = toEigen(l_sole_velocity_with_l_sole_base.asVector(), dq_joint);
 
     double kinetic_energy_with_l_foot_base = toEigen(nu_with_l_foot_base).transpose()
-                                           * toEigen(MassMatrix_with_l_foot_base)
-                                           * toEigen(nu_with_l_foot_base);
+                                             * toEigen(MassMatrix_with_l_foot_base)
+                                             * toEigen(nu_with_l_foot_base);
     double kinetic_energy_with_l_sole_base = toEigen(nu_with_l_sole_base).transpose()
-                                           * toEigen(MassMatrix_with_l_sole_base)
-                                           * toEigen(nu_with_l_sole_base);
+                                             * toEigen(MassMatrix_with_l_sole_base)
+                                             * toEigen(nu_with_l_sole_base);
     // kinetic energy should be the same regardless of floating base choice
     ASSERT_EQUAL_DOUBLE(kinetic_energy_with_l_foot_base, kinetic_energy_with_l_sole_base);
 
     // Check Jacobian consistency
     VectorDynSize rootLink_vel_with_l_foot_base(6);
-    toEigen(rootLink_vel_with_l_foot_base) = toEigen(Jacobian_rootLink_with_l_foot_base) * toEigen(nu_with_l_foot_base);
+    toEigen(rootLink_vel_with_l_foot_base)
+        = toEigen(Jacobian_rootLink_with_l_foot_base) * toEigen(nu_with_l_foot_base);
 
     VectorDynSize rootLink_vel_with_l_sole_base(6);
-    toEigen(rootLink_vel_with_l_sole_base) = toEigen(Jacobian_rootLink_with_l_sole_base) * toEigen(nu_with_l_sole_base);
+    toEigen(rootLink_vel_with_l_sole_base)
+        = toEigen(Jacobian_rootLink_with_l_sole_base) * toEigen(nu_with_l_sole_base);
 
     ASSERT_EQUAL_VECTOR(rootLink_vel_with_l_foot_base, rootLink_vel_with_l_sole_base);
-
 }
 
 void testFloatingBaseFrameConsistencyAllRepresentations(std::string modelName)
