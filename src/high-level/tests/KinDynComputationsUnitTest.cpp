@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
+#include "iDynTree/FreeFloatingMatrices.h"
+#include "iDynTree/MatrixDynSize.h"
+#include "iDynTree/Rotation.h"
 #include "testModels.h"
 #include <iDynTree/TestUtils.h>
 
@@ -26,6 +29,7 @@
 #include <iDynTree/ModelTestUtils.h>
 
 #include <iDynTree/ModelLoader.h>
+#include <iostream>
 
 using namespace iDynTree;
 
@@ -1067,6 +1071,191 @@ void testSparsityPatternAllRepresentations(std::string modelName)
     testSparsityPattern(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
+void testFloatingBaseFrameConsistency(std::string modelFilePath,
+                                      const FrameVelocityRepresentation frameVelRepr)
+{
+    iDynTree::KinDynComputations dynComp;
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ok = ok && dynComp.loadRobotModel(mdlLoader.model());
+    ASSERT_IS_TRUE(ok);
+
+    ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
+    ASSERT_IS_TRUE(ok);
+
+    // Test with iCub model using l_foot as base link vs l_sole as base frame
+    std::string baseLinkName = "l_foot";
+    std::string baseFrameName = "l_sole";
+    std::string rootLinkName = "root_link";
+
+    // Check if both frames exist in the model
+    int baseLinkIndex = dynComp.model().getFrameIndex(baseLinkName);
+    int baseFrameIndex = dynComp.model().getFrameIndex(baseFrameName);
+    int rootLinkIndex = dynComp.model().getFrameIndex(rootLinkName);
+
+    if (baseLinkIndex < 0 || baseFrameIndex < 0 || rootLinkIndex < 0)
+    {
+        // if frames are not present, test should fail
+        ASSERT_IS_TRUE(false);
+    }
+
+    // Set floating base to l_foot and create a state with non-zero velocities
+    ok = dynComp.setFloatingBase(baseLinkName);
+    ASSERT_IS_TRUE(ok);
+
+    // Create a non-trivial state with non-zero velocities for both base and joints
+    Transform world_H_l_foot = getRandomTransform();
+    VectorDynSize q_joint(dynComp.model().getNrOfPosCoords());
+    getRandomJointPositions(q_joint, dynComp.model());
+
+    // Generate non-zero base velocity
+    Twist base_vel_l_foot = getRandomTwist();
+
+    // Generate non-zero base acceleration
+    iDynTree::Vector6 base_acc_l_foot = getRandomTwist().asVector();
+
+    VectorDynSize dq_joint(dynComp.model().getNrOfDOFs());
+    getRandomVector(dq_joint);
+    VectorDynSize ddq_joint(dynComp.model().getNrOfDOFs());
+    getRandomVector(ddq_joint);
+
+    LinkNetExternalWrenches externalWrenches(dynComp.model());
+    for (LinkIndex lnkIdx = 0; lnkIdx < dynComp.model().getNrOfLinks(); lnkIdx++)
+    {
+        // Generate random external wrenches
+        externalWrenches(lnkIdx) = getRandomWrench();
+    }
+
+    Vector3 gravity;
+    gravity(0) = 0.0;
+    gravity(1) = 0.0;
+    gravity(2) = -9.81;
+
+    // Set state with l_foot as floating base
+    ok = dynComp.setRobotState(world_H_l_foot, q_joint, base_vel_l_foot, dq_joint, gravity);
+    ASSERT_IS_TRUE(ok);
+
+    // Compute quantities with l_foot as base
+    Transform world_H_l_sole_with_l_foot_base = dynComp.getWorldTransform(baseFrameName);
+    Transform world_H_l_foot_with_l_foot_base = dynComp.getWorldTransform(baseLinkName);
+    Position com_pos_with_l_foot_base = dynComp.getCenterOfMassPosition();
+    Twist l_sole_velocity_with_l_foot_base = dynComp.getFrameVel(baseFrameName);
+    Twist l_foot_velocity_with_l_foot_base = dynComp.getFrameVel(baseLinkName);
+    Transform l_foot_H_l_sole = world_H_l_foot.inverse() * world_H_l_sole_with_l_foot_base;
+    iDynTree::Vector6 l_sole_acceleration_with_l_foot_base
+        = dynComp.getFrameAcc(baseFrameName, base_acc_l_foot, ddq_joint);
+    iDynTree::Vector6 rootLinkAcceleration_with_l_foot_base
+        = dynComp.getFrameAcc(rootLinkName, base_acc_l_foot, ddq_joint);
+    iDynTree::Vector6 rootLink_bias_acc_with_l_foot_base = dynComp.getFrameBiasAcc(rootLinkName);
+    MatrixDynSize MassMatrix_with_l_foot_base(6 + dynComp.getNrOfDegreesOfFreedom(),
+                                              6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_foot_base);
+    MatrixDynSize Jacobian_rootLink_with_l_foot_base(6, 6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFrameFreeFloatingJacobian(rootLinkName, Jacobian_rootLink_with_l_foot_base);
+    FreeFloatingGeneralizedTorques baseForceAndJointTorques_with_l_foot_base(dynComp.model());
+    ASSERT_IS_TRUE(dynComp.inverseDynamics(base_acc_l_foot,
+                                           ddq_joint,
+                                           externalWrenches,
+                                           baseForceAndJointTorques_with_l_foot_base));
+
+    // Now set floating base to l_sole
+    ok = dynComp.setFloatingBase(baseFrameName);
+    ASSERT_IS_TRUE(ok);
+
+    // Set state with l_sole as base - using the computed transform and velocity from previous state
+    ok = dynComp.setRobotState(world_H_l_sole_with_l_foot_base,
+                               q_joint,
+                               l_sole_velocity_with_l_foot_base,
+                               dq_joint,
+                               gravity);
+    ASSERT_IS_TRUE(ok);
+
+    // Compute quantities with l_sole as base
+    Transform world_H_l_sole_with_l_sole_base = dynComp.getWorldTransform(baseFrameName);
+    Transform world_H_l_foot_with_l_sole_base = dynComp.getWorldTransform(baseLinkName);
+    Position com_pos_with_l_sole_base = dynComp.getCenterOfMassPosition();
+    Twist l_sole_velocity_with_l_sole_base = dynComp.getFrameVel(baseFrameName);
+    Twist l_foot_velocity_with_l_sole_base = dynComp.getFrameVel(baseLinkName);
+    iDynTree::Vector6 rootLinkAcceleration_with_l_sole_base
+        = dynComp.getFrameAcc(rootLinkName, l_sole_acceleration_with_l_foot_base, ddq_joint);
+    iDynTree::Vector6 rootLink_bias_acc_with_l_sole_base = dynComp.getFrameBiasAcc(rootLinkIndex);
+    MatrixDynSize MassMatrix_with_l_sole_base(6 + dynComp.getNrOfDegreesOfFreedom(),
+                                              6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFreeFloatingMassMatrix(MassMatrix_with_l_sole_base);
+    MatrixDynSize Jacobian_rootLink_with_l_sole_base(6, 6 + dynComp.getNrOfDegreesOfFreedom());
+    dynComp.getFrameFreeFloatingJacobian(rootLinkName, Jacobian_rootLink_with_l_sole_base);
+    FreeFloatingGeneralizedTorques baseForceAndJointTorques_with_l_sole_base(dynComp.model());
+    ASSERT_IS_TRUE(dynComp.inverseDynamics(l_sole_acceleration_with_l_foot_base,
+                                           ddq_joint,
+                                           externalWrenches,
+                                           baseForceAndJointTorques_with_l_sole_base));
+
+    // Test that computed quantities are consistent regardless of floating base choice
+    ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
+    ASSERT_EQUAL_TRANSFORM(world_H_l_foot_with_l_foot_base, world_H_l_foot_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(com_pos_with_l_foot_base, com_pos_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(),
+                        l_sole_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(l_foot_velocity_with_l_foot_base.asVector(),
+                        l_foot_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(dynComp.getBaseTwist().asVector(),
+                        l_sole_velocity_with_l_sole_base.asVector());
+    ASSERT_EQUAL_VECTOR(rootLink_bias_acc_with_l_foot_base, rootLink_bias_acc_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(rootLinkAcceleration_with_l_foot_base,
+                        rootLinkAcceleration_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(baseForceAndJointTorques_with_l_foot_base.jointTorques(),
+                        baseForceAndJointTorques_with_l_sole_base.jointTorques());
+    ASSERT_EQUAL_VECTOR(baseForceAndJointTorques_with_l_foot_base.baseWrench(),
+                        baseForceAndJointTorques_with_l_sole_base.baseWrench());
+
+    // recompute some quantities with getRobotState
+    dynComp.getRobotState(world_H_l_sole_with_l_sole_base,
+                          q_joint,
+                          l_sole_velocity_with_l_sole_base,
+                          dq_joint,
+                          gravity);
+
+    // check getRobotState consistency
+    ASSERT_EQUAL_TRANSFORM(world_H_l_sole_with_l_foot_base, world_H_l_sole_with_l_sole_base);
+    ASSERT_EQUAL_VECTOR(l_sole_velocity_with_l_foot_base.asVector(),
+                        l_sole_velocity_with_l_sole_base.asVector());
+
+    // Mass matrix and consistency check via kinetic energy
+    VectorDynSize nu_with_l_foot_base(6 + dynComp.getNrOfDegreesOfFreedom());
+    toEigen(nu_with_l_foot_base) = toEigen(l_foot_velocity_with_l_foot_base.asVector(), dq_joint);
+    VectorDynSize nu_with_l_sole_base(6 + dynComp.getNrOfDegreesOfFreedom());
+    toEigen(nu_with_l_sole_base) = toEigen(l_sole_velocity_with_l_sole_base.asVector(), dq_joint);
+
+    double kinetic_energy_with_l_foot_base = toEigen(nu_with_l_foot_base).transpose()
+                                             * toEigen(MassMatrix_with_l_foot_base)
+                                             * toEigen(nu_with_l_foot_base);
+    double kinetic_energy_with_l_sole_base = toEigen(nu_with_l_sole_base).transpose()
+                                             * toEigen(MassMatrix_with_l_sole_base)
+                                             * toEigen(nu_with_l_sole_base);
+    // kinetic energy should be the same regardless of floating base choice
+    ASSERT_EQUAL_DOUBLE(kinetic_energy_with_l_foot_base, kinetic_energy_with_l_sole_base);
+
+    // Check Jacobian consistency
+    VectorDynSize rootLink_vel_with_l_foot_base(6);
+    toEigen(rootLink_vel_with_l_foot_base)
+        = toEigen(Jacobian_rootLink_with_l_foot_base) * toEigen(nu_with_l_foot_base);
+
+    VectorDynSize rootLink_vel_with_l_sole_base(6);
+    toEigen(rootLink_vel_with_l_sole_base)
+        = toEigen(Jacobian_rootLink_with_l_sole_base) * toEigen(nu_with_l_sole_base);
+
+    ASSERT_EQUAL_VECTOR(rootLink_vel_with_l_foot_base, rootLink_vel_with_l_sole_base);
+}
+
+void testFloatingBaseFrameConsistencyAllRepresentations(std::string modelName)
+{
+    std::string urdfFileName = getAbsModelPath(modelName);
+    std::cout << "Testing floating base frame consistency for file " << urdfFileName << std::endl;
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::INERTIAL_FIXED_REPRESENTATION);
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::BODY_FIXED_REPRESENTATION);
+    testFloatingBaseFrameConsistency(urdfFileName, iDynTree::MIXED_REPRESENTATION);
+}
+
 int main()
 {
     // Just run the tests on a handful of models to avoid
@@ -1105,6 +1294,8 @@ int main()
     testKineticEnergyOnURDFModel(getAbsModelPath("bigman.urdf"));
     testKineticEnergyOnURDFModel(getAbsModelPath("icub_skin_frames.urdf"));
     testKineticEnergyOnURDFModel(getAbsModelPath("iCubGenova02.urdf"));
+
+    testFloatingBaseFrameConsistencyAllRepresentations("iCubGenova02.urdf");
 
     return EXIT_SUCCESS;
 }
