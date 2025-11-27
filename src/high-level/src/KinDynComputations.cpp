@@ -1757,20 +1757,98 @@ Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
     // compute fwd kinematics (if necessary)
     this->computeFwdKinematics();
 
-    // Convert input base acceleration
+    // Handle transformation when floating base is a frame vs a link
+    // The input baseAcc is the acceleration of the floating base frame, but internally
+    // we need the acceleration of the base link in body-fixed representation.
+    Vector6 baseLinkAcc;
+
+    if (this->pimpl->m_isFloatingBaseFrame)
+    {
+        // baseAcc is the acceleration of the floating base frame.
+        // We need to convert it to base link acceleration (in the same representation first),
+        // then convert to body-fixed representation.
+        Transform baseLink_T_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
+        Transform baseFrame_T_baseLink = baseLink_T_baseFrame.inverse();
+
+        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+        {
+            // In inertial representation, the acceleration vector is the same
+            // for both base frame and base link (they are rigidly connected)
+            baseLinkAcc = baseAcc;
+        }
+        else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+        {
+            // Transform body-fixed acceleration from base frame to base link
+            SpatialAcc baseFrameAcc_body;
+            fromEigen(baseFrameAcc_body, toEigen(baseAcc));
+            SpatialAcc baseLinkAcc_body = baseLink_T_baseFrame * baseFrameAcc_body;
+            baseLinkAcc = baseLinkAcc_body.asVector();
+        }
+        else
+        {
+            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
+            // For mixed representation, we need to transform properly.
+            // The mixed frame has world orientation but frame's origin.
+            // We need to convert mixed acceleration from base frame to base link.
+            //
+            // In mixed representation:
+            //   F[A] a_[A,F]
+            //   L[A] a_[A,L]
+            //
+            // For two points on a rigid body:
+            //   F[A]_ddot_p_L = L[A]_ddot_p_F + A_dot_omega × A_p_FL + A_omega × (A_omega × A_p_FL)
+            //
+            // where A_p_FL is the position from F to L in world coordinates.
+
+            Transform world_T_baseFrame = this->getWorldBaseTransform();
+            Transform world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink;
+
+            // Get the position offset in world coordinates: from baseFrame to baseLink
+            Position world_p_baseFrame_to_baseLink
+                = world_T_baseLink.getPosition() - world_T_baseFrame.getPosition();
+
+            // Get angular velocity in world frame (stored internally in body-fixed, need to convert)
+            // pimpl->m_vel.baseVel() is body-fixed velocity of base link
+            Twist baseLinkVel_body = pimpl->m_vel.baseVel();
+            Vector3 omega_world;
+            toEigen(omega_world)
+                = toEigen(pimpl->m_pos.worldBasePos().getRotation()) * toEigen(baseLinkVel_body.getAngularVec3());
+
+            // Extract input acceleration components
+            Eigen::Map<const Eigen::Vector3d> linAcc_baseFrame(baseAcc.data());
+            Eigen::Map<const Eigen::Vector3d> angAcc_baseFrame(baseAcc.data() + 3);
+            Eigen::Map<const Eigen::Vector3d> omega_w(omega_world.data());
+            Eigen::Map<const Eigen::Vector3d> p_FL(world_p_baseFrame_to_baseLink.data());
+
+            // Compute base link linear acceleration:
+            Eigen::Vector3d linAcc_baseLink
+                = linAcc_baseFrame + angAcc_baseFrame.cross(p_FL) + omega_w.cross(omega_w.cross(p_FL));
+
+            // Angular acceleration is the same for both frames
+            toEigen(baseLinkAcc).head<3>() = linAcc_baseLink;
+            toEigen(baseLinkAcc).tail<3>() = angAcc_baseFrame;
+        }
+    }
+    else
+    {
+        // Floating base is a link - use directly
+        baseLinkAcc = baseAcc;
+    }
+
+    // Convert base link acceleration to body-fixed representation
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
-        fromEigen(pimpl->m_baseAcc, toEigen(baseAcc));
+        fromEigen(pimpl->m_baseAcc, toEigen(baseLinkAcc));
     } else if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
     {
         pimpl->m_baseAcc
-            = convertInertialAccelerationToBodyFixedAcceleration(baseAcc,
+            = convertInertialAccelerationToBodyFixedAcceleration(baseLinkAcc,
                                                                  pimpl->m_pos.worldBasePos());
     } else
     {
         assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
         pimpl->m_baseAcc
-            = convertMixedAccelerationToBodyFixedAcceleration(baseAcc,
+            = convertMixedAccelerationToBodyFixedAcceleration(baseLinkAcc,
                                                               pimpl->m_vel.baseVel(),
                                                               pimpl->m_pos.worldBasePos()
                                                                   .getRotation());
