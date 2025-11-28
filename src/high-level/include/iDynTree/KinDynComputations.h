@@ -183,7 +183,8 @@ public:
     std::string getFloatingBase() const;
 
     /**
-     * Set the link that is used as the floating base link.
+     * Set the frame that is used as the floating base. The frame can be either a link frame or an
+     * additional frame rigidly connected to a link.
      *
      * Currently supports only links. See https://github.com/robotology/idyntree/issues/422.
      * @return true if all went well, false otherwise (for example if the link name was not found).
@@ -311,12 +312,12 @@ public:
      * \note This method sets only the world base transform, leaving all the other components of the
      * state to their previous value.
      *
-     * @param[in] world_T_base the homogeneous transformation that transforms position vectors
+     * @param[in] world_T_baseFrame the homogeneous transformation that transforms position vectors
      * expressed in the base reference frame in position frames expressed in the world reference
-     * frame (i.e. pos_world = world_T_base*pos_base .
+     * frame (i.e. pos_world = world_T_baseFrame*pos_base .
      * @return true if all went well, false otherwise.
      */
-    bool setWorldBaseTransform(const iDynTree::Transform& world_T_base);
+    bool setWorldBaseTransform(const iDynTree::Transform& world_T_baseFrame);
 
     /**
      * @brief Set the world base transform (MatrixView implementation).
@@ -324,42 +325,42 @@ public:
      * \note This method sets only the world base transform, leaving all the other components of the
      * state to their previous value.
      *
-     * @param[in] world_T_base the homogeneous transformation that transforms position vectors
+     * @param[in] world_T_baseFrame the homogeneous transformation that transforms position vectors
      * expressed in the base reference frame in position frames expressed in the world reference
-     * frame (i.e. pos_world = world_T_base*pos_base .
+     * frame (i.e. pos_world = world_T_baseFrame*pos_base .
      * @return true if all went well, false otherwise.
      */
-    bool setWorldBaseTransform(iDynTree::MatrixView<const double>& world_T_base);
+    bool setWorldBaseTransform(iDynTree::MatrixView<const double>& world_T_baseFrame);
 
     /**
      * Set the state for the robot (floating base)
      *
-     * @param world_T_base  the homogeneous transformation that transforms position vectors
+     * @param world_T_baseFrame  the homogeneous transformation that transforms position vectors
      * expressed in the base reference frame in position frames expressed in the world reference
-     * frame (i.e. pos_world = world_T_base*pos_base .
+     * frame (i.e. pos_world = world_T_baseFrame*pos_base .
      * @param s a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
-     * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the
-     * convention specified by the used FrameVelocityConvention.
+     * @param baseFrame_velocity The twist (linear/angular velocity) of the base frame, expressed
+     * with the convention specified by the used FrameVelocityConvention.
      * @param s_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
      * @param world_gravity a 3d vector of the gravity acceleration vector, expressed in the
      * world/inertial frame.
      * @return true if all went well, false otherwise.
      */
-    bool setRobotState(const iDynTree::Transform& world_T_base,
+    bool setRobotState(const iDynTree::Transform& world_T_baseFrame,
                        const iDynTree::VectorDynSize& s,
-                       const iDynTree::Twist& base_velocity,
+                       const iDynTree::Twist& baseFrame_velocity,
                        const iDynTree::VectorDynSize& s_dot,
                        const iDynTree::Vector3& world_gravity);
 
     /**
      * Set the state for the robot (floating base) (Span and MatrixView implementation)
      *
-     * @param world_T_base the 4x4 homogeneous transformation that transforms position vectors
+     * @param world_T_baseFrame the 4x4 homogeneous transformation that transforms position vectors
      * expressed in the base reference frame in position frames expressed in the world reference
-     * frame (i.e. pos_world = world_T_base*pos_base).
+     * frame (i.e. pos_world = world_T_baseFrame*pos_base).
      * @param s a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
-     * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the
-     * convention specified by the used FrameVelocityConvention.
+     * @param baseFrame_velocity The twist (linear/angular velocity) of the base frame, expressed
+     * with the convention specified by the used FrameVelocityConvention.
      * @param s_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
      * @param world_gravity a 3d vector of the gravity acceleration vector, expressed in the
      * world/inertial frame.
@@ -367,17 +368,17 @@ public:
      * allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool setRobotState(iDynTree::MatrixView<const double> world_T_base,
+    bool setRobotState(iDynTree::MatrixView<const double> world_T_baseFrame,
                        iDynTree::Span<const double> s,
-                       iDynTree::Span<const double> base_velocity,
+                       iDynTree::Span<const double> baseFrame_velocity,
                        iDynTree::Span<const double> s_dot,
                        iDynTree::Span<const double> world_gravity);
 
     /**
      * Set the state for the robot (fixed base)
      * Same as setRobotState, but with:
-     *  world_T_base      = iDynTree::Transform::Identity()
-     *  base_velocity     = iDynTree::Twist::Zero();
+     *  world_T_baseFrame      = iDynTree::Transform::Identity()
+     *  baseFrame_velocity     = iDynTree::Twist::Zero();
      *
      */
     bool setRobotState(const iDynTree::VectorDynSize& s,
@@ -387,8 +388,8 @@ public:
     /**
      * Set the state for the robot (fixed base)
      * Same as setRobotState, but with:
-     *  world_T_base      = iDynTree::Transform::Identity()
-     *  base_velocity     = iDynTree::Twist::Zero();
+     *  world_T_baseFrame      = iDynTree::Transform::Identity()
+     *  baseFrame_velocity     = iDynTree::Twist::Zero();
      * @warning the Span objects should point an already existing memory. Memory allocation and
      * resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
@@ -397,9 +398,9 @@ public:
                        iDynTree::Span<const double> s_dot,
                        iDynTree::Span<const double> world_gravity);
 
-    void getRobotState(iDynTree::Transform& world_T_base,
+    void getRobotState(iDynTree::Transform& world_T_baseFrame,
                        iDynTree::VectorDynSize& s,
-                       iDynTree::Twist& base_velocity,
+                       iDynTree::Twist& baseFrame_velocity,
                        iDynTree::VectorDynSize& s_dot,
                        iDynTree::Vector3& world_gravity);
 
@@ -407,9 +408,9 @@ public:
                        iDynTree::VectorDynSize& s_dot,
                        iDynTree::Vector3& world_gravity);
 
-    bool getRobotState(iDynTree::MatrixView<double> world_T_base,
+    bool getRobotState(iDynTree::MatrixView<double> world_T_baseFrame,
                        iDynTree::Span<double> s,
-                       iDynTree::Span<double> base_velocity,
+                       iDynTree::Span<double> baseFrame_velocity,
                        iDynTree::Span<double> s_dot,
                        iDynTree::Span<double> world_gravity);
 
@@ -421,10 +422,10 @@ public:
      * Access the robot state.
      */
     iDynTree::Transform getWorldBaseTransform() const;
-    bool getWorldBaseTransform(iDynTree::MatrixView<double> world_T_base) const;
+    bool getWorldBaseTransform(iDynTree::MatrixView<double> world_T_baseFrame) const;
 
     iDynTree::Twist getBaseTwist() const;
-    bool getBaseTwist(iDynTree::Span<double> base_velocity) const;
+    bool getBaseTwist(iDynTree::Span<double> baseFrame_velocity) const;
 
     bool getJointPos(iDynTree::VectorDynSize& q) const;
 
@@ -662,8 +663,9 @@ public:
      * @warning As this method recomputes the accelerations of all links for each call, it may be
      * computationally expensive.
      */
-    Vector6
-    getFrameAcc(const std::string& frameName, const Vector6& baseAcc, const VectorDynSize& s_ddot);
+    Vector6 getFrameAcc(const std::string& frameName,
+                        const Vector6& baseFrameAcc,
+                        const VectorDynSize& s_ddot);
 
     /**
      * Return the frame acceleration, with the convention specified by
@@ -677,7 +679,7 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getFrameAcc(const std::string& frameName,
-                     iDynTree::Span<const double> baseAcc,
+                     iDynTree::Span<const double> baseFrameAcc,
                      iDynTree::Span<const double> s_ddot,
                      iDynTree::Span<double> frame_acceleration);
 
@@ -688,8 +690,9 @@ public:
      * @warning As this method recomputes the accelerations of all links for each call, it may be
      * computationally expensive.
      */
-    Vector6
-    getFrameAcc(const FrameIndex frameIdx, const Vector6& baseAcc, const VectorDynSize& s_ddot);
+    Vector6 getFrameAcc(const FrameIndex frameIdx,
+                        const Vector6& baseFrameAcc,
+                        const VectorDynSize& s_ddot);
 
     /**
      * Return the frame acceleration, with the convention specified by
@@ -703,7 +706,7 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getFrameAcc(const FrameIndex frameName,
-                     iDynTree::Span<const double> baseAcc,
+                     iDynTree::Span<const double> baseFrameAcc,
                      iDynTree::Span<const double> s_ddot,
                      iDynTree::Span<double> frame_acceleration);
 
@@ -1254,18 +1257,18 @@ public:
      * This method computes \f$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}}
      * J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}\f$.
      *
-     * The semantics of baseAcc, the base part of baseForceAndJointTorques
+     * The semantics of baseFrameAcc, the base part of baseForceAndJointTorques
      * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
      *
      * The state is the one given set by the setRobotState method.
      *
-     * @param[in] baseAcc the acceleration of the base link
+     * @param[in] baseFrameAcc the acceleration of the base frame
      * @param[in] s_ddot the accelerations of the joints
      * @param[in] linkExtForces the external wrenches excerted by the environment on the model
      * @param[out] baseForceAndJointTorques the output generalized torques
      * @return true if all went well, false otherwise
      */
-    bool inverseDynamics(const Vector6& baseAcc,
+    bool inverseDynamics(const Vector6& baseFrameAcc,
                          const VectorDynSize& s_ddot,
                          const LinkNetExternalWrenches& linkExtForces,
                          FreeFloatingGeneralizedTorques& baseForceAndJointTorques);
@@ -1276,12 +1279,12 @@ public:
      * This method computes \f$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}}
      * J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}\f$.
      *
-     * The semantics of baseAcc, the base part of baseForceAndJointTorques
+     * The semantics of baseFrameAcc, the base part of baseForceAndJointTorques
      * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
      *
      * The state is the one given set by the setRobotState method.
      *
-     * @param[in] baseAcc the acceleration of the base link
+     * @param[in] baseFrameAcc the acceleration of the base frame
      * @param[in] s_ddot the accelerations of the joints
      * @param[in] linkExtForces the external wrenches excerted by the environment on the model
      * @param[out] baseForceAndJointTorques the output generalized torques
@@ -1289,7 +1292,7 @@ public:
      * resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool inverseDynamics(iDynTree::Span<const double> baseAcc,
+    bool inverseDynamics(iDynTree::Span<const double> baseFrameAcc,
                          iDynTree::Span<const double> s_ddot,
                          const LinkNetExternalWrenches& linkExtForces,
                          FreeFloatingGeneralizedTorques& baseForceAndJointTorques);
@@ -1319,7 +1322,7 @@ public:
      * choosen base link.
      */
     bool inverseDynamicsWithInternalJointForceTorques(
-        const Vector6& baseAcc,
+        const Vector6& baseFrameAcc,
         const VectorDynSize& s_ddot,
         const LinkNetExternalWrenches& linkExtForces,
         FreeFloatingGeneralizedTorques& baseForceAndJointTorques,
@@ -1331,7 +1334,7 @@ public:
      * parameters.
      */
     bool inverseDynamicsWithInternalJointForceTorques(
-        iDynTree::Span<const double> baseAcc,
+        iDynTree::Span<const double> baseFrameAcc,
         iDynTree::Span<const double> s_ddot,
         const LinkNetExternalWrenches& linkExtForces,
         FreeFloatingGeneralizedTorques& baseForceAndJointTorques,
@@ -1442,22 +1445,22 @@ public:
      * where \f$\phi \in \mathbb{R}^{10n_{L}}\f$ is the vector of inertial parameters returned by
      * the Model::getInertialParameters .
      *
-     * The semantics of baseAcc, the base part (first six rows) of baseForceAndJointTorquesRegressor
-     * depend of the chosen FrameVelocityRepresentation .
+     * The semantics of baseFrameAcc, the base part (first six rows) of
+     * baseForceAndJointTorquesRegressor depend of the chosen FrameVelocityRepresentation .
      *
      * The state is the one given set by the setRobotState method.
      *
      * @see iDynTree::InverseDynamicsInertialParametersRegressor for more info on the underlying
      * algorithm.
      *
-     * @param[in] baseAcc the acceleration of the base link
+     * @param[in] baseFrameAcc the acceleration of the base frame
      * @param[in] s_ddot the accelerations of the joints
      * @param[out] baseForceAndJointTorquesRegressor The (6+model.getNrOfDOFs() X
      * 10*model.getNrOfLinks()) inverse dynamics regressor.
      * @return true if all went well, false otherwise
      */
     bool
-    inverseDynamicsInertialParametersRegressor(const Vector6& baseAcc,
+    inverseDynamicsInertialParametersRegressor(const Vector6& baseFrameAcc,
                                                const VectorDynSize& s_ddot,
                                                MatrixDynSize& baseForceAndJointTorquesRegressor);
 

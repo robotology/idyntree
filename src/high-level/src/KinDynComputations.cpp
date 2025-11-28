@@ -123,6 +123,11 @@ public:
     void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(
         MatrixView<double> jac, const FrameVelocityRepresentation& leftSideRepresentation);
 
+    void convertBaseFrameAccelerationToBaseLinkAcceleration(const Vector6& baseFrameAcc,
+                                                            Vector6& baseLinkAcc);
+    void convertBaseFrameVelocityToBaseLinkVelocity(const Twist& baseFrameVel, Twist& baseLinkVel);
+    void convertBaseLinkVelocityToBaseFrameVelocity(const Twist& baseLinkVel, Twist& baseFrameVel);
+
     // Transform a wrench from and to body fixed and the used representation
     Wrench fromBodyFixedToUsedRepresentation(const Wrench& wrenchInBodyFixed,
                                              const Transform& inertial_X_link);
@@ -542,11 +547,11 @@ std::string KinDynComputations::getFloatingBase() const
 
 bool KinDynComputations::setFloatingBase(const std::string& floatingBaseName)
 {
-    // First, try as a link
+    // First, try as a link frame
     LinkIndex newFloatingBaseLinkIndex = this->pimpl->m_robot_model.getLinkIndex(floatingBaseName);
     if (newFloatingBaseLinkIndex != LINK_INVALID_INDEX)
     {
-        // It's a link - use existing behavior
+        // It's a link frame
         bool ok = this->pimpl->m_robot_model.computeFullTreeTraversal(this->pimpl->m_traversal,
                                                                       newFloatingBaseLinkIndex);
         if (ok)
@@ -558,7 +563,7 @@ bool KinDynComputations::setFloatingBase(const std::string& floatingBaseName)
         return ok;
     }
 
-    // If not a link, try as a frame.
+    // If not a link frame, try as an additional frame.
     // Note that the KinDynComputations class will use the body_fixed velocity of the link
     // to which the frame is attached for its computations.
     FrameIndex frameIndex = this->pimpl->m_robot_model.getFrameIndex(floatingBaseName);
@@ -833,25 +838,25 @@ bool KinDynComputations::setRobotState(const VectorDynSize& s,
                                        const VectorDynSize& s_dot,
                                        const Vector3& world_gravity)
 {
-    Transform world_T_base = Transform::Identity();
-    Twist base_velocity = Twist::Zero();
+    Transform world_T_baseFrame = Transform::Identity();
+    Twist baseFrame_velocity = Twist::Zero();
 
-    return setRobotState(world_T_base, s, base_velocity, s_dot, world_gravity);
+    return setRobotState(world_T_baseFrame, s, baseFrame_velocity, s_dot, world_gravity);
 }
 
 bool KinDynComputations::setRobotState(Span<const double> s,
                                        Span<const double> s_dot,
                                        Span<const double> world_gravity)
 {
-    Transform world_T_base = Transform::Identity();
-    Twist base_velocity = Twist::Zero();
+    Transform world_T_baseFrame = Transform::Identity();
+    Twist baseFrame_velocity = Twist::Zero();
 
-    return setRobotState(world_T_base, s, base_velocity, s_dot, world_gravity);
+    return setRobotState(world_T_baseFrame, s, baseFrame_velocity, s_dot, world_gravity);
 }
 
-bool KinDynComputations::setRobotState(iDynTree::MatrixView<const double> world_T_base,
+bool KinDynComputations::setRobotState(iDynTree::MatrixView<const double> world_T_baseFrame,
                                        Span<const double> s,
-                                       Span<const double> base_velocity,
+                                       Span<const double> baseFrame_velocity,
                                        Span<const double> s_dot,
                                        Span<const double> world_gravity)
 
@@ -859,32 +864,34 @@ bool KinDynComputations::setRobotState(iDynTree::MatrixView<const double> world_
 
     constexpr int expected_transform_cols = 4;
     constexpr int expected_transform_rows = 4;
-    bool ok = (world_T_base.rows() == expected_transform_rows)
-              && (world_T_base.cols() == expected_transform_cols);
+    bool ok = (world_T_baseFrame.rows() == expected_transform_rows)
+              && (world_T_baseFrame.cols() == expected_transform_cols);
     if (!ok)
     {
-        reportError("KinDynComputations", "setRobotState", "Wrong size in input world_T_base");
+        reportError("KinDynComputations", "setRobotState", "Wrong size in input world_T_baseFrame");
         return false;
     }
 
     constexpr int expected_twist_size = 6;
-    ok = base_velocity.size() == expected_twist_size;
+    ok = baseFrame_velocity.size() == expected_twist_size;
     if (!ok)
     {
-        reportError("KinDynComputations", "setRobotState", "Wrong size in input base_velocity");
+        reportError("KinDynComputations",
+                    "setRobotState",
+                    "Wrong size in input baseFrame_velocity");
         return false;
     }
 
-    return this->setRobotState(iDynTree::Transform(world_T_base),
+    return this->setRobotState(iDynTree::Transform(world_T_baseFrame),
                                s,
-                               iDynTree::SpatialMotionVector(base_velocity),
+                               iDynTree::SpatialMotionVector(baseFrame_velocity),
                                s_dot,
                                world_gravity);
 }
 
-bool KinDynComputations::setRobotState(const Transform& world_T_base,
+bool KinDynComputations::setRobotState(const Transform& world_T_baseFrame,
                                        const VectorDynSize& s,
-                                       const Twist& base_velocity,
+                                       const Twist& baseFrame_velocity,
                                        const VectorDynSize& s_dot,
                                        const Vector3& world_gravity)
 {
@@ -905,50 +912,21 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
 
     this->invalidateCache();
 
-    // Handle transformation when floating base is a frame vs a link
+    // The floating base could be a link frame or an additional frame.
+    // But, for internal storage, we always use the link frame pose and velocity.
+    // So, if the base is an additional frame, we need to convert world_T_baseFrame and
+    // baseFrame_velocity to world_T_baseLink and baseLink_velocity
     Transform world_T_baseLink;
-    Twist baseLinkVelocity;
-
     if (this->pimpl->m_isFloatingBaseFrame)
     {
-        // world_T_base is for the frame, but we need world_T_baseLink for internal storage
-        // So: world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink
         Transform baseLink_T_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
         Transform baseFrame_T_baseLink = baseLink_T_baseFrame.inverse();
-        world_T_baseLink = world_T_base * baseFrame_T_baseLink;
+        world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink;
 
-        // For velocity transformation, we need to be careful about the representation.
-        // The input base_velocity is expressed with the representation stored in
-        // pimpl->m_frameVelRepr. We need to convert it to base link coordinates with the same
-        // representation.
-
-        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
-        {
-            baseLinkVelocity = base_velocity;
-        } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
-        {
-            baseLinkVelocity = baseLink_T_baseFrame * base_velocity;
-        } else
-        {
-            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
-
-            // W_T_baseFrame[W]: a pure translation from world to base frame
-            Transform world_Ttrans_baseFrame
-                = Transform(Rotation::Identity(), world_T_base.getPosition());
-            // W_T_baseLink[W]: a pure translation from world to base link
-            Transform world_Ttrans_baseLink
-                = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
-            // baseLink[W]_T_baseFrame[W]: a pure translation from base link to base frame
-            Transform baseLink_Ttrans_baseFrame
-                = world_Ttrans_baseLink.inverse() * world_Ttrans_baseFrame;
-
-            baseLinkVelocity = baseLink_Ttrans_baseFrame * base_velocity;
-        }
     } else
     {
-        // Floating base is a link - use directly
-        world_T_baseLink = world_T_base;
-        baseLinkVelocity = base_velocity;
+        // Floating base is a link frame - use directly
+        world_T_baseLink = world_T_baseFrame;
     }
 
     // Save pos (always stored as world_T_baseLink internally)
@@ -961,33 +939,47 @@ bool KinDynComputations::setRobotState(const Transform& world_T_base,
     toEigen(pimpl->m_gravityAccInBaseLinkFrame)
         = toEigen(base_R_inertial) * toEigen(this->pimpl->m_gravityAcc);
 
+    // Velocity of the base link frame (expressed in m_frameVelRepr)
+    Twist baseLinkVelocityInSelectedVelRepr;
+    if (this->pimpl->m_isFloatingBaseFrame)
+    {
+        // Convert velocity from base frame to base link considering representation
+        this->pimpl->convertBaseFrameVelocityToBaseLinkVelocity(baseFrame_velocity,
+                                                                baseLinkVelocityInSelectedVelRepr);
+    } else
+    {
+        // Floating base is a link frame - use directly
+        baseLinkVelocityInSelectedVelRepr = baseFrame_velocity;
+    }
+
     // Save vel
     toEigen(pimpl->m_vel.jointVel()) = toEigen(s_dot);
-    this->pimpl->m_baseVelSetViaRobotState = base_velocity;
+    this->pimpl->m_baseVelSetViaRobotState = baseFrame_velocity;
 
-    // Account for the different possible representations (working with base link velocity
-    // internally)
+    // Account for the different possible representations
+    // For internal storage, the base link frame velocity is always in body-fixed representation
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        pimpl->m_vel.baseVel()
-            = pimpl->m_pos.worldBasePos().getRotation().inverse() * baseLinkVelocity;
+        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().getRotation().inverse()
+                                 * baseLinkVelocityInSelectedVelRepr;
     } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
-        // Data is stored in body fixed
-        pimpl->m_vel.baseVel() = baseLinkVelocity;
+        // Velocity is already in body fixed representation
+        pimpl->m_vel.baseVel() = baseLinkVelocityInSelectedVelRepr;
     } else
     {
         assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
         // base_X_inertial \ls^inertial v_base
-        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().inverse() * baseLinkVelocity;
+        pimpl->m_vel.baseVel()
+            = pimpl->m_pos.worldBasePos().inverse() * baseLinkVelocityInSelectedVelRepr;
     }
 
     return true;
 }
 
-void KinDynComputations::getRobotState(Transform& world_T_base,
+void KinDynComputations::getRobotState(Transform& world_T_baseFrame,
                                        VectorDynSize& s,
-                                       Twist& base_velocity,
+                                       Twist& baseFrame_velocity,
                                        VectorDynSize& s_dot,
                                        Vector3& world_gravity)
 {
@@ -996,72 +988,49 @@ void KinDynComputations::getRobotState(Transform& world_T_base,
     // Get base link transformation first
     Transform world_T_baseLink = this->pimpl->m_pos.worldBasePos();
 
-    // Handle transformation when floating base is a frame vs a link
     if (this->pimpl->m_isFloatingBaseFrame)
     {
-        // Convert from base link to base frame
-        world_T_base = world_T_baseLink * this->pimpl->m_baseLinkToBaseFrame;
+        // Convert from base link frame to the additional frame used as base frame
+        world_T_baseFrame = world_T_baseLink * this->pimpl->m_baseLinkToBaseFrame;
     } else
     {
-        // Floating base is a link - use directly
-        world_T_base = world_T_baseLink;
+        // Floating base is a link frame - use directly
+        world_T_baseFrame = world_T_baseLink;
     }
 
     // Get base link velocity first based on representation
-    Twist baseLinkVelocity;
+    Twist baseLinkVelocityInSelectedVelRepr;
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        baseLinkVelocity = pimpl->m_pos.worldBasePos().getRotation() * pimpl->m_vel.baseVel();
+        baseLinkVelocityInSelectedVelRepr
+            = pimpl->m_pos.worldBasePos().getRotation() * pimpl->m_vel.baseVel();
     } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
         // Data is stored in body fixed
-        baseLinkVelocity = pimpl->m_vel.baseVel();
+        baseLinkVelocityInSelectedVelRepr = pimpl->m_vel.baseVel();
     } else
     {
         assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
         // base_X_inertial \ls^inertial v_base
-        baseLinkVelocity = pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel();
+        baseLinkVelocityInSelectedVelRepr = pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel();
     }
 
     // Transform velocity if needed (when floating base is a frame)
     if (this->pimpl->m_isFloatingBaseFrame)
     {
         // Convert velocity from base link to base frame considering representation
-        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
-        {
-            // In INERTIAL_FIXED_REPRESENTATION, both are in world coordinates
-            base_velocity = baseLinkVelocity;
-        } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
-        {
-            // Body-fixed: transform from base link body to frame body coordinates
-            Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
-            base_velocity = baseFrame_T_baseLink * baseLinkVelocity;
-        } else
-        {
-            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
-
-            // W_T_baseFrame[W]: a pure translation from world to base frame
-            Transform world_Ttrans_baseFrame
-                = Transform(Rotation::Identity(), world_T_base.getPosition());
-            // W_T_baseLink[W]: a pure translation from world to base link
-            Transform world_Ttrans_baseLink
-                = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
-            // baseFrame[W]_T_baseLink[W]: a pure translation from base frame to base link
-            Transform baseFrame_Ttrans_baseLink
-                = world_Ttrans_baseFrame.inverse() * world_Ttrans_baseLink;
-
-            base_velocity = baseFrame_Ttrans_baseLink * baseLinkVelocity;
-        }
+        this->pimpl->convertBaseLinkVelocityToBaseFrameVelocity(baseLinkVelocityInSelectedVelRepr,
+                                                                baseFrame_velocity);
     } else
     {
-        // Floating base is a link - use directly
-        base_velocity = baseLinkVelocity;
+        // Floating base is a link frame - use directly
+        baseFrame_velocity = baseLinkVelocityInSelectedVelRepr;
     }
 }
 
-bool KinDynComputations::getRobotState(iDynTree::MatrixView<double> world_T_base,
+bool KinDynComputations::getRobotState(iDynTree::MatrixView<double> world_T_baseFrame,
                                        iDynTree::Span<double> s,
-                                       iDynTree::Span<double> base_velocity,
+                                       iDynTree::Span<double> baseFrame_velocity,
                                        iDynTree::Span<double> s_dot,
                                        iDynTree::Span<double> world_gravity)
 {
@@ -1081,41 +1050,44 @@ bool KinDynComputations::getRobotState(iDynTree::MatrixView<double> world_T_base
 
     constexpr int expected_transform_cols = 4;
     constexpr int expected_transform_rows = 4;
-    ok = (world_T_base.rows() == expected_transform_rows)
-         && (world_T_base.cols() == expected_transform_cols);
+    ok = (world_T_baseFrame.rows() == expected_transform_rows)
+         && (world_T_baseFrame.cols() == expected_transform_cols);
     if (!ok)
     {
-        reportError("KinDynComputations", "getRobotState", "Wrong size in input world_T_base");
+        reportError("KinDynComputations", "getRobotState", "Wrong size in input world_T_baseFrame");
         return false;
     }
 
     constexpr int expected_twist_size = 6;
-    ok = base_velocity.size() == expected_twist_size;
+    ok = baseFrame_velocity.size() == expected_twist_size;
     if (!ok)
     {
-        reportError("KinDynComputations", "getRobotState", "Wrong size in input base_velocity");
+        reportError("KinDynComputations",
+                    "getRobotState",
+                    "Wrong size in input baseFrame_velocity");
         return false;
     }
 
     getRobotState(s, s_dot, world_gravity);
 
-    toEigen(world_T_base) = toEigen(this->pimpl->m_pos.worldBasePos().asHomogeneousTransform());
+    toEigen(world_T_baseFrame)
+        = toEigen(this->pimpl->m_pos.worldBasePos().asHomogeneousTransform());
 
     // Account for the different possible representations
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        toEigen(base_velocity)
+        toEigen(baseFrame_velocity)
             = toEigen(pimpl->m_pos.worldBasePos().getRotation() * pimpl->m_vel.baseVel());
     } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
         // Data is stored in body fixed
-        toEigen(base_velocity) = toEigen(pimpl->m_vel.baseVel());
+        toEigen(baseFrame_velocity) = toEigen(pimpl->m_vel.baseVel());
     } else
     {
         assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
 
         // base_X_inertial \ls^inertial v_base
-        toEigen(base_velocity) = toEigen(pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel());
+        toEigen(baseFrame_velocity) = toEigen(pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel());
     }
     return true;
 }
@@ -1163,30 +1135,30 @@ bool KinDynComputations::setJointPos(const VectorDynSize& s)
     return this->setJointPos(make_span(s));
 }
 
-bool KinDynComputations::setWorldBaseTransform(const iDynTree::Transform& world_T_base)
+bool KinDynComputations::setWorldBaseTransform(const iDynTree::Transform& world_T_baseFrame)
 {
-    return setRobotState(world_T_base,
+    return setRobotState(world_T_baseFrame,
                          this->pimpl->m_pos.jointPos(),
                          this->pimpl->m_baseVelSetViaRobotState,
                          this->pimpl->m_vel.jointVel(),
                          this->pimpl->m_gravityAcc);
 }
 
-bool KinDynComputations::setWorldBaseTransform(iDynTree::MatrixView<const double>& world_T_base)
+bool KinDynComputations::setWorldBaseTransform(iDynTree::MatrixView<const double>& world_T_baseFrame)
 {
     constexpr int expected_transform_cols = 4;
     constexpr int expected_transform_rows = 4;
-    bool ok = (world_T_base.rows() == expected_transform_rows)
-              && (world_T_base.cols() == expected_transform_cols);
+    bool ok = (world_T_baseFrame.rows() == expected_transform_rows)
+              && (world_T_baseFrame.cols() == expected_transform_cols);
     if (!ok)
     {
         reportError("KinDynComputations",
                     "setWorldBaseTransform",
-                    "Wrong size in input world_T_base");
+                    "Wrong size in input world_T_baseFrame");
         return false;
     }
 
-    return setWorldBaseTransform(iDynTree::Transform(world_T_base));
+    return setWorldBaseTransform(iDynTree::Transform(world_T_baseFrame));
 }
 
 Transform KinDynComputations::getWorldBaseTransform() const
@@ -1195,31 +1167,31 @@ Transform KinDynComputations::getWorldBaseTransform() const
 
     if (this->pimpl->m_isFloatingBaseFrame)
     {
-        // Convert from base link to base frame
+        // Convert from base link frame to additional frame used as base frame
         return world_T_baseLink * this->pimpl->m_baseLinkToBaseFrame;
     } else
     {
-        // Floating base is a link - use directly
+        // Floating base is a link frame - use directly
         return world_T_baseLink;
     }
 }
 
-bool KinDynComputations::getWorldBaseTransform(iDynTree::MatrixView<double> world_T_base) const
+bool KinDynComputations::getWorldBaseTransform(iDynTree::MatrixView<double> world_T_baseFrame) const
 {
     constexpr int expected_transform_cols = 4;
     constexpr int expected_transform_rows = 4;
-    bool ok = (world_T_base.rows() == expected_transform_rows)
-              && (world_T_base.cols() == expected_transform_cols);
+    bool ok = (world_T_baseFrame.rows() == expected_transform_rows)
+              && (world_T_baseFrame.cols() == expected_transform_cols);
     if (!ok)
     {
         reportError("KinDynComputations",
                     "getWorldBaseTransform",
-                    "Wrong size in input world_T_base");
+                    "Wrong size in input world_T_baseFrame");
         return false;
     }
 
     Transform worldBaseTransform = getWorldBaseTransform();
-    toEigen(world_T_base) = toEigen(worldBaseTransform.asHomogeneousTransform());
+    toEigen(world_T_baseFrame) = toEigen(worldBaseTransform.asHomogeneousTransform());
 
     return true;
 }
@@ -1227,72 +1199,50 @@ bool KinDynComputations::getWorldBaseTransform(iDynTree::MatrixView<double> worl
 Twist KinDynComputations::getBaseTwist() const
 {
     // Get base link velocity first based on representation
-    Twist baseLinkVelocity;
+    Twist baseLinkVelocityInSelectedVelRepr;
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
-        baseLinkVelocity = pimpl->m_pos.worldBasePos().getRotation() * (pimpl->m_vel.baseVel());
+        baseLinkVelocityInSelectedVelRepr
+            = pimpl->m_pos.worldBasePos().getRotation() * (pimpl->m_vel.baseVel());
     } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
         // Data is stored in body fixed
-        baseLinkVelocity = pimpl->m_vel.baseVel();
+        baseLinkVelocityInSelectedVelRepr = pimpl->m_vel.baseVel();
     } else
     {
         assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
         // inertial_X_base \ls^base v_base
-        baseLinkVelocity = pimpl->m_pos.worldBasePos() * (pimpl->m_vel.baseVel());
+        baseLinkVelocityInSelectedVelRepr = pimpl->m_pos.worldBasePos() * (pimpl->m_vel.baseVel());
     }
 
     // Transform velocity if needed
     if (this->pimpl->m_isFloatingBaseFrame)
     {
-        // Convert velocity from base link to base frame considering representation
-        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
-        {
-            return baseLinkVelocity;
-        } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
-        {
-            Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
-            return baseFrame_T_baseLink * baseLinkVelocity;
-        } else
-        {
-            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
-
-            // W_T_baseFrame
-            Transform world_T_baseFrame = this->getWorldBaseTransform();
-            // baseFrame_T_baseLink
-            Transform baseFrame_T_baseLink = this->pimpl->m_baseLinkToBaseFrame.inverse();
-            // world_T_baseLink
-            Transform world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink;
-            // W_T_baseFrame[W]: a pure translation from world to base frame
-            Transform world_Ttrans_baseFrame
-                = Transform(Rotation::Identity(), world_T_baseFrame.getPosition());
-            // W_T_baseLink[W]: a pure translation from world to base link
-            Transform world_Ttrans_baseLink
-                = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
-            // baseFrame[W]_T_baseLink[W]: a pure translation from base frame to base link
-            Transform baseFrame_Ttrans_baseLink
-                = world_Ttrans_baseFrame.inverse() * world_Ttrans_baseLink;
-
-            return baseFrame_Ttrans_baseLink * baseLinkVelocity;
-        }
+        // Convert velocity from base link frame to additional frame used as base frame
+        Twist baseFrameVelocity;
+        this->pimpl->convertBaseLinkVelocityToBaseFrameVelocity(baseLinkVelocityInSelectedVelRepr,
+                                                                baseFrameVelocity);
+        return baseFrameVelocity;
     } else
     {
-        // Floating base is a link - use directly
-        return baseLinkVelocity;
+        // Floating base is a link frame - use directly
+        return baseLinkVelocityInSelectedVelRepr;
     }
 }
 
-bool KinDynComputations::getBaseTwist(Span<double> base_velocity) const
+bool KinDynComputations::getBaseTwist(Span<double> baseFrame_velocity) const
 {
     constexpr int expected_twist_size = 6;
-    bool ok = base_velocity.size() == expected_twist_size;
+    bool ok = baseFrame_velocity.size() == expected_twist_size;
     if (!ok)
     {
-        reportError("KinDynComputations", "getRobotState", "Wrong size in input base_velocity");
+        reportError("KinDynComputations",
+                    "getRobotState",
+                    "Wrong size in input baseFrame_velocity");
         return false;
     }
 
-    toEigen(base_velocity) = toEigen(getBaseTwist());
+    toEigen(baseFrame_velocity) = toEigen(getBaseTwist());
     return true;
 }
 
@@ -1720,22 +1670,22 @@ bool KinDynComputations::getFrameVel(const FrameIndex frameIdx, Span<double> twi
 }
 
 Vector6 KinDynComputations::getFrameAcc(const std::string& frameName,
-                                        const Vector6& baseAcc,
+                                        const Vector6& baseFrameAcc,
                                         const VectorDynSize& s_ddot)
 {
-    return getFrameAcc(getFrameIndex(frameName), baseAcc, s_ddot);
+    return getFrameAcc(getFrameIndex(frameName), baseFrameAcc, s_ddot);
 }
 
 bool KinDynComputations::getFrameAcc(const std::string& frameName,
-                                     Span<const double> baseAcc,
+                                     Span<const double> baseFrameAcc,
                                      Span<const double> s_ddot,
                                      Span<double> frame_acceleration)
 {
-    return this->getFrameAcc(getFrameIndex(frameName), baseAcc, s_ddot, frame_acceleration);
+    return this->getFrameAcc(getFrameIndex(frameName), baseFrameAcc, s_ddot, frame_acceleration);
 }
 
 Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
-                                        const Vector6& baseAcc,
+                                        const Vector6& baseFrameAcc,
                                         const VectorDynSize& s_ddot)
 {
     if (!pimpl->m_robot_model.isValidFrameIndex(frameIdx))
@@ -1749,95 +1699,38 @@ Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
     // compute fwd kinematics (if necessary)
     this->computeFwdKinematics();
 
-    // Handle transformation when floating base is a frame vs a link
-    // The input baseAcc is the acceleration of the floating base frame, but internally
-    // we need the acceleration of the base link in body-fixed representation.
-    Vector6 baseLinkAcc;
+    // Handle transformation when floating base is an additional frame rather than a link frame
+    // The input baseFrameAcc is the acceleration of the floating base frame.
+    // But, for internal storage, we always use the acceleration of the base link in body-fixed
+    // representation.
+    Vector6 baseLinkAccInSelectedVelRepr;
 
     if (this->pimpl->m_isFloatingBaseFrame)
     {
-        // baseAcc is the acceleration of the floating base frame.
-        // We need to convert it to base link acceleration (in the same representation first),
-        // then convert to body-fixed representation.
-        Transform baseLink_T_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
-        Transform baseFrame_T_baseLink = baseLink_T_baseFrame.inverse();
-
-        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
-        {
-            // In inertial representation, the acceleration vector is the same
-            // for both base frame and base link (they are rigidly connected)
-            baseLinkAcc = baseAcc;
-        } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
-        {
-            // Transform body-fixed acceleration from base frame to base link
-            SpatialAcc baseFrameAcc_body;
-            fromEigen(baseFrameAcc_body, toEigen(baseAcc));
-            SpatialAcc baseLinkAcc_body = baseLink_T_baseFrame * baseFrameAcc_body;
-            baseLinkAcc = baseLinkAcc_body.asVector();
-        } else
-        {
-            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
-            // For mixed representation, we need to transform properly.
-            // The mixed frame has world orientation but frame's origin.
-            // We need to convert mixed acceleration from base frame to base link.
-            //
-            // In mixed representation:
-            //   F[A] a_[A,F]
-            //   L[A] a_[A,L]
-            //
-            // For two points on a rigid body:
-            //   F[A]_ddot_p_L = L[A]_ddot_p_F + A_dot_omega × A_p_FL + A_omega × (A_omega × A_p_FL)
-            //
-            // where A_p_FL is the position from F to L in world coordinates.
-
-            Transform world_T_baseFrame = this->getWorldBaseTransform();
-            Transform world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink;
-
-            // Get the position offset in world coordinates: from baseFrame to baseLink
-            Position world_p_baseFrame_to_baseLink
-                = world_T_baseLink.getPosition() - world_T_baseFrame.getPosition();
-
-            // Get angular velocity in world frame (stored internally in body-fixed, need to
-            // convert) pimpl->m_vel.baseVel() is body-fixed velocity of base link
-            Twist baseLinkVel_body = pimpl->m_vel.baseVel();
-            Vector3 omega_world;
-            toEigen(omega_world) = toEigen(pimpl->m_pos.worldBasePos().getRotation())
-                                   * toEigen(baseLinkVel_body.getAngularVec3());
-
-            // Extract input acceleration components
-            Eigen::Map<const Eigen::Vector3d> linAcc_baseFrame(baseAcc.data());
-            Eigen::Map<const Eigen::Vector3d> angAcc_baseFrame(baseAcc.data() + 3);
-            Eigen::Map<const Eigen::Vector3d> omega_w(omega_world.data());
-            Eigen::Map<const Eigen::Vector3d> p_FL(world_p_baseFrame_to_baseLink.data());
-
-            // Compute base link linear acceleration:
-            Eigen::Vector3d linAcc_baseLink = linAcc_baseFrame + angAcc_baseFrame.cross(p_FL)
-                                              + omega_w.cross(omega_w.cross(p_FL));
-
-            // Angular acceleration is the same for both frames
-            toEigen(baseLinkAcc).head<3>() = linAcc_baseLink;
-            toEigen(baseLinkAcc).tail<3>() = angAcc_baseFrame;
-        }
+        // Convert acceleration from base frame to base link frame
+        this->pimpl
+            ->convertBaseFrameAccelerationToBaseLinkAcceleration(baseFrameAcc,
+                                                                 baseLinkAccInSelectedVelRepr);
     } else
     {
-        // Floating base is a link - use directly
-        baseLinkAcc = baseAcc;
+        // Floating base is a link frame - use directly
+        baseLinkAccInSelectedVelRepr = baseFrameAcc;
     }
 
     // Convert base link acceleration to body-fixed representation
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
-        fromEigen(pimpl->m_baseAcc, toEigen(baseLinkAcc));
+        fromEigen(pimpl->m_baseAcc, toEigen(baseLinkAccInSelectedVelRepr));
     } else if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
     {
         pimpl->m_baseAcc
-            = convertInertialAccelerationToBodyFixedAcceleration(baseLinkAcc,
+            = convertInertialAccelerationToBodyFixedAcceleration(baseLinkAccInSelectedVelRepr,
                                                                  pimpl->m_pos.worldBasePos());
     } else
     {
         assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
         pimpl->m_baseAcc
-            = convertMixedAccelerationToBodyFixedAcceleration(baseLinkAcc,
+            = convertMixedAccelerationToBodyFixedAcceleration(baseLinkAccInSelectedVelRepr,
                                                               pimpl->m_vel.baseVel(),
                                                               pimpl->m_pos.worldBasePos()
                                                                   .getRotation());
@@ -1891,7 +1784,7 @@ Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
 }
 
 bool KinDynComputations::getFrameAcc(const FrameIndex frame_name,
-                                     Span<const double> base_acc,
+                                     Span<const double> baseFrame_acc,
                                      Span<const double> s_ddot,
                                      Span<double> frame_acceleration)
 {
@@ -1903,7 +1796,7 @@ bool KinDynComputations::getFrameAcc(const FrameIndex frame_name,
     }
 
     constexpr int expected_spatial_acceleration_size = 6;
-    ok = base_acc.size() == expected_spatial_acceleration_size;
+    ok = baseFrame_acc.size() == expected_spatial_acceleration_size;
     if (!ok)
     {
         reportError("KinDynComputations", "getFrameAcc", "Wrong size in input base_acc");
@@ -1917,7 +1810,7 @@ bool KinDynComputations::getFrameAcc(const FrameIndex frame_name,
         return false;
     }
 
-    toEigen(frame_acceleration) = toEigen(getFrameAcc(frame_name, base_acc, s_ddot));
+    toEigen(frame_acceleration) = toEigen(getFrameAcc(frame_name, baseFrame_acc, s_ddot));
 
     return true;
 }
@@ -2538,15 +2431,15 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
 {
     assert(jac.rows() == 6);
 
-    // Get the appropriate world_T_base transform
     Transform world_T_baseLink = m_pos.worldBasePos();
-    Transform world_T_base;
+    Transform world_T_baseFrame;
     if (m_isFloatingBaseFrame)
     {
-        world_T_base = world_T_baseLink * m_baseLinkToBaseFrame;
+        world_T_baseFrame = world_T_baseLink * m_baseLinkToBaseFrame;
     } else
     {
-        world_T_base = world_T_baseLink;
+        // Floating base is a link frame - use directly
+        world_T_baseFrame = world_T_baseLink;
     }
 
     Transform newOutputFrame_T_oldOutputFrame;
@@ -2569,7 +2462,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
             // mixed_baseFrame_v = mixed_baseFrame_X_baseFrame * Ad_{baseFrame_T_baseLink} *
             // baseLink_v
             Transform mixed_baseFrame_T_baseFrame
-                = Transform(world_T_base.getRotation(), Position::Zero());
+                = Transform(world_T_baseFrame.getRotation(), Position::Zero());
             Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
 
             Transform mixed_baseFrame_T_baseLink
@@ -2578,7 +2471,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
         } else
         {
             newOutputFrame_T_oldOutputFrame
-                = Transform(world_T_base.getRotation(), Position::Zero());
+                = Transform(world_T_baseFrame.getRotation(), Position::Zero());
         }
     } else
     {
@@ -2588,10 +2481,10 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
             // For inertial-fixed with frame base:
             // world_v = world_X_baseFrame * Ad_{baseFrame_H_baseLink} * baseLink_v
             Transform baseFrame_H_baseLink = m_baseLinkToBaseFrame.inverse();
-            newOutputFrame_T_oldOutputFrame = world_T_base * baseFrame_H_baseLink;
+            newOutputFrame_T_oldOutputFrame = world_T_baseFrame * baseFrame_H_baseLink;
         } else
         {
-            newOutputFrame_T_oldOutputFrame = world_T_base;
+            newOutputFrame_T_oldOutputFrame = world_T_baseFrame;
         }
     }
 
@@ -2604,15 +2497,15 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
 void KinDynComputations::KinDynComputationsPrivateAttributes::
     processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixView<double> jac)
 {
-    // Get the appropriate world_T_base transform
     Transform world_T_baseLink = m_pos.worldBasePos();
-    Transform world_T_base;
+    Transform world_T_baseFrame;
     if (m_isFloatingBaseFrame)
     {
-        world_T_base = world_T_baseLink * m_baseLinkToBaseFrame;
+        world_T_baseFrame = world_T_baseLink * m_baseLinkToBaseFrame;
     } else
     {
-        world_T_base = world_T_baseLink;
+        // Floating base is the link frame - use directly
+        world_T_baseFrame = world_T_baseLink;
     }
 
     Transform newOutputFrame_T_oldOutputFrame;
@@ -2637,7 +2530,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
             // mixed_baseFrame_f = Ad^*_{mixed_baseFrame_T_baseFrame} * Ad^*_{baseFrame_T_baseLink}
             // * baseLink_f
             Transform mixed_baseFrame_T_baseFrame
-                = Transform(world_T_base.getRotation(), Position::Zero());
+                = Transform(world_T_baseFrame.getRotation(), Position::Zero());
             Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
 
             // Combined transformation: mixed_baseFrame_T_baseFrame * baseFrame_T_baseLink
@@ -2647,7 +2540,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
         } else
         {
             newOutputFrame_T_oldOutputFrame
-                = Transform(world_T_base.getRotation(), Position::Zero());
+                = Transform(world_T_baseFrame.getRotation(), Position::Zero());
         }
     } else
     {
@@ -2657,10 +2550,10 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
             // For inertial-fixed with frame base:
             // world_f = Ad^*_{world_T_baseFrame} * Ad^*_{baseFrame_T_baseLink} * baseLink_f
             Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
-            newOutputFrame_T_oldOutputFrame = world_T_base * baseFrame_T_baseLink;
+            newOutputFrame_T_oldOutputFrame = world_T_baseFrame * baseFrame_T_baseLink;
         } else
         {
-            newOutputFrame_T_oldOutputFrame = world_T_base;
+            newOutputFrame_T_oldOutputFrame = world_T_baseFrame;
         }
     }
 
@@ -2803,6 +2696,145 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
         = newOutputFrame_X_oldOutputFrame.asAdjointTransform();
 
     toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_) * toEigen(jac);
+}
+
+void KinDynComputations::KinDynComputationsPrivateAttributes::
+    convertBaseFrameAccelerationToBaseLinkAcceleration(const Vector6& baseFrameAcc,
+                                                       Vector6& baseLinkAcc)
+{
+
+    // baseLinkAcc is the base link frame acceleration expressed in m_frameVelRepr
+    // baseFrameAcc is the acceleration of an additional frame rigidly connected to the base link
+    // expressed in m_frameVelRepr
+    Transform baseLink_T_baseFrame = m_baseLinkToBaseFrame;
+
+    if (m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+    {
+        // In inertial representation, the acceleration vector is the same
+        // for both base frame and base link (they are rigidly connected)
+        baseLinkAcc = baseFrameAcc;
+    } else if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // Transform body-fixed acceleration from base frame to base link
+        SpatialAcc baseFrameAcc_body;
+        fromEigen(baseFrameAcc_body, toEigen(baseFrameAcc));
+        SpatialAcc baseLinkAcc_body = baseLink_T_baseFrame * baseFrameAcc_body;
+        baseLinkAcc = baseLinkAcc_body.asVector();
+    } else
+    {
+        assert(m_frameVelRepr == MIXED_REPRESENTATION);
+        // For mixed representation, we need to transform properly.
+        // The mixed frame has world orientation but frame's origin.
+        // We need to convert mixed acceleration from base frame to base link.
+        //
+        // In mixed representation:
+        //   F[A] a_[A,F]
+        //   L[A] a_[A,L]
+        //
+        // For two points on a rigid body:
+        //   F[A]_ddot_p_L = L[A]_ddot_p_F + A_dot_omega × A_p_FL + A_omega × (A_omega × A_p_FL)
+        //
+        // where A_p_FL is the position from F to L in world coordinates.
+
+        Transform world_T_baseLink = m_pos.worldBasePos();
+        Transform world_T_baseFrame = world_T_baseLink * baseLink_T_baseFrame;
+
+        // Get the position offset in world coordinates: from baseFrame to baseLink
+        Position world_p_baseFrame_to_baseLink
+            = world_T_baseLink.getPosition() - world_T_baseFrame.getPosition();
+
+        // Get angular velocity in world frame (stored internally in body-fixed, need to
+        // convert) pimpl->m_vel.baseVel() is body-fixed velocity of base link
+        Twist baseLinkVel_body = m_vel.baseVel();
+        Vector3 omega_world;
+        toEigen(omega_world) = toEigen(m_pos.worldBasePos().getRotation())
+                               * toEigen(baseLinkVel_body.getAngularVec3());
+
+        // Extract input acceleration components
+        Eigen::Map<const Eigen::Vector3d> linAcc_baseFrame(baseFrameAcc.data());
+        Eigen::Map<const Eigen::Vector3d> angAcc_baseFrame(baseFrameAcc.data() + 3);
+        Eigen::Map<const Eigen::Vector3d> omega_w(omega_world.data());
+        Eigen::Map<const Eigen::Vector3d> p_FL(world_p_baseFrame_to_baseLink.data());
+
+        // Compute base link linear acceleration:
+        Eigen::Vector3d linAcc_baseLink
+            = linAcc_baseFrame + angAcc_baseFrame.cross(p_FL) + omega_w.cross(omega_w.cross(p_FL));
+
+        // Angular acceleration is the same for both frames
+        toEigen(baseLinkAcc).head<3>() = linAcc_baseLink;
+        toEigen(baseLinkAcc).tail<3>() = angAcc_baseFrame;
+    }
+}
+
+void KinDynComputations::KinDynComputationsPrivateAttributes::
+    convertBaseFrameVelocityToBaseLinkVelocity(const Twist& baseFrameVel, Twist& baseLinkVel)
+{
+    // baseLinkVel is the base link frame velocity expressed in m_frameVelRepr
+    // baseFrameVel is the velocity of an additional frame rigidly connected to the base link
+    // expressed in m_frameVelRepr
+
+    if (m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+    {
+        baseLinkVel = baseFrameVel;
+    } else if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        Transform baseLink_T_baseFrame = m_baseLinkToBaseFrame;
+        baseLinkVel = baseLink_T_baseFrame * baseFrameVel;
+    } else
+    {
+        assert(m_frameVelRepr == MIXED_REPRESENTATION);
+        Transform baseLink_T_baseFrame = m_baseLinkToBaseFrame;
+        Transform world_T_baseLink = m_pos.worldBasePos();
+        Transform world_T_baseFrame = world_T_baseLink * baseLink_T_baseFrame;
+        // W_T_baseFrame[W]: a pure translation from world to base frame
+        Transform world_Ttrans_baseFrame
+            = Transform(Rotation::Identity(), world_T_baseFrame.getPosition());
+        // W_T_baseLink[W]: a pure translation from world to base link
+        Transform world_Ttrans_baseLink
+            = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
+        // baseLink[W]_T_baseFrame[W]: a pure translation from base link to base frame
+        Transform baseLink_Ttrans_baseFrame
+            = world_Ttrans_baseLink.inverse() * world_Ttrans_baseFrame;
+        baseLinkVel = baseLink_Ttrans_baseFrame * baseFrameVel;
+    }
+}
+
+void KinDynComputations::KinDynComputationsPrivateAttributes::
+    convertBaseLinkVelocityToBaseFrameVelocity(const Twist& baseLinkVel, Twist& baseFrameVel)
+{
+    // baseLinkVel is the base link frame velocity expressed in m_frameVelRepr
+    // baseFrameVel is the velocity of an additional frame rigidly connected to the base link
+    // expressed in m_frameVelRepr
+    Transform world_T_baseLink = m_pos.worldBasePos();
+    Transform baseLink_T_baseFrame = m_baseLinkToBaseFrame;
+    Transform world_T_baseFrame = world_T_baseLink * baseLink_T_baseFrame;
+
+    if (m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+    {
+        // In INERTIAL_FIXED_REPRESENTATION, both are in world coordinates
+        baseFrameVel = baseLinkVel;
+    } else if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // Body-fixed: transform from base link body to frame body coordinates
+        Transform baseFrame_T_baseLink = m_baseLinkToBaseFrame.inverse();
+        baseFrameVel = baseFrame_T_baseLink * baseLinkVel;
+    } else
+    {
+        assert(m_frameVelRepr == MIXED_REPRESENTATION);
+        Transform baseLink_T_baseFrame = m_baseLinkToBaseFrame;
+        Transform world_T_baseLink = m_pos.worldBasePos();
+        Transform world_T_baseFrame = world_T_baseLink * baseLink_T_baseFrame;
+        // W_T_baseFrame[W]: a pure translation from world to base frame
+        Transform world_Ttrans_baseFrame
+            = Transform(Rotation::Identity(), world_T_baseFrame.getPosition());
+        // W_T_baseLink[W]: a pure translation from world to base link
+        Transform world_Ttrans_baseLink
+            = Transform(Rotation::Identity(), world_T_baseLink.getPosition());
+        // baseFrame[W]_T_baseLink[W]: a pure translation from base frame to base link
+        Transform baseFrame_Ttrans_baseLink
+            = world_Ttrans_baseFrame.inverse() * world_Ttrans_baseLink;
+        baseFrameVel = baseFrame_Ttrans_baseLink * baseLinkVel;
+    }
 }
 
 Twist KinDynComputations::getCentroidalAverageVelocity()
@@ -3218,7 +3250,7 @@ Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromBodyFixedToU
     return Wrench::Zero();
 }
 
-bool KinDynComputations::inverseDynamics(const Vector6& baseAcc,
+bool KinDynComputations::inverseDynamics(const Vector6& baseFrameAcc,
                                          const VectorDynSize& s_ddot,
                                          const LinkNetExternalWrenches& linkExtForces,
                                          FreeFloatingGeneralizedTorques& baseForceAndJointTorques)
@@ -3226,95 +3258,37 @@ bool KinDynComputations::inverseDynamics(const Vector6& baseAcc,
     // Needed for using pimpl->m_linkVel
     this->computeFwdKinematics();
 
-    // Handle transformation when floating base is a frame vs a link
-    // The input baseAcc is the acceleration of the floating base frame, but internally
-    // we need the acceleration of the base link in body-fixed representation.
-    Vector6 baseLinkAcc;
+    // Handle transformation when floating base is an additional frame rather than a link frame
+    // The input baseFrameAcc is the acceleration of the floating base frame.
+    // But, for internal storage, we always use the acceleration of the base link in body-fixed
+    // representation.
+    Vector6 baseLinkAccInSelectedVelRepr;
 
     if (this->pimpl->m_isFloatingBaseFrame)
     {
-        // baseAcc is the acceleration of the floating base frame.
-        // We need to convert it to base link acceleration (in the same representation first),
-        // then convert to body-fixed representation.
-        Transform baseLink_T_baseFrame = this->pimpl->m_baseLinkToBaseFrame;
-        Transform baseFrame_T_baseLink = baseLink_T_baseFrame.inverse();
-
-        if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
-        {
-            // In inertial representation, the acceleration vector is the same
-            // for both base frame and base link (they are rigidly connected)
-            baseLinkAcc = baseAcc;
-        } else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
-        {
-            // Transform body-fixed acceleration from base frame to base link
-            SpatialAcc baseFrameAcc_body;
-            fromEigen(baseFrameAcc_body, toEigen(baseAcc));
-            SpatialAcc baseLinkAcc_body = baseLink_T_baseFrame * baseFrameAcc_body;
-            baseLinkAcc = baseLinkAcc_body.asVector();
-        } else
-        {
-            assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
-            // For mixed representation, we need to transform properly.
-            // The mixed frame has world orientation but frame's origin.
-            // We need to convert mixed acceleration from base frame to base link.
-            //
-            // In mixed representation:
-            //   F[A] a_[A,F]
-            //   L[A] a_[A,L]
-            //
-            // For two points on a rigid body:
-            //   F[A]_ddot_p_L = L[A]_ddot_p_F + A_dot_omega × A_p_FL + A_omega × (A_omega × A_p_FL)
-            //
-            // where A_p_FL is the position from F to L in world coordinates.
-
-            Transform world_T_baseFrame = this->getWorldBaseTransform();
-            Transform world_T_baseLink = world_T_baseFrame * baseFrame_T_baseLink;
-
-            // Get the position offset in world coordinates: from baseFrame to baseLink
-            Position world_p_baseFrame_to_baseLink
-                = world_T_baseLink.getPosition() - world_T_baseFrame.getPosition();
-
-            // Get angular velocity in world frame (stored internally in body-fixed, need to
-            // convert) pimpl->m_vel.baseVel() is body-fixed velocity of base link
-            Twist baseLinkVel_body = pimpl->m_vel.baseVel();
-            Vector3 omega_world;
-            toEigen(omega_world) = toEigen(pimpl->m_pos.worldBasePos().getRotation())
-                                   * toEigen(baseLinkVel_body.getAngularVec3());
-
-            // Extract input acceleration components
-            Eigen::Map<const Eigen::Vector3d> linAcc_baseFrame(baseAcc.data());
-            Eigen::Map<const Eigen::Vector3d> angAcc_baseFrame(baseAcc.data() + 3);
-            Eigen::Map<const Eigen::Vector3d> omega_w(omega_world.data());
-            Eigen::Map<const Eigen::Vector3d> p_FL(world_p_baseFrame_to_baseLink.data());
-
-            // Compute base link linear acceleration:
-            Eigen::Vector3d linAcc_baseLink = linAcc_baseFrame + angAcc_baseFrame.cross(p_FL)
-                                              + omega_w.cross(omega_w.cross(p_FL));
-
-            // Angular acceleration is the same for both frames
-            toEigen(baseLinkAcc).head<3>() = linAcc_baseLink;
-            toEigen(baseLinkAcc).tail<3>() = angAcc_baseFrame;
-        }
+        // Floating base is an additional frame - need to convert to base link frame
+        pimpl->convertBaseFrameAccelerationToBaseLinkAcceleration(baseFrameAcc,
+                                                                  baseLinkAccInSelectedVelRepr);
     } else
     {
-        // Floating base is a link - use directly
-        baseLinkAcc = baseAcc;
+        // Floating base is a link frame - use directly
+        baseLinkAccInSelectedVelRepr = baseFrameAcc;
     }
 
     // Convert input base acceleration
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
-        fromEigen(pimpl->m_invDynBaseAcc, toEigen(baseLinkAcc));
+        fromEigen(pimpl->m_invDynBaseAcc, toEigen(baseLinkAccInSelectedVelRepr));
     } else if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
     {
         pimpl->m_invDynBaseAcc
-            = convertInertialAccelerationToBodyFixedAcceleration(baseLinkAcc,
+            = convertInertialAccelerationToBodyFixedAcceleration(baseLinkAccInSelectedVelRepr,
                                                                  pimpl->m_pos.worldBasePos());
     } else
     {
         assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
         pimpl->m_invDynBaseAcc
-            = convertMixedAccelerationToBodyFixedAcceleration(baseLinkAcc,
+            = convertMixedAccelerationToBodyFixedAcceleration(baseLinkAccInSelectedVelRepr,
                                                               pimpl->m_vel.baseVel(),
                                                               pimpl->m_pos.worldBasePos()
                                                                   .getRotation());
@@ -3380,16 +3354,16 @@ bool KinDynComputations::inverseDynamics(const Vector6& baseAcc,
     return true;
 }
 
-bool KinDynComputations::inverseDynamics(Span<const double> baseAcc,
+bool KinDynComputations::inverseDynamics(Span<const double> baseFrameAcc,
                                          Span<const double> s_ddot,
                                          const LinkNetExternalWrenches& linkExtForces,
                                          FreeFloatingGeneralizedTorques& baseForceAndJointTorques)
 {
     constexpr int expected_spatial_acceleration_size = 6;
-    bool ok = baseAcc.size() == expected_spatial_acceleration_size;
+    bool ok = baseFrameAcc.size() == expected_spatial_acceleration_size;
     if (!ok)
     {
-        reportError("KinDynComputations", "inverseDynamics", "Wrong size in input baseAcc");
+        reportError("KinDynComputations", "inverseDynamics", "Wrong size in input baseFrameAcc");
         return false;
     }
 
@@ -3400,20 +3374,20 @@ bool KinDynComputations::inverseDynamics(Span<const double> baseAcc,
         return false;
     }
 
-    return this->inverseDynamics(Vector6(baseAcc),
+    return this->inverseDynamics(Vector6(baseFrameAcc),
                                  VectorDynSize(s_ddot),
                                  linkExtForces,
                                  baseForceAndJointTorques);
 }
 
 bool KinDynComputations::inverseDynamicsWithInternalJointForceTorques(
-    const Vector6& baseAcc,
+    const Vector6& baseFrameAcc,
     const VectorDynSize& s_ddot,
     const LinkNetExternalWrenches& linkExtForces,
     FreeFloatingGeneralizedTorques& baseForceAndJointTorques,
     LinkInternalWrenches& linkInternalWrenches)
 {
-    bool ok = this->inverseDynamics(baseAcc, s_ddot, linkExtForces, baseForceAndJointTorques);
+    bool ok = this->inverseDynamics(baseFrameAcc, s_ddot, linkExtForces, baseForceAndJointTorques);
 
     if (!ok)
         return false;
@@ -3431,19 +3405,19 @@ bool KinDynComputations::inverseDynamicsWithInternalJointForceTorques(
 }
 
 bool KinDynComputations::inverseDynamicsWithInternalJointForceTorques(
-    iDynTree::Span<const double> baseAcc,
+    iDynTree::Span<const double> baseFrameAcc,
     iDynTree::Span<const double> s_ddot,
     const LinkNetExternalWrenches& linkExtForces,
     FreeFloatingGeneralizedTorques& baseForceAndJointTorques,
     LinkInternalWrenches& linkInternalWrenches)
 {
     constexpr int expected_spatial_acceleration_size = 6;
-    bool ok = baseAcc.size() == expected_spatial_acceleration_size;
+    bool ok = baseFrameAcc.size() == expected_spatial_acceleration_size;
     if (!ok)
     {
         reportError("KinDynComputations",
                     "inverseDynamicsWithInternalJointForceTorques",
-                    "Wrong size in input baseAcc");
+                    "Wrong size in input baseFrameAcc");
         return false;
     }
 
@@ -3456,7 +3430,7 @@ bool KinDynComputations::inverseDynamicsWithInternalJointForceTorques(
         return false;
     }
 
-    return this->inverseDynamicsWithInternalJointForceTorques(Vector6(baseAcc),
+    return this->inverseDynamicsWithInternalJointForceTorques(Vector6(baseFrameAcc),
                                                               VectorDynSize(s_ddot),
                                                               linkExtForces,
                                                               baseForceAndJointTorques,
@@ -3677,7 +3651,7 @@ bool KinDynComputations::generalizedExternalForces(
     return true;
 }
 
-bool KinDynComputations::inverseDynamicsInertialParametersRegressor(const Vector6& baseAcc,
+bool KinDynComputations::inverseDynamicsInertialParametersRegressor(const Vector6& baseFrameAcc,
                                                                     const VectorDynSize& s_ddot,
                                                                     MatrixDynSize& regressor)
 {
@@ -3687,17 +3661,17 @@ bool KinDynComputations::inverseDynamicsInertialParametersRegressor(const Vector
     // Convert input base acceleration
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
-        fromEigen(pimpl->m_invDynBaseAcc, toEigen(baseAcc));
+        fromEigen(pimpl->m_invDynBaseAcc, toEigen(baseFrameAcc));
     } else if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
     {
         pimpl->m_invDynBaseAcc
-            = convertInertialAccelerationToBodyFixedAcceleration(baseAcc,
+            = convertInertialAccelerationToBodyFixedAcceleration(baseFrameAcc,
                                                                  pimpl->m_pos.worldBasePos());
     } else
     {
         assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
         pimpl->m_invDynBaseAcc
-            = convertMixedAccelerationToBodyFixedAcceleration(baseAcc,
+            = convertMixedAccelerationToBodyFixedAcceleration(baseFrameAcc,
                                                               pimpl->m_vel.baseVel(),
                                                               pimpl->m_pos.worldBasePos()
                                                                   .getRotation());
