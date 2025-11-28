@@ -142,7 +142,7 @@
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a76b26b97933c562c11e88ab3f50bc06b" class="m-doc">setFloatingBase</a>(</span><span class="m-doc-wrap">const std::string&amp; floatingBaseName) -&gt; bool</span>
             </dt>
-            <dd>Set the link that is used as the floating base link.</dd>
+            <dd>Set the frame that is used as the floating base.</dd>
           </dl>
         </section>
         <section id="methods-to-access-the-underlyng-model-for-the-robot">
@@ -198,25 +198,25 @@
             </dt>
             <dd>Set the (internal) joint positions.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3eee3e784003d54a13e0d4e709bd25db" class="m-doc">setWorldBaseTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7267afa1738596b4cf2b4ddc0eda321f" class="m-doc">setWorldBaseTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_baseFrame) -&gt; bool</span>
             </dt>
             <dd>Set the world base transform.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aecb1ebd721765d1fdc2799b169e1b548" class="m-doc">setWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_base) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9462a3430a56845a43416b02a5cd6e6a" class="m-doc">setWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_baseFrame) -&gt; bool</span>
             </dt>
             <dd>Set the world base transform (<a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> implementation).</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2e499491547624639c1765216e0d1f38" class="m-doc">setRobotState</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base,
+              <span class="m-doc-wrap-bumper">auto <a href="#a78f40b8a792e60fd2ff4817f534764c4" class="m-doc">setRobotState</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_baseFrame,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s,
-              const <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a>&amp; base_velocity,
+              const <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a>&amp; baseFrame_velocity,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s_dot,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; world_gravity) -&gt; bool</span>
             </dt>
             <dd>Set the state for the robot (floating base)</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a991bbdf0c9d047562fc51e4993ce0b1f" class="m-doc">setRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; world_T_base,
+              <span class="m-doc-wrap-bumper">auto <a href="#aed07702d66bb1ccc6b6f36d4e3246052" class="m-doc">setRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; world_T_baseFrame,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s,
-              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; base_velocity,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrame_velocity,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_dot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; world_gravity) -&gt; bool</span>
             </dt>
@@ -226,17 +226,17 @@
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s_dot,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; world_gravity) -&gt; bool</span>
             </dt>
-            <dd>Set the state for the robot (fixed base) Same as setRobotState, but with: world_T_base = <a href="classiDynTree_1_1Transform.html#a706809fe4f1904e07634ed3d0c493fcd" class="m-doc">iDynTree::<wbr />Transform::<wbr />Identity()</a> base_velocity = <a href="classiDynTree_1_1SpatialVector.html#ae2ae611372d0a0f53dd983e3598bcc58" class="m-doc">iDynTree::<wbr />Twist::<wbr />Zero()</a>;.</dd>
+            <dd>Set the state for the robot (fixed base) Same as setRobotState, but with: world_T_baseFrame = <a href="classiDynTree_1_1Transform.html#a706809fe4f1904e07634ed3d0c493fcd" class="m-doc">iDynTree::<wbr />Transform::<wbr />Identity()</a> baseFrame_velocity = <a href="classiDynTree_1_1SpatialVector.html#ae2ae611372d0a0f53dd983e3598bcc58" class="m-doc">iDynTree::<wbr />Twist::<wbr />Zero()</a>;.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#af4c08dceadecb5318f295bd8014735d0" class="m-doc">setRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_dot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; world_gravity) -&gt; bool</span>
             </dt>
-            <dd>Set the state for the robot (fixed base) Same as setRobotState, but with: world_T_base = <a href="classiDynTree_1_1Transform.html#a706809fe4f1904e07634ed3d0c493fcd" class="m-doc">iDynTree::<wbr />Transform::<wbr />Identity()</a> base_velocity = <a href="classiDynTree_1_1SpatialVector.html#ae2ae611372d0a0f53dd983e3598bcc58" class="m-doc">iDynTree::<wbr />Twist::<wbr />Zero()</a>;.</dd>
-            <dt id="a24f941538023d1ed481839cf83274833">
-              <span class="m-doc-wrap-bumper">void <a href="#a24f941538023d1ed481839cf83274833" class="m-doc-self">getRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base,
+            <dd>Set the state for the robot (fixed base) Same as setRobotState, but with: world_T_baseFrame = <a href="classiDynTree_1_1Transform.html#a706809fe4f1904e07634ed3d0c493fcd" class="m-doc">iDynTree::<wbr />Transform::<wbr />Identity()</a> baseFrame_velocity = <a href="classiDynTree_1_1SpatialVector.html#ae2ae611372d0a0f53dd983e3598bcc58" class="m-doc">iDynTree::<wbr />Twist::<wbr />Zero()</a>;.</dd>
+            <dt id="aa6fbd0e4fa310ad83e26365341834408">
+              <span class="m-doc-wrap-bumper">void <a href="#aa6fbd0e4fa310ad83e26365341834408" class="m-doc-self">getRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_baseFrame,
               <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s,
-              <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a>&amp; base_velocity,
+              <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a>&amp; baseFrame_velocity,
               <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s_dot,
               <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; world_gravity)</span>
             </dt>
@@ -247,10 +247,10 @@
               <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; world_gravity)</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="aa9a9e494786b116842ae332a451baaa2">
-              <span class="m-doc-wrap-bumper">auto <a href="#aa9a9e494786b116842ae332a451baaa2" class="m-doc-self">getRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;double&gt; world_T_base,
+            <dt id="a9989f487ad578af80b43eb1f3a4e74f3">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9989f487ad578af80b43eb1f3a4e74f3" class="m-doc-self">getRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;double&gt; world_T_baseFrame,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; s,
-              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; base_velocity,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; baseFrame_velocity,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; s_dot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; world_gravity) -&gt; bool</span>
             </dt>
@@ -265,16 +265,16 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a68c9dbca3120164bc2f58f20d12d8dc7" class="m-doc-self">getWorldBaseTransform</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a></span>
             </dt>
             <dd>Access the robot state.</dd>
-            <dt id="afa212ccee1d3b3a1249cdeb1d03f245a">
-              <span class="m-doc-wrap-bumper">auto <a href="#afa212ccee1d3b3a1249cdeb1d03f245a" class="m-doc-self">getWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;double&gt; world_T_base) const -&gt; bool</span>
+            <dt id="ae52ef3ab63fa7d06b7c88e3785085a33">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae52ef3ab63fa7d06b7c88e3785085a33" class="m-doc-self">getWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;double&gt; world_T_baseFrame) const -&gt; bool</span>
             </dt>
             <dd><span></span></dd>
             <dt id="a13d400bb68f3025be3a2cbc8aaebcff2">
               <span class="m-doc-wrap-bumper">auto <a href="#a13d400bb68f3025be3a2cbc8aaebcff2" class="m-doc-self">getBaseTwist</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a></span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a4d61da63a30ef1dc1f5a74e343933765">
-              <span class="m-doc-wrap-bumper">auto <a href="#a4d61da63a30ef1dc1f5a74e343933765" class="m-doc-self">getBaseTwist</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; base_velocity) const -&gt; bool</span>
+            <dt id="ae4b20e7d59ec87c3cefaa063b6632e6b">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae4b20e7d59ec87c3cefaa063b6632e6b" class="m-doc-self">getBaseTwist</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; baseFrame_velocity) const -&gt; bool</span>
             </dt>
             <dd><span></span></dd>
             <dt id="a39e8f4a9fbacf7f855ce049cab6a55c2">
@@ -398,27 +398,27 @@
             </dt>
             <dd>Return the frame velocity, with the convention specified by getFrameVelocityRepresentation.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae41acdeb26c2cc2b5d93f35c2dc0f3ce" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a7e96127dc731d68912bb52656c3d0a8c" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot) -&gt; <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a></span>
             </dt>
             <dd>Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#aad6f28d4d1fdf93c1ffd74622f892ec1" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
-              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a5119b55dd21f7fbeff54ebb5d4661fbf" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; frame_acceleration) -&gt; bool</span>
             </dt>
             <dd>Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a543031fbdf0de765c40b4a47e7d8ef38" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameIdx,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#ad79232c1ecca876cd6b9e30d63fdb221" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameIdx,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot) -&gt; <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a></span>
             </dt>
             <dd>Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ae357ba9c71b3a30a7877e8cc7b4ddf49" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameName,
-              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a57ff00f79233f2e9ccf10a5266c15515" class="m-doc">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameName,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; frame_acceleration) -&gt; bool</span>
             </dt>
@@ -1034,21 +1034,21 @@ $L$
             </dt>
             <dd>Get the free floating mass matrix of the system (<a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> version).</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a60870f0f43c035fc63527ad42394f963" class="m-doc">inverseDynamics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#acb3fc60fa1f238bf7d072db8cac8cb85" class="m-doc">inverseDynamics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques) -&gt; bool</span>
             </dt>
             <dd>Compute the free floating inverse dynamics.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#abd0cffbfc42e25cee59bcb7d9f68138c" class="m-doc">inverseDynamics</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a0f22bf2dcaaa82c6a8aec76d6e282c29" class="m-doc">inverseDynamics</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques) -&gt; bool</span>
             </dt>
             <dd>Compute the free floating inverse dynamics (<a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> version).</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4fda4e851c1817c520382741e7af6e9e" class="m-doc">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a650006a9d9c810f0832e1a90dff3a678" class="m-doc">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques,
@@ -1056,7 +1056,7 @@ $L$
             </dt>
             <dd>This method is similar to inverseDynamics, but provides as an additional output the internal 6D force/torques (aka wrenches) excerted by the two links connected to each joint, in the linkInternalWrenches argument.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#adc2cb49455b673fd6bfc5b40d00eb695" class="m-doc">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a15f9b67519e2a855121c70152df38d1f" class="m-doc">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques,
@@ -1085,7 +1085,7 @@ $L$
             </dt>
             <dd>Compute the getNrOfDOFS()+6 vector of generalized external forces.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a2945d5222c617680fc262ae01dca0f23" class="m-doc">inverseDynamicsInertialParametersRegressor</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">auto <a href="#a5c72b6ea7b5426f7f3d17b42f03adcf5" class="m-doc">inverseDynamicsInertialParametersRegressor</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot,
               <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; baseForceAndJointTorquesRegressor) -&gt; bool</span>
             </dt>
@@ -1199,7 +1199,7 @@ $L$
             <h3>
               <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a76b26b97933c562c11e88ab3f50bc06b" class="m-doc-self">setFloatingBase</a>(</span><span class="m-doc-wrap">const std::string&amp; floatingBaseName)</span></span>
             </h3>
-            <p>Set the link that is used as the floating base link.</p>
+            <p>Set the frame that is used as the floating base.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -1208,7 +1208,7 @@ $L$
                 </tr>
               </tfoot>
             </table>
-<p>Currently supports only links. See <a href="https://github.com/robotology/idyntree/issues/422">https:/<wbr />/<wbr />github.com/<wbr />robotology/<wbr />idyntree/<wbr />issues/<wbr />422</a>.</p>
+<p>The frame can be either a link frame or an additional frame rigidly connected to a link.</p><p>Currently supports only links. See <a href="https://github.com/robotology/idyntree/issues/422">https:/<wbr />/<wbr />github.com/<wbr />robotology/<wbr />idyntree/<wbr />issues/<wbr />422</a>.</p>
           </div></section>
           <section class="m-doc-details" id="a9c1ca970b8cf2f90c3ad3199b4534fec"><div>
             <h3>
@@ -1384,9 +1384,9 @@ $L$
             </table>
 <p>(<a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> implementation)</p><aside class="m-note m-info"><h4>Note</h4><p>This method sets only the joint positions, leaving all the other components of the state to their previous value.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a3eee3e784003d54a13e0d4e709bd25db"><div>
+          <section class="m-doc-details" id="a7267afa1738596b4cf2b4ddc0eda321f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3eee3e784003d54a13e0d4e709bd25db" class="m-doc-self">setWorldBaseTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base)</span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7267afa1738596b4cf2b4ddc0eda321f" class="m-doc-self">setWorldBaseTransform</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_baseFrame)</span></span>
             </h3>
             <p>Set the world base transform.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1395,8 +1395,8 @@ $L$
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">world_T_base&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .</td>
+                  <td style="width: 1%">world_T_baseFrame&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_baseFrame*pos_base .</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -1408,9 +1408,9 @@ $L$
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>This method sets only the world base transform, leaving all the other components of the state to their previous value.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="aecb1ebd721765d1fdc2799b169e1b548"><div>
+          <section class="m-doc-details" id="a9462a3430a56845a43416b02a5cd6e6a"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aecb1ebd721765d1fdc2799b169e1b548" class="m-doc-self">setWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_base)</span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9462a3430a56845a43416b02a5cd6e6a" class="m-doc-self">setWorldBaseTransform</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt;&amp; world_T_baseFrame)</span></span>
             </h3>
             <p>Set the world base transform (<a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> implementation).</p>
             <table class="m-table m-fullwidth m-flat">
@@ -1419,8 +1419,8 @@ $L$
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">world_T_base&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .</td>
+                  <td style="width: 1%">world_T_baseFrame&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_baseFrame*pos_base .</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -1432,11 +1432,11 @@ $L$
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>This method sets only the world base transform, leaving all the other components of the state to their previous value.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a2e499491547624639c1765216e0d1f38"><div>
+          <section class="m-doc-details" id="a78f40b8a792e60fd2ff4817f534764c4"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2e499491547624639c1765216e0d1f38" class="m-doc-self">setRobotState</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_base,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a78f40b8a792e60fd2ff4817f534764c4" class="m-doc-self">setRobotState</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; world_T_baseFrame,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s,
-              const <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a>&amp; base_velocity,
+              const <a href="classiDynTree_1_1Twist.html" class="m-doc">iDynTree::<wbr />Twist</a>&amp; baseFrame_velocity,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; s_dot,
               const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; world_gravity)</span></span>
             </h3>
@@ -1447,16 +1447,16 @@ $L$
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">world_T_base</td>
-                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .</td>
+                  <td style="width: 1%">world_T_baseFrame</td>
+                  <td>the homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_baseFrame*pos_base .</td>
                 </tr>
                 <tr>
                   <td>s</td>
                   <td>a vector of <a href="classiDynTree_1_1KinDynComputations.html#aaf27395b392c1651654bf61d0107287c" class="m-doc">getNrOfDegreesOfFreedom()</a> joint positions (in rad)</td>
                 </tr>
                 <tr>
-                  <td>base_velocity</td>
-                  <td>The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.</td>
+                  <td>baseFrame_velocity</td>
+                  <td>The twist (linear/angular velocity) of the base frame, expressed with the convention specified by the used FrameVelocityConvention.</td>
                 </tr>
                 <tr>
                   <td>s_dot</td>
@@ -1475,11 +1475,11 @@ $L$
               </tfoot>
             </table>
           </div></section>
-          <section class="m-doc-details" id="a991bbdf0c9d047562fc51e4993ce0b1f"><div>
+          <section class="m-doc-details" id="aed07702d66bb1ccc6b6f36d4e3246052"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a991bbdf0c9d047562fc51e4993ce0b1f" class="m-doc-self">setRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; world_T_base,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aed07702d66bb1ccc6b6f36d4e3246052" class="m-doc-self">setRobotState</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; world_T_baseFrame,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s,
-              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; base_velocity,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrame_velocity,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_dot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; world_gravity)</span></span>
             </h3>
@@ -1490,16 +1490,16 @@ $L$
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">world_T_base</td>
-                  <td>the 4x4 homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base).</td>
+                  <td style="width: 1%">world_T_baseFrame</td>
+                  <td>the 4x4 homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = world_T_baseFrame*pos_base).</td>
                 </tr>
                 <tr>
                   <td>s</td>
                   <td>a vector of <a href="classiDynTree_1_1KinDynComputations.html#aaf27395b392c1651654bf61d0107287c" class="m-doc">getNrOfDegreesOfFreedom()</a> joint positions (in rad)</td>
                 </tr>
                 <tr>
-                  <td>base_velocity</td>
-                  <td>The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.</td>
+                  <td>baseFrame_velocity</td>
+                  <td>The twist (linear/angular velocity) of the base frame, expressed with the convention specified by the used FrameVelocityConvention.</td>
                 </tr>
                 <tr>
                   <td>s_dot</td>
@@ -1525,7 +1525,7 @@ $L$
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_dot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; world_gravity)</span></span>
             </h3>
-            <p>Set the state for the robot (fixed base) Same as setRobotState, but with: world_T_base = <a href="classiDynTree_1_1Transform.html#a706809fe4f1904e07634ed3d0c493fcd" class="m-doc">iDynTree::<wbr />Transform::<wbr />Identity()</a> base_velocity = <a href="classiDynTree_1_1SpatialVector.html#ae2ae611372d0a0f53dd983e3598bcc58" class="m-doc">iDynTree::<wbr />Twist::<wbr />Zero()</a>;.</p>
+            <p>Set the state for the robot (fixed base) Same as setRobotState, but with: world_T_baseFrame = <a href="classiDynTree_1_1Transform.html#a706809fe4f1904e07634ed3d0c493fcd" class="m-doc">iDynTree::<wbr />Transform::<wbr />Identity()</a> baseFrame_velocity = <a href="classiDynTree_1_1SpatialVector.html#ae2ae611372d0a0f53dd983e3598bcc58" class="m-doc">iDynTree::<wbr />Twist::<wbr />Zero()</a>;.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>
@@ -1750,19 +1750,19 @@ $L$
             </table>
 <p>(<a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> and <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> implementation)</p><aside class="m-note m-danger"><h4>Warning</h4><p>the <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="ae41acdeb26c2cc2b5d93f35c2dc0f3ce"><div>
+          <section class="m-doc-details" id="a7e96127dc731d68912bb52656c3d0a8c"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a> iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae41acdeb26c2cc2b5d93f35c2dc0f3ce" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a> iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7e96127dc731d68912bb52656c3d0a8c" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot)</span></span>
             </h3>
             <p>Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .</p>
 <aside class="m-note m-danger"><h4>Warning</h4><p>As this method recomputes the accelerations of all links for each call, it may be computationally expensive.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="aad6f28d4d1fdf93c1ffd74622f892ec1"><div>
+          <section class="m-doc-details" id="a5119b55dd21f7fbeff54ebb5d4661fbf"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aad6f28d4d1fdf93c1ffd74622f892ec1" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
-              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5119b55dd21f7fbeff54ebb5d4661fbf" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const std::string&amp; frameName,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; frame_acceleration)</span></span>
             </h3>
@@ -1777,19 +1777,19 @@ $L$
             </table>
 <p>(<a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> version)</p><aside class="m-note m-danger"><h4>Warning</h4><p>As this method recomputes the accelerations of all links for each call, it may be computationally expensive.</p><p>the <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a543031fbdf0de765c40b4a47e7d8ef38"><div>
+          <section class="m-doc-details" id="ad79232c1ecca876cd6b9e30d63fdb221"><div>
             <h3>
-              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a> iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a543031fbdf0de765c40b4a47e7d8ef38" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameIdx,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a> iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad79232c1ecca876cd6b9e30d63fdb221" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameIdx,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot)</span></span>
             </h3>
             <p>Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .</p>
 <aside class="m-note m-danger"><h4>Warning</h4><p>As this method recomputes the accelerations of all links for each call, it may be computationally expensive.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="ae357ba9c71b3a30a7877e8cc7b4ddf49"><div>
+          <section class="m-doc-details" id="a57ff00f79233f2e9ccf10a5266c15515"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae357ba9c71b3a30a7877e8cc7b4ddf49" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameName,
-              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a57ff00f79233f2e9ccf10a5266c15515" class="m-doc-self">getFrameAcc</a>(</span><span class="m-doc-wrap">const FrameIndex frameName,
+              <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;double&gt; frame_acceleration)</span></span>
             </h3>
@@ -3114,9 +3114,9 @@ $M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$
 </g>
 </svg>.</p><p>The mass matrix depends on the joint positions, specified by the setRobotState methods. If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION, the mass matrix depends also on the base orientation with respect to the inertial frame, that is also set by the setRobotState methods.</p><p>For more details on the structure of the free floating mass matrix, please check: S. Traversaro, A. Saccon Multibody Dynamics Notation <a href="http://repository.tue.nl/849895">http:/<wbr />/<wbr />repository.tue.nl/<wbr />849895</a></p><aside class="m-note m-danger"><h4>Warning</h4><p>the <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a60870f0f43c035fc63527ad42394f963"><div>
+          <section class="m-doc-details" id="acb3fc60fa1f238bf7d072db8cac8cb85"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a60870f0f43c035fc63527ad42394f963" class="m-doc-self">inverseDynamics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acb3fc60fa1f238bf7d072db8cac8cb85" class="m-doc-self">inverseDynamics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques)</span></span>
@@ -3128,8 +3128,8 @@ $M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">baseAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the acceleration of the base link</td>
+                  <td style="width: 1%">baseFrameAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the acceleration of the base frame</td>
                 </tr>
                 <tr>
                   <td>s_ddot&nbsp;<span class="m-label m-flat m-info">in</span></td>
@@ -3224,11 +3224,11 @@ $M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{
 <use x='245.238032' y='-2.999008' xlink:href='#eq19-g4-79'/>
 <use x='251.015196' y='-2.999008' xlink:href='#eq19-g4-70'/>
 </g>
-</svg>.</p><p>The semantics of baseAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p>
+</svg>.</p><p>The semantics of baseFrameAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p>
           </div></section>
-          <section class="m-doc-details" id="abd0cffbfc42e25cee59bcb7d9f68138c"><div>
+          <section class="m-doc-details" id="a0f22bf2dcaaa82c6a8aec76d6e282c29"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abd0cffbfc42e25cee59bcb7d9f68138c" class="m-doc-self">inverseDynamics</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0f22bf2dcaaa82c6a8aec76d6e282c29" class="m-doc-self">inverseDynamics</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques)</span></span>
@@ -3240,8 +3240,8 @@ $M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">baseAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the acceleration of the base link</td>
+                  <td style="width: 1%">baseFrameAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the acceleration of the base frame</td>
                 </tr>
                 <tr>
                   <td>s_ddot&nbsp;<span class="m-label m-flat m-info">in</span></td>
@@ -3336,11 +3336,11 @@ $M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{
 <use x='245.238032' y='-2.999008' xlink:href='#eq20-g4-79'/>
 <use x='251.015196' y='-2.999008' xlink:href='#eq20-g4-70'/>
 </g>
-</svg>.</p><p>The semantics of baseAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p><aside class="m-note m-danger"><h4>Warning</h4><p>the <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.</p></aside>
+</svg>.</p><p>The semantics of baseFrameAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p><aside class="m-note m-danger"><h4>Warning</h4><p>the <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a4fda4e851c1817c520382741e7af6e9e"><div>
+          <section class="m-doc-details" id="a650006a9d9c810f0832e1a90dff3a678"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4fda4e851c1817c520382741e7af6e9e" class="m-doc-self">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a650006a9d9c810f0832e1a90dff3a678" class="m-doc-self">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques,
@@ -3533,9 +3533,9 @@ $L$
 </g>
 </svg>, its parent \lambda(L) depends on the choosen base link.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="adc2cb49455b673fd6bfc5b40d00eb695"><div>
+          <section class="m-doc-details" id="a15f9b67519e2a855121c70152df38d1f"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adc2cb49455b673fd6bfc5b40d00eb695" class="m-doc-self">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15f9b67519e2a855121c70152df38d1f" class="m-doc-self">inverseDynamicsWithInternalJointForceTorques</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; baseFrameAcc,
               <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; s_ddot,
               const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; linkExtForces,
               <a href="classiDynTree_1_1FreeFloatingGeneralizedTorques.html" class="m-doc">FreeFloatingGeneralizedTorques</a>&amp; baseForceAndJointTorques,
@@ -3845,11 +3845,11 @@ $ -\sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}} $
 <use x='113.011033' y='-2.999008' xlink:href='#eq37-g4-79'/>
 <use x='118.788196' y='-2.999008' xlink:href='#eq37-g4-70'/>
 </g>
-</svg>.</p><aside class="m-note m-danger"><h4>Warning</h4><p>Note that this method returns the <strong>negated</strong> sum of the product of jacobian and the external force, consistently with how the generalized external forces are computed in the <a href="classiDynTree_1_1KinDynComputations.html#a60870f0f43c035fc63527ad42394f963" class="m-doc">KinDynComputations::<wbr />inverseDynamics</a> method.</p></aside><p>The semantics of the base part of generalizedExternalForces and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p>
+</svg>.</p><aside class="m-note m-danger"><h4>Warning</h4><p>Note that this method returns the <strong>negated</strong> sum of the product of jacobian and the external force, consistently with how the generalized external forces are computed in the <a href="classiDynTree_1_1KinDynComputations.html#acb3fc60fa1f238bf7d072db8cac8cb85" class="m-doc">KinDynComputations::<wbr />inverseDynamics</a> method.</p></aside><p>The semantics of the base part of generalizedExternalForces and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p>
           </div></section>
-          <section class="m-doc-details" id="a2945d5222c617680fc262ae01dca0f23"><div>
+          <section class="m-doc-details" id="a5c72b6ea7b5426f7f3d17b42f03adcf5"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2945d5222c617680fc262ae01dca0f23" class="m-doc-self">inverseDynamicsInertialParametersRegressor</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseAcc,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />KinDynComputations::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a5c72b6ea7b5426f7f3d17b42f03adcf5" class="m-doc-self">inverseDynamicsInertialParametersRegressor</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector6</a>&amp; baseFrameAcc,
               const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; s_ddot,
               <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; baseForceAndJointTorquesRegressor)</span></span>
             </h3>
@@ -3860,8 +3860,8 @@ $ -\sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}} $
               </thead>
               <tbody>
                 <tr>
-                  <td style="width: 1%">baseAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
-                  <td>the acceleration of the base link</td>
+                  <td style="width: 1%">baseFrameAcc&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>the acceleration of the base frame</td>
                 </tr>
                 <tr>
                   <td>s_ddot&nbsp;<span class="m-label m-flat m-info">in</span></td>
@@ -4007,7 +4007,7 @@ $\phi \in \mathbb{R}^{10n_{L}}$
 <use x='38.642577' y='-4.338437' xlink:href='#eq40-g3-110'/>
 <use x='43.78078' y='-2.999008' xlink:href='#eq40-g2-76'/>
 </g>
-</svg> is the vector of inertial parameters returned by the <a href="classiDynTree_1_1Model.html#a2c283e000a2d6a5e86770d8616b7e18b" class="m-doc">Model::<wbr />getInertialParameters</a> .</p><p>The semantics of baseAcc, the base part (first six rows) of baseForceAndJointTorquesRegressor depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p><aside class="m-note m-default"><h4>See also</h4><p>iDynTree::InverseDynamicsInertialParametersRegressor for more info on the underlying algorithm.</p></aside>
+</svg> is the vector of inertial parameters returned by the <a href="classiDynTree_1_1Model.html#a2c283e000a2d6a5e86770d8616b7e18b" class="m-doc">Model::<wbr />getInertialParameters</a> .</p><p>The semantics of baseFrameAcc, the base part (first six rows) of baseForceAndJointTorquesRegressor depend of the chosen FrameVelocityRepresentation .</p><p>The state is the one given set by the setRobotState method.</p><aside class="m-note m-default"><h4>See also</h4><p>iDynTree::InverseDynamicsInertialParametersRegressor for more info on the underlying algorithm.</p></aside>
           </div></section>
         </section>
       </div>
