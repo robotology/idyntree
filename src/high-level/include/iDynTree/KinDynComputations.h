@@ -1251,6 +1251,31 @@ public:
      */
     bool getFreeFloatingMassMatrix(iDynTree::MatrixView<double> freeFloatingMassMatrix);
 
+    bool getCoriolisAndMassMatrices(MatrixDynSize& coriolisMatrix,
+                                    MatrixDynSize& massMatrixDerivative,
+                                    MatrixDynSize& massMatrix);
+
+    /**
+     * @brief Compute the Coriolis matrix, mass matrix time derivative, and mass matrix simultaneously (MatrixView version).
+     *
+     *
+     * The three outputs satisfy the following properties:
+     * - \f$C(q, \nu) \nu = \text{generalizedBiasForces}(q, \nu) - G(q)\f$
+     * - \f$\dot{M}(q, \nu) = C(q, \nu) + C(q, \nu)^T\f$
+     * - \f$M(q)\f$ is the free floating mass matrix
+     *
+     *
+     * @param[out] coriolisMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output Coriolis matrix.
+     * @param[out] massMatrixDerivative the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix derivative.
+     * @param[out] massMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix.
+     * @warning the MatrixView objects should point to already existing memory. Memory allocation and
+     * resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    // bool getCoriolisAndMassMatrices(iDynTree::MatrixView<double> coriolisMatrix,
+    //                                 iDynTree::MatrixView<double> massMatrixDerivative,
+    //                                 iDynTree::MatrixView<double> massMatrix);
+
     /**
      * @brief Compute the free floating inverse dynamics.
      *
