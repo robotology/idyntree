@@ -3312,7 +3312,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             S[traversalEl] = motionSubspace;
             // compute derivative of MotionSubSpaceVector (setting Φ°i = 0)
             Vector6 motionSubspaceDotVector;
-            toEigen(motionSubspaceDotVector) = toEigen(linkVel.cross(motionSubspace));
+            toEigen(motionSubspaceDotVector) = toEigen(linkVel.asCrossProductMatrix()).transpose() * (-1.0) * toEigen(motionSubspace);
             Sdot[traversalEl](0) = motionSubspaceDotVector(0);
             Sdot[traversalEl](1) = motionSubspaceDotVector(1);
             Sdot[traversalEl](2) = motionSubspaceDotVector(2);
@@ -3332,7 +3332,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             S[traversalEl] = motionSubspace;
             // compute derivative of MotionSubSpaceVector (setting Φ°i = 0)
             Vector6 motionSubspaceDotVector;
-            toEigen(motionSubspaceDotVector) = toEigen(linkVel.cross(motionSubspace));
+            toEigen(motionSubspaceDotVector) = toEigen(linkVel.asCrossProductMatrixWrench()).transpose() * (-1.0) * toEigen(motionSubspace);
             Sdot[traversalEl](0) = motionSubspaceDotVector(0);
             Sdot[traversalEl](1) = motionSubspaceDotVector(1);
             Sdot[traversalEl](2) = motionSubspaceDotVector(2);
@@ -3345,16 +3345,16 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         Matrix6x6 bilinearFactor, term1, term2, term3;
         bilinearFactor.zero();
         // term1 = (v_i x*) I_i
-        toEigen(term1) = toEigen(linkVel.asCrossProductMatrix()) * toEigen(inertia.asMatrix());
+        toEigen(term1) = toEigen(linkVel.asCrossProductMatrixWrench()) * toEigen(inertia.asMatrix());
         // term2 = (I_i v_i) x̄*
         Vector6 tmpVector;
         toEigen(tmpVector) = toEigen(inertia.asMatrix()) * toEigen(linkVel);
         SpatialMotionVector tmp;
         tmp(0) = tmpVector(0); tmp(1) = tmpVector(1); tmp(2) = tmpVector(2);
         tmp(3) = tmpVector(3); tmp(4) = tmpVector(4); tmp(5) = tmpVector(5);
-        toEigen(term2) = (-1.0) * toEigen(tmp.asCrossProductMatrixWrench());
+        toEigen(term2) = toEigen(tmp.asCrossProductMatrixCustom());
         // term3 = I_i (v_i x)
-        toEigen(term3) = toEigen(inertia.asMatrix()) * toEigen(linkVel.asCrossProductMatrix()).transpose() * (-1.0);
+        toEigen(term3) = toEigen(inertia.asMatrix()) * toEigen(linkVel.asCrossProductMatrixWrench()).transpose() * (-1.0);
         // sum terms
         toEigen(bilinearFactor) = 0.5 * (toEigen(term1) + toEigen(term2) - toEigen(term3));
         B[traversalEl] = bilinearFactor;

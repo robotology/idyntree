@@ -131,6 +131,8 @@ public:
      */
     Matrix6x6 asCrossProductMatrixWrench() const;
 
+    Matrix6x6 asCrossProductMatrixCustom() const;
+
     /**
      * Exp mapping between a  generic element of se(3) (iDynTree::SpatialMotionVector)
      * to the corresponding element of SE(3) (iDynTree::Transform).
