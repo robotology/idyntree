@@ -3276,6 +3276,19 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         return false;
     }
 
+    // get matrix size
+    const int matrixSize = m_robot_model.getNrOfDOFs() + 6;
+    std::cout << "matrixSize: " << matrixSize << std::endl;
+    // get number of visited links
+    const int nrOfVisitedLinks = m_traversal.getNrOfVisitedLinks();
+    std::cout << "nrOfVisitedLinks: " << nrOfVisitedLinks << std::endl;
+
+    // print all link names in the traversal
+    for(int i = 0; i < nrOfVisitedLinks; i++){
+        LinkConstPtr link = m_traversal.getLink(i);
+        std::cout << "link " << i << ": " << m_robot_model.getLinkName(link->getIndex()) << std::endl;
+    }
+
     // cycle through traversal to compute bilinear factors and motion subspace vectors
     for(int traversalEl = 0; traversalEl < m_traversal.getNrOfVisitedLinks(); traversalEl++){
         // get link and parent link
@@ -3295,6 +3308,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             SpatialMotionVector motionSubspace;
             motionSubspace(0) = 1.0; motionSubspace(1) = 1.0; motionSubspace(2) = 1.0;
             motionSubspace(3) = 1.0; motionSubspace(4) = 1.0; motionSubspace(5) = 1.0;
+            // motionSubspace.zero();
             S[traversalEl] = motionSubspace;
             // compute derivative of MotionSubSpaceVector (setting Φ°i = 0)
             Vector6 motionSubspaceDotVector;
@@ -3359,36 +3373,50 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
     for(int j = m_traversal.getNrOfVisitedLinks() - 1; j >= 0; j--){
         // get link and parent link
         Vector6 F1, F2, F3;
+        std::cout << "=========Computing contributions for link=========== " << std::endl;
         toEigen(F1) = toEigen(aggregateLinkInertiaMatrices[j]) * toEigen(Sdot[j])
                             + toEigen(B[j]) * toEigen(S[j]);
         toEigen(F2) = toEigen(aggregateLinkInertiaMatrices[j]) * toEigen(S[j]);
         // print
+        std::cout << "link index: " << m_traversal.getLink(j)->getIndex() << std::endl;
+        std::cout << "link : " << m_robot_model.getLinkName(m_traversal.getLink(j)->getIndex()) << std::endl;
         std::cout << "aggregateLinkInertiaMatrices[" << j << "]: " << aggregateLinkInertiaMatrices[j].toString() << std::endl;
         std::cout << "S[" << j << "]: " << S[j].toString() << std::endl;
         std::cout << "Sdot[" << j << "]: " << Sdot[j].toString() << std::endl;
         std::cout << "F1: " << F1.toString() << std::endl;
         std::cout << "F2: " << F2.toString() << std::endl;
         toEigen(F3) = toEigen(B[j]).transpose() * toEigen(S[j]);
+        std::cout << "-----j " << j << std::endl;
         coriolisMatrix(j, j) = toEigen(S[j]).dot(toEigen(F1));
         massMatrix(j, j) = toEigen(S[j]).dot(toEigen(F2));
         massMatrixDerivative(j, j) = toEigen(Sdot[j]).dot(toEigen(F2))
                                             + toEigen(S[j]).dot(toEigen(F1)+toEigen(F3));
+        std::cout << "F3: " << F3.toString() << std::endl;
+        std::cout << "coriolisMatrix(" << j << "," << j << "): " << coriolisMatrix(j, j) << std::endl;
+        std::cout << "massMatrix(" << j << "," << j << "): " << massMatrix(j, j) << std::endl;
+        std::cout << "massMatrixDerivative(" << j << "," << j << "): " << massMatrixDerivative(j, j) << std::endl;
+        
+        // propagate contributions to parent links
         int i = j;
+        m_traversal.getParentLink(i);
+        std::cout << "Propagating contributions to parent links..." << std::endl;
         while (m_traversal.getParentLink(i) != nullptr){
             // get link to parent link transform
             FrameIndex linkIndex = m_traversal.getLink(i)->getIndex();
             FrameIndex parentLinkIndex = m_traversal.getParentLink(i)->getIndex();
             Transform link_X_parentLink = m_linkPos(linkIndex).inverse() * m_linkPos(parentLinkIndex);
-            toEigen(F1) = toEigen(link_X_parentLink.asAdjointTransformWrench()) * toEigen(F1);
-            toEigen(F2) = toEigen(link_X_parentLink.asAdjointTransformWrench()) * toEigen(F2);
-            toEigen(F3) = toEigen(link_X_parentLink.asAdjointTransformWrench()) * toEigen(F3);
+            toEigen(F1) = toEigen(link_X_parentLink.asAdjointTransform()).transpose() * toEigen(F1);
+            toEigen(F2) = toEigen(link_X_parentLink.asAdjointTransform()).transpose() * toEigen(F2);
+            toEigen(F3) = toEigen(link_X_parentLink.asAdjointTransform()).transpose() * toEigen(F3);
             i = parentLinkIndex;
             coriolisMatrix(i, j) = toEigen(S[i]).dot(toEigen(F1));
             coriolisMatrix(j, i) = toEigen(Sdot[i]).dot(toEigen(F2)) + toEigen(S[i]).dot(toEigen(F3));
             massMatrix(i, j) = toEigen(S[i]).dot(toEigen(F2));
             massMatrix(j, i) = massMatrix(i, j);
             massMatrixDerivative(i, j) = toEigen(Sdot[i]).dot(toEigen(F2)) + toEigen(S[i]).dot(toEigen(F1)+toEigen(F3));
+            massMatrixDerivative(j, i) = massMatrixDerivative(i, j);
         }
+        std::cout << "Finished propagating contributions to parent links." << std::endl;
         // update aggregated Inertias and bilinear factors of parent link to include contribution of current link
         FrameIndex linkIndex = m_traversal.getLink(j)->getIndex();
         if (m_traversal.getParentLink(j) != nullptr){
@@ -3396,16 +3424,17 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             Transform link_X_parentLink = m_linkPos(linkIndex).inverse() * m_linkPos(parentLinkIndex);
             // update aggregated inertias
             toEigen(aggregateLinkInertiaMatrices[parentLinkIndex]) +=
-                                          toEigen(link_X_parentLink.asAdjointTransformWrench())
+                                          toEigen(link_X_parentLink.asAdjointTransform()).transpose()
                                         * toEigen(aggregateLinkInertiaMatrices[linkIndex])
                                         * toEigen(link_X_parentLink.asAdjointTransform());
 
             // update bilinear factors
             toEigen(B[parentLinkIndex]) +=
-                                          toEigen(link_X_parentLink.asAdjointTransformWrench())
+                                          toEigen(link_X_parentLink.asAdjointTransform()).transpose()
                                         * toEigen(B[linkIndex])
                                         * toEigen(link_X_parentLink.asAdjointTransform());
         }
+        std::cout << "Updated aggregated inertias and bilinear factors of parent link." << std::endl;
     }
     return true;
 }

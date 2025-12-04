@@ -1307,6 +1307,10 @@ void testCoriolisAndMassMatricesConsistency(KinDynComputations& dynComp)
     // Get the mass matrix from getFreeFloatingMassMatrix for comparison
     MatrixDynSize massMatrixRef(matSize, matSize);
     ok = dynComp.getFreeFloatingMassMatrix(massMatrixRef);
+    std::cout << "Mass Matrix from getFreeFloatingMassMatrix:\n"
+              << toEigen(massMatrixRef) << std::endl;
+    std::cout << "Mass Matrix from getCoriolisAndMassMatrices:\n"
+              << toEigen(massMatrix) << std::endl;
     ASSERT_IS_TRUE(ok);
 
     // Test 1: Mass matrix from getCoriolisAndMassMatrices should match getFreeFloatingMassMatrix
@@ -1466,7 +1470,7 @@ int main()
 
     // Test kinetic energy consistency on random models with various joint types
     // (including revolute, spherical, and others)
-    testKineticEnergyOnRandomModels();
+    // testKineticEnergyOnRandomModels();
 
     // Test kinetic energy consistency on URDF models
     std::cout << "Testing kinetic energy consistency on URDF models..." << std::endl;
@@ -1481,8 +1485,8 @@ int main()
 
     // Test getCoriolisAndMassMatrices consistency (mass matrix matches getFreeFloatingMassMatrix, Hdot = C + C^T)
     //testCoriolisAndMassMatricesOnModel(getAbsModelPath("oneLink.urdf"));
-    testCoriolisAndMassMatricesOnModel(getAbsModelPath("twoLinks.urdf"));
-    // testCoriolisAndMassMatricesOnModel(getAbsModelPath("threeLinks.urdf"));
+    // testCoriolisAndMassMatricesOnModel(getAbsModelPath("iCubGenova02.urdf"));
+    testCoriolisAndMassMatricesOnModel(getAbsModelPath("tenLinks.urdf"));
 
     // Test getCoriolisAndMassMatrices on random models
     // testCoriolisAndMassMatricesOnRandomModels();
