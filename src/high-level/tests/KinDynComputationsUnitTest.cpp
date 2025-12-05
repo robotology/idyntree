@@ -1284,20 +1284,12 @@ void testFloatingBaseFrameConsistencyAllRepresentations(std::string modelName)
     testFloatingBaseFrameConsistency(urdfFileName, iDynTree::MIXED_REPRESENTATION);
 }
 
-/**
- * Test that verifies the getCoriolisAndMassMatrices function.
- *
- * This test verifies the following properties:
- * 1. The mass matrix H returned by getCoriolisAndMassMatrices matches getFreeFloatingMassMatrix
- * 2. The property Hdot = C + C^T holds (mass matrix derivative equals C + C^T)
- * 3. The Coriolis matrix C from getCoriolisAndMassMatrices matches the one from getCoriolisMatrix
- */
 void testCoriolisAndMassMatricesConsistency(KinDynComputations& dynComp)
 {
     const size_t nrOfDofs = dynComp.getNrOfDegreesOfFreedom();
     const size_t matSize = 6 + nrOfDofs;
 
-    // Get all three matrices from the new function
+    // Get all three matrices from function being tested (i.e., getCoriolisAndMassMatrices)
     MatrixDynSize coriolisMatrix(matSize, matSize);
     MatrixDynSize massMatrixDerivative(matSize, matSize);
     MatrixDynSize massMatrix(matSize, matSize);
@@ -1307,78 +1299,42 @@ void testCoriolisAndMassMatricesConsistency(KinDynComputations& dynComp)
     // Get the mass matrix from getFreeFloatingMassMatrix for comparison
     MatrixDynSize massMatrixRef(matSize, matSize);
     ok = dynComp.getFreeFloatingMassMatrix(massMatrixRef);
-    std::cout << "Mass Matrix from getFreeFloatingMassMatrix:\n"
-              << toEigen(massMatrixRef) << std::endl;
-    std::cout << "Mass Matrix from getCoriolisAndMassMatrices:\n"
-              << toEigen(massMatrix) << std::endl;
     ASSERT_IS_TRUE(ok);
 
     // Test 1: Mass matrix from getCoriolisAndMassMatrices should match getFreeFloatingMassMatrix
-    for (size_t i = 0; i < matSize; i++)
-    {
-        for (size_t j = 0; j < matSize; j++)
-        {
-            if (std::abs(massMatrix(i, j) - massMatrixRef(i, j)) > 1e-8)
-            {
-                std::cerr << "Mass matrix mismatch at (" << i << ", " << j << "): "
-                          << "computed=" << massMatrix(i, j)
-                          << " reference=" << massMatrixRef(i, j) << std::endl;
-            }
-            ASSERT_EQUAL_DOUBLE_TOL(massMatrix(i, j), massMatrixRef(i, j), 1e-8);
-        }
-    }
+    ASSERT_EQUAL_MATRIX_TOL(massMatrix, massMatrixRef, 1e-8);
 
-    // Test 2: Hdot = C + C^T
-    for (size_t i = 0; i < matSize; i++)
-    {
-        for (size_t j = 0; j < matSize; j++)
-        {
-            double C_plus_CT = coriolisMatrix(i, j) + coriolisMatrix(j, i);
-            if (std::abs(massMatrixDerivative(i, j) - C_plus_CT) > 1e-8)
-            {
-                std::cerr << "Hdot != C + C^T at (" << i << ", " << j << "): "
-                          << "Hdot=" << massMatrixDerivative(i, j)
-                          << " C+C^T=" << C_plus_CT << std::endl;
-            }
-            ASSERT_EQUAL_DOUBLE_TOL(massMatrixDerivative(i, j), C_plus_CT, 1e-8);
-        }
-    }
+    // Test 2: Mdot = C + C^T
+    MatrixDynSize C_plus_CT(matSize, matSize);
+    toEigen(C_plus_CT) = toEigen(coriolisMatrix) + toEigen(coriolisMatrix).transpose();
+    ASSERT_EQUAL_MATRIX_TOL(massMatrixDerivative, C_plus_CT, 1e-8);
 
-    // Test 3: Coriolis matrix from getCoriolisAndMassMatrices should produce the same Coriolis forces
-    // as getGeneralizedBiasForces - getGeneralizedGravityForces
-    FreeFloatingGeneralizedTorques generalizedBiasForces(dynComp.model());
-    ok = dynComp.generalizedBiasForces(generalizedBiasForces);
+    // Test 3: C*nu = bias forces - gravity forces
+    FreeFloatingGeneralizedTorques biasForces(dynComp.model());
+    ok = dynComp.generalizedBiasForces(biasForces);
     ASSERT_IS_TRUE(ok);
-    FreeFloatingGeneralizedTorques generalizedGravityForces(dynComp.model());
-    ok = ok && dynComp.generalizedGravityForces(generalizedGravityForces);
+
+    FreeFloatingGeneralizedTorques gravityForces(dynComp.model());
+    ok = ok && dynComp.generalizedGravityForces(gravityForces);
     ASSERT_IS_TRUE(ok);
-    FreeFloatingGeneralizedTorques coriolisForcesFromCMatrix(dynComp.model());
-    // Get current generalized velocities
+
     VectorDynSize nu(6 + nrOfDofs);
     ok = dynComp.getModelVel(nu);
     ASSERT_IS_TRUE(ok);    
-    // compute full C * nu once and split into base wrench (6) and joint torques (nrOfDofs)
-    Eigen::VectorXd coriolisContinuous = toEigen(coriolisMatrix) * toEigen(nu);
-    toEigen(coriolisForcesFromCMatrix.baseWrench().getLinearVec3())
-        = coriolisContinuous.segment<3>(0);
-    toEigen(coriolisForcesFromCMatrix.baseWrench().getAngularVec3())
-        = coriolisContinuous.segment<3>(3);
-    toEigen(coriolisForcesFromCMatrix.jointTorques())
-        = coriolisContinuous.segment(6, nrOfDofs);
 
-    // compute difference only on joint torques to avoid numerical issues with base wrench
-    FreeFloatingGeneralizedTorques generalizedCoriolisForces;
-    generalizedCoriolisForces.resize(dynComp.model());
-    generalizedCoriolisForces.baseWrench() = generalizedBiasForces.baseWrench() - generalizedGravityForces.baseWrench();
-    toEigen(generalizedCoriolisForces.jointTorques()) = toEigen(generalizedBiasForces.jointTorques()) - toEigen(generalizedGravityForces.jointTorques());
-    ASSERT_EQUAL_VECTOR(coriolisForcesFromCMatrix.jointTorques(),
-                        generalizedCoriolisForces.jointTorques());
+    VectorDynSize C_nu(6 + nrOfDofs);
+    toEigen(C_nu) = toEigen(coriolisMatrix) * toEigen(nu);
+
+    ASSERT_EQUAL_VECTOR_TOL(toEigen(C_nu).tail(nrOfDofs),
+                                toEigen(biasForces.jointTorques()) - toEigen(gravityForces.jointTorques()),
+                                1e-8);
+
+    ASSERT_EQUAL_VECTOR_TOL(toEigen(C_nu).head(6),
+                                toEigen(biasForces.baseWrench()) - toEigen(gravityForces.baseWrench()),
+                                1e-8);
 }
 
-/**
- * Test getCoriolisAndMassMatrices on a KinDynComputations object
- * for all frame velocity representations.
- */
+
 void testCoriolisAndMassMatricesOnModel(std::string modelFilePath)
 {
     iDynTree::ModelLoader mdlLoader;
@@ -1391,8 +1347,8 @@ void testCoriolisAndMassMatricesOnModel(std::string modelFilePath)
 
     std::cout << "Testing getCoriolisAndMassMatrices for model: " << modelFilePath << std::endl;
 
-    // Test for each frame velocity representation
-    // for (auto repr : {BODY_FIXED_REPRESENTATION, MIXED_REPRESENTATION, INERTIAL_FIXED_REPRESENTATION})
+    // Test getCoriolisAndMassMatrices on a KinDynComputations object for all frame velocity representations.
+    // {BODY_FIXED_REPRESENTATION, MIXED_REPRESENTATION, INERTIAL_FIXED_REPRESENTATION}
     for (auto repr : {BODY_FIXED_REPRESENTATION})
     {
         ok = dynComp.setFrameVelocityRepresentation(repr);
@@ -1407,9 +1363,6 @@ void testCoriolisAndMassMatricesOnModel(std::string modelFilePath)
     }
 }
 
-/**
- * Test getCoriolisAndMassMatrices on random models with various joint types.
- */
 void testCoriolisAndMassMatricesOnRandomModels()
 {
     std::cout << "Testing getCoriolisAndMassMatrices consistency on random models..." << std::endl;
@@ -1435,7 +1388,7 @@ void testCoriolisAndMassMatricesOnRandomModels()
             // Test multiple random configurations
             for (int iter = 0; iter < 3; iter++)
             {
-                setRandomState(dynComp);
+                setRandomStateFixedBase(dynComp);
                 testCoriolisAndMassMatricesConsistency(dynComp);
             }
         }
