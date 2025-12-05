@@ -1357,7 +1357,7 @@ void testCoriolisAndMassMatricesOnModel(std::string modelFilePath)
         // Test multiple random configurations
         for (int iter = 0; iter < 5; iter++)
         {
-            setRandomStateFixedBase(dynComp);
+            setRandomState(dynComp);
             testCoriolisAndMassMatricesConsistency(dynComp);
         }
     }

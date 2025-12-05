@@ -3309,9 +3309,10 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             toEigen(motionSubspace).setIdentity();
             std::cout << "Visiting base link, setting motion subspace to identity: " << motionSubspace.toString() << std::endl;
             S[traversalEl] = motionSubspace;
-            // compute derivative of MotionSubSpaceVector (setting Φ°i = 0)
+            // compute derivative of MotionSubSpaceVector for the base link
+            // it is null in body-fixed representation
             MatrixDynSize motionSubspaceDotVector(6, 6);
-            toEigen(motionSubspaceDotVector) = toEigen(linkVel.asCrossProductMatrix()).transpose() * (-1.0) * toEigen(motionSubspace);
+            toEigen(motionSubspaceDotVector).setZero();
             Sdot[traversalEl] = motionSubspaceDotVector;
         }
         else {
