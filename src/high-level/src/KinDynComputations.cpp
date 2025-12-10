@@ -3375,123 +3375,120 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
     }
 
     // cycle backwards through traversal to compute coriolis, mass matrix, and mass matrix derivative
-    int j = m_robot_model.getNrOfDOFs() + 6;
     for(int traversalEl = m_traversal.getNrOfVisitedLinks() - 1; traversalEl >= 0; traversalEl--){
         // get link and parent link
         LinkConstPtr visitedLink = m_traversal.getLink(traversalEl);
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
         LinkConstPtr parentLink = m_traversal.getParentLink(visitedLinkIndex);
 
-        // if fixed joint, skip
-        bool parentToLinkJointIsFixed = false;
-        if (parentLink != 0){
-            IJointConstPtr joint = m_traversal.getParentJoint(visitedLinkIndex);
-            if (joint->getNrOfDOFs() == 0){
-                parentToLinkJointIsFixed = true;
-            }
-        }
-        if (!parentToLinkJointIsFixed){
-            // compute F1, F2, F3
-            MatrixDynSize F1, F2, F3;
-            F1.resize(6, S[visitedLinkIndex].cols());
-            F2.resize(6, S[visitedLinkIndex].cols());
-            F3.resize(6, S[visitedLinkIndex].cols());
-            toEigen(F1) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]) * toEigen(Sdot[visitedLinkIndex])
-                                + toEigen(B[visitedLinkIndex]) * toEigen(S[visitedLinkIndex]);
-            toEigen(F2) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]) * toEigen(S[visitedLinkIndex]);
-            toEigen(F3) = toEigen(B[visitedLinkIndex]).transpose() * toEigen(S[visitedLinkIndex]);
+        if (visitedLinkIndex){
+            // the visited link is NOT the base link
+            IJointConstPtr toParentJoint = m_traversal.getParentJoint(visitedLinkIndex);
 
-            // insert contributions to coriolis, mass matrix, and mass matrix derivative of visited link
-            const int cols = toEigen(S[visitedLinkIndex]).cols();
-            const int rows = cols;
-            int startRow;
-            if (visitedLinkIndex == 0){
-                // base link
-                startRow = 0;
-            } else {
-                IJointConstPtr parentToLinkJoint = m_traversal.getParentJointFromLinkIndex(visitedLinkIndex);
-                startRow = parentToLinkJoint->getDOFsOffset()+6;
-            }
-            int startCol = startRow;
-            toEigen(coriolisMatrix).block(startRow, startCol, rows, cols) = toEigen(S[visitedLinkIndex]).transpose() * toEigen(F1);
-            toEigen(massMatrix).block(startRow, startCol, rows, cols) = toEigen(S[visitedLinkIndex]).transpose() * toEigen(F2);
-            toEigen(massMatrixDerivative).block(startRow, startCol, rows, cols) = toEigen(Sdot[visitedLinkIndex]).transpose() * toEigen(F2)
-                                                + toEigen(S[visitedLinkIndex]).transpose() * (toEigen(F1)+toEigen(F3));
+            if (toParentJoint->getNrOfDOFs() > 0)
+            { // is NOT a fixed joint
+                // compute F1, F2, F3
+                MatrixDynSize F1, F2, F3;
+                F1.resize(6, S[visitedLinkIndex].cols());
+                F2.resize(6, S[visitedLinkIndex].cols());
+                F3.resize(6, S[visitedLinkIndex].cols());
+                toEigen(F1) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]) * toEigen(Sdot[visitedLinkIndex])
+                                    + toEigen(B[visitedLinkIndex]) * toEigen(S[visitedLinkIndex]);
+                toEigen(F2) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]) * toEigen(S[visitedLinkIndex]);
+                toEigen(F3) = toEigen(B[visitedLinkIndex]).transpose() * toEigen(S[visitedLinkIndex]);
 
+                // insert contributions to coriolis, mass matrix, and mass matrix derivative of visited link
+                const int cols = toEigen(S[visitedLinkIndex]).cols();
+                const int rows = cols;
+                const int dofIndex = toParentJoint->getDOFsOffset();
 
-            LinkIndex otherLinkIndex = visitedLinkIndex;
-            while (m_traversal.getParentLink(otherLinkIndex) != nullptr){
-                // std::cout << "Propagating contributions from link " << m_robot_model.getLinkName(otherLinkIndex) << "(index: " << otherLinkIndex << ")"
-                // << " to its parent link " << m_robot_model.getLinkName(m_traversal.getParentLink(otherLinkIndex)->getIndex())
-                // << "(index: " << m_traversal.getParentLink(otherLinkIndex)->getIndex() << ")" << std::endl;
-                // update F1, F2, F3 to parent link frame
-                LinkConstPtr parentLink = m_traversal.getParentLink(otherLinkIndex);
-                LinkIndex parentLinkIndex = parentLink->getIndex();
+                toEigen(coriolisMatrix).block(dofIndex+6, dofIndex+6, rows, cols) = toEigen(S[visitedLinkIndex]).transpose() * toEigen(F1);
+                toEigen(massMatrix).block(dofIndex+6, dofIndex+6, rows, cols) = toEigen(S[visitedLinkIndex]).transpose() * toEigen(F2);
+                toEigen(massMatrixDerivative).block(dofIndex+6, dofIndex+6, rows, cols) = toEigen(Sdot[visitedLinkIndex]).transpose() * toEigen(F2)
+                                                    + toEigen(S[visitedLinkIndex]).transpose() * (toEigen(F1)+toEigen(F3));
 
-                Transform otherLink_X_parentLink = m_linkPos(otherLinkIndex).inverse() * m_linkPos(parentLinkIndex);
+                // Compute off-diagonal terms of the coriolis, mass matrix, and mass matrix derivative
+                // related to ancestor links (excluding the base link)
+                LinkIndex ancestorLinkIndex = visitedLinkIndex;
+                while (m_traversal.getParentLinkFromLinkIndex(
+                        m_traversal.getParentLinkFromLinkIndex(ancestorLinkIndex)->getIndex()))
+                {
+                    LinkConstPtr ancestorParentLink = m_traversal.getParentLink(ancestorLinkIndex);
+                    LinkIndex ancestorParentIndex = ancestorParentLink->getIndex();
+
+                    Transform ancestorLink_X_parentLink = m_linkPos(ancestorLinkIndex).inverse() * m_linkPos(ancestorParentIndex);
+                    toEigen(F1) = toEigen(ancestorLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F1);
+                    toEigen(F2) = toEigen(ancestorLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F2);
+                    toEigen(F3) = toEigen(ancestorLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F3);
+
+                    // check if parent link is connected to its parent through a fixed joint
+                    IJointConstPtr toGrandParentJoint = m_traversal.getParentJointFromLinkIndex(ancestorParentIndex);
+                    if (toGrandParentJoint->getNrOfDOFs() == 0){
+                        // the parent link is connected to its parent through a fixed joint
+                        // nothing left to do, continue upwards
+                        ancestorLinkIndex = ancestorParentIndex;
+                        continue;
+                    }
+
+                    // insert contributions to coriolis, mass matrix, and mass matrix derivative of parent link
+                    const int rows = toEigen(S[ancestorParentIndex]).cols();
+                    const int cols = toEigen(S[visitedLinkIndex]).cols();
+                    const int ancestorDofIndex = toGrandParentJoint->getDOFsOffset();
+
+                    toEigen(coriolisMatrix).block(ancestorDofIndex+6, dofIndex+6, rows, cols) = toEigen(S[ancestorParentIndex]).transpose() * toEigen(F1);
+                    toEigen(coriolisMatrix).block(dofIndex+6, ancestorDofIndex+6, cols, rows) = toEigen(F2).transpose() * toEigen(Sdot[ancestorParentIndex]) + toEigen(F3).transpose() * toEigen(S[ancestorParentIndex]);
+                    auto massMatrixBlock = toEigen(S[ancestorParentIndex]).transpose() * toEigen(F2);
+                    toEigen(massMatrix).block(ancestorDofIndex+6, dofIndex+6, rows, cols) = massMatrixBlock;
+                    toEigen(massMatrix).block(dofIndex+6, ancestorDofIndex+6, cols, rows) = massMatrixBlock.transpose();
+                    auto massMatrixDerivativeBlock = toEigen(Sdot[ancestorParentIndex]).transpose() * toEigen(F2) + toEigen(S[ancestorParentIndex]).transpose() * (toEigen(F1)+toEigen(F3));
+                    toEigen(massMatrixDerivative).block(ancestorDofIndex+6, dofIndex+6, rows, cols) = massMatrixDerivativeBlock;
+                    toEigen(massMatrixDerivative).block(dofIndex+6, ancestorDofIndex+6, cols, rows) = massMatrixDerivativeBlock.transpose();
+
+                    ancestorLinkIndex = ancestorParentIndex;
+                }
+
+                // Fill the 6 \times nDof right top submatrix of the coriolis, mass matrix, and mass matrix derivative
+                // related to the base link
+                LinkConstPtr ancestorParentLink = m_traversal.getParentLink(ancestorLinkIndex);
+                LinkIndex ancestorParentIndex = ancestorParentLink->getIndex();
+                assert(ancestorParentIndex == 0); // base link
+
+                Transform otherLink_X_parentLink = m_linkPos(ancestorLinkIndex).inverse() * m_linkPos(ancestorParentIndex);
                 toEigen(F1) = toEigen(otherLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F1);
                 toEigen(F2) = toEigen(otherLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F2);
                 toEigen(F3) = toEigen(otherLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F3);
 
-                int startRow;
-                if (parentLink != 0){
-                    LinkConstPtr grandParentLink = m_traversal.getParentLink(parentLinkIndex);
-                    if (grandParentLink != nullptr){
-                        LinkIndex grandParentLinkIndex = grandParentLink->getIndex();
-                        IJointConstPtr parentToGrandParentJoint = m_traversal.getParentJointFromLinkIndex(parentLinkIndex);
-                        if (parentToGrandParentJoint->getNrOfDOFs() == 0){
-                            // the parent link is connected to its parent through a fixed joint
-                            // nothing left to do, continue upwards
-                            otherLinkIndex = parentLinkIndex;
-                            continue;
-                        }
-                        startRow = parentToGrandParentJoint->getDOFsOffset() + 6;
-                    } else {
-                        // parent link is base link
-                        startRow = 0;
-                    }
-                } else {
-                    // parent link is base link
-                    startRow = 0;
-                }
+                toEigen(coriolisMatrix).block<6, 1>(0, 6 + dofIndex) = toEigen(F1);
+                toEigen(coriolisMatrix).block<1, 6>(6+dofIndex, 0) = toEigen(F3).transpose();
+                toEigen(massMatrix).block<6, 1>(0, 6 + dofIndex) = toEigen(F2);
+                toEigen(massMatrix).block<1, 6>(6 + dofIndex, 0) = toEigen(F2).transpose();
+                toEigen(massMatrixDerivative).block<6, 1>(0, 6 + dofIndex) = toEigen(F1) + toEigen(F3);
+                toEigen(massMatrixDerivative).block<1, 6>(6 + dofIndex, 0) = (toEigen(F1) + toEigen(F3)).transpose();
 
+            } // end if not fixed joint
 
-                // insert contributions to coriolis, mass matrix, and mass matrix derivative of parent link
-                // i = parentLinkIndex;
-                IJointConstPtr toParentJoint = m_traversal.getParentJointFromLinkIndex(otherLinkIndex);
-                const int rows = toEigen(S[parentLinkIndex]).cols();
-                const int cols = toEigen(S[visitedLinkIndex]).cols();
-
-                toEigen(coriolisMatrix).block(startRow, startCol, rows, cols) = toEigen(S[parentLinkIndex]).transpose() * toEigen(F1);
-                toEigen(coriolisMatrix).block(startCol, startRow, cols, rows) = toEigen(F2).transpose() * toEigen(Sdot[parentLinkIndex]) + toEigen(F3).transpose() * toEigen(S[parentLinkIndex]);
-                auto massMatrixBlock = toEigen(S[parentLinkIndex]).transpose() * toEigen(F2);
-                toEigen(massMatrix).block(startRow, startCol, rows, cols) = massMatrixBlock;
-                toEigen(massMatrix).block(startCol, startRow, cols, rows) = massMatrixBlock.transpose();
-                auto massMatrixDerivativeBlock = toEigen(Sdot[parentLinkIndex]).transpose() * toEigen(F2) + toEigen(S[parentLinkIndex]).transpose() * (toEigen(F1)+toEigen(F3));
-                toEigen(massMatrixDerivative).block(startRow, startCol, rows, cols) = massMatrixDerivativeBlock;
-                toEigen(massMatrixDerivative).block(startCol, startRow, cols, rows) = massMatrixDerivativeBlock.transpose();
-
-                otherLinkIndex = parentLinkIndex;
-            }
-
-        } // end if not fixed joint
-
-        // update aggregated Inertias and bilinear factors of parent link to include contribution of visited link
-
-        if (parentLink != nullptr){
+            // update aggregated Inertias and bilinear factors of parent link to include contribution of visited link
             LinkIndex parentLinkIndex = parentLink->getIndex();
             Transform link_X_parentLink = m_linkPos(visitedLinkIndex).inverse() * m_linkPos(parentLinkIndex);
             // update aggregated inertias
             toEigen(aggregateLinkInertiaMatrices[parentLinkIndex]) +=
-                                          toEigen(link_X_parentLink.asAdjointTransform()).transpose()
+                                        toEigen(link_X_parentLink.asAdjointTransform()).transpose()
                                         * toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex])
                                         * toEigen(link_X_parentLink.asAdjointTransform());
 
             // update bilinear factors
             toEigen(B[parentLinkIndex]) +=
-                                          toEigen(link_X_parentLink.asAdjointTransform()).transpose()
+                                        toEigen(link_X_parentLink.asAdjointTransform()).transpose()
                                         * toEigen(B[visitedLinkIndex])
                                         * toEigen(link_X_parentLink.asAdjointTransform());
+        } // end if not base link
+        else
+        {
+            // the visited link is the base link
+            // fill in the top-left 6x6 blocks of coriolis, mass matrix, and mass matrix derivative
+            toEigen(coriolisMatrix).block<6, 6>(0, 0) = toEigen(B[visitedLinkIndex]);
+            toEigen(massMatrix).block<6, 6>(0, 0) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]);
+            toEigen(massMatrixDerivative).block<6, 6>(0, 0) = toEigen(B[visitedLinkIndex]) + toEigen(B[visitedLinkIndex]).transpose();
         }
 
     }
