@@ -3251,7 +3251,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                                         MatrixDynSize& massMatrixDerivative,
                                         MatrixDynSize& massMatrix){
 
-    // create a buffer to store bilinear factors (6x6 spatial matrices)
+    // create a buffer to store bilinear factors (6x6 matrices)
     std::vector<Matrix6x6> B(m_traversal.getNrOfVisitedLinks());
     // initialize with zeros
     for(int i = 0; i < m_traversal.getNrOfVisitedLinks(); i++){
@@ -3277,12 +3277,11 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                                       m_linkPos,
                                       m_linkVel);
 
-    // create buffer to store link inertias
-    std::vector<Matrix6x6> aggregateLinkInertiaMatrices(m_traversal.getNrOfVisitedLinks());
+    // Forward pass to initialize the CRBI
     for(int i = 0; i < m_traversal.getNrOfVisitedLinks(); i++){
         LinkConstPtr link = m_traversal.getLink(i);
         LinkIndex linkIndex = link->getIndex();
-        aggregateLinkInertiaMatrices[linkIndex] = link->getInertia().asMatrix();
+        m_linkCRBIs(linkIndex) = link->getInertia();
     }
 
     if (!ok)
@@ -3293,19 +3292,18 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         return false;
     }
 
-    // cycle backwards through traversal to compute bilinear factors and motion subspace vectors
+    // Backward pass through traversal to compute bilinear factors and motion subspace vectors
     for(int traversalEl = m_traversal.getNrOfVisitedLinks() - 1; traversalEl >= 0; traversalEl--){
         // get link and parent link
         LinkConstPtr visitedLink = m_traversal.getLink(traversalEl);
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
         LinkConstPtr parentLink = m_traversal.getParentLink(visitedLinkIndex);
         // get joint between parent and child
-        IJointConstPtr joint = m_traversal.getParentJoint(visitedLinkIndex);
+        IJointConstPtr toParentJoint = m_traversal.getParentJoint(visitedLinkIndex);
         // get link velocity
         const Twist& linkVel = m_linkVel(visitedLinkIndex);
-        // // get link inertia
-        // const SpatialInertia& inertia = link->getInertia();
-        Matrix6x6 inertia = aggregateLinkInertiaMatrices[visitedLinkIndex];
+        // get link inertia
+        SpatialInertia inertia = m_linkCRBIs(visitedLinkIndex);
 
         if (parentLink == 0)
         {
@@ -3320,29 +3318,29 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             Sdot[visitedLinkIndex] = motionSubspaceDotVector;
         }
         else {
-                if (joint->getNrOfDOFs() > 1)
+                if (toParentJoint->getNrOfDOFs() > 1)
                     {
                         reportError("KinDynComputations",
                                     "computeCoriolisAndMassMatrices",
                                     "Joints with more than one DoF are not supported yet.");
                         return false;
                     }
-            const SpatialMotionVector& motionSubspace = joint->getMotionSubspaceVector(0, visitedLinkIndex, parentLink->getIndex());
+            const SpatialMotionVector& motionSubspace = toParentJoint->getMotionSubspaceVector(0, visitedLinkIndex, parentLink->getIndex());
             S[visitedLinkIndex] = toEigen(motionSubspace);
             // compute derivative of MotionSubSpaceVector (setting Φ°i = 0)
             MatrixDynSize motionSubspaceDotVector(6,1);
-            toEigen(motionSubspaceDotVector) = toEigen(linkVel.asCrossProductMatrixWrench()).transpose() * (-1.0) * toEigen(motionSubspace);
+            toEigen(motionSubspaceDotVector) = toEigen(linkVel.asCrossProductMatrix()) * toEigen(motionSubspace);
             Sdot[visitedLinkIndex] = motionSubspaceDotVector;
 
-            if (joint->getNrOfDOFs() == 0)
+            if (toParentJoint->getNrOfDOFs() == 0)
             {
-                // fixed joint, adding its inertia to parent link inertia
+                // fixed joint, adding its CRBI to the CRBI of the parent. This is needed to compute the bilinear
+                // factors of the parent links.
                 LinkIndex parentLinkIndex = m_traversal.getParentLink(visitedLinkIndex)->getIndex();
                 Transform link_X_parentLink = m_linkPos(visitedLinkIndex).inverse() * m_linkPos(parentLinkIndex);
-                toEigen(aggregateLinkInertiaMatrices[parentLinkIndex]) +=
-                                          toEigen(link_X_parentLink.asAdjointTransform()).transpose()
-                                        * toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex])
-                                        * toEigen(link_X_parentLink.asAdjointTransform());
+                m_linkCRBIs(parentLinkIndex)
+                = m_linkCRBIs(parentLinkIndex)
+                  + link_X_parentLink.inverse() * m_linkCRBIs(visitedLinkIndex);
                 // nothing else to do for fixed joints
                 continue;
             }
@@ -3352,29 +3350,27 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         Matrix6x6 bilinearFactor, term1, term2, term3;
         bilinearFactor.zero();
         // term1 = (v_i x*) I_i
-        toEigen(term1) = toEigen(linkVel.asCrossProductMatrixWrench()) * toEigen(inertia);
+        toEigen(term1) = toEigen(linkVel.asCrossProductMatrixWrench()) * toEigen(inertia.asMatrix());
         // term2 = (I_i v_i) x̄*
-        Vector6 tmpVector;
-        toEigen(tmpVector) = toEigen(inertia) * toEigen(linkVel);
-        SpatialMotionVector tmp;
-        tmp(0) = tmpVector(0); tmp(1) = tmpVector(1); tmp(2) = tmpVector(2);
-        tmp(3) = tmpVector(3); tmp(4) = tmpVector(4); tmp(5) = tmpVector(5);
-        toEigen(term2) = toEigen(tmp.asCrossProductMatrixCustom());
+        SpatialForceVector momentum = inertia * linkVel;
+        toEigen(term2) = toEigen(momentum.asCrossProductMatrix());
         // term3 = I_i (v_i x)
-        toEigen(term3) = toEigen(inertia) * toEigen(linkVel.asCrossProductMatrixWrench()).transpose() * (-1.0);
+        toEigen(term3) = toEigen(inertia.asMatrix()) * toEigen(linkVel.asCrossProductMatrix());
         // sum terms
         toEigen(bilinearFactor) = 0.5 * (toEigen(term1) + toEigen(term2) - toEigen(term3));
         B[visitedLinkIndex] = bilinearFactor;
     }
 
-    // restore aggregateLinkInertiaMatrices (they were modified in the previous loop for fixed joints)
+    // Forward pass to restore the CRBI to the initial value. They were only needed to compute the bilinear factors
+    // in the previous backward pass. We will compose them again in the next backward pass of the algorithm.
     for(int i = 0; i < m_traversal.getNrOfVisitedLinks(); i++){
         LinkConstPtr link = m_traversal.getLink(i);
         LinkIndex linkIndex = link->getIndex();
-        aggregateLinkInertiaMatrices[linkIndex] = link->getInertia().asMatrix();
+        m_linkCRBIs(linkIndex) = link->getInertia();
     }
 
-    // cycle backwards through traversal to compute coriolis, mass matrix, and mass matrix derivative
+    // This is the main algorithm!
+    // Backward pass through traversal to compute coriolis, mass matrix, and mass matrix derivative
     for(int traversalEl = m_traversal.getNrOfVisitedLinks() - 1; traversalEl >= 0; traversalEl--){
         // get link and parent link
         LinkConstPtr visitedLink = m_traversal.getLink(traversalEl);
@@ -3392,9 +3388,9 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                 F1.resize(6, S[visitedLinkIndex].cols());
                 F2.resize(6, S[visitedLinkIndex].cols());
                 F3.resize(6, S[visitedLinkIndex].cols());
-                toEigen(F1) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]) * toEigen(Sdot[visitedLinkIndex])
+                toEigen(F1) = toEigen(m_linkCRBIs(visitedLinkIndex).asMatrix()) * toEigen(Sdot[visitedLinkIndex])
                                     + toEigen(B[visitedLinkIndex]) * toEigen(S[visitedLinkIndex]);
-                toEigen(F2) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]) * toEigen(S[visitedLinkIndex]);
+                toEigen(F2) = toEigen(m_linkCRBIs(visitedLinkIndex).asMatrix()) * toEigen(S[visitedLinkIndex]);
                 toEigen(F3) = toEigen(B[visitedLinkIndex]).transpose() * toEigen(S[visitedLinkIndex]);
 
                 // insert contributions to coriolis, mass matrix, and mass matrix derivative of visited link
@@ -3430,7 +3426,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                         continue;
                     }
 
-                    // insert contributions to coriolis, mass matrix, and mass matrix derivative of parent link
+                    // insert contributions to coriolis, mass matrix, and mass matrix derivative of ancestor parent link
                     const int rows = toEigen(S[ancestorParentIndex]).cols();
                     const int cols = toEigen(S[visitedLinkIndex]).cols();
                     const int ancestorDofIndex = toGrandParentJoint->getDOFsOffset();
@@ -3467,14 +3463,13 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
 
             } // end if not fixed joint
 
-            // update aggregated Inertias and bilinear factors of parent link to include contribution of visited link
+            // update CRBIs and bilinear factors of parent link to include contribution of visited link
             LinkIndex parentLinkIndex = parentLink->getIndex();
             Transform link_X_parentLink = m_linkPos(visitedLinkIndex).inverse() * m_linkPos(parentLinkIndex);
-            // update aggregated inertias
-            toEigen(aggregateLinkInertiaMatrices[parentLinkIndex]) +=
-                                        toEigen(link_X_parentLink.asAdjointTransform()).transpose()
-                                        * toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex])
-                                        * toEigen(link_X_parentLink.asAdjointTransform());
+            // update CRBIs inertias
+            m_linkCRBIs(parentLinkIndex)
+                = m_linkCRBIs(parentLinkIndex)
+                  + link_X_parentLink.inverse() * m_linkCRBIs(visitedLinkIndex);
 
             // update bilinear factors
             toEigen(B[parentLinkIndex]) +=
@@ -3487,7 +3482,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             // the visited link is the base link
             // fill in the top-left 6x6 blocks of coriolis, mass matrix, and mass matrix derivative
             toEigen(coriolisMatrix).block<6, 6>(0, 0) = toEigen(B[visitedLinkIndex]);
-            toEigen(massMatrix).block<6, 6>(0, 0) = toEigen(aggregateLinkInertiaMatrices[visitedLinkIndex]);
+            toEigen(massMatrix).block<6, 6>(0, 0) = toEigen(m_linkCRBIs(visitedLinkIndex).asMatrix());
             toEigen(massMatrixDerivative).block<6, 6>(0, 0) = toEigen(B[visitedLinkIndex]) + toEigen(B[visitedLinkIndex]).transpose();
         }
 

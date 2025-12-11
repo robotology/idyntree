@@ -83,20 +83,6 @@ Matrix6x6 SpatialMotionVector::asCrossProductMatrixWrench() const
     return res;
 }
 
-Matrix6x6 SpatialMotionVector::asCrossProductMatrixCustom() const
-{
-    Matrix6x6 res;
-
-    Eigen::Map<Eigen::Matrix<double, 6, 6, Eigen::RowMajor>> retEigen(res.data());
-
-    retEigen.block<3, 3>(0, 0).setZero();
-    retEigen.block<3, 3>(0, 3) = -skew(toEigen(this->linearVec3));
-    retEigen.block<3, 3>(3, 0) = -skew(toEigen(this->linearVec3));
-    retEigen.block<3, 3>(3, 3) = -skew(toEigen(this->angularVec3));
-
-    return res;
-}
-
 Transform SpatialMotionVector::exp() const
 {
     Transform res;
