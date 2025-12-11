@@ -70,9 +70,9 @@ private:
     // exits without further computations
     void computeRawMassMatrixAndTotalMomentum();
 
-    // Make sure that (if necessary) coriolis matrix, mass matrix, and mass matrix derivative are updated
-    // If it was already called before the last call to setRobotState,
-    // exits without further computations
+    // Make sure that (if necessary) coriolis matrix, mass matrix, and mass matrix derivative are
+    // updated If it was already called before the last call to setRobotState, exits without further
+    // computations
     void computeCoriolisAndMassMatrices();
 
     // Make sure that (if necessary) the kinematics bias acc is update
@@ -1257,7 +1257,8 @@ public:
     bool getFreeFloatingMassMatrix(iDynTree::MatrixView<double> freeFloatingMassMatrix);
 
     /**
-     * @brief Compute the Coriolis matrix, mass matrix time derivative, and mass matrix simultaneously.
+     * @brief Compute the Coriolis matrix, mass matrix time derivative, and mass matrix
+     * simultaneously.
      *
      *
      * The three outputs satisfy the following properties:
@@ -1267,12 +1268,15 @@ public:
      *
      * For more details on the computation of these matrices, please check:
      * Sebastian Echeandia, Patrick M. Wensing
-     * Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for Rigid-Body Systems
-     * https://arxiv.org/abs/2010.01033
+     * Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for Rigid-Body
+     * Systems https://arxiv.org/abs/2010.01033
      *
-     * @param[out] freeFloatingCoriolisMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output Coriolis matrix.
-     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix.
-     * @param[out] freeFloatingMassMatrixDerivative the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix derivative.
+     * @param[out] freeFloatingCoriolisMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output
+     * Coriolis matrix.
+     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass
+     * matrix.
+     * @param[out] freeFloatingMassMatrixDerivative the (6+getNrOfDOFs()) times (6+getNrOfDOFs())
+     * output mass matrix derivative.
      * @return true if all went well, false otherwise.
      */
     bool getCoriolisAndMassMatrices(MatrixDynSize& freeFloatingCoriolisMatrix,
@@ -1280,7 +1284,8 @@ public:
                                     MatrixDynSize& freeFloatingMassMatrixDerivative);
 
     /**
-     * @brief Compute the Coriolis matrix, mass matrix time derivative, and mass matrix simultaneously (MatrixView version).
+     * @brief Compute the Coriolis matrix, mass matrix time derivative, and mass matrix
+     * simultaneously (MatrixView version).
      *
      *
      * The three outputs satisfy the following properties:
@@ -1290,14 +1295,17 @@ public:
      *
      * For more details on the computation of these matrices, please check:
      * Sebastian Echeandia, Patrick M. Wensing
-     * Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for Rigid-Body Systems
-     * https://arxiv.org/abs/2010.01033
+     * Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for Rigid-Body
+     * Systems https://arxiv.org/abs/2010.01033
      *
-     * @param[out] freeFloatingCoriolisMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output Coriolis matrix.
-     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix.
-     * @param[out] freeFloatingMassMatrixDerivative the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix derivative.
-     * @warning the MatrixView objects should point to already existing memory. Memory allocation and
-     * resizing cannot be achieved with this kind of objects.
+     * @param[out] freeFloatingCoriolisMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output
+     * Coriolis matrix.
+     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass
+     * matrix.
+     * @param[out] freeFloatingMassMatrixDerivative the (6+getNrOfDOFs()) times (6+getNrOfDOFs())
+     * output mass matrix derivative.
+     * @warning the MatrixView objects should point to already existing memory. Memory allocation
+     * and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
     bool getCoriolisAndMassMatrices(iDynTree::MatrixView<double> freeFloatingCoriolisMatrix,

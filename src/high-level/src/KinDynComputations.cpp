@@ -467,7 +467,14 @@ void KinDynComputations::computeCoriolisAndMassMatrices()
     this->computeFwdKinematics();
 
     // Compute coriolis, mass matrix and mass matrix derivative
-    bool ok = CoriolisMatrixAlgorithm(pimpl->m_robot_model, pimpl->m_traversal, pimpl->m_linkPos, pimpl->m_linkVel, pimpl->m_linkCRBIs, pimpl->m_rawCoriolisMatrix, pimpl->m_rawMassMatrix, pimpl->m_rawMassMatrixDerivative);
+    bool ok = CoriolisMatrixAlgorithm(pimpl->m_robot_model,
+                                      pimpl->m_traversal,
+                                      pimpl->m_linkPos,
+                                      pimpl->m_linkVel,
+                                      pimpl->m_linkCRBIs,
+                                      pimpl->m_rawCoriolisMatrix,
+                                      pimpl->m_rawMassMatrix,
+                                      pimpl->m_rawMassMatrixDerivative);
 
     reportErrorIf(!ok,
                   "KinDynComputations::computeCoriolisAndMassMatrices",
@@ -3246,39 +3253,40 @@ bool KinDynComputations::getFreeFloatingMassMatrix(MatrixView<double> freeFloati
 }
 
 bool KinDynComputations::getCoriolisAndMassMatrices(MatrixDynSize& freeFloatingCoriolisMatrix,
-                                                   MatrixDynSize& freeFloatingMassMatrix,
-                                                   MatrixDynSize& freeFloatingMassMatrixDerivative)
+                                                    MatrixDynSize& freeFloatingMassMatrix,
+                                                    MatrixDynSize& freeFloatingMassMatrixDerivative)
 {
     // If the matrices have the right size, this should be inexpensive
     freeFloatingCoriolisMatrix.resize(pimpl->m_robot_model.getNrOfDOFs() + 6,
-                                  pimpl->m_robot_model.getNrOfDOFs() + 6);
+                                      pimpl->m_robot_model.getNrOfDOFs() + 6);
     freeFloatingMassMatrix.resize(pimpl->m_robot_model.getNrOfDOFs() + 6,
                                   pimpl->m_robot_model.getNrOfDOFs() + 6);
     freeFloatingMassMatrixDerivative.resize(pimpl->m_robot_model.getNrOfDOFs() + 6,
-                                  pimpl->m_robot_model.getNrOfDOFs() + 6);
+                                            pimpl->m_robot_model.getNrOfDOFs() + 6);
 
-    this->getCoriolisAndMassMatrices(
-        MatrixView<double>(freeFloatingCoriolisMatrix),
-        MatrixView<double>(freeFloatingMassMatrix),
-        MatrixView<double>(freeFloatingMassMatrixDerivative));
+    this->getCoriolisAndMassMatrices(MatrixView<double>(freeFloatingCoriolisMatrix),
+                                     MatrixView<double>(freeFloatingMassMatrix),
+                                     MatrixView<double>(freeFloatingMassMatrixDerivative));
 
-    return this->getCoriolisAndMassMatrices(
-        MatrixView<double>(freeFloatingCoriolisMatrix),
-        MatrixView<double>(freeFloatingMassMatrix),
-        MatrixView<double>(freeFloatingMassMatrixDerivative));
+    return this->getCoriolisAndMassMatrices(MatrixView<double>(freeFloatingCoriolisMatrix),
+                                            MatrixView<double>(freeFloatingMassMatrix),
+                                            MatrixView<double>(freeFloatingMassMatrixDerivative));
 }
 
-bool KinDynComputations::getCoriolisAndMassMatrices(iDynTree::MatrixView<double> freeFloatingCoriolisMatrix,
-                                                    iDynTree::MatrixView<double> freeFloatingMassMatrix,
-                                                    iDynTree::MatrixView<double> freeFloatingMassMatrixDerivative){
+bool KinDynComputations::getCoriolisAndMassMatrices(
+    iDynTree::MatrixView<double> freeFloatingCoriolisMatrix,
+    iDynTree::MatrixView<double> freeFloatingMassMatrix,
+    iDynTree::MatrixView<double> freeFloatingMassMatrixDerivative)
+{
 
     // check sizes
-    bool ok = (freeFloatingCoriolisMatrix.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
-              && (freeFloatingCoriolisMatrix.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6)
-              && (freeFloatingMassMatrix.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
-              && (freeFloatingMassMatrix.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6)
-              && (freeFloatingMassMatrixDerivative.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
-              && (freeFloatingMassMatrixDerivative.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+    bool ok
+        = (freeFloatingCoriolisMatrix.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingCoriolisMatrix.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrix.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrix.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrixDerivative.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrixDerivative.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
 
     if (!ok)
     {
