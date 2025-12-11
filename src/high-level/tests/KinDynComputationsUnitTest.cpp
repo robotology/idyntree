@@ -1424,7 +1424,7 @@ int main()
 
     // Test kinetic energy consistency on random models with various joint types
     // (including revolute, spherical, and others)
-    // testKineticEnergyOnRandomModels();
+    testKineticEnergyOnRandomModels();
 
     // Test kinetic energy consistency on URDF models
     std::cout << "Testing kinetic energy consistency on URDF models..." << std::endl;
