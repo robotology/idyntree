@@ -1291,9 +1291,11 @@ void testCoriolisAndMassMatricesConsistency(KinDynComputations& dynComp)
 
     // Get all three matrices from function being tested (i.e., getCoriolisAndMassMatrices)
     MatrixDynSize coriolisMatrix(matSize, matSize);
-    MatrixDynSize massMatrixDerivative(matSize, matSize);
     MatrixDynSize massMatrix(matSize, matSize);
-    bool ok = dynComp.getCoriolisAndMassMatrices(coriolisMatrix, massMatrixDerivative, massMatrix);
+    MatrixDynSize massMatrixDerivative(matSize, matSize);
+    bool ok = dynComp.getCoriolisAndMassMatrices(coriolisMatrix,
+                                                     massMatrix,
+                                           massMatrixDerivative);
     ASSERT_IS_TRUE(ok);
 
     // Get the mass matrix from getFreeFloatingMassMatrix for comparison

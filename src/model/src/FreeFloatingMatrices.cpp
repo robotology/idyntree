@@ -82,4 +82,46 @@ FreeFloatingMassMatrix::~FreeFloatingMassMatrix()
 {
 }
 
+FreeFloatingMassMatrixDerivative::FreeFloatingMassMatrixDerivative(size_t nrOfDofs)
+    : MatrixDynSize(6 + nrOfDofs, 6 + nrOfDofs)
+{
+    MatrixDynSize::zero();
+}
+
+FreeFloatingMassMatrixDerivative::FreeFloatingMassMatrixDerivative(const Model& model)
+{
+    MatrixDynSize::resize(6 + model.getNrOfDOFs(), 6 + model.getNrOfDOFs());
+    MatrixDynSize::zero();
+}
+
+void FreeFloatingMassMatrixDerivative::resize(const Model& model)
+{
+    MatrixDynSize::resize(6 + model.getNrOfDOFs(), 6 + model.getNrOfDOFs());
+}
+
+FreeFloatingMassMatrixDerivative::~FreeFloatingMassMatrixDerivative()
+{
+}
+
+FreeFloatingCoriolisMatrix::FreeFloatingCoriolisMatrix(size_t nrOfDofs)
+    : MatrixDynSize(6 + nrOfDofs, 6 + nrOfDofs)
+{
+    MatrixDynSize::zero();
+}
+
+FreeFloatingCoriolisMatrix::FreeFloatingCoriolisMatrix(const Model& model)
+{
+    MatrixDynSize::resize(6 + model.getNrOfDOFs(), 6 + model.getNrOfDOFs());
+    MatrixDynSize::zero();
+}
+
+void FreeFloatingCoriolisMatrix::resize(const Model& model)
+{
+    MatrixDynSize::resize(6 + model.getNrOfDOFs(), 6 + model.getNrOfDOFs());
+}
+
+FreeFloatingCoriolisMatrix::~FreeFloatingCoriolisMatrix()
+{
+}
+
 } // namespace iDynTree

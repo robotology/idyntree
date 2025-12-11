@@ -19,6 +19,8 @@ class FreeFloatingVel;
 class FreeFloatingAcc;
 class FreeFloatingGeneralizedTorques;
 class FreeFloatingMassMatrix;
+class FreeFloatingCoriolisMatrix;
+class FreeFloatingMassMatrixDerivative;
 class JointDOFsDoubleArray;
 class DOFSpatialForceArray;
 class DOFSpatialMotionArray;
@@ -100,6 +102,23 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
                                  const JointPosDoubleArray& jointPos,
                                  LinkCompositeRigidBodyInertias& linkCRBs,
                                  FreeFloatingMassMatrix& massMatrix);
+
+/**
+ *
+ * Compute the Coriolis Matrix of a free floating robot, using
+ * Alogrithm 1 of "Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for Rigid-Body Systems"
+ * (https://arxiv.org/abs/2010.01033).
+ * It also computes the mass matrix and the mass matrix derivative, which satisfy the property:
+ * M_dot = C + C^T
+ */
+bool CoriolisMatrixAlgorithm(const Model& model,
+                             const Traversal& traversal,
+                             const iDynTree::LinkPositions& linkPos,
+                             const iDynTree::LinkVelArray& linkVels,
+                             LinkCompositeRigidBodyInertias& linkCRBIs,
+                             FreeFloatingCoriolisMatrix& coriolisMatrix,
+                             FreeFloatingMassMatrix& massMatrix,
+                             FreeFloatingMassMatrixDerivative& massMatrixDerivative);
 
 /**
  * Structure of buffers required by ArticulatedBodyAlgorithm.
