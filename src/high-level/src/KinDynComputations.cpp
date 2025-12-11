@@ -3251,24 +3251,6 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                                         MatrixDynSize& massMatrixDerivative,
                                         MatrixDynSize& massMatrix){
 
-    // create a buffer to store bilinear factors (6x6 matrices)
-    std::vector<Matrix6x6> B(m_traversal.getNrOfVisitedLinks());
-    // initialize with zeros
-    for(int i = 0; i < m_traversal.getNrOfVisitedLinks(); i++){
-        B[i].zero();
-    }
-
-    // create buffer to store MotionSubSpaceVectors and its derivatives
-    std::vector<MatrixDynSize> S(m_traversal.getNrOfVisitedLinks());
-    std::vector<MatrixDynSize> Sdot(m_traversal.getNrOfVisitedLinks());
-    // initialize with zeros
-    for(int i = 0; i < m_traversal.getNrOfVisitedLinks(); i++){
-        S[i].resize(6, 1);
-        toEigen(S[i]).setZero();
-        Sdot[i].resize(6, 1);
-        toEigen(Sdot[i]).setZero();
-    }
-
     // run forward kinematics
     bool ok = ForwardPosVelKinematics(m_robot_model,
                                       m_traversal,
@@ -3276,6 +3258,13 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                                       m_vel,
                                       m_linkPos,
                                       m_linkVel);
+    if (!ok)
+    {
+        reportError("KinDynComputations",
+                    "computeCoriolisAndMassMatrices",
+                    "Error in ForwardPosVelKinematics.");
+        return false;
+    }
 
     // Forward pass to initialize the CRBI
     for(int i = 0; i < m_traversal.getNrOfVisitedLinks(); i++){
@@ -3284,12 +3273,11 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         m_linkCRBIs(linkIndex) = link->getInertia();
     }
 
-    if (!ok)
-    {
-        reportError("KinDynComputations",
-                    "computeCoriolisAndMassMatrices",
-                    "Error in ForwardPosVelKinematics.");
-        return false;
+    // create a buffer to store bilinear factors (6x6 matrices)
+    std::vector<Matrix6x6> B(m_traversal.getNrOfVisitedLinks());
+    // initialize with zeros
+    for(int i = 0; i < m_traversal.getNrOfVisitedLinks(); i++){
+        B[i].zero();
     }
 
     // Backward pass through traversal to compute bilinear factors and motion subspace vectors
@@ -3305,32 +3293,16 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         // get link inertia
         SpatialInertia inertia = m_linkCRBIs(visitedLinkIndex);
 
-        if (parentLink == 0)
-        {
-            // visiting the base link, motion subspace is identity, assuming 6 DoFs
-            MatrixDynSize motionSubspace(6, 6);
-            toEigen(motionSubspace).setIdentity();
-            S[visitedLinkIndex] = motionSubspace;
-            // compute derivative of MotionSubSpaceVector for the base link
-            // it is null in body-fixed representation
-            MatrixDynSize motionSubspaceDotVector(6, 6);
-            toEigen(motionSubspaceDotVector).setZero();
-            Sdot[visitedLinkIndex] = motionSubspaceDotVector;
-        }
-        else {
-                if (toParentJoint->getNrOfDOFs() > 1)
-                    {
-                        reportError("KinDynComputations",
-                                    "computeCoriolisAndMassMatrices",
-                                    "Joints with more than one DoF are not supported yet.");
-                        return false;
-                    }
-            const SpatialMotionVector& motionSubspace = toParentJoint->getMotionSubspaceVector(0, visitedLinkIndex, parentLink->getIndex());
-            S[visitedLinkIndex] = toEigen(motionSubspace);
-            // compute derivative of MotionSubSpaceVector (setting Φ°i = 0)
-            MatrixDynSize motionSubspaceDotVector(6,1);
-            toEigen(motionSubspaceDotVector) = toEigen(linkVel.asCrossProductMatrix()) * toEigen(motionSubspace);
-            Sdot[visitedLinkIndex] = motionSubspaceDotVector;
+        if (parentLink)
+        { // the visited link is NOT the base link
+
+            if (toParentJoint->getNrOfDOFs() > 1)
+                {
+                    reportError("KinDynComputations",
+                                "computeCoriolisAndMassMatrices",
+                                "Joints with more than one DoF are not supported yet.");
+                    return false;
+                }
 
             if (toParentJoint->getNrOfDOFs() == 0)
             {
@@ -3383,25 +3355,28 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
 
             if (toParentJoint->getNrOfDOFs() > 0)
             { // is NOT a fixed joint
+
+                // Compute motion subspace vector and its derivative
+                Vector6 S_visitedDof, Sdot_visitedDof;
+                toEigen(S_visitedDof) = toEigen(toParentJoint->getMotionSubspaceVector(0, visitedLinkIndex, parentLink->getIndex()));
+                toEigen(Sdot_visitedDof) = toEigen(m_linkVel(visitedLinkIndex).asCrossProductMatrix()) * toEigen(S_visitedDof);
+
                 // compute F1, F2, F3
-                MatrixDynSize F1, F2, F3;
-                F1.resize(6, S[visitedLinkIndex].cols());
-                F2.resize(6, S[visitedLinkIndex].cols());
-                F3.resize(6, S[visitedLinkIndex].cols());
-                toEigen(F1) = toEigen(m_linkCRBIs(visitedLinkIndex).asMatrix()) * toEigen(Sdot[visitedLinkIndex])
-                                    + toEigen(B[visitedLinkIndex]) * toEigen(S[visitedLinkIndex]);
-                toEigen(F2) = toEigen(m_linkCRBIs(visitedLinkIndex).asMatrix()) * toEigen(S[visitedLinkIndex]);
-                toEigen(F3) = toEigen(B[visitedLinkIndex]).transpose() * toEigen(S[visitedLinkIndex]);
+                Vector6 F1, F2, F3;
+                toEigen(F1) = toEigen(m_linkCRBIs(visitedLinkIndex).asMatrix()) * toEigen(Sdot_visitedDof)
+                                    + toEigen(B[visitedLinkIndex]) * toEigen(S_visitedDof);
+                toEigen(F2) = toEigen(m_linkCRBIs(visitedLinkIndex).asMatrix()) * toEigen(S_visitedDof);
+                toEigen(F3) = toEigen(B[visitedLinkIndex]).transpose() * toEigen(S_visitedDof);
 
                 // insert contributions to coriolis, mass matrix, and mass matrix derivative of visited link
-                const int cols = toEigen(S[visitedLinkIndex]).cols();
-                const int rows = cols;
                 const int dofIndex = toParentJoint->getDOFsOffset();
 
-                toEigen(coriolisMatrix).block(dofIndex+6, dofIndex+6, rows, cols) = toEigen(S[visitedLinkIndex]).transpose() * toEigen(F1);
-                toEigen(massMatrix).block(dofIndex+6, dofIndex+6, rows, cols) = toEigen(S[visitedLinkIndex]).transpose() * toEigen(F2);
-                toEigen(massMatrixDerivative).block(dofIndex+6, dofIndex+6, rows, cols) = toEigen(Sdot[visitedLinkIndex]).transpose() * toEigen(F2)
-                                                    + toEigen(S[visitedLinkIndex]).transpose() * (toEigen(F1)+toEigen(F3));
+                coriolisMatrix(dofIndex+6, dofIndex+6) = toEigen(S_visitedDof).transpose() * toEigen(F1);
+                massMatrix(dofIndex+6, dofIndex+6) = toEigen(S_visitedDof).transpose() * toEigen(F2);
+                auto Mdot_jj = toEigen(Sdot_visitedDof).transpose() * toEigen(F2)
+                                                    + toEigen(S_visitedDof).transpose() * (toEigen(F1)+toEigen(F3));
+                assert(Mdot_jj.rows() == 1 && Mdot_jj.cols() == 1);
+                massMatrixDerivative(dofIndex+6, dofIndex+6) = Mdot_jj(0,0);
 
                 // Compute off-diagonal terms of the coriolis, mass matrix, and mass matrix derivative
                 // related to ancestor links (excluding the base link)
@@ -3417,6 +3392,8 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                     toEigen(F2) = toEigen(ancestorLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F2);
                     toEigen(F3) = toEigen(ancestorLink_X_parentLink.asAdjointTransform()).transpose() * toEigen(F3);
 
+                    Vector6 S_ancestorParentDof, Sdot_ancestorParentDof;
+
                     // check if parent link is connected to its parent through a fixed joint
                     IJointConstPtr toGrandParentJoint = m_traversal.getParentJointFromLinkIndex(ancestorParentIndex);
                     if (toGrandParentJoint->getNrOfDOFs() == 0){
@@ -3425,20 +3402,26 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                         ancestorLinkIndex = ancestorParentIndex;
                         continue;
                     }
+                    else {
+                        // compute ancestor parent motion subspace vector and its derivative
+                        toEigen(S_ancestorParentDof) = toEigen(toGrandParentJoint->getMotionSubspaceVector(0, ancestorParentIndex,
+                                                                                 m_traversal.getParentLinkFromLinkIndex(ancestorParentIndex)->getIndex()));
+                        toEigen(Sdot_ancestorParentDof) = toEigen(m_linkVel(ancestorParentIndex).asCrossProductMatrix()) * toEigen(S_ancestorParentDof);
+                    }
 
                     // insert contributions to coriolis, mass matrix, and mass matrix derivative of ancestor parent link
-                    const int rows = toEigen(S[ancestorParentIndex]).cols();
-                    const int cols = toEigen(S[visitedLinkIndex]).cols();
                     const int ancestorDofIndex = toGrandParentJoint->getDOFsOffset();
 
-                    toEigen(coriolisMatrix).block(ancestorDofIndex+6, dofIndex+6, rows, cols) = toEigen(S[ancestorParentIndex]).transpose() * toEigen(F1);
-                    toEigen(coriolisMatrix).block(dofIndex+6, ancestorDofIndex+6, cols, rows) = toEigen(F2).transpose() * toEigen(Sdot[ancestorParentIndex]) + toEigen(F3).transpose() * toEigen(S[ancestorParentIndex]);
-                    auto massMatrixBlock = toEigen(S[ancestorParentIndex]).transpose() * toEigen(F2);
-                    toEigen(massMatrix).block(ancestorDofIndex+6, dofIndex+6, rows, cols) = massMatrixBlock;
-                    toEigen(massMatrix).block(dofIndex+6, ancestorDofIndex+6, cols, rows) = massMatrixBlock.transpose();
-                    auto massMatrixDerivativeBlock = toEigen(Sdot[ancestorParentIndex]).transpose() * toEigen(F2) + toEigen(S[ancestorParentIndex]).transpose() * (toEigen(F1)+toEigen(F3));
-                    toEigen(massMatrixDerivative).block(ancestorDofIndex+6, dofIndex+6, rows, cols) = massMatrixDerivativeBlock;
-                    toEigen(massMatrixDerivative).block(dofIndex+6, ancestorDofIndex+6, cols, rows) = massMatrixDerivativeBlock.transpose();
+                    coriolisMatrix(ancestorDofIndex+6, dofIndex+6) = toEigen(S_ancestorParentDof).transpose() * toEigen(F1);
+                    coriolisMatrix(dofIndex+6, ancestorDofIndex+6) = (toEigen(F2).transpose() * toEigen(Sdot_ancestorParentDof) + toEigen(F3).transpose() * toEigen(S_ancestorParentDof))(0,0);
+                    auto M_ij = toEigen(S_ancestorParentDof).transpose() * toEigen(F2);
+                    assert(M_ij.rows() == 1 && M_ij.cols() == 1);
+                    massMatrix(ancestorDofIndex+6, dofIndex+6) = M_ij;
+                    massMatrix(dofIndex+6, ancestorDofIndex+6) = M_ij.transpose()(0,0);
+                    auto Mdot_ij = toEigen(Sdot_ancestorParentDof).transpose() * toEigen(F2) + toEigen(S_ancestorParentDof).transpose() * (toEigen(F1)+toEigen(F3));
+                    assert(Mdot_ij.rows() == 1 && Mdot_ij.cols() == 1);
+                    massMatrixDerivative(ancestorDofIndex+6, dofIndex+6) = Mdot_ij(0,0);
+                    massMatrixDerivative(dofIndex+6, ancestorDofIndex+6) = Mdot_ij.transpose()(0,0);
 
                     ancestorLinkIndex = ancestorParentIndex;
                 }
