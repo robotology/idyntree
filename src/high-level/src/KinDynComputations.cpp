@@ -3285,9 +3285,9 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         // get link and parent link
         LinkConstPtr visitedLink = m_traversal.getLink(traversalEl);
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
-        LinkConstPtr parentLink = m_traversal.getParentLink(visitedLinkIndex);
+        LinkConstPtr parentLink = m_traversal.getParentLinkFromLinkIndex(visitedLinkIndex);
         // get joint between parent and child
-        IJointConstPtr toParentJoint = m_traversal.getParentJoint(visitedLinkIndex);
+        IJointConstPtr toParentJoint = m_traversal.getParentJointFromLinkIndex(visitedLinkIndex);
         // get link velocity
         const Twist& linkVel = m_linkVel(visitedLinkIndex);
         // get link inertia
@@ -3308,7 +3308,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
             {
                 // fixed joint, adding its CRBI to the CRBI of the parent. This is needed to compute the bilinear
                 // factors of the parent links.
-                LinkIndex parentLinkIndex = m_traversal.getParentLink(visitedLinkIndex)->getIndex();
+                LinkIndex parentLinkIndex = m_traversal.getParentLinkFromLinkIndex(visitedLinkIndex)->getIndex();
                 Transform link_X_parentLink = m_linkPos(visitedLinkIndex).inverse() * m_linkPos(parentLinkIndex);
                 m_linkCRBIs(parentLinkIndex)
                 = m_linkCRBIs(parentLinkIndex)
@@ -3347,12 +3347,11 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
         // get link and parent link
         LinkConstPtr visitedLink = m_traversal.getLink(traversalEl);
         LinkIndex visitedLinkIndex = visitedLink->getIndex();
-        LinkConstPtr parentLink = m_traversal.getParentLink(visitedLinkIndex);
+        LinkConstPtr parentLink = m_traversal.getParentLinkFromLinkIndex(visitedLinkIndex);
 
         if (visitedLinkIndex){
             // the visited link is NOT the base link
-            IJointConstPtr toParentJoint = m_traversal.getParentJoint(visitedLinkIndex);
-
+            IJointConstPtr toParentJoint = m_traversal.getParentJointFromLinkIndex(visitedLinkIndex);
             if (toParentJoint->getNrOfDOFs() > 0)
             { // is NOT a fixed joint
 
@@ -3384,7 +3383,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
                 while (m_traversal.getParentLinkFromLinkIndex(
                         m_traversal.getParentLinkFromLinkIndex(ancestorLinkIndex)->getIndex()))
                 {
-                    LinkConstPtr ancestorParentLink = m_traversal.getParentLink(ancestorLinkIndex);
+                    LinkConstPtr ancestorParentLink = m_traversal.getParentLinkFromLinkIndex(ancestorLinkIndex);
                     LinkIndex ancestorParentIndex = ancestorParentLink->getIndex();
 
                     Transform ancestorLink_X_parentLink = m_linkPos(ancestorLinkIndex).inverse() * m_linkPos(ancestorParentIndex);
@@ -3428,7 +3427,7 @@ bool KinDynComputations::KinDynComputationsPrivateAttributes::computeCoriolisAnd
 
                 // Fill the 6 \times nDof right top submatrix of the coriolis, mass matrix, and mass matrix derivative
                 // related to the base link
-                LinkConstPtr ancestorParentLink = m_traversal.getParentLink(ancestorLinkIndex);
+                LinkConstPtr ancestorParentLink = m_traversal.getParentLinkFromLinkIndex(ancestorLinkIndex);
                 LinkIndex ancestorParentIndex = ancestorParentLink->getIndex();
                 assert(ancestorParentIndex == 0); // base link
 
