@@ -2634,6 +2634,8 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
     // velocity of the base expressed in body-fixed coordinates.
 
     Transform A_T_B;
+    Twist vel_for_derivative;
+
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
         // In body-fixed representation nothing to do
@@ -2641,17 +2643,23 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
     } else if (m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
     {
         A_T_B = m_pos.worldBasePos();
+        // For inertial-fixed representation, use full body-fixed velocity
+        vel_for_derivative = m_vel.baseVel();
     } else
     {
         assert(m_frameVelRepr == MIXED_REPRESENTATION);
         A_T_B = Transform(m_pos.worldBasePos().getRotation(), Position::Zero());
+        // For mixed representation, the MIXED frame origin is at the base,
+        // so only the angular part contributes to the derivative.
+        Vector3 zero_linvel;
+        zero_linvel.zero();
+        vel_for_derivative = Twist(zero_linvel, m_vel.baseVel().getAngularVec3());
     }
 
-    Twist baseVel_bodyFixed = m_vel.baseVel();
     Matrix6x6 A_X_B, A_Xdot_B, B_X_A, B_Xdot_A;
     A_X_B = A_T_B.asAdjointTransform();
     B_X_A = A_T_B.inverse().asAdjointTransform();
-    toEigen(A_Xdot_B) = toEigen(A_X_B) * toEigen(baseVel_bodyFixed.asCrossProductMatrix());
+    toEigen(A_Xdot_B) = toEigen(A_X_B) * toEigen(vel_for_derivative.asCrossProductMatrix());
     toEigen(B_Xdot_A) = -toEigen(B_X_A) * toEigen(A_Xdot_B) * toEigen(B_X_A);
 
     // Compute transformation matrices
