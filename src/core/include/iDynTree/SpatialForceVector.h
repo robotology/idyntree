@@ -51,6 +51,26 @@ public:
     virtual ~SpatialForceVector();
 
     SpatialForceVector operator*(const double scalar) const;
+
+    /**
+     * Liner operator defined in https://arxiv.org/abs/2010.01033
+     * If this object is \f$ F = \begin{bmatrix} f \\ \tau \end{bmatrix}  \f$,
+     * return the 6x6 matrix \f$ F\times \f$
+     * such that, if F is a SpatialForceVector and V is a SpatialMotionVector :
+     * \f[
+     *   (F \times) V = V\texttt{.cross}(F)
+     * \f]
+     *
+     * The returned matrix is then the following one:
+     * \f[
+     *   F \times =
+     *  \begin{bmatrix}
+     *   0_{3\times3} & -f \times \\
+     *     -f \times  & -\tau \times
+     *  \end{bmatrix}
+     * \f]
+     */
+    Matrix6x6 asCrossProductMatrix() const;
 };
 } // namespace iDynTree
 

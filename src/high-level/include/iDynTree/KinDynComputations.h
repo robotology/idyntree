@@ -70,6 +70,11 @@ private:
     // exits without further computations
     void computeRawMassMatrixAndTotalMomentum();
 
+    // Make sure that (if necessary) coriolis matrix, mass matrix, and mass matrix derivative are
+    // updated If it was already called before the last call to setRobotState, exits without further
+    // computations
+    void computeCoriolisAndMassMatrices();
+
     // Make sure that (if necessary) the kinematics bias acc is update
     // If it was already called before the last call to setRobotState,
     // exits without further computations
@@ -1250,6 +1255,62 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getFreeFloatingMassMatrix(iDynTree::MatrixView<double> freeFloatingMassMatrix);
+
+    /**
+     * @brief Compute the Coriolis matrix, mass matrix time derivative, and mass matrix
+     * simultaneously.
+     *
+     *
+     * The three outputs satisfy the following properties:
+     * - \f$C(q, \nu) \nu = \text{generalizedBiasForces}(q, \nu) - G(q)\f$
+     * - \f$\dot{M}(q, \nu) = C(q, \nu) + C(q, \nu)^T\f$
+     * - \f$M(q)\f$ is the free floating mass matrix
+     *
+     * For more details on the computation of these matrices, please check:
+     * Sebastian Echeandia, Patrick M. Wensing
+     * Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for Rigid-Body
+     * Systems https://arxiv.org/abs/2010.01033
+     *
+     * @param[out] freeFloatingCoriolisMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output
+     * Coriolis matrix.
+     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass
+     * matrix.
+     * @param[out] freeFloatingMassMatrixDerivative the (6+getNrOfDOFs()) times (6+getNrOfDOFs())
+     * output mass matrix derivative.
+     * @return true if all went well, false otherwise.
+     */
+    bool getCoriolisAndMassMatrices(MatrixDynSize& freeFloatingCoriolisMatrix,
+                                    MatrixDynSize& freeFloatingMassMatrix,
+                                    MatrixDynSize& freeFloatingMassMatrixDerivative);
+
+    /**
+     * @brief Compute the Coriolis matrix, mass matrix time derivative, and mass matrix
+     * simultaneously (MatrixView version).
+     *
+     *
+     * The three outputs satisfy the following properties:
+     * - \f$C(q, \nu) \nu = \text{generalizedBiasForces}(q, \nu) - G(q)\f$
+     * - \f$\dot{M}(q, \nu) = C(q, \nu) + C(q, \nu)^T\f$
+     * - \f$M(q)\f$ is the free floating mass matrix
+     *
+     * For more details on the computation of these matrices, please check:
+     * Sebastian Echeandia, Patrick M. Wensing
+     * Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for Rigid-Body
+     * Systems https://arxiv.org/abs/2010.01033
+     *
+     * @param[out] freeFloatingCoriolisMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output
+     * Coriolis matrix.
+     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass
+     * matrix.
+     * @param[out] freeFloatingMassMatrixDerivative the (6+getNrOfDOFs()) times (6+getNrOfDOFs())
+     * output mass matrix derivative.
+     * @warning the MatrixView objects should point to already existing memory. Memory allocation
+     * and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getCoriolisAndMassMatrices(iDynTree::MatrixView<double> freeFloatingCoriolisMatrix,
+                                    iDynTree::MatrixView<double> freeFloatingMassMatrix,
+                                    iDynTree::MatrixView<double> freeFloatingMassMatrixDerivative);
 
     /**
      * @brief Compute the free floating inverse dynamics.
