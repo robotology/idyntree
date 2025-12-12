@@ -152,27 +152,27 @@ public:
     void resize(const iDynTree::Model& model);
 
     /**
-     * Get the base acceleration.
+     * Get the base velocity.
      */
     Twist& baseVel();
 
     /**
-     * Get the vector of joint accelerations.
+     * Get the vector of joint velocities.
      */
     JointDOFsDoubleArray& jointVel();
 
     /**
-     * Get the base acceleration (const version).
+     * Get the base velocity (const version).
      */
     const Twist& baseVel() const;
 
     /**
-     * Get the vector of joint accelerations (const version).
+     * Get the vector of joint velocities (const version).
      */
     const JointDOFsDoubleArray& jointVel() const;
 
     /**
-     * Get the dimension of the joint accelerations vector.
+     * Get the dimension of the joint velocities vector.
      */
     unsigned int getNrOfDOFs() const;
 
