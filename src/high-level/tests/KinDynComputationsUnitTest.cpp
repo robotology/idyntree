@@ -1348,9 +1348,9 @@ void testCoriolisAndMassMatricesOnModel(std::string modelFilePath)
     std::cout << "Testing getCoriolisAndMassMatrices for model: " << modelFilePath << std::endl;
 
     // Test getCoriolisAndMassMatrices on a KinDynComputations object for all frame velocity
-    // representations. for (auto repr : {BODY_FIXED_REPRESENTATION, MIXED_REPRESENTATION,
-    // INERTIAL_FIXED_REPRESENTATION})
-    for (auto repr : {BODY_FIXED_REPRESENTATION})
+    // representations.
+    for (auto repr :
+         {BODY_FIXED_REPRESENTATION, MIXED_REPRESENTATION, INERTIAL_FIXED_REPRESENTATION})
     {
         ok = dynComp.setFrameVelocityRepresentation(repr);
         ASSERT_IS_TRUE(ok);
@@ -1381,9 +1381,8 @@ void testCoriolisAndMassMatricesOnRandomModels()
         ASSERT_IS_TRUE(ok);
 
         // Test for each frame velocity representation
-        // for (auto repr : {BODY_FIXED_REPRESENTATION, MIXED_REPRESENTATION,
-        // INERTIAL_FIXED_REPRESENTATION})
-        for (auto repr : {BODY_FIXED_REPRESENTATION})
+        for (auto repr :
+             {BODY_FIXED_REPRESENTATION, MIXED_REPRESENTATION, INERTIAL_FIXED_REPRESENTATION})
         {
             ok = dynComp.setFrameVelocityRepresentation(repr);
             ASSERT_IS_TRUE(ok);

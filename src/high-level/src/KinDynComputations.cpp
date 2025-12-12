@@ -125,6 +125,9 @@ public:
     void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(
         MatrixView<double> jac, const FrameVelocityRepresentation& leftSideRepresentation);
 
+    // Process the coriolis computed assuming body-fixed model velocity
+    void processCoriolisMatrixExpectingBodyFixedModelVelocity(MatrixView<double> coriolisMatrix);
+
     void convertBaseFrameAccelerationToBaseLinkAcceleration(const Vector6& baseFrameAcc,
                                                             Vector6& baseLinkAcc);
     void convertBaseFrameVelocityToBaseLinkVelocity(const Twist& baseFrameVel, Twist& baseLinkVel);
@@ -2604,6 +2607,79 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
         = toEigen(newOutputFrame_X_oldOutputFrame_) * toEigen(jac).block(0, 0, 6, cols);
 }
 
+void KinDynComputations::KinDynComputationsPrivateAttributes::
+    processCoriolisMatrixExpectingBodyFixedModelVelocity(MatrixView<double> coriolisMatrix)
+{
+    // It converts the coriolis from body-fixed representation
+    // to the desired representation (inertial-fixed or mixed).
+
+    // Coriolis Matrix
+    // As per equation 3.60b of S. Traversaro "Modelling, Estimation and Identification of Humanoid
+    // Robots Dynamics" PhD thesis, the Coriolis matrix needs to be transformed through:
+    //
+    // T^(-T) * ( M * d/dt(T^(-1)) + C * T^(-1) )
+    //
+    // with T being the transformation from body-fixed velocities to the used representation
+    // velocities:
+    //
+    // T = [ A_X_B   0
+    //         0     I ]
+    //
+    // where A_X_B is the adjoint transformation from body-fixed to the used representation
+    // (inertial-fixed or mixed), whose derivative d/dt(A_X_B) can be written using eq. 2.36
+    //
+    // d/dt(A_X_B) = A_X_B * (b_v_a,b)x
+    //
+    // with (b_v_a,b)x being the 6x6 matrix associated to the cross product with the spatial
+    // velocity of the base expressed in body-fixed coordinates.
+
+    Transform A_T_B;
+    if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // In body-fixed representation nothing to do
+        return;
+    } else if (m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+    {
+        A_T_B = m_pos.worldBasePos();
+    } else
+    {
+        assert(m_frameVelRepr == MIXED_REPRESENTATION);
+        A_T_B = Transform(m_pos.worldBasePos().getRotation(), Position::Zero());
+    }
+
+    Twist baseVel_bodyFixed = m_vel.baseVel();
+    Matrix6x6 A_X_B, A_Xdot_B, B_X_A, B_Xdot_A;
+    A_X_B = A_T_B.asAdjointTransform();
+    B_X_A = A_T_B.inverse().asAdjointTransform();
+    toEigen(A_Xdot_B) = toEigen(A_X_B) * toEigen(baseVel_bodyFixed.asCrossProductMatrix());
+    toEigen(B_Xdot_A) = -toEigen(B_X_A) * toEigen(A_Xdot_B) * toEigen(B_X_A);
+
+    // Compute transformation matrices
+    MatrixDynSize T, Tinv, Tinv_dot;
+    const int ndofs = m_robot_model.getNrOfDOFs();
+    T.resize(6 + ndofs, 6 + ndofs);
+    Tinv.resize(6 + ndofs, 6 + ndofs);
+    Tinv_dot.resize(6 + ndofs, 6 + ndofs);
+    T.zero();
+    Tinv.zero();
+    Tinv_dot.zero();
+
+    toEigen(T).block<6, 6>(0, 0) = toEigen(A_X_B);
+    toEigen(T).block<>(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
+
+    // T inverse
+    toEigen(Tinv).block<6, 6>(0, 0) = toEigen(B_X_A);
+    toEigen(Tinv).block<>(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
+
+    // time derivative of T inverse
+    toEigen(Tinv_dot).block<6, 6>(0, 0) = toEigen(B_Xdot_A);
+
+    // Apply the transformation to the coriolis matrix
+    toEigen(coriolisMatrix) = toEigen(Tinv).transpose()
+                              * (toEigen(m_rawMassMatrix) * toEigen(Tinv_dot)
+                                 + toEigen(coriolisMatrix) * toEigen(Tinv));
+}
+
 Twist KinDynComputations::getAverageVelocity()
 {
     this->computeRawMassMatrixAndTotalMomentum();
@@ -3302,6 +3378,25 @@ bool KinDynComputations::getCoriolisAndMassMatrices(
     toEigen(freeFloatingCoriolisMatrix) = toEigen(pimpl->m_rawCoriolisMatrix);
     toEigen(freeFloatingMassMatrix) = toEigen(pimpl->m_rawMassMatrix);
     toEigen(freeFloatingMassMatrixDerivative) = toEigen(pimpl->m_rawMassMatrixDerivative);
+
+    // Handle the different representations (internal matrices are in body-fixed representation)
+    // Coriolis Matrix
+    pimpl->processCoriolisMatrixExpectingBodyFixedModelVelocity(freeFloatingCoriolisMatrix);
+
+    // Mass Matrix Derivative
+    // As stated by Theorem 3.3 in S. Traversaro "Modelling, Estimation and Identification of
+    // Humanoid Robots Dynamics" PhD thesis, the property M_dot - 2C is skew symmetric also holds
+    // for different velocity representations. So we can compute M_dot as C + C^T.
+    if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION
+        || pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        toEigen(freeFloatingMassMatrixDerivative)
+            = toEigen(freeFloatingCoriolisMatrix) + toEigen(freeFloatingCoriolisMatrix).transpose();
+    }
+
+    // Mass Matrix
+    pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(freeFloatingMassMatrix);
+    pimpl->processOnLeftSideBodyFixedBaseMomentumJacobian(freeFloatingMassMatrix);
 
     return true;
 }
