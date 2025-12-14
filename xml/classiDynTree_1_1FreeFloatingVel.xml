@@ -97,7 +97,7 @@
         <argsstring>()</argsstring>
         <name>baseVel</name>
         <briefdescription>
-<para>Get the base acceleration. </para>
+<para>Get the base velocity. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -111,7 +111,7 @@
         <argsstring>()</argsstring>
         <name>jointVel</name>
         <briefdescription>
-<para>Get the vector of joint accelerations. </para>
+<para>Get the vector of joint velocities. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -125,7 +125,7 @@
         <argsstring>() const</argsstring>
         <name>baseVel</name>
         <briefdescription>
-<para>Get the base acceleration (const version). </para>
+<para>Get the base velocity (const version). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -139,7 +139,7 @@
         <argsstring>() const</argsstring>
         <name>jointVel</name>
         <briefdescription>
-<para>Get the vector of joint accelerations (const version). </para>
+<para>Get the vector of joint velocities (const version). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -153,7 +153,7 @@
         <argsstring>() const</argsstring>
         <name>getNrOfDOFs</name>
         <briefdescription>
-<para>Get the dimension of the joint accelerations vector. </para>
+<para>Get the dimension of the joint velocities vector. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
