@@ -128,6 +128,18 @@
             </dt>
             <dd>Compute the floating base mass matrix, using the composite rigid body algorithm.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a95943c5ae38fbad06cd015fc172a8555" class="m-doc">CoriolisMatrixAlgorithm</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const <a href="classiDynTree_1_1LinkPositions.html" class="m-doc">iDynTree::<wbr />LinkPositions</a>&amp; linkPos,
+              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">iDynTree::<wbr />LinkVelArray</a>&amp; linkVels,
+              LinkCompositeRigidBodyInertias&amp; linkCRBIs,
+              FreeFloatingCoriolisMatrix&amp; coriolisMatrix,
+              FreeFloatingMassMatrix&amp; massMatrix,
+              FreeFloatingMassMatrixDerivative&amp; massMatrixDerivative) -&gt; bool</span>
+            </dt>
+            <dd>Compute the Coriolis Matrix of a free floating robot, using Algorithm 1 of &quot;Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for
+Rigid-Body Systems&quot; (<a href="https://arxiv.org/abs/2010.01033">https:/<wbr />/<wbr />arxiv.org/<wbr />abs/<wbr />2010.01033</a>).</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModel.html#ga5879141982887fc0d049cc3645f10dd5" class="m-doc">ArticulatedBodyAlgorithm</a>(</span><span class="m-doc-wrap">const Model&amp; model,
               const Traversal&amp; traversal,
               const FreeFloatingPos&amp; robotPos,
@@ -161,6 +173,21 @@
             </h3>
             <p>Compute the total momentum derivatitive bias, i.e.</p>
 <p>the part of the total momentum derivative that does not depend on robot acceleration.</p><p>The linear and angular momentum derivative depends on the robot position, velocity and acceleration. This function computes the part that do not depend on the robot accelearation.</p><p>This function returns the bias of the derivative of the ComputeLinearAndAngularMomentum function.</p>
+          </div></section>
+          <section class="m-doc-details" id="a95943c5ae38fbad06cd015fc172a8555"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a95943c5ae38fbad06cd015fc172a8555" class="m-doc-self">CoriolisMatrixAlgorithm</a>(</span><span class="m-doc-wrap">const Model&amp; model,
+              const Traversal&amp; traversal,
+              const <a href="classiDynTree_1_1LinkPositions.html" class="m-doc">iDynTree::<wbr />LinkPositions</a>&amp; linkPos,
+              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">iDynTree::<wbr />LinkVelArray</a>&amp; linkVels,
+              LinkCompositeRigidBodyInertias&amp; linkCRBIs,
+              FreeFloatingCoriolisMatrix&amp; coriolisMatrix,
+              FreeFloatingMassMatrix&amp; massMatrix,
+              FreeFloatingMassMatrixDerivative&amp; massMatrixDerivative)</span></span>
+            </h3>
+            <p>Compute the Coriolis Matrix of a free floating robot, using Algorithm 1 of &quot;Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for
+Rigid-Body Systems&quot; (<a href="https://arxiv.org/abs/2010.01033">https:/<wbr />/<wbr />arxiv.org/<wbr />abs/<wbr />2010.01033</a>).</p>
+<p>It also computes the mass matrix and the mass matrix derivative, which satisfy the property: M_dot = C + C^T</p>
           </div></section>
         </section>
       </div>

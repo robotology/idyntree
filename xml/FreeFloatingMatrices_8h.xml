@@ -8,6 +8,8 @@
     <innerclass refid="classiDynTree_1_1FrameFreeFloatingJacobian" prot="public">iDynTree::FrameFreeFloatingJacobian</innerclass>
     <innerclass refid="classiDynTree_1_1MomentumFreeFloatingJacobian" prot="public">iDynTree::MomentumFreeFloatingJacobian</innerclass>
     <innerclass refid="classiDynTree_1_1FreeFloatingMassMatrix" prot="public">iDynTree::FreeFloatingMassMatrix</innerclass>
+    <innerclass refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative" prot="public">iDynTree::FreeFloatingMassMatrixDerivative</innerclass>
+    <innerclass refid="classiDynTree_1_1FreeFloatingCoriolisMatrix" prot="public">iDynTree::FreeFloatingCoriolisMatrix</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="enum">
       <memberdef kind="enum" id="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375a" prot="public" static="no" strong="no">

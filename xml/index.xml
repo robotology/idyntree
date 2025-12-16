@@ -1127,6 +1127,12 @@
     <member refid="classiDynTree_1_1FreeFloatingAcc_1a3a56360f7bb4652150bb615ae9e9eee0" kind="function"><name>getNrOfDOFs</name></member>
     <member refid="classiDynTree_1_1FreeFloatingAcc_1a2e64dacc9a5ca428722254bb15a913be" kind="function"><name>~FreeFloatingAcc</name></member>
   </compound>
+  <compound refid="classiDynTree_1_1FreeFloatingCoriolisMatrix" kind="class"><name>iDynTree::FreeFloatingCoriolisMatrix</name>
+    <member refid="classiDynTree_1_1FreeFloatingCoriolisMatrix_1acb4dc37f139466d810535213d3b596ee" kind="function"><name>FreeFloatingCoriolisMatrix</name></member>
+    <member refid="classiDynTree_1_1FreeFloatingCoriolisMatrix_1a557f0e928f46ce340ed992f4f77cffea" kind="function"><name>FreeFloatingCoriolisMatrix</name></member>
+    <member refid="classiDynTree_1_1FreeFloatingCoriolisMatrix_1a1e86befcad575b4ed1c03f61d7863649" kind="function"><name>resize</name></member>
+    <member refid="classiDynTree_1_1FreeFloatingCoriolisMatrix_1a9d150767910a7aaebff0c5327e77db5d" kind="function"><name>~FreeFloatingCoriolisMatrix</name></member>
+  </compound>
   <compound refid="classiDynTree_1_1FreeFloatingGeneralizedTorques" kind="class"><name>iDynTree::FreeFloatingGeneralizedTorques</name>
     <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1aa06c473d290b46c6651c94a460fd1153" kind="variable"><name>m_baseWrench</name></member>
     <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afc23533156de2aa1a9536a18a1bf2dcf" kind="variable"><name>m_jointTorques</name></member>
@@ -1145,6 +1151,12 @@
     <member refid="classiDynTree_1_1FreeFloatingMassMatrix_1a9a21f03cb252d6600dcd7a474ae13667" kind="function"><name>FreeFloatingMassMatrix</name></member>
     <member refid="classiDynTree_1_1FreeFloatingMassMatrix_1a8ac1a8cf3d2010f53263b2bc14d2358d" kind="function"><name>resize</name></member>
     <member refid="classiDynTree_1_1FreeFloatingMassMatrix_1aaa699e09cc550c03596074c35b38f2b3" kind="function"><name>~FreeFloatingMassMatrix</name></member>
+  </compound>
+  <compound refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative" kind="class"><name>iDynTree::FreeFloatingMassMatrixDerivative</name>
+    <member refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative_1a42bc3f146ec316b8b55786b2afb0db33" kind="function"><name>FreeFloatingMassMatrixDerivative</name></member>
+    <member refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative_1a8527ca6f09ee8ad689706eecec3361df" kind="function"><name>FreeFloatingMassMatrixDerivative</name></member>
+    <member refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative_1a5a3ffc7adf64fe970788997b128b7a92" kind="function"><name>resize</name></member>
+    <member refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative_1a72a8bb4c97140c2cd10a6dabe5235b29" kind="function"><name>~FreeFloatingMassMatrixDerivative</name></member>
   </compound>
   <compound refid="classiDynTree_1_1FreeFloatingPos" kind="class"><name>iDynTree::FreeFloatingPos</name>
     <member refid="classiDynTree_1_1FreeFloatingPos_1aad41c4da3ed443679b518e6df126931b" kind="variable"><name>m_worldBasePos</name></member>
@@ -2060,6 +2072,8 @@
     <member refid="classiDynTree_1_1KinDynComputations_1a336e26bd0eef654bc071b2df5a722caf" kind="function"><name>getCentroidalTotalMomentumJacobian</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a8103b966509c9ef696d76b9e1221b16a" kind="function"><name>getFreeFloatingMassMatrix</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1aade6b7d911481ea0e3763587247cd896" kind="function"><name>getFreeFloatingMassMatrix</name></member>
+    <member refid="classiDynTree_1_1KinDynComputations_1add1809c77695613ca5784f69d5d4d410" kind="function"><name>getCoriolisAndMassMatrices</name></member>
+    <member refid="classiDynTree_1_1KinDynComputations_1ad4f40ab0af5b3d3d1c0fe99ab3b5565f" kind="function"><name>getCoriolisAndMassMatrices</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1acb3fc60fa1f238bf7d072db8cac8cb85" kind="function"><name>inverseDynamics</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a0f22bf2dcaaa82c6a8aec76d6e282c29" kind="function"><name>inverseDynamics</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a650006a9d9c810f0832e1a90dff3a678" kind="function"><name>inverseDynamicsWithInternalJointForceTorques</name></member>
@@ -2075,6 +2089,7 @@
     <member refid="classiDynTree_1_1KinDynComputations_1a63c2d2251202bfe8d5a5945b47a0932f" kind="function"><name>operator=</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a1b87931ecbb1192dcbca6c1dff0d3f3b" kind="function"><name>computeFwdKinematics</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a0f77386cadb313641227f34e5aa292c5" kind="function"><name>computeRawMassMatrixAndTotalMomentum</name></member>
+    <member refid="classiDynTree_1_1KinDynComputations_1a687512adc96dfa5d0a7dd9a73b6e0e0d" kind="function"><name>computeCoriolisAndMassMatrices</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a7c1e789c31554c990c34f72985fe76b1" kind="function"><name>computeBiasAccFwdKinematics</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a6b53e9658acda7a8185e5d1bb0d36d31" kind="function"><name>invalidateCache</name></member>
     <member refid="classiDynTree_1_1KinDynComputations_1a4511bb4f2fcaf091a5b91123f42fa001" kind="function"><name>resizeInternalDataStructures</name></member>
@@ -3688,6 +3703,7 @@
     <member refid="classiDynTree_1_1SpatialForceVector_1a64cb561fa22a1fa8149764d64dd2c6cf" kind="function"><name>SpatialForceVector</name></member>
     <member refid="classiDynTree_1_1SpatialForceVector_1a276d6b32c67b5a7ba365cf03411e8790" kind="function"><name>~SpatialForceVector</name></member>
     <member refid="classiDynTree_1_1SpatialForceVector_1ac96276a6d073a19752aea3ef4183d608" kind="function"><name>operator*</name></member>
+    <member refid="classiDynTree_1_1SpatialForceVector_1a9c284fd823606497e337d0f3d3f0181b" kind="function"><name>asCrossProductMatrix</name></member>
   </compound>
   <compound refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" kind="class"><name>iDynTree::SpatialForceWrtMotionDerivative</name>
     <member refid="classiDynTree_1_1SpatialForceWrtMotionDerivative_1a9d454876935197ca67ebe145684fa53f" kind="function"><name>operator*</name></member>
@@ -4617,6 +4633,7 @@
     <member refid="Dynamics_8h_1ae214683bf9d037ee89a0c070ed9ed78d" kind="function"><name>ComputeLinearAndAngularMomentumDerivativeBias</name></member>
     <member refid="group__iDynTreeModel_1ga18613d41830aef7430e7a8a09fef98e1" kind="function"><name>RNEADynamicPhase</name></member>
     <member refid="Dynamics_8h_1afa4f3546edbb4ab3e50a486e316a2470" kind="function"><name>CompositeRigidBodyAlgorithm</name></member>
+    <member refid="Dynamics_8h_1a95943c5ae38fbad06cd015fc172a8555" kind="function"><name>CoriolisMatrixAlgorithm</name></member>
     <member refid="group__iDynTreeModel_1ga5879141982887fc0d049cc3645f10dd5" kind="function"><name>ArticulatedBodyAlgorithm</name></member>
     <member refid="group__iDynTreeModel_1ga0c75db73b7682b9c524b0727b516b12b" kind="function"><name>InverseDynamicsInertialParametersRegressor</name></member>
     <member refid="DynamicsLinearization_8h_1a0c9b6d083f99f1b6ffd1a6c3a7ae5e07" kind="function"><name>ForwardDynamicsLinearization</name></member>
@@ -5398,6 +5415,7 @@
     <member refid="Dynamics_8h_1ae214683bf9d037ee89a0c070ed9ed78d" kind="function"><name>ComputeLinearAndAngularMomentumDerivativeBias</name></member>
     <member refid="group__iDynTreeModel_1ga18613d41830aef7430e7a8a09fef98e1" kind="function"><name>RNEADynamicPhase</name></member>
     <member refid="Dynamics_8h_1afa4f3546edbb4ab3e50a486e316a2470" kind="function"><name>CompositeRigidBodyAlgorithm</name></member>
+    <member refid="Dynamics_8h_1a95943c5ae38fbad06cd015fc172a8555" kind="function"><name>CoriolisMatrixAlgorithm</name></member>
     <member refid="group__iDynTreeModel_1ga5879141982887fc0d049cc3645f10dd5" kind="function"><name>ArticulatedBodyAlgorithm</name></member>
     <member refid="group__iDynTreeModel_1ga0c75db73b7682b9c524b0727b516b12b" kind="function"><name>InverseDynamicsInertialParametersRegressor</name></member>
   </compound>

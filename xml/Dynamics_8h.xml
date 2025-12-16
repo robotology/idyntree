@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Dynamics.h" line="38" column="6" declfile="iDynTree/Dynamics.h" declline="38" declcolumn="6"/>
+        <location file="iDynTree/Dynamics.h" line="40" column="6" declfile="iDynTree/Dynamics.h" declline="40" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="Dynamics_8h_1ae214683bf9d037ee89a0c070ed9ed78d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Dynamics.h" line="52" column="6" declfile="iDynTree/Dynamics.h" declline="52" declcolumn="6"/>
+        <location file="iDynTree/Dynamics.h" line="54" column="6" declfile="iDynTree/Dynamics.h" declline="54" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeModel_1ga18613d41830aef7430e7a8a09fef98e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Dynamics.h" line="84" column="6" declfile="iDynTree/Dynamics.h" declline="84" declcolumn="6"/>
+        <location file="iDynTree/Dynamics.h" line="86" column="6" declfile="iDynTree/Dynamics.h" declline="86" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="Dynamics_8h_1afa4f3546edbb4ab3e50a486e316a2470" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -261,7 +261,55 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Dynamics.h" line="98" column="6" declfile="iDynTree/Dynamics.h" declline="98" declcolumn="6"/>
+        <location file="iDynTree/Dynamics.h" line="100" column="6" declfile="iDynTree/Dynamics.h" declline="100" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="Dynamics_8h_1a95943c5ae38fbad06cd015fc172a8555" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::CoriolisMatrixAlgorithm</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const iDynTree::LinkPositions &amp;linkPos, const iDynTree::LinkVelArray &amp;linkVels, LinkCompositeRigidBodyInertias &amp;linkCRBIs, FreeFloatingCoriolisMatrix &amp;coriolisMatrix, FreeFloatingMassMatrix &amp;massMatrix, FreeFloatingMassMatrixDerivative &amp;massMatrixDerivative)</argsstring>
+        <name>CoriolisMatrixAlgorithm</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkPositions" kindref="compound">iDynTree::LinkPositions</ref> &amp;</type>
+          <declname>linkPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">iDynTree::LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>LinkCompositeRigidBodyInertias &amp;</type>
+          <declname>linkCRBIs</declname>
+        </param>
+        <param>
+          <type>FreeFloatingCoriolisMatrix &amp;</type>
+          <declname>coriolisMatrix</declname>
+        </param>
+        <param>
+          <type>FreeFloatingMassMatrix &amp;</type>
+          <declname>massMatrix</declname>
+        </param>
+        <param>
+          <type>FreeFloatingMassMatrixDerivative &amp;</type>
+          <declname>massMatrixDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Compute the Coriolis Matrix of a free floating robot, using Algorithm 1 of &quot;Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for
+Rigid-Body Systems&quot; (<ulink url="https://arxiv.org/abs/2010.01033">https://arxiv.org/abs/2010.01033</ulink>). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It also computes the mass matrix and the mass matrix derivative, which satisfy the property: M_dot = C + C^T </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Dynamics.h" line="113" column="6" declfile="iDynTree/Dynamics.h" declline="113" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeModel_1ga5879141982887fc0d049cc3645f10dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -308,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Dynamics.h" line="158" column="6" declfile="iDynTree/Dynamics.h" declline="158" declcolumn="6"/>
+        <location file="iDynTree/Dynamics.h" line="176" column="6" declfile="iDynTree/Dynamics.h" declline="176" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeModel_1ga0c75db73b7682b9c524b0727b516b12b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -399,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Dynamics.h" line="201" column="6" declfile="iDynTree/Dynamics.h" declline="201" declcolumn="6"/>
+        <location file="iDynTree/Dynamics.h" line="219" column="6" declfile="iDynTree/Dynamics.h" declline="219" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

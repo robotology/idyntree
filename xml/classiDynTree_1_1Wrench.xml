@@ -214,6 +214,7 @@
       <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>angularOffset</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>angularVec3</name></member>
       <member refid="classiDynTree_1_1SpatialForceVector_1a6302c479904a175eb6c61c9de390d287" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>AngularVector3T</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1a9c284fd823606497e337d0f3d3f0181b" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>asCrossProductMatrix</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a28178bda574859bc9cda8e51f23ffc07" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>asVector</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1af55844354af98084b8fd52a9240b2d5f" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>changeCoordFrame</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1aaf50d0723aa1bf73962f05224a56bd8b" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>changePoint</name></member>

@@ -3,7 +3,9 @@
   <compounddef id="classiDynTree_1_1MatrixDynSize" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::MatrixDynSize</compoundname>
     <derivedcompoundref refid="classiDynTree_1_1FrameFreeFloatingJacobian" prot="public" virt="non-virtual">iDynTree::FrameFreeFloatingJacobian</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1FreeFloatingCoriolisMatrix" prot="public" virt="non-virtual">iDynTree::FreeFloatingCoriolisMatrix</derivedcompoundref>
     <derivedcompoundref refid="classiDynTree_1_1FreeFloatingMassMatrix" prot="public" virt="non-virtual">iDynTree::FreeFloatingMassMatrix</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative" prot="public" virt="non-virtual">iDynTree::FreeFloatingMassMatrixDerivative</derivedcompoundref>
     <derivedcompoundref refid="classiDynTree_1_1FreeFloatingStateLinearization" prot="public" virt="non-virtual">iDynTree::FreeFloatingStateLinearization</derivedcompoundref>
     <derivedcompoundref refid="classiDynTree_1_1MomentumFreeFloatingJacobian" prot="public" virt="non-virtual">iDynTree::MomentumFreeFloatingJacobian</derivedcompoundref>
     <includes local="no">iDynTree/MatrixDynSize.h</includes>
@@ -745,7 +747,13 @@
         <label>iDynTree::MatrixDynSize</label>
         <link refid="classiDynTree_1_1MatrixDynSize"/>
       </node>
-      <node id="3">
+      <node id="5">
+        <label>iDynTree::FreeFloatingMassMatrixDerivative</label>
+        <link refid="classiDynTree_1_1FreeFloatingMassMatrixDerivative"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
         <label>iDynTree::FreeFloatingMassMatrix</label>
         <link refid="classiDynTree_1_1FreeFloatingMassMatrix"/>
         <childnode refid="1" relation="public-inheritance">
@@ -757,15 +765,21 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="4">
+      <node id="6">
         <label>iDynTree::FreeFloatingStateLinearization</label>
         <link refid="classiDynTree_1_1FreeFloatingStateLinearization"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="5">
+      <node id="7">
         <label>iDynTree::MomentumFreeFloatingJacobian</label>
         <link refid="classiDynTree_1_1MomentumFreeFloatingJacobian"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::FreeFloatingCoriolisMatrix</label>
+        <link refid="classiDynTree_1_1FreeFloatingCoriolisMatrix"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
