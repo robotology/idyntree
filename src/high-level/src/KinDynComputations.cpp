@@ -3348,10 +3348,6 @@ bool KinDynComputations::getCoriolisAndMassMatrices(MatrixDynSize& freeFloatingC
     freeFloatingMassMatrixDerivative.resize(pimpl->m_robot_model.getNrOfDOFs() + 6,
                                             pimpl->m_robot_model.getNrOfDOFs() + 6);
 
-    this->getCoriolisAndMassMatrices(MatrixView<double>(freeFloatingCoriolisMatrix),
-                                     MatrixView<double>(freeFloatingMassMatrix),
-                                     MatrixView<double>(freeFloatingMassMatrixDerivative));
-
     return this->getCoriolisAndMassMatrices(MatrixView<double>(freeFloatingCoriolisMatrix),
                                             MatrixView<double>(freeFloatingMassMatrix),
                                             MatrixView<double>(freeFloatingMassMatrixDerivative));
