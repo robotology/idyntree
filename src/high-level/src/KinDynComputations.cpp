@@ -2673,11 +2673,11 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
     Tinv_dot.zero();
 
     toEigen(T).block<6, 6>(0, 0) = toEigen(A_X_B);
-    toEigen(T).block<>(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
+    toEigen(T).block(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
 
     // T inverse
     toEigen(Tinv).block<6, 6>(0, 0) = toEigen(B_X_A);
-    toEigen(Tinv).block<>(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
+    toEigen(Tinv).block(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
 
     // time derivative of T inverse
     toEigen(Tinv_dot).block<6, 6>(0, 0) = toEigen(B_Xdot_A);
