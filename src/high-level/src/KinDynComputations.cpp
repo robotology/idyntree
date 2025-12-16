@@ -105,6 +105,8 @@ public:
 
     bool m_isRawMassMatrixUpdated;
 
+    bool m_isRawCoriolisMatrixUpdated;
+
     // storage of the CRBs, used to extract
     LinkCompositeRigidBodyInertias m_linkCRBIs;
 
@@ -122,6 +124,9 @@ public:
     void processOnLeftSideBodyFixedAvgVelocityJacobian(MatrixView<double> jac);
     void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(
         MatrixView<double> jac, const FrameVelocityRepresentation& leftSideRepresentation);
+
+    // Process the coriolis computed assuming body-fixed model velocity
+    void processCoriolisMatrixExpectingBodyFixedModelVelocity(MatrixView<double> coriolisMatrix);
 
     void convertBaseFrameAccelerationToBaseLinkAcceleration(const Vector6& baseFrameAcc,
                                                             Vector6& baseLinkAcc);
@@ -163,6 +168,11 @@ public:
     /** Acceleration of each link, in body-fixed representation, i.e. \f$ {}^L \mathrm{v}_{A,L} \f$
      */
     LinkAccArray m_linkAccs;
+
+    // storage of the output of the Coriolis computation
+    // the mass matrix is stored in m_rawMassMatrix
+    FreeFloatingCoriolisMatrix m_rawCoriolisMatrix;
+    FreeFloatingMassMatrixDerivative m_rawMassMatrixDerivative;
 
     // Inverse dynamics buffers
 
@@ -339,6 +349,7 @@ void KinDynComputations::invalidateCache()
 {
     this->pimpl->m_isFwdKinematicsUpdated = false;
     this->pimpl->m_isRawMassMatrixUpdated = false;
+    this->pimpl->m_isRawCoriolisMatrixUpdated = false;
     this->pimpl->m_areBiasAccelerationsUpdated = false;
 }
 
@@ -353,6 +364,10 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_linkCRBIs.resize(this->pimpl->m_robot_model);
     this->pimpl->m_rawMassMatrix.resize(this->pimpl->m_robot_model);
     this->pimpl->m_rawMassMatrix.zero();
+    this->pimpl->m_rawCoriolisMatrix.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_rawCoriolisMatrix.zero();
+    this->pimpl->m_rawMassMatrixDerivative.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_rawMassMatrixDerivative.zero();
     this->pimpl->m_jacBuffer.resize(6, 6 + this->pimpl->m_robot_model.getNrOfDOFs());
     this->pimpl->m_jacBuffer.zero();
     this->pimpl->m_baseBiasAcc.zero();
@@ -441,6 +456,34 @@ void KinDynComputations::computeRawMassMatrixAndTotalMomentum()
                                     pimpl->m_totalMomentum);
 
     this->pimpl->m_isRawMassMatrixUpdated = ok;
+}
+
+void KinDynComputations::computeCoriolisAndMassMatrices()
+{
+    if (this->pimpl->m_isRawCoriolisMatrixUpdated)
+    {
+        return;
+    }
+
+    // m_linkPos and m_linkVel are used in the computation,
+    // so we need to make sure that they are updated
+    this->computeFwdKinematics();
+
+    // Compute coriolis, mass matrix and mass matrix derivative
+    bool ok = CoriolisMatrixAlgorithm(pimpl->m_robot_model,
+                                      pimpl->m_traversal,
+                                      pimpl->m_linkPos,
+                                      pimpl->m_linkVel,
+                                      pimpl->m_linkCRBIs,
+                                      pimpl->m_rawCoriolisMatrix,
+                                      pimpl->m_rawMassMatrix,
+                                      pimpl->m_rawMassMatrixDerivative);
+
+    reportErrorIf(!ok,
+                  "KinDynComputations::computeCoriolisAndMassMatrices",
+                  "Error in computing Coriolis and Mass Matrices.");
+
+    this->pimpl->m_isRawCoriolisMatrixUpdated = ok;
 }
 
 void KinDynComputations::computeBiasAccFwdKinematics()
@@ -1104,7 +1147,7 @@ void KinDynComputations::getRobotState(iDynTree::Span<double> s,
                                        iDynTree::Span<double> world_gravity)
 {
     constexpr int expected_size_gravity = 3;
-    assert(s.size() == pimpl->m_robot_model.getNrOfDOFs());
+    assert(s.size() == pimpl->m_robot_model.getNrOfPosCoords());
     assert(s_dot.size() == pimpl->m_robot_model.getNrOfDOFs());
     assert(world_gravity.size() == expected_size_gravity);
 
@@ -2564,6 +2607,87 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::
         = toEigen(newOutputFrame_X_oldOutputFrame_) * toEigen(jac).block(0, 0, 6, cols);
 }
 
+void KinDynComputations::KinDynComputationsPrivateAttributes::
+    processCoriolisMatrixExpectingBodyFixedModelVelocity(MatrixView<double> coriolisMatrix)
+{
+    // It converts the coriolis from body-fixed representation
+    // to the desired representation (inertial-fixed or mixed).
+
+    // Coriolis Matrix
+    // As per equation 3.60b of S. Traversaro "Modelling, Estimation and Identification of Humanoid
+    // Robots Dynamics" PhD thesis, the Coriolis matrix needs to be transformed through:
+    //
+    // T^(-T) * ( M * d/dt(T^(-1)) + C * T^(-1) )
+    //
+    // with T being the transformation from body-fixed velocities to the used representation
+    // velocities:
+    //
+    // T = [ A_X_B   0
+    //         0     I ]
+    //
+    // where A_X_B is the adjoint transformation from body-fixed to the used representation
+    // (inertial-fixed or mixed), whose derivative d/dt(A_X_B) can be written using eq. 2.36
+    //
+    // d/dt(A_X_B) = A_X_B * (b_v_a,b)x
+    //
+    // with (b_v_a,b)x being the 6x6 matrix associated to the cross product with the spatial
+    // velocity of the base expressed in body-fixed coordinates.
+
+    Transform A_T_B;
+    Twist vel_for_derivative;
+
+    if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // In body-fixed representation nothing to do
+        return;
+    } else if (m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION)
+    {
+        A_T_B = m_pos.worldBasePos();
+        // For inertial-fixed representation, use full body-fixed velocity
+        vel_for_derivative = m_vel.baseVel();
+    } else
+    {
+        assert(m_frameVelRepr == MIXED_REPRESENTATION);
+        A_T_B = Transform(m_pos.worldBasePos().getRotation(), Position::Zero());
+        // For mixed representation, the MIXED frame origin is at the base,
+        // so only the angular part contributes to the derivative.
+        Vector3 zero_linvel;
+        zero_linvel.zero();
+        vel_for_derivative = Twist(zero_linvel, m_vel.baseVel().getAngularVec3());
+    }
+
+    Matrix6x6 A_X_B, A_Xdot_B, B_X_A, B_Xdot_A;
+    A_X_B = A_T_B.asAdjointTransform();
+    B_X_A = A_T_B.inverse().asAdjointTransform();
+    toEigen(A_Xdot_B) = toEigen(A_X_B) * toEigen(vel_for_derivative.asCrossProductMatrix());
+    toEigen(B_Xdot_A) = -toEigen(B_X_A) * toEigen(A_Xdot_B) * toEigen(B_X_A);
+
+    // Compute transformation matrices
+    MatrixDynSize T, Tinv, Tinv_dot;
+    const int ndofs = m_robot_model.getNrOfDOFs();
+    T.resize(6 + ndofs, 6 + ndofs);
+    Tinv.resize(6 + ndofs, 6 + ndofs);
+    Tinv_dot.resize(6 + ndofs, 6 + ndofs);
+    T.zero();
+    Tinv.zero();
+    Tinv_dot.zero();
+
+    toEigen(T).block<6, 6>(0, 0) = toEigen(A_X_B);
+    toEigen(T).block(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
+
+    // T inverse
+    toEigen(Tinv).block<6, 6>(0, 0) = toEigen(B_X_A);
+    toEigen(Tinv).block(6, 6, ndofs, ndofs) = Eigen::MatrixXd::Identity(ndofs, ndofs);
+
+    // time derivative of T inverse
+    toEigen(Tinv_dot).block<6, 6>(0, 0) = toEigen(B_Xdot_A);
+
+    // Apply the transformation to the coriolis matrix
+    toEigen(coriolisMatrix) = toEigen(Tinv).transpose()
+                              * (toEigen(m_rawMassMatrix) * toEigen(Tinv_dot)
+                                 + toEigen(coriolisMatrix) * toEigen(Tinv));
+}
+
 Twist KinDynComputations::getAverageVelocity()
 {
     this->computeRawMassMatrixAndTotalMomentum();
@@ -3209,6 +3333,75 @@ bool KinDynComputations::getFreeFloatingMassMatrix(MatrixView<double> freeFloati
     pimpl->processOnLeftSideBodyFixedBaseMomentumJacobian(freeFloatingMassMatrix);
 
     // Return
+    return true;
+}
+
+bool KinDynComputations::getCoriolisAndMassMatrices(MatrixDynSize& freeFloatingCoriolisMatrix,
+                                                    MatrixDynSize& freeFloatingMassMatrix,
+                                                    MatrixDynSize& freeFloatingMassMatrixDerivative)
+{
+    // If the matrices have the right size, this should be inexpensive
+    freeFloatingCoriolisMatrix.resize(pimpl->m_robot_model.getNrOfDOFs() + 6,
+                                      pimpl->m_robot_model.getNrOfDOFs() + 6);
+    freeFloatingMassMatrix.resize(pimpl->m_robot_model.getNrOfDOFs() + 6,
+                                  pimpl->m_robot_model.getNrOfDOFs() + 6);
+    freeFloatingMassMatrixDerivative.resize(pimpl->m_robot_model.getNrOfDOFs() + 6,
+                                            pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    return this->getCoriolisAndMassMatrices(MatrixView<double>(freeFloatingCoriolisMatrix),
+                                            MatrixView<double>(freeFloatingMassMatrix),
+                                            MatrixView<double>(freeFloatingMassMatrixDerivative));
+}
+
+bool KinDynComputations::getCoriolisAndMassMatrices(
+    iDynTree::MatrixView<double> freeFloatingCoriolisMatrix,
+    iDynTree::MatrixView<double> freeFloatingMassMatrix,
+    iDynTree::MatrixView<double> freeFloatingMassMatrixDerivative)
+{
+
+    // check sizes
+    bool ok
+        = (freeFloatingCoriolisMatrix.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingCoriolisMatrix.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrix.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrix.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrixDerivative.rows() == pimpl->m_robot_model.getNrOfDOFs() + 6)
+          && (freeFloatingMassMatrixDerivative.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    if (!ok)
+    {
+        reportError("KinDynComputations",
+                    "getCoriolisAndMassMatrices",
+                    "Wrong size in input matrices");
+        return false;
+    }
+
+    // Compute the coriolis, mass matrix and mass matrix derivative, if necessary
+    this->computeCoriolisAndMassMatrices();
+
+    toEigen(freeFloatingCoriolisMatrix) = toEigen(pimpl->m_rawCoriolisMatrix);
+    toEigen(freeFloatingMassMatrix) = toEigen(pimpl->m_rawMassMatrix);
+    toEigen(freeFloatingMassMatrixDerivative) = toEigen(pimpl->m_rawMassMatrixDerivative);
+
+    // Handle the different representations (internal matrices are in body-fixed representation)
+    // Coriolis Matrix
+    pimpl->processCoriolisMatrixExpectingBodyFixedModelVelocity(freeFloatingCoriolisMatrix);
+
+    // Mass Matrix Derivative
+    // As stated by Theorem 3.3 in S. Traversaro "Modelling, Estimation and Identification of
+    // Humanoid Robots Dynamics" PhD thesis, the property M_dot - 2C is skew symmetric also holds
+    // for different velocity representations. So we can compute M_dot as C + C^T.
+    if (pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION
+        || pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        toEigen(freeFloatingMassMatrixDerivative)
+            = toEigen(freeFloatingCoriolisMatrix) + toEigen(freeFloatingCoriolisMatrix).transpose();
+    }
+
+    // Mass Matrix
+    pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(freeFloatingMassMatrix);
+    pimpl->processOnLeftSideBodyFixedBaseMomentumJacobian(freeFloatingMassMatrix);
+
     return true;
 }
 

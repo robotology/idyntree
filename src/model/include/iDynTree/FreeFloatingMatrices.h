@@ -91,6 +91,70 @@ public:
     virtual ~FreeFloatingMassMatrix();
 };
 
+/**
+ * Class representing the mass matrix derivative of a Free Floating robot.
+ *
+ *
+ */
+class FreeFloatingMassMatrixDerivative : public MatrixDynSize
+{
+public:
+    FreeFloatingMassMatrixDerivative(size_t nrOfDofs = 0);
+
+    /**
+     * Constructor from a model, to get the appropriate size of the
+     * mass matrix.
+     */
+    FreeFloatingMassMatrixDerivative(const iDynTree::Model& model);
+
+    /**
+     * Resize the class to match the dimension of the dofs contained in a Model.
+     *
+     * @param model the model from which to get the number and dimension of the joints.
+     *
+     * @warning This method wipes the content of the mass matrix.
+     *
+     */
+    void resize(const iDynTree::Model& model);
+
+    /**
+     * Destructor
+     */
+    virtual ~FreeFloatingMassMatrixDerivative();
+};
+
+/**
+ * Class representing the Coriolis matrix of a Free Floating robot.
+ *
+ *
+ */
+class FreeFloatingCoriolisMatrix : public MatrixDynSize
+{
+public:
+    FreeFloatingCoriolisMatrix(size_t nrOfDofs = 0);
+
+    /**
+     * Constructor from a model, to get the appropriate size of the
+     * mass matrix.
+     */
+    FreeFloatingCoriolisMatrix(const iDynTree::Model& model);
+
+    /**
+     * Resize the class to match the dimension of the dofs contained in a Model.
+     *
+     * @param model the model from which to get the number and dimension of the joints.
+     *
+     * @warning This method wipes the content of the mass matrix.
+     *
+     */
+    void resize(const iDynTree::Model& model);
+
+    /**
+     * Destructor
+     */
+    virtual ~FreeFloatingCoriolisMatrix();
+};
+
 } // namespace iDynTree
 
 #endif
