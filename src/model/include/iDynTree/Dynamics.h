@@ -106,7 +106,7 @@ bool CompositeRigidBodyAlgorithm(const Model& model,
 /**
  *
  * Compute the Coriolis Matrix of a free floating robot, using
- * Alogrithm 1 of "Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for
+ * Algorithm 1 of "Numerical Methods to Compute the Coriolis Matrix and Christoffel Symbols for
  * Rigid-Body Systems" (https://arxiv.org/abs/2010.01033). It also computes the mass matrix and the
  * mass matrix derivative, which satisfy the property: M_dot = C + C^T
  */
