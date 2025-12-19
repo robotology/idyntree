@@ -1246,17 +1246,22 @@ void testFloatingBaseFrameConsistency(std::string modelFilePath,
     ASSERT_EQUAL_VECTOR(gravityForces_with_l_foot_base.jointTorques(),
                         gravityForces_with_l_sole_base.jointTorques());
     iDynTree::Transform toFrame_H_fromFrame;
-    if (dynComp.getFrameVelocityRepresentation() == iDynTree::BODY_FIXED_REPRESENTATION){
+    if (dynComp.getFrameVelocityRepresentation() == iDynTree::BODY_FIXED_REPRESENTATION)
+    {
         toFrame_H_fromFrame = l_foot_H_l_sole;
-    } else if (dynComp.getFrameVelocityRepresentation() == iDynTree::INERTIAL_FIXED_REPRESENTATION){
+    } else if (dynComp.getFrameVelocityRepresentation() == iDynTree::INERTIAL_FIXED_REPRESENTATION)
+    {
         toFrame_H_fromFrame = Transform::Identity();
-    } else if (dynComp.getFrameVelocityRepresentation() == iDynTree::MIXED_REPRESENTATION){
+    } else if (dynComp.getFrameVelocityRepresentation() == iDynTree::MIXED_REPRESENTATION)
+    {
         // l_foot[W]_H_l_sole[W]
-        toFrame_H_fromFrame = Transform(Rotation::Identity(), world_H_l_sole_with_l_sole_base.getPosition()
-                                               - world_H_l_foot_with_l_foot_base.getPosition());
+        toFrame_H_fromFrame = Transform(Rotation::Identity(),
+                                        world_H_l_sole_with_l_sole_base.getPosition()
+                                            - world_H_l_foot_with_l_foot_base.getPosition());
     }
     ASSERT_EQUAL_VECTOR(baseForceAndJointTorques_with_l_foot_base.baseWrench(),
-                        toFrame_H_fromFrame * baseForceAndJointTorques_with_l_sole_base.baseWrench());
+                        toFrame_H_fromFrame
+                            * baseForceAndJointTorques_with_l_sole_base.baseWrench());
     ASSERT_EQUAL_VECTOR(biasForces_with_l_foot_base.baseWrench(),
                         toFrame_H_fromFrame * biasForces_with_l_sole_base.baseWrench());
     ASSERT_EQUAL_VECTOR(gravityForces_with_l_foot_base.baseWrench(),

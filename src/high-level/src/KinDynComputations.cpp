@@ -3544,12 +3544,13 @@ bool KinDynComputations::inverseDynamics(const Vector6& baseFrameAcc,
     if (this->pimpl->m_isFloatingBaseFrame)
     {
         // Floating base is an additional frame - need to convert from base link frame
-        iDynTree::Transform world_X_baseLink = pimpl->m_linkPos(
-            pimpl->m_traversal.getBaseLink()->getIndex());
+        iDynTree::Transform world_X_baseLink
+            = pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex());
         world_X_baseFrame = world_X_baseLink * pimpl->m_baseLinkToBaseFrame;
-        baseForceAndJointTorques.baseWrench() = pimpl->m_baseLinkToBaseFrame.inverse()
-                                                   * baseForceAndJointTorques.baseWrench();
-    } else {
+        baseForceAndJointTorques.baseWrench()
+            = pimpl->m_baseLinkToBaseFrame.inverse() * baseForceAndJointTorques.baseWrench();
+    } else
+    {
         world_X_baseFrame = pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex());
     }
     // Convert base wrench to the used representation
@@ -3697,7 +3698,6 @@ bool KinDynComputations::generalizedBiasForces(FreeFloatingGeneralizedTorques& g
                      pimpl->m_invDynInternalWrenches,
                      generalizedBiasForces);
 
-
     // The base wrench is currently expressed in body-fixed representation of the base link frame
     // Need to convert it to the used representation and, if needed, to the floating base frame
     iDynTree::Transform world_X_baseFrame;
@@ -3705,12 +3705,13 @@ bool KinDynComputations::generalizedBiasForces(FreeFloatingGeneralizedTorques& g
     if (this->pimpl->m_isFloatingBaseFrame)
     {
         // Floating base is an additional frame - need to convert from base link frame
-        iDynTree::Transform world_X_baseLink = pimpl->m_linkPos(
-            pimpl->m_traversal.getBaseLink()->getIndex());
+        iDynTree::Transform world_X_baseLink
+            = pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex());
         world_X_baseFrame = world_X_baseLink * pimpl->m_baseLinkToBaseFrame;
-        generalizedBiasForces.baseWrench() = pimpl->m_baseLinkToBaseFrame.inverse()
-                                                   * generalizedBiasForces.baseWrench();
-    } else {
+        generalizedBiasForces.baseWrench()
+            = pimpl->m_baseLinkToBaseFrame.inverse() * generalizedBiasForces.baseWrench();
+    } else
+    {
         world_X_baseFrame = pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex());
     }
     // Convert base wrench to the used representation
@@ -3790,19 +3791,19 @@ bool KinDynComputations::generalizedGravityForces(
     if (this->pimpl->m_isFloatingBaseFrame)
     {
         // Floating base is an additional frame - need to convert from base link frame
-        iDynTree::Transform world_X_baseLink = pimpl->m_linkPos(
-            pimpl->m_traversal.getBaseLink()->getIndex());
+        iDynTree::Transform world_X_baseLink
+            = pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex());
         world_X_baseFrame = world_X_baseLink * pimpl->m_baseLinkToBaseFrame;
-        generalizedGravityForces.baseWrench() = pimpl->m_baseLinkToBaseFrame.inverse()
-                                                   * generalizedGravityForces.baseWrench();
-    } else {
+        generalizedGravityForces.baseWrench()
+            = pimpl->m_baseLinkToBaseFrame.inverse() * generalizedGravityForces.baseWrench();
+    } else
+    {
         world_X_baseFrame = pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex());
     }
     // Convert base wrench to the used representation
     generalizedGravityForces.baseWrench()
         = pimpl->fromBodyFixedToUsedRepresentation(generalizedGravityForces.baseWrench(),
                                                    world_X_baseFrame);
-
 
     return true;
 }
