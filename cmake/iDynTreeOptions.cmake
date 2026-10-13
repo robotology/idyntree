@@ -4,6 +4,9 @@ option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
+# enable parallel install
+set_property(GLOBAL PROPERTY INSTALL_PARALLEL ON)
+
 #########################################################################
 option(IDYNTREE_ONLY_DOCS "Only produce iDynTree documentation, without compiling" FALSE)
 mark_as_advanced(IDYNTREE_ONLY_DOCS)
